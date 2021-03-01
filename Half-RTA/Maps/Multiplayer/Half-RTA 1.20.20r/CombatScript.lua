@@ -486,7 +486,7 @@ function UnitMoveNonBlocking(unit)
 	local init_mana = GetUnitManaPoints(unit)
 	local init_enemy_hero_mana = GetUnitManaPoints(enemy_hero)
 	local init_spawns = GetSpellSpawns(we)
-	local last_turn_player
+	last_turn_player = 0
 
 	
 	if creature_dead[unit] then

@@ -1491,7 +1491,7 @@ end;
 function levelup12()
   if GetHeroStat (hero1, STAT_EXPERIENCE) >= array_level[HalfLevel] then
     ArrayStatHero(hero1);
-    if Name(hero1) == "Elleshar" then Discount1 = EllesharDiscount; end;
+    if Name(hero1) == "Elleshar" then Discount1 = EllesharDiscount; else Discount1 = 0; end;
     ChangeHeroStat (hero1, STAT_EXPERIENCE, array_level[GetHeroLevel(hero1) + StartLevel - HalfLevel] - GetHeroStat(hero1, STAT_EXPERIENCE));
     --EllesharLevelBonus = 0;
     --if HasHeroSkill(hero1, 29) then EstatesEnable1 = 1; end;
@@ -1543,7 +1543,7 @@ function levelup13()
   --if HasHeroSkill(HeroMax1, 29) then EstatesEnable1 = 1; end;
   --if EstatesEnable1 == 1 then DiscountLevel1 = EstatesDiscountLevel; else DiscountLevel1 = 0; end;
   if lvl1 <= length(LevelUp) then
-    if GetPlayerResource(1, 6) >= (LevelUp[lvl1] - Discount11) then
+    if GetPlayerResource(1, 6) >= (LevelUp[lvl1] - Discount1) then
       QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), {GetMapDataPath().."LevelUP.txt"; eq = LevelUp[lvl1] - Discount1}, 'levelup13yes', 'no');
     else
       MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), {GetMapDataPath().."NoLevelUP.txt"; eq = LevelUp[lvl1] - Discount1} );
@@ -1613,7 +1613,7 @@ end;
 function levelup22()
   if GetHeroStat (hero2, STAT_EXPERIENCE) >= array_level[HalfLevel] then
     ArrayStatHero(hero2);
-    if Name(hero2) == "Elleshar" then Discount2 = EllesharDiscount; end;
+    if Name(hero2) == "Elleshar" then Discount2 = EllesharDiscount; else Discount2 = 0; end;
     --if Name(hero2) == "Elleshar" then EllesharLevelBonus = EllesharLevel; else EllesharLevelBonus = 0; end;
     ChangeHeroStat (hero2, STAT_EXPERIENCE, array_level[GetHeroLevel(hero2) + StartLevel - HalfLevel] - GetHeroStat(hero2, STAT_EXPERIENCE));
     --EllesharLevelBonus = 0;
@@ -13108,9 +13108,9 @@ function BlockBattleZone(race1, race2)
   if race1 == 6 or race2 == 6 then SetRegionBlocked ('land_block_race6', true); end;
   if race1 == 7 or race7 == 2 then SetRegionBlocked ('land_block_race7', true); end;
   if race1 == 8 or race2 == 8 then SetRegionBlocked ('land_block_race8', true); end;
-  SetRegionBlocked ('land_block1', true);
-  SetRegionBlocked ('land_block2', true);
-  SetRegionBlocked ('land_block3', true);
+  --SetRegionBlocked ('land_block1', true);
+  --SetRegionBlocked ('land_block2', true);
+  --SetRegionBlocked ('land_block3', true);
 end
 
 
@@ -13307,16 +13307,16 @@ function newday ()
      BlockBattleZone(hero1race, hero2race)
      
      if HasHeroSkill(HeroMax1, 19) or HasHeroSkill(HeroMax2, 19) or Name(HeroMax1) == "Jazaz" or Name(HeroMax2) == "Jazaz" then
-       SetRegionBlocked ('land_block1', false);
-       SetRegionBlocked ('land_block2', false);
-       SetRegionBlocked ('land_block3', false);
-       SetRegionBlocked ('land_block_race1', true);
-       SetRegionBlocked ('land_block_race2', true);
-       SetRegionBlocked ('land_block_race3', true);
-       SetRegionBlocked ('land_block_race5', true);
-       SetRegionBlocked ('land_block_race6', true);
-       SetRegionBlocked ('land_block_race7', true);
-       SetRegionBlocked ('land_block_race8', true);
+       --SetRegionBlocked ('land_block1', false);
+       --SetRegionBlocked ('land_block2', false);
+       --SetRegionBlocked ('land_block3', false);
+       SetRegionBlocked ('land_block_race1', false);
+       SetRegionBlocked ('land_block_race2', false);
+       SetRegionBlocked ('land_block_race3', false);
+       SetRegionBlocked ('land_block_race5', false);
+       SetRegionBlocked ('land_block_race6', false);
+       SetRegionBlocked ('land_block_race7', false);
+       SetRegionBlocked ('land_block_race8', false);
      end;
      
      
@@ -15538,7 +15538,6 @@ array_HasArtsSlot2 = {}
 array_HasArtsSlot2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 function Spoils1()
---  if SpoilsUse1 == 0 and HasHeroSkill(HeroMax1, 129) then
     for i = 0, 2 do
       for j = 1, length(array_arts[i]) do
         if HasArtefact(HeroMax1, array_arts[i][j].id) then
@@ -15550,22 +15549,15 @@ function Spoils1()
         end;
       end;
     end;
-
     ArtNumber1 = random (length(array_arts[1])) + 1;
     while array_arts[1][ArtNumber1].blocked == 1 or HasArtefact(HeroMax1, array_arts[1][ArtNumber1].id, 0) or array_HasArtsSlot1[array_arts[1][ArtNumber1].place] == 1 do
       ArtNumber1 = random (length(array_arts[1])) + 1;
     end;
     GiveArtefact(HeroMax1, array_arts[1][ArtNumber1].id, 1);
     SpoilsUse1 = 1;
-    sleep(2);
-    if GetDate (DAY) == 3 then
-      DopLavka1();
-    end;
---  end;
 end;
 
 function Spoils2()
---  if SpoilsUse2 == 0 and HasHeroSkill(HeroMax2, 129) then
     for i = 0, 2 do
       for j = 1, length(array_arts[i]) do
         if HasArtefact(HeroMax2, array_arts[i][j].id) then
@@ -15577,57 +15569,51 @@ function Spoils2()
         end;
       end;
     end;
-    
     ArtNumber2 = random (length(array_arts[1])) + 1;
     while array_arts[1][ArtNumber2].blocked == 1 or HasArtefact(HeroMax2, array_arts[1][ArtNumber2].id, 0) or array_HasArtsSlot2[array_arts[1][ArtNumber2].place] == 1 do
       ArtNumber2 = random (length(array_arts[1])) + 1;
     end;
     GiveArtefact(HeroMax2, array_arts[1][ArtNumber2].id, 1);
     SpoilsUse2 = 1;
-    sleep(2);
-    if GetDate (DAY) == 3 then
-      DopLavka2();
-    end;
---  end;
 end;
 
 arrayArtsForFortunateAdventure1 = {}
 arrayArtsForFortunateAdventure2 = {}
 
-FortunateAdventureTxt = {}
-FortunateAdventureTxt = {"FortunateAdventureDiscount.txt", "FortunateAdventureDiscount1.txt", "FortunateAdventureDiscount2.txt", "FortunateAdventureDiscount3.txt", "FortunateAdventureDiscount4.txt"}
+Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'ArtifactMerchant1' );
+Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'ArtifactMerchant2' );
 
-function FortunateAdventure1Ok()
-  FortunateAdventureEnable1 = 2;
-  print("Fortunate = ", FortunateAdventureEnable1)
-end;
-
-function FortunateAdventure1Ok()
-  FortunateAdventureEnable2 = 2;
-end;
-
-function FortunateAdventure1Q()
-  MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath()..FortunateAdventureTxt[random(2)+1], 'FortunateAdventure1Ok');
-end;
-
-function FortunateAdventure2Q()
-  SpoilsUse2 = 0;
-  if FortunateAdventureEnable2 == 0 and HasHeroSkill(HeroMax2, 33) then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."FortunateAdventure.txt", 'DopLavka2', 'Lavka2Use');
-  else
-    MakeHeroInteractWithObject (HeroQ2, 'spoils2');
+function ArtifactMerchant1(hero)
+  if FortunateAdventureEnable1 == 1 then FortunateAdventureEnable1 = 2; end;
+  if SpoilsUse1 == 0 and HasHeroSkill(hero, 129) then
+    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Spoils.txt", 'Spoils1', 'no');
   end;
 end;
 
+function ArtifactMerchant2(hero)
+  if FortunateAdventureEnable2 == 1 then FortunateAdventureEnable2 = 2; end;
+  if SpoilsUse2 == 0 and HasHeroSkill(hero, 129) then
+    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Spoils.txt", 'Spoils2', 'no');
+  end;
+end;
+
+function FortunateAdventureBlockInTower1()
+  if FortunateAdventureEnable1 == 1 then FortunateAdventureEnable1 = 2; end;
+end;
+
+function FortunateAdventureBlockInTower2()
+  if FortunateAdventureEnable2 == 1 then FortunateAdventureEnable2 = 2; end;
+end;
+
 function FortunateAdventure1()
+  if (hero1race == 5 or hero1race == 6) and IsHeroInTown(HeroMax1, 'RANDOMTOWN1', 1, 0) then
+    MoveHeroRealTime(HeroMax1, 55, 80);
+    Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN1', 'FortunateAdventureBlockInTower1');
+  end;
   arrayArtsForFortunateAdventure1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   kol_arts_hero1 = 0
-  startThread(FortunateAdventure1Q)
-  MakeHeroInteractWithObject (HeroMax1, 'spoils1');
-  sleep(1);
+  MakeHeroInteractWithObject (HeroMax1, 'FortunateAdventure1');
   FortunateAdventureEnable1 = 1;
---  MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath()..FortunateAdventureTxt[random(5)+1], 'FortunateAdventure1Ok');
-  print("FortunateFortunate = ", FortunateAdventureEnable1)
   NewArt1 = 0;
   for lev_art1 = 0, 2 do
     for num_art1 = 1, length(array_arts[lev_art1]) do
@@ -15639,8 +15625,7 @@ function FortunateAdventure1()
   end;
   while FortunateAdventureEnable1 == 1 do
     Gold1 = GetPlayerResource(PLAYER_1, GOLD);
-    sleep(1);
-    print("FortunateAdventureEnable1 = ", FortunateAdventureEnable1)
+    sleep(2);
     for lev_art1 = 0, 2 do
       for num_art1 = 1, length(array_arts[lev_art1]) do
         if HasArtefact(HeroMax1, array_arts[lev_art1][num_art1].id) then
@@ -15655,13 +15640,10 @@ function FortunateAdventure1()
           arrayArtsForFortunateAdventure1[kol_arts_hero1] = array_arts[lev_art1][num_art1].id;
           kol_arts_hero1 = kol_arts_hero1 + 1;
           NewArt1 = 1;
-          --lev_art1 = 2;
-          --break
         end;
-        if NewArt1 == 1 and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) <= 1.05 * array_arts[lev_art1][num_art1].price and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) >= 0.95 * array_arts[lev_art1][num_art1].price then
+        if NewArt1 == 1 and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) <= 1.05 * array_arts[lev_art1][num_art1].price and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) >= 0.95 * array_arts[lev_art1][num_art1].price and FortunateAdventureEnable1 == 1 then
           ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(FortunateAdventureDiscount * array_arts[lev_art1][num_art1].price)}, HeroMax1, 1, random(6) + 3);
           SetPlayerResource (PLAYER_1, GOLD, int(GetPlayerResource (PLAYER_1, GOLD) + FortunateAdventureDiscount * array_arts[lev_art1][num_art1].price));
-          --EstatesUse1 = 1;
           NewArt1 = 0;
         end;
       end;
@@ -15670,103 +15652,52 @@ function FortunateAdventure1()
   end;
 end;
 
-function FortunateAdventure2(hero)
-  SetObjectEnabled('lavka2',  nil);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'DopLavka2Q' );
-end;
-
-function DopLavka1Q(hero)
-  HeroQ1 = hero;
-  if SpoilsUse1 == 0 and HasHeroSkill(hero, 129) then
-    SpoilsUse1 = 1;
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Spoils.txt", 'Spoils1', 'FortunateAdventure1Q');
-  else
-    if HasHeroSkill(hero, 33) then
-      if FortunateAdventureEnable1 == 0 then
-        QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."FortunateAdventure.txt", 'DopLavka1', 'Lavka1Use');
-      else
-        MakeHeroInteractWithObject (hero, 'spoils1');
+function FortunateAdventure2()
+  if (hero2race == 5 or hero2race == 6) and IsHeroInTown(HeroMax2, 'RANDOMTOWN2', 1, 0) then
+    MoveHeroRealTime(HeroMax2, 33, 14);
+    Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN2', 'FortunateAdventureBlockInTower2');
+  end;
+  arrayArtsForFortunateAdventure2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  kol_arts_hero2 = 0
+  MakeHeroInteractWithObject (HeroMax2, 'FortunateAdventure2');
+  FortunateAdventureEnable2 = 1;
+  NewArt2 = 0;
+  for lev_art2 = 0, 2 do
+    for num_art2 = 1, length(array_arts[lev_art2]) do
+      if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) then
+        arrayArtsForFortunateAdventure2[kol_arts_hero2] = array_arts[lev_art2][num_art2].id;
+        kol_arts_hero2 = kol_arts_hero2 + 1;
       end;
     end;
   end;
-  if HeroQ1 ~= HeroMax1 and FortunateAdventureEnable1 == 0 then
-    Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'no' );
-    SetObjectEnabled('lavka1', true);
-    MakeHeroInteractWithObject (hero, 'lavka1');
-    sleep(1);
-    SetObjectEnabled('lavka1',  nil);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'DopLavka1Q' );
-  end;
-end;
-
-function DopLavka2Q(hero)
-  HeroQ2 = hero;
-  if SpoilsUse2 == 0 and HasHeroSkill(hero, 129) then
-    SpoilsUse2 = 1;
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Spoils.txt", 'Spoils2', 'FortunateAdventure2Q');
-  else
-    if HasHeroSkill(hero, 33) then
-      if FortunateAdventureEnable2 == 0 then
-        QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."FortunateAdventure.txt", 'DopLavka2', 'Lavka2Use');
-      else
-        MakeHeroInteractWithObject (hero, 'spoils2');
+  while FortunateAdventureEnable2 == 1 do
+    Gold2 = GetPlayerResource(PLAYER_2, GOLD);
+    sleep(2);
+    for lev_art2 = 0, 2 do
+      for num_art2 = 1, length(array_arts[lev_art2]) do
+        if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) then
+          HasArt2 = 0;
+          for i = 0, kol_arts_hero2 do
+            if arrayArtsForFortunateAdventure2[i] == array_arts[lev_art2][num_art2].id then
+              HasArt2 = 1;
+            end;
+          end;
+        end;
+        if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) and HasArt2 == 0 then
+          arrayArtsForFortunateAdventure2[kol_arts_hero2] = array_arts[lev_art2][num_art2].id;
+          kol_arts_hero2 = kol_arts_hero2 + 1;
+          NewArt2 = 1;
+        end;
+        if NewArt2 == 1 and (Gold2 - GetPlayerResource(PLAYER_2, GOLD)) <= 1.05 * array_arts[lev_art2][num_art2].price and (Gold2 - GetPlayerResource(PLAYER_2, GOLD)) >= 0.95 * array_arts[lev_art2][num_art2].price and FortunateAdventureEnable2 == 1 then
+          ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(FortunateAdventureDiscount * array_arts[lev_art2][num_art2].price)}, HeroMax2, 2, random(6) + 3);
+          SetPlayerResource (PLAYER_2, GOLD, int(GetPlayerResource (PLAYER_2, GOLD) + FortunateAdventureDiscount * array_arts[lev_art2][num_art2].price));
+          NewArt2 = 0;
+        end;
       end;
     end;
-  end;
-  if HeroQ2 ~= HeroMax2 and FortunateAdventureEnable2 == 0 then
-    Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'no' );
-    SetObjectEnabled('lavka2', true);
-    MakeHeroInteractWithObject (hero, 'lavka2');
-    sleep(1);
-    SetObjectEnabled('lavka2',  nil);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'DopLavka2Q' );
+    if FortunateAdventureEnable2 == 2 then break; end;
   end;
 end;
-
-function DopLavka1()
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'no' );
-  SetObjectEnabled('lavka1', true);
-  MakeHeroInteractWithObject (HeroQ1, 'lavka1');
-  MakeHeroInteractWithObject (HeroQ1, 'spoils1');
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'DopLavka1Q' );
-  if FortunateAdventureEnable1 == 0 then
-    FortunateAdventureEnable1 = 1;
---    startThread(Estates1(HeroQ1));
-  end;
-end;
-
-function DopLavka2()
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'no' );
-  SetObjectEnabled('lavka2', true);
-  MakeHeroInteractWithObject (HeroQ2, 'lavka2');
-  MakeHeroInteractWithObject (HeroQ2, 'spoils2');
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'DopLavka2Q' );
-  if FortunateAdventureEnable2 == 0 then
-    FortunateAdventureEnable2 = 1;
---    startThread(Estates2(HeroQ2));
-  end;
-end;
-
-
-
-function Lavka1Use()
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'no' );
-  SetObjectEnabled('lavka1', true);
-  MakeHeroInteractWithObject (HeroQ1, 'lavka1');
-  sleep(1);
-  SetObjectEnabled('lavka1',  nil);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'DopLavka1Q' );
-end;
-
-function Lavka2Use()
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'no' );
-  SetObjectEnabled('lavka2', true);
-  MakeHeroInteractWithObject (HeroQ2, 'lavka2');
-  sleep(1);
-  SetObjectEnabled('lavka2',  nil);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'DopLavka2Q' );
-end;
-
 
 
 ScoutingEnable1 = 0;
@@ -16714,7 +16645,7 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
 
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax1) then
     startThread(FortunateAdventure1)
-
+    --QuestionBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."FortunateAdventure.txt", 'FortunateAdventure1Ok', 'no');
     --SetObjectOwner('Dwel1', PLAYER_1);
     --startThread(HeraldFunction1);
     --MoveCameraForPlayers( 1, 89, 82, 0, 40, 0, 0, 0, 0, 1);
@@ -16724,9 +16655,10 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
   end;
 
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax2) then
-    SetObjectOwner('Dwel2', PLAYER_2);
-    startThread(HeraldFunction2);
-    MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
+    startThread(FortunateAdventure2)
+    --SetObjectOwner('Dwel2', PLAYER_2);
+    --startThread(HeraldFunction2);
+    --MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
     --sleep(2);
     --MakeHeroInteractWithObject (hero, 'Dwel2');
     --HeraldUse2 = 1;
