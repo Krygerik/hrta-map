@@ -19,6 +19,8 @@ sleep()
 heroes1 = GetPlayerHeroes (PLAYER_1)
 heroes2 = GetPlayerHeroes (PLAYER_2)
 
+-- Корневые триггеры
+Trigger (NEW_DAY_TRIGGER, 'newday');
 
 function InitCombatExecThread(hero)
 	StartCombat(hero, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)')
@@ -13115,36 +13117,8 @@ kolUnit2 = { 0, 0, 0, 0, 0, 0, 0}
 -- New Day
 
 function newday ()
-
   if GetDate (DAY) == 2 then
-
---    startThread (peredvigenie_v_lesu);
-    if GAME_MODE.MATCHUPS then
-      ShowFlyingSign(GetMapDataPath().."variant12.txt", heroes1[0], 1, 5.0);
-      ShowFlyingSign(GetMapDataPath().."variant12.txt", heroes2[0], 2, 5.0);
-    end;
-    if GAME_MODE.HALF then
-      ShowFlyingSign(GetMapDataPath().."variant7.txt", heroes1[0], 1, 5.0);
---      ShowFlyingSign(GetMapDataPath().."variant7.txt", heroes2[0], 2, 5.0);
-      stop (heroes2[0]);
-    end;
-    if GAME_MODE.MIX then
-      if podvariant == 1 then
-        ShowFlyingSign(GetMapDataPath().."MixCherkDSCRP5.txt", heroes1[0], 1, 5.0);
-        stop (heroes2[0]);
-      end;
-      if podvariant == 2 then
-        ShowFlyingSign(GetMapDataPath().."CherkOfSetStep1.txt", heroes1[0], 1, 5.0);
-        ShowFlyingSign(GetMapDataPath().."CherkOfSetStep1.txt", heroes2[0], 2, 5.0);
-      end;
---      stop (heroes2[0]);
-    end;
-    if GAME_MODE.SIMPLE_CHOOSE then
-      ShowFlyingSign(GetMapDataPath().."variant1.txt", heroes1[0], 1, 5.0);
-      ShowFlyingSign(GetMapDataPath().."variant1.txt", heroes2[0], 2, 5.0);
-    end;
---    if bonus1 == 'spell' then StartRandomSpell(1); end;
---    if bonus2 == 'spell' then StartRandomSpell(2); end;
+     doFile(GetMapDataPath().."day2/day2_scripts.lua");
   end;
 
   if GetDate (DAY) == 3 then
@@ -13876,9 +13850,6 @@ function newday ()
   end;
 
 end;
-
-Trigger (NEW_DAY_TRIGGER, 'newday');
-
 
 function DayFour1()
 
