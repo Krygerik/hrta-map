@@ -15,3 +15,23 @@ GAME_MODE = {
   -- Микс черк (GEROI)
   MIX = DIFFICULTY == DIFFICULTY_HEROIC,
 }
+
+-- Кастомное перечисление рас, за неимением такого по умолчанию
+RACES = {
+  -- Орден Порядка
+  HAVEN = 0,
+  -- Инферно
+  INFERNO = 1,
+  -- Некрополис
+  NECROPOLIS = 2,
+  -- Лесной Союз
+  SYLVAN = 3,
+  -- Акадения Волшебства
+  ACADEMY = 4,
+  -- Лига Теней
+  DUNGEON = 5,
+  -- Дварфы
+  FORTRESS = 6,
+  -- Орда
+  STRONGHOLD = 7,
+}
