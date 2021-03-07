@@ -5,8 +5,6 @@ local MODULE_PATH = GetMapDataPath().."day1/";
 -- Путь до папки с сообщениями
 PATH_TO_DAY1_MESSAGES = MODULE_PATH.."messages/";
 
-print(10);
-
 -- Список пар существ, относящихся к каждой сгенерированной расе
 randomGenerateRaceList = {
   [0] = {
@@ -127,7 +125,7 @@ function getCountRacesByRaceId(findRaceId)
   local count = 0;
 
   for i = 0, length(randomGenerateRaceList)-1 do
-    if (randomGenerateRaceList[i].raceId == value) then
+    if (randomGenerateRaceList[i].raceId == findRaceId) then
       count = count + 1;
     end;
   end;
@@ -229,7 +227,7 @@ function getCountSelectedRace()
   local count = 0;
 
   for i = 0, length(randomGenerateRaceList)-1 do
-    if (randomGenerateRaceList[i].selected) then
+    if (randomGenerateRaceList[i].selected == true) then
       count = count + 1;
     end;
   end;
@@ -290,18 +288,29 @@ function pushSelectedRaceToRacePair(selectedRace)
   print "pushSelectedRaceToRacePair"
   for pairIndex = 0, 3 do
     for sideIndex = 0, 1 do
-      if (selectedRacePair[pairIndex][sideIndex].raceId == nil) then
-        selectedRacePair[pairIndex][sideIndex].raceId = selectedRace.raceId
-        selectedRacePair[pairIndex][sideIndex].red_unit.name = selectedRace.red_unit.name
-        selectedRacePair[pairIndex][sideIndex].blue_unit.name = selectedRace.blue_unit.name
+      local checkedSide = selectedRacePair[pairIndex][sideIndex];
+
+      if (checkedSide.raceId == nil) then
+        -- Запись выбранной расы в список пар
+        checkedSide.raceId = selectedRace.raceId
+        checkedSide.red_unit.name = selectedRace.red_unit.name
+        checkedSide.blue_unit.name = selectedRace.blue_unit.name
+        
+        -- Изменение местоположения выбранных существ
+        
+        SetObjectPosition(checkedSide.red_unit.name, checkedSide.red_unit.x, checkedSide.red_unit.y, GROUND);
+        SetObjectRotation(checkedSide.red_unit.name, checkedSide.red_unit.rot);
+        SetObjectPosition(checkedSide.blue_unit.name, checkedSide.blue_unit.x, checkedSide.blue_unit.y, GROUND);
+        SetObjectRotation(checkedSide.blue_unit.name, checkedSide.blue_unit.rot);
+
+        Trigger(OBJECT_TOUCH_TRIGGER, checkedSide.red_unit.name, 'questionDeleteMatchup');
+        Trigger(OBJECT_TOUCH_TRIGGER, checkedSide.blue_unit.name, 'questionDeleteMatchup');
 
         return '';
       end;
     end
   end;
 end;
-
-print(300);
 
 -- Выбор расы
 function confirmSelectRace(unitName)
@@ -312,14 +321,6 @@ function confirmSelectRace(unitName)
   randomGenerateRaceList[selectedRaceIndex].selected = true;
 
   local selectedRace = randomGenerateRaceList[selectedRaceIndex]
-
-  SetObjectPosition(selectedRace.red_unit.name, selectedRace.red_unit.x, selectedRace.red_unit.y, GROUND);
-  SetObjectRotation(selectedRace.red_unit.name, selectedRace.red_unit.rot);
-  SetObjectPosition(selectedRace.blue_unit.name, selectedRace.blue_unit.x, selectedRace.blue_unit.y, GROUND);
-  SetObjectRotation(selectedRace.blue_unit.name, selectedRace.blue_unit.rot);
-
-  Trigger(OBJECT_TOUCH_TRIGGER, selectedRace.red_unit.name, 'questionDeleteMatchup');
-  Trigger(OBJECT_TOUCH_TRIGGER, selectedRace.blue_unit.name, 'questionDeleteMatchup');
 
   pushSelectedRaceToRacePair(selectedRace);
   changePlayersTurn();
@@ -355,7 +356,7 @@ end;
 function getCountDeletedPair()
   print "getCountDeletedPair"
   local count = 0;
-  
+
   for i = 0, length(selectedRacePair)-1 do
     if (selectedRacePair[0].deleted ~= nil) then
       count = count + 1;
@@ -475,7 +476,7 @@ end;
 -- Снимает все очки передвижения у переданного героя до 0
 function removeHeroMovePoints(hero)
   print "removeHeroMovePoints"
-  local currentHeroMovePoints = GetHeroMovePoints(hero);
+  local currentHeroMovePoints = GetHeroStat(hero, STAT_MOVE_POINTS);
 
   ChangeHeroStat(hero, STAT_MOVE_POINTS, -currentHeroMovePoints);
 end;
@@ -484,7 +485,7 @@ end;
 function addHeroMovePoints(hero)
   print "addHeroMovePoints"
   local ADD_MOVE_POINTS = 50000;
-  local currentHeroMovePoints = GetHeroMovePoints(hero);
+  local currentHeroMovePoints = GetHeroStat(hero, STAT_MOVE_POINTS);
 
   ChangeHeroStat(hero, STAT_MOVE_POINTS, -currentHeroMovePoints+ADD_MOVE_POINTS);
 end;
@@ -706,8 +707,6 @@ function changeChooseArea()
   SetRegionBlocked ('block5', true);
   SetRegionBlocked ('block6', true);
 end;
-
-print(700);
 
 -- Точка входа в модуль
 main();

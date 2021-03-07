@@ -14,8 +14,6 @@ doFile(GetMapDataPath()..'constants.lua');
 doFile(GetMapDataPath().."day1/day1_scripts.lua");
 sleep(10)
 
-print('MAP_SCRIPT')
-
 heroes1 = GetPlayerHeroes (PLAYER_1)
 heroes2 = GetPlayerHeroes (PLAYER_2)
 
