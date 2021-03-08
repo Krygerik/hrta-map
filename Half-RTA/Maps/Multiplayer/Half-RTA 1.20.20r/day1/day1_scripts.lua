@@ -4,6 +4,13 @@
 local MODULE_PATH = GetMapDataPath().."day1/";
 -- Путь до папки с сообщениями
 PATH_TO_DAY1_MESSAGES = MODULE_PATH.."messages/";
+-- Путь до папки с сообщениями
+PATH_TO_HERO_NAMES = MODULE_PATH.."hero_names/";
+
+-- Биара (герой красного)
+Biara = GetPlayerHeroes(PLAYER_1)[0]
+-- Джованни (негой синего)
+Djovanni = GetPlayerHeroes(PLAYER_2)[0]
 
 -- Список пар существ, относящихся к каждой сгенерированной расе
 randomGenerateRaceList = {
@@ -167,10 +174,6 @@ end;
 -- Точка входа для выполнения скриптов модулю
 function main()
   print "__MAIN__"
-  -- Биара (герой красного)
-  local Biara = GetPlayerHeroes(PLAYER_1)[0]
-  -- Джованни (негой синего)
-  local Djovanni = GetPlayerHeroes(PLAYER_2)[0]
 
   if GAME_MODE.HALF then
     disableAreaInteractive();
@@ -266,20 +269,20 @@ end;
 -- Список полученных пар рас
 selectedRacePair = {
   [0] = {
-    [0] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 38, y = 90, rot = 90 }, blue_unit = { name = nil, x = 39, y = 25, rot = 270 } },
-    [1] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 39, y = 90, rot = 270 }, blue_unit = { name = nil, x = 38, y = 25, rot = 90 } },
+    [0] = { raceId = nil, deleted = nil, owner = PLAYER_1, red_unit = { name = nil, x = 38, y = 90, rot = 90 }, blue_unit = { name = nil, x = 39, y = 25, rot = 270 } },
+    [1] = { raceId = nil, deleted = nil, owner = PLAYER_2, red_unit = { name = nil, x = 39, y = 90, rot = 270 }, blue_unit = { name = nil, x = 38, y = 25, rot = 90 } },
   },
   [1] = {
-    [0] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 39, y = 88, rot = 270 }, blue_unit = { name = nil, x = 38, y = 23, rot = 90 } },
-    [1] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 38, y = 88, rot = 90 }, blue_unit = { name = nil, x = 39, y = 23, rot = 270 } },
+    [0] = { raceId = nil, deleted = nil, owner = PLAYER_2, red_unit = { name = nil, x = 39, y = 88, rot = 270 }, blue_unit = { name = nil, x = 38, y = 23, rot = 90 } },
+    [1] = { raceId = nil, deleted = nil, owner = PLAYER_1, red_unit = { name = nil, x = 38, y = 88, rot = 90 }, blue_unit = { name = nil, x = 39, y = 23, rot = 270 } },
   },
   [2] = {
-    [0] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 38, y = 86, rot = 90 }, blue_unit = { name = nil, x = 39, y = 21, rot = 270 } },
-    [1] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 39, y = 86, rot = 270 }, blue_unit = { name = nil, x = 38, y = 21, rot = 90 } },
+    [0] = { raceId = nil, deleted = nil, owner = PLAYER_1, red_unit = { name = nil, x = 38, y = 86, rot = 90 }, blue_unit = { name = nil, x = 39, y = 21, rot = 270 } },
+    [1] = { raceId = nil, deleted = nil, owner = PLAYER_2, red_unit = { name = nil, x = 39, y = 86, rot = 270 }, blue_unit = { name = nil, x = 38, y = 21, rot = 90 } },
   },
   [3] = {
-    [0] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 39, y = 84, rot = 270 }, blue_unit = { name = nil, x = 38, y = 19, rot = 90 } },
-    [1] = { raceId = nil, deleted = nil, red_unit = { name = nil, x = 38, y = 84, rot = 90 }, blue_unit = { name = nil, x = 39, y = 19, rot = 270 } },
+    [0] = { raceId = nil, deleted = nil, owner = PLAYER_2, red_unit = { name = nil, x = 39, y = 84, rot = 270 }, blue_unit = { name = nil, x = 38, y = 19, rot = 90 } },
+    [1] = { raceId = nil, deleted = nil, owner = PLAYER_1, red_unit = { name = nil, x = 38, y = 84, rot = 90 }, blue_unit = { name = nil, x = 39, y = 19, rot = 270 } },
   },
 };
 
@@ -385,10 +388,6 @@ function handleDeleteMatchup(hero, indexPair)
   deleteMatchupByIndexPair(indexPair);
 
   local countDeletedPair = getCountDeletedPair();
-      -- Биара (герой красного)
-  local Biara = GetPlayerHeroes(PLAYER_1)[0];
-  -- Джованни (негой синего)
-  local Djovanni = GetPlayerHeroes(PLAYER_2)[0];
 
   -- Разрешаем игрокам удалить 2 пары
   if (countDeletedPair < 2) then
@@ -457,19 +456,453 @@ function finishCherkRace()
   removePairDelimeters();
 
   -- Переход к черку героев
-  startChoosingHeroes();
+  startChoosingHeroes(resultPairIndex);
 end;
 
 -- Черк героев
-function startChoosingHeroes()
+function startChoosingHeroes(resultPairIndex)
   print "startChoosingHeroes"
-  x11=41; x12=44; y11=78; y12=78;
-  x21=43; x22=41; y21=15; y22=15;
+  
+  local selectedPair = selectedRacePair[resultPairIndex];
+  local redRaceId, blueRaceId;
 
-  if random(2) == 0 then    -- ПОМЕНЯТЬ НА 2
-    CherkPossibleHeroes();
+  for sideIndex = 0, length(selectedPair)-1 do
+    local currentSide = selectedPair[sideIndex];
+  
+    if (currentSide.owner == PLAYER_1) then
+      redRaceId = currentSide.raceId;
+    else
+      blueRaceId = currentSide.raceId;
+    end;
+  end;
+
+  if random(2) == 0 then
+    cherkPossibleHeroes(redRaceId, blueRaceId);
   else
     SetPossibleHeroes();
+  end;
+end;
+
+-- Оставил как есть
+function deleteRace()
+  print "deleteRace"
+  RemoveObject('human1vrag');
+  RemoveObject('demon1vrag');
+  RemoveObject('nekr1vrag');
+  RemoveObject('elf1vrag');
+  RemoveObject('mag1vrag');
+  RemoveObject('liga1vrag');
+  RemoveObject('gnom1vrag');
+  RemoveObject('ork1vrag');
+  RemoveObject('human2vrag');
+  RemoveObject('demon2vrag');
+  RemoveObject('nekr2vrag');
+  RemoveObject('elf2vrag');
+  RemoveObject('mag2vrag');
+  RemoveObject('liga2vrag');
+  RemoveObject('gnom2vrag');
+  RemoveObject('ork2vrag');
+  RemoveObject('human1');
+  RemoveObject('demon1');
+  RemoveObject('nekr1');
+  RemoveObject('elf1');
+  RemoveObject('mag1');
+  RemoveObject('liga1');
+  RemoveObject('gnom1');
+  RemoveObject('ork1');
+  RemoveObject('human2');
+  RemoveObject('demon2');
+  RemoveObject('nekr2');
+  RemoveObject('elf2');
+  RemoveObject('mag2');
+  RemoveObject('liga2');
+  RemoveObject('gnom2');
+  RemoveObject('ork2');
+end;
+
+-- Удаление триггеров с регионов, где находились расы
+function removeRaceRegionTriggers()
+  print "removeRaceRegionTriggers"
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'noop');
+  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'noop');
+end;
+
+-- Список случайный героев для выбранных рас
+randomHeroList = {
+  [PLAYER_1] = {
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+  },
+  [PLAYER_2] = {
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+    { raceId = nil, name = nil, selected = nil, deleted = nil, red_icon = nil, blue_icon = nil },
+  },
+};
+
+-- Получение признака, есть ли такой герой в списке для выбора у определенного игрока
+function getHasHeroInHeroRandomList(playerId, heroName)
+  print "getHasHeroInHeroRandomList"
+  local count = 0;
+
+  for i, savedHeroName in randomHeroList[playerId] do
+    if (savedHeroName == heroName) then
+      count = count + 1;
+    end;
+  end;
+  
+  return count ~= 0;
+end;
+
+-- Генерация 7 случайных героев переданной расы для выбранного игрока
+function generateRandomHeroListByPlayerIdAndRaceId(playerId, raceId)
+  print "generateRandomHeroListByPlayerIdAndRaceId"
+  for generateIndex = 1, 7 do
+    local currentRaceHeroList = HEROES_BY_RACE[raceId];
+    local randomHeroIndex, randomHeroName;
+
+    repeat
+      randomHeroIndex = random(length(currentRaceHeroList)) + 1;
+      randomHeroName = currentRaceHeroList[randomHeroIndex].name;
+
+      local isHeroNotExist = getHasHeroInHeroRandomList(playerId, randomHeroName);
+    until isHeroNotExist;
+
+    randomHeroList[playerId][generateIndex] = {
+      hero = randomHeroName,
+      raceId = raceId,
+      red_icon = currentRaceHeroList[randomHeroIndex][playerId].red_icon,
+      blue_icon = currentRaceHeroList[randomHeroIndex][playerId].blue_icon,
+    };
+  end;
+end;
+
+-- Признак, как первым черкаются герои: 0 - сначала добавляем, 1 - сначала удаляем
+RANDOM_CHOOSE_FIRST_FLAG = random(2);
+
+-- Черк по одному герою
+function cherkPossibleHeroes(redRaceId, blueRaceId)
+  print "cherkPossibleHeroes"
+  SetObjectPosition(Biara, 35, 87);
+  SetObjectPosition(Djovanni, 42, 22);
+
+  removeHeroMovePoints(Djovanni);
+  addHeroMovePoints(Biara)
+
+  deleteRace();
+  removeRaceRegionTriggers();
+  
+  -- Список выбранных рас
+  local selectedRaceIdList = { redRaceId, blueRaceId };
+
+  -- Изменяем название и описание портретов всех героев на карте
+  for raceIndex, raceId in selectedRaceIdList do
+    local currentRaceHeroList = HEROES_BY_RACE[raceId];
+    
+    for heroIndex, heroData in currentRaceHeroList do
+      local playerList = { PLAYER_1, PLAYER_2 };
+      
+      for playerIndex, playerId in playerList do
+        for iconIndex, iconName in heroData[playerId] do
+           SetObjectEnabled(iconName, nil);
+           OverrideObjectTooltipNameAndDescription(iconName, PATH_TO_HERO_NAMES..heroData.txt, heroData.dsc);
+        end;
+      end;
+    end;
+  end;
+
+  -- Генерируем списки случайных героев для обоих игроков
+  generateRandomHeroListByPlayerIdAndRaceId(PLAYER_1, redRaceId);
+  generateRandomHeroListByPlayerIdAndRaceId(PLAYER_2, blueRaceId);
+  
+  -- Расставляем сгенерированных героев для выбора
+  for playerId, heroList in randomHeroList do
+    for heroIndex, heroData in heroList do
+      SetObjectPosition(heroData.red_icon, (31 + heroIndex), 85, GROUND);
+      SetObjectPosition(heroData.blue_icon, (38 + heroIndex), 23, GROUND);
+      Trigger(OBJECT_TOUCH_TRIGGER, heroData.red_icon, 'handleTouchHero');
+      Trigger(OBJECT_TOUCH_TRIGGER, heroData.blue_icon, 'handleTouchHero');
+    end;
+  end;
+  
+  changePlayersTurnForChoosingHero();
+end;
+
+-- Получение игрока, которому принадлежит выбранный герой
+function getRelatedPlayerAndHeroNameByHeroIconName(heroIconName)
+  print "getRelatedPlayerAndHeroNameByHeroIconName"
+  for playerId, randomHeroList in randomHeroList do
+    for heroIndex, heroData in randomHeroList do
+      if (heroData.red_unit == heroIconName or heroData.blue_unit == heroIconName) then
+          return playerId, heroData.name;
+        end;
+    end;
+  end;
+end;
+
+-- Обработчик касания героев для выбора
+function handleTouchHero(triggerPlayerHero, triggeredHeroIconName)
+  print "handleTouchHero"
+  -- игрок, которому принадлежит этот герой
+  local player, heroName = getRelatedPlayerAndHeroNameByHeroIconName(triggeredHeroIconName);
+  local triggerPlayer = GetPlayerFilter(GetObjectOwner(triggerPlayerHero));
+  local action = getCurrentTurnAction();
+  local question = action == TURN_ACTIONS.CHOOSING and "question_add_hero.txt" or "question_delete_hero.txt";
+
+  QuestionBoxForPlayers(triggerPlayer, PATH_TO_DAY1_MESSAGES..question, "handlerAddOrDeleteHero('"..player.."', '"..heroName.."')", 'noop');
+end;
+
+-- Обработчик удаления или добавления героя
+function handlerAddOrDeleteHero(playerId, heroName)
+  print "handlerAddOrDeleteHero"
+  local action = getCurrentTurnAction();
+  
+  if action == TURN_ACTIONS.CHOOSING then
+    addHeroForPlayer(playerId, heroName);
+  else
+    deleteHeroFromList(playerId, heroName);
+  end;
+  
+  checkOnSelectMaximumHeroes();
+  changePlayersTurnForChoosingHero();
+end;
+
+-- Проставление герою признака выбранного
+function addHeroForPlayer(playerId, heroName)
+  print "addHeroForPlayer"
+  for heroIndex, heroData in randomHeroList[playerId] do
+    if (heroData.hero == heroName) then
+      heroData.selected = true;
+      
+      for indexDictHero, dictHero in HEROES_BY_RACE[heroData.raceId] do
+        if (dictHero.name == heroName) then
+          local icons = dictHero[playerId];
+
+          SetObjectPosition(icons.red_icon, 31 + heroIndex, 84, GROUND);
+          SetObjectPosition(icons.blue_icon, 38 + heroIndex, 24, GROUND);
+          Trigger(icons.red_icon, 'noop');
+          Trigger(icons.blue_icon, 'noop');
+        end;
+      end;
+    end;
+  end;
+end;
+
+-- Удаление героя из набора
+function deleteHeroFromList(playerId, heroName)
+  print "deleteHeroFromList"
+  for heroIndex, heroData in randomHeroList[playerId] do
+    if (heroData.hero == heroName) then
+      heroData.deleted = true;
+
+      RemoveObject(heroData.red_icon);
+      RemoveObject(heroData.blue_icon);
+    end;
+  end;
+end;
+
+-- Проверка на максимум выбранных героев на каждой стороне
+function checkOnSelectMaximumHeroes()
+  print "checkOnSelectMaximumHeroes"
+  for playerId, heroList in randomHeroList do
+    local countDeletedHero, countSelectedHero = 0, 0;
+    
+    for heroIndex, heroData in heroList do
+      if heroData.deleted then
+        countDeletedHero = countDeletedHero + 1;
+      end;
+
+      if heroData.selected then
+        countSelectedHero = countSelectedHero + 1;
+      end;
+    end;
+    
+    -- Если вычеркнуто 3 героя, добавляем всех оставшихся героев в набор
+    if countDeletedHero == 3 then
+      for heroIndex, heroData in heroList do
+        if (not heroData.deleted and not heroData.selected) then
+          addHeroForPlayer(playerId, heroData.name)
+        end;
+      end;
+    end;
+
+    -- Если добавлено 3 героя, удаляем всех оставшихся героев в набор
+    if countSelectedHero == 4 then
+      for heroIndex, heroData in heroList do
+        if (not heroData.deleted and not heroData.selected) then
+          deleteHeroFromList(playerId, heroData.name);
+        end;
+      end;
+    end;
+  end;
+end;
+
+-- Признак заполнена ли одна из сторон или нет: 0 - Не заполнены, 1 - Заполнена
+function getCountSideFullfied()
+  print "getCountSideFullfied"
+  for playerId, heroList in randomHeroList do
+    local countDeletedHero, countSelectedHero = 0, 0;
+
+    for heroIndex, heroData in heroList do
+      if heroData.selected then
+        countSelectedHero = countSelectedHero + 1;
+      end;
+    end;
+    
+    if countSelectedHero == 4 then
+      return 1;
+    end;
+  end;
+  
+  return 0;
+end;
+
+-- Получение номера текущего хода
+function getHeroTurn()
+  print "getHeroTurn"
+  local count = 0;
+  local countSideFullfied = getCountSideFullfied();
+  
+  for playerId, heroList in randomHeroList do
+    for heroIndex, heroData in heroList do
+      if (heroData.deleted or heroData.selected) then
+        count = count + 1;
+      end;
+    end;
+  end;
+  
+  return count - countSideFullfied;
+end;
+
+-- Перечисление типов хода при черке героев: 0 - Вычеркиваем, 1 - Добавляем
+TURN_ACTIONS = {
+  CHOOSING = 1,
+  DELETING = 0,
+};
+
+-- Получение типа действия текущего хода:
+function getCurrentTurnAction()
+  print "getCurrentTurnAction"
+  -- Соотношение хода героя к типу действия при черке
+  local mapFlagToTurnAction = {
+    [0] = { TURN_ACTIONS.CHOOSING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.DELETING, TURN_ACTIONS.DELETING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.DELETING, TURN_ACTIONS.DELETING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.CHOOSING },
+    [1] = { TURN_ACTIONS.DELETING, TURN_ACTIONS.DELETING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.DELETING, TURN_ACTIONS.DELETING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.CHOOSING, TURN_ACTIONS.DELETING, TURN_ACTIONS.DELETING },
+  };
+  local turn = getHeroTurn();
+  
+  return mapFlagToTurnAction[RANDOM_CHOOSE_FIRST_FLAG][turn + 1];
+end;
+
+-- Обработчик изменения
+function changePlayersTurnForChoosingHero()
+  print "changePlayersTurnForChoosingHero"
+  -- Номер текущего хода черка героев
+  local turn = getHeroTurn();
+  local turnAction = getCurrentTurnAction();
+  local message = turnAction == TURN_ACTIONS.CHOOSING and "include_single_hero.txt" or "exclude_single_hero.txt";
+  
+  -- разрешаем черкнуть 10 героев
+  if turn > 9 then
+    return setResultHeroes();
+  end;
+  
+  -- Четные ходы выбирает красный, Нечетные - синий
+  if mod(turn, 2) then
+    removeHeroMovePoints(Djovanni);
+    addHeroMovePoints(Biara);
+    ShowFlyingSign(PATH_TO_DAY1_MESSAGES..text, Biara, PLAYER_1, 7.0);
+  else
+    removeHeroMovePoints(Biara);
+    addHeroMovePoints(Djovanni);
+    ShowFlyingSign(PATH_TO_DAY1_MESSAGES..text, Djovanni, PLAYER_2, 7.0);
+  end;
+end;
+
+-- Итоговый список героев для игры
+RESULT_HERO_LIST = {
+  [PLAYER_1] = { raceId = nil, heroes = {} },
+  [PLAYER_2] = { raceId = nil, heroes = {} },
+};
+
+-- Получение конечного списка героев для обоих игроков
+function setResultHeroes()
+  print "setResultHeroes"
+  for playerId, heroList in randomHeroList do
+    -- Список выбранных героев для рандомного выбора
+    local selectedHero = {};
+
+    for heroIndex, heroData in heroList do
+      if heroData.selected then
+        local pushedIndex = length(selectedHero) + 1;
+
+        selectedHero[pushedIndex] = {
+          hero = heroData.hero,
+          raceId = heroData.raceId,
+          selected = nil,
+        };
+      end;
+    end;
+    
+    -- Заполняем итоговый список 2 случайными выбранными героями
+    for resultHeroIndex = 1, 2 do
+      local randomSelectedHero;
+      
+      -- Повторять, пока не сгенерируем индекс героя, которого не выбрали
+      repeat
+        local randomIndex = random(length(selectedHero)) + 1;
+        randomSelectedHero = selectedHero[randomIndex];
+      until not randomSelectedHero.selected;
+      
+      RESULT_HERO_LIST[playerId].raceId = randomSelectedHero.raceId;
+      RESULT_HERO_LIST[playerId].heroes[resultHeroIndex] = randomSelectedHero.hero;
+      
+      randomSelectedHero.selected = true;
+    end;
+    
+    -- Заполняем список 3 случайным героем этой расы
+    local raceId = RESULT_HERO_LIST[playerId].raceId;
+    local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
+    local allHeroesByRace = HEROES_BY_RACE[raceId];
+    local randomHero;
+    
+    -- Повторяем, пока не зарандомим не выбранного героя
+    repeat
+      local randomIndex = random(length(allHeroesByRace)) + 1;
+      randomHero = allHeroesByRace[randomIndex];
+      local isNotExist = true;
+      
+      for i, resultHero in resultHeroes do
+        if resultHero == randomHero.name then
+          isNotExist = nil;
+        end;
+      end;
+      
+    until isNotExist;
+
+    RESULT_HERO_LIST[playerId].heroes[3] = randomHero.name;
   end;
 end;
 
@@ -527,11 +960,6 @@ end;
 -- Передача ходов между игроками после выбора расы
 function changePlayersTurn()
   print "changePlayersTurn"
-  -- Биара (герой красного)
-  local Biara = GetPlayerHeroes(PLAYER_1)[0];
-  -- Джованни (негой синего)
-  local Djovanni = GetPlayerHeroes(PLAYER_2)[0];
-
   local countSelectedRace = getCountSelectedRace();
 
   if (countSelectedRace == 1) then
