@@ -10,15 +10,20 @@ consoleCmd('game_writelog 0')
 sleep(1)
 
 doFile(GetMapDataPath()..'common.lua');
+doFile(GetMapDataPath()..'utils.lua');
 doFile(GetMapDataPath()..'constants.lua');
-doFile(GetMapDataPath().."day1/day1_scripts.lua");
 sleep(10)
+
+removeHeroMovePoints(Biara);
+removeHeroMovePoints(Djovanni);
 
 heroes1 = GetPlayerHeroes (PLAYER_1)
 heroes2 = GetPlayerHeroes (PLAYER_2)
 
 -- Корневые триггеры
 Trigger (NEW_DAY_TRIGGER, 'newday');
+
+doFile(GetMapDataPath().."day1/day1_scripts.lua");
 
 function InitCombatExecThread(hero)
 	StartCombat(hero, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)')
@@ -2464,32 +2469,6 @@ Para = {
    { ["obj1"] = 'o', ["obj2"] = 'o', ["obj3"] = 'o', ["obj4"] = 'o', ["race1"] =  0, ["race2"] =  0 }
 }
 
-if GAME_MODE.SIMPLE_CHOOSE then
-  SetObjectPosition('blue1', 44, 24);
-  SetObjectPosition('blue2', 45, 24);
-  SetObjectPosition('blue3', 46, 24);
-  SetObjectPosition('blue4', 44, 22);
-  SetObjectPosition('blue5', 45, 22);
-  SetObjectPosition('blue6', 46, 22);
-  SetObjectPosition('blue7', 44, 20);
-  SetObjectPosition('blue8', 45, 20);
-  SetObjectPosition('blue9', 46, 20);
-  SetObjectPosition('red12', 37, 89);
-  SetObjectPosition('red13', 38, 89);
-  SetObjectPosition('red14', 39, 89);
-  SetObjectPosition('red15', 37, 87);
-  SetObjectPosition('red16', 38, 87);
-  SetObjectPosition('red17', 39, 87);
-  SetObjectPosition('red18', 37, 85);
-  SetObjectPosition('red19', 38, 85);
-  SetObjectPosition('red20', 39, 85);
---  SetObjectPosition('red10', 35, 85, UNDERGROUND);
-  SetObjectEnabled('mumiya', nil);
-  SetObjectPosition('mumiya', 35, 91);
-  SetDisabledObjectMode('mumiya', 3);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'mumiya', 'mumiyaVopros' );
-end;
-
 if GAME_MODE.MATCHUPS then
   RemoveObject('blue1');
   RemoveObject('blue2');
@@ -3593,14 +3572,6 @@ if GAME_MODE.MATCHUPS then
 --    end;
   end;
 end;
-
-
-
-function mumiyaVopros ()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."mumiya.txt", 'rndRace', 'no');
-end;
-
-
 
 ------------------------------ MENTOR ------------------------------------------
 
@@ -5709,35 +5680,6 @@ while pl2_race1==pl2_race2 do
   pl2_race2=random(8)+1;
 end;
 
-if GAME_MODE.HALF then
-
-  pl1_race3=random(8)+1;
-  while (pl1_race3==pl1_race1) or (pl1_race3==pl1_race2) do
-    pl1_race3=random(8)+1;
-  end;
-
-  pl1_race4=random(8)+1;
-  while (pl1_race4==pl1_race1) or (pl1_race4==pl1_race2) or (pl1_race4==pl1_race3) do
-    pl1_race4=random(8)+1;
-  end;
-
-  pl2_race3=random(8)+1;
-  while (pl2_race3==pl2_race1) or (pl2_race3==pl2_race2) do
-    pl2_race3=random(8)+1;
-  end;
-
-  pl2_race4=random(8)+1;
-  while (pl2_race4==pl2_race1) or (pl2_race4==pl2_race2) or (pl2_race4==pl2_race3) do
-    pl2_race4=random(8)+1;
-  end;
-
-  hero1race = pl1_race1 * pl1_race2 * pl1_race3 * pl1_race4;
-  hero2race = pl2_race1 * pl2_race2 * pl2_race3 * pl2_race4;
-  regionFinal1 = 1 * 2 * 3 * 4;
-  regionFinal2 = 5 * 6 * 7 * 8;
-
-end;
-
 if GAME_MODE.MIX then
 
   pl1_race3=random(8)+1;
@@ -5767,17 +5709,6 @@ if GAME_MODE.MIX then
 
 end;
 
-if GAME_MODE.SIMPLE_CHOOSE then
-  pl1_race1=1;
-  pl1_race2=2;
-  pl1_race3=3;
-  pl1_race4=4;
-  pl2_race1=5;
-  pl2_race2=6;
-  pl2_race3=7;
-  pl2_race4=8;
-end;
-
 reg1block=0;
 reg2block=0;
 reg3block=0;
@@ -5793,65 +5724,49 @@ function SetRace (race, pl, x1, x2, y1, y2)
       SetObjectPosition('human1', x1, y1);
       SetObjectPosition('human2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="human.txt"; end;
-      if GAME_MODE.HALF then text="humanCherk.txt"; end;
       if GAME_MODE.MIX then text="humanCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="human.txt"; end;
     end;
     if race == 2 then
       SetObjectPosition('demon1', x1, y1);
       SetObjectPosition('demon2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="demon.txt"; end;
-      if GAME_MODE.HALF then text="demonCherk.txt"; end;
       if GAME_MODE.MIX then text="demonCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="demon.txt"; end;
     end;
     if race == 3 then
       SetObjectPosition('nekr1', x1, y1);
       SetObjectPosition('nekr2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="nekr.txt"; end;
-      if GAME_MODE.HALF then text="nekrCherk.txt"; end;
       if GAME_MODE.MIX then text="nekrCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="nekr.txt"; end;
     end;
     if race == 4 then
       SetObjectPosition('elf1', x1, y1);
       SetObjectPosition('elf2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="elf.txt"; end;
-      if GAME_MODE.HALF then text="elfCherk.txt"; end;
       if GAME_MODE.MIX then text="elfCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="elf.txt"; end;
     end;
     if race == 5 then
       SetObjectPosition('mag1', x1, y1);
       SetObjectPosition('mag2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="mag.txt"; end;
-      if GAME_MODE.HALF then text="magCherk.txt"; end;
       if GAME_MODE.MIX then text="magCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="mag.txt"; end;
     end;
     if race == 6 then
       SetObjectPosition('liga1', x1, y1);
       SetObjectPosition('liga2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="liga.txt"; end;
-      if GAME_MODE.HALF then text="ligaCherk.txt"; end;
       if GAME_MODE.MIX then text="ligaCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="liga.txt"; end;
     end;
     if race == 7 then
       SetObjectPosition('gnom1', x1, y1);
       SetObjectPosition('gnom2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="gnom.txt"; end;
-      if GAME_MODE.HALF then text="gnomCherk.txt"; end;
       if GAME_MODE.MIX then text="gnomCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="gnom.txt"; end;
     end;
     if race == 8 then
       SetObjectPosition('ork1', x1, y1);
       SetObjectPosition('ork2vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="ork.txt"; end;
-      if GAME_MODE.HALF then text="orkCherk.txt"; end;
       if GAME_MODE.MIX then text="orkCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="ork.txt"; end;
     end;
   end;
   if pl==2 then
@@ -5859,65 +5774,49 @@ function SetRace (race, pl, x1, x2, y1, y2)
       SetObjectPosition('human2', x1, y1);
       SetObjectPosition('human1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="human.txt"; end;
-      if GAME_MODE.HALF then text="humanCherk.txt"; end;
       if GAME_MODE.MIX then text="humanCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="human.txt"; end;
     end;
     if race == 2 then
       SetObjectPosition('demon2', x1, y1);
       SetObjectPosition('demon1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="demon.txt"; end;
-      if GAME_MODE.HALF then text="demonCherk.txt"; end;
       if GAME_MODE.MIX then text="demonCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="demon.txt"; end;
     end;
     if race == 3 then
       SetObjectPosition('nekr2', x1, y1);
       SetObjectPosition('nekr1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="nekr.txt"; end;
-      if GAME_MODE.HALF then text="nekrCherk.txt"; end;
       if GAME_MODE.MIX then text="nekrCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="nekr.txt"; end;
     end;
     if race == 4 then
       SetObjectPosition('elf2', x1, y1);
       SetObjectPosition('elf1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="elf.txt"; end;
-      if GAME_MODE.HALF then text="elfCherk.txt"; end;
       if GAME_MODE.MIX then text="elfCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="elf.txt"; end;
     end;
     if race == 5 then
       SetObjectPosition('mag2', x1, y1);
       SetObjectPosition('mag1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="mag.txt"; end;
-      if GAME_MODE.HALF then text="magCherk.txt"; end;
       if GAME_MODE.MIX then text="magCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="mag.txt"; end;
     end;
     if race == 6 then
       SetObjectPosition('liga2', x1, y1);
       SetObjectPosition('liga1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="liga.txt"; end;
-      if GAME_MODE.HALF then text="ligaCherk.txt"; end;
       if GAME_MODE.MIX then text="ligaCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="liga.txt"; end;
     end;
     if race == 7 then
       SetObjectPosition('gnom2', x1, y1);
       SetObjectPosition('gnom1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="gnom.txt"; end;
-      if GAME_MODE.HALF then text="gnomCherk.txt"; end;
       if GAME_MODE.MIX then text="gnomCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="gnom.txt"; end;
     end;
     if race == 8 then
       SetObjectPosition('ork2', x1, y1);
       SetObjectPosition('ork1vrag', x2, y2);
       if GAME_MODE.MATCHUPS then text="ork.txt"; end;
-      if GAME_MODE.HALF then text="orkCherk.txt"; end;
       if GAME_MODE.MIX then text="orkCherk.txt"; end;
-      if GAME_MODE.SIMPLE_CHOOSE then text="ork.txt"; end;
     end;
   end;
   return text;
@@ -5937,8 +5836,6 @@ function SetUnit (race, x, y, rotate)
   end;
   array_units[unit_race][unit_number].blocked=1;
   koef=1;
-  if GAME_MODE.SIMPLE_CHOOSE then koef=2; end;
-  if GAME_MODE.HALF then koef=0.9; end;
   if GAME_MODE.MIX then koef=0.7; end;
   CreateMonster (array_units[unit_race][unit_number].name, array_units[unit_race][unit_number].id,
                  array_units[unit_race][unit_number].kol*koef, x, y, 0, MONSTER_MOOD_FRIENDLY,
@@ -6433,28 +6330,6 @@ function nabor8()
   end;
   RemoveObject(array_units[n8ur][n8un].name);
 end;
-
-
-
---if GAME_MODE.MATCHUPS then
---  text11=SetRace(pl1_race1, 1, 85, 10, 36, 58);
---  text12=SetRace(pl1_race2, 1, 85, 10, 34, 56);
---  text21=SetRace(pl2_race1, 2,  2, 93, 58, 36);
---  text22=SetRace(pl2_race2, 2,  2, 93, 56, 34);
---end;
-
---if GAME_MODE.HALF then
---  text11=SetRace(pl1_race1, 1, 85, 10, 36, 58);
---  text12=SetRace(pl1_race2, 1, 85, 10, 34, 56);
---  text13=SetRace(pl1_race3, 1, 85, 10, 38, 60);
---  text14=SetRace(pl1_race4, 1, 85, 10, 32, 54);
---  text21=SetRace(pl2_race1, 2,  2, 93, 58, 36);
---  text22=SetRace(pl2_race2, 2,  2, 93, 56, 34);
---  text23=SetRace(pl2_race3, 2,  2, 93, 60, 38);
---  text24=SetRace(pl2_race4, 2,  2, 93, 54, 32);
---end;
-
-
 
 ---------------  ЧЕРК ГЕРОЕВ И РАС ---------
 
@@ -8207,82 +8082,7 @@ function ChoiseMixCherk( g1, g2)
   if g2 == 2 then CherkOfSetStep1(); podvariant = 2; end;
 end;
 
-if GAME_MODE.SIMPLE_CHOOSE then
-  text11=SetRace(pl1_race1, 1, 31, 46, 88, 23);
-  text12=SetRace(pl1_race2, 1, 31, 46, 86, 21);
-  text13=SetRace(pl1_race3, 1, 31, 46, 90, 25);
-  text14=SetRace(pl1_race4, 1, 31, 46, 84, 19);
-  text21=SetRace(pl2_race1, 2, 38, 39, 23, 88);
-  text22=SetRace(pl2_race2, 2, 38, 39, 21, 86);
-  text23=SetRace(pl2_race3, 2, 38, 39, 25, 90);
-  text24=SetRace(pl2_race4, 2, 38, 39, 19, 84);
-end;
-
 vybor=0;
-
---if GAME_MODE.MATCHUPS then
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'pl1_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'pl1_vopros2' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'pl2_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'pl2_vopros2' );
---end;
-
---if GAME_MODE.HALF then
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'pl1_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'pl1_vopros2' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'pl1_vopros3' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'pl1_vopros4' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'pl1_vopros5' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'pl1_vopros6' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'pl1_vopros7' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'pl1_vopros8' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'pl2_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'pl2_vopros2' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'pl2_vopros3' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'pl2_vopros4' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'pl2_vopros5' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'pl2_vopros6' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'pl2_vopros7' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'pl2_vopros8' );
---end;
-
---if GAME_MODE.MIX then
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'pl1_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'pl1_vopros2' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'pl1_vopros3' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'pl1_vopros4' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'pl1_vopros5' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'pl1_vopros6' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'pl1_vopros7' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'pl1_vopros8' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'pl2_vopros1' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'pl2_vopros2' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'pl2_vopros3' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'pl2_vopros4' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'pl2_vopros5' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'pl2_vopros6' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'pl2_vopros7' );
---  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'pl2_vopros8' );
---end;
-
-if GAME_MODE.SIMPLE_CHOOSE then
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'pl1_vopros1' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'pl1_vopros2' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'pl1_vopros3' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'pl1_vopros4' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'pl1_vopros5' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'pl1_vopros6' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'pl1_vopros7' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'pl1_vopros8' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'pl2_vopros1' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'pl2_vopros2' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'pl2_vopros3' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'pl2_vopros4' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'pl2_vopros5' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'pl2_vopros6' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'pl2_vopros7' );
-  Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'pl2_vopros8' );
-end;
 
 function pl1_vopros1()
   if GetDate (DAY) == 2 then
@@ -8585,29 +8385,23 @@ function cherk (pl, race, reg)
     schetchikPl1=schetchikPl1+1;
     hero1race = hero1race/race;
     regionFinal1 = regionFinal1/reg;
-    if SecondCherk == -1 and GAME_MODE.HALF then SetRace (race, 1, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
-    else SetRace (race, 1, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
-    end;
+    SetRace (race, 1, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
   end;
   if reg > 4 then
     schetchikPl2=schetchikPl2+1;
     hero2race = hero2race/race;
     regionFinal2 = regionFinal2/reg;
-    if SecondCherk == -1 and GAME_MODE.HALF then SetRace (race, 2, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
-    else SetRace (race, 2, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
-    end;
+    SetRace (race, 2, (64+schetchikPl1*2+schetchikPl2*2), (65+schetchikPl1*2+schetchikPl2*2), 53, 53);
   end;
   if pl == 1 then
     stop (heroes1[0]);
     hodi1(heroes2[0]);
   end;
   if pl == 2 then
-    if ((schetchikPl1+schetchikPl2) ~= 4) and GAME_MODE.HALF then stop (heroes2[0]);
-    else stop (heroes2[0]);
-    end;
-    if ((schetchikPl1+schetchikPl2) ~= 6) then
-      hodi1(heroes1[0]);
-    end;
+     stop (heroes2[0]);
+  end;
+  if ((schetchikPl1+schetchikPl2) ~= 6) then
+    hodi1(heroes1[0]);
   end;
   if GAME_MODE.MIX then
     if schetchikPl1 == 3 then
@@ -8639,172 +8433,102 @@ function cherk (pl, race, reg)
       end;
     end;
   end;
-  if GAME_MODE.HALF then
-    if schetchikPl1 == 2 and SecondCherk == -1 then
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'no' );
-    end;
-    if schetchikPl2 == 2 and SecondCherk == -1 then
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'no' );
-      Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'no' );
-    end;
-    if (schetchikPl1+schetchikPl2) == 4 then
-      hodi1(heroes1[0]);
-      hodi1(heroes2[0]);
-      SecondCherk = random(2);
-      if SecondCherk == 0 then
-        ShowFlyingSign(GetMapDataPath().."variant4.txt", heroes1[0], 1, 5.0);
-        ShowFlyingSign(GetMapDataPath().."variant4.txt", heroes2[0], 2, 5.0);
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'pl1_vopros1' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'pl1_vopros2' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'pl1_vopros3' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race4', 'pl1_vopros4' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race1', 'pl2_vopros1' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race2', 'pl2_vopros2' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race3', 'pl2_vopros3' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race4', 'pl2_vopros4' );
-      end;
-      if SecondCherk == 1 then
-        ShowFlyingSign(GetMapDataPath().."variant5.txt", heroes1[0], 1, 5.0);
-        ShowFlyingSign(GetMapDataPath().."variant5.txt", heroes2[0], 2, 5.0);
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race5', 'pl1_vopros5' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race6', 'pl1_vopros6' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race7', 'pl1_vopros7' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race8', 'pl1_vopros8' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race5', 'pl2_vopros5' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'pl2_vopros6' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'pl2_vopros7' );
-        Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'pl2_vopros8' );
-      end;
-    end;
-  end;
 end;
 
 function pl1_vybor1 ()
   pl_vybor ( 1, 1, pl1_race1)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg1block = 1; end;
+  if GAME_MODE.MIX then reg1block = 1; end;
 end;
 
 function pl1_vybor2 ()
   pl_vybor ( 1, 2, pl1_race2)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg2block = 1; end;
+  if GAME_MODE.MIX then reg2block = 1; end;
 end;
 
 function pl1_vybor3 ()
   pl_vybor ( 1, 3, pl1_race3)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg3block = 1; end;
+  if GAME_MODE.MIX then reg3block = 1; end;
 end;
 
 function pl1_vybor4 ()
   pl_vybor ( 1, 4, pl1_race4)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg4block = 1; end;
+  if GAME_MODE.MIX then reg4block = 1; end;
 end;
 
 function pl1_vybor5 ()
   pl_vybor ( 1, 5, pl2_race1)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg5block = 1; end;
+  if GAME_MODE.MIX then reg5block = 1; end;
 end;
 
 function pl1_vybor6 ()
   pl_vybor ( 1, 6, pl2_race2)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg6block = 1; end;
+  if GAME_MODE.MIX then reg6block = 1; end;
 end;
 
 function pl1_vybor7 ()
   pl_vybor ( 1, 7, pl2_race3)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg7block = 1; end;
+  if GAME_MODE.MIX then reg7block = 1; end;
 end;
 
 function pl1_vybor8 ()
   pl_vybor ( 1, 8, pl2_race4)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg8block = 1; end;
+  if GAME_MODE.MIX then reg8block = 1; end;
 end;
 
 function pl2_vybor1 ()
   pl_vybor ( 2, 5, pl2_race1)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg5block = 1; end;
+  if GAME_MODE.MIX then reg5block = 1; end;
 end;
 
 function pl2_vybor2 ()
   pl_vybor ( 2, 6, pl2_race2)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg6block = 1; end;
+  if GAME_MODE.MIX then reg6block = 1; end;
 end;
 
 function pl2_vybor3 ()
   pl_vybor ( 2, 7, pl2_race3)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg7block = 1; end;
+  if GAME_MODE.MIX then reg7block = 1; end;
 end;
 
 function pl2_vybor4 ()
   pl_vybor ( 2, 8, pl2_race4)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg8block = 1; end;
+  if GAME_MODE.MIX then reg8block = 1; end;
 end;
 
 function pl2_vybor5 ()
   pl_vybor ( 2, 1, pl1_race1)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg1block = 1; end;
+  if GAME_MODE.MIX then reg1block = 1; end;
 end;
 
 function pl2_vybor6 ()
   pl_vybor ( 2, 2, pl1_race2)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg2block = 1; end;
+  if GAME_MODE.MIX then reg2block = 1; end;
 end;
 
 function pl2_vybor7 ()
   pl_vybor ( 2, 3, pl1_race3)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg3block = 1; end;
+  if GAME_MODE.MIX then reg3block = 1; end;
 end;
 
 function pl2_vybor8 ()
   pl_vybor ( 2, 4, pl1_race4)
-  if GAME_MODE.HALF or GAME_MODE.MIX then reg4block = 1; end;
+  if GAME_MODE.MIX then reg4block = 1; end;
 end;
 
 function pl_vybor(pl, region, race)
   vybor=vybor+1;
---  if GAME_MODE.MATCHUPS then
---    if pl == 1 then hero1race = race; end;
---    if pl == 2 then hero2race = race; end;
---  end;
---  if GAME_MODE.HALF then
---    if pl == 1 then hero2race = race; end;
---    if pl == 2 then hero1race = race; end;
---  end;
-  if GAME_MODE.HALF or GAME_MODE.MIX then
+  
+  if GAME_MODE.MIX then
     cherk (pl, race, region);
   end;
-  if GAME_MODE.SIMPLE_CHOOSE then
-    if pl == 1 then hero1race = race; end;
-    if (pl == 2 and vybor<3) then hero2race = race; end;
-  end;
-  if (GAME_MODE.MATCHUPS or GAME_MODE.SIMPLE_CHOOSE) or ((schetchikPl1+schetchikPl2) == 6) then
+  if GAME_MODE.MATCHUPS or ((schetchikPl1+schetchikPl2) == 6) then
     x11=41; x12=44; y11=78; y12=78;
     x21=43; x22=41; y21=15; y22=15;
   end;
   if pl == 1 then stop (heroes1[0]); end;
   if pl == 2 and GAME_MODE.MIX then stop (heroes2[0]); end;
-  if pl == 2 and GAME_MODE.HALF and (schetchikPl1+schetchikPl2) ~= 4 then stop (heroes2[0]); end;
-  if ((GAME_MODE.MATCHUPS or GAME_MODE.SIMPLE_CHOOSE) and vybor == 2) or ((schetchikPl1+schetchikPl2) == 6) then
-
---    CherkPossibleHeroes();
-
+  if (GAME_MODE.MATCHUPS and vybor == 2) or ((schetchikPl1+schetchikPl2) == 6) then
     SetPossibleHeroes();
-
---    add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
---    add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
---    unreserve();
   end;
 end;
 
@@ -8846,18 +8570,9 @@ arrayPositionPosterHero[3] = {
 
 function SetPossibleHeroes()
   if GAME_MODE.MATCHUPS then textForHero = "cherkHero.txt";  varCherkHero = 3; end;
-  if GAME_MODE.HALF then textForHero = "cherkHero.txt";  varCherkHero = 3; end;
   if GAME_MODE.MIX then textForHero = "cherkHero.txt";  varCherkHero = 3; end;
-  if GAME_MODE.SIMPLE_CHOOSE then
-    varCherkHero = random(2) + 1;
-    if varCherkHero == 1 then textForHero = "cherkHero1.txt"; end;
-    if varCherkHero == 2 then textForHero = "cherkHero2.txt"; end;
-    if GetTurnTimeLeft(1) == 0 then textForHero = "cherkHero.txt";  varCherkHero = 3; end;
-  end;
   ShowFlyingSign(GetMapDataPath()..textForHero, heroes1[0], 1, 7.0);
   ShowFlyingSign(GetMapDataPath()..textForHero, heroes2[0], 2, 7.0);
---  MoveHeroRealTime(heroes1[0], 35, 87);
---  MoveHeroRealTime(heroes2[0], 42, 22);
   SetObjectPosition(heroes1[0], 35, 87);
   SetObjectPosition(heroes2[0], 42, 22);
   ChangeHeroStat (heroes2[0], STAT_MOVE_POINTS, -5000);
@@ -8879,22 +8594,8 @@ function SetPossibleHeroes()
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'no');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'no');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'no');
---  SetRegionBlocked ('pl1_race3', true);
---  SetRegionBlocked ('pl1_race4', true);
---  SetRegionBlocked ('pl1_race5', true);
---  SetRegionBlocked ('pl1_race6', true);
---  SetRegionBlocked ('pl1_race7', true);
---  SetRegionBlocked ('pl1_race8', true);
---  SetRegionBlocked ('pl2_race1', true);
---  SetRegionBlocked ('pl2_race2', true);
---  SetRegionBlocked ('pl2_race3', true);
---  SetRegionBlocked ('pl2_race4', true);
---  SetRegionBlocked ('pl2_race5', true);
---  SetRegionBlocked ('pl2_race6', true);
---  SetRegionBlocked ('pl2_race7', true);
---  SetRegionBlocked ('pl2_race8', true);
 
-  if GAME_MODE.MIX or GAME_MODE.SIMPLE_CHOOSE then
+  if GAME_MODE.MIX then
   RemoveObject     ('red1');
   RemoveObject     ('red2');
   RemoveObject     ('red3');
@@ -8958,15 +8659,6 @@ function SetPossibleHeroes()
     end;
   end;
 
-  ------- BLOCK HERO -----------
---  if hero1race == 3 and hero2race == 3 then array_heroes[2][4].blocked = 1; end;
---  if hero1race == 2 and hero2race == 6 then array_heroes[1][3].blocked = 1; end;
---  if hero2race == 2 and hero1race == 6 then array_heroes[1][3].blocked = 1; end;
---  if hero1race == 2 and hero2race == 3 then array_heroes[1][3].blocked = 1; end;
---  if hero2race == 2 and hero1race == 3 then array_heroes[1][3].blocked = 1; end;
---  if hero1race == 3 and hero2race == 7 then array_heroes[2][9].blocked = 1; end;
---  if hero2race == 3 and hero1race == 7 then array_heroes[2][9].blocked = 1; end;
-
   num_heroes=11;
   if (hero1race == 6) or (hero1race == 3) then num_heroes=12; end;
   if (hero1race == 1) then num_heroes=13; end;
@@ -8985,13 +8677,6 @@ function SetPossibleHeroes()
   end;
 
   k = 0;
---  for i = 1, num_heroes do
---    if random(2) > 0 and k < 3 and array_heroes[hero1race-1][i].block_temply == 1 then
---      array_heroes[hero1race-1][i].block_temply = 0;
---      k = k + 1;
---    end;
---    if k < 3 and i == num_heroes then i = 1; end;
---  end;
 
   for i = 1, 5 do
     rnd = random(num_heroes) + 1;
@@ -9028,13 +8713,6 @@ function SetPossibleHeroes()
   end;
 
   k = 0;
---  for i = 1, num_heroes do
---    if random(2) > 0 and k < 3 and array_heroes[hero2race-1][i].block_temply == 1 then
---      array_heroes[hero2race-1][i].block_temply = 0;
---      k = k + 1;
---    end;
---    if k < 3 and i == num_heroes then i = 1; end;
---  end;
 
   for i = 1, 5 do
     rnd = random(num_heroes) + 1;
@@ -9056,9 +8734,6 @@ function SetPossibleHeroes()
   sleep (3);
 
   stop (heroes2[0]);
-
-  if GAME_MODE.SIMPLE_CHOOSE and GetTurnTimeLeft(1) == 0 then hodi1(heroes2[0]); end;
-
 end;
 
 HCC1 = 0;
@@ -9088,14 +8763,9 @@ function HeroCollectionChoise1()
     HeroCollectionPlayer1 = 0;
     if H == heroes1[0] then hodi1(heroes2[0]); Hotseat = 0;
     else
-      if GAME_MODE.SIMPLE_CHOOSE and Hotseat == 1 and GetTurnTimeLeft(1) == 0 then
-        hodi1(heroes2[0]);
-        Hotseat = 0;
-      else
-        add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
-        add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
-        unreserve();
-      end;
+      add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
+      add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
+      unreserve();
     end;
     for i = 1, 5 do
       RemoveObject(array_heroes[hero1race-1][arrayPossibleHeroes[1][i]].p3);
@@ -9123,14 +8793,9 @@ function HeroCollectionChoise2()
     HeroCollectionPlayer1 = 1;
     if H == heroes1[0] then hodi1(heroes2[0]); Hotseat = 0;
     else
-      if GAME_MODE.SIMPLE_CHOOSE and Hotseat == 1 and GetTurnTimeLeft(1) == 0 then
-        hodi1(heroes2[0]);
-        Hotseat = 0;
-      else
-        add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
-        add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
-        unreserve();
-      end;
+      add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
+      add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
+      unreserve();
     end;
     for i = 1, 5 do
       RemoveObject(array_heroes[hero1race-1][arrayPossibleHeroes[0][i]].p1);
@@ -9158,14 +8823,9 @@ function HeroCollectionChoise3()
     HeroCollectionPlayer2 = 2;
     if H == heroes1[0] then hodi1(heroes2[0]); Hotseat = 0;
     else
-      if GAME_MODE.SIMPLE_CHOOSE and Hotseat == 1 and GetTurnTimeLeft(1) == 0 then
-        hodi1(heroes2[0]);
-        Hotseat = 0;
-      else
-        add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
-        add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
-        unreserve();
-      end;
+      add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
+      add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
+      unreserve();
     end;
     for i = 1, 5 do
       RemoveObject(array_heroes[hero2race-1][arrayPossibleHeroes[3][i]].p7);
@@ -9193,14 +8853,9 @@ function HeroCollectionChoise4()
     HeroCollectionPlayer2 = 3;
     if H == heroes1[0] then hodi1(heroes2[0]); Hotseat = 0;
     else
-      if GAME_MODE.SIMPLE_CHOOSE and Hotseat == 1 and GetTurnTimeLeft(1) == 0 then
-        hodi1(heroes2[0]);
-        Hotseat = 0;
-      else
-        add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
-        add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
-        unreserve();
-      end;
+      add_hero (hero1race, x11, x12, y11, y12, 1, hero2race);
+      add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
+      unreserve();
     end;
     for i = 1, 5 do
       RemoveObject(array_heroes[hero2race-1][arrayPossibleHeroes[2][i]].p5);
@@ -9245,7 +8900,7 @@ function CherkPossibleHeroes()
     ShowFlyingSign(GetMapDataPath().."HeroPlus.txt",  heroes1[0], 1, 7.0);
   end;
 
-  if GAME_MODE.MIX or GAME_MODE.SIMPLE_CHOOSE then
+  if GAME_MODE.MIX then
   RemoveObject     ('red1');
   RemoveObject     ('red2');
   RemoveObject     ('red3');
@@ -12223,7 +11878,7 @@ kolUnit2 = { 0, 0, 0, 0, 0, 0, 0}
 -- обработчик наступления нового дня
 function newday ()
   if GetDate (DAY) == 2 then
-     doFile(GetMapDataPath().."day2/day2_scripts.lua");
+    addHeroMovePoints(Biara);
   end;
 
   if GetDate (DAY) == 3 then

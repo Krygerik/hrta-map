@@ -147,3 +147,8 @@ HEROES_BY_RACE = {
 	  { name = "Quroq",       txt = "stronghold/heroKurak.txt",      dsc = "/Text/Game/Heroes/Specializations/Stronghold/SpecQuroq/Description.txt",                  [PLAYER_1] = {{ red_icon = "hero_11_8_1", blue_icon = "hero_11_8_2" }, { red_icon = "hero_11_8_5", blue_icon = "hero_11_8_6" }}, [PLAYER_2] = {{ red_icon = "hero_11_8_3", blue_icon = "hero_11_8_4" }, { red_icon = "hero_11_8_7", blue_icon = "hero_11_8_8" }} }
   }
 };
+
+-- Биара (герой красного)
+Biara = GetPlayerHeroes(PLAYER_1)[0]
+-- Джованни (негой синего)
+Djovanni = GetPlayerHeroes(PLAYER_2)[0]

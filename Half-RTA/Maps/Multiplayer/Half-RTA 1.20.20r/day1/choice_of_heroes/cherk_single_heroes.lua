@@ -29,7 +29,6 @@ function cherkSingleHeroes()
   removeHeroMovePoints(Djovanni);
   addHeroMovePoints(Biara)
 
-  deleteRace();
   removeRaceRegionTriggers();
 
   -- Меняем описание портретов всех героев выбранных рас
@@ -60,44 +59,6 @@ function cherkSingleHeroes()
   end;
 
   changePlayersTurnForChoosingHero();
-end;
-
--- Оставил как есть
-function deleteRace()
-  print "deleteRace"
-  
-  RemoveObject('human1vrag');
-  RemoveObject('demon1vrag');
-  RemoveObject('nekr1vrag');
-  RemoveObject('elf1vrag');
-  RemoveObject('mag1vrag');
-  RemoveObject('liga1vrag');
-  RemoveObject('gnom1vrag');
-  RemoveObject('ork1vrag');
-  RemoveObject('human2vrag');
-  RemoveObject('demon2vrag');
-  RemoveObject('nekr2vrag');
-  RemoveObject('elf2vrag');
-  RemoveObject('mag2vrag');
-  RemoveObject('liga2vrag');
-  RemoveObject('gnom2vrag');
-  RemoveObject('ork2vrag');
-  RemoveObject('human1');
-  RemoveObject('demon1');
-  RemoveObject('nekr1');
-  RemoveObject('elf1');
-  RemoveObject('mag1');
-  RemoveObject('liga1');
-  RemoveObject('gnom1');
-  RemoveObject('ork1');
-  RemoveObject('human2');
-  RemoveObject('demon2');
-  RemoveObject('nekr2');
-  RemoveObject('elf2');
-  RemoveObject('mag2');
-  RemoveObject('liga2');
-  RemoveObject('gnom2');
-  RemoveObject('ork2');
 end;
 
 -- Удаление триггеров с регионов, где находились расы

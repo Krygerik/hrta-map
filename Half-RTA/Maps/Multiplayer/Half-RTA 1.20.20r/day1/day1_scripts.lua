@@ -11,12 +11,14 @@ sleep(1)
 -- Точка входа для выполнения скриптов модулю
 function day1()
   print "day1"
-  
-  removeHeroMovePoints(Biara);
-  removeHeroMovePoints(Djovanni);
 
+  -- Получерк
   if GAME_MODE.HALF then
     doFile(PATH_TO_DAY1_MODULE.."choice_of_races/half.lua");
+  end;
+  -- Простой выбор
+  if GAME_MODE.SIMPLE_CHOOSE then
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_races/simple.lua");
   end;
 end;
 
