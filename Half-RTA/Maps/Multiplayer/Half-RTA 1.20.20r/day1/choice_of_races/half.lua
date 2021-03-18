@@ -151,13 +151,6 @@ function half_choice_of_races()
   end;
 end;
 
--- Получение ключа случайной расы
-function getRandomRace()
-  print "getRandomRace"
-  
-  return random(8);
-end;
-
 -- Получение количества записей в списке, равных переданной
 function getCountRacesByRaceId(findRaceId)
   print "getCountRacesByRaceId"
@@ -177,26 +170,6 @@ end;
 function setCreaturesPairInToRace(index, raceId)
   print "setCreaturesPairInToRace"
   
-  -- соотношение расы с отображаемыми при черке существами
-  local MAPPING_RACE_TO_CREATURES = {
-     -- Орден Порядка - латник и ревнитель веры
-     [RACES.HAVEN] = { ID1 = CREATURE_FOOTMAN, ID2 = CREATURE_VINDICATOR },
-     -- Инферно - черт и дьяволенок
-     [RACES.INFERNO] = { ID1 = CREATURE_IMP, ID2 = CREATURE_QUASIT },
-     -- Некрополис - вампир и князья вампиров
-     [RACES.NECROPOLIS] = { ID1 = CREATURE_VAMPIRE, ID2 = CREATURE_NOSFERATU },
-     -- Лесной Союз - лучник и стрелок
-     [RACES.SYLVAN] = { ID1 = CREATURE_WOOD_ELF, ID2 = CREATURE_SHARP_SHOOTER },
-     -- Акадения Волшебства - маг и боевой маг
-     [RACES.ACADEMY] = { ID1 = CREATURE_MAGI, ID2 = CREATURE_COMBAT_MAGE },
-     -- Лига Теней - бестия и фурия
-     [RACES.DUNGEON] = { ID1 = CREATURE_WITCH, ID2 = CREATURE_BLOOD_WITCH_2 },
-     -- Дварфы - жрец рун и служитель огня
-     [RACES.FORTRESS] = { ID1 = CREATURE_RUNE_MAGE, ID2 = CREATURE_FLAME_KEEPER },
-     -- Орда - палач и вожак
-     [RACES.STRONGHOLD] = { ID1 = CREATURE_ORCCHIEF_BUTCHER, ID2 = CREATURE_ORCCHIEF_CHIEFTAIN },
-  };
-
   randomGenerateRaceList[index].red_unit.unitId = MAPPING_RACE_TO_CREATURES[raceId].ID1;
   randomGenerateRaceList[index].blue_unit.unitId = MAPPING_RACE_TO_CREATURES[raceId].ID2;
 end;

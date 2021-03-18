@@ -20,6 +20,7 @@ removeHeroMovePoints(Djovanni);
 heroes1 = GetPlayerHeroes (PLAYER_1)
 heroes2 = GetPlayerHeroes (PLAYER_2)
 
+
 -- Корневые триггеры
 Trigger (NEW_DAY_TRIGGER, 'newday');
 
@@ -2469,94 +2470,6 @@ Para = {
    { ["obj1"] = 'o', ["obj2"] = 'o', ["obj3"] = 'o', ["obj4"] = 'o', ["race1"] =  0, ["race2"] =  0 }
 }
 
-if GAME_MODE.MATCHUPS then
-  RemoveObject('blue1');
-  RemoveObject('blue2');
-  RemoveObject('blue3');
-  RemoveObject('blue4');
-  RemoveObject('blue5');
-  RemoveObject('blue6');
-  RemoveObject('blue7');
-  RemoveObject('blue8');
-  RemoveObject('blue9');
-  RemoveObject('blue12');
-  RemoveObject('blue13');
-  RemoveObject('blue14');
-  RemoveObject('blue15');
-  RemoveObject('blue16');
-  RemoveObject('blue17');
-  RemoveObject('blue18');
-  RemoveObject('blue19');
-  RemoveObject('blue20');
-  RemoveObject('red1');
-  RemoveObject('red2');
-  RemoveObject('red3');
-  RemoveObject('red4');
-  RemoveObject('red5');
-  RemoveObject('red6');
-  -- RemoveObject('red7');
-  RemoveObject('red8');
-  RemoveObject('red9');
-  RemoveObject('red12');
-  RemoveObject('red13');
-  RemoveObject('red14');
-  RemoveObject('red15');
-  RemoveObject('red16');
-  RemoveObject('red17');
-  RemoveObject('red18');
-  RemoveObject('red19');
-  RemoveObject('red20');
---  SetObjectPosition('s11', 85, 38, 0);
---  SetObjectPosition('s12', 86, 38, 0);
---  SetObjectPosition('s13', 87, 38, 0);
---  SetObjectPosition('s14', 88, 38, 0);
---  SetObjectPosition('s15', 89, 38, 0);
---  SetObjectPosition('s16', 90, 38, 0);
---  SetObjectPosition('s17', 91, 38, 0);
---  SetObjectPosition('s18', 92, 38, 0);
---  SetObjectPosition('s19', 93, 38, 0);
---  SetObjectPosition('s21',  2, 60, 0);
---  SetObjectPosition('s22',  3, 60, 0);
---  SetObjectPosition('s23',  4, 60, 0);
---  SetObjectPosition('s24',  5, 60, 0);
---  SetObjectPosition('s25',  6, 60, 0);
---  SetObjectPosition('s26',  7, 60, 0);
---  SetObjectPosition('s27',  8, 60, 0);
---  SetObjectPosition('s28',  9, 60, 0);
---  SetObjectPosition('s29', 10, 60, 0);
-  SetObjectEnabled('s11', nil);
-  SetObjectEnabled('s12', nil);
-  SetObjectEnabled('s13', nil);
-  SetObjectEnabled('s14', nil);
-  SetObjectEnabled('s15', nil);
-  SetObjectEnabled('s16', nil);
-  SetObjectEnabled('s17', nil);
-  SetObjectEnabled('s18', nil);
-  SetObjectEnabled('s19', nil);
-  SetObjectEnabled('s21', nil);
-  SetObjectEnabled('s22', nil);
-  SetObjectEnabled('s23', nil);
-  SetObjectEnabled('s24', nil);
-  SetObjectEnabled('s25', nil);
-  SetObjectEnabled('s26', nil);
-  SetObjectEnabled('s27', nil);
-  SetObjectEnabled('s28', nil);
-  SetObjectEnabled('s29', nil);
-  Trigger( OBJECT_TOUCH_TRIGGER, 's11', 'MinusS1Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's21', 'MinusS1Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's12', 'MinusS2Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's22', 'MinusS2Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's13', 'MinusS3Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's23', 'MinusS3Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's14', 'MinusS4Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's24', 'MinusS4Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's15', 'MinusS5Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's25', 'MinusS5Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's16', 'MinusS6Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's26', 'MinusS6Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's17', 'MinusS7Question' );
-  Trigger( OBJECT_TOUCH_TRIGGER, 's27', 'MinusS7Question' );
-end;
 
 NumberBattle = 2;
 
@@ -2564,20 +2477,6 @@ battle = {};
 battle = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 option = {};
 option = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-function MinusS1Question(hero)
-  HeroQ = hero;
-  if GetObjectOwner(hero) == 1 then NumberMutchUp1 = 1; end;
-  if GetObjectOwner(hero) == 2 then NumberMutchUp2 = 1; end;
-  if DisableBagPlayer1 == 0 and GetObjectOwner(hero) == 1 then
-    DisableBagPlayer1 = 1;
-    QuestionBoxForPlayers (GetPlayerFilter( 1 ), GetMapDataPath().."QuestionMatchup.txt", 'MatchUpChoise', 'no1');
-  end;
-  if DisableBagPlayer2 == 0 and GetObjectOwner(hero) == 2 then
-    DisableBagPlayer2 = 1;
-    QuestionBoxForPlayers (GetPlayerFilter( 2 ), GetMapDataPath().."QuestionMatchup.txt", 'MatchUpChoise', 'no2');
-  end;
-end;
 
 function MinusS2Question(hero)
   HeroQ = hero;
@@ -2994,61 +2893,6 @@ function SetOptionBattle()
 
 end;
 
-function RandomBattle()
-
-  bat = random(length(array_battles[0]) - 6) + 7;
-  while array_battles[0][bat].kv < random(100) or array_battles[0][bat].blocked == 1 do
-    bat = random(length(array_battles[0]) - 6) + 7;
-  end;
-  array_battles[0][bat].blocked = 1;
-
-  if bat >= 6   and bat <= 13  then h1race = 1; end;
-  if bat >= 14  and bat <= 21  then h1race = 2; end;
-  if bat >= 22  and bat <= 29  then h1race = 3; end;
-  if bat >= 30  and bat <= 37  then h1race = 4; end;
-  if bat >= 38  and bat <= 45  then h1race = 5; end;
-  if bat >= 46  and bat <= 53  then h1race = 6; end;
-  if bat >= 54  and bat <= 61  then h1race = 7; end;
-  if bat >= 62  and bat <= 69  then h1race = 8; end;
-
-  if mod(bat + 10, 8) == 0     then h2race = 1; end;
-  if mod(bat +  9, 8) == 0     then h2race = 2; end;
-  if mod(bat +  8, 8) == 0     then h2race = 3; end;
-  if mod(bat +  7, 8) == 0     then h2race = 4; end;
-  if mod(bat +  6, 8) == 0     then h2race = 5; end;
-  if mod(bat +  5, 8) == 0     then h2race = 6; end;
-  if mod(bat +  4, 8) == 0     then h2race = 7; end;
-  if mod(bat +  3, 8) == 0     then h2race = 8; end;
-
-  if h1race == h2race then
-    Mirror = 1;
-  else
-    Mirror = 0;
-  end;
-
-  return bat, h1race, h2race;
-
-end;
-
-
-function RandomOption()
-  if random(100) < 0 then
-    opt = random(10) + 1;
-    while array_options[0][opt].blocked == 1 do
-      opt = random(10) + 1;
-    end;
-  else
-    opt = 1;
-  end;
---  if Mirror == 1 and opt == 1 and random(10) > 0 then
---    OverrideObjectTooltipNameAndDescription ('s17',  array_battles[0][battle[7]].text, GetMapDataPath().."Battle/Battle5.txt");
---    OverrideObjectTooltipNameAndDescription ('s27',  array_battles[0][battle[7]].text, GetMapDataPath().."Battle/Battle5.txt");
---    FM = 1;
---  end;
-  return opt;
-end;
-
-
 function FullMirror()
   num_heroes=11;
   if (hero1race == 6) then num_heroes = 12; end;
@@ -3310,268 +3154,6 @@ end;
 OptionText = {}
 OptionText = { GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt", GetMapDataPath().."Battle/Option0.txt"}
 
-if GAME_MODE.MATCHUPS then
-
-  NumberBattle = 28;
-
-  for i = 1, 6 do
---    if i == 7 then Mirror = 1; else Mirror = 0; end;
-    battle[i], h1r, h2r = RandomBattle();
-    option[i] = RandomOption();
-    if h1r == 1 then ID1 =   5; end;
-    if h1r == 2 then ID1 =  15; end;
-    if h1r == 3 then ID1 =  35; end;
-    if h1r == 4 then ID1 =  47; end;
-    if h1r == 5 then ID1 =  63; end;
-    if h1r == 6 then ID1 =  73; end;
-    if h1r == 7 then ID1 = 100; end;
-    if h1r == 8 then ID1 = 125; end;
-    if h2r == 1 then ID2 = 108; end;
-    if h2r == 2 then ID2 = 131; end;
-    if h2r == 3 then ID2 = 155; end;
-    if h2r == 4 then ID2 = 147; end;
-    if h2r == 5 then ID2 = 162; end;
-    if h2r == 6 then ID2 = 139; end;
-    if h2r == 7 then ID2 = 170; end;
-    if h2r == 8 then ID2 = 177; end;
-
-    if i == 1 then
---      battle[i] = 5;
-      CreateMonster('m111', ID1, 1, 31, 90, 0, 1, 2,  90, 0); SetObjectEnabled('m111', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm111', 'MinusS1Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s11', 32, 90, 0); end;
-      CreateMonster('m112', ID2, 1, 32, 90, 0, 1, 2, 270, 0); SetObjectEnabled('m112', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm112', 'MinusS1Question' );  SetObjectPosition('m112', 32, 90, 0);
-      CreateMonster('m211', ID1, 1, 39, 25, 0, 1, 2, 270, 0); SetObjectEnabled('m211', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm211', 'MinusS1Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s21', 39, 25, 0); end;
-      CreateMonster('m212', ID2, 1, 38, 25, 0, 1, 2,  90, 0); SetObjectEnabled('m212', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm212', 'MinusS1Question' );  SetObjectPosition('m212', 38, 25, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 31, 90, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS1Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 32, 90, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS1Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 39, 25, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS1Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 38, 25, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS1Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m111', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m112', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m211', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m212', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s11',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s21',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-
-    if i == 2 then
-      CreateMonster('m121', ID1, 1, 38, 90, 0, 1, 2,  90, 0); SetObjectEnabled('m121', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm121', 'MinusS2Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s12', 38, 90, 0); end;
-      CreateMonster('m122', ID2, 1, 39, 90, 0, 1, 2, 270, 0); SetObjectEnabled('m122', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm122', 'MinusS2Question' );  SetObjectPosition('m122', 39, 90, 0);
-      CreateMonster('m221', ID1, 1, 46, 25, 0, 1, 2, 270, 0); SetObjectEnabled('m221', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm221', 'MinusS2Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s22', 45, 25, 0); end;
-      CreateMonster('m222', ID2, 1, 45, 25, 0, 1, 2,  90, 0); SetObjectEnabled('m222', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm222', 'MinusS2Question' );  SetObjectPosition('m222', 45, 25, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 38, 90, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS2Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 39, 90, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS2Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 46, 25, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS2Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 45, 25, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS2Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m121', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m122', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m221', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m222', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s12',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s22',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-    if i == 3 then
-      CreateMonster('m131', ID1, 1, 31, 87, 0, 1, 2,  90, 0); SetObjectEnabled('m131', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm131', 'MinusS3Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s13', 32, 87, 0); end;
-      CreateMonster('m132', ID2, 1, 32, 87, 0, 1, 2, 270, 0); SetObjectEnabled('m132', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm132', 'MinusS3Question' );  SetObjectPosition('m132', 32, 87, 0);
-      CreateMonster('m231', ID1, 1, 39, 22, 0, 1, 2, 270, 0); SetObjectEnabled('m231', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm231', 'MinusS3Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s23', 39, 22, 0); end;
-      CreateMonster('m232', ID2, 1, 38, 22, 0, 1, 2,  90, 0); SetObjectEnabled('m232', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm232', 'MinusS3Question' );  SetObjectPosition('m232', 38, 22, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 31, 87, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS3Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 32, 87, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS3Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 39, 22, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS3Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 38, 22, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS3Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m131', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m132', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m231', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m232', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s13',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s23',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-    if i == 4 then
-      CreateMonster('m141', ID1, 1, 38, 87, 0, 1, 2,  90, 0); SetObjectEnabled('m141', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm141', 'MinusS4Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s14', 38, 87, 0); end;
-      CreateMonster('m142', ID2, 1, 39, 87, 0, 1, 2, 270, 0); SetObjectEnabled('m142', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm142', 'MinusS4Question' );  SetObjectPosition('m142', 39, 87, 0);
-      CreateMonster('m241', ID1, 1, 46, 22, 0, 1, 2, 270, 0); SetObjectEnabled('m241', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm241', 'MinusS4Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s24', 45, 22, 0); end;
-      CreateMonster('m242', ID2, 1, 45, 22, 0, 1, 2,  90, 0); SetObjectEnabled('m242', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm242', 'MinusS4Question' );  SetObjectPosition('m242', 45, 22, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 38, 87, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS4Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 39, 87, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS4Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 46, 22, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS4Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 45, 22, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS4Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m141', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m142', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m241', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m242', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s14',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s24',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-    if i == 5 then
-      CreateMonster('m151', ID1, 1, 31, 84, 0, 1, 2,  90, 0); SetObjectEnabled('m151', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm151', 'MinusS5Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s15', 32, 84, 0); end;
-      CreateMonster('m152', ID2, 1, 32, 84, 0, 1, 2, 270, 0); SetObjectEnabled('m152', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm152', 'MinusS5Question' );  SetObjectPosition('m152', 32, 84, 0);
-      CreateMonster('m251', ID1, 1, 39, 19, 0, 1, 2, 270, 0); SetObjectEnabled('m251', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm251', 'MinusS5Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s25', 39, 19, 0); end;
-      CreateMonster('m252', ID2, 1, 38, 19, 0, 1, 2,  90, 0); SetObjectEnabled('m252', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm252', 'MinusS5Question' );  SetObjectPosition('m252', 38, 19, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 31, 84, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS5Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 32, 84, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS5Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 39, 19, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS5Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 38, 19, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS5Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m151', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m152', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m251', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m252', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s15',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s25',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-    if i == 6 then
-      CreateMonster('m161', ID1, 1, 38, 84, 0, 1, 2,  90, 0); SetObjectEnabled('m161', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm161', 'MinusS6Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s16', 38, 84, 0); end;
-      CreateMonster('m162', ID2, 1, 39, 84, 0, 1, 2, 270, 0); SetObjectEnabled('m162', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm162', 'MinusS6Question' );  SetObjectPosition('m162', 39, 84, 0);
-      CreateMonster('m261', ID1, 1, 46, 19, 0, 1, 2, 270, 0); SetObjectEnabled('m261', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm261', 'MinusS6Question' );
-      if option[i] ~= 1 then SetObjectPosition ('s26', 45, 19, 0); end;
-      CreateMonster('m262', ID2, 1, 45, 19, 0, 1, 2,  90, 0); SetObjectEnabled('m262', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm262', 'MinusS6Question' );  SetObjectPosition('m262', 45, 19, 0);
-      SetObjectPosition(array_MathcUp[i].colour11, 38, 84, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour11, 'MinusS6Question' );
-      SetObjectPosition(array_MathcUp[i].colour21, 39, 84, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour21, 'MinusS6Question' );
-      SetObjectPosition(array_MathcUp[i].colour12, 46, 19, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour12, 'MinusS6Question' );
-      SetObjectPosition(array_MathcUp[i].colour22, 45, 19, 0); Trigger( OBJECT_TOUCH_TRIGGER, array_MathcUp[i].colour22, 'MinusS6Question' );
-      OptionText[i] = array_options[0][option[i]].text;
-      if option[i] == 2 then
-        if arrayBonusForSiege[h2r - 1][h1r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed0.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed5.txt";  end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed10.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed15.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed20.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed25.txt"; end;
-        if arrayBonusForSiege[h2r - 1][h1r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeRed30.txt"; end;
-      end;
-      if option[i] == 3 then
-        if arrayBonusForSiege[h1r - 1][h2r] ==  0 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue0.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] ==  5 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue5.txt";  end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 10 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue10.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 15 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue15.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 20 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue20.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 25 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue25.txt"; end;
-        if arrayBonusForSiege[h1r - 1][h2r] == 30 then OptionText[i] = GetMapDataPath().."Battle/SiegeBlue30.txt"; end;
-      end;
-      OverrideObjectTooltipNameAndDescription ('m161', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m162', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m261', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('m262', array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s16',  array_battles[0][battle[i]].text, OptionText[i]);
-      OverrideObjectTooltipNameAndDescription ('s26',  array_battles[0][battle[i]].text, OptionText[i]);
-    end;
-    
---    if i == 7 then
---      CreateMonster('m171', ID1, 1, 89, 32, 0, 1, 2, 0, 0); SetObjectEnabled('m171', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm171', 'MinusS7Question' );
---      SetObjectPosition     ('s17', 89, 32, 0);
---      CreateMonster('m271', ID1, 1,  6, 54, 0, 1, 2, 0, 0); SetObjectEnabled('m271', nil); Trigger( OBJECT_TOUCH_TRIGGER, 'm271', 'MinusS7Question' );
---      SetObjectPosition     ('s27',  6, 54, 0);
---      OverrideObjectTooltipNameAndDescription ('m171', array_battles[0][battle[i]].text, array_options[0][option[i]].text);
---      OverrideObjectTooltipNameAndDescription ('m271', array_battles[0][battle[i]].text, array_options[0][option[i]].text);
---      if FM ~=1 then OverrideObjectTooltipNameAndDescription ('s17',  array_battles[0][battle[i]].text, array_options[0][option[i]].text); end;
---      if FM ~=1 then OverrideObjectTooltipNameAndDescription ('s27',  array_battles[0][battle[i]].text, array_options[0][option[i]].text); end;
---    end;
-  end;
-end;
 
 ------------------------------ MENTOR ------------------------------------------
 
@@ -5723,49 +5305,41 @@ function SetRace (race, pl, x1, x2, y1, y2)
     if race == 1 then
       SetObjectPosition('human1', x1, y1);
       SetObjectPosition('human2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="human.txt"; end;
       if GAME_MODE.MIX then text="humanCherk.txt"; end;
     end;
     if race == 2 then
       SetObjectPosition('demon1', x1, y1);
       SetObjectPosition('demon2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="demon.txt"; end;
       if GAME_MODE.MIX then text="demonCherk.txt"; end;
     end;
     if race == 3 then
       SetObjectPosition('nekr1', x1, y1);
       SetObjectPosition('nekr2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="nekr.txt"; end;
       if GAME_MODE.MIX then text="nekrCherk.txt"; end;
     end;
     if race == 4 then
       SetObjectPosition('elf1', x1, y1);
       SetObjectPosition('elf2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="elf.txt"; end;
       if GAME_MODE.MIX then text="elfCherk.txt"; end;
     end;
     if race == 5 then
       SetObjectPosition('mag1', x1, y1);
       SetObjectPosition('mag2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="mag.txt"; end;
       if GAME_MODE.MIX then text="magCherk.txt"; end;
     end;
     if race == 6 then
       SetObjectPosition('liga1', x1, y1);
       SetObjectPosition('liga2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="liga.txt"; end;
       if GAME_MODE.MIX then text="ligaCherk.txt"; end;
     end;
     if race == 7 then
       SetObjectPosition('gnom1', x1, y1);
       SetObjectPosition('gnom2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="gnom.txt"; end;
       if GAME_MODE.MIX then text="gnomCherk.txt"; end;
     end;
     if race == 8 then
       SetObjectPosition('ork1', x1, y1);
       SetObjectPosition('ork2vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="ork.txt"; end;
       if GAME_MODE.MIX then text="orkCherk.txt"; end;
     end;
   end;
@@ -5773,49 +5347,41 @@ function SetRace (race, pl, x1, x2, y1, y2)
     if race == 1 then
       SetObjectPosition('human2', x1, y1);
       SetObjectPosition('human1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="human.txt"; end;
       if GAME_MODE.MIX then text="humanCherk.txt"; end;
     end;
     if race == 2 then
       SetObjectPosition('demon2', x1, y1);
       SetObjectPosition('demon1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="demon.txt"; end;
       if GAME_MODE.MIX then text="demonCherk.txt"; end;
     end;
     if race == 3 then
       SetObjectPosition('nekr2', x1, y1);
       SetObjectPosition('nekr1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="nekr.txt"; end;
       if GAME_MODE.MIX then text="nekrCherk.txt"; end;
     end;
     if race == 4 then
       SetObjectPosition('elf2', x1, y1);
       SetObjectPosition('elf1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="elf.txt"; end;
       if GAME_MODE.MIX then text="elfCherk.txt"; end;
     end;
     if race == 5 then
       SetObjectPosition('mag2', x1, y1);
       SetObjectPosition('mag1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="mag.txt"; end;
       if GAME_MODE.MIX then text="magCherk.txt"; end;
     end;
     if race == 6 then
       SetObjectPosition('liga2', x1, y1);
       SetObjectPosition('liga1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="liga.txt"; end;
       if GAME_MODE.MIX then text="ligaCherk.txt"; end;
     end;
     if race == 7 then
       SetObjectPosition('gnom2', x1, y1);
       SetObjectPosition('gnom1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="gnom.txt"; end;
       if GAME_MODE.MIX then text="gnomCherk.txt"; end;
     end;
     if race == 8 then
       SetObjectPosition('ork2', x1, y1);
       SetObjectPosition('ork1vrag', x2, y2);
-      if GAME_MODE.MATCHUPS then text="ork.txt"; end;
       if GAME_MODE.MIX then text="orkCherk.txt"; end;
     end;
   end;
@@ -8521,13 +8087,9 @@ function pl_vybor(pl, region, race)
   if GAME_MODE.MIX then
     cherk (pl, race, region);
   end;
-  if GAME_MODE.MATCHUPS or ((schetchikPl1+schetchikPl2) == 6) then
-    x11=41; x12=44; y11=78; y12=78;
-    x21=43; x22=41; y21=15; y22=15;
-  end;
   if pl == 1 then stop (heroes1[0]); end;
   if pl == 2 and GAME_MODE.MIX then stop (heroes2[0]); end;
-  if (GAME_MODE.MATCHUPS and vybor == 2) or ((schetchikPl1+schetchikPl2) == 6) then
+  if (schetchikPl1+schetchikPl2) == 6 then
     SetPossibleHeroes();
   end;
 end;

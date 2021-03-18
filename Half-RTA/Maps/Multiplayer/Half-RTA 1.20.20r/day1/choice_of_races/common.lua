@@ -1,6 +1,5 @@
 -- Файл, описывающий общий функционал между черками рас
 
-
 -- Выключение взаимодействия игроков с окружением
 function disableAreaInteractive()
   print "disableAreaInteractive"
@@ -81,3 +80,74 @@ function disableAreaInteractive()
   SetObjectEnabled('ork1vrag', nil);   SetDisabledObjectMode('ork1vrag', DISABLED_BLOCKED);
   SetObjectEnabled('ork2vrag', nil);   SetDisabledObjectMode('ork2vrag', DISABLED_BLOCKED);
 end;
+
+-- Удаление всех перегородок
+function deleteAllDelimeters()
+  print "deleteAllDelimeters"
+
+  RemoveObject     ('red1');
+  RemoveObject     ('red2');
+  RemoveObject     ('red3');
+  RemoveObject     ('red4');
+  RemoveObject     ('red5');
+  RemoveObject     ('red6');
+  RemoveObject     ('red7');
+  RemoveObject     ('red8');
+  RemoveObject     ('red9');
+  RemoveObject     ('red12');
+  RemoveObject     ('red13');
+  RemoveObject     ('red14');
+  RemoveObject     ('red15');
+  RemoveObject     ('red16');
+  RemoveObject     ('red17');
+  RemoveObject     ('red18');
+  RemoveObject     ('red19');
+  RemoveObject     ('red20');
+
+  RemoveObject     ('blue1');
+  RemoveObject     ('blue2');
+  RemoveObject     ('blue3');
+  RemoveObject     ('blue4');
+  RemoveObject     ('blue5');
+  RemoveObject     ('blue6');
+  RemoveObject     ('blue7');
+  RemoveObject     ('blue8');
+  RemoveObject     ('blue9');
+  RemoveObject     ('blue12');
+  RemoveObject     ('blue13');
+  RemoveObject     ('blue14');
+  RemoveObject     ('blue15');
+  RemoveObject     ('blue16');
+  RemoveObject     ('blue17');
+  RemoveObject     ('blue18');
+  RemoveObject     ('blue19');
+  RemoveObject     ('blue20');
+end;
+
+-- соотношение расы с отображаемыми при черке существами
+MAPPING_RACE_TO_CREATURES = {
+  -- Орден Порядка - латник и ревнитель веры
+  [RACES.HAVEN] = { ID1 = CREATURE_FOOTMAN, ID2 = CREATURE_VINDICATOR },
+  -- Инферно - черт и дьяволенок
+  [RACES.INFERNO] = { ID1 = CREATURE_IMP, ID2 = CREATURE_QUASIT },
+  -- Некрополис - вампир и князья вампиров
+  [RACES.NECROPOLIS] = { ID1 = CREATURE_VAMPIRE, ID2 = CREATURE_NOSFERATU },
+  -- Лесной Союз - лучник и стрелок
+  [RACES.SYLVAN] = { ID1 = CREATURE_WOOD_ELF, ID2 = CREATURE_SHARP_SHOOTER },
+  -- Акадения Волшебства - маг и боевой маг
+  [RACES.ACADEMY] = { ID1 = CREATURE_MAGI, ID2 = CREATURE_COMBAT_MAGE },
+  -- Лига Теней - бестия и фурия
+  [RACES.DUNGEON] = { ID1 = CREATURE_WITCH, ID2 = CREATURE_BLOOD_WITCH_2 },
+  -- Дварфы - жрец рун и служитель огня
+  [RACES.FORTRESS] = { ID1 = CREATURE_RUNE_MAGE, ID2 = CREATURE_FLAME_KEEPER },
+  -- Орда - палач и вожак
+  [RACES.STRONGHOLD] = { ID1 = CREATURE_ORCCHIEF_BUTCHER, ID2 = CREATURE_ORCCHIEF_CHIEFTAIN },
+};
+
+-- Получение ключа случайной расы
+function getRandomRace()
+  print "getRandomRace"
+
+  return random(8);
+end;
+  

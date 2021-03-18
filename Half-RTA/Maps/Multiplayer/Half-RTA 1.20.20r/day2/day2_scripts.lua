@@ -10,6 +10,8 @@ local Djovanni = GetPlayerHeroes(PLAYER_2)[0]
 
 -- черк матчапов
 if GAME_MODE.MATCHUPS then
+   addHeroMovePoints(Biara);
+   addHeroMovePoints(Djovanni);
    ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."cherk_matchups.txt", Biara, 1, 5.0);
    ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."cherk_matchups.txt", Djovanni, 2, 5.0);
 end;

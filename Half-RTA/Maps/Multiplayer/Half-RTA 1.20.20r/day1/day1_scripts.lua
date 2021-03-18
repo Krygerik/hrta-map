@@ -20,6 +20,10 @@ function day1()
   if GAME_MODE.SIMPLE_CHOOSE then
     doFile(PATH_TO_DAY1_MODULE.."choice_of_races/simple.lua");
   end;
+  -- Черк матчапов
+  if GAME_MODE.MATCHUPS then
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_races/matchups.lua");
+  end;
 end;
 
 -- Точка входа в модуль

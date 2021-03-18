@@ -176,49 +176,6 @@ function finishSimpleChoiseOfRaces()
   doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
 end;
 
--- Удаление всех перегородок
-function deleteAllDelimeters()
-  print "deleteAllDelimeters"
-  
-  RemoveObject     ('red1');
-  RemoveObject     ('red2');
-  RemoveObject     ('red3');
-  RemoveObject     ('red4');
-  RemoveObject     ('red5');
-  RemoveObject     ('red6');
-  RemoveObject     ('red7');
-  RemoveObject     ('red8');
-  RemoveObject     ('red9');
-  RemoveObject     ('red12');
-  RemoveObject     ('red13');
-  RemoveObject     ('red14');
-  RemoveObject     ('red15');
-  RemoveObject     ('red16');
-  RemoveObject     ('red17');
-  RemoveObject     ('red18');
-  RemoveObject     ('red19');
-  RemoveObject     ('red20');
-
-  RemoveObject     ('blue1');
-  RemoveObject     ('blue2');
-  RemoveObject     ('blue3');
-  RemoveObject     ('blue4');
-  RemoveObject     ('blue5');
-  RemoveObject     ('blue6');
-  RemoveObject     ('blue7');
-  RemoveObject     ('blue8');
-  RemoveObject     ('blue9');
-  RemoveObject     ('blue12');
-  RemoveObject     ('blue13');
-  RemoveObject     ('blue14');
-  RemoveObject     ('blue15');
-  RemoveObject     ('blue16');
-  RemoveObject     ('blue17');
-  RemoveObject     ('blue18');
-  RemoveObject     ('blue19');
-  RemoveObject     ('blue20');
-end;
-
 -- Удаление всех юнитов, для выбора рас
 function deleteAllRacesUnit()
   print "deleteAllRacesUnit"
@@ -230,9 +187,5 @@ function deleteAllRacesUnit()
     RemoveObject(currentRace[PLAYER_2].unit)
   end;
 end;
-
---------------------------------------------------------------------
---------------------------------------------------------------------
---------------------------------------------------------------------
 
 simple_choice_of_races();
