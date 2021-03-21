@@ -24,6 +24,10 @@ function day1()
   if GAME_MODE.MATCHUPS then
     doFile(PATH_TO_DAY1_MODULE.."choice_of_races/matchups.lua");
   end;
+  -- Микс черк
+  if GAME_MODE.MIX then
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_races/mix.lua");
+  end;
 end;
 
 -- Точка входа в модуль
