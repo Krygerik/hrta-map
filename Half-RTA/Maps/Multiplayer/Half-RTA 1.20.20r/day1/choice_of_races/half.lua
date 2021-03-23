@@ -365,13 +365,19 @@ selectedRacePair = {
 function pushSelectedRaceToRacePair(selectedRace)
   print "pushSelectedRaceToRacePair"
   
+  local pushed = nil;
+  
   for pairIndex = 1, length(selectedRacePair) do
     local pair =  selectedRacePair[pairIndex];
+    
+    if pushed then
+      break;
+    end;
 
     for sideIndex = 1, length(pair) do
       local side = pair[sideIndex];
 
-      if (side.raceId == nil) then
+      if (not side.raceId and not pushed) then
         -- Запись выбранной расы в список пар
         side.raceId = selectedRace.raceId
         side.red_unit.name = selectedRace.red_unit.name
@@ -387,7 +393,8 @@ function pushSelectedRaceToRacePair(selectedRace)
         Trigger(OBJECT_TOUCH_TRIGGER, side.red_unit.name, 'questionDeleteMatchup');
         Trigger(OBJECT_TOUCH_TRIGGER, side.blue_unit.name, 'questionDeleteMatchup');
 
-        return '';
+        pushed = 1;
+        break;
       end;
     end
   end;

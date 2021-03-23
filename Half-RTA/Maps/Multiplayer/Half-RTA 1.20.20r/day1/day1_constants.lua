@@ -10,13 +10,6 @@ PATH_TO_RACE_NAMES = PATH_TO_DAY1_MODULE.."race_names/";
 -- 1 значение первого игрока (красного), 2 - второго (синего)
 SELECTED_RACE_ID_TABLE = {};
 
--- Итоговый список расы и героев для игры
--- Служит для передачи значения для начала прокачки
-RESULT_HERO_LIST = {
-  [PLAYER_1] = { raceId = nil, heroes = {} },
-  [PLAYER_2] = { raceId = nil, heroes = {} },
-};
-
 -- Маппинг ИД расы на ее наименование
 MAP_RACE_ID_TO_RACE_NAME = {
   [RACES.HAVEN] = PATH_TO_RACE_NAMES.."haven.txt",

@@ -152,3 +152,13 @@ HEROES_BY_RACE = {
 Biara = GetPlayerHeroes(PLAYER_1)[0]
 -- Джованни (негой синего)
 Djovanni = GetPlayerHeroes(PLAYER_2)[0]
+
+-- Итоговый список расы и героев для игры
+-- Служит для передачи значения для начала прокачки
+RESULT_HERO_LIST = {
+  [PLAYER_1] = { raceId = nil, heroes = {} },
+  [PLAYER_2] = { raceId = nil, heroes = {} },
+};
+
+-- Таблица ИД всех игроков
+PLAYER_ID_TABLE = { PLAYER_1, PLAYER_2 };

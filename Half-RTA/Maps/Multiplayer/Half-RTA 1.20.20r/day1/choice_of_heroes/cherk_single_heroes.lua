@@ -350,18 +350,17 @@ function changePlayersTurnForChoosingHero()
   -- Если 2 списка заполнены - заканчиваем черк
   if countSideFullfied == 2 then
     setResultHeroes();
-    return '';
-  end;
-
-  -- Четные ходы выбирает красный, Нечетные - синий
-  if mod(turn, 2) == 0 then
-    removeHeroMovePoints(Djovanni);
-    addHeroMovePoints(Biara);
-    ShowFlyingSign(PATH_TO_DAY1_MESSAGES..message, Biara, PLAYER_1, 7.0);
   else
-    removeHeroMovePoints(Biara);
-    addHeroMovePoints(Djovanni);
-    ShowFlyingSign(PATH_TO_DAY1_MESSAGES..message, Djovanni, PLAYER_2, 7.0);
+    -- Четные ходы выбирает красный, Нечетные - синий
+    if mod(turn, 2) == 0 then
+      removeHeroMovePoints(Djovanni);
+      addHeroMovePoints(Biara);
+      ShowFlyingSign(PATH_TO_DAY1_MESSAGES..message, Biara, PLAYER_1, 7.0);
+    else
+      removeHeroMovePoints(Biara);
+      addHeroMovePoints(Djovanni);
+      ShowFlyingSign(PATH_TO_DAY1_MESSAGES..message, Djovanni, PLAYER_2, 7.0);
+    end;
   end;
 end;
 

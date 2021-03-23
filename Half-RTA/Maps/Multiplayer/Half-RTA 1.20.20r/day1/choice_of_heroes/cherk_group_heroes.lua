@@ -258,12 +258,10 @@ function DeleteHeroGroupByIconName(iconName)
   local countDeletedGroup = getCountDeletedHeroGroup();
   if countDeletedGroup == 2 then
     finishGroupCherk();
-
-    return '';
+  else
+    -- ≈сли 2 игрок еще не ходил, передаем ему ход
+    changeTurnSelectedHeroGroup(PLAYER_2);
   end;
-
-  -- ≈сли 2 игрок еще не ходил, передаем ему ход
-  changeTurnSelectedHeroGroup(PLAYER_2);
 end;
 
 -- ѕолучение количество удаленных списков героев
