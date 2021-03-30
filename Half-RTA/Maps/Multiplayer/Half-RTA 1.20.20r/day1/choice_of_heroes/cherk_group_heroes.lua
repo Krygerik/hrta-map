@@ -227,22 +227,15 @@ end;
 function DeleteHeroGroupByIconName(iconName)
   print "DeleteHeroGroupByIconName"
 
-  -- Удаляем выбранный набор и снимает с другого набора триггеры
+  -- Удаляем выбранный набор
   local playerId, deleteGroupIndex = getGroupDataByIconName(iconName);
+  deleteGroupByIndex(playerId, deleteGroupIndex);
 
+  -- Снимаем с другого набора триггеры
   for groupIndex = 1, length(RANDOM_GROUPS_HERO_ICONS[playerId].heroGroups) do
     local group = RANDOM_GROUPS_HERO_ICONS[playerId].heroGroups[groupIndex];
 
-    if groupIndex == deleteGroupIndex then
-      group.deleted = true;
-
-      for heroIndex = 1, length(group.heroes) do
-        local heroData = group.heroes[heroIndex];
-
-        RemoveObject(heroData.red.icon);
-        RemoveObject(heroData.blue.icon);
-      end;
-    else
+    if groupIndex ~= deleteGroupIndex then
       group.selected = true;
 
       for heroIndex = 1, length(group.heroes) do
@@ -261,6 +254,45 @@ function DeleteHeroGroupByIconName(iconName)
   else
     -- Если 2 игрок еще не ходил, передаем ему ход
     changeTurnSelectedHeroGroup(PLAYER_2);
+  end;
+end;
+
+-- Удаление группы героев по их индексу
+function deleteGroupByIndex(playerId, deleteIndexGroup)
+  print "deleteGroupByIndex"
+
+  local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
+
+  for groupIndex = 1, length(playerData.heroGroups) do
+    local group = playerData.heroGroups[groupIndex];
+
+    if groupIndex == deleteIndexGroup then
+      group.deleted = true;
+
+      for heroIndex = 1, length(group.heroes) do
+        local heroData = group.heroes[heroIndex];
+
+        RemoveObject(heroData.red.icon);
+        RemoveObject(heroData.blue.icon);
+      end;
+    end;
+  end;
+end;
+
+-- Удаление оставшихся групп героев
+function deleteResultHeroGroups()
+  print "deleteResultHeroGroups"
+
+  for _, playerId in PLAYER_ID_TABLE do
+     local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
+     
+     for groupIndex = 1, length(playerData.heroGroups) do
+       local group = playerData.heroGroups[groupIndex];
+       
+       if not group.deleted then
+         deleteGroupByIndex(playerId, groupIndex);
+       end;
+     end;
   end;
 end;
 
@@ -309,7 +341,10 @@ function finishGroupCherk()
   removeHeroMovePoints(Djovanni);
   removeHeroMovePoints(Biara);
 
-  sleep(10);
+  sleep(5);
+
+  -- Скрывает оставшиеся группы героев(выбранные)
+  deleteResultHeroGroups();
 
   -- Получение итоговых героев для всех игроков
   for playerId = 1, length(RANDOM_GROUPS_HERO_ICONS) do

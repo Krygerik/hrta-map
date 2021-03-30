@@ -1,73 +1,108 @@
+PATH_TO_DAY3_SCRIPTS = GetMapDataPath().."day3/";
+
+doFile(PATH_TO_DAY3_SCRIPTS.."day3_constants.lua");
+doFile(PATH_TO_DAY3_SCRIPTS.."day3_common.lua");
+sleep(1);
+
 -- Точка входа в модуль
 function day3()
   print "day3"
 
   addHeroesToPlayers();
+  setHeroesInitialProperties();
+  changePlayersArea();
 end;
-
-
-INITIAL_HERO_COORDINATES = {
-  [PLAYER_1] = {
-    { x = 41, y = 78 },
-    { x = 44, y = 78 },
-    { x = 40, y = 82 },
-  },
-  [PLAYER_2] = {
-    { x = 43, y = 15 },
-    { x = 41, y = 15 },
-    { x = 53, y = 18 },
-  },
-}
 
 -- Добавление героев игрокам
 function addHeroesToPlayers()
+  print "addHeroesToPlayers"
+  
+  local INITIAL_HERO_COORDINATES = {
+    [PLAYER_1] = {
+      { x = 41, y = 78 },
+      { x = 44, y = 78 },
+      { x = 40, y = 82 },
+    },
+    [PLAYER_2] = {
+      { x = 43, y = 15 },
+      { x = 41, y = 15 },
+      { x = 53, y = 18 },
+    },
+  };
+
   for _, playerId in PLAYER_ID_TABLE do
     local playerData = RESULT_HERO_LIST[playerId];
 
     for indexHero, heroName in playerData.heroes do
       local coords = INITIAL_HERO_COORDINATES[playerId][indexHero];
       
-      -- Для второго игрока берем его зарезервированных героев
-      local reservedHeroName = playerId == PLAYER_1 and heroName or heroName.."2"
+      -- берем зарезервированных героев для игроков
+      local reservedHeroName = getReservedHeroName(playerId, heroName);
 
       DeployReserveHero(reservedHeroName, coords.x, coords.y, GROUND);
     end;
   end;
 end;
 
--- Точка входа
-day3();
+-- Установка героям начальных свойств
+function setHeroesInitialProperties()
+  print "setHeroesInitialProperties"
 
-function mock()
-  -- Перемещаем камеру второго игрока
-  MoveCameraForPlayers( GetPlayerFilter(PLAYER_2), 42, 24, GROUND, 40, 0, 3.14, 0, 0, 1);
+  for _, playerId in PLAYER_ID_TABLE do
+    local playerData = RESULT_HERO_LIST[playerId];
 
-  addHeroMovePoints(Biara)
-  ChangeHeroStat(HeroDop1, STAT_MOVE_POINTS, 500);
-  addHeroMovePoints(Djovanni);
-  ChangeHeroStat(HeroDop2, STAT_MOVE_POINTS, 500);
+    for indexHero, heroName in playerData.heroes do
+      -- берем зарезервированных героев для игроков
+      local reservedHeroName = getReservedHeroName(playerId, heroName);
+      local heroMana = GetHeroStat(reservedHeroName, STAT_MANA_POINTS);
+      
+      ChangeHeroStat(reservedHeroName, STAT_MANA_POINTS, 0 - heroMana);
+      LockMinHeroSkillsAndAttributes(reservedHeroName);
+      
+      -- Отнимаем очки передвижения у героя из таверны
+      if indexHero == 3 then
+        removeHeroMovePoints(reservedHeroName);
+      end;
+      
+      for _, skill in INITIAL_HERO_SKILLS[heroName] do
+        GiveHeroSkill(reservedHeroName, skill);
+      end;
+    end;
+  end;
+  
+  SetObjectPosition(Biara, 35, 85);
+  SetObjectPosition(Djovanni, 42, 24);
+  GiveHeroSkill(Biara, PERK_DEMONIC_FIRE);
+  GiveHeroSkill(Biara, HERO_SKILL_SNATCH);
+  GiveHeroSkill(Djovanni, HERO_SKILL_SNATCH);
+  
+  doFile(PATH_TO_DAY3_SCRIPTS.."spells_generate/spells_generate_scripts.lua");
+  -- doFile(PATH_TO_DAY3_SCRIPTS.."start_bonus/start_bonus_scripts.lua");
+end;
 
+-- Изменение игровых зон обоих игроков
+function changePlayersArea()
+  print "changePlayersArea"
+
+  local PLAYERS_DATA = {
+    [PLAYER_1] = { townName = 'RANDOMTOWN1' },
+    [PLAYER_2] = { townName = 'RANDOMTOWN2' },
+  }
+  
   OpenCircleFog(57, 80, GROUND, 14, PLAYER_1);
   OpenCircleFog(31, 14, GROUND, 17, PLAYER_2);
   OpenCircleFog(54, 12, GROUND, 14, PLAYER_2);
-
-  -- Превращает города в города выбранных рас
-  TransformPlayersTown('RANDOMTOWN1', hero1race);
-  TransformPlayersTown('RANDOMTOWN2', hero2race);
-
-  SetObjectOwner('RANDOMTOWN1', PLAYER_1);
-  SetObjectOwner('RANDOMTOWN2', PLAYER_2);
-
-  TownBuilding('RANDOMTOWN1', hero1race);
-  TownBuilding('RANDOMTOWN2', hero2race);
-
-  if hero1race == 1 then OverrideObjectTooltipNameAndDescription ('oko1', GetMapDataPath().."TrainingNAME.txt", GetMapDataPath().."TrainingDSCRP.txt"); end;
-  if hero1race == 4 then OverrideObjectTooltipNameAndDescription ('oko1', GetMapDataPath().."AvengerNAME.txt", GetMapDataPath().."AvengerDSCRP.txt"); end;
-  if hero1race == 5 then OverrideObjectTooltipNameAndDescription ('oko1', GetMapDataPath().."MinikNAME.txt", GetMapDataPath().."MinikDSCRP.txt"); end;
-  if hero2race == 1 then OverrideObjectTooltipNameAndDescription ('oko2', GetMapDataPath().."TrainingNAME.txt", GetMapDataPath().."TrainingDSCRP.txt"); end;
-  if hero2race == 4 then OverrideObjectTooltipNameAndDescription ('oko2', GetMapDataPath().."AvengerNAME.txt", GetMapDataPath().."AvengerDSCRP.txt"); end;
-  if hero2race == 5 then OverrideObjectTooltipNameAndDescription ('oko2', GetMapDataPath().."MinikNAME.txt", GetMapDataPath().."MinikDSCRP.txt"); end;
-
+  
+  for playerId = 1, length(RESULT_HERO_LIST) do
+    local playerData = RESULT_HERO_LIST[playerId];
+    local townName = PLAYERS_DATA[playerId].townName
+    
+    -- Превращает города в города выбранных рас
+    transformPlayersTown(townName, playerData.raceId);
+    SetObjectOwner(townName, playerId);
+    setTownMaximumLevel(townName, playerData.raceId);
+  end;
+  
   SetRegionBlocked('block1', 1);
   SetRegionBlocked('block2', 1);
   SetRegionBlocked('block3', 1);
@@ -76,26 +111,86 @@ function mock()
   SetRegionBlocked('reg_shop4', 1);
   SetRegionBlocked('reg_shop5', 1);
   SetRegionBlocked('reg_shop6', 1);
+  SetObjectPosition('spell_nabor1', 35, 86, GROUND);
+  SetObjectPosition('spell_nabor2', 42, 23, GROUND);
+  SetObjectEnabled ('spell_nabor1', nil);
+  SetObjectEnabled ('spell_nabor2', nil);
+  SetRegionBlocked ('block1', true);
+  SetRegionBlocked ('block2', true);
+  SetRegionBlocked ('block3', true);
+  SetRegionBlocked ('block4', true);
+end;
 
-  ChangeHeroStat(HeroMax1, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax1, STAT_MANA_POINTS));
-  ChangeHeroStat(HeroMax2, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax2, STAT_MANA_POINTS));
-  ChangeHeroStat(HeroMin1, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMin1, STAT_MANA_POINTS));
-  ChangeHeroStat(HeroMin2, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMin2, STAT_MANA_POINTS));
+-- Изменение переданного города на город переданной расы
+function transformPlayersTown(townName, raceId)
+  print "transformPlayersTown"
+  
+  -- Соотношение расы к ее городу
+  local MAP_RACE_TO_TOWN = {
+    [RACES.HAVEN] = TOWN_HEAVEN,
+    [RACES.INFERNO] = TOWN_INFERNO,
+    [RACES.NECROPOLIS] = TOWN_NECROMANCY,
+    [RACES.SYLVAN] = TOWN_PRESERVE,
+    [RACES.ACADEMY] = TOWN_ACADEMY,
+    [RACES.DUNGEON] = TOWN_DUNGEON,
+    [RACES.FORTRESS] = TOWN_FORTRESS,
+    [RACES.STRONGHOLD] = TOWN_STRONGHOLD,
+  };
 
+  TransformTown(townName, MAP_RACE_TO_TOWN[raceId]);
+end;
+
+-- Отстройка максимального lvl для города
+function setTownMaximumLevel(townName, raceId)
+  print "setTownMaximumLevel"
+
+  local allTownCreatureList = {
+    TOWN_BUILDING_DWELLING_1,
+    TOWN_BUILDING_DWELLING_2,
+    TOWN_BUILDING_DWELLING_3,
+    TOWN_BUILDING_DWELLING_4,
+    TOWN_BUILDING_DWELLING_5,
+    TOWN_BUILDING_DWELLING_6,
+    TOWN_BUILDING_DWELLING_7
+  };
+  
+  for _, dwelling in allTownCreatureList do
+    UpgradeTownBuilding(townName, dwelling);
+    SetTownBuildingLimitLevel(townName, dwelling, 2);
+    UpgradeTownBuilding(townName, dwelling);
+  end;
+
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_TOWN_HALL, 1);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_FORT, 0);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_MARKETPLACE, 0);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_SHIPYARD, 0);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_TAVERN, 0);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_BLACKSMITH, 0);
+  SetTownBuildingLimitLevel(townName, TOWN_BUILDING_MAGIC_GUILD, 0);
+  
+  if raceId == RACES.HAVEN then
+    UpgradeTownBuilding(townName, TOWN_BUILDING_HAVEN_TRAINING_GROUNDS);
+    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0);
+    UpgradeTownBuilding(townName, TOWN_BUILDING_HAVEN_FARMS);
+  end;
+  if raceId == RACES.ACADEMY then
+    UpgradeTownBuilding(townName, TOWN_BUILDING_ACADEMY_ARTIFACT_MERCHANT);
+  end;
+  if raceId == RACES.DUNGEON then
+    UpgradeTownBuilding(townName, TOWN_BUILDING_DUNGEON_TRADE_GUILD);
+    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_DUNGEON_HALL_OF_INTRIGUE, 0);
+    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS, 0);
+  end;
+end;
+
+-- Точка входа
+day3();
+
+function mock()
   if hero1race == 4 then AvengerGenerating1(); end;
   if hero2race == 4 then AvengerGenerating2(); end;
 
-  startThread (RaskladkaPolya);
-  transferArt (heroes1[0], HeroMax1);
-  transferArt (heroes2[0], HeroMax2);
-  GiveHeroSkill( heroes1[0],  59); GiveHeroSkill( heroes1[0], 168);
-  GiveHeroSkill( heroes2[0], 168);
-  if FM == 1 and NumberBattle == 7 then
-      SpellMirror();
-  else
-    SetPosters();
-    SpellNabor(hero1race, hero2race);
-  end;
+  SetPosters();
 
   if bonus1 == 'spell' then StartRandomSpell(1); end;
   if bonus2 == 'spell' then StartRandomSpell(2); end;
@@ -132,114 +227,7 @@ function mock()
   startThread (RemoveStartUnit1);
   startThread (RemoveStartUnit2);
 
-  -- Изменение переданного города на город переданной расы
-  function TransformPlayersTown (town, race)
-    -- Соотношение расы к ее городу
-    local MAP_RACE_TO_TOWN = {
-      -- Орден Порядка
-      [RACE_HEAVEN] = TOWN_HEAVEN,
-      -- Лесной союз
-      [RACE_PRESERVE] = TOWN_PRESERVE,
-      -- Академия Волшебства
-      [RACE_ACADEMY] = TOWN_ACADEMY,
-      -- Лига Теней
-      [RACE_DUNGEON] = TOWN_DUNGEON,
-      -- Некрополис
-      [RACE_NECROMANCY] = TOWN_NECROMANCY,
-      -- Инферно
-      [RACE_INFERNO] = TOWN_INFERNO,
-      -- Северные Кланы
-      [RACE_DWARF] = TOWN_FORTRESS,
-      -- Великая Орда
-      [RACE_STRONGHOLD] = TOWN_STRONGHOLD,
-    };
-
-    TransformTown(town, MAP_RACE_TO_TOWN[race]);
-  end;
-
   -- Обрати внимание на функции
   -- add_hero (hero2race, x21, x22, y21, y22, 2, hero1race);
   -- unreserve();
-end;
-
-----------------------------------------------
-
-function add_hero (race, x1, x2, y1, y2, pl, race_opponent)
-  looserHero = 0;
-  num_heroes = length(array_heroes[race-1]);
-
-  ------- BLOCK HERO -----------
---  if race == 3 and race_opponent == 3 then array_heroes[2][4].blocked = 1; end;
---  if race == 2 and race_opponent == 6 then array_heroes[1][3].blocked = 1; end;
---  if race == 2 and race_opponent == 3 then array_heroes[1][3].blocked = 1; end;
-
-
---  if (race == 6) then num_heroes=12; end;
---  if (race == 1) then num_heroes=13; end;
-
-  for i = 0, 7 do
-    for j = 1, length(array_heroes[i]) do
-      array_heroes[i][j].block_temply = 1;
-    end;
-  end;
-
-  if pl == 1 then
-    l = length(arrayPossibleHeroes[HeroCollectionPlayer1])
-    for i = 1, l do
-      rnd = random(l) + 1;
-      arrayPossibleHeroes[HeroCollectionPlayer1][i], arrayPossibleHeroes[HeroCollectionPlayer1][rnd] = arrayPossibleHeroes[HeroCollectionPlayer1][rnd], arrayPossibleHeroes[HeroCollectionPlayer1][i];
-    end;
-    DeployReserveHero(array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][1]].name, x1, y1, 0);
-    DeployReserveHero(array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][2]].name, x2, y2, 0);
-    HeroMax1 = array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][1]].name;
-    HeroMin1 = array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][2]].name;
-    stop(HeroMax1);
-    stop(HeroMin1);
-    array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][1]].blocked = 1;
-    array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer1][2]].blocked = 1;
-    HeroForScouting1_Player1 = arrayPossibleHeroes[HeroCollectionPlayer1][1];
-    HeroForScouting2_Player1 = arrayPossibleHeroes[HeroCollectionPlayer1][2];
-    LockMinHeroSkillsAndAttributes(HeroMax1);
-    LockMinHeroSkillsAndAttributes(HeroMin1);
-    StartArmy(HeroMax1, race);
-    StartArmy(HeroMin1, race);
-    GiveStartSkill( pl, race-1, arrayPossibleHeroes[HeroCollectionPlayer1][1]);
-    GiveStartSkill( pl, race-1, arrayPossibleHeroes[HeroCollectionPlayer1][2]);
-  end;
-  if pl == 2 then
-    num = 0;
-    l = length(arrayPossibleHeroes[HeroCollectionPlayer2])
-    for i = 1, l do
-      rnd = random(l) + 1;
-      arrayPossibleHeroes[HeroCollectionPlayer2][i], arrayPossibleHeroes[HeroCollectionPlayer2][rnd] = arrayPossibleHeroes[HeroCollectionPlayer2][rnd], arrayPossibleHeroes[HeroCollectionPlayer2][i];
-    end;
-    for i = 1, length(arrayPossibleHeroes[HeroCollectionPlayer2]) do
-      if array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].blocked ~= 1 and num < 2 then
-        if num == 0 then
-          DeployReserveHero(array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].name2, x1, y1, 0);
-        else
-          DeployReserveHero(array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].name2, x2, y2, 0);
-        end;
-        if num == 0 then
-          HeroMax2 = array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].name2;
-          LockMinHeroSkillsAndAttributes(HeroMax2);
-          GiveStartSkill( pl, race-1, arrayPossibleHeroes[HeroCollectionPlayer2][i]);
-          array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].blocked = 1;
-          HeroForScouting1_Player2 = arrayPossibleHeroes[HeroCollectionPlayer2][i];
-          num = 1;
-        else
-          HeroMin2 = array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].name2;
-          LockMinHeroSkillsAndAttributes(HeroMin2);
-          GiveStartSkill( pl, race-1, arrayPossibleHeroes[HeroCollectionPlayer2][i]);
-          array_heroes[race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].blocked = 1;
-          HeroForScouting2_Player2 = arrayPossibleHeroes[HeroCollectionPlayer2][i];
-          num = 2;
-        end;
-      end;
-    end;
-    stop(HeroMax2);
-    stop(HeroMin2);
-    StartArmy(HeroMax2, race);
-    StartArmy(HeroMin2, race);
-  end;
 end;

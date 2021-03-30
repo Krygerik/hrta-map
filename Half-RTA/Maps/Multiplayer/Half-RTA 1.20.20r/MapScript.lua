@@ -20,9 +20,19 @@ removeHeroMovePoints(Djovanni);
 heroes1 = GetPlayerHeroes (PLAYER_1)
 heroes2 = GetPlayerHeroes (PLAYER_2)
 
+-- Обработчик наступления нового дня
+function handleNewDay()
+  if GetDate(DAY) == 2 then
+    doFile(GetMapDataPath().."day2/day2_scripts.lua");
+  end;
+
+  if GetDate(DAY) == 3 then
+    doFile(GetMapDataPath().."day3/day3_scripts.lua");
+  end;
+end;
 
 -- Корневые триггеры
-Trigger (NEW_DAY_TRIGGER, 'newday');
+Trigger (NEW_DAY_TRIGGER, 'handleNewDay');
 
 doFile(GetMapDataPath().."day1/day1_scripts.lua");
 
@@ -293,7 +303,6 @@ end;
 
 ------------------ ARTS ----------------------------
 
-array_arts={}
 array_arts[0] = {
    { ["name"] = "art1",  ["name2"] = "art1x2",  ["place"] = 7, ["price"] = 5000,  ["blocked"] = 0, ["id"] = 1},   --меч мощи
    { ["name"] = "art2",  ["name2"] = "art2x2",  ["place"] = 7, ["price"] = 6000,  ["blocked"] = 0, ["id"] = 90},  --на грани равновесия
@@ -611,11 +620,9 @@ array_units[8] = {
    { ["name"] = "unit873", ["kol"] =  6, ["id"] =179, ["blocked"] = 0, ["price"] = 14100, ["price1"] = 3600, ["power"] = 5937, ["lvl"] = 7}
 };
 
-
 ------------------ HEROES ------------------------
 array_heroes={};
 array_heroes[0] = {
-
 	 { ["name"] = "Orrin",       ["name2"] = "Orrin2",       ["blocked"] = 0, ["taverna"] = 1, ["skill1"] =   6, ["skill2"] =  35, ["looser"] = 0, ["ver"] = 100, ["txt"] = "heroDugal.txt",      ["p1"] = "hero_1_1_1", ["p2"] = "hero_1_1_2", ["p3"] = "hero_1_1_3", ["p4"] = "hero_1_1_4", ["p5"] = "hero_1_1_5", ["p6"] = "hero_1_1_6", ["p7"] = "hero_1_1_7", ["p8"] = "hero_1_1_8", ["block_temply"] = 0, ["dsc"] = "/Text/Game/Heroes/Specializations/Haven/Archer_Commander/Description.txt" },
 	 { ["name"] = "Sarge",       ["name2"] = "Sarge2",       ["blocked"] = 0, ["taverna"] = 1, ["skill1"] =   6, ["skill2"] =  55, ["looser"] = 1, ["ver"] = 100, ["txt"] = "heroAksel.txt",      ["p1"] = "hero_2_1_1", ["p2"] = "hero_2_1_2", ["p3"] = "hero_2_1_3", ["p4"] = "hero_2_1_4", ["p5"] = "hero_2_1_5", ["p6"] = "hero_2_1_6", ["p7"] = "hero_2_1_7", ["p8"] = "hero_2_1_8", ["block_temply"] = 0, ["dsc"] = "/Text/Game/Heroes/Specializations/Haven/Jouster/Description.txt"},
 	 { ["name"] = "Mardigo",     ["name2"] = "Mardigo2",     ["blocked"] = 0, ["taverna"] = 1, ["skill1"] =   7, ["skill2"] =  39, ["looser"] = 0, ["ver"] = 100, ["txt"] = "heroLaslo.txt",      ["p1"] = "hero_3_1_1", ["p2"] = "hero_3_1_2", ["p3"] = "hero_3_1_3", ["p4"] = "hero_3_1_4", ["p5"] = "hero_3_1_5", ["p6"] = "hero_3_1_6", ["p7"] = "hero_3_1_7", ["p8"] = "hero_3_1_8", ["block_temply"] = 0, ["dsc"] = "/Text/Game/Heroes/Specializations/Haven/Infantry_Commander/Description.txt"},
@@ -2302,78 +2309,14 @@ if levelH1 == MaxLevelForAntiscaner then
 end;
 end;
 
-
-podvariant = 1;
-
-bonus1 = 'art';
-bonus2 = 'art';
-
-if GetPlayerResource(PLAYER_1, GOLD)~=10000
-   and GetPlayerResource(PLAYER_1, GOLD)~=20000
-   and GetPlayerResource(PLAYER_1, GOLD)~=30000
-   and GetPlayerResource(PLAYER_1, GOLD)~=50000
-then podvariant = 1; schetchikUnit=0; bonus1 = 'gold'; end;
-
-if mod(GetPlayerResource(PLAYER_1, 0) + GetPlayerResource(PLAYER_1, 1) + GetPlayerResource(PLAYER_1, 2)
-   + GetPlayerResource(PLAYER_1, 3) + GetPlayerResource(PLAYER_1, 4) + GetPlayerResource(PLAYER_1, 5), 40) ~= 0
-then podvariant = 1; schetchikUnit=0; bonus1 = 'spell'; end;
-
-if GetPlayerResource(PLAYER_2, GOLD)~=10000
-   and GetPlayerResource(PLAYER_2, GOLD)~=20000
-   and GetPlayerResource(PLAYER_2, GOLD)~=30000
-   and GetPlayerResource(PLAYER_2, GOLD)~=50000
-then bonus2 = 'gold'; end;
-
-if mod(GetPlayerResource(PLAYER_2, 0) + GetPlayerResource(PLAYER_2, 1) + GetPlayerResource(PLAYER_2, 2)
-   + GetPlayerResource(PLAYER_2, 3) + GetPlayerResource(PLAYER_2, 4) + GetPlayerResource(PLAYER_2, 5), 40) ~= 0
-then bonus2 = 'spell'; end;
-
 StartBonus = {}
 StartBonus[1] = bonus1;
 StartBonus[2] = bonus2;
-
-function BonusStartGold(player)
-  StartGold = 4000 + random(11)*100;
-  SetPlayerResource(player, GOLD, GetPlayerResource(player, GOLD) + StartGold);
-  if player == 1 then
---    ShowFlyingSign({GetMapDataPath().."StartGold.txt"; eq = StartGold}, heroes1[0], 1, 5.0);
-    ShowFlyingSign({GetMapDataPath().."StartGold.txt"; eq = StartGold}, HeroMax1, 1, 5.0);
-  end;
-  if player == 2 then
---    ShowFlyingSign({GetMapDataPath().."StartGold.txt"; eq = StartGold}, heroes2[0], 2, 5.0);
-    ShowFlyingSign({GetMapDataPath().."StartGold.txt"; eq = StartGold}, HeroMax2, 2, 5.0);
-  end;
-end;
 
 rndSpell1 = 49; rndSpellM1 = 0; rndSpellSp1 = 1;
 rndSpell2 = 49; rndSpellM11 = 0; rndSpellSp11 = 1;
 rndSpell11 = 49; rndSpellM2 = 0; rndSpellSp2 = 1;
 rndSpell22 = 49; rndSpellM22 = 0; rndSpellSp22 = 1;
-
-function StartRandomSpell (player)
-  if player == 1 then
-    TeachHeroSpell(HeroMax1, array_spells[BonusSpells[0].m1][BonusSpells[0].sp1].id );
-    TeachHeroSpell(HeroMin1, array_spells[BonusSpells[0].m1][BonusSpells[0].sp1].id );
-    TeachHeroSpell(HeroDop1, array_spells[BonusSpells[0].m1][BonusSpells[0].sp1].id );
-    if hero1race ~= 8 then
-      TeachHeroSpell(HeroDop1, array_spells[BonusSpells[0].m1][BonusSpells[0].sp1].id );
-      TeachHeroSpell(HeroMax1, array_spells[BonusSpells[0].m2][BonusSpells[0].sp2].id );
-      TeachHeroSpell(HeroMin1, array_spells[BonusSpells[0].m2][BonusSpells[0].sp2].id );
-      TeachHeroSpell(HeroDop1, array_spells[BonusSpells[0].m2][BonusSpells[0].sp2].id );
-    end;
-  end;
-  if player == 2 then
-    TeachHeroSpell(HeroMax2, array_spells[BonusSpells[1].m1][BonusSpells[1].sp1].id );
-    TeachHeroSpell(HeroMin2, array_spells[BonusSpells[1].m1][BonusSpells[1].sp1].id );
-    TeachHeroSpell(HeroDop2, array_spells[BonusSpells[1].m1][BonusSpells[1].sp1].id );
-    if hero2race ~= 8 then
-      TeachHeroSpell(HeroDop2, array_spells[BonusSpells[1].m1][BonusSpells[1].sp1].id );
-      TeachHeroSpell(HeroMax2, array_spells[BonusSpells[1].m2][BonusSpells[1].sp2].id );
-      TeachHeroSpell(HeroMin2, array_spells[BonusSpells[1].m2][BonusSpells[1].sp2].id );
-      TeachHeroSpell(HeroDop2, array_spells[BonusSpells[1].m2][BonusSpells[1].sp2].id );
-    end;
-  end;
-end;
 
 function transferSpell (player)
   if player == 1 then
@@ -2415,23 +2358,6 @@ function SpellForHeroFromTavern2(hero)
   if getrace (hero) ~= 8 then
     TeachHeroSpell (hero, rndSpell2);
     TeachHeroSpell (hero, rndSpell22);
-  end;
-end;
-
-function RaskladkaPolya()
-  SetObjectPosition(heroes1[0], 35, 85);
-  SetObjectPosition(heroes2[0], 42, 24);
-  if battle[NumberBattle] == 5 then stop(heroes1[0]); end;
-  if battle[NumberBattle] == 5 then stop(heroes2[0]); end;
-  SetObjectPosition('spell_nabor1', 35, 86, 0);
-  SetObjectPosition('spell_nabor2', 42, 23, 0);
-  SetObjectEnabled ('spell_nabor1', nil);
-  SetObjectEnabled ('spell_nabor2', nil);
-  if option[NumberBattle] ~= 5 and option[NumberBattle] ~= 6 then
-    SetRegionBlocked ('block1', true);
-    SetRegionBlocked ('block2', true);
-    SetRegionBlocked ('block3', true);
-    SetRegionBlocked ('block4', true);
   end;
 end;
 
@@ -4125,296 +4051,6 @@ end;
 
 AddSpells = -1;
 
-
-
-function SpellNabor(race1, race2)
---  rnd = random (100);
---  if rnd > 74 then m31 = RandomMagic(race1); m32 = RandomMagic(race2); AddSpells = 1; end;
---  if rnd < 75 then
-  m31 = -1; m32 = -1; AddSpells = 0; --end;
-
-  if race1 == 1 then m11=0; m21=1; end;
-  if race1 == 2 then m11=1; m21=2; end;
-  if race1 == 3 then m11=1; m21=3; end;
-  if race1 == 4 then m11=0; m21=2; end;
-  if race1 == 5 then m11=3; m21=RandomMagic(race1); end;
-  if race1 == 6 then m11=2; m21=3; end;
-  if race1 == 7 then m11=0; m21=2; end;
-  if race1 == 8 then m11=5; m21=0; end;
-
-  if race2 == 1 then m12=0; m22=1; end;
-  if race2 == 2 then m12=1; m22=2; end;
-  if race2 == 3 then m12=1; m22=3; end;
-  if race2 == 4 then m12=0; m22=2; end;
-  if race2 == 5 then m12=3; m22=RandomMagic(race2); end;
-  if race2 == 6 then m12=2; m22=3; end;
-  if race2 == 7 then m12=0; m22=2; end;
-  if race2 == 8 then m12=5; m22=0; end;
-
-  SpellGenerate( m11, m21, m31, race1, 0);
-  SpellGenerate( m12, m22, m32, race2, 1);
-
-end;
-
-function SpellGenerate (magic1, magic2, magic3, race, place)
---1.95
-  if place == 0 and rndSpell1 ~= 49 then
-    array_spells[rndSpellM1][rndSpellSp1].block_temply = 1;
-    array_spells[rndSpellM11][rndSpellSp11].block_temply = 1;
-  end;
-  if place == 1 and rndSpell2 ~= 49 then
-    array_spells[rndSpellM2][rndSpellSp2].block_temply = 1;
-    array_spells[rndSpellM22][rndSpellSp22].block_temply = 1;
-  end;
-
-  if magic1 < 4 then
-    num = 1;
-    rnd = random(2); -- for bonus spell
-    for lvl = 1, 5 do
-      sp = kolSpell (lvl, magic1);
-      while array_spells[magic1][sp].blocked == 1 or array_spells[magic1][sp].block_temply == 1 or array_spells[magic1][sp].kv == 0 do
-        sp = kolSpell (lvl, magic1);
-      end;
-      array_spells[magic1][sp].block_temply = 1;
-      spells[place][num].m = magic1;
-      spells[place][num].sp = sp;
-      SpellPosition (magic1, sp, num, place);
-      num = num + 1;
-
-      -- bonus spell
-      if rnd == 0 and lvl == 1 and BonusSpells[place].sp1 == 0 and StartBonus[place + 1] == 'spell' then
-         BonusSpells[place].m1  = magic1;
-         BonusSpells[place].sp1 = 1 + int (0.1 + mod( sp, 2));
-         array_spells[magic1][BonusSpells[place].sp1].block_temply = 1;
-      end;
-      if rnd == 1 and lvl == 2 and BonusSpells[place].sp1 == 0 and StartBonus[place + 1] == 'spell' then
-         BonusSpells[place].m1  = magic1;
-         BonusSpells[place].sp1 = 3 + int (0.1 + mod( sp, 2));
-         array_spells[magic1][BonusSpells[place].sp1].block_temply = 1;
-      end;
-    end;
-
-    rnd = random(2); -- for bonus spell
-    for lvl = 1, 5 do
-      sp = kolSpell (lvl, magic2);
-      while array_spells[magic2][sp].blocked == 1 or array_spells[magic2][sp].block_temply == 1 or array_spells[magic2][sp].kv == 0 do
-        sp = kolSpell (lvl, magic2);
-      end;
-      array_spells[magic2][sp].block_temply = 1;
-      spells[place][num].m = magic2;
-      spells[place][num].sp = sp;
-      SpellPosition (magic2, sp, num, place);
-      num = num + 1;
-
-      -- bonus spell
-      if rnd == 0 and lvl == 1 and BonusSpells[place].sp2 == 0 and StartBonus[place + 1] == 'spell' then
-         BonusSpells[place].m2  = magic2;
-         BonusSpells[place].sp2 = 1 + int (0.1 + mod( sp, 2));
-         array_spells[magic2][BonusSpells[place].sp2].block_temply = 1;
-      end;
-      if rnd == 1 and lvl == 2 and BonusSpells[place].sp2 == 0 and StartBonus[place + 1] == 'spell' then
-         BonusSpells[place].m2  = magic2;
-         BonusSpells[place].sp2 = 3 + int (0.1 + mod( sp, 2));
-         array_spells[magic2][BonusSpells[place].sp2].block_temply = 1;
-      end;
-    end;
-
-    if magic3 == -1 or race == 5 then
-
-      for lvl = 1, 3 do
-        m = random (4);
-        sp = kolSpell (lvl, m);
-        while m == magic1 or m == magic2 or array_spells[m][sp].blocked == 1 or array_spells[m][sp].block_temply == 1 do
-          m = random (4);
-          sp = kolSpell (lvl, m);
-        end;
-        array_spells[m][sp].block_temply = 1;
-        spells[place][num].m = m;
-        spells[place][num].sp = sp;
-        SpellPosition (m, sp, num, place);
-        num = num + 1;
-      end;
-
-      m = random (4);
-      sp = 7;
-      array_spells[m][sp].block_temply = 1;
-      spells[place][num].m = m;
-      spells[place][num].sp = sp;
-      SpellPosition (m, sp, num, place);
-      num = num + 1;
-
-    end;
-
-    if magic3 ~= -1 and race ~= 5 then
-      num = num + 3;
-      for lvl = 1, 5 do
-        sp = kolSpell (lvl, magic3);
-        while array_spells[magic3][sp].blocked == 1 or array_spells[magic3][sp].block_temply == 1 do
-          sp = kolSpell (lvl, magic3);
-        end;
-        array_spells[magic3][sp].block_temply = 1;
-        spells[place][num].m = magic3;
-        spells[place][num].sp = sp;
-        SpellPosition (magic3, sp, num, place);
-        num = num + 1;
-      end;
-    end;
-
-    if race == 5 then
-      ml = 0; md = 0;
-      for lvl = 1, 5 do
-        m = random (4);
-        sp = kolSpell (lvl, m);
-        while (lvl > 3 and (m == magic1 or m == magic2))
-        or (m == 0 and ml == 1 and magic2 == 0 and magic3 == -1)
-        or (m == 1 and md == 1 and magic2 == 1 and magic3 == -1)
-        or array_spells[m][sp].blocked == 1 or array_spells[m][sp].block_temply == 1 do
-          m = random (4);
-          sp = kolSpell (lvl, m);
-        end;
-	if (lvl < 4 and m == 0 and magic2 == 0 and magic3 == -1) then
-	  ml = 1;
-	end;
-	if (lvl < 4 and m == 1 and magic2 == 1 and magic3 == -1) then
-	  md = 1;
-	end;
-        array_spells[m][sp].block_temply = 1;
-        spells[place][num].m = m;
-        spells[place][num].sp = sp;
-        SpellPosition (m, sp, num, place);
-        num = num + 1;
-      end;
-    end;
-
-    if race == 6 then
-      for lvl = 4, 5 do
-        m = random (4);
-        sp = kolSpell (lvl, m);
-        while array_spells[m][sp].blocked == 1 or array_spells[m][sp].block_temply == 1 do
-          m = random (4);
-          sp = kolSpell (lvl, m);
-        end;
-        array_spells[m][sp].block_temply = 1;
-        spells[place][num].m = m;
-        spells[place][num].sp = sp;
-        SpellPosition (m, sp, num, place);
-        num = num + 1;
-      end;
-
-      if magic3 == -1 then
-        for lvl = 4, 5 do
-          m = random (4);
-          sp = kolSpell (lvl, m);
-          while array_spells[m][sp].blocked == 1 or array_spells[m][sp].block_temply == 1 do
-            m = random (4);
-            sp = kolSpell (lvl, m);
-          end;
-          array_spells[m][sp].block_temply = 1;
-          spells[place][num].m = m;
-          spells[place][num].sp = sp;
-          SpellPosition (m, sp, num, place);
-          num = num + 1;
-        end;
-      end;
-
-      lvl = random (2) + 4;
-      m = random (4);
-      sp = kolSpell (lvl, m);
-      while array_spells[m][sp].blocked == 1 or array_spells[m][sp].block_temply == 1 do
-        m = random (4);
-        sp = kolSpell (lvl, m);
-      end;
-      array_spells[m][sp].block_temply = 1;
-      spells[place][num].m = m;
-      spells[place][num].sp = sp;
-      SpellPosition (m, sp, num, place);
-      num = num + 1;
-    end;
-
-    if race == 7 then
-      if (place == 0 and SpellResetUse1 == 0) or (place == 1 and SpellResetUse2 == 0) then
-        for lvl = 1, 5 do
-          sp = kolSpell (lvl, 4);
-          while array_spells[4][sp].blocked == 1 or array_spells[4][sp].block_temply == 1 do
-            sp = kolSpell (lvl, 4);
-          end;
-          array_spells[4][sp].block_temply = 1;
-          spells[place][num].m = 4;
-          spells[place][num].sp = sp;
-          SpellPosition (4, sp, num, place);
-          runes[place][lvl].m  = 4;
-          runes[place][lvl].sp = spells[place][num].sp;
-          num = num + 1;
-        end;
-      end;
-    end;
-  end;
-
-  if magic1 == 5 then
-    num = 1;
-    if magic3 == -1 then
-      sp = random (2) + 1;
-      while array_spells[5][sp].blocked == 1 or array_spells[5][sp].block_temply == 1 do
-        sp = random (2) + 1;
-      end;
-      spells[place][1].m = 5;
-      spells[place][1].sp = sp;
-      SpellPosition (5, sp, num, place);
-      num = num + 2;
-      -- bonus spell
-      if BonusSpells[place].sp1 == 0 and StartBonus[place + 1] == 'spell' then
-         BonusSpells[place].m1  = magic1;
-         BonusSpells[place].sp1 = 1 + int (0.1 + mod( sp, 2));
-      end;
---      spells[place][2].m = 5;
---      spells[place][2].sp = sp;
-      sp = random (2) + 3;
-      while array_spells[5][sp].blocked == 1 or array_spells[5][sp].block_temply == 1 do
-        sp = random (2) + 3;
-      end;
-      spells[place][2].m = 5;
-      spells[place][2].sp = sp;
-      SpellPosition (5, sp, num, place);
-      num = num + 2;
-    end;
-    if magic3 ~= -1 then
-      spells[place][1].m = 5;
-      spells[place][1].sp = 1;
-      SpellPosition (5, 1, num, place);
-      num = num + 2;
-      spells[place][2].m = 5;
-      spells[place][2].sp = 2;
-      SpellPosition (5, 2, num, place);
-      num = num + 2;
-      sp = random (2) + 3;
-      while array_spells[5][sp].blocked == 1 or array_spells[5][sp].block_temply == 1 do
-        sp = random (2) + 3;
-      end;
-      spells[place][3].m = 5;
-      spells[place][3].sp = sp;
-      SpellPosition (5, sp, num, place);
-      num = num + 7;
-    end;
-    sp = random (2) + 5;
-    while array_spells[5][sp].blocked == 1 or array_spells[5][sp].block_temply == 1 do
-      sp = random (2) + 5;
-    end;
-    spells[place][3].m = 5;
-    spells[place][3].sp = sp;
-    SpellPosition (5, sp, num, place);
-  end;
-
-  for i = 0, 5 do
-    k = 12;
-    if i == 4 then k = 10; end;
-    if i == 5 then k = 6; end;
-    for j = 1, k do
-      array_spells[i][j].block_temply = 0;
-    end;
-  end;
-end;
-
-
 function kolSpell ( level, magic)
   if magic == 0 then
     if level == 1 then spell = random(2) +  1; end;
@@ -4738,16 +4374,6 @@ function Scholar(hero, nabor)
       if (nabor == 1 or nabor == 3) and HasHeroSkill(HeroMax2, PERK_SCHOLAR) and array_spells[i][j].level == 3 and KnowHeroSpell(HeroMax1, array_spells[i][j].id) and (HasHeroSkill(HeroMax2, PERK_WISDOM) or GetHeroSkillMastery( HeroMax2, magic) >= 1) then
         TeachHeroSpell(HeroMax2, array_spells[i][j].id);
       end;
-    end;
-  end;
-end;
-
-
-function transferArt (heroSender, heroAddressee)
-  for i = 1, length(array_arts[0]) do
-    if HasArtefact   (heroSender, array_arts[0][i].id) then
-      GiveArtefact   (heroAddressee, array_arts[0][i].id);
-      RemoveArtefact (heroSender, array_arts[0][i].id);
     end;
   end;
 end;
@@ -5891,48 +5517,6 @@ function UpgradeMiniArts2()
   end;
 end;
 
-function MiniArtsRes1()
-  if (GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) == 2 and minikUse1 == 1) or (GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) == 3 and minikUse1 == 2) then
-    SetPlayerResource(1,    WOOD, GetPlayerResource(1,    WOOD) + 10);
-  	SetPlayerResource(1,     ORE, GetPlayerResource(1,     ORE) + 10);
-  	SetPlayerResource(1, MERCURY, GetPlayerResource(1, MERCURY) +  5);
-  	SetPlayerResource(1, CRYSTAL, GetPlayerResource(1, CRYSTAL) +  5);
-  	SetPlayerResource(1,  SULFUR, GetPlayerResource(1,  SULFUR) +  5);
-  	SetPlayerResource(1,     GEM, GetPlayerResource(1,     GEM) +  5);
-  	minikUse1 = minikUse1 + 1;
-  end;
-  if (GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) == 3 and minikUse1 == 1) then
-    SetPlayerResource(1,    WOOD, GetPlayerResource(1,    WOOD) + 20);
-  	SetPlayerResource(1,     ORE, GetPlayerResource(1,     ORE) + 20);
-  	SetPlayerResource(1, MERCURY, GetPlayerResource(1, MERCURY) + 10);
-  	SetPlayerResource(1, CRYSTAL, GetPlayerResource(1, CRYSTAL) + 10);
-  	SetPlayerResource(1,  SULFUR, GetPlayerResource(1,  SULFUR) + 10);
-  	SetPlayerResource(1,     GEM, GetPlayerResource(1,     GEM) + 10);
-  	minikUse1 = minikUse1 + 2;
-  end;
-end;
-
-function MiniArtsRes2()
-  if (GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) == 2 and minikUse2 == 1) or (GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) == 3 and minikUse2 == 2) then
-    SetPlayerResource(2,    WOOD, GetPlayerResource(2,    WOOD) + 10);
-  	SetPlayerResource(2,     ORE, GetPlayerResource(2,     ORE) + 10);
-  	SetPlayerResource(2, MERCURY, GetPlayerResource(2, MERCURY) +  5);
-  	SetPlayerResource(2, CRYSTAL, GetPlayerResource(2, CRYSTAL) +  5);
-  	SetPlayerResource(2,  SULFUR, GetPlayerResource(2,  SULFUR) +  5);
-  	SetPlayerResource(2,     GEM, GetPlayerResource(2,     GEM) +  5);
-  	minikUse2 = minikUse2 + 1;
-  end;
-  if (GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) == 3 and minikUse2 == 1) then
-    SetPlayerResource(2,    WOOD, GetPlayerResource(2,    WOOD) + 20);
-  	SetPlayerResource(2,     ORE, GetPlayerResource(2,     ORE) + 20);
-  	SetPlayerResource(2, MERCURY, GetPlayerResource(2, MERCURY) + 10);
-  	SetPlayerResource(2, CRYSTAL, GetPlayerResource(2, CRYSTAL) + 10);
-  	SetPlayerResource(2,  SULFUR, GetPlayerResource(2,  SULFUR) + 10);
-  	SetPlayerResource(2,     GEM, GetPlayerResource(2,     GEM) + 10);
-  	minikUse2 = minikUse2 + 2;
-  end;
-end;
-
 ------- BONUS -----------------------------------------------------------------------
 
 function BonusForSiege (player, race1, race2, a, b, c, d, e, f, g)
@@ -6681,43 +6265,6 @@ function transferArmy (town, heroMin, heroMax)
   end;
 end;
 
-function TownBuilding(town, race)
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_1);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_2);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_3);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_4);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_5);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_6);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_7);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_1, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_2, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_3, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_4, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_5, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_6, 2);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_DWELLING_7, 2);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_1);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_2);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_3);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_4);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_5);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_6);
-  UpgradeTownBuilding(town, TOWN_BUILDING_DWELLING_7);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_TOWN_HALL, 1);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_FORT, 0);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_MARKETPLACE, 0);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_SHIPYARD, 0);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_TAVERN, 0);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_BLACKSMITH, 0);
-  SetTownBuildingLimitLevel(town, TOWN_BUILDING_MAGIC_GUILD, 0);
-  if race == 1 then UpgradeTownBuilding(town, TOWN_BUILDING_HAVEN_TRAINING_GROUNDS); SetTownBuildingLimitLevel(town, TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); UpgradeTownBuilding(town, TOWN_BUILDING_HAVEN_FARMS); end;
---  if race == 2 then UpgradeTownBuilding(town, TOWN_BUILDING_INFERNO_INFERNAL_LOOM); end;
-  if race == 5 then UpgradeTownBuilding(town, TOWN_BUILDING_ACADEMY_ARTIFACT_MERCHANT); end;
-  if race == 6 then UpgradeTownBuilding(town, TOWN_BUILDING_DUNGEON_TRADE_GUILD); end;
-  if race == 6 then SetTownBuildingLimitLevel(town, TOWN_BUILDING_DUNGEON_HALL_OF_INTRIGUE, 0); end;
-  if race == 6 then SetTownBuildingLimitLevel(town, TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS, 0); end;
-end;
-
 function DestroyBuilding (town)
   DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_1, 1, 0);
   DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_2, 1, 0);
@@ -6726,79 +6273,6 @@ function DestroyBuilding (town)
   DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_5, 1, 0);
   DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_6, 1, 0);
   DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_7, 1, 0);
-end;
-
-
-
-SetObjectEnabled ('oko1', nil);
-SetObjectEnabled ('oko2', nil);
-
-Trigger (OBJECT_TOUCH_TRIGGER, 'oko1', 'RaceSkillQ1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'oko2', 'RaceSkillQ2');
-
-function RaceSkillQ1(hero)
-  if GetHeroLevel(hero) >= StartLevel then
-    Hero1 = hero;
-    if hero1race == 1 and ExpertTrainerUse1 == 0 then
-      QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_1), GetMapDataPath().."RaceSkillQuestionHuman.txt", 'RaceSkillHuman1', 'no');
-    end;
---    if hero1race == 3 then
---      ShowFlyingSign(GetMapDataPath().."NecroBonus1.txt", Hero1, 1, 5.0);
---      NecroBonus1();
---    end;
-    if hero1race == 4 and AvengerUse1 == 0 then
-      QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_1), GetMapDataPath().."AvengerQuestion.txt", 'Avenger1()', 'no');
-    end;
-    if hero1race == 5 then
-      if minikUse1 == 0 then
-        QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_1), GetMapDataPath().."MiniartsQuestion.txt", 'MiniArts1()', 'no');
-      else
-        if GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) > minikUse1 and GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) ~= 4 then
-          QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_1), GetMapDataPath().."MiniartsPlusQuestion.txt", 'MiniArtsRes1()', 'no');
-        end;
-      end;
-    end;
-  end;
-end;
-
-function RaceSkillQ2(hero)
-  if GetHeroLevel(hero) >= StartLevel then
-    Hero2 = hero;
-    if hero2race == 1 and ExpertTrainerUse2 == 0 then
-      QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_2), GetMapDataPath().."RaceSkillQuestionHuman.txt", 'RaceSkillHuman2', 'no');
-    end;
---    if hero2race == 3 then
---      ShowFlyingSign(GetMapDataPath().."NecroBonus2.txt", Hero2, 1, 5.0);
---      NecroBonus2();
---    end;
-    if hero2race == 4 and AvengerUse2 == 0 then
-      QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_2), GetMapDataPath().."AvengerQuestion.txt", 'Avenger2()', 'no');
-    end;
-    if hero2race == 5 then
-      if minikUse2 == 0 then
-        QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_2), GetMapDataPath().."MiniartsQuestion.txt", 'MiniArts2()', 'no');
-      else
-        if GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) > minikUse2 and GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) ~= 4 then
-          QuestionBoxForPlayers ( GetPlayerFilter(PLAYER_2), GetMapDataPath().."MiniartsPlusQuestion.txt", 'MiniArtsRes2()', 'no');
-        end;
-      end;
-    end;
-  end;
-end;
-
-ExpertTrainerUse1 = 0;
-ExpertTrainerUse2 = 0;
-
-function RaceSkillHuman1()
-  UpgradeTownBuilding('RANDOMTOWN1', TOWN_BUILDING_HAVEN_TRAINING_GROUNDS);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN1', 'Training1' );
-  ExpertTrainerUse1 = 1;
-end;
-
-function RaceSkillHuman2()
-  UpgradeTownBuilding('RANDOMTOWN2', TOWN_BUILDING_HAVEN_TRAINING_GROUNDS);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN2', 'Training2' );
-  ExpertTrainerUse2 = 1;
 end;
 
 function BlockBattleZone(race1, race2)
@@ -9975,14 +9449,6 @@ function diplomacy2(hero)
   if GetHeroSkillMastery(hero, SKILL_NECROMANCY) > 0 then
     NecroBonus2(hero);
   end;
-end;
-
-function Training1(hero)
-  if GetHeroSkillMastery(hero, SKILL_TRAINING) == 4 then UpgradeTownBuilding('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES); end;
-end;
-
-function Training2(hero)
-  if GetHeroSkillMastery(hero, SKILL_TRAINING) == 4 then UpgradeTownBuilding('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES); end;
 end;
 
 function NoActivity (hero1, hero2)
