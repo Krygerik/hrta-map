@@ -111,10 +111,6 @@ function changePlayersArea()
   SetRegionBlocked('reg_shop4', 1);
   SetRegionBlocked('reg_shop5', 1);
   SetRegionBlocked('reg_shop6', 1);
-  SetObjectPosition('spell_nabor1', 35, 86, GROUND);
-  SetObjectPosition('spell_nabor2', 42, 23, GROUND);
-  SetObjectEnabled ('spell_nabor1', nil);
-  SetObjectEnabled ('spell_nabor2', nil);
   SetRegionBlocked ('block1', true);
   SetRegionBlocked ('block2', true);
   SetRegionBlocked ('block3', true);
@@ -187,14 +183,6 @@ end;
 day3();
 
 function mock()
-  if hero1race == 4 then AvengerGenerating1(); end;
-  if hero2race == 4 then AvengerGenerating2(); end;
-
-  SetPosters();
-
-  if bonus1 == 'spell' then StartRandomSpell(1); end;
-  if bonus2 == 'spell' then StartRandomSpell(2); end;
-
   kol_u1_pl1, kol_u2_pl1, kol_u3_pl1, kol_u4_pl1, kol_u5_pl1, kol_u6_pl1, kol_u7_pl1 = rnd_army(hero1race);
   kol_u1_pl2, kol_u2_pl2, kol_u3_pl2, kol_u4_pl2, kol_u5_pl2, kol_u6_pl2, kol_u7_pl2 = rnd_army(hero2race);
 
