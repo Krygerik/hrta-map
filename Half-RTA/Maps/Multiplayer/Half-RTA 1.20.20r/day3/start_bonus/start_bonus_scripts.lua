@@ -1,5 +1,5 @@
 -- Путь до сообщений этого модуля
-PATH_TO_START_BONUS_MESSAGES = GetMapDataPath().."day3/start_bonus/messages"
+PATH_TO_START_BONUS_MESSAGES = GetMapDataPath().."day3/start_bonus/messages/"
 
 doFile(GetMapDataPath().."day3/start_bonus/start_bonus_constants.lua");
 sleep(1);
@@ -23,14 +23,10 @@ function setStartedBonus()
     if bonus == STARTED_BONUSES.ART then
       transferAllSmallArt(firstHero, secondHero);
     end;
-    
-    if bonus == STARTED_BONUSES.SPELL then
-      StartRandomSpell();
-    end;
   end;
 end;
 
--- Перенос артефактов между героями
+-- Перенос ма артефактов между героями
 function transferAllSmallArt(sourceHero, targetHero)
   print "transferAllSmallArt"
   

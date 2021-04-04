@@ -341,7 +341,7 @@ function finishGroupCherk()
   removeHeroMovePoints(Djovanni);
   removeHeroMovePoints(Biara);
 
-  sleep(5);
+  sleep(1);
 
   -- Скрывает оставшиеся группы героев(выбранные)
   deleteResultHeroGroups();
