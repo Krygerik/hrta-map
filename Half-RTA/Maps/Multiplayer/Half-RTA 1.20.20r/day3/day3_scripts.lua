@@ -81,6 +81,7 @@ function setHeroesInitialProperties()
   doFile(PATH_TO_DAY3_SCRIPTS.."spells_generate/spells_generate_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."start_bonus/start_bonus_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."town_building/town_building_scripts.lua");
+  doFile(PATH_TO_DAY3_SCRIPTS.."set_initial_resources/set_initial_resources_scripts.lua");
 end;
 
 -- Изменение игровых зон обоих игроков
@@ -109,16 +110,7 @@ end;
 day3();
 
 
-
 function mock()
-  kolUnit1 = {intg(K * kol_u1_pl1), intg(K * kol_u2_pl1), intg(K * kol_u3_pl1), intg(K * kol_u4_pl1), intg(K * kol_u5_pl1), intg(K * kol_u6_pl1), intg(K * kol_u7_pl1)};
-  kolUnit2 = {intg(K * kol_u1_pl2), intg(K * kol_u2_pl2), intg(K * kol_u3_pl2), intg(K * kol_u4_pl2), intg(K * kol_u5_pl2), intg(K * kol_u6_pl2), intg(K * kol_u7_pl2)};
-  set_player_resources(PLAYER_1, hero1race, kol_u1_pl1, kol_u2_pl1, kol_u3_pl1, kol_u4_pl1, kol_u5_pl1, kol_u6_pl1, kol_u7_pl1);
-  set_player_resources(PLAYER_2, hero2race, kol_u1_pl2, kol_u2_pl2, kol_u3_pl2, kol_u4_pl2, kol_u5_pl2, kol_u6_pl2, kol_u7_pl2);
-
-  if hero1race == 1 then ShowFlyingSign(GetMapDataPath().."HumanBonus.txt", HeroMax1, 1, 7.0); end;
-  if hero2race == 1 then ShowFlyingSign(GetMapDataPath().."HumanBonus.txt", HeroMax2, 2, 7.0); end;
-
   startThread (peredvigenie);
   Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'MentorAddSkill1');
   Trigger( HERO_ADD_SKILL_TRIGGER, HeroMin1, 'MentorAddSkill1');

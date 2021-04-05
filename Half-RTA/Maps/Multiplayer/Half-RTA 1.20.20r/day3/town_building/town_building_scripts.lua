@@ -184,7 +184,7 @@ function adjustmentArmyCount(playerId, raceId)
   -- Если сгенерировалась слишком мало войск,
   -- увеличиваем их количество до стоимости менее 10% от первого тира
   if priceAllButFirst < (-tenPercentFullPriceFirstLvlUnit) then
-    while unitNumber > 1 do
+    while unitLevel > 1 do
       local priceCurrentLvl = getPriceUnitByLevel(raceId, unitLevel);
 
       if priceCurrentLvl < 0 then
@@ -193,18 +193,18 @@ function adjustmentArmyCount(playerId, raceId)
         unit.count = unit.count + 1;
       end;
 
-      unitNumber = unitNumber - 1;
+      unitLevel = unitLevel - 1;
 
       -- Идем по еще одному кругу, если
-      if unitNumber == 1 then
-        unitNumber = 6;
+      if unitLevel == 1 then
+        unitLevel = 6;
       end;
 
       priceAllButFirst = getAllPriceButFirst(playerId, raceId);
 
       -- Завершаем балансировку, если достигли баланса
       if priceAllButFirst < (-tenPercentFullPriceFirstLvlUnit) then
-        unitNumber = 1;
+        unitLevel = 1;
       end;
     end;
   end;

@@ -3865,53 +3865,6 @@ function getrace(hero)
 	return 0;
 end;
 
-function set_player_resources(player, race, k1, k2, k3, k4, k5, k6, k7)
-
-	--------     HAVEN     INF    NECR     ELF    MAGE    LIGA    GNOM     ORC
-	woods    = {     0,      0,      0,      0,      0,      0,      0,      0};
-	ores     = {     0,      0,      0,      0,      0,      0,      0,      0};
-	mercurys = {     0,      0,      0,      0,      0,      0,      0,      0};
-	crystals = {     0,      0,      0,      0,      0,      0,      0,      0};
-	sulfurs  = {     0,      0,      0,      0,      0,      0,      0,      0};
-	gems     = {     0,      0,      0,      0,      0,      0,      0,      0};
-	golds    = {135000, 130000, 130000, 130000, 130000, 130000, 130000, 130000};
-
-  if option[NumberBattle] == 5 then
-    golds    = { 115000, 115000, 115000, 115000, 115000, 115000, 115000, 115000};
-  end;
-
-  Gold = golds[race];
-
-  if option[NumberBattle] == 2 and player == 2 then
-    Gold = Gold * (1 + arrayBonusForSiege[hero2race - 1][hero1race]/100);
-  end;
-
-  if option[NumberBattle] == 3 and player == 1 then
-    Gold = Gold * (1 + arrayBonusForSiege[hero1race - 1][hero2race]/100);
-  end;
-
-  if option[NumberBattle] == 7 then
-    Gold = Gold * 0.8;
-  end;
-
-  if option[NumberBattle] == 8 then
-    Gold = Gold * 1.25;
-  end;
-
-  if option[NumberBattle] == 9 then
-    Gold = Gold * 1.5;
-  end;
-
-	SetPlayerResource(player,    GOLD,           Gold);
-	SetPlayerResource(player,    WOOD,    woods[race]);
-	SetPlayerResource(player,     ORE,     ores[race]);
-	SetPlayerResource(player, MERCURY, mercurys[race]);
-	SetPlayerResource(player, CRYSTAL, crystals[race]);
-	SetPlayerResource(player,  SULFUR,  sulfurs[race]);
-	SetPlayerResource(player,     GEM,     gems[race]);
-
-end;
-
 SetObjectOwner('RANDOMTOWN1',  PLAYER_NONE);
 SetObjectOwner('RANDOMTOWN2',  PLAYER_NONE);
 
@@ -7221,6 +7174,9 @@ end;
 
 array_units_for_recruitment = {};
 array_units_for_recruitment = { 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 43, 44, 45, 46, 47, 48, 57, 58, 59, 60, 61, 62, 71, 71, 73, 74, 75, 76, 92, 93, 94, 95, 96, 97, 106, 107, 108, 117, 118, 119, 120, 121, 122, 131, 132, 133, 138, 139, 140, 145, 146, 147, 152, 153, 154, 159, 160, 161, 166, 167, 168, 173, 174, 175};
+
+kolUnit1 = {intg(K * kol_u1_pl1), intg(K * kol_u2_pl1), intg(K * kol_u3_pl1), intg(K * kol_u4_pl1), intg(K * kol_u5_pl1), intg(K * kol_u6_pl1), intg(K * kol_u7_pl1)};
+Unit2 = {intg(K * kol_u1_pl2), intg(K * kol_u2_pl2), intg(K * kol_u3_pl2), intg(K * kol_u4_pl2), intg(K * kol_u5_pl2), intg(K * kol_u6_pl2), intg(K * kol_u7_pl2)}
 
 function recruitment1(hero)
   Stek1[1].id, Stek1[2].id, Stek1[3].id, Stek1[4].id, Stek1[5].id, Stek1[6].id, Stek1[7].id = GetHeroCreaturesTypes(hero);
