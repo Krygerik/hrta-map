@@ -162,6 +162,47 @@ RESULT_HERO_LIST = {
   [PLAYER_2] = { raceId = nil, heroes = {} },
 };
 
+-- ¬се свойства главных героев игроков
+-- «аполн€етс€ на этапе обучени€ героев
+PLAYERS_MAIN_HERO_PROPS = {
+  [PLAYER_1] = {
+    name = nil,
+    stats = {
+      [STAT_ATTACK] = nil,
+      [STAT_DEFENCE] = nil,
+      [STAT_SPELL_POWER] = nil,
+      [STAT_KNOWLEDGE] = nil
+    },
+    -- ƒополнительные статы с образовани€ разделенные на уровни
+    -- разбил на уровни дл€ удобства отката
+    learning = {
+      [1] = nil,
+      [2] = nil,
+      [3] = nil,
+    },
+    -- текущий уровень образовани€
+    current_learning_level = 0,
+  },
+  [PLAYER_2] = {
+    name = nil,
+    stats = {
+      [STAT_ATTACK] = nil,
+      [STAT_DEFENCE] = nil,
+      [STAT_SPELL_POWER] = nil,
+      [STAT_KNOWLEDGE] = nil
+    },
+    -- ƒополнительные статы с образовани€ разделенные на уровни
+    -- разбил на уровни дл€ удобства отката
+    learning = {
+      [1] = nil,
+      [2] = nil,
+      [3] = nil,
+    },
+    -- текущий уровень образовани€
+    current_learning_level = 0,
+  },
+};
+
 -- “аблица »ƒ всех игроков
 PLAYER_ID_TABLE = { PLAYER_1, PLAYER_2 };
 

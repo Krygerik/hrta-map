@@ -11,6 +11,7 @@ function day3()
   addHeroesToPlayers();
   setHeroesInitialProperties();
   changePlayersArea();
+  doFile(PATH_TO_DAY3_SCRIPTS.."start_learning/start_learning_scripts.lua");
 end;
 
 -- Добавление героев игрокам
@@ -108,19 +109,3 @@ end;
 
 -- Точка входа
 day3();
-
-
-function mock()
-  startThread (peredvigenie);
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'MentorAddSkill1');
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMin1, 'MentorAddSkill1');
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroDop1, 'MentorAddSkill1');
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'MentorAddSkill2');
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMin2, 'MentorAddSkill2');
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroDop2, 'MentorAddSkill2');
-  Trigger( PLAYER_ADD_HERO_TRIGGER, PLAYER_1, 'HeroAdd1');
-  Trigger( PLAYER_ADD_HERO_TRIGGER, PLAYER_2, 'HeroAdd2');
-
-  startThread (RemoveStartUnit1);
-  startThread (RemoveStartUnit2);
-end;
