@@ -1430,24 +1430,6 @@ Ellaina2 = 0;
 StLvlUp1 = 0;
 StLvlUp2 = 0;
 
-SetObjectEnabled ('arena', nil);
-SetObjectEnabled ('gorgul', nil);
-SetObjectEnabled ('sklep', nil);
-SetObjectEnabled ('higina', nil);
-SetObjectEnabled ('heops', nil);
-SetObjectEnabled ('gertva', nil);
-SetObjectEnabled ('utopa', nil);
-SetObjectEnabled ('academy', nil);
-
-Trigger (OBJECT_TOUCH_TRIGGER, 'arena',   'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'gorgul',  'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'sklep',   'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'higina',  'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'heops',   'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'gertva',  'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'utopa',   'levelupstart1');
-Trigger (OBJECT_TOUCH_TRIGGER, 'academy', 'levelupstart1');
-
 SetObjectEnabled ('tent1', nil);
 SetObjectEnabled ('tent2', nil);
 OverrideObjectTooltipNameAndDescription ('tent1', GetMapDataPath().."tentNAME.txt", GetMapDataPath().."tentDSCRP.txt");
@@ -1457,233 +1439,64 @@ DisguiseEnable1 = 0;
 DisguiseEnable2 = 0;
 DisguiseHero1 = 0;
 
-function levelupstart1 (hero)
---  Load(GetMapDataPath().."AutoSave");
-  hero1 = hero;
-  if DisableBagPlayer1 == 0 and GetDate (DAY) == 3 and (DisguiseEnable1 == 0 or (DisguiseEnable1 == 1 and DisguiseHero1 == hero1)) then
-    DisableBagPlayer1 = 1;
-    ArrayStatHero(hero1);
-    if hero1race == 1 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15human1.txt", 'levelup11', 'no1'); end;
-    if hero1race == 2 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15ad1.txt",    'levelup11', 'no1'); end;
-    if hero1race == 3 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15necro1.txt", 'levelup11', 'no1'); end;
-    if hero1race == 4 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15elf1.txt",   'levelup11', 'no1'); end;
-    if hero1race == 5 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15mage1.txt",  'levelup11', 'no1'); end;
-    if hero1race == 6 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15liga1.txt",  'levelup11', 'no1'); end;
-    if hero1race == 7 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15gnom1.txt",  'levelup11', 'no1'); end;
-    if hero1race == 8 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."UR15orc1.txt",   'levelup11', 'no1'); end;
-  end;
-  if GetHeroStat (hero1, STAT_EXPERIENCE) > array_level[HalfLevel] then
-    levelup11();
-  end;
-end;
-
-function levelup11()
-  StLvlUp1 = 1;
-  levelup12();
-end;
-
 function levelup12()
-  if GetHeroStat (hero1, STAT_EXPERIENCE) >= array_level[HalfLevel] then
-    ArrayStatHero(hero1);
-    if Name(hero1) == "Elleshar" then Discount1 = EllesharDiscount; else Discount1 = 0; end;
-    ChangeHeroStat (hero1, STAT_EXPERIENCE, array_level[GetHeroLevel(hero1) + StartLevel - HalfLevel] - GetHeroStat(hero1, STAT_EXPERIENCE));
-    --EllesharLevelBonus = 0;
-    --if HasHeroSkill(hero1, 29) then EstatesEnable1 = 1; end;
-    Trigger (OBJECT_TOUCH_TRIGGER, 'arena',   'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'gorgul',  'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'sklep',   'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'higina',  'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'heops',   'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'gertva',  'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'utopa',   'levelup13');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'academy', 'levelup13');
-
-    SetObjectEnabled ('mentor1', true);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'mentor1', 'mentor1' );
-    PerkSum1 = PerkSum1 + StartLevel - HalfLevel;
+  if Name(hero1) == "Elleshar" then
+    Discount1 = EllesharDiscount;
   else
-    if HalfLeveling1 == 0 then
-      if GenerateLearningEnable1 == 0 then GenerateStatLearning1(hero1); end;
-      Learning1(hero1);
-      ArrayStatHero(hero1);
-      if hero1 == HeroDop1 then HeroDop1 = HeroMax1; HeroTavern1 = 1; end;
-      if hero1 == HeroMin1 then HeroMin1 = HeroMax1; end;
-      HeroMax1 = hero1;
-      if Name(hero1) == "Nathaniel" and Ellaina1 == 0 then Ellaina1 = 1; startThread(SpecEllaina1); end;
-      if Name(hero1) == "Una" then Trigger(HERO_LEVELUP_TRIGGER, HeroMax1, 'SpecInga1'); end;
-      if HasHeroSkill(hero1, 1) and LogisticsEnable1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + LogisticsSum * GetHeroSkillMastery(hero1, 1))); end;
-      --if HasHeroSkill(hero1, 29) then EstatesEnable1 = 1; end;
-      if HasHeroSkill(hero1, 33) then ControlHeroCustomAbility(hero1, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-      ChangeHeroStat (hero1, STAT_EXPERIENCE, array_level[HalfLevel - 1 + GetHeroLevel(hero1)] - GetHeroStat(hero1, STAT_EXPERIENCE) + 500);
-      SetObjectEnabled ('mentor11', nil);
-      SetObjectEnabled ('mentor12', nil);
-      SetObjectEnabled ('mentor13', nil);
-      SetObjectEnabled ('mentor14', nil);
-      SetObjectEnabled ('mentor15', nil);
-      SetObjectEnabled ('mentor16', nil);
-      SetObjectEnabled ('mentor17', nil);
-      SetObjectEnabled ('mentor18', nil);
-      Scouting1DopInfo();
-      if hero1 == "Nikolas" or hero1 == "Nikolas2" then SetObjectOwner('Dwel1', PLAYER_1); startThread(HeraldFunction1); MoveCameraForPlayers( 1, 89, 82, 0, 40, 0, 0, 0, 0, 1); OpenCircleFog( 89, 82, 0, 12, 1 ); end;
---      if HasHeroSkill(hero1, 29) then ControlHeroCustomAbility(hero1, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-      PerkSum1 = PerkSumF(HeroMax1) + HalfLevel - 1;
-    end;
-    HalfLeveling1 = 1;
+    Discount1 = 0;
   end;
-end;
-
-
-function levelup13()
-  --if HasHeroSkill(HeroMax1, 29) then EstatesEnable1 = 1; end;
-  --if EstatesEnable1 == 1 then DiscountLevel1 = EstatesDiscountLevel; else DiscountLevel1 = 0; end;
-  if lvl1 <= length(LevelUp) then
-    if GetPlayerResource(1, 6) >= (LevelUp[lvl1] - Discount1) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), {GetMapDataPath().."LevelUP.txt"; eq = LevelUp[lvl1] - Discount1}, 'levelup13yes', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), {GetMapDataPath().."NoLevelUP.txt"; eq = LevelUp[lvl1] - Discount1} );
-    end;
-  else
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."URMAX.txt" );
-	end;
-end;
-
-function levelup13yes()
-  ArrayStatHero(hero1);
-  SetPlayerResource(PLAYER_1, 6, GetPlayerResource(1, 6) - LevelUp[lvl1] + Discount1);
---  if EstatesEnable1 == 1 and EstatesDiscountUse1 == 0 and GetHeroLevel(hero1) > (StartLevel - 1) then
---    EstatesDiscountUse1 = 1;
---    SetPlayerResource(PLAYER_1, 6, GetPlayerResource(1, 6) + DiscountLevel1 * (GetHeroLevel(hero1) - StartLevel) + RemSkSum1 * EstatesDiscountMentor);
---    ShowFlyingSign({GetMapDataPath().."EstatesPostfactum.txt"; eq = DiscountLevel1 * (GetHeroLevel(hero1) - StartLevel) + RemSkSum1 * EstatesDiscountMentor}, hero1, 1, 5.0);
---  end;
---  if EstatesEnable1 == 1 then EstatesDiscountUse1 = 1; end;
-	LevelUpHero (hero1);
-	lvl1 = lvl1 + 1;
-	PerkSum1 = PerkSum1 + 1;
-end;
-
-
-SetObjectEnabled ('hram', nil);
-SetObjectEnabled ('rune', nil);
-SetObjectEnabled ('mogila', nil);
-SetObjectEnabled ('derevo', nil);
-SetObjectEnabled ('treasure', nil);
-SetObjectEnabled ('magiya', nil);
-SetObjectEnabled ('obelisk', nil);
-SetObjectEnabled ('gizn', nil);
-
-Trigger (OBJECT_TOUCH_TRIGGER, 'hram',     'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'rune',     'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'mogila',   'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'derevo',   'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'treasure', 'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'magiya',   'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'obelisk',  'levelupstart2');
-Trigger (OBJECT_TOUCH_TRIGGER, 'gizn',     'levelupstart2');
-
-function levelupstart2 (hero)
-  hero2 = hero;
-  if DisableBagPlayer2 == 0 and GetDate (DAY) == 3  and (DisguiseEnable2 == 0 or (DisguiseEnable2 == 1 and DisguiseHero2 == hero2)) then
-    DisableBagPlayer2 = 1;
-    ArrayStatHero(hero2);
-    if hero2race == 1 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15human2.txt", 'levelup21', 'no2'); end;
-    if hero2race == 2 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15ad2.txt",    'levelup21', 'no2'); end;
-    if hero2race == 3 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15necro2.txt", 'levelup21', 'no2'); end;
-    if hero2race == 4 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15elf2.txt",   'levelup21', 'no2'); end;
-    if hero2race == 5 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15mage2.txt",  'levelup21', 'no2'); end;
-    if hero2race == 6 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15liga2.txt",  'levelup21', 'no2'); end;
-    if hero2race == 7 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15gnom2.txt",  'levelup21', 'no2'); end;
-    if hero2race == 8 then QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."UR15orc2.txt",   'levelup21', 'no2'); end;
+  
+  if Name(hero1) == "Nathaniel" and Ellaina1 == 0 then
+    Ellaina1 = 1;
+    startThread(SpecEllaina1);
   end;
-  if GetHeroStat (hero2, STAT_EXPERIENCE) > 12000 then
-    levelup21();
+  if Name(hero1) == "Una" then
+    Trigger(HERO_LEVELUP_TRIGGER, HeroMax1, 'SpecInga1');
   end;
-end;
-
-function levelup21()
-  StLvlUp2 = 1;
-  levelup22();
+  if HasHeroSkill(hero1, 1) and LogisticsEnable1 == 0 then
+    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + LogisticsSum * GetHeroSkillMastery(hero1, 1)));
+  end;
+  if HasHeroSkill(hero1, 33) then
+    ControlHeroCustomAbility(hero1, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
+    Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
+  end;
+  Scouting1DopInfo();
+  if hero1 == "Nikolas" or hero1 == "Nikolas2" then
+    SetObjectOwner('Dwel1', PLAYER_1);
+    startThread(HeraldFunction1);
+    MoveCameraForPlayers( 1, 89, 82, 0, 40, 0, 0, 0, 0, 1);
+    OpenCircleFog( 89, 82, 0, 12, 1 );
+  end;
 end;
 
 function levelup22()
-  if GetHeroStat (hero2, STAT_EXPERIENCE) >= array_level[HalfLevel] then
-    ArrayStatHero(hero2);
-    if Name(hero2) == "Elleshar" then Discount2 = EllesharDiscount; else Discount2 = 0; end;
-    --if Name(hero2) == "Elleshar" then EllesharLevelBonus = EllesharLevel; else EllesharLevelBonus = 0; end;
-    ChangeHeroStat (hero2, STAT_EXPERIENCE, array_level[GetHeroLevel(hero2) + StartLevel - HalfLevel] - GetHeroStat(hero2, STAT_EXPERIENCE));
-    --EllesharLevelBonus = 0;
-    --if HasHeroSkill(hero2, 29) then EstatesEnable2 = 1; end;
-    Trigger (OBJECT_TOUCH_TRIGGER, 'hram',     'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'rune',     'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'mogila',   'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'derevo',   'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'treasure', 'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'magiya',   'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'obelisk',  'levelup23');
-    Trigger (OBJECT_TOUCH_TRIGGER, 'gizn',     'levelup23');
-
-    SetObjectEnabled ('mentor2', true);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'mentor2', 'mentor2' );
-    PerkSum2 = PerkSum2 + StartLevel - HalfLevel;
+  if Name(hero2) == "Elleshar" then
+    Discount2 = EllesharDiscount;
   else
-    if HalfLeveling2 == 0 then
-      if GenerateLearningEnable2 == 0 then GenerateStatLearning2(hero2); end;
-      Learning2(hero2);
-      ArrayStatHero(hero2);
-      if hero2 == HeroDop2 then HeroDop2 = HeroMax2; HeroTavern2 = 1; end;
-      if hero2 == HeroMin2 then HeroMin2 = HeroMax2; end;
-      HeroMax2 = hero2;
-      if Name(hero2) == "Nathaniel" and Ellaina2 == 0 then Ellaina2 = 1; startThread(SpecEllaina2); end;
-      if Name(hero2) == "Una" then Trigger(HERO_LEVELUP_TRIGGER, HeroMax2, 'SpecInga2'); end;
-      if HasHeroSkill(hero2, 1) and LogisticsEnable2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + LogisticsSum * GetHeroSkillMastery(hero2, 1))); end;
-      --if HasHeroSkill(hero2, 29) then EstatesEnable2 = 1; end;
-      if HasHeroSkill(hero2, 33) then ControlHeroCustomAbility(hero2, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-      ChangeHeroStat (hero2, STAT_EXPERIENCE, array_level[HalfLevel - 1 + GetHeroLevel(hero2)] - GetHeroStat(hero2, STAT_EXPERIENCE) + 500);
-      SetObjectEnabled ('mentor21', nil);
-      SetObjectEnabled ('mentor22', nil);
-      SetObjectEnabled ('mentor23', nil);
-      SetObjectEnabled ('mentor24', nil);
-      SetObjectEnabled ('mentor25', nil);
-      SetObjectEnabled ('mentor26', nil);
-      SetObjectEnabled ('mentor27', nil);
-      SetObjectEnabled ('mentor28', nil);
-      Scouting2DopInfo();
-      if hero2 == "Nikolas" or hero2 == "Nikolas2" then SetObjectOwner('Dwel2', PLAYER_2); startThread(HeraldFunction2); MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);  OpenCircleFog( 81, 7, 0, 12, 2 ); end;
---      if HasHeroSkill(hero2, 29) then ControlHeroCustomAbility(hero2, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-      PerkSum2 = PerkSumF(HeroMax2) + HalfLevel - 1;
-    end;
-    HalfLeveling2 = 1;
+    Discount2 = 0;
+  end;
+  if Name(hero2) == "Nathaniel" and Ellaina2 == 0 then
+    Ellaina2 = 1;
+    startThread(SpecEllaina2);
+  end;
+  if Name(hero2) == "Una" then
+    Trigger(HERO_LEVELUP_TRIGGER, HeroMax2, 'SpecInga2');
+  end;
+  if HasHeroSkill(hero2, 1) and LogisticsEnable2 == 0 then
+    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + LogisticsSum * GetHeroSkillMastery(hero2, 1)));
+  end;
+  if HasHeroSkill(hero2, 33) then
+    ControlHeroCustomAbility(hero2, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
+    Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
+  end;
+  Scouting2DopInfo();
+  if hero2 == "Nikolas" or hero2 == "Nikolas2" then
+    SetObjectOwner('Dwel2', PLAYER_2);
+    startThread(HeraldFunction2);
+    MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
+    OpenCircleFog( 81, 7, 0, 12, 2 );
   end;
 end;
-
-function levelup23()
-  --if HasHeroSkill(HeroMax2, 29) then EstatesEnable2 = 1; end;
-  --if EstatesEnable2 == 1 then DiscountLevel2 = EstatesDiscountLevel; else DiscountLevel2 = 0; end;
-  if lvl2 <= length(LevelUp) then
-    if GetPlayerResource(2, 6) >= (LevelUp[lvl2] - Discount2) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), {GetMapDataPath().."LevelUP.txt"; eq = LevelUp[lvl2] - Discount2}, 'levelup23yes', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), {GetMapDataPath().."NoLevelUP.txt"; eq = LevelUp[lvl2] - Discount2} );
-    end;
-  else
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."URMAX.txt" );
-	end;
-end;
-
-function levelup23yes()
-  ArrayStatHero(hero2);
-  SetPlayerResource(PLAYER_2, 6, GetPlayerResource(2, 6) - LevelUp[lvl2] + Discount2);
---  if EstatesEnable2 == 1 and EstatesDiscountUse2 == 0 and GetHeroLevel(hero2) > (StartLevel - 1) then
---    EstatesDiscountUse2 = 1;
---    SetPlayerResource(PLAYER_2, 6, GetPlayerResource(2, 6) + DiscountLevel2 * (GetHeroLevel(hero2) - StartLevel) + RemSkSum2 * EstatesDiscountMentor);
---    ShowFlyingSign({GetMapDataPath().."EstatesPostfactum.txt"; eq = DiscountLevel2 * (GetHeroLevel(hero2) - StartLevel) + RemSkSum2 * EstatesDiscountMentor}, hero2, 2, 5.0);
---  end;
---  if EstatesEnable2 == 1 then EstatesDiscountUse2 = 1; end;
-	LevelUpHero (hero2);
-	lvl2 = lvl2 + 1;
-	PerkSum2 = PerkSum2 + 1;
-end;
-
-
 
 Rolf1 = 0;
 function B1R1()
@@ -1741,8 +1554,6 @@ function StartArmy(hero, race)
   RemoveHeroCreatures(hero, unitID, 1);
 end;
 
-
-
 function PerkSumF(hero)
   k = 0;
   for i = 1, 26 do
@@ -1755,8 +1566,6 @@ function PerkSumF(hero)
   end;
   return k;
 end;
-
-
 
 -- Movement
 
@@ -2114,78 +1923,9 @@ artHero2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	basicS   = {     1,      1,      3,      1,      2,      3,      2,      1};
 	basicK   = {     1,      2,      1,      2,      3,      1,      2,      1};
 
-Trigger( OBJECT_TOUCH_TRIGGER, 'mentor1', 'mentor1' );
-Trigger( OBJECT_TOUCH_TRIGGER, 'mentor2', 'mentor2' );
-
-RemoveSkillStart1 = 0;
-RemoveSkillStart2 = 0;
-
-function mentor1(heroX)
-  ArraySkill1();
-  ArrayStatHero(heroX);
-  if GenerateLearningEnable1 == 0 then GenerateStatLearning1(heroX); end;
-  Trigger( HERO_REMOVE_SKILL_TRIGGER, heroX, 'MentorRemoveSkill1');
-  RemSk1 = 0;
-  AddSk1 = 0;
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroX, 'MentorAddSkill1');
-  STARTattH1 = GetHeroStat(heroX, STAT_ATTACK);
-  STARTdefH1 = GetHeroStat(heroX, STAT_DEFENCE);
-  STARTspH1  = GetHeroStat(heroX, STAT_SPELL_POWER);
-  STARTknH1  = GetHeroStat(heroX, STAT_KNOWLEDGE);
-end;
-
-function mentor2(heroX)
-  ArraySkill2();
-  ArrayStatHero(heroX);
-  if GenerateLearningEnable2 == 0 then GenerateStatLearning2(heroX); end;
-  Trigger( HERO_REMOVE_SKILL_TRIGGER, heroX, 'MentorRemoveSkill2');
-  RemSk2 = 0;
-  AddSk2 = 0;
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroX, 'MentorAddSkill2');
-  STARTattH2 = GetHeroStat(heroX, STAT_ATTACK);
-  STARTdefH2 = GetHeroStat(heroX, STAT_DEFENCE);
-  STARTspH2  = GetHeroStat(heroX, STAT_SPELL_POWER);
-  STARTknH2  = GetHeroStat(heroX, STAT_KNOWLEDGE);
-end;
-
-function MentorRemoveSkill1(heroXX,skillXX)
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) < 2000 and RemoveSkillStart1 < 2 then
---    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  500));
-    RemoveSkillStart1 = RemoveSkillStart1 + 1;
-  else
-    if GetHeroStat(heroXX, STAT_EXPERIENCE) < 2000 and RemoveSkillStart1 > 1 then
-      SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - 2000));
-      RemoveSkillStart1 = RemoveSkillStart1 + 1;
-    end;
-  end;
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) >= 2000   and GetHeroStat(heroXX, STAT_EXPERIENCE) < 14000 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  1000)); end;
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) >= 14000 and GetHeroStat(heroXX, STAT_EXPERIENCE) < 20000 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -   500)); end;
-  RemSk1 = RemSk1 + 1;
-  RemSkSum1 = RemSkSum1 + 1;
-  RemoveSkill1(heroXX, skillXX);
-end;
-
-function  MentorRemoveSkill2(heroXX,skillXX)
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) < 2000 and RemoveSkillStart2 < 2 then
---    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  500));
-    RemoveSkillStart2 = RemoveSkillStart2 + 1;
-  else
-    if GetHeroStat(heroXX, STAT_EXPERIENCE) < 2000 and RemoveSkillStart2 > 1 then
-      SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - 2000));
-      RemoveSkillStart2 = RemoveSkillStart2 + 1;
-    end;
-  end;
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) >= 2000   and GetHeroStat(heroXX, STAT_EXPERIENCE) < 14000 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  1000)); end;
-  if GetHeroStat(heroXX, STAT_EXPERIENCE) >= 14000 and GetHeroStat(heroXX, STAT_EXPERIENCE) < 20000 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -   500)); end;
-  RemSk2 = RemSk2 + 1;
-  RemSkSum2 = RemSkSum2 + 1;
-  RemoveSkill2(heroXX, skillXX);
-end;
-
 function MentorAddSkill1(hero, skill)
   AddSkill1(hero, skill);
   AddSk1 = AddSk1 + 1;
---  if EstatesEnable1 == 1 then EstatesDiscountUse1 = 1; else EstatesDiscountUse1 = 0; end;
   if AddSk1 == RemSk1 and ReturnSkillPlayer1 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse1 == 1 then
     SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + RemSk1 * EstatesDiscountMentor));
     ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = RemSk1 * EstatesDiscountMentor}, HeroMax1, 1, 5.0);
@@ -2202,7 +1942,6 @@ end;
 function MentorAddSkill2(hero, skill)
   AddSkill2(hero, skill);
   AddSk2 = AddSk2 + 1;
---  if EstatesEnable2 == 1 then EstatesDiscountUse2 = 1; else EstatesDiscountUse2 = 0; end;
   if AddSk2 == RemSk2 and ReturnSkillPlayer2 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse2 == 1 then
     SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + RemSk2 * EstatesDiscountMentor));
     ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = RemSk2 * EstatesDiscountMentor}, HeroMax2, 2, 5.0);
@@ -2248,97 +1987,65 @@ Disconnect_GoldPlayer1 = 0
 Disconnect_GoldPlayer2 = 0
 
 function AddSkill1(hero, skill)
---  print(skill);
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
   ControlStatHero(hero, skill, 1);
---  if RevUse1 == 2 then RevUse1 = 1; end;
---  if RevDel1 == 1 and RevUse1 ~= 1 and ((GetHeroLevel(hero) == 10 and DisableBagPlayer1 == 0) or (StartLevel == 13 and GetHeroLevel(hero) > 13)
---    or (StartLevel == 17 and GetHeroLevel(hero) > 17) or (StartLevel == 21 and GetHeroLevel(hero) > 21) or (StartLevel == 25 and GetHeroLevel(hero) > 25))
---    then RevUse1 = 2; LevelUpHero(hero);
---  end;
   if skill == 129 and GetDate (DAY) == 4 and SpoilsUse1 == 0 then Spoils1(hero) end;
   if skill ==  30 and GetDate (DAY) == 4 then diplomacy1(hero) end;
   if skill == 79 and StudentUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 1000)); StudentUse1 = 1; end;
---  if skill == 127 and AcademyUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 1000)); AcademyUse1 = 1; end;
---  if skill == 87 then ChangeHeroStat(hero, 3, 1); end; --ХРАНИТЕЛЬ ТАЙНОГО
---  if skill == 169 then ChangeLevel(hero, 10); end;
   if skill == 33 and GetHeroStat(hero, STAT_EXPERIENCE) > 1000 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end; --FortunateAdventure1(hero) end;
   if (skill == 29 and RemSk1 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates1Q(hero); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport1(hero) end;
---  if skill == 110 then HauntMine1(hero) end;
   if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
   if skill == 115 then ForestGuard1(hero); end;
   if skill == 181 then DefendUsAll1(hero); end;
   if skill == 1 then Logistics1(hero); end;
   if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation1(); end;
   if skill == 131 then ChangeHeroStat(hero, 2, -2); end;
---  if skill == 141 then GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_SPEED, -1); GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_INITIATIVE, 1); end;
   if skill == 186 then ChangeHeroStat(hero, 2, -1); end;
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel1 == 3) then Revelation1(); end;
---  if (HasHeroSkill(hero, 140) or HasHeroSkill(hero, 219)) and (RevDel1 == 0 or (RevUse1 == 1 and RevDel1 == 1) or (RevUse1 == 3 and RevDel1 == 3)) then Revelation1(); end;
   if skill == 20 or skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
---  if skill == 168 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-  if skill == 102 then startThread(HeraldFunction1); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
---  if (skill == 78 or HasHeroSkill(hero, 78)) and GetHeroLevel(hero) >= StartLevel and Skill1_78 == 0 then ChangeLevel(hero, 5); Skill1_78 = 1; end;
+  if skill == 102 then startThread(HeraldFunction1); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
---  if RevUse1 == 4 then RevUse1 = 3; end;
-  if skill == 81 then ChangeHeroStat(hero, 3, -2); end; --ChangeHeroStat(hero, 4, 2); end;
+  if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 87 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
---  print(skill)
   if (skill == 3 or skill == 183) and ReturnSkillPlayer1 == 0 then Learning1(hero) end;
   ArrayStatHero(hero);
 end;
 
 function AddSkill2(hero, skill)
---  print(skill);
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' +' .. skill
   Disconnect_GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD)
   ControlStatHero(hero, skill, 1);
---  if RevUse2 == 2 then RevUse2 = 1; end;
---  if RevDel2 == 1 and RevUse2 ~= 1 and ((GetHeroLevel(hero) == 10 and DisableBagPlayer2 == 0) or (StartLevel == 13 and GetHeroLevel(hero) > 13)
---    or (StartLevel == 17 and GetHeroLevel(hero) > 17) or (StartLevel == 21 and GetHeroLevel(hero) > 21) or (StartLevel == 25 and GetHeroLevel(hero) > 25))
---    then RevUse2 = 2; LevelUpHero(hero);
---  end;
   if skill == 129 and GetDate (DAY) == 4 and SpoilsUse2 == 0 then Spoils2(hero) end;
   if skill ==  30 and GetDate (DAY) == 4 then diplomacy2(hero) end;
   if skill == 79 and StudentUse2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 1000)); StudentUse2 = 1; end;
---  if skill == 127 and AcademyUse2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 1000)); AcademyUse2 = 1; end;
---  if skill == 87 then ChangeHeroStat(hero, 3, 1); end; --ХРАНИТЕЛЬ ТАЙНОГО
---  if skill == 169 then ChangeLevel(hero, 10); end;
   if skill == 33 and GetHeroStat(hero, STAT_EXPERIENCE) > 1000 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end; --FortunateAdventure2(hero) end;
-  if (skill == 29 and RemSk2 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates2Q(hero); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
+  if (skill == 29 and RemSk2 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates2Q(hero); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport2(hero) end;
---  if skill == 110 then HauntMine2(hero) end;
   if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
   if skill == 115 then ForestGuard2(hero); end;
   if skill == 181 then DefendUsAll2(hero); end;
   if skill == 1 then Logistics2(hero) end;
   if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation2(); end;
   if skill == 131 then ChangeHeroStat(hero, 2, -2); end;
---  if skill == 141 then GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_SPEED, -1); GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_INITIATIVE, 1); end;
   if skill == 186 then ChangeHeroStat(hero, 2, -1); end;
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
---  if (HasHeroSkill(hero, 140) or HasHeroSkill(hero, 219)) and (RevDel2 == 0 or (RevUse2 == 1 and RevDel2 == 1) or (RevUse2 == 3 and RevDel2 == 3)) then Revelation2(); end;
   if skill == 20 or skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
---  if skill == 168 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
-  if skill == 102 then startThread(HeraldFunction2); end; -- ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
---  if (skill == 78 or HasHeroSkill(hero, 78)) and GetHeroLevel(hero) >= StartLevel and Skill2_78 == 0 then ChangeLevel(hero, 5); Skill2_78 = 1; end;
+  if skill == 102 then startThread(HeraldFunction2); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
---  if RevUse2 == 4 then RevUse2 = 3; end;
-  if skill == 81 then ChangeHeroStat(hero, 3, -2); end; --ChangeHeroStat(hero, 4, 2); end;
+  if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 87 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
---  print(skill)
   if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
   ArrayStatHero(hero);
 end;
@@ -2354,34 +2061,27 @@ function RemoveSkill1(hero, skill)
   if skill == 16 and AvengerUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 17 and minikUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 29 and EstatesDiscountUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 29 and EstatesDiscountUse1 == 0 and ReturnSkillPlayer1 == 0 then EstatesEnable1 = 0; end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED); end;
+  if skill == 29 and EstatesDiscountUse1 == 0 and ReturnSkillPlayer1 == 0 then EstatesEnable1 = 0; end;
   if skill == 33 and FortunateAdventureEnable1 ~= 0 then ReturnSkillPlayer1 = 1; end;
-  if skill == 33 and FortunateAdventureEnable1 == 0 and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end; --SetObjectEnabled('lavka1',  true); Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'no' ); end;
---  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_TRAINING_GROUNDS) > 0 then ReturnSkillPlayer1 = 1; end;
+  if skill == 33 and FortunateAdventureEnable1 == 0 and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
   if skill == 152 and RunesChangeUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 1 then DelLogistics1(hero); if LogisticsNoMoney1 == 1 then ReturnSkillPlayer1 = 1; end; end;
   if skill == 21 and NavUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 131 then ChangeHeroStat(hero, 2, 2); end;
---  if skill == 141 then GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_SPEED, 1); GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_INITIATIVE, -1); end;
   if skill == 186 then ChangeHeroStat(hero, 2, 1); end;
   if skill == 185 then ChangeHeroStat(hero, 4, -2); end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
---  if skill == 169 then ChangeLevel(hero, -10); end;
   if skill == 71 and ReturnSkillPlayer1 == 0 then RemoveDarkRitual1(hero); end;
---  if skill == 87 then ChangeHeroStat(hero, 3, -1); end; --ХРАНИТЕЛЬ ТАЙНОГО
---  if skill == 78 then ChangeLevel(hero, -5); Skill1_78 = 0; end;
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
   if skill == 20 and ScoutingEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 20 and ScoutingEnable1 == 0 and HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 112 and DisguiseEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 112 and DisguiseEnable1 == 0 and HasHeroSkill(hero, 20)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
---  if skill == 168 and SnatchUse1 == 1 then ReturnSkillPlayer1 = 1; end;
---  if skill == 168 and SnatchUse1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end; -- ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 81 then ChangeHeroStat(hero, 3, 2); end; --ChangeHeroStat(hero, 4, -2); end;
+  if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
+  if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 87 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
@@ -2399,42 +2099,33 @@ function RemoveSkill2(hero, skill)
   if skill == 16 and AvengerUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 17 and minikUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 29 and EstatesDiscountUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 29 and EstatesDiscountUse2 == 0 and ReturnSkillPlayer2 == 0 then EstatesEnable2 = 0; end; -- ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED); end;
+  if skill == 29 and EstatesDiscountUse2 == 0 and ReturnSkillPlayer2 == 0 then EstatesEnable2 = 0; end;
   if skill == 33 and FortunateAdventureEnable2 ~= 0 then ReturnSkillPlayer2 = 1; end;
-  if skill == 33 and FortunateAdventureEnable2 == 0 and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end; --SetObjectEnabled('lavka2',  true); Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'no' ); end;
---  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_TRAINING_GROUNDS) > 0 then ReturnSkillPlayer2 = 1; end;
+  if skill == 33 and FortunateAdventureEnable2 == 0 and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
   if skill == 152 and RunesChangeUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 1 then DelLogistics2(hero); if LogisticsNoMoney2 == 1 then ReturnSkillPlayer2 = 1; end; end;
   if skill == 21 and NavUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 131 then ChangeHeroStat(hero, 2, 2); end;
---  if skill == 141 then GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_SPEED, 1); GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_INITIATIVE, -1); end;
   if skill == 186 then ChangeHeroStat(hero, 2, 1); end;
   if skill == 185 then ChangeHeroStat(hero, 4, -2); end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
---  if skill == 169 then ChangeLevel(hero, -10); end;
   if skill == 71 and ReturnSkillPlayer2 == 0 then RemoveDarkRitual2(hero); end;
---  if skill == 87 then ChangeHeroStat(hero, 3, -1); end; --ХРАНИТЕЛЬ ТАЙНОГО
---  if skill == 78 then ChangeLevel(hero, -5); Skill2_78 = 0; end;
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
   if skill == 20 and ScoutingEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 20 and ScoutingEnable2 == 0 and HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 112 and DisguiseEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 112 and DisguiseEnable2 == 0 and HasHeroSkill(hero, 20)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
---  if skill == 168 and SnatchUse2 == 1 then ReturnSkillPlayer2 = 1; end;
---  if skill == 168 and SnatchUse2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 81 then ChangeHeroStat(hero, 3, 2); end; --ChangeHeroStat(hero, 4, -2); end;
+  if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
+  if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
+  if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 87 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
   if ReturnSkillPlayer2 == 0 then ArrayStatHero(hero); end;
 end;
-
-
 
 arrayStatHero = {}
 arrayStatHero[1] = { 0, 0, 0, 0, 0}
@@ -2463,8 +2154,6 @@ function ControlStatHero(hero, skill, add)
     if skill == 101 then arrayStatHero[1][4] = arrayStatHero[1][4] + 1; end;
     sumPrev = arrayStatHero[1][1] + arrayStatHero[1][2] + arrayStatHero[1][3] + arrayStatHero[1][4];
     sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
---    print(sumPrev);
---    print(sumNow);
     if (sumNow > (sumPrev + 1)) and (GetHeroLevel(hero) > arrayStatHero[1][5]) then
       arrayUpStat = { 0, 0, 0, 0, 0};
       for i = 1, 4 do
@@ -2482,7 +2171,6 @@ function ControlStatHero(hero, skill, add)
       end;
       ChangeHeroStat(hero, rnd, 1);
     end;
---    print(skill);
 
     if (sumNow > sumPrev) and (GetHeroLevel(hero) == arrayStatHero[1][5]) then
       ChangeHeroStat(hero, 1, arrayStatHero[1][1] - GetHeroStat(hero, 1));
@@ -2490,10 +2178,6 @@ function ControlStatHero(hero, skill, add)
       ChangeHeroStat(hero, 3, arrayStatHero[1][3] - GetHeroStat(hero, 3));
       ChangeHeroStat(hero, 4, arrayStatHero[1][4] - GetHeroStat(hero, 4));
     end;
---    sumNow1  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
---    print(sumNow);
---    print(GetHeroLevel(hero), probel, skill, probel,  arrayStatHero[1][1], probel,  arrayStatHero[1][2], probel,  arrayStatHero[1][3], probel,  arrayStatHero[1][4]);
---    print(GetHeroLevel(hero), probel, skill, probel, GetHeroStat(hero, 1), probel, GetHeroStat(hero, 2), probel, GetHeroStat(hero, 3), probel, GetHeroStat(hero, 4));
   end;
   if GetObjectOwner(hero) == 2 and add == 1 then
     if skill == 115 then arrayStatHero[2][1] = arrayStatHero[2][1] + 2; end;
@@ -2503,8 +2187,7 @@ function ControlStatHero(hero, skill, add)
     if skill == 101 then arrayStatHero[2][4] = arrayStatHero[2][4] + 1; end;
     sumPrev = arrayStatHero[2][1] + arrayStatHero[2][2] + arrayStatHero[2][3] + arrayStatHero[2][4];
     sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4));
---    print(sumPrev);
---    print(sumNow);
+
     if (sumNow > (sumPrev + 1)) and (GetHeroLevel(hero) > arrayStatHero[2][5]) then
       arrayUpStat = { 0, 0, 0, 0, 0};
       for i = 1, 4 do
@@ -2522,7 +2205,6 @@ function ControlStatHero(hero, skill, add)
       end;
       ChangeHeroStat(hero, rnd, 1);
     end;
---    print(skill);
 
     if (sumNow > sumPrev) and (GetHeroLevel(hero) == arrayStatHero[2][5]) then
       ChangeHeroStat(hero, 1, arrayStatHero[2][1] - GetHeroStat(hero, 1));
@@ -2530,10 +2212,6 @@ function ControlStatHero(hero, skill, add)
       ChangeHeroStat(hero, 3, arrayStatHero[2][3] - GetHeroStat(hero, 3));
       ChangeHeroStat(hero, 4, arrayStatHero[2][4] - GetHeroStat(hero, 4));
     end;
---    sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
---    print(sumNow);
---    print(GetHeroLevel(hero), probel, skill, probel,  arrayStatHero[2][1], probel,  arrayStatHero[2][2], probel,  arrayStatHero[2][3], probel,  arrayStatHero[2][4]);
---    print(GetHeroLevel(hero), probel, skill, probel, GetHeroStat(hero, 1), probel, GetHeroStat(hero, 2), probel, GetHeroStat(hero, 3), probel, GetHeroStat(hero, 4));
   end;
 
   if GetObjectOwner(hero) == 1 and add == 0 then
@@ -2667,13 +2345,6 @@ function ReturnSkill1(heroX)
   for i = 1, kol_perks_H1 do
     GiveHeroSkill(heroX, array_perks_H1[i]);
   end;
---  k = 0;
---  for i = 1, 189 do
---    if HasHeroSkill( heroX, array_perks[i]) then
---      k = k + 1;
---    end;
---  end;
---  while k < kol_perks_H1 do
     for i = 1, 5 do
       if HasHeroSkill( heroX, array_perks_H1[i]) == nil then
         GiveHeroSkill(heroX, array_perks_H1[i]);
@@ -2685,11 +2356,6 @@ function ReturnSkill1(heroX)
   ChangeHeroStat(heroX, STAT_DEFENCE, 5);
   ChangeHeroStat(heroX, STAT_SPELL_POWER, 5);
   ChangeHeroStat(heroX, STAT_KNOWLEDGE, 5);
-
---  ChangeHeroStat(heroX, STAT_ATTACK, attH1 - GetHeroStat(heroX, STAT_ATTACK));
---  ChangeHeroStat(heroX, STAT_DEFENCE, defH1 - GetHeroStat(heroX, STAT_DEFENCE));
---  ChangeHeroStat(heroX, STAT_SPELL_POWER, spH1 - GetHeroStat(heroX, STAT_SPELL_POWER));
---  ChangeHeroStat(heroX, STAT_KNOWLEDGE, knH1 - GetHeroStat(heroX, STAT_KNOWLEDGE));
 
   ChangeHeroStat(heroX, STAT_ATTACK, STARTattH1 - GetHeroStat(heroX, STAT_ATTACK) - DELTAattH1);
   ChangeHeroStat(heroX, STAT_DEFENCE, STARTdefH1 - GetHeroStat(heroX, STAT_DEFENCE) - DELTAdefH1);
@@ -2709,7 +2375,6 @@ function ReturnSkill1(heroX)
   LearningLvl1 = GetHeroSkillMastery(heroX, 3);
   ArrayStatHero(heroX);
   Trigger( HERO_ADD_SKILL_TRIGGER, heroX, 'MentorAddSkill1');
---15.03.20  DT_use1 = DT_use1prev;
 end;
 
 function ReturnSkill2(heroXX)
@@ -2756,29 +2421,15 @@ function ReturnSkill2(heroXX)
   for i = 1, kol_perks_H2 do
     GiveHeroSkill(heroXX, array_perks_H2[i]);
   end;
---  k = 0;
---  for i = 1, 189 do
---    if HasHeroSkill( heroXX, array_perks[i]) then
---      k = k + 1;
---    end;
---  end;
---  while k < kol_perks_H2 do
     for i = 1, 5 do
       if HasHeroSkill( heroXX, array_perks_H2[i]) == nil then
         GiveHeroSkill(heroXX, array_perks_H2[i]);
---        k = k + 1;
       end;
     end;
---  end;
   ChangeHeroStat(heroXX, STAT_ATTACK, 5);
   ChangeHeroStat(heroXX, STAT_DEFENCE, 5);
   ChangeHeroStat(heroXX, STAT_SPELL_POWER, 5);
   ChangeHeroStat(heroXX, STAT_KNOWLEDGE, 5);
-
---  ChangeHeroStat(heroX, STAT_ATTACK, attH1 - GetHeroStat(heroX, STAT_ATTACK));
---  ChangeHeroStat(heroX, STAT_DEFENCE, defH1 - GetHeroStat(heroX, STAT_DEFENCE));
---  ChangeHeroStat(heroX, STAT_SPELL_POWER, spH1 - GetHeroStat(heroX, STAT_SPELL_POWER));
---  ChangeHeroStat(heroX, STAT_KNOWLEDGE, knH1 - GetHeroStat(heroX, STAT_KNOWLEDGE));
 
   ChangeHeroStat(heroXX, STAT_ATTACK, STARTattH2 - GetHeroStat(heroXX, STAT_ATTACK) - DELTAattH2);
   ChangeHeroStat(heroXX, STAT_DEFENCE, STARTdefH2 - GetHeroStat(heroXX, STAT_DEFENCE) - DELTAdefH2);
@@ -2798,17 +2449,7 @@ function ReturnSkill2(heroXX)
   LearningLvl2 = GetHeroSkillMastery(heroXX, 3);
   ArrayStatHero(heroXX);
   Trigger( HERO_ADD_SKILL_TRIGGER, heroXX, 'MentorAddSkill2');
---15.03.20  DT_use2 = DT_use2prev;
 end;
-
-
-
-
-
-
-
-
-
 
 function ResetExp1()
 
@@ -2816,8 +2457,6 @@ function ResetExp1()
   if (GetPlayerResource( PLAYER_1, 6) >= ResetExpPrice1) then
     Trigger( HERO_REMOVE_SKILL_TRIGGER, heroReset1, 'RemoveSkill1');
     Trigger( HERO_ADD_SKILL_TRIGGER,    heroReset1, 'MentorAddSkill1');
-
---    ResetExpAndDelLearning1 = 1;
 
     j = 1;
     for i = 1, length(array_arts[0]) do
@@ -2854,7 +2493,6 @@ function ResetExp1()
     ArrayStatHero(heroReset1);
     ChangeHeroStat (heroReset1, STAT_EXPERIENCE, ExpHero);
     resetExpHero1 = 1;
---    ResetExpAndDelLearning1 = 0;
     SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - ResetExpPrice1));
     for i = 1, 7 do
       GiveArtefact   (heroReset1, artHero1[i]);
@@ -2871,8 +2509,6 @@ function ResetExp2()
   if (GetPlayerResource( PLAYER_2, 6) >= ResetExpPrice2) then
     Trigger( HERO_REMOVE_SKILL_TRIGGER, heroReset2, 'RemoveSkill2');
     Trigger( HERO_ADD_SKILL_TRIGGER,    heroReset2, 'MentorAddSkill2');
-
---    ResetExpAndDelLearning2 = 1;
 
     j = 1;
     for i = 1, length(array_arts[0]) do
@@ -2905,7 +2541,6 @@ function ResetExp2()
     ArrayStatHero(heroReset2);
     ChangeHeroStat (heroReset2, STAT_EXPERIENCE, ExpHero);
     resetExpHero2 = 1;
---    ResetExpAndDelLearning2 = 0;
     SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - ResetExpPrice2));
     for i = 1, 7 do
       GiveArtefact   (heroReset2, artHero2[i]);
@@ -2920,39 +2555,15 @@ end;
 function ReturnGold1(hero, skill)
   AddSkill1(hero, skill);
   SetPlayerResource( 1, GOLD, GoldPl1);
-  SetObjectEnabled('mentor1', nil);
   ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price1}, HeroMax1, 1, 5.0);
---  Trigger( OBJECT_TOUCH_TRIGGER, 'mentor1', 'mentor1price' );
 end;
 
 function ReturnGold2(hero, skill)
   AddSkill2(hero, skill);
   SetPlayerResource( 2, GOLD, GoldPl2);
-  SetObjectEnabled('mentor2', nil);
   ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price2}, HeroMax2, 2, 5.0);
---  Trigger( OBJECT_TOUCH_TRIGGER, 'mentor2', 'mentor2price' );
 end;
 
-
-function mentor1price(hero)
-  if price1 <= GetPlayerResource (PLAYER_1, GOLD) then
-    SetObjectEnabled('mentor1', true);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'mentor1', 'mentor1' );
-    MakeHeroInteractWithObject (hero, 'mentor1');
-  else
-    ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price1}, HeroMax1, 1, 2.0);
-  end;
-end;
-
-function mentor2price(hero)
-  if price2 <= GetPlayerResource (PLAYER_2, GOLD) then
-    SetObjectEnabled('mentor2', true);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'mentor2', 'mentor2' );
-    MakeHeroInteractWithObject (hero, 'mentor2');
-  else
-    ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price2}, HeroMax2, 2, 2.0);
-  end;
-end;
 
 --------------------------------- SPELL NABOR ----------------------------------
 
@@ -4039,10 +3650,6 @@ function MiniArts1()
     while pause1 == 0 do
       sleep(1);
     end;
-    -- холодная сталь
---    if (HasHeroSkill(HeroMax1, 104) or HasHeroSkill(HeroMax1, 82)) then
---      DublikatHero1( HeroMax1);
---    end;
     
     if Name(HeroMax1) == "Maahir" then DeltaRes = 15; else DeltaRes = 0; end;
     
@@ -4848,9 +4455,6 @@ function BlockBattleZone(race1, race2)
   if race1 == 6 or race2 == 6 then SetRegionBlocked ('land_block_race6', true); end;
   if race1 == 7 or race7 == 2 then SetRegionBlocked ('land_block_race7', true); end;
   if race1 == 8 or race2 == 8 then SetRegionBlocked ('land_block_race8', true); end;
-  --SetRegionBlocked ('land_block1', true);
-  --SetRegionBlocked ('land_block2', true);
-  --SetRegionBlocked ('land_block3', true);
 end
 
 
@@ -4890,9 +4494,6 @@ function newday ()
      BlockBattleZone(hero1race, hero2race)
      
      if HasHeroSkill(HeroMax1, 19) or HasHeroSkill(HeroMax2, 19) or Name(HeroMax1) == "Jazaz" or Name(HeroMax2) == "Jazaz" then
-       --SetRegionBlocked ('land_block1', false);
-       --SetRegionBlocked ('land_block2', false);
-       --SetRegionBlocked ('land_block3', false);
        SetRegionBlocked ('land_block_race1', false);
        SetRegionBlocked ('land_block_race2', false);
        SetRegionBlocked ('land_block_race3', false);
@@ -4907,36 +4508,9 @@ function newday ()
 
      startThread (DayFour2);
      startThread (DayFour1);
-     
-
-     -- Орнелла
---     if HeroMax1 == "OrnellaNecro" or HeroMax1 == "OrnellaNecro2" then SpecOrnella(HeroMax1); end;
---     if HeroMax2 == "OrnellaNecro" or HeroMax2 == "OrnellaNecro2" then SpecOrnella(HeroMax2); end;
-
-     -- дипломатия
---     if (HasHeroSkill(HeroMax1, 30)) and GetHeroSkillMastery(HeroMax1, SKILL_NECROMANCY) == 0 and DiplomacyEnable1 == 0 then diplomacy1(HeroMax1); end;
---     if (HasHeroSkill(HeroMax2, 30)) and GetHeroSkillMastery(HeroMax2, SKILL_NECROMANCY) == 0 and DiplomacyEnable2 == 0 then diplomacy2(HeroMax2); end;
-
---     sleep(1);
-     -- некромантия
---     if hero1race == 3 then NecroBonus1(HeroMax1); end;
---     if hero2race == 3 then NecroBonus2(HeroMax2); end;
-
-     -- мститель
---     if hero1race == 4 then Trigger (OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN1', 'Avenger1'); MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Avenger.txt" ); startThread (AutoTeleportBattleZone1); ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax2, 2, 5.0); end;
---     if hero2race == 4 then Trigger (OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN2', 'Avenger2'); MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Avenger.txt" ); startThread (AutoTeleportBattleZone2); ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax1, 1, 5.0); end;
   end;
 
   if GetDate (DAY) == 5 then
-
-     -- покровительство асхи (неделя наставника)
---     if (HasHeroSkill(HeroMax1, 80)) and GetCurrentMoonWeek() == 23 then GraalVision(HeroMax1, hero1race); end;
---     if (HasHeroSkill(HeroMax2, 80)) and GetCurrentMoonWeek() == 23 then GraalVision(HeroMax2, hero2race); end;
-
-     -- холодная сталь
-     --if (HasHeroSkill(HeroMax1, 104) or HasHeroSkill(HeroMax1, 82)) and (hero1race ~= 4 and hero1race ~= 5) and Name(HeroMax1) ~= "RedHeavenHero03" and Name(HeroMax1) ~= "RedHeavenHero033" and Name(HeroMax1) ~= "Brem" and Name(HeroMax1) ~= "Brem3" then DublikatHero1( HeroMax1); end;
-     --if (HasHeroSkill(HeroMax2, 104) or HasHeroSkill(HeroMax2, 82)) and (hero2race ~= 4 and hero2race ~= 5) and Name(HeroMax2) ~= "RedHeavenHero03" and Name(HeroMax2) ~= "RedHeavenHero033" and Name(HeroMax2) ~= "Brem" and Name(HeroMax2) ~= "Brem3" then DublikatHero2( HeroMax2); end;
-
      -- менторство
      if (HasHeroSkill(HeroMax1, 169)) then ChangeLevel(HeroMax1, 8); if Name(HeroMax1) == "Una" then SpecInga1(); end; end;
      if (HasHeroSkill(HeroMax2, 169)) then ChangeLevel(HeroMax2, 8); if Name(HeroMax2) == "Una" then SpecInga2(); end; end;
@@ -4955,14 +4529,6 @@ function newday ()
      -- тюрбан просвещенности
      if HasArtefact(HeroMax1, 34, 1) then ChangeLevel(HeroMax1, 6); end;
      if HasArtefact(HeroMax2, 34, 1) then ChangeLevel(HeroMax2, 6); end;
-
-     -- кольчуга просвещенности
---     if HasArtefact(HeroMax1, 35, 1) then ChangeLevel(HeroMax1, 8); end;
---     if HasArtefact(HeroMax2, 35, 1) then ChangeLevel(HeroMax2, 8); end;
-
-     -- одеяние просвещения
---     if HasArtefact(HeroMax1, 34, 1) and HasArtefact(HeroMax1, 35, 1) then ChangeLevel(HeroMax2, -3); end;
---     if HasArtefact(HeroMax2, 34, 1) and HasArtefact(HeroMax2, 35, 1) then ChangeLevel(HeroMax1, -3); end;
      
      -- корона лидерства
      if HasArtefact(HeroMax1, 88, 1) then CrownLeader(HeroMax1); end;
@@ -4983,11 +4549,6 @@ function newday ()
 
      if (HeroMax2 == "Shadwyn" or HeroMax2 == "Shadwyn2") and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) == 3 then SubHero(HeroMax2, "Shadwyn4"); HeroMax2 = "Shadwyn4"; sleep(3); end;
      if (HeroMax2 == "Shadwyn" or HeroMax2 == "Shadwyn2") and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) < 3 and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no'); GiveHeroSkill(HeroMax2, SKILL_INVOCATION); end;
-
-
-     -- Золтан
---     if (HeroMax1 == "Aberrar" or HeroMax1 == "Aberrar2") and GetHeroSkillMastery(HeroMax1, SKILL_DARK_MAGIC) == 3 then SubHero(HeroMax1, "Aberrar3"); HeroMax1 = "Aberrar3"; end;
---     if (HeroMax2 == "Aberrar" or HeroMax2 == "Aberrar2") and GetHeroSkillMastery(HeroMax2, SKILL_DARK_MAGIC) == 3 then SubHero(HeroMax2, "Aberrar4"); HeroMax2 = "Aberrar4"; end;
 
      -- Киган
      if Name(HeroMax1) == "Hero9" then
@@ -5020,9 +4581,6 @@ function newday ()
      end;
 
      ------------- УМЕНИЯ ---------------
-
-
-
 
      -- сбор войск
      if (HasHeroSkill(HeroMax1, 28)) then recruitment1(HeroMax1); end;
@@ -8728,9 +8286,7 @@ function napPlus1(hero)
   if stat1 == 0 then MakeHeroInteractWithObject (hero_1, 'napadenie1'); else MakeHeroInteractWithObject (hero_1, 'dolm1'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'napadenie1', 'nap1' );
   SetObjectEnabled('napadenie1', nil);
---  ChangeHeroStat(hero_1, 1, 1);
   SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."nap_plus1.txt", 'napadenie1', 1, 2.0);
   stat1 = stat1 + 1;
   statA1 = statA1 + 1;
   if stat1 < 2 then SetObjectEnabled('napadenie1', nil); end;
@@ -8753,9 +8309,7 @@ function defPlus1(hero)
   if stat1 == 0 then MakeHeroInteractWithObject (hero_1, 'zashchita1'); else MakeHeroInteractWithObject (hero_1, 'dolm2'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'zashchita1', 'def1' );
   SetObjectEnabled('zashchita1', nil);
---  ChangeHeroStat(hero_1, 2, 1);
   SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."def_plus1.txt", 'zashchita1', 1, 2.0);
   stat1 = stat1 + 1;
   statD1 = statD1 + 1;
   if stat1 < 2 then SetObjectEnabled('zashchita1', nil); end;
@@ -8778,9 +8332,7 @@ function koldPlus1(hero)
   if stat1 == 0 then MakeHeroInteractWithObject (hero_1, 'koldovstvo1'); else MakeHeroInteractWithObject (hero_1, 'dolm3'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'koldovstvo1', 'kold1' );
   SetObjectEnabled('koldovstvo1', nil);
---  ChangeHeroStat(hero_1, 3, 1);
   SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."kold_plus1.txt", 'koldovstvo1', 1, 2.0);
   stat1 = stat1 + 1;
   statS1 = statS1 + 1;
   if stat1 < 2 then SetObjectEnabled('koldovstvo1', nil); end;
@@ -8803,9 +8355,7 @@ function znPlus1(hero)
   if stat1 == 0 then MakeHeroInteractWithObject (hero_1, 'znanie1'); else MakeHeroInteractWithObject (hero_1, 'dolm4'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'znanie1', 'zn1' );
   SetObjectEnabled('znanie1', nil);
---  ChangeHeroStat(hero_1, 4, 1);
   SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."zn_plus1.txt", 'znanie1', 1, 2.0);
   stat1 = stat1 + 1;
   statK1 = statK1 + 1;
   if stat1 < 2 then SetObjectEnabled('znanie1', nil); end;
@@ -8830,9 +8380,7 @@ function napPlus2(hero)
   if stat2 == 0 then MakeHeroInteractWithObject (hero_2, 'napadenie2'); else MakeHeroInteractWithObject (hero_2, 'dolm1'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'napadenie2', 'nap2' );
   SetObjectEnabled('napadenie2', nil);
---  ChangeHeroStat(hero_2, 1, 1);
   SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."nap_plus1.txt", 'napadenie2', 2, 2.0);
   stat2 = stat2 + 1;
   statA2 = statA2 + 1;
   if stat2 < 2 then SetObjectEnabled('napadenie2', nil); end;
@@ -8855,9 +8403,7 @@ function defPlus2(hero)
   if stat2 == 0 then MakeHeroInteractWithObject (hero_2, 'zashchita2'); else MakeHeroInteractWithObject (hero_2, 'dolm2'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'zashchita2', 'def2' );
   SetObjectEnabled('zashchita2', nil);
---  ChangeHeroStat(hero_2, 2, 1);
   SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."def_plus1.txt", 'zashchita2', 2, 2.0);
   stat2 = stat2 + 1;
   statD2 = statD2 + 1;
   if stat2 < 2 then SetObjectEnabled('zashchita2', nil); end;
@@ -8880,9 +8426,7 @@ function koldPlus2(hero)
   if stat2 == 0 then MakeHeroInteractWithObject (hero_2, 'koldovstvo2'); else MakeHeroInteractWithObject (hero_2, 'dolm3'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'koldovstvo2', 'kold2' );
   SetObjectEnabled('koldovstvo2', nil);
---  ChangeHeroStat(hero_2, 3, 1);
   SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."kold_plus1.txt", 'koldovstvo2', 2, 2.0);
   stat2 = stat2 + 1;
   statS2 = statS2 + 1;
   if stat2 < 2 then SetObjectEnabled('koldovstvo2', nil); end;
@@ -8905,9 +8449,7 @@ function znPlus2(hero)
   if stat2 == 0 then MakeHeroInteractWithObject (hero_2, 'znanie2'); else MakeHeroInteractWithObject (hero_2, 'dolm4'); end;
   Trigger( OBJECT_TOUCH_TRIGGER, 'znanie2', 'zn2' );
   SetObjectEnabled('znanie2', nil);
---  ChangeHeroStat(hero_2, 4, 1);
   SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) -  2500));
---  ShowFlyingSign(GetMapDataPath().."zn_plus1.txt", 'znanie2', 2, 2.0);
   stat2 = stat2 + 1;
   statK2 = statK2 + 1;
   if stat2 < 2 then SetObjectEnabled('znanie2', nil); end;
@@ -8947,9 +8489,7 @@ function AutoSave()
   while GetDate (DAY) == 2 or GetDate (DAY) == 3 do
     sleep (100);
     i1 = i1 + 1;
---    if i1 == 3 then Load('AutoSave'); sleep(10); end;
     Save(GetMapDataPath().."AutoSave");
---    Save('AutoSave');
   end;
 end;
 
@@ -8981,9 +8521,7 @@ Trigger( OBJECT_TOUCH_TRIGGER, 'znanie2', 'zn2' );
 Trigger( OBJECT_TOUCH_TRIGGER, 'port1', 'TeleportStartZone1' ); SetObjectEnabled('port1', nil); SetDisabledObjectMode('port1', 2);
 Trigger( OBJECT_TOUCH_TRIGGER, 'port2', 'TeleportStartZone2' ); SetObjectEnabled('port2', nil); SetDisabledObjectMode('port2', 2);
 
---SetObjectEnabled ('whirlpool1', nil);
 Trigger( OBJECT_TOUCH_TRIGGER, 'boat4', 'BoatMove' );
-
 
 -- Opisaniya
 
@@ -8997,26 +8535,8 @@ OverrideObjectTooltipNameAndDescription ('stat1', GetMapDataPath().."regenStatNA
 OverrideObjectTooltipNameAndDescription ('stat2', GetMapDataPath().."regenStatNAME.txt", GetMapDataPath().."regenStatDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('skill1', GetMapDataPath().."buyskillNAME.txt", GetMapDataPath().."buyskillDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('skill2', GetMapDataPath().."buyskillNAME.txt", GetMapDataPath().."buyskillDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('derevo', GetMapDataPath().."derevoNAME.txt", GetMapDataPath().."derevoDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('higina', GetMapDataPath().."higinaNAME.txt", GetMapDataPath().."higinaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('arena', GetMapDataPath().."arenaNAME.txt", GetMapDataPath().."arenaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('hram', GetMapDataPath().."hramNAME.txt", GetMapDataPath().."hramDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('rune', GetMapDataPath().."runeNAME.txt", GetMapDataPath().."runeDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('gorgul', GetMapDataPath().."gorgulNAME.txt", GetMapDataPath().."gorgulDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('heops', GetMapDataPath().."heopsNAME.txt", GetMapDataPath().."heopsDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('treasure', GetMapDataPath().."treasureNAME.txt", GetMapDataPath().."treasureDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('gertva', GetMapDataPath().."gertvaNAME.txt", GetMapDataPath().."gertvaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('magiya', GetMapDataPath().."arenaNAME.txt", GetMapDataPath().."arenaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('utopa', GetMapDataPath().."utopaNAME.txt", GetMapDataPath().."utopaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('obelisk', GetMapDataPath().."obeliskNAME.txt", GetMapDataPath().."obeliskDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('academy', GetMapDataPath().."academyNAME.txt", GetMapDataPath().."academyDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('gizn', GetMapDataPath().."giznNAME.txt", GetMapDataPath().."giznDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('sklep', GetMapDataPath().."sklepNAME.txt", GetMapDataPath().."sklepDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mogila', GetMapDataPath().."mogilaNAME.txt", GetMapDataPath().."mogilaDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('oko1', GetMapDataPath().."notext.txt", GetMapDataPath().."notext.txt");
 OverrideObjectTooltipNameAndDescription ('oko2', GetMapDataPath().."notext.txt", GetMapDataPath().."notext.txt");
---OverrideObjectTooltipNameAndDescription ('magehelp1', GetMapDataPath().."magehelp1NAME.txt", GetMapDataPath().."magehelp1DSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('magehelp2', GetMapDataPath().."magehelp2NAME.txt", GetMapDataPath().."magehelp2DSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('napadenie1', GetMapDataPath().."napadenieNAME.txt", GetMapDataPath().."NapadeniePlus1.txt");
 OverrideObjectTooltipNameAndDescription ('zashchita1', GetMapDataPath().."zashchitaNAME.txt", GetMapDataPath().."zashchitaPlus1.txt");
 OverrideObjectTooltipNameAndDescription ('koldovstvo1', GetMapDataPath().."koldovstvoNAME.txt", GetMapDataPath().."koldovstvoPlus1.txt");
@@ -9025,72 +8545,11 @@ OverrideObjectTooltipNameAndDescription ('napadenie2', GetMapDataPath().."napade
 OverrideObjectTooltipNameAndDescription ('zashchita2', GetMapDataPath().."zashchitaNAME.txt", GetMapDataPath().."zashchitaPlus1.txt");
 OverrideObjectTooltipNameAndDescription ('koldovstvo2', GetMapDataPath().."koldovstvoNAME.txt", GetMapDataPath().."koldovstvoPlus1.txt");
 OverrideObjectTooltipNameAndDescription ('znanie2', GetMapDataPath().."znanieNAME.txt", GetMapDataPath().."znaniePlus1.txt");
---OverrideObjectTooltipNameAndDescription ('loga1', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga2', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga3', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga4', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga5', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga6', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga7', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga8', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga9', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga10', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga11', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga12', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga13', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga14', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga15', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga16', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga17', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('loga18', GetMapDataPath().."logaNAME.txt", GetMapDataPath().."logaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mumiya', GetMapDataPath().."mumiya.txt", GetMapDataPath().."mumiyaDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor11', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor12', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor13', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor14', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor15', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor16', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor17', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor18', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor21', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor22', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor23', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor24', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor25', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor26', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor27', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('mentor28', GetMapDataPath().."mentorNAME.txt", GetMapDataPath().."mentorDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('bandit_map', GetMapDataPath().."banditNAME.txt", GetMapDataPath().."bandit_mapDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('mostovik_map', GetMapDataPath().."mostovikNAME.txt", GetMapDataPath().."mostovik_mapDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('vsev_map', GetMapDataPath().."vsevNAME.txt", GetMapDataPath().."vsev_mapDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('tari_map', GetMapDataPath().."tariNAME.txt", GetMapDataPath().."tari_mapDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('bandit', GetMapDataPath().."banditNAME.txt", GetMapDataPath().."banditDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('zilo', GetMapDataPath().."ziloNAME.txt", GetMapDataPath().."ziloDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('hustred', GetMapDataPath().."hustredNAME.txt", GetMapDataPath().."hustredDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('valery', GetMapDataPath().."valeryNAME.txt", GetMapDataPath().."valeryDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('kartofun', GetMapDataPath().."kartofunNAME.txt", GetMapDataPath().."kartofunDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('lionup', GetMapDataPath().."lionupNAME.txt", GetMapDataPath().."lionupDSCRP.txt");
---OverrideObjectTooltipNameAndDescription ('champion', GetMapDataPath().."championNAME.txt", GetMapDataPath().."championDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('bonus1', GetMapDataPath().."bonusNAME.txt", GetMapDataPath().."bon.txt");
 OverrideObjectTooltipNameAndDescription ('bonus2', GetMapDataPath().."bonusNAME.txt", GetMapDataPath().."bon.txt");
-
---startThread (SilaStihii1(HeroDop1));
-
-
---sleep(50)
---InitCombatExecThread(heroes1[1])
---sleep(5)
---SaveHeroesInfoBeforeCombat{heroes1[1], heroes2[1]}
---sleep(5)
-
---startThread(RTA_CommonSetCombatScriptThread)
-
---MakeHeroInteractWithObject (heroes1[1], heroes2[1])
-
---skill31hero1 = 1;
-
---sleep(10)
-
---SetGameVar("skill31hero1", "4")
 
 end;

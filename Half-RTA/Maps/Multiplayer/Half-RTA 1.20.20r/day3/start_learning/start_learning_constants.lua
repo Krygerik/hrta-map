@@ -171,3 +171,9 @@ MAP_SKILLS_TO_CHANGING_STATS = {
 
 -- —писок всех основных статистик
 ALL_MAIN_STATS_LIST = { STAT_ATTACK, STAT_DEFENCE, STAT_SPELL_POWER, STAT_KNOWLEDGE };
+
+--  оличество дешевых скидок дл€ обоих игроков на 1 уровне
+PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS = {
+  [PLAYER_1] = 2,
+  [PLAYER_2] = 2,
+};

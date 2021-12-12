@@ -34,6 +34,20 @@ function start_learning_script()
   print "start_learning_script"
   
   setLearningTriggers();
+  setMentorTriggers();
+end;
+
+-- Установка триггеров для обучения героя
+function setMentorTriggers()
+  print "setMentorTriggers"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local heroes = RESULT_HERO_LIST[playerId].heroes;
+    
+    for _, heroName in heroes do
+      Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
+    end;
+  end;
 end;
 
 -- Установка триггеров для обучения героя
@@ -179,8 +193,15 @@ end;
 -- Обработчик потери героем нового навыка
 function handleHeroRemoveSkill(triggerHero, skill)
   print "handleHeroRemoveSkill"
-  
+
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  
+  mentorCashback(playerId);
+
+  -- Если не выбран главный герой, не производим никаких внутренних расчетов
+  if PLAYERS_MAIN_HERO_PROPS[playerId].name == nil then
+    return nil;
+  end;
 
   local change = MAP_SKILLS_TO_CHANGING_STATS[skill];
   
@@ -195,11 +216,49 @@ function handleHeroRemoveSkill(triggerHero, skill)
   end;
 end;
 
+-- Возврат ментором средств при сброске навыков
+function mentorCashback(playerId)
+  print "mentorCashback"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local currentCountFirstLeveDiscount = PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS[playerId];
+  
+  -- Если у игрока не вкачан ни один герой, даем ему 2 сброски по 500 монет
+  if mainHeroName == nil then
+    -- сброски по умолчанию равны 500
+    if currentCountFirstLeveDiscount > 0 then
+
+      PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS[playerId] = currentCountFirstLeveDiscount - 1;
+
+      return nil;
+    end;
+    
+    -- После окончания дешевых сбросок, устанавливаем обычную цену
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) -  2000));
+    
+    return nil;
+  end;
+  
+  local mainHeroLevel = GetHeroLevel(mainHeroName);
+  
+  -- Если герой наполовину прокачан - отнимаем столько, чтобы суммарно получалось 2500
+  if mainHeroLevel == HALF_FREE_LEARNING_LEVEL then
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) -  1000));
+    
+    return nil;
+  end;
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skill)
   print "handleHeroAddSkill"
   
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  
+  -- Если не выбран главный герой, не производим никаких внутренних расчетов
+  if PLAYERS_MAIN_HERO_PROPS[playerId].name == nil then
+    return nil;
+  end;
 
   local change = MAP_SKILLS_TO_CHANGING_STATS[skill];
 
