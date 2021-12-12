@@ -35,6 +35,125 @@ function start_learning_script()
   
   setLearningTriggers();
   setMentorTriggers();
+  setBuySkillTriggers();
+end;
+
+-- Установка триггеров на покупку базы
+function setBuySkillTriggers()
+  print "setBuySkillTriggers"
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    SetObjectEnabled(BUY_SKILL_OBJECTS_NAME[playerId], nil);
+    OverrideObjectTooltipNameAndDescription(
+      BUY_SKILL_OBJECTS_NAME[playerId],
+      PATH_TO_START_LEARNING_MESSAGES..'buy_skill_name.txt',
+      PATH_TO_START_LEARNING_MESSAGES..'buy_skill_description.txt'
+    );
+    Trigger(OBJECT_TOUCH_TRIGGER, BUY_SKILL_OBJECTS_NAME[playerId], 'handleTouchBuySkill');
+  end;
+end;
+
+-- Получение текущей стоимости покупки навыка
+function getPriceBuySkill(playerId)
+  print "getPriceBuySkill"
+
+  local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  -- на старте прокачки
+  if playerMainHeroName == nil then
+    return 8000;
+  end;
+  
+  -- если герой уже прокачан
+  return 5000;
+end;
+
+-- Возвращает статус, что герой уже имеет максимум навыков
+function getIsHeroHasMaximumCountSkills(heroName)
+  print "getIsHeroHasMaximumCountSkills"
+  
+  local countSkills = 0;
+  
+  for _, skillId in ALL_NOT_RACES_SKILL_LIST do
+    if GetHeroSkillMastery(heroName, skillId) > 0 then
+      countSkills = countSkills + 1;
+    end;
+  end;
+  
+  return countSkills == 6;
+end;
+
+-- Обработчик взаимодействия с алтарем для покупки базы
+function handleTouchBuySkill(triggerHero)
+  print "handleTouchBuySkill"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local priceBuySkill = getPriceBuySkill(playerId);
+  
+  if getIsHeroHasMaximumCountSkills(triggerHero) then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."has_maximum_skills.txt");
+
+    return nil;
+  end;
+  
+  if GetPlayerResource(playerId, GOLD) < priceBuySkill then
+    MessageBoxForPlayers(
+      playerId,
+      {PATH_TO_START_LEARNING_MESSAGES.."not_enough_n_gold.txt"; eq=priceBuySkill}
+    );
+
+    return nil;
+  end;
+  
+  questionBuySkill(triggerHero, priceBuySkill, 1);
+end;
+
+-- Вопрос на покупку уровня
+function questionBuySkill(heroName, priceStr, skillIndexStr)
+  print "questionBuySkill"
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  -- Приведение приходящей строки к числу
+  local price = priceStr + 0;
+  local skillIndex = skillIndexStr + 0;
+  
+  local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
+  
+  -- Если предложили уже все варианты
+  if skillIndex > length(ALLOW_BUY_SKILL_LIST_BY_RACE[playerRaceId]) then
+    return nil;
+  end;
+  
+  local offerSkillId = ALLOW_BUY_SKILL_LIST_BY_RACE[playerRaceId][skillIndex];
+
+  -- Если герой уже имеет данную базу - предлагаем следующую
+  if GetHeroSkillMastery(heroName, offerSkillId) > 0 then
+    questionBuySkill(heroName, price, skillIndex + 1);
+
+    return nil;
+  end;
+
+  QuestionBoxForPlayers(
+    playerId,
+    { PATH_TO_START_LEARNING_MESSAGES..BUY_SKILL_QUESTIONS[offerSkillId]; eq = price },
+    'addHeroOfferSkill("'..heroName..'", "'..offerSkillId..'", "'..price..'")',
+    'questionBuySkill("'..heroName..'", "'..price..'", "'..(skillIndex + 1)..'")'
+  );
+end;
+
+-- Добавляем герою купленный навык
+function addHeroOfferSkill(heroName, skillIdStr, priceStr)
+  print "addHeroOfferSkill"
+
+  local skillId = skillIdStr + 0;
+  local price = priceStr + 0;
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+
+  GiveHeroSkill(heroName, skillIdStr);
+  Trigger(OBJECT_TOUCH_TRIGGER, BUY_SKILL_OBJECTS_NAME[playerId], 'noop');
+  SetPlayerResource(playerId, GOLD, (GetPlayerResource (playerId, GOLD) - price));
 end;
 
 -- Установка триггеров для обучения героя

@@ -177,3 +177,122 @@ PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS = {
   [PLAYER_1] = 2,
   [PLAYER_2] = 2,
 };
+
+-- Список объектов, в которых можно купить базы
+BUY_SKILL_OBJECTS_NAME = {
+  [PLAYER_1] = 'skill1',
+  [PLAYER_2] = 'skill2',
+};
+
+-- Список всех возможных не расовых скиллов
+ALL_NOT_RACES_SKILL_LIST = {
+  SKILL_LOGISTICS,
+  SKILL_WAR_MACHINES,
+  SKILL_LEARNING,
+  SKILL_LEADERSHIP,
+  SKILL_LUCK,
+  SKILL_OFFENCE,
+  SKILL_DEFENCE,
+  SKILL_SORCERY,
+  SKILL_DESTRUCTIVE_MAGIC,
+  SKILL_DARK_MAGIC,
+  SKILL_LIGHT_MAGIC,
+  SKILL_SUMMONING_MAGIC,
+};
+
+-- Сопоставление вопросов для покупки к навыкам
+BUY_SKILL_QUESTIONS = {
+  [SKILL_LOGISTICS] = "question_buy_logistic.txt",
+  [SKILL_WAR_MACHINES] = "question_buy_war_machines.txt",
+  [SKILL_LEARNING] = "question_buy_learning.txt",
+  [SKILL_LEADERSHIP] = "question_buy_leadership.txt",
+  [SKILL_LUCK] = "question_buy_luck.txt",
+  [SKILL_OFFENCE] = "question_buy_offence.txt",
+  [SKILL_DEFENCE] = "question_buy_deffence.txt",
+  [SKILL_SORCERY] = "question_buy_sorcery.txt",
+  [SKILL_DESTRUCTIVE_MAGIC] = "question_buy_destructive_magic.txt",
+  [SKILL_DARK_MAGIC] = "question_buy_dark.txt",
+  [SKILL_LIGHT_MAGIC] = "question_buy_light_magic.txt",
+  [SKILL_SUMMONING_MAGIC] = "question_buy_summoning_magic.txt",
+};
+
+-- Список разрешенных для покупки навыков по расам
+ALLOW_BUY_SKILL_LIST_BY_RACE = {
+  [RACES.HAVEN] = {
+    SKILL_LOGISTICS,
+    SKILL_WAR_MACHINES,
+    SKILL_LEADERSHIP,
+    SKILL_LUCK,
+    SKILL_OFFENCE,
+    SKILL_DEFENCE,
+    SKILL_DARK_MAGIC,
+    SKILL_LIGHT_MAGIC,
+  },
+  [RACES.INFERNO] = {
+    SKILL_LOGISTICS,
+    SKILL_WAR_MACHINES,
+    SKILL_LUCK,
+    SKILL_OFFENCE,
+    SKILL_DEFENCE,
+    SKILL_SORCERY,
+    SKILL_DARK_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+  },
+  [RACES.NECROPOLIS] = {
+    SKILL_LOGISTICS,
+    SKILL_LEARNING,
+    SKILL_OFFENCE,
+    SKILL_DEFENCE,
+    SKILL_SORCERY,
+    SKILL_DARK_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+    SKILL_SUMMONING_MAGIC,
+  },
+  [RACES.SYLVAN] = {
+    SKILL_LOGISTICS,
+    SKILL_LEARNING,
+    SKILL_LEADERSHIP,
+    SKILL_DEFENCE,
+    SKILL_LUCK,
+    SKILL_LIGHT_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+  },
+  [RACES.ACADEMY] = {
+    SKILL_WAR_MACHINES,
+    SKILL_LEARNING,
+    SKILL_LUCK,
+    SKILL_SORCERY,
+    SKILL_LIGHT_MAGIC,
+    SKILL_DARK_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+    SKILL_SUMMONING_MAGIC,
+  },
+  [RACES.DUNGEON] = {
+    SKILL_LOGISTICS,
+    SKILL_WAR_MACHINES,
+    SKILL_LEARNING,
+    SKILL_LUCK,
+    SKILL_OFFENCE,
+    SKILL_SORCERY,
+    SKILL_DESTRUCTIVE_MAGIC,
+    SKILL_SUMMONING_MAGIC,
+  },
+  [RACES.FORTRESS] = {
+    SKILL_WAR_MACHINES,
+    SKILL_LEARNING,
+    SKILL_LEADERSHIP,
+    SKILL_LUCK,
+    SKILL_OFFENCE,
+    SKILL_DEFENCE,
+    SKILL_LIGHT_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+  },
+  [RACES.STRONGHOLD] = {
+    SKILL_LOGISTICS,
+    SKILL_WAR_MACHINES,
+    SKILL_LEADERSHIP,
+    SKILL_LUCK,
+    SKILL_OFFENCE,
+    SKILL_DEFENCE,
+  },
+};

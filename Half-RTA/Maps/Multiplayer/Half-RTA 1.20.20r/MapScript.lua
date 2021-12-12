@@ -4205,179 +4205,6 @@ function DeletePerk(hero, perk)
   sleep(2);
 end;
 
-SetObjectEnabled('skill1', nil);
-SetObjectEnabled('skill2', nil);
-Trigger( OBJECT_TOUCH_TRIGGER, 'skill1', 'PreBuySkill1' );
-Trigger( OBJECT_TOUCH_TRIGGER, 'skill2', 'PreBuySkill2' );
-
-array_SkillForBuy = {};
-array_SkillForBuy[0] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  4,  ["text"] = "BuyLeadership.txt"  },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    },
-    { ["ID"] = 10,  ["text"] = "BuyDark.txt"        },
-    { ["ID"] = 11,  ["text"] = "BuyLight.txt"       } }
-array_SkillForBuy[1] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    },
-    { ["ID"] =  8,  ["text"] = "BuySorcery.txt"     },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 10,  ["text"] = "BuyDark.txt"        } }
-array_SkillForBuy[2] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  3,  ["text"] = "BuyLearning.txt"    },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    },
-    { ["ID"] =  8,  ["text"] = "BuySorcery.txt"     },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 10,  ["text"] = "BuyDark.txt"        },
-    { ["ID"] = 12,  ["text"] = "BuySummoning.txt"   } }
-array_SkillForBuy[3] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  3,  ["text"] = "BuyLearning.txt"    },
-    { ["ID"] =  4,  ["text"] = "BuyLeadership.txt"  },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 11,  ["text"] = "BuyLight.txt"       } }
-array_SkillForBuy[4] = {
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  3,  ["text"] = "BuyLearning.txt"    },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  8,  ["text"] = "BuySorcery.txt"     },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 10,  ["text"] = "BuyDark.txt"        },
-    { ["ID"] = 11,  ["text"] = "BuyLight.txt"       },
-    { ["ID"] = 12,  ["text"] = "BuySummoning.txt"   } }
-array_SkillForBuy[5] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  3,  ["text"] = "BuyLearning.txt"    },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  8,  ["text"] = "BuySorcery.txt"     },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 12,  ["text"] = "BuySummoning.txt"   } }
-array_SkillForBuy[6] = {
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  3,  ["text"] = "BuyLearning.txt"    },
-    { ["ID"] =  4,  ["text"] = "BuyLeadership.txt"  },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    },
-    { ["ID"] =  9,  ["text"] = "BuyDestructive.txt" },
-    { ["ID"] = 11,  ["text"] = "BuyLight.txt"       } }
-array_SkillForBuy[7] = {
-    { ["ID"] =  1,  ["text"] = "BuyLogistics.txt"   },
-    { ["ID"] =  2,  ["text"] = "BuyMachines.txt"    },
-    { ["ID"] =  4,  ["text"] = "BuyLeadership.txt"  },
-    { ["ID"] =  5,  ["text"] = "BuyLuck.txt"        },
-    { ["ID"] =  6,  ["text"] = "BuyOffence.txt"     },
-    { ["ID"] =  7,  ["text"] = "BuyDeffence.txt"    } }
-
-
-scorer1 = 0;
-scorer2 = 0;
-
-function PreBuySkill1(hero)
-  heroBS1 = hero;
-  ArrayStatHero(heroBS1);
-  scorerSkill1 = 0;
-  if GetHeroStat(hero, STAT_EXPERIENCE) < 2000 then SkillCostCurrent1 = SkillCostStart else SkillCostCurrent1 = SkillCost end;
-  for i = 1, 12 do
-    if GetHeroSkillMastery (hero, i) > 0 then
-      scorerSkill1 = scorerSkill1 + 1;
-    end;
-  end;
-  if GetPlayerResource(PLAYER_1, GOLD) >= SkillCostCurrent1 and scorerSkill1 < 5 then
-    BuySkill1();
-  else
-    if scorerSkill1 < 5 then
-      MessageBoxForPlayers (GetPlayerFilter (PLAYER_1), {GetMapDataPath().."no_money.txt"; eq = SkillCostCurrent1});
-    else
-      MessageBoxForPlayers (GetPlayerFilter (PLAYER_1), GetMapDataPath().."MaxSkill.txt");
-    end;
-  end;
-end;
-
-function BuySkill1()
-  race = getrace(heroBS1);
-  scorer1 = scorer1 + 1;
-  if scorer1 <= length(array_SkillForBuy[race - 1]) then
-    if GetHeroSkillMastery (heroBS1, array_SkillForBuy[race - 1][scorer1].ID) < 1 then
-      QuestionBoxForPlayers (GetPlayerFilter (PLAYER_1), {GetMapDataPath()..array_SkillForBuy[race - 1][scorer1].text; eq = SkillCostCurrent1}, 'BuySkillReady1', 'BuySkill1');
-    else
-      BuySkill1();
-    end;
-  else
-    scorer1 = 0;
-  end;
-end;
-
-function BuySkillReady1()
-  if GenerateLearningEnable1 == 0 then GenerateStatLearning1(heroBS1); end;
-  GiveHeroSkill(heroBS1, array_SkillForBuy[getrace(heroBS1) - 1][scorer1].ID);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'skill1', 'no' );
-  SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - SkillCostCurrent1));
-  ChangeLevel(heroBS1, 1);
-  sleep(1);
-  if array_SkillForBuy[getrace(heroBS1) - 1][scorer1].ID ~= 3 then UpHeroStat(heroBS1); end;
-  PerkSum1 = PerkSum1 + 1;
-end;
-
-function PreBuySkill2(hero)
-  heroBS2 = hero;
-  ArrayStatHero(heroBS2);
-  scorerSkill2 = 0;
-  if GetHeroStat(hero, STAT_EXPERIENCE) < 2000 then SkillCostCurrent2 = SkillCostStart else SkillCostCurrent2 = SkillCost end;
-  for i = 1, 12 do
-    if GetHeroSkillMastery (hero, i) > 0 then
-      scorerSkill2 = scorerSkill2 + 1;
-    end;
-  end;
-  if GetPlayerResource(PLAYER_2, GOLD) >= SkillCostCurrent2 and scorerSkill2 < 5 then
-    BuySkill2();
-  else
-    if scorerSkill2 < 5 then
-      MessageBoxForPlayers (GetPlayerFilter (PLAYER_2), {GetMapDataPath().."no_money.txt"; eq = SkillCostCurrent2});
-    else
-      MessageBoxForPlayers (GetPlayerFilter (PLAYER_2), GetMapDataPath().."MaxSkill.txt");
-    end;
-  end;
-end;
-
-function BuySkill2()
-  race = getrace(heroBS2);
-  scorer2 = scorer2 + 1;
-  if scorer2 <= length(array_SkillForBuy[race - 1]) then
-    if GetHeroSkillMastery (heroBS2, array_SkillForBuy[race - 1][scorer2].ID) < 1 then
-      QuestionBoxForPlayers (GetPlayerFilter (PLAYER_2), {GetMapDataPath()..array_SkillForBuy[race - 1][scorer2].text; eq = SkillCostCurrent2}, 'BuySkillReady2', 'BuySkill2');
-    else
-      BuySkill2();
-    end;
-  else
-    scorer2 = 0;
-  end;
-end;
-
-function BuySkillReady2()
-  if GenerateLearningEnable2 == 0 then GenerateStatLearning2(heroBS2); end;
-  GiveHeroSkill(heroBS2, array_SkillForBuy[getrace(heroBS2) - 1][scorer2].ID);
-  Trigger( OBJECT_TOUCH_TRIGGER, 'skill2', 'no' );
-  SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - SkillCostCurrent2));
-  ChangeLevel(heroBS2, 1);
-  sleep(1);
-  if array_SkillForBuy[getrace(heroBS2) - 1][scorer2].ID ~= 3 then UpHeroStat(heroBS2); end;
-  PerkSum2 = PerkSum2 + 1;
-end;
-
-
 function transferAllArts (heroMain, hero1, hero2)
   for i = 0, 2 do
     for j = 1, length(array_arts[i]) do
@@ -5719,10 +5546,7 @@ function ChangeLevel(hero, delta)
   heroExp = GetHeroStat(hero, STAT_EXPERIENCE);
   heroLevel = GetHeroLevel(hero);
   deltaExp = array_level[heroLevel + delta + 1] - array_level[heroLevel + 1];
---  print("deltaExp")
---  print( deltaExp )
   WarpHeroExp (hero, heroExp + deltaExp);
---  print(GetHeroStat(hero, STAT_EXPERIENCE));
 end;
 
 
@@ -8533,8 +8357,6 @@ OverrideObjectTooltipNameAndDescription ('port1', GetMapDataPath().."portNAME.tx
 OverrideObjectTooltipNameAndDescription ('port2', GetMapDataPath().."portNAME.txt", GetMapDataPath().."portDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('stat1', GetMapDataPath().."regenStatNAME.txt", GetMapDataPath().."regenStatDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('stat2', GetMapDataPath().."regenStatNAME.txt", GetMapDataPath().."regenStatDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('skill1', GetMapDataPath().."buyskillNAME.txt", GetMapDataPath().."buyskillDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('skill2', GetMapDataPath().."buyskillNAME.txt", GetMapDataPath().."buyskillDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('oko1', GetMapDataPath().."notext.txt", GetMapDataPath().."notext.txt");
 OverrideObjectTooltipNameAndDescription ('oko2', GetMapDataPath().."notext.txt", GetMapDataPath().."notext.txt");
 OverrideObjectTooltipNameAndDescription ('napadenie1', GetMapDataPath().."napadenieNAME.txt", GetMapDataPath().."NapadeniePlus1.txt");
