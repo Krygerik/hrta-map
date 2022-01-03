@@ -168,10 +168,10 @@ PLAYERS_MAIN_HERO_PROPS = {
   [PLAYER_1] = {
     name = nil,
     stats = {
-      [STAT_ATTACK] = nil,
-      [STAT_DEFENCE] = nil,
-      [STAT_SPELL_POWER] = nil,
-      [STAT_KNOWLEDGE] = nil
+      [STAT_ATTACK] = 0,
+      [STAT_DEFENCE] = 0,
+      [STAT_SPELL_POWER] = 0,
+      [STAT_KNOWLEDGE] = 0
     },
     -- Дополнительные статы с образования разделенные на уровни
     -- разбил на уровни для удобства отката
@@ -182,14 +182,23 @@ PLAYERS_MAIN_HERO_PROPS = {
     },
     -- текущий уровень образования
     current_learning_level = 0,
+    -- Покупаемые статы
+    buy_stats = {
+      [STAT_ATTACK] = 0,
+      [STAT_DEFENCE] = 0,
+      [STAT_SPELL_POWER] = 0,
+      [STAT_KNOWLEDGE] = 0
+    },
+    -- Количество купленных статов
+    count_buy_stats = 0,
   },
   [PLAYER_2] = {
     name = nil,
     stats = {
-      [STAT_ATTACK] = nil,
-      [STAT_DEFENCE] = nil,
-      [STAT_SPELL_POWER] = nil,
-      [STAT_KNOWLEDGE] = nil
+      [STAT_ATTACK] = 0,
+      [STAT_DEFENCE] = 0,
+      [STAT_SPELL_POWER] = 0,
+      [STAT_KNOWLEDGE] = 0
     },
     -- Дополнительные статы с образования разделенные на уровни
     -- разбил на уровни для удобства отката
@@ -200,6 +209,15 @@ PLAYERS_MAIN_HERO_PROPS = {
     },
     -- текущий уровень образования
     current_learning_level = 0,
+    -- Покупаемые статы
+    buy_stats = {
+      [STAT_ATTACK] = 0,
+      [STAT_DEFENCE] = 0,
+      [STAT_SPELL_POWER] = 0,
+      [STAT_KNOWLEDGE] = 0
+    },
+    -- Количество купленных статов
+    count_buy_stats = 0,
   },
 };
 

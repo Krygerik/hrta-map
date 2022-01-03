@@ -5,30 +5,6 @@ PATH_TO_START_LEARNING_MESSAGES = PATH_TO_START_LEARNING_MODULE.."messages/";
 doFile(PATH_TO_START_LEARNING_MODULE..'start_learning_constants.lua');
 sleep(1);
 
--- Вопросы при начале прокачке
-QUESTION_BY_RACE = {
-  [RACES.HAVEN] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_haven.txt",
-  [RACES.INFERNO] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_inferno.txt",
-  [RACES.NECROPOLIS] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_necropolis.txt",
-  [RACES.SYLVAN] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_sylvan.txt",
-  [RACES.ACADEMY] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_academy.txt",
-  [RACES.DUNGEON] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_dungeon.txt",
-  [RACES.FORTRESS] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_fortress.txt",
-  [RACES.STRONGHOLD] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_stronghold.txt",
-};
-
--- Мапа наименования и описания объектов
-LEARNING_OBJECTS_NAME_AND_DESCRIPTION_MAP = {
-  [PLAYER_LEARNING_OBJECTS_NAMES[PLAYER_1]] = {
-    name = PATH_TO_START_LEARNING_MESSAGES..'arena_name.txt',
-    description = PATH_TO_START_LEARNING_MESSAGES..'arena_description.txt',
-  },
-  [PLAYER_LEARNING_OBJECTS_NAMES[PLAYER_2]] = {
-    name = PATH_TO_START_LEARNING_MESSAGES..'arena_name.txt',
-    description = PATH_TO_START_LEARNING_MESSAGES..'arena_description.txt',
-  },
-}
-
 -- Скрипты для обработки прокачки героя
 function start_learning_script()
   print "start_learning_script"
@@ -36,6 +12,102 @@ function start_learning_script()
   setLearningTriggers();
   setMentorTriggers();
   setBuySkillTriggers();
+  setBuyStatsTriggers();
+end;
+
+-- Установка триггеров на покупку дополнительных статов
+function setBuyStatsTriggers()
+  print "setBuyStatsTriggers"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    for _, statId in ALL_MAIN_STATS_LIST do
+      local object = BUY_STATS_OBJECTS_NAMES[playerId][statId];
+
+      SetObjectEnabled(object.id, nil);
+      OverrideObjectTooltipNameAndDescription(object.id, object.name, object.desc);
+      Trigger(OBJECT_TOUCH_TRIGGER, object.id, 'handleTouchBuyStatObject("'..playerId..'", "'..statId..'")');
+    end;
+  end;
+end;
+
+-- Обработчик взаимодействия героя с объектом для покупки стата
+function handleTouchBuyStatObject(strPlayerId, strStatId)
+  print "handleTouchBuyStatObject"
+
+  local playerId = strPlayerId + 0;
+  local statId = strStatId + 0;
+
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  if playerMainHeroProps.name == nil then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."need_main_hero.txt");
+
+    return nil;
+  end;
+
+  if playerMainHeroProps.count_buy_stats == 2 then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."has_maximum_buy_stats.txt");
+
+    return nil;
+  end;
+
+  if GetPlayerResource(playerId, GOLD) < 2500 then
+    MessageBoxForPlayers(playerId, {PATH_TO_START_LEARNING_MESSAGES.."not_enough_n_gold.txt"; eq=2500});
+
+    return nil;
+  end;
+
+  QuestionBoxForPlayers(playerId, MAP_BUY_STAT_ON_QUESTIONS[statId], 'buyStat("'..playerId..'", "'..statId..'")', 'noop');
+end;
+
+-- Обновление игровых статистик главного героя на основе скриптовых
+function refreshMainHeroStats(playerId)
+  print "refreshMainHeroStats"
+
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  for _, statId in ALL_MAIN_STATS_LIST do
+    local changeStatValue = playerMainHero.stats[statId] + playerMainHero.buy_stats[statId] - GetHeroStat(playerMainHero.name, statId);
+  
+    ChangeHeroStat(playerMainHero.name, statId, changeStatValue);
+  end;
+end;
+
+-- Увеличение значение переданного стата у главного героя игрока
+function changeMainHeroMainStat(playerId, statId, count)
+  print "changeMainHeroMainStat"
+
+  if count == nil then
+    count = 1;
+  end;
+
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  -- Меняем скриптовое состояние главных статистик героя
+  playerMainHero.stats[statId] = playerMainHero.stats[statId] + count;
+
+  -- Обновляем статы ГГ
+  refreshMainHeroStats(playerId);
+end;
+
+-- Покупка стата игроком
+function buyStat(strPlayerId, strStatId)
+  print "buyStat"
+
+  local playerId = strPlayerId + 0;
+  local statId = strStatId + 0;
+  
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+  
+  playerMainHeroProps.buy_stats[statId] = playerMainHeroProps.buy_stats[statId] + 1;
+  playerMainHeroProps.count_buy_stats = playerMainHeroProps.count_buy_stats + 1;
+
+  SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - 2500));
+
+  -- Обновляем статы ГГ
+  refreshMainHeroStats(playerId);
+
+  ShowFlyingSign(MAP_STAT_ON_ADDING_MESSAGE[statId], playerMainHeroProps.name, playerId, 5.0);
 end;
 
 -- Установка триггеров на покупку базы
@@ -326,7 +398,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
   
   -- Если обычный навык, дающий статы
   if change ~= nil then
-    increasePlayerMainHeroStat(playerId, change.stat, -change.count);
+    changeMainHeroMainStat(playerId, change.stat, -change.count);
   end;
 
   -- если образование
@@ -383,7 +455,7 @@ function handleHeroAddSkill(triggerHero, skill)
 
   -- Если обычный навык, дающий статы
   if change ~= nil then
-    increasePlayerMainHeroStat(playerId, change.stat, change.count);
+    changeMainHeroMainStat(playerId, change.stat, change.count);
   end;
   
   -- если взяли образование
@@ -404,7 +476,7 @@ function removePlayerMainHeroLearningStats(playerId)
   -- Убираем статы образования у героя
   for _, statId in ALL_MAIN_STATS_LIST do
     if learning[currentLearningLevel][statId] ~= nil then
-      increasePlayerMainHeroStat(playerId, statId, -learning[currentLearningLevel][statId]);
+      changeMainHeroMainStat(playerId, statId, -learning[currentLearningLevel][statId]);
     end;
   end;
 
@@ -441,7 +513,7 @@ function addPlayerMainHeroLearningStats(playerId)
   -- Добавляем статы образования герою
   for _, statId in ALL_MAIN_STATS_LIST do
     if learning[nextLerningLevel][statId] ~= nil then
-      increasePlayerMainHeroStat(playerId, statId, learning[nextLerningLevel][statId]);
+      changeMainHeroMainStat(playerId, statId, learning[nextLerningLevel][statId]);
     end;
   end;
   
@@ -458,7 +530,7 @@ function handleHeroLevelUp(triggerHero)
   -- ИД случайно сгенерированного стата
   local randomGenerateStatId = getRandomStatByRace(playerRaceId);
   
-  increasePlayerMainHeroStat(playerId, randomGenerateStatId);
+  changeMainHeroMainStat(playerId, randomGenerateStatId);
 end;
 
 -- Получение случайной статистики героя в соответствии с расовым распределением
@@ -496,27 +568,6 @@ function getRandomStatByRace(raceId)
   -- Стат упал в знание
   if randomPercent < maxKnowledgeLimit then
     return STAT_KNOWLEDGE;
-  end;
-end;
-
--- Увеличение значение переданного стата у главного героя игрока
-function increasePlayerMainHeroStat(playerId, statId, count)
-  print "increaseHeroStat"
-  
-  if count == nil then
-    count = 1;
-  end;
-  
-  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
-  
-  -- Меняем скриптовое состояние главных статистик героя
-  playerMainHero.stats[statId] = playerMainHero.stats[statId] + count;
-  
-  -- Меняем статы ГГ на основе скриптовых статов
-  local currentHeroStat = GetHeroStat(playerMainHero.name, statId);
-  
-  for _, statId in ALL_MAIN_STATS_LIST do
-    ChangeHeroStat(playerMainHero.name, statId, playerMainHero.stats[statId] - GetHeroStat(playerMainHero.name, statId));
   end;
 end;
 

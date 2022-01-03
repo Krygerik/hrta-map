@@ -5,6 +5,30 @@ PLAYER_LEARNING_OBJECTS_NAMES = {
   [PLAYER_2] = 'magiya',
 };
 
+-- Вопросы при начале прокачке
+QUESTION_BY_RACE = {
+  [RACES.HAVEN] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_haven.txt",
+  [RACES.INFERNO] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_inferno.txt",
+  [RACES.NECROPOLIS] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_necropolis.txt",
+  [RACES.SYLVAN] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_sylvan.txt",
+  [RACES.ACADEMY] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_academy.txt",
+  [RACES.DUNGEON] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_dungeon.txt",
+  [RACES.FORTRESS] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_fortress.txt",
+  [RACES.STRONGHOLD] = PATH_TO_START_LEARNING_MESSAGES.."question_start_learning_stronghold.txt",
+};
+
+-- Мапа наименования и описания объектов
+LEARNING_OBJECTS_NAME_AND_DESCRIPTION_MAP = {
+  [PLAYER_LEARNING_OBJECTS_NAMES[PLAYER_1]] = {
+    name = PATH_TO_START_LEARNING_MESSAGES..'arena_name.txt',
+    description = PATH_TO_START_LEARNING_MESSAGES..'arena_description.txt',
+  },
+  [PLAYER_LEARNING_OBJECTS_NAMES[PLAYER_2]] = {
+    name = PATH_TO_START_LEARNING_MESSAGES..'arena_name.txt',
+    description = PATH_TO_START_LEARNING_MESSAGES..'arena_description.txt',
+  },
+}
+
 -- Количество опыта, необходимое для достижения необходимого уровня от первого
 -- Значения из мануала
 TOTAL_EXPERIENCE_BY_LEVEL = {
@@ -295,4 +319,65 @@ ALLOW_BUY_SKILL_LIST_BY_RACE = {
     SKILL_OFFENCE,
     SKILL_DEFENCE,
   },
+};
+
+BUY_STATS_OBJECTS_NAMES = {
+  [PLAYER_1] = {
+    [STAT_ATTACK] = {
+      id = 'napadenie1',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_attack_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_attack_stat_desc.txt",
+    },
+    [STAT_DEFENCE] = {
+      id = 'zashchita1',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_defence_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_defence_stat_desc.txt",
+    },
+    [STAT_SPELL_POWER] = {
+      id = 'koldovstvo1',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_spell_power_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_spell_power_stat_desc.txt",
+    },
+    [STAT_KNOWLEDGE] = {
+      id = 'znanie1',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_knowledge_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_knowledge_stat_desc.txt",
+    },
+  },
+  [PLAYER_2] = {
+    [STAT_ATTACK] = {
+      id = 'napadenie2',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_attack_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_attack_stat_desc.txt",
+    },
+    [STAT_DEFENCE] = {
+      id = 'zashchita2',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_defence_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_defence_stat_desc.txt",
+    },
+    [STAT_SPELL_POWER] = {
+      id = 'koldovstvo2',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_spell_power_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_spell_power_stat_desc.txt",
+    },
+    [STAT_KNOWLEDGE] = {
+      id = 'znanie2',
+      name = PATH_TO_START_LEARNING_MESSAGES.."buy_knowledge_object_name.txt",
+      desc = PATH_TO_START_LEARNING_MESSAGES.."buy_knowledge_stat_desc.txt",
+    },
+  },
+};
+
+MAP_BUY_STAT_ON_QUESTIONS = {
+  [STAT_ATTACK] = PATH_TO_START_LEARNING_MESSAGES.."question_buy_attack_stat.txt",
+  [STAT_DEFENCE] = PATH_TO_START_LEARNING_MESSAGES.."question_buy_defence_stat.txt",
+  [STAT_SPELL_POWER] = PATH_TO_START_LEARNING_MESSAGES.."question_buy_spell_power_stat.txt",
+  [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."question_buy_knowledge_stat.txt",
+};
+
+MAP_STAT_ON_ADDING_MESSAGE = {
+  [STAT_ATTACK] = PATH_TO_START_LEARNING_MESSAGES.."getting_attack_stat.txt",
+  [STAT_DEFENCE] = PATH_TO_START_LEARNING_MESSAGES.."getting_defence_stat.txt",
+  [STAT_SPELL_POWER] = PATH_TO_START_LEARNING_MESSAGES.."getting_spell_power_stat.txt",
+  [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."getting_knowledge_stat.txt",
 };
