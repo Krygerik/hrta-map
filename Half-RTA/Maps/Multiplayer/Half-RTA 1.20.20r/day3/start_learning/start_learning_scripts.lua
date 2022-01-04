@@ -13,6 +13,89 @@ function start_learning_script()
   setMentorTriggers();
   setBuySkillTriggers();
   setBuyStatsTriggers();
+  setReGenerationStatTriggers();
+end;
+
+-- Установка триггеров на покупку дополнительных статов
+function setReGenerationStatTriggers()
+  print "setReGenerationStatTriggers"
+  
+  -- Маппинг объектов для перегенерации статистик на игроков
+  local MAP_RE_GENERATION_OBJECT_NAME_ON_PLAYER = {
+    [PLAYER_1] = 'stat1',
+    [PLAYER_2] = 'stat2',
+  };
+
+  for _, playerId in PLAYER_ID_TABLE do
+    SetObjectEnabled(MAP_RE_GENERATION_OBJECT_NAME_ON_PLAYER[playerId], nil);
+    OverrideObjectTooltipNameAndDescription(
+      MAP_RE_GENERATION_OBJECT_NAME_ON_PLAYER[playerId],
+      PATH_TO_START_LEARNING_MESSAGES.."re_generation_stats_object_name.txt",
+      PATH_TO_START_LEARNING_MESSAGES.."re_generation_stats_object_desc.txt"
+    );
+    Trigger(OBJECT_TOUCH_TRIGGER, MAP_RE_GENERATION_OBJECT_NAME_ON_PLAYER[playerId], 'handleTouchReGenerationStatObject' );
+  end;
+end;
+
+-- Обработка касания героем объекта для перегенерации статов
+function handleTouchReGenerationStatObject(triggerHero)
+  print "handleTouchReGenerationStatObject"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  if playerMainHeroProps.name == nil then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."need_main_hero.txt");
+
+    return nil;
+  end;
+
+  if GetPlayerResource(playerId, GOLD) < COST_RE_GENERATION_STATS then
+    MessageBoxForPlayers(GetPlayerFilter(playerId), {PATH_TO_START_LEARNING_MESSAGES.."not_enough_n_gold.txt"; eq=COST_RE_GENERATION_STATS});
+    
+    return nil;
+  end;
+  
+  QuestionBoxForPlayers(
+    playerId,
+    {PATH_TO_START_LEARNING_MESSAGES.."question_re_generation_stats.txt"; eq = COST_RE_GENERATION_STATS},
+    'reGenerationStats("'..playerId..'")',
+    'noop'
+  );
+end;
+
+-- Перегенерация статов у главного героя игрока
+function reGenerationStats(strPlayerId)
+  print "reGenerationStats"
+
+  local playerId = strPlayerId + 0;
+  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+  local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
+
+  -- Считаем количество статистик, полученных за уровни
+  local countHeroMainStats = 0;
+  
+  for _, statId in ALL_MAIN_STATS_LIST do
+    countHeroMainStats = countHeroMainStats + mainHeroProps.stats[statId];
+  end;
+  
+  -- Зануляем статы за уровни
+  for _, statId in ALL_MAIN_STATS_LIST do
+    mainHeroProps.stats[statId] = 0;
+  end;
+  
+  -- Генерируем их заново :)
+  for indexStat = 1, countHeroMainStats do
+    local randomGenerateStatId = getRandomStatByRace(playerRaceId);
+
+    changeMainHeroMainStat(playerId, randomGenerateStatId);
+  end;
+  
+  local mainHeroX, mainHeroY = GetObjectPosition(mainHeroProps.name);
+  Play2DSoundForPlayers(playerId, "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", mainHeroX, mainHeroY, 0);
+
+  -- Снимаем бабки за диджейство
+  SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - COST_RE_GENERATION_STATS));
 end;
 
 -- Установка триггеров на покупку дополнительных статов
@@ -64,13 +147,36 @@ end;
 function refreshMainHeroStats(playerId)
   print "refreshMainHeroStats"
 
+  -- Снимаем с героя все шмотки
+  moveAllMainHeroArtsToStorage(playerId);
+  
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
 
   for _, statId in ALL_MAIN_STATS_LIST do
-    local changeStatValue = playerMainHero.stats[statId] + playerMainHero.buy_stats[statId] - GetHeroStat(playerMainHero.name, statId);
-  
+    local changeStatValue = playerMainHero.stats[statId]
+      + playerMainHero.start_stats[statId]
+      + playerMainHero.stats_for_skills[statId]
+      + playerMainHero.buy_stats[statId]
+      - GetHeroStat(playerMainHero.name, statId);
+
+    -- Если есть образло, считываем статы за все уровни образла
+    if playerMainHero.current_learning_level > 0 then
+      for learningLevel = 1, playerMainHero.current_learning_level do
+        changeStatValue = changeStatValue + playerMainHero.learning[learningLevel][statId]
+      end;
+    end;
+    
+    -- Добавляем костыльно статы с образла при рефреше
+    -- Заброшенные шахты и СА мага были переделаны под астрологию
+    if HasHeroSkill(playerMainHero.name, NECROMANCER_FEAT_HAUNT_MINE) or HasHeroSkill(playerMainHero.name, WIZARD_FEAT_ABSOLUTE_WIZARDY) then
+      changeStatValue = changeStatValue + MAP_WEEK_ON_ASTROLOGY_STATS[GetCurrentMoonWeek()][statId]
+    end;
+
     ChangeHeroStat(playerMainHero.name, statId, changeStatValue);
   end;
+
+  -- Отдаем шмотки обратно
+  getAllMainHeroArtsFromStorage(playerId);
 end;
 
 -- Увеличение значение переданного стата у главного героя игрока
@@ -85,6 +191,19 @@ function changeMainHeroMainStat(playerId, statId, count)
 
   -- Меняем скриптовое состояние главных статистик героя
   playerMainHero.stats[statId] = playerMainHero.stats[statId] + count;
+
+  -- Обновляем статы ГГ
+  refreshMainHeroStats(playerId);
+end;
+
+-- Изменение у ГГ статов, полученных за навыки
+function changeMainHeroStatsForSkills(playerId, statId, count)
+  print "changeMainHeroStatsForSkills"
+
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  -- Меняем скриптовое состояние главных статистик героя
+  playerMainHero.stats_for_skills[statId] = playerMainHero.stats_for_skills[statId] + count;
 
   -- Обновляем статы ГГ
   refreshMainHeroStats(playerId);
@@ -366,14 +485,58 @@ function learning(strPlayerId, heroName, stage)
   end;
 end;
 
+-- Перемещение всех артефактов ГГ во временное хранилище
+function moveAllMainHeroArtsToStorage(playerId)
+  print "moveAllMainHeroArtsToStorage"
+
+  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  for _, art in ALL_ARTS_LIST do
+    if HasArtefact(mainHeroProps.name, art.id) then
+      mainHeroProps.removedHeroArtIdList[length(mainHeroProps.removedHeroArtIdList)] = art.id;
+      RemoveArtefact(mainHeroProps.name, art.id);
+    end;
+  end;
+end;
+
+-- Получение всех артефактов ГГ из временное хранилище
+function getAllMainHeroArtsFromStorage(playerId)
+  print "getAllMainHeroArtsFromStorage"
+
+  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  -- Отдаем шмотки обратно
+  for _, removedArtId in mainHeroProps.removedHeroArtIdList do
+    GiveArtifact(mainHeroProps.name, removedArtId);
+  end;
+  
+  mainHeroProps.removedHeroArtIdList = {};
+end;
+
 -- Установка триггеров на контроль статистик героев
 function setControlStatsTriggerOnHero(playerId)
   print "setControlStatsTriggerOnHero"
   
   local heroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  -- Снимаем с героя все шмотки
+  moveAllMainHeroArtsToStorage(playerId);
   
+  -- Переводим стартовые статы героев в стартовые скриптовые
   for _, statId in ALL_MAIN_STATS_LIST do
-    PLAYERS_MAIN_HERO_PROPS[playerId].stats[statId] = GetHeroStat(heroName, statId);
+    PLAYERS_MAIN_HERO_PROPS[playerId].start_stats[statId] = GetHeroStat(heroName, statId);
+  end;
+  
+  -- Отдаем шмотки обратно
+  getAllMainHeroArtsFromStorage(playerId);
+  
+  -- Если у героя есть образло, выдаем ему положенные статы за него
+  if HasHeroSkill(heroName, SKILL_LEARNING) then
+    local learningLevel = GetHeroSkillMastery(heroName, SKILL_LEARNING);
+    
+    for level = 1, learningLevel do
+      addPlayerMainHeroLearningStats(playerId);
+    end;
   end;
 
   Trigger(HERO_LEVELUP_TRIGGER, heroName, 'handleHeroLevelUp("'..heroName..'")');
@@ -398,7 +561,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
   
   -- Если обычный навык, дающий статы
   if change ~= nil then
-    changeMainHeroMainStat(playerId, change.stat, -change.count);
+    changeMainHeroStatsForSkills(playerId, change.stat, -change.count)
   end;
 
   -- если образование
@@ -441,7 +604,7 @@ function mentorCashback(playerId)
 end;
 
 -- Обработчик получения героем нового навыка
-function handleHeroAddSkill(triggerHero, skill)
+function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
   
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
@@ -451,42 +614,37 @@ function handleHeroAddSkill(triggerHero, skill)
     return nil;
   end;
 
-  local change = MAP_SKILLS_TO_CHANGING_STATS[skill];
+  local skillWithStats = MAP_SKILLS_TO_CHANGING_STATS[skillId];
 
-  -- Если обычный навык, дающий статы
-  if change ~= nil then
-    changeMainHeroMainStat(playerId, change.stat, change.count);
+  -- Если навык, дающий статы
+  if skillWithStats ~= nil then
+    changeMainHeroStatsForSkills(playerId, skillWithStats.stat, skillWithStats.count);
   end;
   
   -- если взяли образование
-  if skill == SKILL_LEARNING or skill == HERO_SKILL_BARBARIAN_LEARNING then
+  if skillId == SKILL_LEARNING or skillId == HERO_SKILL_BARBARIAN_LEARNING then
     addPlayerMainHeroLearningStats(playerId);
   end;
 end;
 
 -- Генерация главному герою игрока статов образования
 function removePlayerMainHeroLearningStats(playerId)
-  print "removePlayerMainHeroLearningStats("
+  print "removePlayerMainHeroLearningStats"
 
   local learning = PLAYERS_MAIN_HERO_PROPS[playerId].learning;
   local raceId = RESULT_HERO_LIST[playerId].raceId;
 
   local currentLearningLevel = PLAYERS_MAIN_HERO_PROPS[playerId].current_learning_level;
 
-  -- Убираем статы образования у героя
-  for _, statId in ALL_MAIN_STATS_LIST do
-    if learning[currentLearningLevel][statId] ~= nil then
-      changeMainHeroMainStat(playerId, statId, -learning[currentLearningLevel][statId]);
-    end;
-  end;
-
   PLAYERS_MAIN_HERO_PROPS[playerId].current_learning_level = currentLearningLevel - 1;
+
+  refreshMainHeroStats(playerId);
 end;
 
 -- Генерация главному герою игрока статов образования
 function addPlayerMainHeroLearningStats(playerId)
   print "addPlayerMainHeroLearningStats"
-  
+
   local learning = PLAYERS_MAIN_HERO_PROPS[playerId].learning;
   local raceId = RESULT_HERO_LIST[playerId].raceId;
   
@@ -495,29 +653,22 @@ function addPlayerMainHeroLearningStats(playerId)
   if learning[nextLerningLevel] == nil then
     learning[nextLerningLevel] = {};
     
+    -- Заполняем этот уровень образла нулевыми значениями, чтобы измежать проблем с математикой в будущем
+    for _, statId in ALL_MAIN_STATS_LIST do
+      learning[nextLerningLevel][statId] = 0;
+    end;
+    
     -- Генерируем 3 случайных стата для этого уровня образла
     for indexStat = 1, 3 do
       local randomGenerateStatId = getRandomStatByRace(raceId);
 
-      local generateStatPrevValue = 0;
-
-      -- Если стат сгенерировался снова
-      if learning[nextLerningLevel][randomGenerateStatId] ~= nil then
-        generateStatPrevValue = learning[nextLerningLevel][randomGenerateStatId];
-      end;
-
-      learning[nextLerningLevel][randomGenerateStatId] = generateStatPrevValue + 1;
-    end;
-  end;
-  
-  -- Добавляем статы образования герою
-  for _, statId in ALL_MAIN_STATS_LIST do
-    if learning[nextLerningLevel][statId] ~= nil then
-      changeMainHeroMainStat(playerId, statId, learning[nextLerningLevel][statId]);
+      learning[nextLerningLevel][randomGenerateStatId] = learning[nextLerningLevel][randomGenerateStatId] + 1;
     end;
   end;
   
   PLAYERS_MAIN_HERO_PROPS[playerId].current_learning_level = nextLerningLevel;
+  
+  refreshMainHeroStats(playerId);
 end;
 
 -- Обработчик получения героем нового уровня

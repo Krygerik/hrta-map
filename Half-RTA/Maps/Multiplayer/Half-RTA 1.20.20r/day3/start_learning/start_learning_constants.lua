@@ -381,3 +381,49 @@ MAP_STAT_ON_ADDING_MESSAGE = {
   [STAT_SPELL_POWER] = PATH_TO_START_LEARNING_MESSAGES.."getting_spell_power_stat.txt",
   [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."getting_knowledge_stat.txt",
 };
+
+-- Стоимость перегенерации заклинаний
+COST_RE_GENERATION_STATS = 5000;
+
+-- Ручное перечисление недель
+CUSTOM_WEEKS = {
+  ATTACK = 20,
+  DEFENCE = 23,
+  SPELL_POWER = 15,
+  KNOWLEDGE = 3,
+  EQUAL = 18,
+};
+
+-- Соотношение недели к статам, которые оно дает
+MAP_WEEK_ON_ASTROLOGY_STATS = {
+  [CUSTOM_WEEKS.ATTACK] = {
+    [STAT_ATTACK] = 3,
+    [STAT_DEFENCE] = 0,
+    [STAT_SPELL_POWER] = 0,
+    [STAT_KNOWLEDGE] = 0
+  },
+  [CUSTOM_WEEKS.DEFENCE] = {
+    [STAT_ATTACK] = 0,
+    [STAT_DEFENCE] = 3,
+    [STAT_SPELL_POWER] = 0,
+    [STAT_KNOWLEDGE] = 0
+  },
+  [CUSTOM_WEEKS.SPELL_POWER] = {
+    [STAT_ATTACK] = 0,
+    [STAT_DEFENCE] = 0,
+    [STAT_SPELL_POWER] = 3,
+    [STAT_KNOWLEDGE] = 0
+  },
+  [CUSTOM_WEEKS.KNOWLEDGE] = {
+    [STAT_ATTACK] = 0,
+    [STAT_DEFENCE] = 0,
+    [STAT_SPELL_POWER] = 0,
+    [STAT_KNOWLEDGE] = 3
+  },
+  [CUSTOM_WEEKS.EQUAL] = {
+    [STAT_ATTACK] = 1,
+    [STAT_DEFENCE] = 1,
+    [STAT_SPELL_POWER] = 1,
+    [STAT_KNOWLEDGE] = 1
+  },
+};
