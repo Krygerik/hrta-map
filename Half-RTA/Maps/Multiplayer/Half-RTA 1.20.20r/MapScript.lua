@@ -5655,8 +5655,6 @@ function RevelationDel2(hero)
   end;
 end;
 
-
-
 Trigger( REGION_ENTER_AND_STOP_TRIGGER, 'town', 'ChangeRandomTown' );
 
 function ChangeRandomTown(hero)
@@ -5679,79 +5677,8 @@ end;
 FortunateAdventureEnable1 = 0
 FortunateAdventureEnable2 = 0
 
-array_HasArtsSlot1 = {}
-array_HasArtsSlot1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-
-array_HasArtsSlot2 = {}
-array_HasArtsSlot2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-
-function Spoils1()
-    for i = 0, 2 do
-      for j = 1, length(array_arts[i]) do
-        if HasArtefact(HeroMax1, array_arts[i][j].id) then
-          if array_arts[i][j].place == 1 and array_HasArtsSlot1[1] == 2 then array_HasArtsSlot1[1] = 1; end;
-          if array_arts[i][j].place == 1 and array_HasArtsSlot1[1] == 0 then array_HasArtsSlot1[1] = 2; end;
-          if array_arts[i][j].place ~= 1 then
-            array_HasArtsSlot1[array_arts[i][j].place] = 1;
-          end;
-        end;
-      end;
-    end;
-    ArtNumber1 = random (length(array_arts[1])) + 1;
-    while array_arts[1][ArtNumber1].blocked == 1 or HasArtefact(HeroMax1, array_arts[1][ArtNumber1].id, 0) or array_HasArtsSlot1[array_arts[1][ArtNumber1].place] == 1 do
-      ArtNumber1 = random (length(array_arts[1])) + 1;
-    end;
-    GiveArtefact(HeroMax1, array_arts[1][ArtNumber1].id, 1);
-    SpoilsUse1 = 1;
-end;
-
-function Spoils2()
-    for i = 0, 2 do
-      for j = 1, length(array_arts[i]) do
-        if HasArtefact(HeroMax2, array_arts[i][j].id) then
-          if array_arts[i][j].place == 1 and array_HasArtsSlot2[1] == 2 then array_HasArtsSlot2[1] = 1; end;
-          if array_arts[i][j].place == 1 and array_HasArtsSlot2[1] == 0 then array_HasArtsSlot2[1] = 2; end;
-          if array_arts[i][j].place ~= 1 then
-            array_HasArtsSlot2[array_arts[i][j].place] = 1;
-          end;
-        end;
-      end;
-    end;
-    ArtNumber2 = random (length(array_arts[1])) + 1;
-    while array_arts[1][ArtNumber2].blocked == 1 or HasArtefact(HeroMax2, array_arts[1][ArtNumber2].id, 0) or array_HasArtsSlot2[array_arts[1][ArtNumber2].place] == 1 do
-      ArtNumber2 = random (length(array_arts[1])) + 1;
-    end;
-    GiveArtefact(HeroMax2, array_arts[1][ArtNumber2].id, 1);
-    SpoilsUse2 = 1;
-end;
-
 arrayArtsForFortunateAdventure1 = {}
 arrayArtsForFortunateAdventure2 = {}
-
-Trigger( OBJECT_TOUCH_TRIGGER, 'lavka1', 'ArtifactMerchant1' );
-Trigger( OBJECT_TOUCH_TRIGGER, 'lavka2', 'ArtifactMerchant2' );
-
-function ArtifactMerchant1(hero)
-  if FortunateAdventureEnable1 == 1 then FortunateAdventureEnable1 = 2; end;
-  if SpoilsUse1 == 0 and HasHeroSkill(hero, 129) then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Spoils.txt", 'Spoils1', 'no');
-  end;
-end;
-
-function ArtifactMerchant2(hero)
-  if FortunateAdventureEnable2 == 1 then FortunateAdventureEnable2 = 2; end;
-  if SpoilsUse2 == 0 and HasHeroSkill(hero, 129) then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Spoils.txt", 'Spoils2', 'no');
-  end;
-end;
-
-function FortunateAdventureBlockInTower1()
-  if FortunateAdventureEnable1 == 1 then FortunateAdventureEnable1 = 2; end;
-end;
-
-function FortunateAdventureBlockInTower2()
-  if FortunateAdventureEnable2 == 1 then FortunateAdventureEnable2 = 2; end;
-end;
 
 function FortunateAdventure1()
   if (hero1race == 5 or hero1race == 6) and IsHeroInTown(HeroMax1, 'RANDOMTOWN1', 1, 0) then
@@ -6864,40 +6791,6 @@ function SaleArmy(town, hero)
   x, y = GetObjectPosition(hero);
   Play2DSoundForPlayers ( GetObjectOwner(hero), "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", x, y, 0);
   ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = price}, hero, GetObjectOwner(hero), 5.0);
-end;
-
-
-SnatchUse1 = 0;
-SnatchUse2 = 0;
-
-function Snatch_CUSTOM_F(hero, CUSTOM_ABILITY)
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == HeroMax1) then
-    if hero2race == 1 then MakeHeroInteractWithObject (hero, 'lavka16'); end;
-    if hero2race == 2 then MakeHeroInteractWithObject (hero, 'lavka12'); end;
-    if hero2race == 3 then MakeHeroInteractWithObject (hero, 'lavka13'); end;
-    if hero2race == 4 then MakeHeroInteractWithObject (hero, 'lavka14'); end;
-    if hero2race == 5 then MakeHeroInteractWithObject (hero, 'lavka9');  end;
-    if hero2race == 6 then MakeHeroInteractWithObject (hero, 'lavka10'); end;
-    if hero2race == 7 then MakeHeroInteractWithObject (hero, 'lavka11'); end;
-    if hero2race == 8 then MakeHeroInteractWithObject (hero, 'lavka15'); end;
-    if SnatchUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 3000)); end;
-    SnatchUse1 = 1;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == HeroMax2) then
-    if hero1race == 1 then MakeHeroInteractWithObject (hero, 'lavka7'); end;
-    if hero1race == 2 then MakeHeroInteractWithObject (hero, 'lavka4'); end;
-    if hero1race == 3 then MakeHeroInteractWithObject (hero, 'lavka5'); end;
-    if hero1race == 4 then MakeHeroInteractWithObject (hero, 'lavka6'); end;
-    if hero1race == 5 then MakeHeroInteractWithObject (hero, 'lavka1'); end;
-    if hero1race == 6 then MakeHeroInteractWithObject (hero, 'lavka2'); end;
-    if hero1race == 7 then MakeHeroInteractWithObject (hero, 'lavka3'); end;
-    if hero1race == 8 then MakeHeroInteractWithObject (hero, 'lavka8'); end;
-    if SnatchUse2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 3000)); end;
-    SnatchUse2 = 1;
-  end;
-
 end;
 
 HeraldUse1 = 0;

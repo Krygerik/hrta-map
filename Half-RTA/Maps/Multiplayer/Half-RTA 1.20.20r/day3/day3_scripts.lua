@@ -12,6 +12,7 @@ function day3()
   setHeroesInitialProperties();
   changePlayersArea();
   doFile(PATH_TO_DAY3_SCRIPTS.."start_learning/start_learning_scripts.lua");
+  doFile(PATH_TO_DAY3_SCRIPTS.."artifact_merchant/artifact_merchant_scripts.lua");
 end;
 
 -- Добавление героев игрокам
