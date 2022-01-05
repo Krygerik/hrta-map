@@ -460,6 +460,9 @@ function learning(strPlayerId, heroName, stage)
      setControlStatsTriggerOnHero(playerId);
      
      ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
+     
+     -- DELETE THIS TEST (разведка)
+     ControlHeroCustomAbility(heroName, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED);
   end;
   
   -- ѕродолжение бесплатной прокачки
