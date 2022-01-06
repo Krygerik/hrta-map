@@ -5,6 +5,18 @@ PATH_TO_START_LEARNING_MESSAGES = PATH_TO_START_LEARNING_MODULE.."messages/";
 doFile(PATH_TO_START_LEARNING_MODULE..'start_learning_constants.lua');
 sleep(1);
 
+-- Статус использования игроками разведки
+PLAYER_USE_SCOUTING_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+}
+
+-- Статус ожидания игроками прокачки оппонента
+PLAYER_SCOUTING_WAITING_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
 -- Скрипты для обработки прокачки героя
 function start_learning_script()
   print "start_learning_script"
@@ -459,10 +471,16 @@ function learning(strPlayerId, heroName, stage)
      PLAYERS_MAIN_HERO_PROPS[playerId].name = heroName;
      setControlStatsTriggerOnHero(playerId);
      
-     ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
+     -- Если опп заюзал разведку - отчитываемся о начале прокачки
+     local enemyPlayerId = PLAYERS_OPPONENT[playerId];
      
-     -- DELETE THIS TEST (разведка)
-     ControlHeroCustomAbility(heroName, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED);
+     if PLAYER_SCOUTING_WAITING_STATUS[enemyPlayerId] ~= nil then
+       MessageBoxForPlayers(enemyPlayerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_start_learning.txt" );
+       
+       scouting(enemyPlayerId);
+     end;
+     
+     ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
   end;
   
   -- Продолжение бесплатной прокачки
@@ -571,6 +589,13 @@ function handleHeroRemoveSkill(triggerHero, skill)
   if skill == SKILL_LEARNING or skill == HERO_SKILL_BARBARIAN_LEARNING then
     removePlayerMainHeroLearningStats(playerId);
   end;
+  
+  local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skill];
+
+  -- Если навык добавляется в книгу заклинаний
+  if customAbility ~= nil and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
+    ControlHeroCustomAbility(triggerHero, customAbility, CUSTOM_ABILITY_DISABLED);
+  end;
 end;
 
 -- Возврат ментором средств при сброске навыков
@@ -606,14 +631,100 @@ function mentorCashback(playerId)
   end;
 end;
 
+-- Получает нескидываемый навык, если он был сброшен
+function getRemovedUnremovableSkillId(playerId)
+  print "getRemovedUnremovableSkillId"
+
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  -- Если сбросил разведку
+  if PLAYER_USE_SCOUTING_STATUS[playerId] ~= nil and HasHeroSkill(playerMainHero, PERK_SCOUTING) == nil then
+    return PERK_SCOUTING;
+  end;
+
+  return nil;
+end;
+
+-- Удаление навыка у героя
+-- Не предоставлено разработчиками, поэтому херачим свой метод с блекджеком и изабелькой
+function removeHeroSkill(heroName, removeSkillId)
+  print "removeHeroSkill"
+
+  Trigger(HERO_ADD_SKILL_TRIGGER, heroName, 'noop');
+  Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'noop');
+
+  -- Список текущих навыков героя { skillId, skillLevel }[]
+  local heroSkillIdList = {};
+
+  -- Мне очень влом делать список всех возможных скилов, поэтому я просто протыкаю все числа до максимально знакомого мне айдишника
+  for checkSkillId = 1, 215 do
+    if HasHeroSkill(heroName, checkSkillId) then
+      heroSkillIdList[length(heroSkillIdList)] = {
+        skillId = checkSkillId,
+        skillLevel = GetHeroSkillMastery(heroName, checkSkillId),
+      };
+    end;
+  end;
+
+  -- Количество опыта, имеющееся у героя
+  local hasHeroExpirience = TOTAL_EXPERIENCE_BY_LEVEL[GetHeroLevel(heroName)];
+
+  TakeAwayHeroExp(heroName, hasHeroExpirience);
+  WarpHeroExp(heroName, hasHeroExpirience);
+
+  -- Сбрасываем 2 раз, потому что из-за стартовых навыков их количество на 2 больше чем уровень
+  TakeAwayHeroExp(heroName, hasHeroExpirience);
+  WarpHeroExp(heroName, hasHeroExpirience);
+
+  -- Возвращаем все навыки и школы кроме того, который удаляем
+  for _, savedSkill in heroSkillIdList do
+    local maxSkillLevel = savedSkill.skillLevel;
+
+    if removeSkillId == savedSkill.skillId then
+      maxSkillLevel = maxSkillLevel - 1;
+    end;
+
+    if maxSkillLevel > 0 then
+      for level = 1, savedSkill.skillLevel do
+        GiveHeroSkill(heroName, savedSkill.skillId);
+      end;
+    end;
+  end;
+
+  -- Возвращаем обратно кастомные триггеры и статы
+  Trigger(HERO_ADD_SKILL_TRIGGER, heroName, 'handleHeroAddSkill');
+  Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+
+  refreshMainHeroStats(playerId);
+end;
+
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
   
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
   -- Если не выбран главный герой, не производим никаких внутренних расчетов
-  if PLAYERS_MAIN_HERO_PROPS[playerId].name == nil then
+  if playerMainHero == nil then
+    return nil;
+  end;
+  
+  local removedSkillId = getRemovedUnremovableSkillId(playerId);
+  
+  -- Проверяем, не скинул ли игрок нескидываемый навык
+  if removedSkillId ~= nil then
+    removeHeroSkill(playerMainHero, skillId);
+    
+    GiveHeroSkill(playerMainHero, removedSkillId);
+    
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) +  2500));
+
+    ShowFlyingSign(PATH_TO_START_LEARNING_MESSAGES.."cannot_remove_skill.txt", playerMainHero, playerId, 5.0);
+
     return nil;
   end;
 
@@ -628,6 +739,103 @@ function handleHeroAddSkill(triggerHero, skillId)
   if skillId == SKILL_LEARNING or skillId == HERO_SKILL_BARBARIAN_LEARNING then
     addPlayerMainHeroLearningStats(playerId);
   end;
+  
+  local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skillId];
+
+  -- Если навык добавляется в книгу заклинаний
+  if customAbility ~= nil then
+    ControlHeroCustomAbility(playerMainHero, customAbility, CUSTOM_ABILITY_ENABLED);
+    Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
+  end;
+end;
+
+-- Обработчик использования кастомной способности
+function handleUseCustomAbility(triggerHero, ability)
+  print "handleUseCustomAbility"
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  
+  -- если кликнули разведку
+  if ability == CUSTOM_ABILITY_2 and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
+    handleUseScouting(playerId)
+  end;
+end;
+
+-- Обработка использования способности разведка
+function handleUseScouting(playerId)
+  print "handleUseScouting"
+
+  -- Если разведка уже использована
+  if PLAYER_SCOUTING_WAITING_STATUS[playerId] ~= nil then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."has_waiting_learning_opponent.txt" );
+    
+    return nil;
+  end;
+
+  QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_scouting.txt", 'scouting("'..playerId..'")', 'noop');
+end;
+
+-- Перемещаем камеру игрока на героев оппонента
+function moveCameraOnEnemyHero(playerId)
+  print "moveCameraOnEnemyHero"
+
+  -- Ваще влом это делать универсально)
+  -- Думаю, что все здесь понятно итак
+  if playerId == PLAYER_1 then
+    MoveCameraForPlayers(playerId, 31, 88, 0, 20, 0, 0, 0, 0, 1);
+  else
+    MoveCameraForPlayers(playerId, 44, 23, 0, 20, 0, 3.14, 0, 0, 1);
+  end;
+end;
+
+-- Активация разведки
+function scouting(strPlayerId)
+  print "scouting"
+  
+  local playerId = strPlayerId + 0;
+  local enemyPlayerId = PLAYERS_OPPONENT[playerId];
+  local enemyMainHero = PLAYERS_MAIN_HERO_PROPS[enemyPlayerId].name;
+  local enemyHeroes = RESULT_HERO_LIST[enemyPlayerId].heroes;
+  local enemyChoisedHeroes = RESULT_HERO_LIST[enemyPlayerId].choised_heroes;
+
+  PLAYER_USE_SCOUTING_STATUS[playerId] = not nil;
+
+  -- Если оппонент еще не начал прокачку
+  if enemyMainHero == nil then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_has_not_main_hero.txt" );
+    
+    -- Показываем тех героев, которые выпали оппоненту
+    for _, heroName in enemyChoisedHeroes do
+      if heroName ~= enemyHeroes[1] and heroName ~= enemyHeroes[2] then
+        local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
+
+        SetObjectPosition(iconName, 1, 1, UNDERGROUND);
+      end;
+    end;
+    
+    moveCameraOnEnemyHero(playerId);
+    
+    PLAYER_SCOUTING_WAITING_STATUS[playerId] = not nil;
+    return nil;
+  end;
+  
+  -- Если герой из таверны
+  if enemyMainHero == enemyHeroes[3] then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_buy_hero.txt");
+
+    return nil;
+  end;
+  
+  -- Показываем ГГ врага
+  for _, heroName in enemyChoisedHeroes do
+    if heroName ~= enemyMainHero then
+      local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
+    
+      SetObjectPosition(iconName, 1, 1, UNDERGROUND);
+    end;
+  end;
+  
+  moveCameraOnEnemyHero(playerId);
 end;
 
 -- Генерация главному герою игрока статов образования

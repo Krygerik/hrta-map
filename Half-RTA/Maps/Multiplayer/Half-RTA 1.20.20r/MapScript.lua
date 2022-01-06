@@ -2006,7 +2006,7 @@ function AddSkill1(hero, skill)
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel1 == 3) then Revelation1(); end;
-  if skill == 20 or skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
+  if skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 102 then startThread(HeraldFunction1); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
   if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
@@ -2038,7 +2038,7 @@ function AddSkill2(hero, skill)
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
-  if skill == 20 or skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
+  if skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 102 then startThread(HeraldFunction2); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
   if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
@@ -2075,9 +2075,9 @@ function RemoveSkill1(hero, skill)
   if skill == 71 and ReturnSkillPlayer1 == 0 then RemoveDarkRitual1(hero); end;
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
   if skill == 20 and ScoutingEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 20 and ScoutingEnable1 == 0 and HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
+  if HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 112 and DisguiseEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 112 and DisguiseEnable1 == 0 and HasHeroSkill(hero, 20)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
+  if skill == 112 and DisguiseEnable1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
   if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
@@ -2113,9 +2113,9 @@ function RemoveSkill2(hero, skill)
   if skill == 71 and ReturnSkillPlayer2 == 0 then RemoveDarkRitual2(hero); end;
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
   if skill == 20 and ScoutingEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 20 and ScoutingEnable2 == 0 and HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
+  if HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 112 and DisguiseEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 112 and DisguiseEnable2 == 0 and HasHeroSkill(hero, 20)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
+  if skill == 112 and DisguiseEnable2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
   if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
@@ -5558,164 +5558,6 @@ function FortunateAdventure2()
   end;
 end;
 
-
-ScoutingEnable1 = 0;
-ScoutingEnable2 = 0;
-
-function Scouting1Q()
-  if ScoutingEnable1 == 0 then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Scouting.txt", 'Scouting1', 'no');
-  end;
-end;
-
-function Scouting2Q()
-  if ScoutingEnable2 == 0 then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Scouting.txt", 'Scouting2', 'no');
-  end;
-end;
-
-function Scouting1()
-  if ScoutingEnable1 == 0 then
---    for i = 1, 5 do
---      print(array_heroes[hero2race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].name);
---    end;
---    print('x');
-
-    for i = 1, length(array_heroes[hero2race-1]) do
-      array_heroes[hero2race-1][i].block_temply = 0;
-    end;
---    SetObjectPosition(array_heroes[hero2race-1][arrayPossibleHeroes[2][1]].p5, 31, 90, GROUND);
-    if CherkPossibleHeroesEnable == 1 then k = 4; else k = 5; end;
-    for i = 1, k do
-      if arrayPossibleHeroes[HeroCollectionPlayer2][i] ~= HeroForScouting1_Player2 and arrayPossibleHeroes[HeroCollectionPlayer2][i] ~= HeroForScouting2_Player2 and arrayPossibleHeroes[HeroCollectionPlayer2][i] > 0 then
-        if HeroCollectionPlayer2 == 2 then
-          RemoveObject(array_heroes[hero2race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].p5);
-        end;
-        if HeroCollectionPlayer2 == 3 then
-          RemoveObject(array_heroes[hero2race-1][arrayPossibleHeroes[HeroCollectionPlayer2][i]].p7);
-        end;
-      end;
-    end;
-
-    if HalfLeveling2 == 1 then
-      if HeroTavern2 == 0 then
-        for i = 1, length(array_heroes[hero2race-1]) do
-          if HeroMin2 == array_heroes[hero2race-1][i].name2 then
-            if HeroCollectionPlayer2 == 2 then
-              RemoveObject(array_heroes[hero2race-1][i].p5);
-            end;
-            if HeroCollectionPlayer2 == 3 then
-              RemoveObject(array_heroes[hero2race-1][i].p7);
-            end;
-            array_heroes[hero2race-1][i].block_temply = 1;
-            i = length(array_heroes[hero2race-1]);
-          end;
-        end;
-      else
-        MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."HeroTavern.txt" );
-      end;
-    end;
-  end;
-  ScoutingEnable1 = 1;
-  MoveCameraForPlayers( 1, 31, 88, 0, 20, 0, 0, 0, 0, 1);
-end;
-
-function Scouting2()
-  if ScoutingEnable2 == 0 then
---    for i = 1, 5 do
---      print(array_heroes[hero1race-1][arrayPossibleHeroes[HeroCollectionPlayer1][i]].name);
---    end;
---    print('y');
-
-    for i = 1, length(array_heroes[hero1race-1]) do
-      array_heroes[hero1race-1][i].block_temply = 0;
-    end;
-    if CherkPossibleHeroesEnable == 1 then k = 4; else k = 5; end;
-    for i = 1, k do
-      if arrayPossibleHeroes[HeroCollectionPlayer1][i] ~= HeroForScouting1_Player1 and arrayPossibleHeroes[HeroCollectionPlayer1][i] ~= HeroForScouting2_Player1 and arrayPossibleHeroes[HeroCollectionPlayer1][i] > 0 then
-        if HeroCollectionPlayer1 == 0 then
-          RemoveObject(array_heroes[hero1race-1][arrayPossibleHeroes[HeroCollectionPlayer1][i]].p2);
-        end;
-        if HeroCollectionPlayer1 == 1 then
-          RemoveObject(array_heroes[hero1race-1][arrayPossibleHeroes[HeroCollectionPlayer1][i]].p4);
-        end;
-      end;
-    end;
-
-    if HalfLeveling1 == 1 then
-      if HeroTavern1 == 0 then
-        for i = 1, length(array_heroes[hero1race-1]) do
-          if HeroMin1 == array_heroes[hero1race-1][i].name then
-            if HeroCollectionPlayer1 == 0 then
-              RemoveObject(array_heroes[hero1race-1][i].p2);
-            end;
-            if HeroCollectionPlayer1 == 1 then
-              RemoveObject(array_heroes[hero1race-1][i].p4);
-            end;
-            array_heroes[hero1race-1][i].block_temply = 1;
-            i = length(array_heroes[hero1race-1]);
-          end;
-        end;
-      else
-        MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."HeroTavern.txt" );
-      end;
-    end;
-  end;
-  ScoutingEnable2 = 1;
-  MoveCameraForPlayers( 2, 44, 23, 0, 20, 0, 3.14, 0, 0, 1);
-end;
-
-function Scouting1DopInfo()
-  if HasHeroSkill(HeroMax2, 20) and ScoutingEnable2 == 1 then
-    if HeroTavern1 == 0 then
-      for i = 1, length(array_heroes[hero1race-1]) do
-        if HeroMin1 == array_heroes[hero1race-1][i].name then
-          if HeroCollectionPlayer1 == 0 then
-            RemoveObject(array_heroes[hero1race-1][i].p2);
-            print('hero1 del ', array_heroes[hero1race-1][i].name)
-          end;
-          if HeroCollectionPlayer1 == 1 then
-            RemoveObject(array_heroes[hero1race-1][i].p4);
-            print('hero1 del ', array_heroes[hero1race-1][i].name)
-          end;
-          array_heroes[hero1race-1][i].block_temply = 1;
-          i = length(array_heroes[hero1race-1]);
-        end;
-      end;
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."HeroTop.txt" );
-      MoveCameraForPlayers( 2, 44, 23, 0, 20, 0, 3.14, 0, 0, 1);
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."HeroTavern.txt" );
-    end;
-  end;
-end;
-
-function Scouting2DopInfo()
-  if HasHeroSkill(HeroMax1, 20) and ScoutingEnable1 == 1 then
-    if HeroTavern2 == 0 then
-      print('length(array_heroes[hero2race-1] ', length(array_heroes[hero2race-1]))
-      for i = 1, length(array_heroes[hero2race-1]) do
-        if HeroMin2 == array_heroes[hero2race-1][i].name2 then
-          if HeroCollectionPlayer2 == 2 then
-            RemoveObject(array_heroes[hero2race-1][i].p5);
-            print('hero2 del ', array_heroes[hero2race-1][i].name2)
-          end;
-          if HeroCollectionPlayer2 == 3 then
-            RemoveObject(array_heroes[hero2race-1][i].p7);
-            print('hero2 del ', array_heroes[hero2race-1][i].name2)
-          end;
-          array_heroes[hero2race-1][i].block_temply = 1;
-          i = length(array_heroes[hero2race-1]);
-        end;
-      end;
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."HeroTop.txt" );
-      MoveCameraForPlayers( 1, 33, 88, 0, 20, 0, 0, 0, 0, 1);
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."HeroTavern.txt" );
-    end;
-  end;
-end;
-
 DisguiseEnable1 = 0;
 DisguiseEnable2 = 0;
 DisguiseHero1 = 0;
@@ -6469,14 +6311,6 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
     DenyGarrisonCreaturesTakeAway('regrade2', 0);
     MakeHeroInteractWithObject (hero, 'regrade2');
     startThread (RegradeUnit2);
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_2) and (hero == HeroMax1) and HasHeroSkill(hero, 20) then
-    Scouting1Q();
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_2) and (hero == HeroMax2) and HasHeroSkill(hero, 20) then
-    Scouting2Q();
   end;
 
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_2) and GetObjectOwner(hero) == 1 and HasHeroSkill(hero, 112) then

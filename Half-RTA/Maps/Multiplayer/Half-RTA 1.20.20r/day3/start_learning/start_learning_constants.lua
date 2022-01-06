@@ -427,3 +427,9 @@ MAP_WEEK_ON_ASTROLOGY_STATS = {
     [STAT_KNOWLEDGE] = 1
   },
 };
+
+-- Соотношение навыка к специальной способности, добавляемой в книгу заклинаний
+MAP_SKILL_ON_CUSTOM_ABILITY = {
+  [PERK_SCOUTING] = CUSTOM_ABILITY_2,
+  [RANGER_FEAT_DISGUISE_AND_RECKON] = CUSTOM_ABILITY_2,
+}

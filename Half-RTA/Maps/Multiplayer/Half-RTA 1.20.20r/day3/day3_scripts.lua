@@ -109,21 +109,6 @@ function changePlayersArea()
   SetRegionBlocked ('block4', 1);
 end;
 
--- Получение иконки героя для игрока по герою
-function getHeroIconByHeroName(playerId, heroName)
-  print "getHeroIconByHeroName"
-
-  local raceId = RESULT_HERO_LIST[playerId].raceId;
-
-  for indexDictHero = 1, length(HEROES_BY_RACE[raceId]) do
-    local dictHero = HEROES_BY_RACE[raceId][indexDictHero];
-    
-    if dictHero.name == heroName then
-      return dictHero[playerId][1].red_icon;
-    end;
-  end;
-end;
-
 -- Отображение иконок выбранного списка героев у оппонента
 function setEnemyHeroPosters()
   print "setEnemyHeroPosters"
