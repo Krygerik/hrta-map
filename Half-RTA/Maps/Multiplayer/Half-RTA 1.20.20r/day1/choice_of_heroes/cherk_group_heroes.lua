@@ -229,7 +229,7 @@ function DeleteHeroGroupByIconName(iconName)
 
   -- Удаляем выбранный набор
   local playerId, deleteGroupIndex = getGroupDataByIconName(iconName);
-  deleteGroupByIndex(playerId, deleteGroupIndex);
+  hideGroupToUndergroundByIndex(playerId, deleteGroupIndex);
 
   -- Снимаем с другого набора триггеры
   for groupIndex = 1, length(RANDOM_GROUPS_HERO_ICONS[playerId].heroGroups) do
@@ -257,23 +257,23 @@ function DeleteHeroGroupByIconName(iconName)
   end;
 end;
 
--- Удаление группы героев по их индексу
-function deleteGroupByIndex(playerId, deleteIndexGroup)
-  print "deleteGroupByIndex"
-
+-- Скрытие иконок
+function hideGroupToUndergroundByIndex(playerId, hideIndexGroup)
+  print "hideGroupToUndergroundByIndex"
+  
   local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
 
   for groupIndex = 1, length(playerData.heroGroups) do
     local group = playerData.heroGroups[groupIndex];
 
-    if groupIndex == deleteIndexGroup then
+    if groupIndex == hideIndexGroup then
       group.deleted = true;
-
+      
       for heroIndex = 1, length(group.heroes) do
         local heroData = group.heroes[heroIndex];
 
-        RemoveObject(heroData.red.icon);
-        RemoveObject(heroData.blue.icon);
+        SetObjectPosition(heroData.red.icon, heroData.red.x, heroData.red.y, UNDERGROUND);
+        SetObjectPosition(heroData.blue.icon, heroData.blue.x, heroData.blue.y, UNDERGROUND);
       end;
     end;
   end;
@@ -290,7 +290,7 @@ function deleteResultHeroGroups()
        local group = playerData.heroGroups[groupIndex];
        
        if not group.deleted then
-         deleteGroupByIndex(playerId, groupIndex);
+         hideGroupToUndergroundByIndex(playerId, groupIndex);
        end;
      end;
   end;
@@ -363,6 +363,9 @@ function finishGroupCherk()
         end;
       end;
     end;
+    
+    -- Записываем список героев, которые будем показывать оппоненту
+    RESULT_HERO_LIST[playerId].choised_heroes = selectedHeroes;
 
     -- Выбор 2 случайных героев из переданного списка
     setRandomHeroFromHeroList(playerId, playerData.raceId, selectedHeroes);

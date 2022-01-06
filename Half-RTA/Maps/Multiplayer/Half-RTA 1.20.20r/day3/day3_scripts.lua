@@ -10,6 +10,7 @@ function day3()
 
   addHeroesToPlayers();
   setHeroesInitialProperties();
+  setEnemyHeroPosters();
   changePlayersArea();
   doFile(PATH_TO_DAY3_SCRIPTS.."spells_generate/spells_generate_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."start_bonus/start_bonus_scripts.lua");
@@ -106,6 +107,56 @@ function changePlayersArea()
   SetRegionBlocked ('block2', 1);
   SetRegionBlocked ('block3', 1);
   SetRegionBlocked ('block4', 1);
+end;
+
+-- Получение иконки героя для игрока по герою
+function getHeroIconByHeroName(playerId, heroName)
+  print "getHeroIconByHeroName"
+
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+
+  for indexDictHero = 1, length(HEROES_BY_RACE[raceId]) do
+    local dictHero = HEROES_BY_RACE[raceId][indexDictHero];
+    
+    if dictHero.name == heroName then
+      return dictHero[playerId][1].red_icon;
+    end;
+  end;
+end;
+
+-- Отображение иконок выбранного списка героев у оппонента
+function setEnemyHeroPosters()
+  print "setEnemyHeroPosters"
+
+  local ENEMY_POSTERS_POSITION = {
+    [PLAYER_1] = {
+      { x = 31, y = 85 },
+      { x = 31, y = 86 },
+      { x = 31, y = 87 },
+      { x = 31, y = 88 },
+      { x = 31, y = 89 },
+      { x = 31, y = 90 },
+    },
+    [PLAYER_2] = {
+      { x = 46, y = 19 },
+      { x = 46, y = 20 },
+      { x = 46, y = 21 },
+      { x = 46, y = 22 },
+      { x = 46, y = 23 },
+      { x = 46, y = 24 },
+    },
+  };
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    local enemyPlayerId = PLAYERS_OPPONENT[playerId];
+    local enemyChoisedHeroes = RESULT_HERO_LIST[enemyPlayerId].choised_heroes;
+
+    for indexHero, heroName in enemyChoisedHeroes do
+      local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
+      
+      SetObjectPosition(iconName, ENEMY_POSTERS_POSITION[playerId][indexHero].x, ENEMY_POSTERS_POSITION[playerId][indexHero].y, GROUND);
+    end;
+  end;
 end;
 
 -- Точка входа

@@ -158,8 +158,20 @@ Djovanni = GetPlayerHeroes(PLAYER_2)[0]
 -- Итоговый список расы и героев для игры
 -- Служит для передачи значения для начала прокачки
 RESULT_HERO_LIST = {
-  [PLAYER_1] = { raceId = nil, heroes = {} },
-  [PLAYER_2] = { raceId = nil, heroes = {} },
+  [PLAYER_1] = {
+    raceId = nil,
+    -- Список героев, выданных игроку (3)
+    heroes = {},
+    -- Список героев после черков (5)
+    choised_heroes = {},
+  },
+  [PLAYER_2] = {
+    raceId = nil,
+    -- Список героев, выданных игроку (3)
+    heroes = {},
+    -- Список героев после черков (5)
+    choised_heroes = {},
+  },
 };
 
 -- Все свойства главных героев игроков
@@ -257,6 +269,12 @@ PLAYERS_MAIN_HERO_PROPS = {
 
 -- Таблица ИД всех игроков
 PLAYER_ID_TABLE = { PLAYER_1, PLAYER_2 };
+
+-- Соотношение ИД игрока к ИД его соперника
+PLAYERS_OPPONENT = {
+  [PLAYER_1] = PLAYER_2,
+  [PLAYER_2] = PLAYER_1,
+};
 
 -- Список начальных навыков и/или школ для каждого героя
 INITIAL_HERO_SKILLS = {

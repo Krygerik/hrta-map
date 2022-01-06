@@ -1354,7 +1354,6 @@ LevelUp = { 8500, 9000, 9500, 10000, 10500, 11000}
 SkillCost = 12000;
 SkillCostStart = 14000;
 StatRegenCost = 5000;
-TavernCost = 5000;
 
 StartExperience = 54000;
 HalfLevel = 9;

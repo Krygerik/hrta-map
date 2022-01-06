@@ -235,7 +235,7 @@ function handlerAddOrDeleteHero(playerId, heroName)
   if action == TURN_ACTIONS.CHOOSING then
     addHeroForPlayer(playerId, heroName, true);
   else
-    deleteHeroFromList(playerId, heroName, true);
+    hideHeroToUnderground(playerId, heroName, true);
   end;
 
   checkOnSelectMaximumHeroes();
@@ -275,9 +275,9 @@ function addHeroForPlayer(playerId, heroName, manual)
   end;
 end;
 
--- ”даление геро€ из набора
-function deleteHeroFromList(playerId, heroName, manual)
-  print "deleteHeroFromList"
+-- —крытие иконки геро€ в подземелье
+function hideHeroToUnderground(playerId, heroName, manual)
+  print "hideHeroToUnderground"
 
   for heroIndex = 1, length(randomHeroList[playerId]) do
     local heroData = randomHeroList[playerId][heroIndex];
@@ -286,10 +286,11 @@ function deleteHeroFromList(playerId, heroName, manual)
       heroData.deleted = true;
       heroData.manual_change = manual;
 
-      RemoveObject(heroData.red_icon);
-      RemoveObject(heroData.blue_icon);
+      SetObjectPosition(heroData.red_icon, 1, 1, UNDERGROUND);
+      SetObjectPosition(heroData.blue_icon, 1, 1, UNDERGROUND);
     end;
   end;
+  -- TODO
 end;
 
 -- ѕроверка на максимум выбранных героев на каждой стороне
@@ -330,7 +331,7 @@ function checkOnSelectMaximumHeroes()
         local heroData = heroList[heroIndex];
 
         if (not heroData.deleted and not heroData.selected) then
-          deleteHeroFromList(playerId, heroData.name);
+          hideHeroToUnderground(playerId, heroData.name);
         end;
       end;
     end;
@@ -409,6 +410,9 @@ function setResultHeroes()
         selectedHero[pushedIndex] = heroData.name;
       end;
     end;
+    
+    -- «аписываем список героев, которые будем показывать оппоненту
+    RESULT_HERO_LIST[playerId].choised_heroes = selectedHero;
 
     -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
     setRandomHeroFromHeroList(playerId, heroList[1].raceId, selectedHero);
