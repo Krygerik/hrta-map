@@ -17,7 +17,6 @@ function day3()
   doFile(PATH_TO_DAY3_SCRIPTS.."town_building/town_building_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."set_initial_resources/set_initial_resources_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."start_learning/start_learning_scripts.lua");
-  doFile(PATH_TO_DAY3_SCRIPTS.."artifact_merchant/artifact_merchant_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."buy_hero/buy_hero_scripts.lua");
 end;
 

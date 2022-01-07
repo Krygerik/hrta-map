@@ -5,24 +5,6 @@ PATH_TO_START_LEARNING_MESSAGES = PATH_TO_START_LEARNING_MODULE.."messages/";
 doFile(PATH_TO_START_LEARNING_MODULE..'start_learning_constants.lua');
 sleep(1);
 
--- Статус использования игроками разведки
-PLAYER_USE_SCOUTING_STATUS = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
-}
-
--- Статус ожидания игроками прокачки оппонента
-PLAYER_SCOUTING_WAITING_STATUS = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
-};
-
--- Статусы применения игроками навыка "Бесшумный преследователь"
-PLAYER_USE_DISGUISE_STATUS = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
-};
-
 -- Скрипты для обработки прокачки героя
 function start_learning_script()
   print "start_learning_script"
@@ -571,6 +553,59 @@ function setControlStatsTriggerOnHero(playerId)
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
 end;
 
+-- Обработчик получения героем нового навыка
+function handleHeroAddSkill(triggerHero, skillId)
+  print "handleHeroAddSkill"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  -- Если не выбран главный герой, не производим никаких внутренних расчетов
+  if playerMainHero == nil then
+    return nil;
+  end;
+
+  local removedSkillId = getRemovedUnremovableSkillId(playerId);
+
+  -- Проверяем, не скинул ли игрок нескидываемый навык
+  if removedSkillId ~= nil then
+    removeHeroSkill(playerMainHero, skillId);
+
+    GiveHeroSkill(playerMainHero, removedSkillId);
+
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) +  2500));
+
+    ShowFlyingSign(PATH_TO_START_LEARNING_MESSAGES.."cannot_remove_skill.txt", playerMainHero, playerId, 5.0);
+
+    return nil;
+  end;
+
+  local skillWithStats = MAP_SKILLS_TO_CHANGING_STATS[skillId];
+
+  -- Если навык, дающий статы
+  if skillWithStats ~= nil then
+    changeMainHeroStatsForSkills(playerId, skillWithStats.stat, skillWithStats.count);
+  end;
+
+  -- если взяли образование
+  if skillId == SKILL_LEARNING or skillId == HERO_SKILL_BARBARIAN_LEARNING then
+    addPlayerMainHeroLearningStats(playerId);
+  end;
+  
+  -- Если трофеи
+  if skillId == WIZARD_FEAT_SPOILS_OF_WAR then
+    setSpoilsTrigger(playerId);
+  end;
+
+  local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skillId];
+
+  -- Если навык добавляется в книгу заклинаний
+  if customAbility ~= nil then
+    ControlHeroCustomAbility(playerMainHero, customAbility, CUSTOM_ABILITY_ENABLED);
+    Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
+  end;
+end;
+
 -- Обработчик потери героем нового навыка
 function handleHeroRemoveSkill(triggerHero, skill)
   print "handleHeroRemoveSkill"
@@ -597,6 +632,11 @@ function handleHeroRemoveSkill(triggerHero, skill)
     removePlayerMainHeroLearningStats(playerId);
   end;
 
+  -- Если трофеи
+  if skill == WIZARD_FEAT_SPOILS_OF_WAR then
+    Trigger(OBJECT_TOUCH_TRIGGER, MAP_MERCHANT_ON_PLAYER[playerId], 'noop');
+  end;
+
   local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skill];
 
   -- Если это навык, привязанный к CUSTOM_ABILITY_2
@@ -609,6 +649,82 @@ function handleHeroRemoveSkill(triggerHero, skill)
   )then
     ControlHeroCustomAbility(triggerHero, customAbility, CUSTOM_ABILITY_DISABLED);
   end;
+end;
+
+-- Установка триггеров для активации Трофеев
+function setSpoilsTrigger(playerId)
+  print "setSpoilsTrigger"
+
+  Trigger(OBJECT_TOUCH_TRIGGER, MAP_MERCHANT_ON_PLAYER[playerId], 'handleTouchArtifactMerchant');
+end;
+
+-- Обработчик касания героя с лавкой
+function handleTouchArtifactMerchant(triggerHero)
+  print "handleTouchArtifactMerchant"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+
+  if PLAYERS_USE_SPOILS_STATUS[playerId] ~= nil then
+    return nil;
+  end;
+
+  QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_spoils.txt", 'spoilsOfWar', 'noop');
+end;
+
+-- Активация трофеев
+function spoilsOfWar(strPlayerId)
+  print "spoilsOfWar"
+
+  local playerId = strPlayerId + 0;
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  -- Формируем список слотов, которые заняты у героя текущими артами
+  -- Список занятых слотов
+  local havingItemPositionList = {};
+
+  for _, art in ALL_ARTS_LIST do
+    if HasArtefact(playerMainHeroProps.name, art.id) then
+      local slotIsNotAdded = not nil; -- Ору с этого, почему то адекватный true тут не существует :)
+
+      for _, position in havingItemPositionList do
+        if position == art.position then
+          slotIsNotAdded = nil;
+        end;
+      end;
+
+      if slotIsNotAdded then
+        havingItemPositionList[length(havingItemPositionList)] = art.position;
+      end;
+    end;
+  end;
+
+  -- На основе списка занятых слотов формируем список артефактов мажорных артов в доступные слоты
+  -- Список возможных для выдачи артефактов
+  local allowedItemIdList = {};
+
+  for _, art in ALL_ARTS_LIST do
+    if art.level == ARTS_LEVELS.MAJOR then
+      local isAllowedPosition = not nil;
+
+      for _, position in havingItemPositionList do
+        if art.position == position then
+          isAllowedPosition = nil;
+        end;
+      end;
+
+      if isAllowedPosition then
+        allowedItemIdList[length(allowedItemIdList)] = art.id;
+      end;
+    end;
+  end;
+
+  -- Теперь рандомим из этой кучи выдаваемый арт
+  local randomIndexArt = random(length(allowedItemIdList));
+
+  GiveArtefact(playerMainHeroProps.name, allowedItemIdList[randomIndexArt]);
+
+  -- И запрещаем игроку больше использовать трофеи
+  PLAYERS_USE_SPOILS_STATUS[playerId] = not nil;
 end;
 
 -- Возврат ментором средств при сброске навыков
@@ -650,12 +766,17 @@ function getRemovedUnremovableSkillId(playerId)
 
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
-  -- Если сбросил разведку
+  -- Если сбросил Трофеи
+  if HasHeroSkill(playerMainHero, WIZARD_FEAT_SPOILS_OF_WAR) == nil and PLAYERS_USE_SPOILS_STATUS[playerId] ~= nil then
+    return WIZARD_FEAT_SPOILS_OF_WAR;
+  end;
+
+  -- Если сбросил Разведку
   if HasHeroSkill(playerMainHero, PERK_SCOUTING) == nil and PLAYER_USE_SCOUTING_STATUS[playerId] ~= nil then
     return PERK_SCOUTING;
   end;
   
-  -- Если сбросил разведку
+  -- Если сбросил Бесшумного преследователя
   if HasHeroSkill(playerMainHero, RANGER_FEAT_DISGUISE_AND_RECKON) == nil and PLAYER_USE_DISGUISE_STATUS[playerId] ~= nil then
     return RANGER_FEAT_DISGUISE_AND_RECKON;
   end;
@@ -716,55 +837,6 @@ function removeHeroSkill(heroName, removeSkillId)
   local playerId = GetPlayerFilter(GetObjectOwner(heroName));
 
   refreshMainHeroStats(playerId);
-end;
-
-
--- Обработчик получения героем нового навыка
-function handleHeroAddSkill(triggerHero, skillId)
-  print "handleHeroAddSkill"
-  
-  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
-  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  
-  -- Если не выбран главный герой, не производим никаких внутренних расчетов
-  if playerMainHero == nil then
-    return nil;
-  end;
-  
-  local removedSkillId = getRemovedUnremovableSkillId(playerId);
-  
-  -- Проверяем, не скинул ли игрок нескидываемый навык
-  if removedSkillId ~= nil then
-    removeHeroSkill(playerMainHero, skillId);
-    
-    GiveHeroSkill(playerMainHero, removedSkillId);
-    
-    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) +  2500));
-
-    ShowFlyingSign(PATH_TO_START_LEARNING_MESSAGES.."cannot_remove_skill.txt", playerMainHero, playerId, 5.0);
-
-    return nil;
-  end;
-
-  local skillWithStats = MAP_SKILLS_TO_CHANGING_STATS[skillId];
-
-  -- Если навык, дающий статы
-  if skillWithStats ~= nil then
-    changeMainHeroStatsForSkills(playerId, skillWithStats.stat, skillWithStats.count);
-  end;
-  
-  -- если взяли образование
-  if skillId == SKILL_LEARNING or skillId == HERO_SKILL_BARBARIAN_LEARNING then
-    addPlayerMainHeroLearningStats(playerId);
-  end;
-  
-  local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skillId];
-
-  -- Если навык добавляется в книгу заклинаний
-  if customAbility ~= nil then
-    ControlHeroCustomAbility(playerMainHero, customAbility, CUSTOM_ABILITY_ENABLED);
-    Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
-  end;
 end;
 
 -- Обработчик использования кастомной способности

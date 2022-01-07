@@ -433,3 +433,39 @@ MAP_SKILL_ON_CUSTOM_ABILITY = {
   [PERK_SCOUTING] = CUSTOM_ABILITY_2,
   [RANGER_FEAT_DISGUISE_AND_RECKON] = CUSTOM_ABILITY_2,
 }
+
+-- Статус использования игроками трофеев
+PLAYER_USE_SPOILS_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Статус использования игроками разведки
+PLAYER_USE_SCOUTING_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+}
+
+-- Статус ожидания игроками прокачки оппонента
+PLAYER_SCOUTING_WAITING_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Статусы применения игроками навыка "Бесшумный преследователь"
+PLAYER_USE_DISGUISE_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Соотношение лавок артефактов к игрокам
+MAP_MERCHANT_ON_PLAYER = {
+  [PLAYER_1] = 'lavka1',
+  [PLAYER_2] = 'lavka2',
+}
+
+-- Статус использования трофеев у обоих игроков
+PLAYERS_USE_SPOILS_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
