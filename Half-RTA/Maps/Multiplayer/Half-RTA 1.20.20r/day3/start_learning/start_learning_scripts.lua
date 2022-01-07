@@ -643,7 +643,8 @@ function handleHeroRemoveSkill(triggerHero, skill)
   if (
     customAbility ~= nil
     and (
-      (skill == PERK_SCOUTING and HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) == nil)
+      skill == PERK_FORTUNATE_ADVENTURER
+      or (skill == PERK_SCOUTING and HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) == nil)
       or (skill == RANGER_FEAT_DISGUISE_AND_RECKON and HasHeroSkill(mainHeroName, PERK_SCOUTING) == nil)
     )
   )then
@@ -780,6 +781,11 @@ function getRemovedUnremovableSkillId(playerId)
   if HasHeroSkill(playerMainHero, RANGER_FEAT_DISGUISE_AND_RECKON) == nil and PLAYER_USE_DISGUISE_STATUS[playerId] ~= nil then
     return RANGER_FEAT_DISGUISE_AND_RECKON;
   end;
+  
+  -- Если сбросил Удачу в пути
+  if HasHeroSkill(playerMainHero, PERK_FORTUNATE_ADVENTURER) == nil and PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] ~= nil then
+    return PERK_FORTUNATE_ADVENTURER;
+  end;
 
   return nil;
 end;
@@ -855,11 +861,16 @@ function handleUseCustomAbility(triggerHero, ability)
       handleUseDisguise(playerId)
     end;
   end;
+  
+  -- если использовали "Удача в пути"
+  if ability == CUSTOM_ABILITY_4 then
+    handleUseFortunareAdventure(playerId);
+  end;
 end;
 
 -- Обработка использования способности "Бесшумный преследователь"
 function handleUseDisguise(playerId)
-  print "handleUseScouting"
+  print "handleUseDisguise"
 
   QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_disguise.txt", 'disguise("'..playerId..'")', 'noop');
 end;
@@ -956,6 +967,74 @@ function scouting(strPlayerId)
   end;
   
   moveCameraOnEnemyHero(playerId);
+end;
+
+
+-- Обработчик использования "Удача в пути" в книге заклинаний
+function handleUseFortunareAdventure(playerId)
+  print "handleUseFortunareAdventure"
+
+  -- Если игрок еще не использовал этот навык - предупреждаем его о последствиях
+  if PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] == nil then
+    QuestionBoxForPlayers(
+      playerId,
+      PATH_TO_START_LEARNING_MESSAGES.."question_use_fortunare_adventure.txt",
+      'fortunareAdventure("'..playerId..'")',
+      'noop'
+    );
+
+    return nil;
+  end;
+
+  fortunareAdventure(playerId);
+end;
+
+-- Активация удачи в пути
+function fortunareAdventure(strPlayerId)
+  print "fortunareAdventure"
+
+  local playerId = strPlayerId + 0;
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  -- Соотношение дополнительных лавок к игрокам
+  local MAP_ADDITIONAL_MERCHANT_ON_PLAYERS = {
+    [PLAYER_1] = 'FortunateAdventure1',
+    [PLAYER_2] = 'FortunateAdventure2',
+  };
+
+  PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] = not nil;
+
+  moveAllMainHeroArtsToStorage(playerId);
+
+  MakeHeroInteractWithObject(playerMainHero, MAP_ADDITIONAL_MERCHANT_ON_PLAYERS[playerId]);
+
+  -- Без костылей подсчитать скидку можно только через колбек
+  MessageBoxForPlayers(
+    playerId,
+    PATH_TO_START_LEARNING_MESSAGES.."fortunare_adventure_have_discount.txt",
+    'applyFortunareAdventureDiscount'
+  );
+end;
+
+-- Применение скидок для артефактов с Удачи в пути
+function applyFortunareAdventureDiscount(strPlayerId)
+  print "applyFortunareAdventureDiscount"
+
+  local playerId = strPlayerId + 0;
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  local discountCoefficient = 0.2;
+  local discount = 0;
+
+  for _, art in ALL_ARTS_LIST do
+    if HasArtefact(playerMainHero, art.id) then
+      discount = discount + (art.price * discountCoefficient);
+    end;
+  end;
+
+  ShowFlyingSign({PATH_TO_START_LEARNING_MESSAGES.."n_goldback.txt"; eq = discount}, playerMainHero, playerId, 5);
+  SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) + discount);
+
+  getAllMainHeroArtsFromStorage(playerId);
 end;
 
 -- Генерация главному герою игрока статов образования

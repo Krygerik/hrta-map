@@ -1451,10 +1451,6 @@ function levelup12()
   if HasHeroSkill(hero1, 1) and LogisticsEnable1 == 0 then
     SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + LogisticsSum * GetHeroSkillMastery(hero1, 1)));
   end;
-  if HasHeroSkill(hero1, 33) then
-    ControlHeroCustomAbility(hero1, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
-    Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
-  end;
   Scouting1DopInfo();
   if hero1 == "Nikolas" or hero1 == "Nikolas2" then
     SetObjectOwner('Dwel1', PLAYER_1);
@@ -1479,10 +1475,6 @@ function levelup22()
   end;
   if HasHeroSkill(hero2, 1) and LogisticsEnable2 == 0 then
     SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + LogisticsSum * GetHeroSkillMastery(hero2, 1)));
-  end;
-  if HasHeroSkill(hero2, 33) then
-    ControlHeroCustomAbility(hero2, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
-    Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
   end;
   Scouting2DopInfo();
   if hero2 == "Nikolas" or hero2 == "Nikolas2" then
@@ -1946,8 +1938,6 @@ ReturnSkillPlayer1 = 0;
 ReturnSkillPlayer2 = 0;
 EstatesUse1 = 0;
 EstatesUse2 = 0;
-SpoilsUse1 = 0;
-SpoilsUse2 = 0;
 Skill1_78 = 0;
 Skill2_78 = 0;
 SumSkill1 = 0;
@@ -1977,7 +1967,6 @@ function AddSkill1(hero, skill)
   if skill == 129 and GetDate (DAY) == 4 and SpoilsUse1 == 0 then Spoils1(hero) end;
   if skill ==  30 and GetDate (DAY) == 4 then diplomacy1(hero) end;
   if skill == 79 and StudentUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 1000)); StudentUse1 = 1; end;
-  if skill == 33 and GetHeroStat(hero, STAT_EXPERIENCE) > 1000 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end; --FortunateAdventure1(hero) end;
   if (skill == 29 and RemSk1 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates1Q(hero); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport1(hero) end;
@@ -2008,7 +1997,6 @@ function AddSkill2(hero, skill)
   if skill == 129 and GetDate (DAY) == 4 and SpoilsUse2 == 0 then Spoils2(hero) end;
   if skill ==  30 and GetDate (DAY) == 4 then diplomacy2(hero) end;
   if skill == 79 and StudentUse2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 1000)); StudentUse2 = 1; end;
-  if skill == 33 and GetHeroStat(hero, STAT_EXPERIENCE) > 1000 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end; --FortunateAdventure2(hero) end;
   if (skill == 29 and RemSk2 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates2Q(hero); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport2(hero) end;
@@ -2017,15 +2005,10 @@ function AddSkill2(hero, skill)
   if skill == 181 then DefendUsAll2(hero); end;
   if skill == 1 then Logistics2(hero) end;
   if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation2(); end;
-  if skill == 131 then ChangeHeroStat(hero, 2, -2); end;
-  if skill == 186 then ChangeHeroStat(hero, 2, -1); end;
-  if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
   if skill == 102 then startThread(HeraldFunction2); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
-  if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
-  if skill == 87 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
@@ -2038,20 +2021,13 @@ function RemoveSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' -' .. skill
 
   ControlStatHero(hero, skill, 0);
-  sleep(1);
-  if skill == 129 and SpoilsUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 16 and AvengerUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 17 and minikUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 29 and EstatesDiscountUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 29 and EstatesDiscountUse1 == 0 and ReturnSkillPlayer1 == 0 then EstatesEnable1 = 0; end;
-  if skill == 33 and FortunateAdventureEnable1 ~= 0 then ReturnSkillPlayer1 = 1; end;
-  if skill == 33 and FortunateAdventureEnable1 == 0 and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
   if skill == 152 and RunesChangeUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 1 then DelLogistics1(hero); if LogisticsNoMoney1 == 1 then ReturnSkillPlayer1 = 1; end; end;
   if skill == 21 and NavUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 131 then ChangeHeroStat(hero, 2, 2); end;
-  if skill == 186 then ChangeHeroStat(hero, 2, 1); end;
-  if skill == 185 then ChangeHeroStat(hero, 4, -2); end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
@@ -2059,8 +2035,6 @@ function RemoveSkill1(hero, skill)
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
-  if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
-  if skill == 87 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer1 == 0 then Learning1(hero) end;
@@ -2072,20 +2046,13 @@ function RemoveSkill2(hero, skill)
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' -' .. skill
 
   ControlStatHero(hero, skill, 0);
-  sleep(1);
-  if skill == 129 and SpoilsUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 16 and AvengerUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 17 and minikUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 29 and EstatesDiscountUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 29 and EstatesDiscountUse2 == 0 and ReturnSkillPlayer2 == 0 then EstatesEnable2 = 0; end;
-  if skill == 33 and FortunateAdventureEnable2 ~= 0 then ReturnSkillPlayer2 = 1; end;
-  if skill == 33 and FortunateAdventureEnable2 == 0 and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED); end;
   if skill == 152 and RunesChangeUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 1 then DelLogistics2(hero); if LogisticsNoMoney2 == 1 then ReturnSkillPlayer2 = 1; end; end;
   if skill == 21 and NavUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 131 then ChangeHeroStat(hero, 2, 2); end;
-  if skill == 186 then ChangeHeroStat(hero, 2, 1); end;
-  if skill == 185 then ChangeHeroStat(hero, 4, -2); end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
@@ -2093,8 +2060,6 @@ function RemoveSkill2(hero, skill)
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
   if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
-  if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
-  if skill == 87 then ChangeHeroStat(hero, 3, 2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
@@ -2559,92 +2524,6 @@ function DeleteRace()
   RemoveObject('ork2');
 end;
 
-
-arrayGrade1 = {};
-arrayGrade2 = {};
-arrayGrade1 = {  1,   3,   5,   7,   9,  11,  13,  15,  17,  19,  21,  23,  25,  27,  29,  31,  34,  35,  37,  39,  41,  43,  45,  47,  49,  51,  53,  55,  57,  59,  61,  63,  65,  67,  69,  71,  73,  75,  77,  79,  81,  83,  92,  94,  96,  98, 100, 102, 105, 117, 119, 121, 123, 125, 127, 129}
-arrayGrade2 = {106, 107, 108, 109, 110, 111, 112, 131, 132, 133, 134, 135, 136, 137, 152, 153, 154, 155, 156, 157, 158, 145, 146, 147, 148, 149, 150, 151, 159, 160, 161, 162, 163, 164, 165, 138, 139, 140, 141, 142, 143, 144, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179}
-
-function Regrade_CUSTOM_F(hero, CUSTOM_ABILITY)
-
-  if (CUSTOM_ABILITY == CUSTOM_ABILITY_1) and (GetObjectOwner(hero) == 1) then
-    HeroR1 = hero;
-    x1, y1 = GetObjectPosition(HeroR1);
-    DenyGarrisonCreaturesTakeAway('regrade1', 0);
-    MakeHeroInteractWithObject (hero, 'regrade1');
-    startThread (RegradeUnit1);
-  end;
-
-  if (CUSTOM_ABILITY == CUSTOM_ABILITY_1) and (GetObjectOwner(hero) == 2) then
-    HeroR2 = hero;
-    x2, y2 = GetObjectPosition(HeroR2);
-    DenyGarrisonCreaturesTakeAway('regrade2', 0);
-    MakeHeroInteractWithObject (hero, 'regrade2');
-    startThread (RegradeUnit2);
-  end;
-
-end;
-
-function RegradeUnit1()
-  x11, y11 = GetObjectPosition(HeroR1);
-  while (x11 == x1 and y11 == y1) do
-    RegradeUse1 = 0;
-    for a = 1, length(arrayGrade1) do
-      if GetObjectCreatures('regrade1', arrayGrade1[a]) > 0 then
-        AddHeroCreatures(HeroR1, arrayGrade2[a], GetObjectCreatures('regrade1', arrayGrade1[a]));
-        --Play3DSoundForPlayers ( 1, "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", x1, y1, 0);
-        RegradeUse1 = 1;
-        delCreat1 = GetObjectCreatures('regrade1', arrayGrade1[a]);
-        RemoveObjectCreatures('regrade1', arrayGrade1[a], delCreat1);
-        a = length(arrayGrade1);
-      end;
-    end;
-    if RegradeUse1 == 0 then
-      for a = 1, length(arrayGrade2) do
-        if GetObjectCreatures('regrade1', arrayGrade2[a]) > 0 then
-          AddHeroCreatures(HeroR1, arrayGrade1[a], GetObjectCreatures('regrade1', arrayGrade2[a]));
-          --Play3DSoundForPlayers ( 1, "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", x1, y1, 0);
-          RegradeUse1 = 1;
-          delCreat1 = GetObjectCreatures('regrade1', arrayGrade2[a]);
-          RemoveObjectCreatures('regrade1', arrayGrade2[a], delCreat1);
-          a = length(arrayGrade2);
-        end;
-      end;
-    end;
-    sleep(1);
-    x11, y11 = GetObjectPosition(HeroR1);
-  end;
-end;
-
-function RegradeUnit2()
-  x22, y22 = GetObjectPosition(HeroR2);
-  while (x22 == x2 and y22 == y2) do
-    RegradeUse2 = 0;
-    for b = 1, length(arrayGrade1) do
-      if GetObjectCreatures('regrade2', arrayGrade1[b]) > 0 then
-        AddHeroCreatures(HeroR2, arrayGrade2[b], GetObjectCreatures('regrade2', arrayGrade1[b]));
-        RegradeUse2 = 1;
-        delCreat2 = GetObjectCreatures('regrade2', arrayGrade1[b]);
-        RemoveObjectCreatures('regrade2', arrayGrade1[b], delCreat2);
-        b = length(arrayGrade1);
-      end;
-    end;
-    if RegradeUse2 == 0 then
-      for b = 1, length(arrayGrade2) do
-        if GetObjectCreatures('regrade2', arrayGrade2[b]) > 0 then
-          AddHeroCreatures(HeroR2, arrayGrade1[b], GetObjectCreatures('regrade2', arrayGrade2[b]));
-          RegradeUse2 = 1;
-          delCreat2 = GetObjectCreatures('regrade2', arrayGrade2[b]);
-          RemoveObjectCreatures('regrade2', arrayGrade2[b], delCreat2);
-          b = length(arrayGrade2);
-        end;
-      end;
-    end;
-    sleep(1);
-    x22, y22 = GetObjectPosition(HeroR2);
-  end;
-end;
-
 ------ ELF ARMIES ---------------------------------------------------------------
 
 function elf_arm ()
@@ -2844,137 +2723,6 @@ end;
 
 kol_u = {};
 price = {};
-
-PlayerInTown = 0;
-PlayerInBoat = 0;
-
-function TownAndBoat()
-  ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED);
-  ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED);
-  ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
-  ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_ENABLED);
-  for i = 1, 305 do
-    if GetHeroStat(HeroMax1, STAT_EXPERIENCE) > 1000 or GetHeroStat(HeroMax2, STAT_EXPERIENCE) > 1000
-    or GetHeroStat(HeroMin1, STAT_EXPERIENCE) > 1000 or GetHeroStat(HeroMin2, STAT_EXPERIENCE) > 1000
-    or GetHeroStat(HeroDop1, STAT_EXPERIENCE) > 1000 or GetHeroStat(HeroDop2, STAT_EXPERIENCE) > 1000 or i == 305 then
-      ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-      ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-      ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-      ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-    end;
-    sleep (3);
---    print (i);
-  end;
-end;
-
-
-function TownAndBoat_CUSTOM_F(hero, CUSTOM_ABILITY)
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == heroes1[0]) then
-    if (GetPlayerResource(PLAYER_1, GOLD) >= 35000) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."TownVopros.txt", 'TownYES1', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."NOmoney.txt" );
-    end;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == heroes1[0]) then
-    if (GetPlayerResource(PLAYER_1, GOLD) >= 15000) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."BoatVopros.txt", 'BoatYES1', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."NOmoney.txt" );
-    end;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == heroes2[0]) then
-    if (GetPlayerResource(PLAYER_2, GOLD) >= 35000) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."TownVopros.txt", 'TownYES2', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."NOmoney.txt" );
-    end;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == heroes2[0]) then
-    if (GetPlayerResource(PLAYER_2, GOLD) >= 15000) then
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."BoatVopros.txt", 'BoatYES2', 'no');
-    else
-      MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."NOmoney.txt" );
-    end;
-  end;
-
-end;
-
-function TownYES1()
-  if  GetHeroStat(HeroMax1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMax2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroMin1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMin2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroDop1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroDop2, STAT_EXPERIENCE) <= 1000 then
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - 35000));
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 35000));
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."TownInfo.txt" );
-    PlayerInTown = 1;
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-  end;
-end;
-
-function TownYES2()
-  if  GetHeroStat(HeroMax1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMax2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroMin1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMin2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroDop1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroDop2, STAT_EXPERIENCE) <= 1000 then
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - 35000));
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 35000));
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."TownInfo.txt" );
-    PlayerInTown = 2;
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-  end;
-end;
-
-function BoatYES1()
-  if  GetHeroStat(HeroMax1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMax2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroMin1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMin2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroDop1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroDop2, STAT_EXPERIENCE) <= 1000 then
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - 15000));
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 15000));
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."BoatInfo.txt" );
-    PlayerInBoat = 1;
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-  end;
-end;
-
-function BoatYES2()
-  if  GetHeroStat(HeroMax1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMax2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroMin1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroMin2, STAT_EXPERIENCE) <= 1000
-  and GetHeroStat(HeroDop1, STAT_EXPERIENCE) <= 1000 and GetHeroStat(HeroDop2, STAT_EXPERIENCE) <= 1000 then
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - 15000));
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 15000));
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."BoatInfo.txt" );
-    PlayerInBoat = 2;
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-    ControlHeroCustomAbility(heroes2[0], CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-  end;
-end;
-
-function BattleInTown1()
-  DisableAutoEnterTown('RANDOMTOWN1', true);
-  MakeHeroInteractWithObject (HeroMax1, 'RANDOMTOWN1'  );
-  MakeHeroInteractWithObject (HeroMax2, HeroMax1);
-end;
-
-function BattleInTown2()
-  DisableAutoEnterTown('RANDOMTOWN2', true);
-  MakeHeroInteractWithObject (HeroMax2, 'RANDOMTOWN2'  );
-  MakeHeroInteractWithObject (HeroMax1, HeroMax2);
-end;
 
 array_Archer_ID = {}
 array_Archer_ID = { 3, 9, 21, 29, 37, 47, 49, 57, 63, 69, 71, 81, 85, 94, 100, 107, 110, 119, 134, 147, 148, 156, 159, 162, 165, 167, 170, 174}
@@ -5170,106 +4918,6 @@ function ChangeRandomTown(hero)
   UpgradeTownBuilding('TOWN', 1);
 end;
 
-FortunateAdventureEnable1 = 0
-FortunateAdventureEnable2 = 0
-
-arrayArtsForFortunateAdventure1 = {}
-arrayArtsForFortunateAdventure2 = {}
-
-function FortunateAdventure1()
-  if (hero1race == 5 or hero1race == 6) and IsHeroInTown(HeroMax1, 'RANDOMTOWN1', 1, 0) then
-    MoveHeroRealTime(HeroMax1, 55, 80);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN1', 'FortunateAdventureBlockInTower1');
-  end;
-  arrayArtsForFortunateAdventure1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  kol_arts_hero1 = 0
-  MakeHeroInteractWithObject (HeroMax1, 'FortunateAdventure1');
-  FortunateAdventureEnable1 = 1;
-  NewArt1 = 0;
-  for lev_art1 = 0, 2 do
-    for num_art1 = 1, length(array_arts[lev_art1]) do
-      if HasArtefact(HeroMax1, array_arts[lev_art1][num_art1].id) then
-        arrayArtsForFortunateAdventure1[kol_arts_hero1] = array_arts[lev_art1][num_art1].id;
-        kol_arts_hero1 = kol_arts_hero1 + 1;
-      end;
-    end;
-  end;
-  while FortunateAdventureEnable1 == 1 do
-    Gold1 = GetPlayerResource(PLAYER_1, GOLD);
-    sleep(2);
-    for lev_art1 = 0, 2 do
-      for num_art1 = 1, length(array_arts[lev_art1]) do
-        if HasArtefact(HeroMax1, array_arts[lev_art1][num_art1].id) then
-          HasArt1 = 0;
-          for i = 0, kol_arts_hero1 do
-            if arrayArtsForFortunateAdventure1[i] == array_arts[lev_art1][num_art1].id then
-              HasArt1 = 1;
-            end;
-          end;
-        end;
-        if HasArtefact(HeroMax1, array_arts[lev_art1][num_art1].id) and HasArt1 == 0 then
-          arrayArtsForFortunateAdventure1[kol_arts_hero1] = array_arts[lev_art1][num_art1].id;
-          kol_arts_hero1 = kol_arts_hero1 + 1;
-          NewArt1 = 1;
-        end;
-        if NewArt1 == 1 and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) <= 1.05 * array_arts[lev_art1][num_art1].price and (Gold1 - GetPlayerResource(PLAYER_1, GOLD)) >= 0.95 * array_arts[lev_art1][num_art1].price and FortunateAdventureEnable1 == 1 then
-          ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(FortunateAdventureDiscount * array_arts[lev_art1][num_art1].price)}, HeroMax1, 1, random(6) + 3);
-          SetPlayerResource (PLAYER_1, GOLD, int(GetPlayerResource (PLAYER_1, GOLD) + FortunateAdventureDiscount * array_arts[lev_art1][num_art1].price));
-          NewArt1 = 0;
-        end;
-      end;
-    end;
-    if FortunateAdventureEnable1 == 2 then break; end;
-  end;
-end;
-
-function FortunateAdventure2()
-  if (hero2race == 5 or hero2race == 6) and IsHeroInTown(HeroMax2, 'RANDOMTOWN2', 1, 0) then
-    MoveHeroRealTime(HeroMax2, 33, 14);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'RANDOMTOWN2', 'FortunateAdventureBlockInTower2');
-  end;
-  arrayArtsForFortunateAdventure2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  kol_arts_hero2 = 0
-  MakeHeroInteractWithObject (HeroMax2, 'FortunateAdventure2');
-  FortunateAdventureEnable2 = 1;
-  NewArt2 = 0;
-  for lev_art2 = 0, 2 do
-    for num_art2 = 1, length(array_arts[lev_art2]) do
-      if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) then
-        arrayArtsForFortunateAdventure2[kol_arts_hero2] = array_arts[lev_art2][num_art2].id;
-        kol_arts_hero2 = kol_arts_hero2 + 1;
-      end;
-    end;
-  end;
-  while FortunateAdventureEnable2 == 1 do
-    Gold2 = GetPlayerResource(PLAYER_2, GOLD);
-    sleep(2);
-    for lev_art2 = 0, 2 do
-      for num_art2 = 1, length(array_arts[lev_art2]) do
-        if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) then
-          HasArt2 = 0;
-          for i = 0, kol_arts_hero2 do
-            if arrayArtsForFortunateAdventure2[i] == array_arts[lev_art2][num_art2].id then
-              HasArt2 = 1;
-            end;
-          end;
-        end;
-        if HasArtefact(HeroMax2, array_arts[lev_art2][num_art2].id) and HasArt2 == 0 then
-          arrayArtsForFortunateAdventure2[kol_arts_hero2] = array_arts[lev_art2][num_art2].id;
-          kol_arts_hero2 = kol_arts_hero2 + 1;
-          NewArt2 = 1;
-        end;
-        if NewArt2 == 1 and (Gold2 - GetPlayerResource(PLAYER_2, GOLD)) <= 1.05 * array_arts[lev_art2][num_art2].price and (Gold2 - GetPlayerResource(PLAYER_2, GOLD)) >= 0.95 * array_arts[lev_art2][num_art2].price and FortunateAdventureEnable2 == 1 then
-          ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(FortunateAdventureDiscount * array_arts[lev_art2][num_art2].price)}, HeroMax2, 2, random(6) + 3);
-          SetPlayerResource (PLAYER_2, GOLD, int(GetPlayerResource (PLAYER_2, GOLD) + FortunateAdventureDiscount * array_arts[lev_art2][num_art2].price));
-          NewArt2 = 0;
-        end;
-      end;
-    end;
-    if FortunateAdventureEnable2 == 2 then break; end;
-  end;
-end;
-
 EstatesQ1 = 0;
 EstatesQ2 = 0;
 
@@ -6001,14 +5649,6 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == HeroMax2) then
     SaleArmyQuestion(HeroMax2)
   end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax1) then
-    startThread(FortunateAdventure1)
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax2) then
-    startThread(FortunateAdventure2)
-  end;
 end;
 
 SaleArmyUse1 = 0;
@@ -6073,28 +5713,6 @@ HeraldUse2 = 0;
 
 GlesUse1 = 0;
 GlesUse2 = 0;
-
-function Herald_CUSTOM_F(hero, CUSTOM_ABILITY)
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax1) then
-    SetObjectOwner('Dwel1', PLAYER_1);
-    startThread(HeraldFunction1);
-    MoveCameraForPlayers( 1, 89, 82, 0, 20, 0, 0, 0, 0, 1);
-    --sleep(2);
-    --MakeHeroInteractWithObject (hero, 'Dwel1');
-    --HeraldUse1 = 1;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax2) then
-    SetObjectOwner('Dwel2', PLAYER_2);
-    startThread(HeraldFunction2);
-    MoveCameraForPlayers( 2, 81, 7, 0, 20, 0, 3.14, 0, 0, 1);
-    --sleep(2);
-    --MakeHeroInteractWithObject (hero, 'Dwel2');
-    --HeraldUse2 = 1;
-  end;
-
-end;
 
 function HeraldFunction1()
   SetObjectOwner('Dwel1', PLAYER_1);

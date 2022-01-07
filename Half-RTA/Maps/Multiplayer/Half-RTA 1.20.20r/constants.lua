@@ -490,85 +490,88 @@ ART_POSITION = {
 
 -- Список всех доступных артефактов
 ALL_ARTS_LIST = {
-  { id = 1,  level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON },  --меч мощи
-  { id = 90, level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON }, -- на грани равновесия
-  { id = 8,  level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG },  -- клевер
-  { id = 87, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG }, -- колода таро
-  { id = 27, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BOOTS }, -- сапоги магической защиты
-  -- { id = 34, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD }, -- тюрбан просвещенности
-  { id = 66, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY }, -- шлем хаоса
-  { id = 64, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY }, -- туника из плоти
-  { id = 14, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY }, -- нагрудник мощи
-  { id = 80, level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON }, -- палочка новичка
-  { id = 62, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BACK }, -- плащ силанны
-  { id = 84, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BACK }, -- защитные покровы
-  { id = 20, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING }, -- кольцо от молний
-  { id = 60, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING }, -- пояс элементалей
-  { id = 16, level = ARTS_LEVELS.MINOR, position = ART_POSITION.NECK }, -- ошейник льва
-  { id = 55, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD }, -- шлем некроманта
-  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING }, -- кольцо грешников
-  { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.SHILD }, -- свиток маны
-  { id = 56, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY }, -- доспех бесстрашия
-  -- { id = 86, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG }, -- руна пламени
-  -- { id = 61, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS }, -- изумрудные туфли
-  -- { id = 32, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK }, -- накидка феникса
-  { id = 65, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING }, -- кольцо предостережения
-  -- { id = 93, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING }, -- кольцо изгнания
-  { id = 74, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON }, -- дубина орка
-  { id = 85, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON }, -- гномий молот
-  { id = 81, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON }, -- рунный топор
-  { id = 2,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON },  -- секира горного короля
-  { id = 43, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON }, -- меч дракона
-  { id = 58, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD }, -- лунный клинок
-  { id = 75, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD }, -- щит орка
-  { id = 9,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD }, -- ледяной щит
-  { id = 71, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD }, -- том силы (амулет некроманта)
-  { id = 37, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD }, -- щит дракона
-  { id = 25, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BAG }, -- золотая подкова
-  { id = 38, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS }, -- поножи дракона
-  { id = 41, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.HEAD }, -- шлем дракона
-  { id = 82, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY }, -- рунная упряжь
-  { id = 36, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY }, -- доспех дракона
-  { id = 31, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK }, -- накидка льва
-  { id = 95, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK }, -- колчан единорога
-  { id = 39, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK }, -- мантия дракона
-  { id = 23, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING }, -- кольцо сломленного духа
-  { id = 63, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING },  --кольцо неудачи
-  { id = 42, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING }, -- кольцо дракона
-  { id = 19, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK }, -- ожерелье победы
-  { id = 40, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK }, -- ожерелье дракона
-  -- { id = 35, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY }, -- кольчуга просвещенности
-  { id = 17, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK }, -- ожерелье коготь
-  { id = 59, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING }, -- кольцо стремительности
-  { id = 57, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS }, -- сапоги скорости
-  { id = 88, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD }, -- корона лидерства
-  -- { id = 91, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING }, -- кольцо машин
-  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON },  -- лук единорога
-  { id = 45, level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON }, -- посох сар-иссы
-  { id = 51, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD }, -- щит гномов
-  { id = 79, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD }, -- том призыва
-  { id = 77, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD }, -- том света
-  { id = 78, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD }, -- том тьмы
-  { id = 76, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD }, -- том хаоса
-  { id = 83, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BAG }, -- череп маркела
-  { id = 68, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS }, -- сандали святого
-  { id = 49, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS }, -- поножи гномов
-  { id = 11, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD }, -- корона льва
-  { id = 50, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD }, -- шлем гномов
-  { id = 44, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY }, -- халат сар-иссы
-  { id = 48, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY }, -- кираса гномов
-  { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY }, -- доспех забытого
-  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK }, -- плащ смерти
-  { id = 47, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING }, -- кольцо сар-иссы
-  { id = 67, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK }, -- кулон поглощения
-  { id = 5,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON },  -- трезубец титанов
-  { id = 18, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK }, -- ледяной кулон
-  { id = 7,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON },  -- посох преисподней (кандалы неизбежности)
-  -- { id = 15, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK }, -- кулон мастерства
-  -- { id = 6, level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON },  -- посох преисподней
-  -- { id = 89, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD }, -- маска справедливости
-  -- { id = 69, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK }, -- плащ сандро
-  -- { id = 22, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING }, -- кольцо скорости
+  { id = 1,  level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON,  price = 5000 },  --меч мощи
+  { id = 90, level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON,  price = 6000 }, -- на грани равновесия
+  { id = 8,  level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,     price = 4000 },  -- клевер
+  { id = 87, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,     price = 6000 }, -- колода таро
+  { id = 27, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BOOTS,   price = 5000 }, -- сапоги магической защиты
+  -- { id = 34, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD, price = 6000 }, -- тюрбан просвещенности
+  { id = 66, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- шлем хаоса
+  { id = 64, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 5500 }, -- туника из плоти
+  { id = 14, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 5000 }, -- нагрудник мощи
+  { id = 80, level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON,  price = 5000 }, -- палочка новичка
+  { id = 62, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BACK,    price = 7000 }, -- плащ силанны
+  { id = 84, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BACK,    price = 4500 }, -- защитные покровы
+  { id = 20, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 6000 }, -- кольцо от молний
+  { id = 60, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 5000 }, -- пояс элементалей
+  { id = 16, level = ARTS_LEVELS.MINOR, position = ART_POSITION.NECK,    price = 4500 }, -- ошейник льва
+  { id = 55, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD,    price = 5000 }, -- шлем некроманта
+  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4500 }, -- кольцо грешников
+  { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.SHILD,   price = 5000 }, -- свиток маны
+  { id = 56, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 7000 }, -- доспех бесстрашия
+  -- { id = 86, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,  price = 6500 }, -- руна пламени
+  -- { id = 61, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS,  price = 8000 }, -- изумрудные туфли
+  -- { id = 32, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,   price = 8000 }, -- накидка феникса
+  { id = 65, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо предостережения
+  -- { id = 93, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,   price = 8000 }, -- кольцо изгнания
+  { id = 74, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 7500 }, -- дубина орка
+  { id = 85, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 9500 }, -- гномий молот
+  { id = 81, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 9000 }, -- рунный топор
+  { id = 2,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 10000 },  -- секира горного короля
+  { id = 43, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 12500 }, -- меч дракона
+  { id = 58, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 7500 }, -- лунный клинок
+  { id = 75, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 8500 }, -- щит орка
+  { id = 9,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 9000 }, -- ледяной щит
+  { id = 71, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 10000 }, -- том силы (амулет некроманта)
+  { id = 37, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 10000 }, -- щит дракона
+  { id = 25, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BAG,       price = 8000 }, -- золотая подкова
+  { id = 38, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS,     price = 10000 }, -- поножи дракона
+  { id = 41, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.HEAD,      price = 9000 }, -- шлем дракона
+  { id = 82, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY,      price = 9000 }, -- рунная упряжь
+  { id = 36, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY,      price = 11000 }, -- доспех дракона
+  { id = 31, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 9000 }, -- накидка льва
+  { id = 95, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 7500 }, -- колчан единорога
+  { id = 39, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 9000 }, -- мантия дракона
+  { id = 23, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 10000 }, -- кольцо сломленного духа
+  { id = 63, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 9000 },  --кольцо неудачи
+  { id = 21, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо жизненной силы
+  { id = 42, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 11000 }, -- кольцо дракона
+  { id = 19, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK,      price = 9000 }, -- ожерелье победы
+  { id = 40, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK,      price = 10000 }, -- ожерелье дракона
+  -- { id = 35, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BODY,   price = 6500 }, -- кольчуга просвещенности
+  
+  { id = 17, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK,      price = 12000 }, -- ожерелье коготь
+  { id = 59, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,      price = 12000 }, -- кольцо стремительности
+  { id = 57, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 12000 }, -- сапоги скорости
+  { id = 88, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 12000 }, -- корона лидерства
+  -- { id = 91, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 20000 }, -- кольцо машин
+  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 15000 },  -- лук единорога
+  { id = 45, level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 12000 }, -- посох сар-иссы
+  { id = 51, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- щит гномов
+  { id = 79, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том призыва
+  { id = 77, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том света
+  { id = 78, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том тьмы
+  { id = 76, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том хаоса
+  { id = 83, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BAG,       price = 16000 }, -- череп маркела
+  { id = 68, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 14500 }, -- сандали святого
+  { id = 49, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 13000 }, -- поножи гномов
+  { id = 11, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 16000 }, -- корона льва
+  { id = 46, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 15000 }, -- корона сар-иссы
+  { id = 50, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 13000 }, -- шлем гномов
+  { id = 44, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 15000 }, -- халат сар-иссы
+  { id = 48, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 13000 }, -- кираса гномов
+  { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 23000 }, -- доспех забытого
+  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 18000 }, -- плащ смерти
+  { id = 47, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,      price = 17000 }, -- кольцо сар-иссы
+  { id = 67, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK,      price = 12000 }, -- кулон поглощения
+  { id = 5,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 14000 },  -- трезубец титанов
+  { id = 18, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK,      price = 14000 }, -- ледяной кулон
+  { id = 7,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 13000 },  -- посох преисподней (кандалы неизбежности)
+  -- { id = 15, level = ARTS_LEVELS.RELIC, position = ART_POSITION.NECK,   price = 15000 }, -- кулон мастерства
+  -- { id = 6, level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,  price = 35000 },  -- посох преисподней
+  -- { id = 89, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,   price = 26000 }, -- маска справедливости
+  -- { id = 69, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,   price = 16000 }, -- плащ сандро
+  -- { id = 22, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 30000 }, -- кольцо скорости
 };
 
 array_arts[0] = {

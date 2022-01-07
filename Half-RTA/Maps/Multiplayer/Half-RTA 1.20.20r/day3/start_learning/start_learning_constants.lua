@@ -432,6 +432,7 @@ MAP_WEEK_ON_ASTROLOGY_STATS = {
 MAP_SKILL_ON_CUSTOM_ABILITY = {
   [PERK_SCOUTING] = CUSTOM_ABILITY_2,
   [RANGER_FEAT_DISGUISE_AND_RECKON] = CUSTOM_ABILITY_2,
+  [PERK_FORTUNATE_ADVENTURER] = CUSTOM_ABILITY_4,
 }
 
 -- Статус использования игроками трофеев
@@ -466,6 +467,12 @@ MAP_MERCHANT_ON_PLAYER = {
 
 -- Статус использования трофеев у обоих игроков
 PLAYERS_USE_SPOILS_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Статус использования "Удачи в пути" игроками
+PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS = {
   [PLAYER_1] = nil,
   [PLAYER_2] = nil,
 };
