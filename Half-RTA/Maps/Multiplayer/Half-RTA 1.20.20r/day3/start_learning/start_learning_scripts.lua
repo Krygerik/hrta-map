@@ -17,6 +17,12 @@ PLAYER_SCOUTING_WAITING_STATUS = {
   [PLAYER_2] = nil,
 };
 
+-- Статусы применения игроками навыка "Бесшумный преследователь"
+PLAYER_USE_DISGUISE_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
 -- Скрипты для обработки прокачки героя
 function start_learning_script()
   print "start_learning_script"
@@ -570,11 +576,12 @@ function handleHeroRemoveSkill(triggerHero, skill)
   print "handleHeroRemoveSkill"
 
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
   mentorCashback(playerId);
 
   -- Если не выбран главный герой, не производим никаких внутренних расчетов
-  if PLAYERS_MAIN_HERO_PROPS[playerId].name == nil then
+  if mainHeroName == nil then
     return nil;
   end;
 
@@ -589,11 +596,17 @@ function handleHeroRemoveSkill(triggerHero, skill)
   if skill == SKILL_LEARNING or skill == HERO_SKILL_BARBARIAN_LEARNING then
     removePlayerMainHeroLearningStats(playerId);
   end;
-  
+
   local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skill];
 
-  -- Если навык добавляется в книгу заклинаний
-  if customAbility ~= nil and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
+  -- Если это навык, привязанный к CUSTOM_ABILITY_2
+  if (
+    customAbility ~= nil
+    and (
+      (skill == PERK_SCOUTING and HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) == nil)
+      or (skill == RANGER_FEAT_DISGUISE_AND_RECKON and HasHeroSkill(mainHeroName, PERK_SCOUTING) == nil)
+    )
+  )then
     ControlHeroCustomAbility(triggerHero, customAbility, CUSTOM_ABILITY_DISABLED);
   end;
 end;
@@ -638,8 +651,13 @@ function getRemovedUnremovableSkillId(playerId)
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
   -- Если сбросил разведку
-  if PLAYER_USE_SCOUTING_STATUS[playerId] ~= nil and HasHeroSkill(playerMainHero, PERK_SCOUTING) == nil then
+  if HasHeroSkill(playerMainHero, PERK_SCOUTING) == nil and PLAYER_USE_SCOUTING_STATUS[playerId] ~= nil then
     return PERK_SCOUTING;
+  end;
+  
+  -- Если сбросил разведку
+  if HasHeroSkill(playerMainHero, RANGER_FEAT_DISGUISE_AND_RECKON) == nil and PLAYER_USE_DISGUISE_STATUS[playerId] ~= nil then
+    return RANGER_FEAT_DISGUISE_AND_RECKON;
   end;
 
   return nil;
@@ -755,10 +773,40 @@ function handleUseCustomAbility(triggerHero, ability)
   
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
   
-  -- если кликнули разведку
-  if ability == CUSTOM_ABILITY_2 and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
-    handleUseScouting(playerId)
+  -- если использовали абилку разведки или бесшумного
+  if ability == CUSTOM_ABILITY_2 then
+    if HasHeroSkill(triggerHero, PERK_SCOUTING) and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
+      handleUseScouting(playerId)
+    end;
+    
+    if HasHeroSkill(triggerHero, RANGER_FEAT_DISGUISE_AND_RECKON) and PLAYER_USE_DISGUISE_STATUS[playerId] == nil then
+      handleUseDisguise(playerId)
+    end;
   end;
+end;
+
+-- Обработка использования способности "Бесшумный преследователь"
+function handleUseDisguise(playerId)
+  print "handleUseScouting"
+
+  QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_disguise.txt", 'disguise("'..playerId..'")', 'noop');
+end;
+
+-- Применение "Бесшумный преследователь"
+function disguise(strPlayerId)
+  print "disguise"
+
+  local playerId = strPlayerId + 0;
+  
+  if playerId == PLAYER_1 then
+    OpenCircleFog(41, 23, 0, 5, playerId);
+    MoveCameraForPlayers(playerId, 41, 23, 0, 20, 0, 3.14, 0, 0, 1);
+  else
+    OpenCircleFog(36, 88, 0, 5, playerId);
+    MoveCameraForPlayers(playerId, 36, 86, 0, 20, 0, 0, 0, 0, 1);
+  end;
+  
+  PLAYER_USE_DISGUISE_STATUS[playerId] = not nil;
 end;
 
 -- Обработка использования способности разведка

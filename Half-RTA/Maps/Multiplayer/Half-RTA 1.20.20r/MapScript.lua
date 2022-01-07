@@ -1434,10 +1434,6 @@ SetObjectEnabled ('tent2', nil);
 OverrideObjectTooltipNameAndDescription ('tent1', GetMapDataPath().."tentNAME.txt", GetMapDataPath().."tentDSCRP.txt");
 OverrideObjectTooltipNameAndDescription ('tent2', GetMapDataPath().."tentNAME.txt", GetMapDataPath().."tentDSCRP.txt");
 
-DisguiseEnable1 = 0;
-DisguiseEnable2 = 0;
-DisguiseHero1 = 0;
-
 function levelup12()
   if Name(hero1) == "Elleshar" then
     Discount1 = EllesharDiscount;
@@ -1932,10 +1928,6 @@ function MentorAddSkill1(hero, skill)
   if AddSk1 == RemSk1 and ReturnSkillPlayer1 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse1 == 0 then
     Estates1Q(hero);
   end;
-  if AddSk1 == RemSk1 and ReturnSkillPlayer1 == 1 then
-    ShowFlyingSign(GetMapDataPath().."NoForget.txt", HeroMax1, 1, 5.0);
-    ReturnSkill1(hero);
-  end;
 end;
 
 function MentorAddSkill2(hero, skill)
@@ -1948,13 +1940,7 @@ function MentorAddSkill2(hero, skill)
   if AddSk2 == RemSk2 and ReturnSkillPlayer2 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse2 == 0 then
     Estates2Q(hero);
   end;
-  if AddSk2 == RemSk2 and ReturnSkillPlayer2 == 1 then
-    ShowFlyingSign(GetMapDataPath().."NoForget.txt", HeroMax2, 2, 5.0);
-    ReturnSkill2(hero);
-  end;
 end;
-
-
 
 ReturnSkillPlayer1 = 0;
 ReturnSkillPlayer2 = 0;
@@ -1973,7 +1959,6 @@ StudentUse1 = 0;
 StudentUse2 = 0;
 AcademyUse1 = 0;
 AcademyUse2 = 0;
-
 
 EstatesEnable1 = 0;
 EstatesEnable2 = 0;
@@ -2006,7 +1991,6 @@ function AddSkill1(hero, skill)
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel1 == 3) then Revelation1(); end;
-  if skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 102 then startThread(HeraldFunction1); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
   if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
@@ -2038,7 +2022,6 @@ function AddSkill2(hero, skill)
   if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
-  if skill == 112 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 102 then startThread(HeraldFunction2); end;
   if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
   if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
@@ -2074,10 +2057,6 @@ function RemoveSkill1(hero, skill)
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
   if skill == 71 and ReturnSkillPlayer1 == 0 then RemoveDarkRitual1(hero); end;
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
-  if skill == 20 and ScoutingEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 112 and DisguiseEnable1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 112 and DisguiseEnable1 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
   if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
@@ -2112,10 +2091,6 @@ function RemoveSkill2(hero, skill)
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
   if skill == 71 and ReturnSkillPlayer2 == 0 then RemoveDarkRitual2(hero); end;
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
-  if skill == 20 and ScoutingEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if HasHeroSkill(hero, 112)  == nil and ReturnSkillPlayer2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
-  if skill == 112 and DisguiseEnable2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 112 and DisguiseEnable2 == 0 then ControlHeroCustomAbility(hero, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED); end;
   if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
   if skill == 81 then ChangeHeroStat(hero, 3, 2); end;
@@ -2298,269 +2273,6 @@ function ArraySkill2()
   expH2 = GetHeroStat(HeroMax2, STAT_EXPERIENCE);
   GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD);
 end;
-
-
-function ReturnSkill1(heroX)
-  SetPlayerResource (PLAYER_1, GOLD, GoldPlayer1);
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroX, 'no');
-  Trigger( HERO_REMOVE_SKILL_TRIGGER, heroX, 'no');
-
-  attH1 = GetHeroStat(heroX, STAT_ATTACK);
-  defH1 = GetHeroStat(heroX, STAT_DEFENCE);
-  spH1  = GetHeroStat(heroX, STAT_SPELL_POWER);
-  knH1  = GetHeroStat(heroX, STAT_KNOWLEDGE);
-  k = 1;
-  for i = 0, 2 do
-    for j = 1, length (array_arts[i]) do
-      if HasArtefact(heroX, array_arts[i][j].id, 0) then
-        array_arts_Hero1[k].ID = array_arts[i][j].id;
-        k = k + 1;
-      end;
-      if HasArtefact(heroX, array_arts[i][j].id, 1) then
-        array_arts_Hero1[k - 1].Eq = 1;
-        RemoveArtefact(heroX, array_arts[i][j].id);
-      end;
-    end;
-  end;
-  sleep(1);
-  DELTAattH1 = attH1 - GetHeroStat(heroX, STAT_ATTACK);
-  DELTAdefH1 = defH1 - GetHeroStat(heroX, STAT_DEFENCE);
-  DELTAspH1  = spH1 - GetHeroStat(heroX, STAT_SPELL_POWER);
-  DELTAknH1  = knH1 - GetHeroStat(heroX, STAT_KNOWLEDGE);
-
-  TakeAwayHeroExp(heroX, expH1 - 1);
-  WarpHeroExp(heroX, expH1);
-  TakeAwayHeroExp(heroX, expH1 - 1);
-  WarpHeroExp(heroX, expH1);
-  for i = 1, 26 do
-    for j = 1, array_skills_H1[i] do
-      if array_skills_H1[i] >= j then
-        if GetHeroSkillMastery(heroX, array_skills[i]) < array_skills_H1[i] then
-          GiveHeroSkill(heroX, array_skills[i]);
-        end;
-      end;
-    end;
-  end;
-  for i = 1, kol_perks_H1 do
-    GiveHeroSkill(heroX, array_perks_H1[i]);
-  end;
-    for i = 1, 5 do
-      if HasHeroSkill( heroX, array_perks_H1[i]) == nil then
-        GiveHeroSkill(heroX, array_perks_H1[i]);
---        k = k + 1;
-      end;
-    end;
---  end;
-  ChangeHeroStat(heroX, STAT_ATTACK, 5);
-  ChangeHeroStat(heroX, STAT_DEFENCE, 5);
-  ChangeHeroStat(heroX, STAT_SPELL_POWER, 5);
-  ChangeHeroStat(heroX, STAT_KNOWLEDGE, 5);
-
-  ChangeHeroStat(heroX, STAT_ATTACK, STARTattH1 - GetHeroStat(heroX, STAT_ATTACK) - DELTAattH1);
-  ChangeHeroStat(heroX, STAT_DEFENCE, STARTdefH1 - GetHeroStat(heroX, STAT_DEFENCE) - DELTAdefH1);
-  ChangeHeroStat(heroX, STAT_SPELL_POWER, STARTspH1 - GetHeroStat(heroX, STAT_SPELL_POWER) - DELTAspH1);
-  ChangeHeroStat(heroX, STAT_KNOWLEDGE, STARTknH1 - GetHeroStat(heroX, STAT_KNOWLEDGE) - DELTAknH1);
-  
-  for i = 1, length(array_arts_Hero1) do
-    if array_arts_Hero1[i].ID ~= 0 and array_arts_Hero1[i].Eq == 1 then
-      GiveArtefact(heroX, array_arts_Hero1[i].ID);
-    end;
-  end;
-
-  array_arts_Hero1 = {{["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0},  {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}}
-
-  ReturnSkillPlayer1 = 0;
-  sleep(1);
-  ArrayStatHero(heroX);
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroX, 'MentorAddSkill1');
-end;
-
-function ReturnSkill2(heroXX)
-  SetPlayerResource (PLAYER_2, GOLD, GoldPlayer2);
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroXX, 'no');
-  Trigger( HERO_REMOVE_SKILL_TRIGGER, heroXX, 'no');
-
-  attH2 = GetHeroStat(heroXX, STAT_ATTACK);
-  defH2 = GetHeroStat(heroXX, STAT_DEFENCE);
-  spH2  = GetHeroStat(heroXX, STAT_SPELL_POWER);
-  knH2  = GetHeroStat(heroXX, STAT_KNOWLEDGE);
-  k = 1;
-  for i = 0, 2 do
-    for j = 1, length (array_arts[i]) do
-      if HasArtefact(heroXX, array_arts[i][j].id, 0) then
-        array_arts_Hero2[k].ID = array_arts[i][j].id;
-        k = k + 1;
-      end;
-      if HasArtefact(heroXX, array_arts[i][j].id, 1) then
-        array_arts_Hero2[k - 1].Eq = 1;
-        RemoveArtefact(heroXX, array_arts[i][j].id);
-      end;
-    end;
-  end;
-  sleep(1);
-  DELTAattH2 = attH2 - GetHeroStat(HeroMax2, STAT_ATTACK);
-  DELTAdefH2 = defH2 - GetHeroStat(HeroMax2, STAT_DEFENCE);
-  DELTAspH2  = spH2  - GetHeroStat(HeroMax2, STAT_SPELL_POWER);
-  DELTAknH2  = knH2  - GetHeroStat(HeroMax2, STAT_KNOWLEDGE);
-
-  TakeAwayHeroExp(heroXX, expH2 - 1);
-  WarpHeroExp(heroXX, expH2);
-  TakeAwayHeroExp(heroXX, expH2 - 1);
-  WarpHeroExp(heroXX, expH2);
-  for i = 1, 26 do
-    for j = 1, array_skills_H2[i] do
-      if array_skills_H2[i] >= j then
-        if GetHeroSkillMastery(heroXX, array_skills[i]) < array_skills_H2[i] then
-          GiveHeroSkill(heroXX, array_skills[i]);
-        end;
-      end;
-    end;
-  end;
-  for i = 1, kol_perks_H2 do
-    GiveHeroSkill(heroXX, array_perks_H2[i]);
-  end;
-    for i = 1, 5 do
-      if HasHeroSkill( heroXX, array_perks_H2[i]) == nil then
-        GiveHeroSkill(heroXX, array_perks_H2[i]);
-      end;
-    end;
-  ChangeHeroStat(heroXX, STAT_ATTACK, 5);
-  ChangeHeroStat(heroXX, STAT_DEFENCE, 5);
-  ChangeHeroStat(heroXX, STAT_SPELL_POWER, 5);
-  ChangeHeroStat(heroXX, STAT_KNOWLEDGE, 5);
-
-  ChangeHeroStat(heroXX, STAT_ATTACK, STARTattH2 - GetHeroStat(heroXX, STAT_ATTACK) - DELTAattH2);
-  ChangeHeroStat(heroXX, STAT_DEFENCE, STARTdefH2 - GetHeroStat(heroXX, STAT_DEFENCE) - DELTAdefH2);
-  ChangeHeroStat(heroXX, STAT_SPELL_POWER, STARTspH2 - GetHeroStat(heroXX, STAT_SPELL_POWER) - DELTAspH2);
-  ChangeHeroStat(heroXX, STAT_KNOWLEDGE, STARTknH2 - GetHeroStat(heroXX, STAT_KNOWLEDGE) - DELTAknH2);
-
-  for i = 1, length(array_arts_Hero2) do
-    if array_arts_Hero2[i].ID ~= 0 and array_arts_Hero2[i].Eq == 1 then
-      GiveArtefact(heroXX, array_arts_Hero2[i].ID);
-    end;
-  end;
-
-  array_arts_Hero2 = {{["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0},  {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}}
-
-  ReturnSkillPlayer2 = 0;
-  sleep(1);
-  ArrayStatHero(heroXX);
-  Trigger( HERO_ADD_SKILL_TRIGGER, heroXX, 'MentorAddSkill2');
-end;
-
-function ResetExp1()
-
-  if FortunateAdventureEnable1 == 0 and EstatesUse1 == 0 and SpoilsUse1 == 0 and ScoutingEnable1 == 0 and DisguiseEnable1 == 0 and SnatchUse1 == 0 and HeraldUse1 == 0 and RunesChangeUse1 == 0 then
-  if (GetPlayerResource( PLAYER_1, 6) >= ResetExpPrice1) then
-    Trigger( HERO_REMOVE_SKILL_TRIGGER, heroReset1, 'RemoveSkill1');
-    Trigger( HERO_ADD_SKILL_TRIGGER,    heroReset1, 'MentorAddSkill1');
-
-    j = 1;
-    for i = 1, length(array_arts[0]) do
-      if HasArtefact   (heroReset1, array_arts[0][i].id) then
-        RemoveArtefact (heroReset1, array_arts[0][i].id);
-        artHero1[j] = array_arts[0][i].id;
-        j = j + 1;
-      end;
-    end;
-    for i = 1, length(array_arts[1]) do
-      if HasArtefact   (heroReset1, array_arts[1][i].id) then
-        RemoveArtefact (heroReset1, array_arts[1][i].id);
-        artHero1[j] = array_arts[1][i].id;
-        j = j + 1;
-      end;
-    end;
-    for i = 1, length(array_arts[2]) do
-      if HasArtefact   (heroReset1, array_arts[2][i].id) then
-        RemoveArtefact (heroReset1, array_arts[2][i].id);
-        artHero1[j] = array_arts[2][i].id;
-        j = j + 1;
-      end;
-    end;
-    ExpHero = GetHeroStat(heroReset1, STAT_EXPERIENCE);
-    TakeAwayHeroExp(heroReset1, ExpHero);
-    sleep(1);
-    for i = 1, 5 do                 -- в цик
-      ChangeHeroStat (heroReset1, STAT_ATTACK,      basicA[hero1race] - GetHeroStat(heroReset1, STAT_ATTACK));
-      ChangeHeroStat (heroReset1, STAT_DEFENCE,     basicD[hero1race] - GetHeroStat(heroReset1, STAT_DEFENCE));
-      ChangeHeroStat (heroReset1, STAT_SPELL_POWER, basicS[hero1race] - GetHeroStat(heroReset1, STAT_SPELL_POWER));
-      ChangeHeroStat (heroReset1, STAT_KNOWLEDGE,   basicK[hero1race] - GetHeroStat(heroReset1, STAT_KNOWLEDGE));
-    end;
-    sleep(1);
-    ArrayStatHero(heroReset1);
-    ChangeHeroStat (heroReset1, STAT_EXPERIENCE, ExpHero);
-    resetExpHero1 = 1;
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - ResetExpPrice1));
-    for i = 1, 7 do
-      GiveArtefact   (heroReset1, artHero1[i]);
-    end;
-  else MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."NOmoney.txt" );
-  end;
-  else MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."NoForgetSkills.txt" );
-  end;
-end;
-
-function ResetExp2()
-
-  if FortunateAdventureEnable2 == 0 and EstatesUse2 == 0 and SpoilsUse2 == 0 and ScoutingEnable2 == 0 and DisguiseEnable2 == 0 and SnatchUse2 == 0 and HeraldUse2 == 0 and RunesResetUse2 == 0 then
-  if (GetPlayerResource( PLAYER_2, 6) >= ResetExpPrice2) then
-    Trigger( HERO_REMOVE_SKILL_TRIGGER, heroReset2, 'RemoveSkill2');
-    Trigger( HERO_ADD_SKILL_TRIGGER,    heroReset2, 'MentorAddSkill2');
-
-    j = 1;
-    for i = 1, length(array_arts[0]) do
-      if HasArtefact   (heroReset2, array_arts[0][i].id) then
-        RemoveArtefact (heroReset2, array_arts[0][i].id);
-        artHero2[j] = array_arts[0][i].id;
-        j = j + 1;
-      end;
-    end;
-    for i = 1, length(array_arts[1]) do
-      if HasArtefact   (heroReset2, array_arts[1][i].id) then
-        RemoveArtefact (heroReset2, array_arts[1][i].id);
-        artHero2[j] = array_arts[1][i].id;
-        j = j + 1;
-      end;
-    end;
-    for i = 1, length(array_arts[2]) do
-      if HasArtefact   (heroReset2, array_arts[2][i].id) then
-        RemoveArtefact (heroReset2, array_arts[2][i].id);
-        artHero2[j] = array_arts[2][i].id;
-        j = j + 1;
-      end;
-    end;
-    ExpHero = GetHeroStat(heroReset2, STAT_EXPERIENCE);
-    TakeAwayHeroExp(heroReset2, ExpHero);
-    ChangeHeroStat (heroReset2, STAT_ATTACK,      basicA[hero2race] - GetHeroStat(heroReset2, STAT_ATTACK));
-    ChangeHeroStat (heroReset2, STAT_DEFENCE,     basicD[hero2race] - GetHeroStat(heroReset2, STAT_DEFENCE));
-    ChangeHeroStat (heroReset2, STAT_SPELL_POWER, basicS[hero2race] - GetHeroStat(heroReset2, STAT_SPELL_POWER));
-    ChangeHeroStat (heroReset2, STAT_KNOWLEDGE,   basicK[hero2race] - GetHeroStat(heroReset2, STAT_KNOWLEDGE));
-    ArrayStatHero(heroReset2);
-    ChangeHeroStat (heroReset2, STAT_EXPERIENCE, ExpHero);
-    resetExpHero2 = 1;
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - ResetExpPrice2));
-    for i = 1, 7 do
-      GiveArtefact   (heroReset2, artHero2[i]);
-    end;
-  else MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."NOmoney.txt" );
-  end;
-  else MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."NoForgetSkills.txt" );
-  end;
-end;
-
-
-function ReturnGold1(hero, skill)
-  AddSkill1(hero, skill);
-  SetPlayerResource( 1, GOLD, GoldPl1);
-  ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price1}, HeroMax1, 1, 5.0);
-end;
-
-function ReturnGold2(hero, skill)
-  AddSkill2(hero, skill);
-  SetPlayerResource( 2, GOLD, GoldPl2);
-  ShowFlyingSign({GetMapDataPath().."MentorBalance.txt"; eq = price2}, HeroMax2, 2, 5.0);
-end;
-
 
 --------------------------------- SPELL NABOR ----------------------------------
 
@@ -5558,37 +5270,6 @@ function FortunateAdventure2()
   end;
 end;
 
-DisguiseEnable1 = 0;
-DisguiseEnable2 = 0;
-DisguiseHero1 = 0;
-DisguiseHero2 = 0;
-
-function Disguise1Q()
-  if DisguiseEnable1 == 0 then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Disguise.txt", 'Disguise1', 'no');
-  end;
-end;
-
-function Disguise2Q()
-  if DisguiseEnable2 == 0 then
-    QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Disguise.txt", 'Disguise2', 'no');
-  end;
-end;
-
-function Disguise1()
-  OpenCircleFog( 41, 23, 0, 5, 1 );
-  MoveCameraForPlayers( 1, 41, 23, 0, 20, 0, 3.14, 0, 0, 1);
-  DisguiseEnable1 = 1;
-end;
-
-function Disguise2()
-  OpenCircleFog( 36, 88, 0, 5, 2 );
-  MoveCameraForPlayers( 2, 36, 86, 0, 20, 0, 0, 0, 0, 1);
-  DisguiseEnable2 = 1;
-end;
-
-
-
 EstatesQ1 = 0;
 EstatesQ2 = 0;
 
@@ -6313,16 +5994,6 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
     startThread (RegradeUnit2);
   end;
 
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_2) and GetObjectOwner(hero) == 1 and HasHeroSkill(hero, 112) then
-    Disguise1Q();
-    DisguiseHero1 = hero;
-  end;
-
-  if (CUSTOM_ABILITY==CUSTOM_ABILITY_2) and GetObjectOwner(hero) == 2 and HasHeroSkill(hero, 112) then
-    Disguise2Q();
-    DisguiseHero2 = hero;
-  end;
-
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_3) and (hero == HeroMax1) then
     SaleArmyQuestion(HeroMax1)
   end;
@@ -6333,25 +6004,11 @@ function Function_CUSTOM_F(hero, CUSTOM_ABILITY)
 
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax1) then
     startThread(FortunateAdventure1)
-    --QuestionBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."FortunateAdventure.txt", 'FortunateAdventure1Ok', 'no');
-    --SetObjectOwner('Dwel1', PLAYER_1);
-    --startThread(HeraldFunction1);
-    --MoveCameraForPlayers( 1, 89, 82, 0, 40, 0, 0, 0, 0, 1);
-    --sleep(2);
-    --MakeHeroInteractWithObject (hero, 'Dwel1');
-    --HeraldUse1 = 1;
   end;
 
   if (CUSTOM_ABILITY==CUSTOM_ABILITY_4) and (hero == HeroMax2) then
     startThread(FortunateAdventure2)
-    --SetObjectOwner('Dwel2', PLAYER_2);
-    --startThread(HeraldFunction2);
-    --MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
-    --sleep(2);
-    --MakeHeroInteractWithObject (hero, 'Dwel2');
-    --HeraldUse2 = 1;
   end;
-
 end;
 
 SaleArmyUse1 = 0;
@@ -6536,12 +6193,10 @@ function HauntMine2(hero)
   HauntMineEnable2 = 1;
 end;
 
-
 LogisticsEnable1 = 0;
 LogisticsEnable2 = 0;
 LogisticsNoMoney1 = 0;
 LogisticsNoMoney2 = 0;
-
 
 function Logistics1(hero)
   if hero == HeroMax1 and StLvlUp1 == 1 then
