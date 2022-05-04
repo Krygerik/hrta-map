@@ -476,3 +476,19 @@ PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS = {
   [PLAYER_1] = nil,
   [PLAYER_2] = nil,
 };
+
+-- Скидка на покупку уровней для Винраэля
+ELLESHAR_DISCOUNT = 2500;
+
+-- Количество возвращаемого золота за покупку крестьян для Эллайны
+ELLAINA_DISCOUNT = 20;
+
+-- За сколько уровней ИНГА учит руну
+LVL_FOR_TEACH_RUNE = 7;
+
+-- Соотношение уровня владения рунами на разрешенные уровни рун
+MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS = {
+  [1] = 3,
+  [2] = 4,
+  [3] = 5
+}

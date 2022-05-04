@@ -868,111 +868,6 @@ dublikat_heroes[7] = {
 	 { ["name"] = "Quroq",       ["name2"] = "Quroq2",       ["name3"] = "Quroq3",       ["name4"] = "Quroq4",       }
 };
 
-
-
------------------ BATTLES ---------------------------------------
-
-array_battles={}
-array_battles[0] = {
-    { ["text"] = GetMapDataPath().."Battle/Battle1.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle2.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle3.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle4.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle5.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle6.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle7.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle8.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle9.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle10.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle11.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle12.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle13.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle14.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle15.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle16.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle17.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle18.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle19.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle20.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle21.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle22.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle23.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle24.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle25.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle26.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle27.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle28.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle29.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle30.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle31.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle32.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle33.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle34.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle35.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle36.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle37.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle38.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle39.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle40.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle41.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle42.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle43.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle44.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle45.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle46.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle47.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle48.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle49.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle50.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle51.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle52.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle53.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle54.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle55.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle56.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle57.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle58.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle59.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle60.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle61.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle62.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle63.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle64.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle65.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle66.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle67.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle68.txt",   ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] = GetMapDataPath().."Battle/Battle69.txt",   ["blocked"] = 0, ["kv"] = 100},
-};
-
-arrayBonusForSiege = {};
---                        HAV  INF  NEC  ELF  MAG  LIG  RUN  ORC
-arrayBonusForSiege[0] = {  20,  20,  25,  20,  20,  25,  20,  15}; -- HAVEN
-arrayBonusForSiege[1] = {  15,  20,  20,  20,  20,  25,  20,  10}; -- INFERNO
-arrayBonusForSiege[2] = {  10,  10,  15,  10,  20,  30,  10,   5}; -- NECROPOLIS
-arrayBonusForSiege[3] = {  20,  20,  25,  15,  20,  25,  15,  15}; -- ELF
-arrayBonusForSiege[4] = {  10,  15,  10,  15,  20,  15,   5,   0}; -- ACADEMY
-arrayBonusForSiege[5] = {   0,   0,   0,   0,  10,  10,   5,   0}; -- WARLOCK
-arrayBonusForSiege[6] = {  15,  20,  30,  15,  20,  25,  20,  20}; -- RUNEMAGE
-arrayBonusForSiege[7] = {  20,  25,  30,  20,  25,  25,  20,  20}; -- STRONGHOLD
-h1r = 3
-h2r = 3
-
-array_options={}
-array_options[0] = {
-    { ["text"] =  GetMapDataPath().."Battle/Option0.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  {GetMapDataPath().."Battle/Option1.txt"; eq = arrayBonusForSiege[h1r - 1][h2r]},    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  {GetMapDataPath().."Battle/Option2.txt"; eq = arrayBonusForSiege[h2r - 1][h1r]},    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option3.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option4.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option5.txt",    ["blocked"] = 1, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option6.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option7.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option8.txt",    ["blocked"] = 0, ["kv"] = 100},
-    { ["text"] =  GetMapDataPath().."Battle/Option9.txt",    ["blocked"] = 1, ["kv"] = 100},
-};
-
-
 ----------------- SKILLS ----------------------------------------
 
 array_skills_id = {};
@@ -1345,17 +1240,6 @@ TELEPORT_BATTLE_ZONE_PLAYER_2_Y = 45
 function no()
 end;
 
-lvl1 = 1;
-lvl2 = 1;
-
-LevelUp = {}
-LevelUp = { 8500, 9000, 9500, 10000, 10500, 11000}
-
-SkillCost = 12000;
-SkillCostStart = 14000;
-StatRegenCost = 5000;
-
-StartExperience = 54000;
 HalfLevel = 9;
 StartLevel = 18;
 
@@ -1383,16 +1267,6 @@ HalfLeveling2 = 0;
 DisableBagPlayer1 = 0;
 DisableBagPlayer2 = 0;
 
-function no1()
-  DisableBagPlayer1 = 0;
-  DisableBag = 0;
-end;
-
-function no2()
-  DisableBagPlayer2 = 0;
-  DisableBag = 0;
-end;
-
 function pause1F()
   pause1 = 1;
 end;
@@ -1417,34 +1291,13 @@ end;
 stop (heroes1[0]);
 stop (heroes2[0]);
 
-HeroTavern1 = 0;
-HeroTavern2 = 0;
-
 PerkSum1 = 1;
 PerkSum2 = 1;
-
-Ellaina1 = 0;
-Ellaina2 = 0;
 
 StLvlUp1 = 0;
 StLvlUp2 = 0;
 
-SetObjectEnabled ('tent1', nil);
-SetObjectEnabled ('tent2', nil);
-OverrideObjectTooltipNameAndDescription ('tent1', GetMapDataPath().."tentNAME.txt", GetMapDataPath().."tentDSCRP.txt");
-OverrideObjectTooltipNameAndDescription ('tent2', GetMapDataPath().."tentNAME.txt", GetMapDataPath().."tentDSCRP.txt");
-
 function levelup12()
-  if Name(hero1) == "Elleshar" then
-    Discount1 = EllesharDiscount;
-  else
-    Discount1 = 0;
-  end;
-  
-  if Name(hero1) == "Nathaniel" and Ellaina1 == 0 then
-    Ellaina1 = 1;
-    startThread(SpecEllaina1);
-  end;
   if Name(hero1) == "Una" then
     Trigger(HERO_LEVELUP_TRIGGER, HeroMax1, 'SpecInga1');
   end;
@@ -1461,15 +1314,6 @@ function levelup12()
 end;
 
 function levelup22()
-  if Name(hero2) == "Elleshar" then
-    Discount2 = EllesharDiscount;
-  else
-    Discount2 = 0;
-  end;
-  if Name(hero2) == "Nathaniel" and Ellaina2 == 0 then
-    Ellaina2 = 1;
-    startThread(SpecEllaina2);
-  end;
   if Name(hero2) == "Una" then
     Trigger(HERO_LEVELUP_TRIGGER, HeroMax2, 'SpecInga2');
   end;
@@ -4039,32 +3883,6 @@ function SpecOrnella(hero)
     if (GetHeroCreatures(hero, 152) - GetHeroCreatures(hero, 29)) > 0 then
       AddHeroCreatures(hero,  29, GetHeroCreatures(hero, 152) - GetHeroCreatures(hero, 29));
     end;
-  end;
-end;
-
-function SpecEllaina1()
-  Tier1UnitInTown1 = GetObjectDwellingCreatures('RANDOMTOWN1', 1);
-  while GetObjectDwellingCreatures('RANDOMTOWN1', 1) > 0 or Ellaina1 == 1 do
-    if Tier1UnitInTown1 > GetObjectDwellingCreatures('RANDOMTOWN1', 1) then
-      SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + EllainaDiscount * (Tier1UnitInTown1 - GetObjectDwellingCreatures('RANDOMTOWN1', 1))));
-      ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(EllainaDiscount * (Tier1UnitInTown1 - GetObjectDwellingCreatures('RANDOMTOWN1', 1)))}, HeroMax1, 1, random(6) + 3);
-      Tier1UnitInTown1 = GetObjectDwellingCreatures('RANDOMTOWN1', 1);
-      if GetObjectDwellingCreatures('RANDOMTOWN1', 1) == 0 then Ellaina1 = 2; end;
-    end;
-    sleep(10);
-  end;
-end;
-
-function SpecEllaina2()
-  Tier1UnitInTown2 = GetObjectDwellingCreatures('RANDOMTOWN2', 1);
-  while GetObjectDwellingCreatures('RANDOMTOWN2', 1) > 0 or Ellaina2 == 1 do
-    if Tier1UnitInTown2 > GetObjectDwellingCreatures('RANDOMTOWN2', 1) then
-      SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + EllainaDiscount * (Tier1UnitInTown2 - GetObjectDwellingCreatures('RANDOMTOWN2', 1))));
-      ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = int(EllainaDiscount * (Tier1UnitInTown2 - GetObjectDwellingCreatures('RANDOMTOWN2', 1)))}, HeroMax2, 2, random(6) + 3);
-      Tier1UnitInTown2 = GetObjectDwellingCreatures('RANDOMTOWN2', 1);
-      if GetObjectDwellingCreatures('RANDOMTOWN2', 1) == 0 then Ellaina2 = 2; end;
-    end;
-    sleep(10);
   end;
 end;
 

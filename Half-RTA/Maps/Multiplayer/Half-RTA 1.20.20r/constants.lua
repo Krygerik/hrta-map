@@ -38,6 +38,96 @@ RACES = {
   NEUTRAL = 8,
 };
 
+-- Перечень типов школ магии
+TYPE_MAGICS = {
+  LIGHT = 0,
+  DARK = 1,
+  DESTRUCTIVE = 2,
+  SUMMON = 3,
+  RUNES = 4,
+  WARCRIES = 5,
+};
+
+-- Перечень всех заклинаний
+SPELLS = {
+  [TYPE_MAGICS.LIGHT] = {
+    { level = 1, id = 23  }, -- божественная сила
+    { level = 1, id = 29  }, -- уклонение
+    { level = 2, id = 25  }, -- каменная кожа
+    { level = 2, id = 24  }, -- ускорение
+    { level = 3, id = 28  }, -- карающий удар
+    { level = 3, id = 26  }, -- снятие чар
+    { level = 3, id = 280 }, -- регенерация
+    { level = 4, id = 32  }, -- телепорт
+    { level = 4, id = 31  }, -- антимагия
+    --{ level = 4, id = 281 }, -- божественная месть
+    { level = 5, id = 48  }, -- воскрешение
+    --{ level = 5, id = 35  }, -- святое слово
+  },
+  [TYPE_MAGICS.DARK] = {
+    { level = 1, id = 11  }, -- ослабление
+    { level = 1, id = 12  }, -- замедление
+    { level = 2, id = 15  }, -- немощность
+    { level = 2, id = 13  }, -- разрушающий луч
+    { level = 3, id = 17  }, -- рассеяность
+    { level = 3, id = 14  }, -- чума
+    { level = 3, id = 277 }, -- скорбь
+    { level = 4, id = 19  }, -- ослепление
+    { level = 4, id = 278 }, -- вампиризм
+    { level = 5, id = 18  }, -- берсерк
+    { level = 5, id = 20  }, -- подчинение
+    --{ level = 5, id = 21  }, -- нечестивое слово
+  },
+  [TYPE_MAGICS.DESTRUCTIVE] = {
+    { level = 1, id = 237 }, -- каменные шипы
+    { level = 1, id = 1   }, -- магическая стрела
+    { level = 2, id = 4   }, -- ледяная глыба
+    { level = 2, id = 3   }, -- молния
+    { level = 3, id = 6   }, -- кольцо холода
+    { level = 3, id = 5   }, -- огненный шар
+    { level = 3, id = 236 }, -- стена огня
+    { level = 4, id = 7   }, -- цепь молний
+    { level = 4, id = 8   }, -- метеоритный дождь
+    { level = 5, id = 279 }, -- останавливающий холод
+    { level = 5, id = 9   }, -- шок земли
+    { level = 5, id = 10  }, -- армагеддон
+  },
+  [TYPE_MAGICS.SUMMON] = {
+    { level = 1, id = 2   }, -- волшебный кулак
+    { level = 1, id = 38  }, -- огненная ловушка
+    { level = 2, id = 39  }, -- призыв осиного роя
+    { level = 2, id = 282 }, -- кристалл тайного
+    { level = 3, id = 284 }, -- стена мечей
+    { level = 3, id = 42  }, -- поднятие мертвых
+    { level = 3, id = 40  }, -- создание фантома
+    --{ level = 3, id = 41  }, -- землетрясение
+    { level = 4, id = 43  }, -- призыв элементалей
+    { level = 4, id = 283 }, -- призыв улья
+    { level = 5, id = 235 }, -- призыв феникса
+    { level = 5, id = 34  }, -- небесный щит
+  },
+  [TYPE_MAGICS.RUNES] = {
+    { level = 1, id = 249 }, -- руна энергии
+    { level = 1, id = 253 }, -- руна стихийной невосприимчивости
+    { level = 2, id = 251 }, -- руна магического надзора
+    { level = 2, id = 252 }, -- руна экзорзизма
+    { level = 3, id = 256 }, -- руна неосязаемости
+    { level = 3, id = 254 }, -- руна громового раската
+    { level = 4, id = 250 }, -- руна берсеркерства
+    { level = 4, id = 257 }, -- руна воскрешения
+    { level = 5, id = 258 }, -- руна драконьего обличья
+    { level = 5, id = 255 }, -- руна боевой ярости
+  },
+  [TYPE_MAGICS.WARCRIES] = {
+    { level = 1, id = 290}, -- объединяющий клич
+    { level = 1, id = 291}, -- зов крови
+    { level = 2, id = 292}, -- слово вождя
+    { level = 2, id = 293}, -- устрашающий рык
+    { level = 3, id = 294}, -- боевой клич
+    { level = 3, id = 295}, -- ярость орды
+  }
+};
+
 ------------------ ГЕРОИ, ИСПОЛЬЗУЮЩИЕСЯ В КАРТЕ ------------------------
 HEROES_BY_RACE = {
   [RACES.HAVEN] = {
@@ -574,6 +664,7 @@ ALL_ARTS_LIST = {
   -- { id = 22, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 30000 }, -- кольцо скорости
 };
 
+array_arts = {}
 array_arts[0] = {
    { ["name"] = "art1",  ["name2"] = "art1x2",  ["place"] = 7, ["price"] = 5000,  ["blocked"] = 0, ["id"] = 1},   --меч мощи
    { ["name"] = "art2",  ["name2"] = "art2x2",  ["place"] = 7, ["price"] = 6000,  ["blocked"] = 0, ["id"] = 90},  --на грани равновесия
@@ -660,4 +751,50 @@ array_arts[2] = {
 --   { ["name"] = "art79", ["name2"] = "art79x2", ["place"] = 2, ["price"] = 26000, ["blocked"] = 1, ["id"] = 89},  --маска справедливости
 --   { ["name"] = "art80", ["name2"] = "art80x2", ["place"] = 9, ["price"] = 16000, ["blocked"] = 1, ["id"] = 69},  --плащ сандро
 --   { ["name"] = "art81", ["name2"] = "art81x2", ["place"] = 1, ["price"] = 30000, ["blocked"] = 1, ["id"] = 22}   --кольцо скорости
+};
+
+-- Перечисление всех героев
+HEROES = {
+  ELLESHAR = 'Elleshar', -- Винраэль
+  NATHANIEL = 'Nathaniel', -- Эллайна
+  UNA = 'Una' -- Инга
+};
+
+-- Соотношение игроков к подконтрольным им городам
+MAP_PLAYER_TO_TOWNNAME = {
+  [PLAYER_1] = 'RANDOMTOWN1',
+  [PLAYER_2] = 'RANDOMTOWN2',
+}
+
+-- Сгенерированный набор заклинаний для
+-- 2 Набора основных заклинаний для возможности покупки второго набора
+PLAYERS_GENERATED_SPELLS = {
+  [PLAYER_1] = {
+    countResetSpells = 0,
+    countResetRunes = 0,
+    bonus_spells = {},
+    spells = {
+      {},
+      {},
+    },
+    runes = {
+      {},
+      {},
+    },
+    ingaRunes = {},
+  },
+  [PLAYER_2] = {
+    countResetSpells = 0,
+    countResetRunes = 0,
+    bonus_spells = {},
+    spells = {
+      {},
+      {},
+    },
+    runes = {
+      {},
+      {},
+    },
+    ingaRunes = {},
+  },
 };
