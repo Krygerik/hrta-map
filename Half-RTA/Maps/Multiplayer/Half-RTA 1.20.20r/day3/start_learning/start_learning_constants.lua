@@ -491,4 +491,24 @@ MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS = {
   [1] = 3,
   [2] = 4,
   [3] = 5
-}
+};
+
+-- Соотношение игроков с координатами их двеллов
+MAP_PLAYERS_ON_DWELL_POSITION = {
+  [PLAYER_1] = {
+    x = 89,
+    y = 82,
+    rotate = 0,
+  },
+  [PLAYER_2] = {
+    x = 81,
+    y = 7,
+    rotate = 3.14,
+  },
+};
+
+-- Соотношение игроков с идентификаторами двеллов
+MAP_PLAYERS_ON_DWELL_NAME = {
+  [PLAYER_1] = 'Dwel1',
+  [PLAYER_2] = 'Dwel2',
+};

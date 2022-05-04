@@ -552,6 +552,116 @@ function specIngaTread(heroName)
   end;
 end;
 
+-- Отслеживание спецы Николаса
+function specNikolasTread(heroName)
+  print "specNikolasTread"
+
+  local playerId = GetObjectOwner(heroName);
+  local dwellPosition = MAP_PLAYERS_ON_DWELL_POSITION[playerId];
+  local countAllowMummy = 40;
+  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+  
+  SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, 0);
+  MoveCameraForPlayers(playerId, dwellPosition.x, dwellPosition.y, GROUND, 40, 0, dwellPosition.rotate, 0, 0, 1);
+  SetObjectOwner(dwellId, playerId);
+  SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
+
+  -- Если купили мумий - передаем их мейну игрока
+  local countBuyMummy = 0;
+
+  while countBuyMummy < countAllowMummy and GetDate(DAY) == 3 do
+    local currentCountBuyMummy = GetObjectCreatures(dwellId, CREATURE_MUMMY);
+    
+    if currentCountBuyMummy > 0 then
+      AddObjectCreatures(heroName, CREATURE_MUMMY, currentCountBuyMummy);
+      RemoveObjectCreatures(dwellId, CREATURE_MUMMY, currentCountBuyMummy);
+      countBuyMummy = countBuyMummy + currentCountBuyMummy;
+    end;
+
+    sleep(10);
+  end;
+end;
+
+-- Отслеживание спецы Свеи
+function specVegeyrTread(heroName)
+  print "specVegeyrTread"
+
+  local isSpecUsed = nil;
+
+  while not isSpecUsed do
+    if GetDate(DAY) == 5 then
+      if KnowHeroSpell(heroName, SPELL_LIGHTNING_BOLT) then
+        TeachHeroSpell(heroName, SPELL_EMPOWERED_LIGHTNING_BOLT);
+      end;
+      if KnowHeroSpell(heroName, SPELL_CHAIN_LIGHTNING) then
+        TeachHeroSpell(heroName, SPELL_EMPOWERED_CHAIN_LIGHTNING);
+      end;
+    
+      isSpecUsed = not nil;
+    end;
+    
+    sleep(10);
+  end;
+end;
+
+-- Отслеживание спецы Валерии
+function specValeriaTread(heroName)
+  print "specValeriaTread"
+  
+  local isSpecUsed = nil;
+
+  local MAP_SPELLS_ON_MASS_SPELLS = {
+    [SPELL_CURSE] = SPELL_MASS_CURSE,
+    [SPELL_SLOW] = SPELL_MASS_SLOW,
+    [SPELL_DISRUPTING_RAY] = SPELL_MASS_DISRUPTING_RAY,
+    [SPELL_PLAGUE] = SPELL_MASS_PLAGUE,
+    [SPELL_WEAKNESS] = SPELL_MASS_WEAKNESS,
+    [SPELL_FORGETFULNESS] = SPELL_MASS_FORGETFULNESS,
+  };
+
+  while not isSpecUsed do
+    if GetDate(DAY) == 5 then
+      for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
+        if KnowHeroSpell(heroName, spellId) then
+          TeachHeroSpell(heroName, massSpellId);
+        end;
+      end;
+      
+      isSpecUsed = not nil;
+    end;
+
+    sleep(10);
+  end;
+end;
+
+-- Проверка героя на наличие скриптовых специализаций и их запуск
+function checkAndRunHeroSpec(heroName)
+  print "checkAndRunHeroSpec"
+  
+  local dictHeroName = getDictionaryHeroName(heroName);
+
+  -- Если скриптовая спеца - запускаем ее
+  if dictHeroName == HEROES.NATHANIEL then
+    startThread(specEllainaTread, heroName);
+  end;
+
+  if dictHeroName == HEROES.UNA then
+    startThread(specIngaTread, heroName);
+  end;
+
+  if dictHeroName == HEROES.NIKOLAS then
+    startThread(specNikolasTread, heroName);
+  end;
+
+  if dictHeroName == HEROES.VEGEYR then
+    startThread(specVegeyrTread, heroName);
+  end;
+
+  if dictHeroName == HEROES.RED_HEAVEN_HERO then
+    startThread(specValeriaTread, heroName);
+  end;
+end;
+
 -- Повышение уровней переданного героя
 function learning(strPlayerId, heroName, stage)
   print "learning"
@@ -572,17 +682,8 @@ function learning(strPlayerId, heroName, stage)
        scouting(enemyPlayerId);
      end;
      
-     local dictHeroName = getDictionaryHeroName(heroName);
-     
-     -- Если скриптовая спеца - запускаем ее
-     if dictHeroName == HEROES.NATHANIEL then
-       startThread(specEllainaTread, heroName);
-     end;
+     checkAndRunHeroSpec(heroName);
 
-     if dictHeroName == HEROES.UNA then
-       startThread(specIngaTread, heroName);
-     end;
-     
      ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
   end;
   

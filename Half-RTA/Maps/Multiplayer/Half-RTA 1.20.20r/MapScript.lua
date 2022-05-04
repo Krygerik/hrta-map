@@ -1298,34 +1298,14 @@ StLvlUp1 = 0;
 StLvlUp2 = 0;
 
 function levelup12()
-  if Name(hero1) == "Una" then
-    Trigger(HERO_LEVELUP_TRIGGER, HeroMax1, 'SpecInga1');
-  end;
   if HasHeroSkill(hero1, 1) and LogisticsEnable1 == 0 then
     SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + LogisticsSum * GetHeroSkillMastery(hero1, 1)));
-  end;
-  Scouting1DopInfo();
-  if hero1 == "Nikolas" or hero1 == "Nikolas2" then
-    SetObjectOwner('Dwel1', PLAYER_1);
-    startThread(HeraldFunction1);
-    MoveCameraForPlayers( 1, 89, 82, 0, 40, 0, 0, 0, 0, 1);
-    OpenCircleFog( 89, 82, 0, 12, 1 );
   end;
 end;
 
 function levelup22()
-  if Name(hero2) == "Una" then
-    Trigger(HERO_LEVELUP_TRIGGER, HeroMax2, 'SpecInga2');
-  end;
   if HasHeroSkill(hero2, 1) and LogisticsEnable2 == 0 then
     SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + LogisticsSum * GetHeroSkillMastery(hero2, 1)));
-  end;
-  Scouting2DopInfo();
-  if hero2 == "Nikolas" or hero2 == "Nikolas2" then
-    SetObjectOwner('Dwel2', PLAYER_2);
-    startThread(HeraldFunction2);
-    MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
-    OpenCircleFog( 81, 7, 0, 12, 2 );
   end;
 end;
 
@@ -3300,10 +3280,6 @@ function newday ()
 --     if Name(HeroMax2) == "Agrael" then kolCreatures = GetHeroCreatures(HeroMax2,  15); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2,  15, kolCreatures); AddHeroCreatures(HeroMax2, 16, kolCreatures); end; end;
 --     if Name(HeroMax2) == "Agrael" then kolCreatures = GetHeroCreatures(HeroMax2, 131); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2, 131, kolCreatures); AddHeroCreatures(HeroMax2, 44, kolCreatures); end; end;
 
-     -- Валерия
-     if (HeroMax1 == "RedHeavenHero03" or HeroMax1 == "RedHeavenHero032") then SpecValeria(HeroMax1); end;
-     if (HeroMax2 == "RedHeavenHero03" or HeroMax2 == "RedHeavenHero032") then SpecValeria(HeroMax2); end;
-
      -- Таланар
      if Name(HeroMax1) == "Nadaur" then kolCreatures = GetHeroCreatures(HeroMax1,  45); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1,  45, kolCreatures); AddHeroCreatures(HeroMax1, 46, kolCreatures); end; end;
      if Name(HeroMax1) == "Nadaur" then kolCreatures = GetHeroCreatures(HeroMax1, 146); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1, 146, kolCreatures); AddHeroCreatures(HeroMax1, 18, kolCreatures); end; end;
@@ -3385,17 +3361,9 @@ function newday ()
      if Name(HeroMax1) == "Marder" then GiveHeroBattleBonus(HeroMax1, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(HeroMax1) ) ); end;
      if Name(HeroMax2) == "Marder" then GiveHeroBattleBonus(HeroMax2, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(HeroMax2) ) ); end;
 
-     -- Каспар
---     if Name(HeroMax1) == "Gles" then SpecGles(HeroMax1, HeroMax2); end;
---     if Name(HeroMax2) == "Gles" then SpecGles(HeroMax2, HeroMax1); end;
-
      -- Илайя
      --if Name(HeroMax1) == "Shadwyn" then SetObjectOwner('Dwel1', PLAYER_1); TransformTown('Dwel1', 3); UpgradeTownBuilding('Dwel1', TOWN_BUILDING_MAGIC_GUILD); UpgradeTownBuilding('Dwel1', TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS); UpgradeTownBuilding('Dwel1', TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS); TeachHeroSpell(HeroMax1, 1); TeachHeroSpell(HeroMax1, 3); TeachHeroSpell(HeroMax1, 4); TeachHeroSpell(HeroMax1, 237); end;
      --if Name(HeroMax2) == "Shadwyn" then SetObjectOwner('Dwel2', PLAYER_2); TransformTown('Dwel2', 3); UpgradeTownBuilding('Dwel2', TOWN_BUILDING_MAGIC_GUILD); UpgradeTownBuilding('Dwel2', TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS); UpgradeTownBuilding('Dwel2', TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS); TeachHeroSpell(HeroMax2, 1); TeachHeroSpell(HeroMax2, 3); TeachHeroSpell(HeroMax2, 4); TeachHeroSpell(HeroMax2, 237); end;
-
-     -- Свея
-     if Name(HeroMax1) == "Vegeyr" then SpecVegeyr(HeroMax1); end;
-     if Name(HeroMax2) == "Vegeyr" then SpecVegeyr(HeroMax2); end;
      
      -- Бранд
      if Name(HeroMax1) == "Brand" then res = floor(GetHeroLevel(HeroMax1)/6); SetPlayerResource(1, WOOD, GetPlayerResource( 1, WOOD) + res); SetPlayerResource(1, ORE, GetPlayerResource( 1, ORE) + res); SetPlayerResource(1, MERCURY, GetPlayerResource( 1, MERCURY) + res); SetPlayerResource(1, CRYSTAL, GetPlayerResource( 1, CRYSTAL) + res); SetPlayerResource(1, SULFUR, GetPlayerResource( 1, SULFUR) + res); SetPlayerResource(1, GEM, GetPlayerResource( 1, GEM) + res); end;
@@ -3828,175 +3796,6 @@ end;
 
 
 ----------------------- HERO SPEC -------------------------
-
-array_Gles = {};
-array_Gles = {0, 0, 0, 0, 0, 0, 0};
-
-array_GlesOpp = {};
-array_GlesOpp = {0, 0, 0, 0, 0, 0, 0};
-
-function SpecGles (hero1, hero2)
-  CreaturesGles = 0;
-  CreaturesGlesOpp = 0;
-  array_Gles[0], array_Gles[1], array_Gles[2], array_Gles[3], array_Gles[4], array_Gles[5], array_Gles[6] = GetHeroCreaturesTypes(hero1);
-  array_GlesOpp[0], array_GlesOpp[1], array_GlesOpp[2], array_GlesOpp[3], array_GlesOpp[4], array_GlesOpp[5], array_GlesOpp[6] = GetHeroCreaturesTypes(hero2);
-  for i = 0, 6 do
-    if array_Gles[i] > 0 and array_Gles[i] < 180 then
-      CreaturesGles = CreaturesGles + 1;
-    end;
-    if array_GlesOpp[i] > 0 and array_GlesOpp[i] < 180 then
-      CreaturesGlesOpp = CreaturesGlesOpp + 1;
-    end;
-  end;
-  GiveHeroBattleBonus(hero1, HERO_BATTLE_BONUS_DEFENCE, ((CreaturesGlesOpp - CreaturesGles) * 2 + int((GetHeroLevel(hero1) - GetHeroLevel(hero2)) / 2)));
-end;
-
-function SpecVegeyr (hero)
-  if KnowHeroSpell (hero, SPELL_LIGHTNING_BOLT) then
-    TeachHeroSpell (hero, SPELL_EMPOWERED_LIGHTNING_BOLT);
-  end;
-  if KnowHeroSpell (hero, SPELL_CHAIN_LIGHTNING) then
-    TeachHeroSpell (hero, SPELL_EMPOWERED_CHAIN_LIGHTNING);
-  end;
-end;
-
-function SpecOrnella(hero)
-  MessageBoxForPlayers(GetPlayerFilter( GetObjectOwner(hero) ), GetMapDataPath().."OrnellaInfo.txt" );
-  if HasHeroSkill(hero, 62) then
-    if GetHeroCreatures(hero,  29) > GetHeroCreatures(hero, 152) then
-      kolCreatures = GetHeroCreatures(hero,  29) + GetHeroCreatures(hero, 152);
-      AddHeroCreatures(hero, 152, GetHeroCreatures(hero,  29));
-      RemoveHeroCreatures(hero,  29, GetHeroCreatures(hero,  29));
-      AddHeroCreatures(hero,  95, kolCreatures);
-    else
-      kolCreatures = GetHeroCreatures(hero,  29) + GetHeroCreatures(hero, 152);
-      if GetHeroCreatures(hero, 152) > 0 then
-        AddHeroCreatures(hero, 29, GetHeroCreatures(hero, 152));
-        RemoveHeroCreatures(hero, 152, GetHeroCreatures(hero, 152));
-        AddHeroCreatures(hero, 97, kolCreatures);
-      end;
-    end;
-  else
-    if GetHeroCreatures(hero,  29) > 0 then
-      AddHeroCreatures(hero, 152, GetHeroCreatures(hero,  29));
-    end;
-    if (GetHeroCreatures(hero, 152) - GetHeroCreatures(hero, 29)) > 0 then
-      AddHeroCreatures(hero,  29, GetHeroCreatures(hero, 152) - GetHeroCreatures(hero, 29));
-    end;
-  end;
-end;
-
-function SpecValeria(hero)
-  if KnowHeroSpell( hero, 11) then TeachHeroSpell( hero, 210); end;
-  if KnowHeroSpell( hero, 12) then TeachHeroSpell( hero, 212); end;
-  if KnowHeroSpell( hero, 13) then TeachHeroSpell( hero, 211); end;
-  if KnowHeroSpell( hero, 14) then TeachHeroSpell( hero, 214); end;
-  if KnowHeroSpell( hero, 15) then TeachHeroSpell( hero, 215); end;
-  if KnowHeroSpell( hero, 17) then TeachHeroSpell( hero, 213); end;
-end;
-
-array_FreeRunes = {}
-array_FreeRunes = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-
-function SpecInga1()
-  if GetHeroLevel(HeroMax1) == IngaLevel then
-    kolRunes = 0;
-  end;
-  if frac(GetHeroLevel(HeroMax1) / IngaLevel) == 0 and (GetDate (DAY) == 3 or GetDate (DAY) == 4) then
-    for i = 1, 10 do
-      if array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 1; end;
-      for j = 15, 19 do
-        if i == spells[0][j].sp and array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 0; end;
-      end;
---      print(array_FreeRunes[i]);
-    end;
-    RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax1, HERO_SKILL_RUNELORE)) + 1;
-    while array_FreeRunes[RuneForInga] == 0 or array_FreeRunes[RuneForInga] == 2 do
-      RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax1, HERO_SKILL_RUNELORE)) + 1;
-    end;
-    TeachHeroSpell(HeroMax1, array_spells[4][RuneForInga].id);
-    array_FreeRunes[RuneForInga] = 2;
-    kolRunes = kolRunes + 1;
-  end;
-  if GetDate (DAY) == 5 then
-    if GetHeroLevel(HeroMax1) < 4 * IngaLevel then
-      k = 3 - kolRunes;
-    else
-      if GetHeroSkillMastery( HeroMax1, HERO_SKILL_RUNELORE) > 1 then
-        k = 4 - kolRunes;
-      else
-        k = 3 - kolRunes;
-      end;
-    end;
-    if k > 0 then
-      for i = 1, 10 do
-        if array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 1; end;
-        for j = 15, 19 do
-          if i == spells[0][j].sp and array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 0; end;
-        end;
---        print(array_FreeRunes[i]);
-      end;
-      for i = 1, k do
-        RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax1, HERO_SKILL_RUNELORE)) + 1;
-        while array_FreeRunes[RuneForInga] == 0 or array_FreeRunes[RuneForInga] == 2 do
-          RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax1, HERO_SKILL_RUNELORE)) + 1;
-        end;
-        TeachHeroSpell(HeroMax1, array_spells[4][RuneForInga].id);
-        array_FreeRunes[RuneForInga] = 2;
-      end;
-    end;
-  end;
-end;
-
-function SpecInga2()
-  if GetHeroLevel(HeroMax2) == IngaLevel then
-    kolRunes = 0;
-  end;
-  if frac(GetHeroLevel(HeroMax2) / IngaLevel) == 0 and (GetDate (DAY) == 3 or GetDate (DAY) == 4) then
-    for i = 1, 10 do
-      if array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 1; end;
-      for j = 15, 19 do
-        if i == spells[1][j].sp and array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 0; end;
-      end;
---      print(array_FreeRunes[i]);
-    end;
-    RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax2, HERO_SKILL_RUNELORE)) + 1;
-    while array_FreeRunes[RuneForInga] == 0 or array_FreeRunes[RuneForInga] == 2 do
-      RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax2, HERO_SKILL_RUNELORE)) + 1;
-    end;
-    TeachHeroSpell(HeroMax2, array_spells[4][RuneForInga].id);
-    array_FreeRunes[RuneForInga] = 2;
-    kolRunes = kolRunes + 1;
-  end;
-  if GetDate (DAY) == 5 then
-    if GetHeroLevel(HeroMax2) < 4 * IngaLevel then
-      k = 3 - kolRunes;
-    else
-      if GetHeroSkillMastery( HeroMax2, HERO_SKILL_RUNELORE) > 1 then
-        k = 4 - kolRunes;
-      else
-        k = 3 - kolRunes;
-      end;
-    end;
-    if k > 0 then
-      for i = 1, 10 do
-        if array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 1; end;
-        for j = 15, 19 do
-          if i == spells[1][j].sp and array_FreeRunes[i] ~= 2 then array_FreeRunes[i] = 0; end;
-        end;
---        print(array_FreeRunes[i]);
-      end;
-      for i = 1, k do
-        RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax2, HERO_SKILL_RUNELORE)) + 1;
-        while array_FreeRunes[RuneForInga] == 0 or array_FreeRunes[RuneForInga] == 2 do
-          RuneForInga = random(4 + 2 * GetHeroSkillMastery( HeroMax2, HERO_SKILL_RUNELORE)) + 1;
-        end;
-        TeachHeroSpell(HeroMax2, array_spells[4][RuneForInga].id);
-        array_FreeRunes[RuneForInga] = 2;
-      end;
-    end;
-  end;
-end;
 
 function CrownLeader(hero)
   kol_u[1]=0;kol_u[2]=0;kol_u[3]=0;kol_u[4]=0;kol_u[5]=0;kol_u[6]=0;kol_u[7]=0;
@@ -5529,9 +5328,6 @@ end;
 HeraldUse1 = 0;
 HeraldUse2 = 0;
 
-GlesUse1 = 0;
-GlesUse2 = 0;
-
 function HeraldFunction1()
   SetObjectOwner('Dwel1', PLAYER_1);
   MoveCameraForPlayers( 1, 89, 82, 0, 20, 0, 0, 0, 0, 1);
@@ -5539,16 +5335,8 @@ function HeraldFunction1()
   if (HasHeroSkill(HeroMax1, 102)) and HeraldUse1 == 0 then
     SetObjectDwellingCreatures('Dwel1',  90, 16);
   end;
-  if (HeroMax1 == "Nikolas" or HeroMax1 == "Nikolas2") and GlesUse1 == 0 then
-    SetObjectDwellingCreatures('Dwel1', 116, 40);
-    GlesUse1 = 1;
-  end;
   while HeraldUse1 ~= 2 do
     sleep(5);
-    if GetObjectCreatures('Dwel1', 116) > 0 then
-      AddObjectCreatures(HeroMax1, 116, GetObjectCreatures('Dwel1', 116));
-      RemoveObjectCreatures('Dwel1', 116, GetObjectCreatures('Dwel1', 116));
-    end;
     if GetObjectCreatures('Dwel1',  90) > 0 then
       AddObjectCreatures(HeroMax1,  90, GetObjectCreatures('Dwel1',  90));
       HeraldUse1 = 1;
@@ -5564,16 +5352,8 @@ function HeraldFunction2()
   if (HasHeroSkill(HeroMax2, 102)) and HeraldUse2 == 0 then
     SetObjectDwellingCreatures('Dwel2',  90, 16);
   end;
-  if (HeroMax2 == "Nikolas" or HeroMax2 == "Nikolas2") and GlesUse2 == 0 then
-    SetObjectDwellingCreatures('Dwel2', 116, 40);
-    GlesUse2 = 1;
-  end;
   while HeraldUse2 ~= 2 do
     sleep(5);
-    if GetObjectCreatures('Dwel2', 116) > 0 then
-      AddObjectCreatures(HeroMax2, 116, GetObjectCreatures('Dwel2', 116));
-      RemoveObjectCreatures('Dwel2', 116, GetObjectCreatures('Dwel2', 116));
-    end;
     if GetObjectCreatures('Dwel2',  90) > 0 then
       AddObjectCreatures(HeroMax2,  90, GetObjectCreatures('Dwel2',  90));
       HeraldUse2 = 1;
@@ -5583,11 +5363,8 @@ function HeraldFunction2()
 end;
 
 SetObjectDwellingCreatures('Dwel1', 116, 0);
-SetObjectDwellingCreatures('Dwel1',  90, 0);
 
 SetObjectDwellingCreatures('Dwel2', 116, 0);
-SetObjectDwellingCreatures('Dwel2',  90, 0);
-
 
 GoblinSupportEnable1 = 0;
 GoblinSupportEnable2 = 0;
@@ -5987,14 +5764,6 @@ function DublikatHero1(hero1)
   for i = 1, length(array_arts_Hero1) do
     if array_arts_Hero1[i].ID ~= 0 and array_arts_Hero1[i].Eq == 1 then
       GiveArtefact(HeroMax1, array_arts_Hero1[i].ID);
-    end;
-  end;
-  
-  if Name(HeroMax1) == "Una" then
-    for i = 1, 10 do
-      if array_FreeRunes[i] == 2 then
-        TeachHeroSpell(HeroMax1, array_spells[4][i].id);
-      end;
     end;
   end;
 

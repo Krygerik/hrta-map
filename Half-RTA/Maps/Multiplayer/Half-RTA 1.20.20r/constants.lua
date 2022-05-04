@@ -755,9 +755,12 @@ array_arts[2] = {
 
 -- Перечисление всех героев
 HEROES = {
-  ELLESHAR = 'Elleshar', -- Винраэль
-  NATHANIEL = 'Nathaniel', -- Эллайна
-  UNA = 'Una' -- Инга
+  ELLESHAR = 'Elleshar',               -- Винраэль
+  NATHANIEL = 'Nathaniel',             -- Эллайна
+  UNA = 'Una',                         -- Инга
+  NIKOLAS = 'Nikolas',                 -- Николас
+  VEGEYR = 'Vegeyr',                   -- Свея
+  RED_HEAVEN_HERO = 'RedHeavenHero03', -- Валерия
 };
 
 -- Соотношение игроков к подконтрольным им городам
