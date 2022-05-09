@@ -32,6 +32,10 @@ function handleNewDay()
   if GetDate(DAY) == 3 then
     doFile(GetMapDataPath().."day3/day3_scripts.lua");
   end;
+  
+  if GetDate(DAY) == 4 then
+    doFile(GetMapDataPath().."day4/day4_scripts.lua");
+  end;
 end;
 
 -- Корневые триггеры
@@ -1788,7 +1792,6 @@ function AddSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
   ControlStatHero(hero, skill, 1);
-  if skill == 129 and GetDate (DAY) == 4 and SpoilsUse1 == 0 then Spoils1(hero) end;
   if skill ==  30 and GetDate (DAY) == 4 then diplomacy1(hero) end;
   if skill == 79 and StudentUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 1000)); StudentUse1 = 1; end;
   if (skill == 29 and RemSk1 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates1Q(hero); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
@@ -3481,8 +3484,6 @@ function DayFour1()
 --    end;
 --    print('wait1');
 --  end;
-
-  if SpoilsUse1 == 0 and HasHeroSkill(HeroMax1, 129) then Spoils1(); end;
   
   sleep(5);
   stop(HeroMin1);
@@ -3508,8 +3509,6 @@ function DayFour1()
   if hero1race == 4 then Avenger1(); startThread (AutoTeleportBattleZone1); end;
   -- мастер артефактов
   if hero1race == 5 then MiniArts1(); startThread (AutoTeleportBattleZone1); end;
-  -- дипломатия
-  if (HasHeroSkill(HeroMax1, 30)) then diplomacy1(HeroMax1); end;
   -- некромантия
   if hero1race == 3 and (HasHeroSkill(HeroMax1, 30)) == nil then NecroBonus1(HeroMax1); end;
   
@@ -3582,8 +3581,6 @@ function DayFour2()
   if hero2race == 4 then Avenger2(); startThread (AutoTeleportBattleZone2); end;
   -- мастер артефактов
   if hero2race == 5 then MiniArts2(); startThread (AutoTeleportBattleZone2); end;
-  -- дипломатия
-  if (HasHeroSkill(HeroMax2, 30)) then diplomacy2(HeroMax2); end;
   -- некромантия
   if hero2race == 3 and (HasHeroSkill(HeroMax2, 30)) == nil then NecroBonus2(HeroMax2); end;
   
@@ -4886,204 +4883,6 @@ function NecroBonus2(hero)
 --  if HasHeroSkill(hero, 104) or HasHeroSkill(hero, 82) then
 --    DublikatHero2( hero);
 --  end;
-end;
-
-arrayGradeDip1 = {};
-arrayGradeDip2 = {};
-arrayGradeDip1 = {   7,   9,  11,  13,  21,  23,  25,  27,  35,  37,  39,  41,  49,  51,  53,  55,  63,  65,  67,  68,  69,  77,  79,  81,  83,  98, 100, 102, 105, 123, 125, 127, 129}
-arrayGradeDip2 = { 109, 110, 111, 112, 134, 135, 136, 137, 155, 156, 157, 158, 148, 149, 150, 151, 162, 163, 164,  70, 165, 141, 142, 143, 144, 169, 170, 171, 172, 176, 177, 178, 179}
-
-
-function diplomacy1(hero)
-  pause1 = 0;
-  MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."Diplomacy.txt", 'pause1F');
-  while pause1 == 0 do
-    sleep(1);
-  end;
-  Stek1 = { {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}};
-  DenyGarrisonCreaturesTakeAway('Garrison3', 1);
-  SetObjectOwner('Garrison3', 1);
-  Stek1[1].id1, Stek1[2].id1, Stek1[3].id1, Stek1[4].id1, Stek1[5].id1, Stek1[6].id1, Stek1[7].id1 = GetHeroCreaturesTypes(hero);
-  for i = 1, 7 do
-    if Stek1[i].id1 > 0 then
-      for a = 1, length(arrayGradeDip1) do
-        if Stek1[i].id1 == arrayGradeDip1[a] then
-          if GetHeroCreatures(hero, arrayGradeDip2[a]) < GetHeroCreatures(hero, Stek1[i].id1) then
-            Stek1[i].id2 = arrayGradeDip2[a];
-          else
-            Stek1[i].id2 = -1;
-          end;
-          a = length(arrayGradeDip1);
-        end;
-      end;
-      if Stek1[i].id2 == 0 then
-        for a = 1, length(arrayGradeDip2) do
-          if Stek1[i].id1 == arrayGradeDip2[a] then
-            if GetHeroCreatures(hero, arrayGradeDip1[a]) <= GetHeroCreatures(hero, Stek1[i].id1) then
-              Stek1[i].id2 = arrayGradeDip1[a];
-            else
-              Stek1[i].id2 = -1;
-            end;
-            a = length(arrayGradeDip2);
-          end;
-        end;
-      end;
-    end;
-  end;
-  kol1 = 0;
-  if HasArtefact( hero, 88, 1) then k1 = CrownOfLeaderBonus; else k1 = 1; end;
-  if hero == "Rolf" or hero == "Rolf2" then k1 = 2; end;
-  for i = 1, 7 do
-    for j = 1, 8 do
-      for k = 1, 21 do
-        if Stek1[i].id1 == array_units[j][k].id and Stek1[i].id2 > 0 then
-          Stek1[i].kol = int(k1 * DiplomacyCoef * kolUnit1[array_units[j][k].lvl]);
-          AddObjectCreatures('Garrison3', Stek1[i].id2, Stek1[i].kol );
-          k = 21;
-          j = 8;
-          kol1 = kol1 + 1;
-        end;
-      end;
-    end;
-  end;
-  MakeHeroInteractWithObject (hero, 'Garrison3');
-  Stek1[1].id2, Stek1[2].id2, Stek1[3].id2, Stek1[4].id2, Stek1[5].id2, Stek1[6].id2, Stek1[7].id2 = GetObjectCreaturesTypes('Garrison3');
-  for i = 1, 7 do
-    if Stek1[i].id2 > 0 then
-      Stek1[i].kol = GetObjectCreatures('Garrison3', Stek1[i].id2);
-    end;
-  end;
-  x1, y1 = GetObjectPosition(hero);
-  
-  pause1 = 0;
-  if GetHeroSkillMastery(hero, SKILL_NECROMANCY) > 0 then
-    sleep(2);
-    startThread (Confirm1F);
-  end;
-  
-  while kol1 > 0 and pause1 == 0 do
-    for i = 1, 7 do
-      if Stek1[i].id2 > 0 then
-        if GetObjectCreatures('Garrison3', Stek1[i].id2) < Stek1[i].kol then
-          for j = 1, 7 do
-            if j ~= i then
-              if Stek1[j].id2 > 0 then
-                RemoveObjectCreatures('Garrison3', Stek1[j].id2, Stek1[j].kol);
-              end;
-            end;
-          end;
-          i = 7;
-          kol1 = 0;
---          pause1 = 1;
-        end;
-      end;
-    end;
-    x1_actual, y1_actual = GetObjectPosition(hero);
-    if x1_actual ~= x1 or y1_actual ~= y1 then kol1 = 0; end;
-    sleep(1);
-  end;
-  DiplomacyEnable1 = 1;
-  sleep(3);
-  if GetHeroSkillMastery(hero, SKILL_NECROMANCY) > 0 then
-    NecroBonus1(hero);
-  end;
-end;
-
-
-function diplomacy2(hero)
-  pause2 = 0;
-  MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Diplomacy.txt", 'pause2F');
-  while pause2 == 0 do
-    sleep(1);
-  end;
---  MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."Diplomacy.txt" );
-  Stek2 = { {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}, {["kol"] = 0, ["id1"] = 0, ["id2"] = 0}};
-  DenyGarrisonCreaturesTakeAway('Garrison4', 1);
-  SetObjectOwner('Garrison4', 2);
-  Stek2[1].id1, Stek2[2].id1, Stek2[3].id1, Stek2[4].id1, Stek2[5].id1, Stek2[6].id1, Stek2[7].id1 = GetHeroCreaturesTypes(hero);
-  for i = 1, 7 do
-    if Stek2[i].id1 > 0 then
-      for a = 1, length(arrayGradeDip1) do
-        if Stek2[i].id1 == arrayGradeDip1[a] then
-          if GetHeroCreatures(hero, arrayGradeDip2[a]) < GetHeroCreatures(hero, Stek2[i].id1) then
-            Stek2[i].id2 = arrayGradeDip2[a];
-          else
-            Stek2[i].id2 = -1;
-          end;
-          a = length(arrayGradeDip1);
-        end;
-      end;
-      if Stek2[i].id2 == 0 then
-        for a = 1, length(arrayGradeDip2) do
-          if Stek2[i].id1 == arrayGradeDip2[a] then
-            if GetHeroCreatures(hero, arrayGradeDip1[a]) <= GetHeroCreatures(hero, Stek2[i].id1) then
-              Stek2[i].id2 = arrayGradeDip1[a];
-            else
-              Stek2[i].id2 = -1;
-            end;
-            a = length(arrayGradeDip2);
-          end;
-        end;
-      end;
-    end;
-  end;
-  kol2 = 0;
-  if HasArtefact( hero, 88, 1) then k2 = CrownOfLeaderBonus; else k2 = 1; end;
-  if hero == "Rolf" or hero == "Rolf2" then k2 = 2; end;
-  for i = 1, 7 do
-    for j = 1, 8 do
-      for k = 1, 21 do
-        if Stek2[i].id1 == array_units[j][k].id and Stek2[i].id2 > 0 then
-          Stek2[i].kol = int(k2 * DiplomacyCoef * kolUnit2[array_units[j][k].lvl]);
-          AddObjectCreatures('Garrison4', Stek2[i].id2, Stek2[i].kol );
-          k = 21;
-          j = 8;
-          kol2 = kol2 + 1;
-        end;
-      end;
-    end;
-  end;
-  MakeHeroInteractWithObject (hero, 'Garrison4');
-  Stek2[1].id2, Stek2[2].id2, Stek2[3].id2, Stek2[4].id2, Stek2[5].id2, Stek2[6].id2, Stek2[7].id2 = GetObjectCreaturesTypes('Garrison4');
-  for i = 1, 7 do
-    if Stek2[i].id2 > 0 then
-      Stek2[i].kol = GetObjectCreatures('Garrison4', Stek2[i].id2);
-    end;
-  end;
-  x2, y2 = GetObjectPosition(hero);
-  
-  pause2 = 0;
-  if GetHeroSkillMastery(hero, SKILL_NECROMANCY) > 0 then
-    sleep(2);
-    startThread (Confirm2F);
-  end;
-  
-  while kol2 > 0 and pause2 == 0 do
-    for i = 1, 7 do
-      if Stek2[i].id2 > 0 then
-        if GetObjectCreatures('Garrison4', Stek2[i].id2) < Stek2[i].kol then
-          for j = 1, 7 do
-            if j ~= i then
-              if Stek2[j].id2 > 0 then
-                RemoveObjectCreatures('Garrison4', Stek2[j].id2, Stek2[j].kol);
-              end;
-            end;
-          end;
-          i = 7;
-          kol2 = 0;
---          pause2 = 1;
-        end;
-      end;
-    end;
-    x2_actual, y2_actual = GetObjectPosition(hero);
-    if x2_actual ~= x2 or y2_actual ~= y2 then kol1 = 0; end;
-    sleep(1);
-  end;
-  DiplomacyEnable2 = 1;
-  sleep(3);
-  if GetHeroSkillMastery(hero, SKILL_NECROMANCY) > 0 then
-    NecroBonus2(hero);
-  end;
 end;
 
 function NoActivity (hero1, hero2)

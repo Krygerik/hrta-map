@@ -1,5 +1,177 @@
 -- Скрипты запускающиеся на 4 день
 
+PATH_TO_DAY4_SCRIPTS = GetMapDataPath().."day4/";
+PATH_TO_DAY4_MESSAGES = PATH_TO_DAY4_SCRIPTS.."messages/";
+
+doFile(PATH_TO_DAY4_SCRIPTS.."day4_constants.lua");
+sleep(1);
+
+-- Соотношение существ к их грейдам
+MAP_CREATURES_ON_GRADE = {
+  [CREATURE_GRIFFIN] = CREATURE_BATTLE_GRIFFIN,
+  [CREATURE_PRIEST] = CREATURE_ZEALOT,
+  [CREATURE_CAVALIER] = CREATURE_CHAMPION,
+  [CREATURE_ANGEL] = CREATURE_SERAPH,
+  [CREATURE_SUCCUBUS] = CREATURE_SUCCUBUS_SEDUCER,
+  [CREATURE_NIGHTMARE] = CREATURE_HELLMARE,
+  [CREATURE_PIT_FIEND] = CREATURE_PIT_SPAWN,
+  [CREATURE_DEVIL] = CREATURE_ARCH_DEMON,
+  [CREATURE_VAMPIRE] = CREATURE_NOSFERATU,
+  [CREATURE_LICH] = CREATURE_LICH_MASTER,
+  [CREATURE_WIGHT] = CREATURE_BANSHEE,
+  [CREATURE_BONE_DRAGON] = CREATURE_HORROR_DRAGON,
+  [CREATURE_DRUID] = CREATURE_HIGH_DRUID,
+  [CREATURE_UNICORN] = CREATURE_WHITE_UNICORN,
+  [CREATURE_TREANT] = CREATURE_ANGER_TREANT,
+  [CREATURE_GREEN_DRAGON] = CREATURE_RAINBOW_DRAGON,
+  [CREATURE_MAGI] = CREATURE_COMBAT_MAGE,
+  [CREATURE_GENIE] = CREATURE_DJINN_VIZIER,
+  [CREATURE_RAKSHASA] = CREATURE_RAKSHASA_KSHATRI,
+  [CREATURE_RAKSHASA_RUKH] = CREATURE_TITAN,
+  [CREATURE_GIANT] = CREATURE_STORM_LORD,
+  [CREATURE_RIDER] = CREATURE_BLACK_RIDER,
+  [CREATURE_HYDRA] = CREATURE_ACIDIC_HYDRA,
+  [CREATURE_MATRON] = CREATURE_SHADOW_MISTRESS,
+  [CREATURE_DEEP_DRAGON] = CREATURE_RED_DRAGON,
+  [CREATURE_BROWLER] = CREATURE_BATTLE_RAGER,
+  [CREATURE_RUNE_MAGE] = CREATURE_FLAME_KEEPER,
+  [CREATURE_THANE] = CREATURE_THUNDER_THANE,
+  [CREATURE_MAGMA_DRAGON] = CREATURE_LAVA_DRAGON,
+  [CREATURE_SHAMAN] = CREATURE_SHAMAN_HAG,
+  [CREATURE_ORCCHIEF_BUTCHER] = CREATURE_ORCCHIEF_CHIEFTAIN,
+  [CREATURE_WYVERN] = CREATURE_WYVERN_PAOKAI,
+  [CREATURE_CYCLOP] = CREATURE_CYCLOP_BLOODEYED,
+};
+
+-- Вычисление кэфа дипломатии
+function getDiplomacyKoef(heroName)
+  print 'getDiplomacyKoef'
+
+  local DIPLOMACY_DEFAULT_COEF = 0.4;
+
+  local dictHeroName = getDictionaryHeroName(heroName);
+
+  if dictHeroName == HEROES.ROLF then
+    return 2 * DIPLOMACY_DEFAULT_COEF;
+  end;
+
+  return DIPLOMACY_DEFAULT_COEF;
+end;
+
+-- Отслеживание изменений в армии гарнизона и очищение его
+function clearGarnisonOnChangeTread(garnisonName)
+  print 'clearGarnisonOnChangeTread'
+  
+  local initArmy = {
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+    { kol = nil, id = nil },
+  };
+  
+  -- Странная херня, если существа нет, то берется ИД = 0
+  initArmy[1].id, initArmy[2].id, initArmy[3].id, initArmy[4].id, initArmy[5].id, initArmy[6].id, initArmy[7].id = GetObjectCreaturesTypes(garnisonName);
+
+  -- Считаем, сколько существ есть вначале
+  for _, army in initArmy do
+    if army.id ~= 0 then
+      army.kol = GetObjectCreatures(garnisonName, army.id);
+    end;
+  end;
+
+  -- Следим, чтобы игрок не взял больше
+  local playerTakeArmy = nil;
+
+  while not playerTakeArmy do
+    for _, army in initArmy do
+      if army.id ~= 0 then
+        local currentCountUnits = GetObjectCreatures(garnisonName, army.id);
+
+        if currentCountUnits < army.kol then
+          playerTakeArmy = not nil;
+        end;
+      end;
+    end;
+
+    sleep(1);
+  end;
+
+  -- Удаляем все, что осталось из гарнизона
+  for _, army in initArmy do
+    if army.id ~= 0 then
+      local currentCountUnits = GetObjectCreatures(garnisonName, army.id);
+
+      if currentCountUnits > 0 then
+        RemoveObjectCreatures(garnisonName, army.id, currentCountUnits);
+      end;
+    end;
+  end;
+end;
+
+-- Активация навыка "Дипломатия"
+function runDiplomacy(heroName)
+  print 'runDiplomacy'
+
+  local playerId = GetObjectOwner(heroName);
+
+  MessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."diplomacy.txt");
+
+  local stashArmy = {
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+    { kol = nil, id1 = nil, id2 = nil },
+  };
+
+  stashArmy[1].id1, stashArmy[2].id1, stashArmy[3].id1, stashArmy[4].id1, stashArmy[5].id1, stashArmy[6].id1, stashArmy[7].id1 = GetHeroCreaturesTypes(heroName);
+
+  -- Выясняем, какие грейды будем предлагать
+  for _, stashItem in stashArmy do
+    if stashItem.id1 ~= nil then
+      for gradeCreatureId, altGradeCreatureId in MAP_CREATURES_ON_GRADE do
+        if stashItem.id1 == gradeCreatureId and GetHeroCreatures(heroName, gradeCreatureId) < GetHeroCreatures(heroName, altGradeCreatureId) then
+          stashItem.id2 = altGradeCreatureId;
+        end;
+
+        if stashItem.id1 == altGradeCreatureId then
+          stashItem.id2 = gradeCreatureId;
+        end;
+      end;
+    end;
+  end;
+
+  local diplomacyKoef = getDiplomacyKoef(heroName);
+
+  -- Добавляем в гарнизон армию, возможную для присоединения через дипломатию
+  DenyGarrisonCreaturesTakeAway(MAP_GARNISON_FOR_DIPLOMACY[playerId], not nil);
+
+  for _, stashItem in stashArmy do
+    for _, raceId in RACES do
+      for _, unitData in UNITS[raceId] do
+        if stashItem.id1 == unitData.id and stashItem.id2 ~= nil then
+          stashItem.kol = diplomacyKoef * unitData.kol;
+          AddObjectCreatures(MAP_GARNISON_FOR_DIPLOMACY[playerId], stashItem.id2, stashItem.kol);
+        end;
+      end;
+    end;
+  end;
+  
+  print 'stashArmy'
+  print (stashArmy)
+
+  -- Отдаем гарнизон игроку и следим за изменением количества существ в нем
+  SetObjectOwner(MAP_GARNISON_FOR_DIPLOMACY[playerId], playerId);
+  MakeHeroInteractWithObject(heroName, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
+
+  startThread(clearGarnisonOnChangeTread, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -11,12 +183,16 @@ function day4_scripts()
     -- Отправляем на выбор заклятых
     if raceId == RACES.SYLVAN then
       -- TODO
-      avengers();
+      --avengers();
+    end;
+    
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    
+    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
+      runDiplomacy(mainHeroName);
     end;
   end;
 end;
-
-
 
 -- Точка входа
 day4_scripts();
@@ -27,6 +203,7 @@ function avengers()
 
   -- TODO
 end;
+
 
 -- Старый функционал по заклятым для эльфа
 function oldAvengersFunctional()
@@ -142,7 +319,7 @@ function oldAvengersFunctional()
   --  OpenCircleFog( 28, 13, 0, 3, 2);
 
   end;
-  
+
 
   function Avenger1()
     pause1 = 0;
@@ -353,7 +530,7 @@ function oldAvengersFunctional()
   --stop(HeroMax2);
 
   end;
-  
+
   function ReturnElfArmy1(hero, res)
     for i = 1, 7 do
       if Stek1[i].id > 0 then
@@ -377,7 +554,7 @@ function oldAvengersFunctional()
     if GetObjectCreatures('RANDOMTOWN2', 91) > 0 then kolCreatures = GetObjectCreatures('RANDOMTOWN2', 91); RemoveObjectCreatures('RANDOMTOWN2', 91, kolCreatures); end;
   --  if HasHeroSkill(hero, 141) then GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_SPEED, -1); GiveHeroBattleBonus(hero, HERO_BATTLE_BONUS_INITIATIVE, 1); end;
   end;
-  
+
   TeleportUse1 = 0;
   TeleportUse2 = 0;
 
