@@ -1738,34 +1738,8 @@ artHero2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	basicS   = {     1,      1,      3,      1,      2,      3,      2,      1};
 	basicK   = {     1,      2,      1,      2,      3,      1,      2,      1};
 
-function MentorAddSkill1(hero, skill)
-  AddSkill1(hero, skill);
-  AddSk1 = AddSk1 + 1;
-  if AddSk1 == RemSk1 and ReturnSkillPlayer1 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse1 == 1 then
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + RemSk1 * EstatesDiscountMentor));
-    ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = RemSk1 * EstatesDiscountMentor}, HeroMax1, 1, 5.0);
-  end;
-  if AddSk1 == RemSk1 and ReturnSkillPlayer1 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse1 == 0 then
-    Estates1Q(hero);
-  end;
-end;
-
-function MentorAddSkill2(hero, skill)
-  AddSkill2(hero, skill);
-  AddSk2 = AddSk2 + 1;
-  if AddSk2 == RemSk2 and ReturnSkillPlayer2 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse2 == 1 then
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + RemSk2 * EstatesDiscountMentor));
-    ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = RemSk2 * EstatesDiscountMentor}, HeroMax2, 2, 5.0);
-  end;
-  if AddSk2 == RemSk2 and ReturnSkillPlayer2 ~= 1 and HasHeroSkill(hero, 29) and EstatesDiscountUse2 == 0 then
-    Estates2Q(hero);
-  end;
-end;
-
 ReturnSkillPlayer1 = 0;
 ReturnSkillPlayer2 = 0;
-EstatesUse1 = 0;
-EstatesUse2 = 0;
 Skill1_78 = 0;
 Skill2_78 = 0;
 SumSkill1 = 0;
@@ -1773,15 +1747,6 @@ SumSkill2 = 0;
 RevUse1 = 0;
 RevUse2 = 0;
 upp=0;
-StudentUse1 = 0;
-StudentUse2 = 0;
-AcademyUse1 = 0;
-AcademyUse2 = 0;
-
-EstatesEnable1 = 0;
-EstatesEnable2 = 0;
-EstatesDiscountUse1 = 0;
-EstatesDiscountUse2 = 0;
 
 Disconnect_SkillPlayer1 = 'AddSkillPlayer1: '
 Disconnect_SkillPlayer2 = 'AddSkillPlayer2: '
@@ -1792,9 +1757,6 @@ function AddSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
   ControlStatHero(hero, skill, 1);
-  if skill ==  30 and GetDate (DAY) == 4 then diplomacy1(hero) end;
-  if skill == 79 and StudentUse1 == 0 then SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + 1000)); StudentUse1 = 1; end;
-  if (skill == 29 and RemSk1 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates1Q(hero); end; --ControlHeroCustomAbility(hero, CUSTOM_ABILITY_3, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F"); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport1(hero) end;
   if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
@@ -1821,9 +1783,6 @@ function AddSkill2(hero, skill)
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' +' .. skill
   Disconnect_GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD)
   ControlStatHero(hero, skill, 1);
-  if skill == 129 and GetDate (DAY) == 4 and SpoilsUse2 == 0 then Spoils2(hero) end;
-  if skill ==  30 and GetDate (DAY) == 4 then diplomacy2(hero) end;
-  if skill == 79 and StudentUse2 == 0 then SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + 1000)); StudentUse2 = 1; end;
   if (skill == 29 and RemSk2 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates2Q(hero); end;
   if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport2(hero) end;
@@ -1850,8 +1809,6 @@ function RemoveSkill1(hero, skill)
   ControlStatHero(hero, skill, 0);
   if skill == 16 and AvengerUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 17 and minikUse1 > 0 then ReturnSkillPlayer1 = 1; end;
-  if skill == 29 and EstatesDiscountUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 29 and EstatesDiscountUse1 == 0 and ReturnSkillPlayer1 == 0 then EstatesEnable1 = 0; end;
   if skill == 152 and RunesChangeUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 1 then DelLogistics1(hero); if LogisticsNoMoney1 == 1 then ReturnSkillPlayer1 = 1; end; end;
   if skill == 21 and NavUse1 == 1 then ReturnSkillPlayer1 = 1; end;
@@ -1875,8 +1832,6 @@ function RemoveSkill2(hero, skill)
   ControlStatHero(hero, skill, 0);
   if skill == 16 and AvengerUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 17 and minikUse2 > 0 then ReturnSkillPlayer2 = 1; end;
-  if skill == 29 and EstatesDiscountUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 29 and EstatesDiscountUse2 == 0 and ReturnSkillPlayer2 == 0 then EstatesEnable2 = 0; end;
   if skill == 152 and RunesChangeUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 1 then DelLogistics2(hero); if LogisticsNoMoney2 == 1 then ReturnSkillPlayer2 = 1; end; end;
   if skill == 21 and NavUse2 == 1 then ReturnSkillPlayer2 = 1; end;
@@ -4531,62 +4486,6 @@ function ChangeRandomTown(hero)
   UpgradeTownBuilding('TOWN', 1);
   UpgradeTownBuilding('TOWN', 1);
 end;
-
-EstatesQ1 = 0;
-EstatesQ2 = 0;
-
-function Estates1Q(hero)
-  EstatesEnable1 = 1;
-  if EstatesDiscountUse1 == 0 and GetHeroLevel(hero) >= HalfLevel and (RemSkSum1 > 0 or GetHeroLevel(hero) > StartLevel) then
-    if GetHeroLevel(hero) < StartLevel then
-      discount1 = RemSkSum1 * EstatesDiscountMentor;
-    else
-      discount1 = EstatesDiscountLevel * (GetHeroLevel(hero) - StartLevel) + RemSkSum1 * EstatesDiscountMentor;
-    end;
-    if EstatesQ1 == 0 then
-      EstatesQ1 = 1;
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), {GetMapDataPath().."EstatesQ.txt"; eq = discount1}, 'Estates1', 'EstatesNo1');
-    end;
-  end;
-end;
-
-function Estates1()
-  if EstatesDiscountUse1 == 0 then
-    SetPlayerResource(PLAYER_1, 6, GetPlayerResource(1, 6) + discount1);
-    EstatesDiscountUse1 = 1;
-  end;
-end;
-
-function EstatesNo1()
-  EstatesQ1 = 0;
-end;
-
-function Estates2Q(hero)
-  EstatesEnable2 = 1;
-  if EstatesDiscountUse2 == 0 and GetHeroLevel(hero) >= HalfLevel and (RemSkSum2 > 0 or GetHeroLevel(hero) > StartLevel) then
-    if GetHeroLevel(hero) < StartLevel then
-      discount2 = RemSkSum2 * EstatesDiscountMentor;
-    else
-      discount2 = EstatesDiscountLevel * (GetHeroLevel(hero) - StartLevel) + RemSkSum2 * EstatesDiscountMentor;
-    end;
-    if EstatesQ2 == 0 then
-      EstatesQ2 = 1;
-      QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), {GetMapDataPath().."EstatesQ.txt"; eq = discount2}, 'Estates2', 'EstatesNo2');
-    end;
-  end;
-end;
-
-function Estates2()
-  if EstatesDiscountUse2 == 0 then
-    SetPlayerResource(PLAYER_2, 6, GetPlayerResource(2, 6) + discount2);
-    EstatesDiscountUse2 = 1;
-  end;
-end;
-
-function EstatesNo2()
-  EstatesQ2 = 0;
-end;
-
 
 array_units_for_recruitment = {};
 array_units_for_recruitment = { 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 43, 44, 45, 46, 47, 48, 57, 58, 59, 60, 61, 62, 71, 71, 73, 74, 75, 76, 92, 93, 94, 95, 96, 97, 106, 107, 108, 117, 118, 119, 120, 121, 122, 131, 132, 133, 138, 139, 140, 145, 146, 147, 152, 153, 154, 159, 160, 161, 166, 167, 168, 173, 174, 175};

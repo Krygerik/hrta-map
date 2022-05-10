@@ -767,6 +767,14 @@ function setControlStatsTriggerOnHero(playerId)
       addPlayerMainHeroLearningStats(playerId);
     end;
   end;
+  
+  -- Если у героя есть стартовые навыки, добавляющиеся в книгу заклинаний
+  for skillId, ability in MAP_SKILL_ON_CUSTOM_ABILITY do
+    if HasHeroSkill(heroName, skillId) then
+      ControlHeroCustomAbility(heroName, ability, CUSTOM_ABILITY_ENABLED);
+      Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
+    end;
+  end;
 
   Trigger(HERO_LEVELUP_TRIGGER, heroName, 'handleHeroLevelUp("'..heroName..'")');
   Trigger(HERO_ADD_SKILL_TRIGGER, heroName, 'handleHeroAddSkill');
@@ -824,9 +832,14 @@ function handleHeroAddSkill(triggerHero, skillId)
     ControlHeroCustomAbility(playerMainHero, customAbility, CUSTOM_ABILITY_ENABLED);
     Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
   end;
+  
+  -- Выпускник
+  if skillId == KNIGHT_FEAT_STUDENT_AWARD then
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + STUDENT_AWARD_GOLD));
+  end;
 end;
 
--- Обработчик потери героем нового навыка
+-- Обработчик потери героем навыка
 function handleHeroRemoveSkill(triggerHero, skill)
   print "handleHeroRemoveSkill"
 
@@ -864,11 +877,17 @@ function handleHeroRemoveSkill(triggerHero, skill)
     customAbility ~= nil
     and (
       skill == PERK_FORTUNATE_ADVENTURER
+      or skill == PERK_ESTATES
       or (skill == PERK_SCOUTING and HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) == nil)
       or (skill == RANGER_FEAT_DISGUISE_AND_RECKON and HasHeroSkill(mainHeroName, PERK_SCOUTING) == nil)
     )
   )then
     ControlHeroCustomAbility(triggerHero, customAbility, CUSTOM_ABILITY_DISABLED);
+  end;
+  
+  -- Выпускник
+  if skill == KNIGHT_FEAT_STUDENT_AWARD then
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - STUDENT_AWARD_GOLD));
   end;
 end;
 
@@ -1006,6 +1025,11 @@ function getRemovedUnremovableSkillId(playerId)
   if HasHeroSkill(playerMainHero, PERK_FORTUNATE_ADVENTURER) == nil and PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] ~= nil then
     return PERK_FORTUNATE_ADVENTURER;
   end;
+  
+  -- Если Казна
+  if HasHeroSkill(playerMainHero, PERK_ESTATES) == nil and PLAYERS_USE_ESTATES_STATUS[playerId] ~= nil then
+    return PERK_ESTATES;
+  end;
 
   return nil;
 end;
@@ -1065,6 +1089,101 @@ function removeHeroSkill(heroName, removeSkillId)
   refreshMainHeroStats(playerId);
 end;
 
+-- Продажа стата игроком
+function sellStat(strPlayerId, strStatId)
+  print "sellStat"
+
+  local playerId = strPlayerId + 0;
+  local statId = strStatId + 0;
+
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+  
+  playerMainHeroProps.stats[statId] = playerMainHeroProps.stats[statId] - 1;
+  PLAYER_COUNT_ALLOW_SELL_STATS[playerId] = PLAYER_COUNT_ALLOW_SELL_STATS[playerId] - 1;
+
+  SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + SELL_STAT_PRICE));
+
+  -- Обновляем статы ГГ
+  refreshMainHeroStats(playerId);
+
+  ShowFlyingSign({PATH_TO_START_LEARNING_MESSAGES.."n_goldback.txt"; eq = SELL_STAT_PRICE}, playerMainHeroProps.name, playerId, 2.0);
+end;
+
+-- Обработчик взаимодействия героя с объектом для продажи стата стата
+function handleTouchSellStatObject(strPlayerId, strStatId)
+  print "handleTouchSellStatObject"
+
+  local playerId = strPlayerId + 0;
+  local statId = strStatId + 0;
+
+  local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  -- Если игрок хочет превысить лимит по продаже статов
+  if PLAYER_COUNT_ALLOW_SELL_STATS[playerId] == 0 then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."sell_maximum_stats.txt");
+
+    return nil;
+  end;
+
+  -- Если значение параметра опустилось до своего минимума
+  if playerMainHeroProps.stats[statId] <= MAP_STATS_ON_MINIMUM[statId] then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."sell_maximum_stat.txt");
+
+    return nil;
+  end;
+
+  QuestionBoxForPlayers(playerId, MAP_BUY_STAT_ON_QUESTIONS[statId], 'sellStat("'..playerId..'", "'..statId..'")', 'noop');
+end;
+
+-- Установка триггеров на продажу статов
+function setSellStatsTriggers(playerId)
+  print "setSellStatsTriggers"
+
+  for _, statId in ALL_MAIN_STATS_LIST do
+    local object = BUY_STATS_OBJECTS_NAMES[playerId][statId];
+
+    Trigger(OBJECT_TOUCH_TRIGGER, object.id, 'handleTouchSellStatObject("'..playerId..'", "'..statId..'")');
+  end;
+end;
+
+-- Запуск продажи статов
+function activeSellStats(heroName)
+  print 'activeSellStats'
+
+  local SELL_STATS_POSITIONS = {
+    [PLAYER_1] = { x = 57, y = 75 },
+    [PLAYER_2] = { x = 31, y = 7 },
+  };
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local position = SELL_STATS_POSITIONS[playerId];
+
+  MoveHeroRealTime(heroName, position.x, position.y);
+  ShowFlyingSign({PATH_TO_START_LEARNING_MESSAGES.."sell_stats_info.txt"; eq = PLAYER_COUNT_ALLOW_SELL_STATS[playerId]}, heroName, playerId, 5.0);
+  
+  setSellStatsTriggers(playerId);
+  
+  PLAYERS_USE_ESTATES_STATUS[playerId] = not nil;
+  PLAYER_ACTIVE_SELL_STATS_STATUS[playerId] = not nil;
+end;
+
+-- Возврат триггеров на покупку доп статов
+function revertBuyStatsTriggers(heroName)
+  print "revertBuyStatsTriggers"
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  for _, statId in ALL_MAIN_STATS_LIST do
+    local object = BUY_STATS_OBJECTS_NAMES[playerId][statId];
+
+    Trigger(OBJECT_TOUCH_TRIGGER, object.id, 'handleTouchBuyStatObject("'..playerId..'", "'..statId..'")');
+  end;
+  
+  ShowFlyingSign(PATH_TO_START_LEARNING_MESSAGES.."sell_stats_disable.txt", heroName, playerId, 5.0);
+  
+  PLAYER_ACTIVE_SELL_STATS_STATUS[playerId] = nil;
+end;
+
 -- Обработчик использования кастомной способности
 function handleUseCustomAbility(triggerHero, ability)
   print "handleUseCustomAbility"
@@ -1079,6 +1198,32 @@ function handleUseCustomAbility(triggerHero, ability)
     
     if HasHeroSkill(triggerHero, RANGER_FEAT_DISGUISE_AND_RECKON) and PLAYER_USE_DISGUISE_STATUS[playerId] == nil then
       handleUseDisguise(playerId)
+    end;
+  end;
+  
+  -- Казна
+  if ability == CUSTOM_ABILITY_3 then
+    if HasHeroSkill(triggerHero, PERK_ESTATES) then
+      -- Если первая активация
+      if PLAYERS_USE_ESTATES_STATUS[playerId] == nil then
+        activeSellStats(triggerHero);
+
+        return nil;
+      end;
+      
+      -- Если игрок хочет выключить продажу
+      if PLAYER_ACTIVE_SELL_STATS_STATUS[playerId] == not nil then
+        revertBuyStatsTriggers(triggerHero);
+
+        return nil;
+      end;
+      
+      -- Если игрок снова хочет включить продажу
+      if PLAYER_ACTIVE_SELL_STATS_STATUS[playerId] == nil then
+        activeSellStats(triggerHero);
+
+        return nil;
+      end;
     end;
   end;
   

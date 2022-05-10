@@ -382,6 +382,13 @@ MAP_STAT_ON_ADDING_MESSAGE = {
   [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."getting_knowledge_stat.txt",
 };
 
+MAP_SELL_STAT_ON_QUESTIONS = {
+  [STAT_ATTACK] = PATH_TO_START_LEARNING_MESSAGES.."question_sell_attack_stat.txt",
+  [STAT_DEFENCE] = PATH_TO_START_LEARNING_MESSAGES.."question_sell_defence_stat.txt",
+  [STAT_SPELL_POWER] = PATH_TO_START_LEARNING_MESSAGES.."question_sell_spell_power_stat.txt",
+  [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."question_sell_knowledge_stat.txt",
+};
+
 -- Стоимость перегенерации заклинаний
 COST_RE_GENERATION_STATS = 5000;
 
@@ -432,6 +439,7 @@ MAP_WEEK_ON_ASTROLOGY_STATS = {
 MAP_SKILL_ON_CUSTOM_ABILITY = {
   [PERK_SCOUTING] = CUSTOM_ABILITY_2,
   [RANGER_FEAT_DISGUISE_AND_RECKON] = CUSTOM_ABILITY_2,
+  [PERK_ESTATES] = CUSTOM_ABILITY_3,
   [PERK_FORTUNATE_ADVENTURER] = CUSTOM_ABILITY_4,
 }
 
@@ -477,6 +485,35 @@ PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS = {
   [PLAYER_2] = nil,
 };
 
+-- Статус использования "Казны" игроками
+PLAYERS_USE_ESTATES_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Количество разрешенных для сброски статистик
+PLAYER_COUNT_ALLOW_SELL_STATS = {
+  [PLAYER_1] = 6,
+  [PLAYER_2] = 6,
+};
+
+-- Статус активации продажи статов
+PLAYER_ACTIVE_SELL_STATS_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Соотношение параметра к своему минимальному значению
+MAP_STATS_ON_MINIMUM = {
+  [STAT_ATTACK] = 0,
+  [STAT_DEFENCE] = 0,
+  [STAT_SPELL_POWER] = 1,
+  [STAT_KNOWLEDGE] = 1
+};
+
+-- Стоимость продажи параметра
+SELL_STAT_PRICE = 2500;
+
 -- Скидка на покупку уровней для Винраэля
 ELLESHAR_DISCOUNT = 2500;
 
@@ -512,3 +549,6 @@ MAP_PLAYERS_ON_DWELL_NAME = {
   [PLAYER_1] = 'Dwel1',
   [PLAYER_2] = 'Dwel2',
 };
+
+-- Вознаграждение за перк "Выпускник"
+STUDENT_AWARD_GOLD = 1000;
