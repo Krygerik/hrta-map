@@ -138,10 +138,23 @@ function getPriceUnitByLevel(raceId, unitLevel, countUnits)
   local oneUnitPrice = UNITS[raceId][unitLevel].price1;
   local defaultUnitCount = UNITS[raceId][unitLevel].kol;
 
+  print 'raceId'
+  print (raceId)
+  print 'unitLevel'
+  print (unitLevel)
+  print 'countUnits'
+  print (countUnits)
+  print 'oneUnitPrice'
+  print (oneUnitPrice)
+  print 'defaultUnitCount'
+  print (defaultUnitCount)
+  print 'oneUnitPrice'
+  print (oneUnitPrice)
+  
   if unitLevel == 1 then
     return oneUnitPrice * defaultUnitCount * 0.1;
   end;
-
+  
   return countUnits * oneUnitPrice - defaultUnitCount * oneUnitPrice;
 end;
 
@@ -157,11 +170,11 @@ function adjustmentArmyCount(playerId, raceId)
   -- уменьшаем их количество до стоимости менее 10% от первого тира
   if priceAllButFirst > tenPercentFullPriceFirstLvlUnit then
     while unitLevel > 1 do
-      local priceCurrentLvl = getPriceUnitByLevel(raceId, unitLevel);
+      local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];
+      
+      local priceCurrentLvl = getPriceUnitByLevel(raceId, unitLevel, unit.count);
 
       if priceCurrentLvl > 0 then
-        local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];
-        
         unit.count = unit.count - 1;
       end;
 
@@ -185,11 +198,11 @@ function adjustmentArmyCount(playerId, raceId)
   -- увеличиваем их количество до стоимости менее 10% от первого тира
   if priceAllButFirst < (-tenPercentFullPriceFirstLvlUnit) then
     while unitLevel > 1 do
-      local priceCurrentLvl = getPriceUnitByLevel(raceId, unitLevel);
+      local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];
+    
+      local priceCurrentLvl = getPriceUnitByLevel(raceId, unitLevel, unit.count);
 
       if priceCurrentLvl < 0 then
-        local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];
-      
         unit.count = unit.count + 1;
       end;
 

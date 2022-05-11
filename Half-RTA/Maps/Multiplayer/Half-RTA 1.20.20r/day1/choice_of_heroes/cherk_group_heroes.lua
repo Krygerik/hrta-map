@@ -76,8 +76,13 @@ function cherkGroupHeroes()
   -- Показ сгенерированных групп и навешивание триггеров
   showAllRandomHeroGroups();
 
-  -- Передача хода первому игроку
-  changeTurnSelectedHeroGroup(PLAYER_1);
+  if HOTSEAT_STATUS == not nil then
+    -- Передача хода первому игроку
+    changeTurnSelectedHeroGroup(PLAYER_2);
+  else
+    -- Передача хода первому игроку
+    changeTurnSelectedHeroGroup(PLAYER_1);
+  end;
 end;
 
 -- Удаление триггеров местности перед черком групп героев
@@ -338,8 +343,8 @@ end;
 
 -- Убираемся после черков героев и определяем конечный набор героев для 2 игроков
 function finishGroupCherk()
-  removeHeroMovePoints(Djovanni);
   removeHeroMovePoints(Biara);
+  removeHeroMovePoints(Djovanni);
 
   sleep(1);
 

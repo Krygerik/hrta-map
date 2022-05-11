@@ -14,7 +14,10 @@ GAME_MODE = {
   HALF = DIFFICULTY == DIFFICULTY_HARD,
   -- Микс черк (GEROI)
   MIX = DIFFICULTY == DIFFICULTY_HEROIC,
-}
+};
+
+-- Выбран ли режим хотсит
+HOTSEAT_STATUS = nil;
 
 -- Кастомное перечисление рас, за неимением такого по умолчанию
 RACES = {
@@ -761,7 +764,8 @@ HEROES = {
   NIKOLAS = 'Nikolas',                 -- Николас
   VEGEYR = 'Vegeyr',                   -- Свея
   RED_HEAVEN_HERO = 'RedHeavenHero03', -- Валерия
-  ROLF = 'Rolf'                        -- Ролф
+  ROLF = 'Rolf',                       -- Ролф
+  ALMEGIR = 'Almegir',                 -- Ирбет
 };
 
 -- Соотношение игроков к подконтрольным им городам

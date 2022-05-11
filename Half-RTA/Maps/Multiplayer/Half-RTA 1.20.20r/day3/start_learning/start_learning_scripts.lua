@@ -660,6 +660,23 @@ function checkAndRunHeroSpec(heroName)
   if dictHeroName == HEROES.RED_HEAVEN_HERO then
     startThread(specValeriaTread, heroName);
   end;
+  
+  if dictHeroName == HEROES.ALMEGIR then
+    startThread(darkRitualTread, heroName);
+  end;
+end;
+
+-- Отслеживает героя и постоянно пополняет ему очки передвижения
+function infitityMoveTread(heroName)
+  print "infitityMoveTread"
+  
+  while not nil do
+    if GetHeroStat(heroName, STAT_MOVE_POINTS) < 30000 then
+      addHeroMovePoints(heroName);
+    end;
+    
+    sleep(20);
+  end;
 end;
 
 -- Повышение уровней переданного героя
@@ -681,6 +698,8 @@ function learning(strPlayerId, heroName, stage)
        
        scouting(enemyPlayerId);
      end;
+
+     startThread(infitityMoveTread, heroName);
      
      checkAndRunHeroSpec(heroName);
 
@@ -781,6 +800,153 @@ function setControlStatsTriggerOnHero(playerId)
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
 end;
 
+-- Вопрос игроку, желает ли он повысить нападение за счет ТР
+function questionDRTakeAttack(strPlayerId)
+  local playerId = strPlayerId + 0;
+
+  QuestionBoxForPlayers(
+    playerId,
+    PATH_TO_START_LEARNING_MESSAGES.."question_get_attack_dark_ritual.txt",
+    'darkRitualUpStat("'..playerId..'", "'..STAT_ATTACK..'")',
+    'questionDRTakeDefence("'..playerId..'")'
+  );
+end;
+
+-- Вопрос игроку, желает ли он повысить защиту за счет ТР
+function questionDRTakeDefence(strPlayerId)
+  local playerId = strPlayerId + 0;
+
+  QuestionBoxForPlayers(
+    playerId,
+    PATH_TO_START_LEARNING_MESSAGES.."question_get_defence_dark_ritual.txt",
+    'darkRitualUpStat("'..playerId..'", "'..STAT_DEFENCE..'")',
+    'questionDRTakeSpellPower("'..playerId..'")'
+  );
+end;
+
+-- Вопрос игроку, желает ли он повысить колдовство за счет ТР
+function questionDRTakeSpellPower(strPlayerId)
+  local playerId = strPlayerId + 0;
+
+  QuestionBoxForPlayers(
+    playerId,
+    PATH_TO_START_LEARNING_MESSAGES.."question_get_spell_power_dark_ritual.txt",
+    'darkRitualUpStat("'..playerId..'", "'..STAT_SPELL_POWER..'")',
+    'questionDRTakeKnowledge("'..playerId..'")'
+  );
+end;
+
+-- Вопрос игроку, желает ли он повысить знание за счет ТР
+function questionDRTakeKnowledge(strPlayerId)
+  local playerId = strPlayerId + 0;
+
+  QuestionBoxForPlayers(
+    playerId,
+    PATH_TO_START_LEARNING_MESSAGES.."question_get_knowledge_dark_ritual.txt",
+    'darkRitualUpStat("'..playerId..'", "'..STAT_KNOWLEDGE..'")',
+    'noop'
+  );
+end;
+
+-- Отслеживание активации Темного ритуала
+function darkRitualTread(heroName)
+  print "darkRitualTread"
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  while not PLAYERS_USE_DARK_RITUAL_STATUS[playerId] and GetDate(DAY) == 3 do
+    if GetHeroStat(heroName, STAT_MANA_POINTS) > 0 then
+      questionDRTakeAttack(playerId);
+    
+      ChangeHeroStat(heroName, STAT_MOVE_POINTS, 30000);
+      ChangeHeroStat(heroName, STAT_MANA_POINTS, 0 - GetHeroStat(heroName, STAT_MANA_POINTS));
+    end;
+    
+    sleep(20);
+  end;
+end;
+
+-- Безопасное изменение статистик главного героя у игрока
+function safetyRemoveStat(playerId, statId, diff)
+  print "safetyRemoveStat"
+
+  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+  
+  local currentValue = mainHeroProps.start_stats[statId] + mainHeroProps.stats[statId];
+  
+  -- Если стат превысит нижний лимит
+  if currentValue - diff < MAP_STATS_ON_MINIMUM[statId] then
+    return nil;
+  end;
+  
+  -- Если хватает статов с уровней - берем их
+  if mainHeroProps.stats[statId] >= diff then
+    mainHeroProps.stats[statId] = mainHeroProps.stats[statId] - diff;
+    
+    return not nil;
+  end;
+  
+  -- Если не хватает - берем еще и стартовые
+  local diffForStartStats = diff - mainHeroProps.stats[statId];
+  local diffForStats = diff - diffForStartStats;
+  
+  if mainHeroProps.stats[statId] > 0 then
+    mainHeroProps.stats[statId] = mainHeroProps.stats[statId] - diffForStats;
+  end;
+  
+  if mainHeroProps.start_stats[statId] > 0 then
+    mainHeroProps.start_stats[statId] = mainHeroProps.start_stats[statId] - diffForStartStats;
+  end;
+  
+  return not nil;
+end;
+
+-- Получение значения изменения каждого параметра
+function getCountDarkRitualStat(playerId)
+  print "getCountDarkRitualStat"
+  
+  local mainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  local dictHeroName = getDictionaryHeroName(mainHero);
+  
+  local defaultCount = 1;
+  
+  if dictHeroName == HEROES.ALMEGIR then
+    return defaultCount * 2;
+  end;
+  
+  return defaultCount;
+end;
+
+-- Повышение статистики с темного ритуала
+function darkRitualUpStat(strPlayerId, strUpStatId)
+  print "darkRitualUpStat"
+  
+  local playerId = strPlayerId + 0;
+  local upStatId = strUpStatId + 0;
+  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
+
+  local changeStatValue = getCountDarkRitualStat(playerId);
+
+  local resultStatValue = changeStatValue;
+  
+  for _, statId in ALL_MAIN_STATS_LIST do
+    if upStatId ~= statId then
+      local success = safetyRemoveStat(playerId, statId, changeStatValue);
+      
+      if success then
+        resultStatValue = resultStatValue + changeStatValue;
+      end;
+    end;
+  end;
+  
+  mainHeroProps.stats[upStatId] = mainHeroProps.stats[upStatId] + resultStatValue;
+  
+  refreshMainHeroStats(playerId);
+  
+  PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
@@ -836,6 +1002,11 @@ function handleHeroAddSkill(triggerHero, skillId)
   -- Выпускник
   if skillId == KNIGHT_FEAT_STUDENT_AWARD then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + STUDENT_AWARD_GOLD));
+  end;
+  
+  -- Темный ритуал
+  if skillId == PERK_DARK_RITUAL then
+    startThread(darkRitualTread, playerMainHero);
   end;
 end;
 
@@ -1029,6 +1200,11 @@ function getRemovedUnremovableSkillId(playerId)
   -- Если Казна
   if HasHeroSkill(playerMainHero, PERK_ESTATES) == nil and PLAYERS_USE_ESTATES_STATUS[playerId] ~= nil then
     return PERK_ESTATES;
+  end;
+  
+  -- Темный ритуал
+  if HasHeroSkill(playerMainHero, PERK_DARK_RITUAL) == nil and PLAYERS_USE_DARK_RITUAL_STATUS[playerId] ~= nil then
+    return PERK_DARK_RITUAL;
   end;
 
   return nil;

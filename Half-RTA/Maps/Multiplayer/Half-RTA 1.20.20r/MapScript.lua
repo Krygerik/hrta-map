@@ -1757,7 +1757,6 @@ function AddSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
   ControlStatHero(hero, skill, 1);
-  if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport1(hero) end;
   if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
   if skill == 115 then ForestGuard1(hero); end;
@@ -1783,8 +1782,6 @@ function AddSkill2(hero, skill)
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' +' .. skill
   Disconnect_GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD)
   ControlStatHero(hero, skill, 1);
-  if (skill == 29 and RemSk2 == 0) or (skill == 29 and GetHeroLevel(hero) > StartLevel) then Estates2Q(hero); end;
-  if skill == 71 or (HasHeroSkill(hero, 71) and GetHeroLevel(hero) == 2) then startThread(DarkRitual) end;
   if skill == 182 then GoblinSupport2(hero) end;
   if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
   if skill == 115 then ForestGuard2(hero); end;
@@ -1815,7 +1812,6 @@ function RemoveSkill1(hero, skill)
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
-  if skill == 71 and ReturnSkillPlayer1 == 0 then RemoveDarkRitual1(hero); end;
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
@@ -1838,7 +1834,6 @@ function RemoveSkill2(hero, skill)
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
-  if skill == 71 and ReturnSkillPlayer2 == 0 then RemoveDarkRitual2(hero); end;
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
   if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
@@ -3900,383 +3895,8 @@ function ChangeLevel(hero, delta)
   WarpHeroExp (hero, heroExp + deltaExp);
 end;
 
-
 RevDel1 = 0;
 RevDel2 = 0;
-
-DT_use1 = 0;
-DT_use2 = 0;
-DT_use1prev = 0;
-DT_use2prev = 0;
-
-array_DR = {}
-array_DR[1] = {0, 0, 0, 0}
-array_DR[2] = {0, 0, 0, 0}
-
-function DarkRitual()
-  varDT = 0;
-  while varDT < 1 and GetDate (DAY) == 3 do
-    sleep (10);
-    if GetHeroStat(HeroMax1, STAT_MOVE_POINTS) == 0 and GetHeroStat(HeroMax1, STAT_MANA_POINTS) > 0 and DT_use1 == 0 and GetDate (DAY) == 3 then
-      DT_use1 = 1;
-      nap1Plus3Q(HeroMax1);
-    elseif GetHeroStat(HeroMax1, STAT_MANA_POINTS) > 0 and DT_use1 == 0 and GetDate (DAY) == 3 then
-      ChangeHeroStat(HeroMax1, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax1, STAT_MANA_POINTS));
-    end;
-    --nap1Plus3Q(HeroMax1); end; /UI/H5A1/Icons/Heroes/Portrets128x128/Giovanni.(Texture).xdb#xpointer(/Texture)
-    if GetHeroStat(HeroMax2, STAT_MOVE_POINTS) == 0 and GetHeroStat(HeroMax2, STAT_MANA_POINTS) > 0 and DT_use2 == 0 and GetDate (DAY) == 3 then
-      DT_use2 = 1;
-      nap2Plus3Q(HeroMax2);
-    elseif GetHeroStat(HeroMax2, STAT_MANA_POINTS) > 0 and DT_use2 == 0 and GetDate (DAY) == 3 then
-      ChangeHeroStat(HeroMax2, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax2, STAT_MANA_POINTS));
-    end;
-  end;
-end;
-
-function Talk1(g1,g2)
-  k = 1;
-  DT_use1 = g2;
-  if HeroMax1 == "Almegir" or HeroMax1 == "Almegir2" then k = 2; end;
-  if g2 > 0 and GetDate (DAY) == 3 then
-    for i = 1, k do
-      for j = 1, 4 do
-        if j < 3 then
-          if j ~= g2 and GetHeroStat(HeroMax1, j) > 0 then
-            ChangeHeroStat(HeroMax1,  j, -1);
-            ChangeHeroStat(HeroMax1, g2,  1);
-          end;
-        else
-          if j ~= g2 and GetHeroStat(HeroMax1, j) > 1 then
-            ChangeHeroStat(HeroMax1,  j, -1);
-            ChangeHeroStat(HeroMax1, g2,  1);
-          end;
-        end;
-      end;
-      ChangeHeroStat(HeroMax1, g2,  1);
-    end;
-  end;
-  ChangeHeroStat(HeroMax1, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(HeroMax1, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax1, STAT_MANA_POINTS));
-  if g2 == 0 then DT_use1 = 0; end;
-end;
-
-function Talk2(g1,g2)
-  k = 1;
-  DT_use2 = g2;
-  if HeroMax2 == "Almegir" or HeroMax2 == "Almegir2" then k = 2; end;
-  if g2 > 0 and GetDate (DAY) == 3 then
-    for i = 1, k do
-      for j = 1, 4 do
-        if j < 3 then
-          if j ~= g2 and GetHeroStat(HeroMax2, j) > 0 then
-            ChangeHeroStat(HeroMax2,  j, -1);
-            ChangeHeroStat(HeroMax2, g2,  1);
-          end;
-        else
-          if j ~= g2 and GetHeroStat(HeroMax2, j) > 1 then
-            ChangeHeroStat(HeroMax2,  j, -1);
-            ChangeHeroStat(HeroMax2, g2,  1);
-          end;
-        end;
-      end;
-      ChangeHeroStat(HeroMax2, g2,  1);
-    end;
-  end;
-  ChangeHeroStat(HeroMax2, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(HeroMax2, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax2, STAT_MANA_POINTS));
-  if g2 == 0 then DT_use2 = 0; end;
-end;
-
-function nap1Plus3Q(hero)
-  hero1 = hero;
-  DT_use1 = 5;
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."napPlus3.txt", 'nap1Plus3', 'zaw1Plus3Q');
-end;
-
-function zaw1Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."zawPlus3.txt", 'zaw1Plus3', 'kol1Plus3Q');
-end;
-
-function kol1Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."kolPlus3.txt", 'kol1Plus3', 'zna1Plus3Q');
-end;
-
-function zna1Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."znaPlus3.txt", 'zna1Plus3', 'noDR');
-end;
-
-function nap2Plus3Q(hero)
-  hero2 = hero;
-  DT_use2 = 5;
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."napPlus3.txt", 'nap2Plus3', 'zaw2Plus3Q');
-end;
-
-function zaw2Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."zawPlus3.txt", 'zaw2Plus3', 'kol2Plus3Q');
-end;
-
-function kol2Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."kolPlus3.txt", 'kol2Plus3', 'zna2Plus3Q');
-end;
-
-function zna2Plus3Q()
-  QuestionBoxForPlayers (GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."znaPlus3.txt", 'zna2Plus3', 'noDR');
-end;
-
-function noDR(player)
-  if player == PLAYER_1 then
-    ChangeHeroStat(HeroMax1, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(HeroMax1, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax1, STAT_MANA_POINTS));
-    DT_use1 = 0;
-  end;
-  if player == PLAYER_2 then
-    ChangeHeroStat(HeroMax2, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(HeroMax2, STAT_MANA_POINTS, 0 - GetHeroStat(HeroMax2, STAT_MANA_POINTS));
-    DT_use2 = 0;
-  end;
-end;
-
-function nap1Plus3()
-  k = 1;
-  if hero1 == "Almegir" or hero1 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero1, 2) > 0 then
-      ChangeHeroStat(hero1, 1,  1);
-      ChangeHeroStat(hero1, 2, -1);
-      array_DR[1][2] = array_DR[1][2] - 1;
-    end;
-    if GetHeroStat(hero1, 3) > 1 then
-      ChangeHeroStat(hero1, 1,  1);
-      ChangeHeroStat(hero1, 3, -1);
-      array_DR[1][3] = array_DR[1][3] - 1;
-    end;
-    if GetHeroStat(hero1, 4) > 1 then
-      ChangeHeroStat(hero1, 1,  1);
-      ChangeHeroStat(hero1, 4, -1);
-      array_DR[1][4] = array_DR[1][4] - 1;
-    end;
-    ChangeHeroStat(hero1, 1,  1);
-    array_DR[1][1] = array_DR[1][1] + 1;
-  end;
-  if GetDate (DAY) == 3 then
-    ChangeHeroStat(hero1, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(hero1, STAT_MANA_POINTS, 0 - GetHeroStat(hero1, STAT_MANA_POINTS));
-  end;
-  DT_use1 = 1;
-end;
-
-function zaw1Plus3()
-  k = 1;
-  if hero1 == "Almegir" or hero1 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero1, 1) > 0 then
-      ChangeHeroStat(hero1, 2,  1);
-      ChangeHeroStat(hero1, 1, -1);
-      array_DR[1][1] = array_DR[1][1] - 1;
-    end;
-    if GetHeroStat(hero1, 3) > 1 then
-      ChangeHeroStat(hero1, 2,  1);
-      ChangeHeroStat(hero1, 3, -1);
-      array_DR[1][3] = array_DR[1][3] - 1;
-    end;
-    if GetHeroStat(hero1, 4) > 1 then
-      ChangeHeroStat(hero1, 2,  1);
-      ChangeHeroStat(hero1, 4, -1);
-      array_DR[1][4] = array_DR[1][4] - 1;
-    end;
-    ChangeHeroStat(hero1, 2,  1);
-    array_DR[1][2] = array_DR[1][2] + 1;
-  end;
-  if GetDate (DAY) == 3 then
-    ChangeHeroStat(hero1, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(hero1, STAT_MANA_POINTS, 0 - GetHeroStat(hero1, STAT_MANA_POINTS));
-  end;
-  DT_use1 = 2;
-end;
-
-function kol1Plus3()
-  k = 1;
-  if hero1 == "Almegir" or hero1 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero1, 1) > 0 then
-      ChangeHeroStat(hero1, 3,  1);
-      ChangeHeroStat(hero1, 1, -1);
-      array_DR[1][1] = array_DR[1][1] - 1;
-    end;
-    if GetHeroStat(hero1, 2) > 0 then
-      ChangeHeroStat(hero1, 3,  1);
-      ChangeHeroStat(hero1, 2, -1);
-      array_DR[1][2] = array_DR[1][2] - 1;
-    end;
-    if GetHeroStat(hero1, 4) > 1 then
-      ChangeHeroStat(hero1, 3,  1);
-      ChangeHeroStat(hero1, 4, -1);
-      array_DR[1][4] = array_DR[1][4] - 1;
-    end;
-    ChangeHeroStat(hero1, 3,  1);
-    array_DR[1][3] = array_DR[1][3] + 1;
-  end;
-  if GetDate (DAY) == 3 then
-    ChangeHeroStat(hero1, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(hero1, STAT_MANA_POINTS, 0 - GetHeroStat(hero1, STAT_MANA_POINTS));
-  end;
-  DT_use1 = 3;
-end;
-
-function zna1Plus3()
-  k = 1;
-  if hero1 == "Almegir" or hero1 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero1, 1) > 0 then
-      ChangeHeroStat(hero1, 4,  1);
-      ChangeHeroStat(hero1, 1, -1);
-      array_DR[1][1] = array_DR[1][1] - 1;
-    end;
-    if GetHeroStat(hero1, 2) > 0 then
-      ChangeHeroStat(hero1, 4,  1);
-      ChangeHeroStat(hero1, 2, -1);
-      array_DR[1][2] = array_DR[1][2] - 1;
-    end;
-    if GetHeroStat(hero1, 3) > 1 then
-      ChangeHeroStat(hero1, 4,  1);
-      ChangeHeroStat(hero1, 3, -1);
-      array_DR[1][3] = array_DR[1][3] - 1;
-    end;
-    ChangeHeroStat(hero1, 4,  1);
-    array_DR[1][4] = array_DR[1][4] + 1;
-  end;
-  if GetDate (DAY) == 3 then
-    ChangeHeroStat(hero1, STAT_MOVE_POINTS, 20000);
-    ChangeHeroStat(hero1, STAT_MANA_POINTS, 0 - GetHeroStat(hero1, STAT_MANA_POINTS));
-  end;
-  DT_use1 = 4;
-end;
-
-function nap2Plus3()
-  k = 1;
-  if hero2 == "Almegir" or hero2 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero2, 2) > 0 then
-      ChangeHeroStat(hero2, 1,  1);
-      ChangeHeroStat(hero2, 2, -1);
-      array_DR[2][2] = array_DR[2][2] - 1;
-    end;
-    if GetHeroStat(hero2, 3) > 1 then
-      ChangeHeroStat(hero2, 1,  1);
-      ChangeHeroStat(hero2, 3, -1);
-      array_DR[2][3] = array_DR[2][3] - 1;
-    end;
-    if GetHeroStat(hero2, 4) > 1 then
-      ChangeHeroStat(hero2, 1,  1);
-      ChangeHeroStat(hero2, 4, -1);
-      array_DR[2][4] = array_DR[2][4] - 1;
-    end;
-    ChangeHeroStat(hero2, 1,  1);
-    array_DR[2][1] = array_DR[2][1] + 1;
-  end;
-  ChangeHeroStat(hero2, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(hero2, STAT_MANA_POINTS, 0 - GetHeroStat(hero2, STAT_MANA_POINTS));
-  DT_use2 = 1;
-end;
-
-function zaw2Plus3()
-  k = 1;
-  if hero2 == "Almegir" or hero2 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero2, 1) > 0 then
-      ChangeHeroStat(hero2, 2,  1);
-      ChangeHeroStat(hero2, 1, -1);
-      array_DR[2][1] = array_DR[2][1] - 1;
-    end;
-    if GetHeroStat(hero2, 3) > 1 then
-      ChangeHeroStat(hero2, 2,  1);
-      ChangeHeroStat(hero2, 3, -1);
-      array_DR[2][3] = array_DR[2][3] - 1;
-    end;
-    if GetHeroStat(hero2, 4) > 1 then
-      ChangeHeroStat(hero2, 2,  1);
-      ChangeHeroStat(hero2, 4, -1);
-      array_DR[2][4] = array_DR[2][4] - 1;
-    end;
-    ChangeHeroStat(hero2, 2,  1);
-    array_DR[2][2] = array_DR[2][2] + 1;
-  end;
-  ChangeHeroStat(hero2, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(hero2, STAT_MANA_POINTS, 0 - GetHeroStat(hero2, STAT_MANA_POINTS));
-  DT_use2 = 2;
-end;
-
-function kol2Plus3()
-  k = 1;
-  if hero2 == "Almegir" or hero2 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero2, 1) > 0 then
-      ChangeHeroStat(hero2, 3,  1);
-      ChangeHeroStat(hero2, 1, -1);
-      array_DR[2][1] = array_DR[2][1] - 1;
-    end;
-    if GetHeroStat(hero2, 2) > 0 then
-      ChangeHeroStat(hero2, 3,  1);
-      ChangeHeroStat(hero2, 2, -1);
-      array_DR[2][2] = array_DR[2][2] - 1;
-    end;
-    if GetHeroStat(hero2, 4) > 1 then
-      ChangeHeroStat(hero2, 3,  1);
-      ChangeHeroStat(hero2, 4, -1);
-      array_DR[2][4] = array_DR[2][4] - 1;
-    end;
-    ChangeHeroStat(hero2, 3,  1);
-    array_DR[2][3] = array_DR[2][3] + 1;
-  end;
-  ChangeHeroStat(hero2, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(hero2, STAT_MANA_POINTS, 0 - GetHeroStat(hero2, STAT_MANA_POINTS));
-  DT_use2 = 3;
-end;
-
-function zna2Plus3()
-  k = 1;
-  if hero2 == "Almegir" or hero2 == "Almegir2" then k = 2; end;
-  for i = 1, k do
-    if GetHeroStat(hero2, 1) > 0 then
-      ChangeHeroStat(hero2, 4,  1);
-      ChangeHeroStat(hero2, 1, -1);
-      array_DR[2][1] = array_DR[2][1] - 1;
-    end;
-    if GetHeroStat(hero2, 2) > 0 then
-      ChangeHeroStat(hero2, 4,  1);
-      ChangeHeroStat(hero2, 2, -1);
-      array_DR[2][2] = array_DR[2][2] - 1;
-    end;
-    if GetHeroStat(hero2, 3) > 1 then
-      ChangeHeroStat(hero2, 4,  1);
-      ChangeHeroStat(hero2, 3, -1);
-      array_DR[2][3] = array_DR[2][3] - 1;
-    end;
-    ChangeHeroStat(hero2, 4,  1);
-    array_DR[2][4] = array_DR[2][4] + 1;
-  end;
-  ChangeHeroStat(hero2, STAT_MOVE_POINTS, 20000);
-  ChangeHeroStat(hero2, STAT_MANA_POINTS, 0 - GetHeroStat(hero2, STAT_MANA_POINTS));
-  DT_use2 = 4;
-end;
-
-function RemoveDarkRitual1(hero)
-  ChangeHeroStat(hero, 1, 0 - array_DR[1][1]);
-  ChangeHeroStat(hero, 2, 0 - array_DR[1][2]);
-  ChangeHeroStat(hero, 3, 0 - array_DR[1][3]);
-  ChangeHeroStat(hero, 4, 0 - array_DR[1][4]);
-  DT_use1prev = DT_use1;
-  DT_use1 = 0;
-end;
-
-function RemoveDarkRitual2(hero)
-  ChangeHeroStat(hero, 1, 0 - array_DR[2][1]);
-  ChangeHeroStat(hero, 2, 0 - array_DR[2][2]);
-  ChangeHeroStat(hero, 3, 0 - array_DR[2][3]);
-  ChangeHeroStat(hero, 4, 0 - array_DR[2][4]);
-  DT_use2prev = DT_use2;
-  DT_use2 = 0;
-end;
 
 function Revelation1()
   if RevDel1 == 1 then
@@ -5325,8 +4945,6 @@ function SubHero(hero1, hero2)
   array_army_Hero = {{["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}};
   array_machine_Hero = { 0, 0, 0}
 end;
-
-
 
 function DublikatHero1(hero1)
 --  print('steel1');

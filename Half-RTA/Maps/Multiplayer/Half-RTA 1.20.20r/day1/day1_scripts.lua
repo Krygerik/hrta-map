@@ -7,10 +7,22 @@ doFile(PATH_TO_DAY1_MODULE.."day1_constants.lua");
 doFile(PATH_TO_DAY1_MODULE.."day1_utils.lua");
 sleep(1)
 
+-- Определение режима хотсит
+function detectHotseatStatus()
+  print "detectHotseatStatus"
+  
+  if GetTurnTimeLeft(PLAYER_2) <= 0 then
+    HOTSEAT_STATUS = not nil;
+  end;
+end;
+
+
 
 -- Точка входа для выполнения скриптов модулю
 function day1()
   print "day1"
+
+  detectHotseatStatus();
 
   -- Получерк
   if GAME_MODE.HALF then
