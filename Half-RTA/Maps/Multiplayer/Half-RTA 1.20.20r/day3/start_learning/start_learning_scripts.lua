@@ -679,6 +679,17 @@ function infitityMoveTread(heroName)
   end;
 end;
 
+-- Высчитывает компенсацию за стартовые навыки логистики
+function startLogisticCompensation(heroName)
+  print "startLogisticCompensation"
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  local newValue = GetPlayerResource(playerId, GOLD) + GetHeroSkillMastery(heroName, SKILL_LOGISTICS) * LOGISTIC_BONUS;
+  
+  SetPlayerResource(playerId, GOLD, newValue);
+end;
+
 -- Повышение уровней переданного героя
 function learning(strPlayerId, heroName, stage)
   print "learning"
@@ -702,6 +713,8 @@ function learning(strPlayerId, heroName, stage)
      startThread(infitityMoveTread, heroName);
      
      checkAndRunHeroSpec(heroName);
+     
+     startLogisticCompensation(heroName);
 
      ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
   end;
@@ -947,6 +960,104 @@ function darkRitualUpStat(strPlayerId, strUpStatId)
   PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
 end;
 
+-- Удаление стека, полученного с навыка "Лесной лидер"
+function removeForestGuardBonusStek(heroName)
+  print "removeForestGuardBonusStek"
+  
+  local COUNT_FOREST_GUARD_BONUS = 10;
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  if PLAYERS_GET_FOREST_GUARD_STATUS[playerId] == nil then
+    PLAYERS_GET_FOREST_GUARD_STATUS[playerId] = not nil;
+    
+    if GetHeroCreatures(heroName, CREATURE_BLADE_SINGER) > 0 then
+      RemoveHeroCreatures(heroName, CREATURE_BLADE_SINGER, COUNT_FOREST_GUARD_BONUS);
+    elseif GetHeroCreatures(heroName, CREATURE_BLADE_JUGGLER) > 0 then
+      RemoveHeroCreatures(heroName, CREATURE_BLADE_JUGGLER, COUNT_FOREST_GUARD_BONUS);
+    end;
+  end;
+end;
+
+-- Ручная выдача бонуса за Лесного лидера
+function customGiveForestGuardBonusTread(heroName)
+  print "customGiveForestGuardBonusTread"
+
+  local countBonus = 10;
+
+  local bonusUsed = nil;
+
+  while not bonusUsed do
+    if GetDate(DAY) == 4 and HasHeroSkill(heroName, RANGER_FEAT_FOREST_GUARD_EMBLEM) then
+      if (GetHeroCreatures(heroName,  CREATURE_BLADE_SINGER) > 0) then
+        AddHeroCreatures(heroName,  CREATURE_BLADE_SINGER, countBonus);
+      elseif (GetHeroCreatures(heroName, CREATURE_BLADE_JUGGLER) > 0) then
+        AddHeroCreatures(heroName, CREATURE_BLADE_JUGGLER, countBonus);
+      end;
+      bonusUsed = not nil;
+    end;
+    
+    sleep(20);
+  end;
+end;
+
+-- Навык "Лесной лидер"
+function forestGuard(heroName)
+  print "forestGuard"
+  
+  removeForestGuardBonusStek(heroName);
+  startThread(customGiveForestGuardBonusTread, heroName);
+end;
+
+-- Удаление стека, полученного с навыка "Защити нас всех"
+function removeDefendUsAllBonusStek(heroName)
+  print "removeDefendUsAllBonusStek"
+
+  local BONUS_VALUE = 15;
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+
+  if PLAYERS_GET_DEFEND_US_ALL_STATUS[playerId] == nil then
+    PLAYERS_GET_DEFEND_US_ALL_STATUS[playerId] = not nil;
+
+    if GetHeroCreatures(heroName, CREATURE_GOBLIN_DEFILER) > 0 then
+      RemoveHeroCreatures(heroName, CREATURE_GOBLIN_DEFILER, BONUS_VALUE);
+    elseif GetHeroCreatures(heroName, CREATURE_GOBLIN) > 0 then
+      RemoveHeroCreatures(heroName, CREATURE_GOBLIN, BONUS_VALUE);
+    end;
+  end;
+end;
+
+-- Ручная выдача бонуса за "Защити нас всех"
+function customGiveDefendUsAllBonusTread(heroName)
+  print "customGiveDefendUsAllBonusTread"
+
+  local BONUS_VALUE = 15;
+
+  local bonusUsed = nil;
+
+  while not bonusUsed do
+    if GetDate(DAY) == 4 and HasHeroSkill(heroName, HERO_SKILL_DEFEND_US_ALL) then
+      if (GetHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER) > 0) then
+        AddHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER, BONUS_VALUE);
+      elseif (GetHeroCreatures(heroName, CREATURE_GOBLIN) > 0) then
+        AddHeroCreatures(heroName, CREATURE_GOBLIN, BONUS_VALUE);
+      end;
+      bonusUsed = not nil;
+    end;
+
+    sleep(20);
+  end;
+end;
+
+-- Навык "Защити нас всех"
+function defendUsAll(heroName)
+  print "defendUsAll"
+
+  removeDefendUsAllBonusStek(heroName);
+  startThread(customGiveDefendUsAllBonusTread, heroName);
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
@@ -1008,6 +1119,30 @@ function handleHeroAddSkill(triggerHero, skillId)
   if skillId == PERK_DARK_RITUAL then
     startThread(darkRitualTread, playerMainHero);
   end;
+  
+  -- Военачальник
+  if skillId == PERK_EXPERT_TRAINER then
+    SetTownBuildingLimitLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1);
+  end;
+  
+  -- Лесной лидер
+  if skillId == RANGER_FEAT_FOREST_GUARD_EMBLEM then
+    forestGuard(playerMainHero);
+  end;
+  
+  -- Защити нас всех
+  if skillId == HERO_SKILL_DEFEND_US_ALL then
+    defendUsAll(playerMainHero);
+  end;
+  
+  -- Логистика
+  if skillId == SKILL_LOGISTICS then
+    if PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] > 0 then
+      PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] - 1;
+    else
+      SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + LOGISTIC_BONUS));
+    end;
+  end;
 end;
 
 -- Обработчик потери героем навыка
@@ -1059,6 +1194,24 @@ function handleHeroRemoveSkill(triggerHero, skill)
   -- Выпускник
   if skill == KNIGHT_FEAT_STUDENT_AWARD then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - STUDENT_AWARD_GOLD));
+  end;
+  
+  -- Военачальник
+  if skill == PERK_EXPERT_TRAINER and GetTownBuildingLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) < 1 then
+    SetTownBuildingLimitLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0);
+  end;
+  
+  -- Логистика
+  if skill == SKILL_LOGISTICS then
+    local resultGold = GetPlayerResource (playerId, GOLD) - LOGISTIC_BONUS;
+    
+    if resultGold < 0 then
+      PLAYERS_LOGISTICS_DEBT[playerId] = PLAYERS_LOGISTICS_DEBT[playerId] + LOGISTIC_BONUS;
+    end;
+  
+    if resultGold >= 0 then
+      SetPlayerResource(playerId, GOLD, resultGold);
+    end;
   end;
 end;
 
@@ -1205,6 +1358,22 @@ function getRemovedUnremovableSkillId(playerId)
   -- Темный ритуал
   if HasHeroSkill(playerMainHero, PERK_DARK_RITUAL) == nil and PLAYERS_USE_DARK_RITUAL_STATUS[playerId] ~= nil then
     return PERK_DARK_RITUAL;
+  end;
+  
+  -- Военачальник
+  if (
+    HasHeroSkill(playerMainHero, PERK_EXPERT_TRAINER) == nil
+    and GetTownBuildingLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1
+  ) then
+    return PERK_EXPERT_TRAINER;
+  end;
+  
+  -- Логистика
+  if PLAYERS_LOGISTICS_DEBT[playerId] > 0 then
+    PLAYERS_LOGISTICS_DEBT[playerId] = PLAYERS_LOGISTICS_DEBT[playerId] - LOGISTIC_BONUS;
+    PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] + 1;
+  
+    return SKILL_LOGISTICS;
   end;
 
   return nil;

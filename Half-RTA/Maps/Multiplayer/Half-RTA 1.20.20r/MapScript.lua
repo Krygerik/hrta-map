@@ -1756,12 +1756,6 @@ Disconnect_GoldPlayer2 = 0
 function AddSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
-  ControlStatHero(hero, skill, 1);
-  if skill == 182 then GoblinSupport1(hero) end;
-  if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
-  if skill == 115 then ForestGuard1(hero); end;
-  if skill == 181 then DefendUsAll1(hero); end;
-  if skill == 1 then Logistics1(hero); end;
   if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation1(); end;
   if skill == 131 then ChangeHeroStat(hero, 2, -2); end;
   if skill == 186 then ChangeHeroStat(hero, 2, -1); end;
@@ -1781,12 +1775,6 @@ end;
 function AddSkill2(hero, skill)
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' +' .. skill
   Disconnect_GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD)
-  ControlStatHero(hero, skill, 1);
-  if skill == 182 then GoblinSupport2(hero) end;
-  if skill == 57 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1); end;
-  if skill == 115 then ForestGuard2(hero); end;
-  if skill == 181 then DefendUsAll2(hero); end;
-  if skill == 1 then Logistics2(hero) end;
   if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation2(); end;
   if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
   if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
@@ -1803,21 +1791,16 @@ function RemoveSkill1(hero, skill)
   sleep(1);
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' -' .. skill
 
-  ControlStatHero(hero, skill, 0);
   if skill == 16 and AvengerUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 17 and minikUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 152 and RunesChangeUse1 > 0 then ReturnSkillPlayer1 = 1; end;
-  if skill == 1 then DelLogistics1(hero); if LogisticsNoMoney1 == 1 then ReturnSkillPlayer1 = 1; end; end;
   if skill == 21 and NavUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN1', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
   if skill == 140 or skill == 219 then RevelationDel1(hero); end;
   if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
-  if (skill == 3 or skill == 183) and ReturnSkillPlayer1 == 0 then Learning1(hero) end;
   if ReturnSkillPlayer1 == 0 then ArrayStatHero(hero); end;
 end;
 
@@ -1825,21 +1808,16 @@ function RemoveSkill2(hero, skill)
   sleep(1);
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' -' .. skill
 
-  ControlStatHero(hero, skill, 0);
   if skill == 16 and AvengerUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 17 and minikUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 152 and RunesChangeUse2 > 0 then ReturnSkillPlayer2 = 1; end;
-  if skill == 1 then DelLogistics2(hero); if LogisticsNoMoney2 == 1 then ReturnSkillPlayer2 = 1; end; end;
   if skill == 21 and NavUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 57 and GetTownBuildingLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) <  1 then SetTownBuildingLimitLevel('RANDOMTOWN2', TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0); end;
   if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
   if skill == 140 or skill == 219 then RevelationDel2(hero); end;
   if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
-  if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
   if ReturnSkillPlayer2 == 0 then ArrayStatHero(hero); end;
 end;
 
@@ -1860,109 +1838,6 @@ function ArrayStatHero(hero)
 end;
 
 probel= " ";
-
-function ControlStatHero(hero, skill, add)
-  if GetObjectOwner(hero) == 1 and add == 1 then
-    if skill == 115 then arrayStatHero[1][1] = arrayStatHero[1][1] + 2; end;
-    if skill == 186 or skill == 181 or skill == 131 then arrayStatHero[1][2] = arrayStatHero[1][2] + 2; end;
-    if skill == 87 or skill == 81 or skill == 127 or skill == 119 then arrayStatHero[1][3] = arrayStatHero[1][3] + 2; end;
-    if skill == 146 or skill == 79 then arrayStatHero[1][4] = arrayStatHero[1][4] + 2; end;
-    if skill == 101 then arrayStatHero[1][4] = arrayStatHero[1][4] + 1; end;
-    sumPrev = arrayStatHero[1][1] + arrayStatHero[1][2] + arrayStatHero[1][3] + arrayStatHero[1][4];
-    sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
-    if (sumNow > (sumPrev + 1)) and (GetHeroLevel(hero) > arrayStatHero[1][5]) then
-      arrayUpStat = { 0, 0, 0, 0, 0};
-      for i = 1, 4 do
-        if GetHeroStat(hero, i) > arrayStatHero[1][i] then
-          arrayUpStat[i] = arrayStatHero[1][i] - GetHeroStat(hero, i);
-        end;
-      end;
-      ChangeHeroStat(hero, 1, arrayStatHero[1][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[1][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[1][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[1][4] - GetHeroStat(hero, 4));
-      rnd = random(4) + 1;
-      while arrayUpStat[rnd] == 0 do
-        rnd = random(4) + 1;
-      end;
-      ChangeHeroStat(hero, rnd, 1);
-    end;
-
-    if (sumNow > sumPrev) and (GetHeroLevel(hero) == arrayStatHero[1][5]) then
-      ChangeHeroStat(hero, 1, arrayStatHero[1][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[1][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[1][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[1][4] - GetHeroStat(hero, 4));
-    end;
-  end;
-  if GetObjectOwner(hero) == 2 and add == 1 then
-    if skill == 115 then arrayStatHero[2][1] = arrayStatHero[2][1] + 2; end;
-    if skill == 186 or skill == 181 or skill == 131 then arrayStatHero[2][2] = arrayStatHero[2][2] + 2; end;
-    if skill == 87 or skill == 81 or skill == 127 or skill == 119 then arrayStatHero[2][3] = arrayStatHero[2][3] + 2; end;
-    if skill == 146 or skill == 79 then arrayStatHero[2][4] = arrayStatHero[2][4] + 2; end;
-    if skill == 101 then arrayStatHero[2][4] = arrayStatHero[2][4] + 1; end;
-    sumPrev = arrayStatHero[2][1] + arrayStatHero[2][2] + arrayStatHero[2][3] + arrayStatHero[2][4];
-    sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4));
-
-    if (sumNow > (sumPrev + 1)) and (GetHeroLevel(hero) > arrayStatHero[2][5]) then
-      arrayUpStat = { 0, 0, 0, 0, 0};
-      for i = 1, 4 do
-        if GetHeroStat(hero, i) > arrayStatHero[2][i] then
-          arrayUpStat[i] = arrayStatHero[2][i] - GetHeroStat(hero, i);
-        end;
-      end;
-      ChangeHeroStat(hero, 1, arrayStatHero[2][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[2][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[2][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[2][4] - GetHeroStat(hero, 4));
-      rnd = random(4) + 1;
-      while arrayUpStat[rnd] == 0 do
-        rnd = random(4) + 1;
-      end;
-      ChangeHeroStat(hero, rnd, 1);
-    end;
-
-    if (sumNow > sumPrev) and (GetHeroLevel(hero) == arrayStatHero[2][5]) then
-      ChangeHeroStat(hero, 1, arrayStatHero[2][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[2][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[2][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[2][4] - GetHeroStat(hero, 4));
-    end;
-  end;
-
-  if GetObjectOwner(hero) == 1 and add == 0 then
-    if skill == 115 then arrayStatHero[1][1] = arrayStatHero[1][1] - 2; end;
-    if skill == 186 or skill == 181 or skill == 131 then arrayStatHero[1][2] = arrayStatHero[1][2] - 2; end;
-    if skill == 87 or skill == 81 or skill == 127 or skill == 119 then arrayStatHero[1][3] = arrayStatHero[1][3] - 2; end;
-    if skill == 146 or skill == 79 then arrayStatHero[1][4] = arrayStatHero[1][4] - 2; end;
-    if skill == 101 then arrayStatHero[1][4] = arrayStatHero[1][4] - 1; end;
-    sumPrev = arrayStatHero[1][1] + arrayStatHero[1][2] + arrayStatHero[1][3] + arrayStatHero[1][4];
-    sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
-    if sumNow < sumPrev then
-      ChangeHeroStat(hero, 1, arrayStatHero[1][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[1][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[1][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[1][4] - GetHeroStat(hero, 4));
-    end;
-  end;
-
-  if GetObjectOwner(hero) == 2 and add == 0 then
-    if skill == 115 then arrayStatHero[2][1] = arrayStatHero[2][1] - 2; end;
-    if skill == 186 or skill == 181 or skill == 131 then arrayStatHero[2][2] = arrayStatHero[2][2] - 2; end;
-    if skill == 87 or skill == 81 or skill == 127 or skill == 119 then arrayStatHero[2][3] = arrayStatHero[2][3] - 2; end;
-    if skill == 146 or skill == 79 then arrayStatHero[2][4] = arrayStatHero[2][4] - 2; end;
-    if skill == 101 then arrayStatHero[2][4] = arrayStatHero[2][4] - 1; end;
-    sumPrev = arrayStatHero[2][1] + arrayStatHero[2][2] + arrayStatHero[2][3] + arrayStatHero[2][4];
-    sumNow  = (GetHeroStat(hero, 1) + GetHeroStat(hero, 2) + GetHeroStat(hero, 3) + GetHeroStat(hero, 4))
-    if sumNow < sumPrev then
-      ChangeHeroStat(hero, 1, arrayStatHero[2][1] - GetHeroStat(hero, 1));
-      ChangeHeroStat(hero, 2, arrayStatHero[2][2] - GetHeroStat(hero, 2));
-      ChangeHeroStat(hero, 3, arrayStatHero[2][3] - GetHeroStat(hero, 3));
-      ChangeHeroStat(hero, 4, arrayStatHero[2][4] - GetHeroStat(hero, 4));
-    end;
-  end;
-end;
-
 
 array_skills_H1 = {}
 array_skills_H1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -2971,18 +2846,6 @@ function newday ()
      -- сбор войск
      if (HasHeroSkill(HeroMax1, 28)) then recruitment1(HeroMax1); end;
      if (HasHeroSkill(HeroMax2, 28)) then recruitment2(HeroMax2); end;
-     
-     -- защити нас всех
-     if (HasHeroSkill(HeroMax1, 181)) and (GetHeroCreatures(HeroMax1, 117) > 0) then AddHeroCreatures(HeroMax1, 117, 30); else
-     if (HasHeroSkill(HeroMax1, 181)) and (GetHeroCreatures(HeroMax1, 173) > 0) then AddHeroCreatures(HeroMax1, 173, 30); end; end;
-     if (HasHeroSkill(HeroMax2, 181)) and (GetHeroCreatures(HeroMax2, 117) > 0) then AddHeroCreatures(HeroMax2, 117, 30); else
-     if (HasHeroSkill(HeroMax2, 181)) and (GetHeroCreatures(HeroMax2, 173) > 0) then AddHeroCreatures(HeroMax2, 173, 30); end; end;
-     
-     -- лесной лидер
-     if (HasHeroSkill(HeroMax1, 115)) and (GetHeroCreatures(HeroMax1,  45) > 0) then AddHeroCreatures(HeroMax1,  45, 10); else
-     if (HasHeroSkill(HeroMax1, 115)) and (GetHeroCreatures(HeroMax1, 146) > 0) then AddHeroCreatures(HeroMax1, 146, 10); end; end;
-     if (HasHeroSkill(HeroMax2, 115)) and (GetHeroCreatures(HeroMax2,  45) > 0) then AddHeroCreatures(HeroMax2,  45, 10); else
-     if (HasHeroSkill(HeroMax2, 115)) and (GetHeroCreatures(HeroMax2, 146) > 0) then AddHeroCreatures(HeroMax2, 146, 10); end; end;
 
      -- покровительство асхи
 --     if (HasHeroSkill(HeroMax1, 80)) then GraalVision(HeroMax1, hero1race); end;
@@ -4292,9 +4155,6 @@ function NecroBonus1(hero)
     sleep(1);
   end;
   sleep(3);
---  if HasHeroSkill(hero, 104) or HasHeroSkill(hero, 82) then
---    DublikatHero1( hero);
---  end;
 end;
 
 function NecroBonus2(hero)
@@ -4484,70 +4344,6 @@ function NavigationUse2()
   SetObjectPosition(heroes2[0], 42, 24);
 end;
 
-ForestGuardUse1 = 0;
-ForestGuardUse2 = 0;
-
-function ForestGuard1(hero)
-  if ForestGuardUse1 == 0 then
-    if GetHeroCreatures(hero, 146) > 0 then
-      RemoveHeroCreatures(hero, 146, 10);
-      ForestGuardUse1 = 1;
-    else
-      if GetHeroCreatures(hero, 45) > 0 then
-        RemoveHeroCreatures(hero, 45, 10);
-        ForestGuardUse1 = 1;
-      end;
-    end;
-  end;
-end;
-
-function ForestGuard2(hero)
-  if ForestGuardUse2 == 0 then
-    if GetHeroCreatures(hero, 146) > 0 then
-      RemoveHeroCreatures(hero, 146, 10);
-      ForestGuardUse2 = 1;
-    else
-      if GetHeroCreatures(hero, 45) > 0 then
-        RemoveHeroCreatures(hero, 45, 10);
-        ForestGuardUse2 = 1;
-      end;
-    end;
-  end;
-end;
-
-
-DefendUsAllUse1 = 0;
-DefendUsAllUse2 = 0;
-
-function DefendUsAll1(hero)
-  if DefendUsAllUse1 == 0 then
-    if GetHeroCreatures(hero, 173) > 0 then
-      RemoveHeroCreatures(hero, 173, 15);
-      DefendUsAllUse1 = 1;
-    else
-      if GetHeroCreatures(hero, 117) > 0 then
-        RemoveHeroCreatures(hero, 117, 15);
-        DefendUsAllUse1 = 1;
-      end;
-    end;
-  end;
-end;
-
-
-function DefendUsAll2(hero)
-  if DefendUsAllUse2 == 0 then
-    if GetHeroCreatures(hero, 173) > 0 then
-      RemoveHeroCreatures(hero, 173, 15);
-      DefendUsAllUse2 = 1;
-    else
-      if GetHeroCreatures(hero, 117) > 0 then
-        RemoveHeroCreatures(hero, 117, 15);
-        DefendUsAllUse2 = 1;
-      end;
-    end;
-  end;
-end;
-
 function Insights(hero)
   if KnowHeroSpell(hero, array_spells[2][8].id) and KnowHeroSpell(hero, array_spells[2][9].id) and KnowHeroSpell(hero, array_spells[2][10].id) and KnowHeroSpell(hero, array_spells[2][11].id) and KnowHeroSpell(hero, array_spells[2][12].id) then
   else
@@ -4684,29 +4480,6 @@ SetObjectDwellingCreatures('Dwel1', 116, 0);
 
 SetObjectDwellingCreatures('Dwel2', 116, 0);
 
-GoblinSupportEnable1 = 0;
-GoblinSupportEnable2 = 0;
-
-function GoblinSupport1(hero)
-  if GoblinSupportEnable1 == 0 then
-    AddHeroCreatures(hero, 118, 50);
-    GiveHeroWarMachine(hero, WAR_MACHINE_BALLISTA);
-    GiveHeroWarMachine(hero, WAR_MACHINE_FIRST_AID_TENT);
-    GiveHeroWarMachine(hero, WAR_MACHINE_AMMO_CART);
-  end;
-  GoblinSupportEnable1 = 1;
-end;
-
-function GoblinSupport2(hero)
-  if GoblinSupportEnable2 == 0 then
-    AddHeroCreatures(hero, 118, 50);
-    GiveHeroWarMachine(hero, WAR_MACHINE_BALLISTA);
-    GiveHeroWarMachine(hero, WAR_MACHINE_FIRST_AID_TENT);
-    GiveHeroWarMachine(hero, WAR_MACHINE_AMMO_CART);
-  end;
-  GoblinSupportEnable2 = 1;
-end;
-
 HauntMineEnable1 = 0;
 HauntMineEnable2 = 0;
 
@@ -4722,49 +4495,6 @@ function HauntMine2(hero)
     AddHeroCreatures(hero, 34, 20);
   end;
   HauntMineEnable2 = 1;
-end;
-
-LogisticsEnable1 = 0;
-LogisticsEnable2 = 0;
-LogisticsNoMoney1 = 0;
-LogisticsNoMoney2 = 0;
-
-function Logistics1(hero)
-  if hero == HeroMax1 and StLvlUp1 == 1 then
-    SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) + LogisticsSum));
-    LogisticsEnable1 = 1;
-  end;
-end;
-
-function Logistics2(hero)
-  if hero == HeroMax2 and StLvlUp2 == 1 then
-    SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) + LogisticsSum));
-    LogisticsEnable2 = 1;
-  end;
-end;
-
-function DelLogistics1(hero)
-  if GetPlayerResource (PLAYER_1, GOLD) >= LogisticsSum then
-    if GetHeroLevel(hero) > 1 then
-      SetPlayerResource (PLAYER_1, GOLD, (GetPlayerResource (PLAYER_1, GOLD) - LogisticsSum));
-    end;
-    LogisticsNoMoney1 = 0;
-  else
-    LogisticsNoMoney1 = 1;
-  end;
-  LogisticsEnable1 = 1;
-end;
-
-function DelLogistics2(hero)
-  if GetPlayerResource (PLAYER_2, GOLD) >= LogisticsSum then
-    if GetHeroLevel(hero) > 1 then
-      SetPlayerResource (PLAYER_2, GOLD, (GetPlayerResource (PLAYER_2, GOLD) - LogisticsSum));
-    end;
-    LogisticsNoMoney2 = 0;
-  else
-    LogisticsNoMoney2 = 1;
-  end;
-  LogisticsEnable2 = 1;
 end;
 
 array_skills_Hero = {}
@@ -4945,315 +4675,6 @@ function SubHero(hero1, hero2)
   array_army_Hero = {{["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}};
   array_machine_Hero = { 0, 0, 0}
 end;
-
-function DublikatHero1(hero1)
---  print('steel1');
-  j = 1;
-  for i = 1, 26 do
-    array_skills_Hero1[i] = GetHeroSkillMastery(hero1, array_skills[i]);
-  end;
-
-  for i = 1, 189 do
-    if HasHeroSkill(hero1, array_perks[i]) then
-      array_perks_Hero1[j] = array_perks[i];
-      j = j + 1;
-      kol_perks_Hero1 = j;
-    end;
-  end;
-
-  k = 1;
-  for i = 0, 2 do
-    for j = 1, length (array_arts[i]) do
-      if HasArtefact(hero1, array_arts[i][j].id, 0) then
-        array_arts_Hero1[k].ID = array_arts[i][j].id;
-        k = k + 1;
-      end;
-      if HasArtefact(hero1, array_arts[i][j].id, 1) then
-        array_arts_Hero1[k - 1].Eq = 1;
-        RemoveArtefact(hero1, array_arts[i][j].id);
-      end;
-    end;
-  end;
-
-  j = 1;
-  for i = 1, 179 do
-    if GetHeroCreatures( hero1, i) > 0 then
-      array_army_Hero1[j].ID  = i;
-      array_army_Hero1[j].kol = GetHeroCreatures( hero1, i);
-      j = j + 1;
-    end;
-  end;
-
-  j = 1;
-  for i = 1, 4 do
-    if HasHeroWarMachine(hero1, i) and i ~= 2 then
-      array_machine_Hero1[j]  = i;
-      j = j + 1;
-    end;
-  end;
-  
-  expHero1 = GetHeroStat(hero1, STAT_EXPERIENCE);
-  attHero1 = GetHeroStat(hero1, STAT_ATTACK);
-  defHero1 = GetHeroStat(hero1, STAT_DEFENCE);
-  spHero1  = GetHeroStat(hero1, STAT_SPELL_POWER);
-  knHero1  = GetHeroStat(hero1, STAT_KNOWLEDGE);
-
-  x, y = GetObjectPosition(hero1);
-  RemoveObject(hero1);
-  
-  for i = 0, 7 do
-    for j = 1, length(dublikat_heroes[i]) do
-      if (hero1 == dublikat_heroes[i][j].name or hero1 == dublikat_heroes[i][j].name2) then
-        HeroMax1 = dublikat_heroes[i][j].name3;
-      end;
-    end;
-  end;
-
-  DeployReserveHero(HeroMax1, x, y, 0);
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no');
-  WarpHeroExp(HeroMax1, expHero1);
-  for i = 1, 26 do
-    for j = 1, array_skills_Hero1[i] do
-      if array_skills_Hero1[i] >= j then
-        if GetHeroSkillMastery(HeroMax1, array_skills[i]) < array_skills_Hero1[i] then
-          GiveHeroSkill(HeroMax1, array_skills[i]);
-        end;
-      end;
-    end;
-  end;
-  for i = 1, kol_perks_Hero1 do
-    GiveHeroSkill(HeroMax1, array_perks_Hero1[i]);
-  end;
-
-  k = 0;
-  for i = 1, 189 do
-    if HasHeroSkill( HeroMax1, array_perks[i]) then
-      k = k + 1;
-    end;
-  end;
-  while k < kol_perks_Hero1 do
-    for i = 1, kol_perks_Hero1 do
-      if HasHeroSkill( HeroMax1, array_perks_Hero1[i]) == nil then
-        GiveHeroSkill(HeroMax1, array_perks_Hero1[i]);
-        k = k + 1;
-        if array_perks_Hero1[i] == 115 and GetHeroCreatures(HeroMax1, 146) > 0 then RemoveHeroCreatures(HeroMax1, 146, 10); end;
-        if array_perks_Hero1[i] == 181 and GetHeroCreatures(HeroMax1, 173) > 0 then RemoveHeroCreatures(HeroMax1, 173, 15); end;
-      end;
-    end;
-  end;
-
-
-  for i = 1, length(array_army_Hero1) do
-    if array_army_Hero1[i].ID ~= 0 then
-      AddHeroCreatures(HeroMax1, array_army_Hero1[i].ID, array_army_Hero1[i].kol);
-      if GetHeroCreatures(HeroMax1, 88) > 0 then kolCreatures1 = GetHeroCreatures(HeroMax1, 88); RemoveHeroCreatures(HeroMax1, 88, kolCreatures1); end;
-    end;
-  end;
-
---  print('ttt');
-
-  for i = 1, length(array_machine_Hero1) do
-    if array_machine_Hero1[i] ~= 0 then
-      GiveHeroWarMachine(HeroMax1, array_machine_Hero1[i]);
-    end;
-  end;
-  
---  print('1');
-
-  if StartBonus[1] == 'spell' then
-    TeachHeroSpell(HeroMax1, array_spells[BonusSpells[0].m1][BonusSpells[0].sp1].id );
-    TeachHeroSpell(HeroMax1, array_spells[BonusSpells[0].m2][BonusSpells[0].sp2].id );
-  end;
-  
---  print('2');
-
-  attHero1 = attHero1 - GetHeroStat(HeroMax1, STAT_ATTACK); --print(attHero2);
-  defHero1 = defHero1 - GetHeroStat(HeroMax1, STAT_DEFENCE); --print(defHero2);
-  spHero1  = spHero1  - GetHeroStat(HeroMax1, STAT_SPELL_POWER); --print(spHero2);
-  knHero1  = knHero1  - GetHeroStat(HeroMax1, STAT_KNOWLEDGE); --print(knHero2);
-
-  if attHero1 > 0 then ChangeHeroStat(HeroMax1, STAT_ATTACK,      attHero1); end;
-  if defHero1 > 0 then ChangeHeroStat(HeroMax1, STAT_DEFENCE,     defHero1); end;
-  if spHero1  > 0 then ChangeHeroStat(HeroMax1, STAT_SPELL_POWER,  spHero1); end;
-  if knHero1  > 0 then ChangeHeroStat(HeroMax1, STAT_KNOWLEDGE,    knHero1); end;
-  
-  for i = 1, length(array_arts_Hero1) do
-    if array_arts_Hero1[i].ID ~= 0 and array_arts_Hero1[i].Eq == 1 then
-      GiveArtefact(HeroMax1, array_arts_Hero1[i].ID);
-    end;
-  end;
-
---  print('3');
-
-  array_skills_Hero1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  array_perks_Hero1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  array_arts_Hero1 = {{["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0},  {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}}
-  array_army_Hero1 = {{["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}};
-  array_machine_Hero1 = { 0, 0, 0}
-end;
-
-function DublikatHero2(hero2)
-  j = 1;
-  for i = 1, 26 do
-    array_skills_Hero2[i] = GetHeroSkillMastery(hero2, array_skills[i]);
-  end;
-
-  for i = 1, 189 do
-    if HasHeroSkill(hero2, array_perks[i]) then
-      array_perks_Hero2[j] = array_perks[i];
-      j = j + 1;
-      kol_perks_Hero2 = j;
-    end;
-  end;
-
-  k = 1;
-  for i = 0, 2 do
-    for j = 1, length (array_arts[i]) do
-      if HasArtefact(hero2, array_arts[i][j].id, 0) then
-        array_arts_Hero2[k].ID = array_arts[i][j].id;
-        k = k + 1;
-      end;
-      if HasArtefact(hero2, array_arts[i][j].id, 1) then
-        array_arts_Hero2[k - 1].Eq = 1;
-        RemoveArtefact(hero2, array_arts[i][j].id);
-      end;
-    end;
-  end;
-
-  j = 1;
-  for i = 1, 179 do
-    if GetHeroCreatures( hero2, i) > 0 then
-      array_army_Hero2[j].ID  = i;
-      array_army_Hero2[j].kol = GetHeroCreatures( hero2, i);
-      j = j + 1;
-    end;
-  end;
-
-  j = 1;
-  for i = 1, 4 do
-    if HasHeroWarMachine(hero2, i) and i ~= 2 then
-      array_machine_Hero2[j]  = i;
-      j = j + 1;
-    end;
-  end;
-  
-  expHero2 = GetHeroStat(hero2, STAT_EXPERIENCE);
-  attHero2 = GetHeroStat(hero2, STAT_ATTACK);
-  defHero2 = GetHeroStat(hero2, STAT_DEFENCE);
-  spHero2  = GetHeroStat(hero2, STAT_SPELL_POWER);
-  knHero2  = GetHeroStat(hero2, STAT_KNOWLEDGE);
-
-  x, y = GetObjectPosition(hero2);
-  RemoveObject(hero2);
-
-  for i = 0, 7 do
-    for j = 1, length(dublikat_heroes[i]) do
-      if (hero2 == dublikat_heroes[i][j].name or hero2 == dublikat_heroes[i][j].name2) then
-        HeroMax2 = dublikat_heroes[i][j].name4;
-      end;
-    end;
-  end;
-
-  DeployReserveHero(HeroMax2, x, y, 0);
-  Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no');
-  WarpHeroExp(HeroMax2, expHero2);
-  for i = 1, 26 do
-    for j = 1, array_skills_Hero2[i] do
-      if array_skills_Hero2[i] >= j then
-        if GetHeroSkillMastery(HeroMax2, array_skills[i]) < array_skills_Hero2[i] then
-          GiveHeroSkill(HeroMax2, array_skills[i]);
-        end;
-      end;
-    end;
-  end;
-  for i = 1, kol_perks_Hero2 do
-    GiveHeroSkill(HeroMax2, array_perks_Hero2[i]);
-  end;
-  
-  k = 0;
-  for i = 1, 189 do
-    if HasHeroSkill( HeroMax2, array_perks[i]) then
-      k = k + 1;
-    end;
-  end;
-  while k < kol_perks_Hero2 do
-    for i = 1, kol_perks_Hero2 do
-      if HasHeroSkill( HeroMax2, array_perks_Hero2[i]) == nil then
-        GiveHeroSkill(HeroMax2, array_perks_Hero2[i]);
-        k = k + 1;
-        if array_perks_Hero2[i] == 115 and GetHeroCreatures(HeroMax2, 146) > 0 then RemoveHeroCreatures(HeroMax2, 146, 10); end;
-        if array_perks_Hero2[i] == 181 and GetHeroCreatures(HeroMax2, 173) > 0 then RemoveHeroCreatures(HeroMax2, 173, 15); end;
-      end;
-    end;
-  end;
-
-  for i = 1, length(array_army_Hero2) do
-    if array_army_Hero2[i].ID ~= 0 then
-      AddHeroCreatures(HeroMax2, array_army_Hero2[i].ID, array_army_Hero2[i].kol);
-      if GetHeroCreatures(HeroMax2, 88) > 0 then kolCreatures2 = GetHeroCreatures(HeroMax2, 88); RemoveHeroCreatures(HeroMax2, 88, kolCreatures2); end;
-    end;
-  end;
-
---  print('ttt');
-
-  for i = 1, length(array_machine_Hero2) do
-    if array_machine_Hero2[i] ~= 0 then
-      GiveHeroWarMachine(HeroMax2, array_machine_Hero2[i]);
-    end;
-  end;
-  
---  print('1');
-
-  if StartBonus[2] == 'spell' then
-    TeachHeroSpell(HeroMax2, array_spells[BonusSpells[1].m1][BonusSpells[1].sp1].id );
-    TeachHeroSpell(HeroMax2, array_spells[BonusSpells[1].m2][BonusSpells[1].sp2].id );
-  end;
-  
---  print('2');
-  
-  sleep(1);
-  
---  print(GetHeroStat(HeroMax2, STAT_ATTACK));
---  print(GetHeroStat(HeroMax2, STAT_DEFENCE))
---  print(GetHeroStat(HeroMax2, STAT_SPELL_POWER))
---  print(GetHeroStat(HeroMax2, STAT_KNOWLEDGE))
-
-  attHero2 = attHero2 - GetHeroStat(HeroMax2, STAT_ATTACK); --print(attHero2);
-  defHero2 = defHero2 - GetHeroStat(HeroMax2, STAT_DEFENCE); --print(defHero2);
-  spHero2  = spHero2  - GetHeroStat(HeroMax2, STAT_SPELL_POWER); --print(spHero2);
-  knHero2  = knHero2  - GetHeroStat(HeroMax2, STAT_KNOWLEDGE); --print(knHero2);
-
-  if attHero2 > 0 then ChangeHeroStat(HeroMax2, STAT_ATTACK,      attHero2); end;
-  if defHero2 > 0 then ChangeHeroStat(HeroMax2, STAT_DEFENCE,     defHero2); end;
-  if spHero2  > 0 then ChangeHeroStat(HeroMax2, STAT_SPELL_POWER,  spHero2); end;
-  if knHero2  > 0 then ChangeHeroStat(HeroMax2, STAT_KNOWLEDGE,    knHero2); end;
-  
-  for i = 1, length(array_arts_Hero2) do
-    if array_arts_Hero2[i].ID ~= 0 and array_arts_Hero2[i].Eq == 1 then
-      GiveArtefact(HeroMax2, array_arts_Hero2[i].ID);
-    end;
-  end;
-  
-  if Name(HeroMax2) == "Una" then
-    for i = 1, 10 do
-      if array_FreeRunes[i] == 2 then
-        TeachHeroSpell(HeroMax2, array_spells[4][i].id);
-      end;
-    end;
-  end;
-  
-  sleep(2);
-  
---  print('3');
-
-  array_skills_Hero2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  array_perks_Hero2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-  array_arts_Hero2 = {{["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0},  {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}, {["ID"] = 0, ["Eq"] = 0}}
-  array_army_Hero2 = {{["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}, {["ID"] = 0, ["kol"] = 0}};
-  array_machine_Hero2 = { 0, 0, 0}
-end;
-
-
 
 --------------------------------------------------------------------------------
 

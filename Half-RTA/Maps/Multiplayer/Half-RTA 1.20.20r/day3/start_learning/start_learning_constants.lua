@@ -558,3 +558,30 @@ MAP_PLAYERS_ON_DWELL_NAME = {
 
 -- Вознаграждение за перк "Выпускник"
 STUDENT_AWARD_GOLD = 1000;
+
+-- Статус получения "Лесного лидера" игроками
+PLAYERS_GET_FOREST_GUARD_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Статус получения "Защити нас всех" игроками
+PLAYERS_GET_DEFEND_US_ALL_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Количество бонуса, получаемого с логистики
+LOGISTIC_BONUS = 5000;
+
+-- Значение задолженности с навыка логистики
+PLAYERS_LOGISTICS_DEBT = {
+  [PLAYER_1] = 0,
+  [PLAYER_2] = 0,
+};
+
+-- Количество уровней, которые вернули из-за задолженнности
+PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED = {
+  [PLAYER_1] = 0,
+  [PLAYER_2] = 0,
+};
