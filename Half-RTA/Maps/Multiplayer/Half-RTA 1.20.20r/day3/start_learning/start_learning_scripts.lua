@@ -552,18 +552,31 @@ function specIngaTread(heroName)
   end;
 end;
 
+-- Выдача игроку дополнительного замка с дополнительными существами
+function givePlayerSecondTown(playerId)
+  print "givePlayerSecondTown"
+
+  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+  local dwellPosition = MAP_PLAYERS_ON_DWELL_POSITION[playerId];
+  
+  if GetObjectOwner(dwellId) ~= playerId then
+    SetObjectOwner(dwellId, playerId);
+    SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, 0);
+    SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
+    MoveCameraForPlayers(playerId, dwellPosition.x, dwellPosition.y, GROUND, 40, 0, dwellPosition.rotate, 0, 0, 1);
+  end;
+end;
+
 -- Отслеживание спецы Николаса
 function specNikolasTread(heroName)
   print "specNikolasTread"
 
   local playerId = GetObjectOwner(heroName);
-  local dwellPosition = MAP_PLAYERS_ON_DWELL_POSITION[playerId];
+
   local countAllowMummy = 40;
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
   
-  SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, 0);
-  MoveCameraForPlayers(playerId, dwellPosition.x, dwellPosition.y, GROUND, 40, 0, dwellPosition.rotate, 0, 0, 1);
-  SetObjectOwner(dwellId, playerId);
+  givePlayerSecondTown(playerId);
   SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
 
   -- Если купили мумий - передаем их мейну игрока
@@ -715,6 +728,11 @@ function learning(strPlayerId, heroName, stage)
      checkAndRunHeroSpec(heroName);
      
      startLogisticCompensation(heroName);
+     
+     -- Навигация
+     if HasHeroSkill(heroName, PERK_NAVIGATION) then
+       setNavigationTriggers(heroName);
+     end;
 
      ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
   end;
@@ -1058,6 +1076,114 @@ function defendUsAll(heroName)
   startThread(customGiveDefendUsAllBonusTread, heroName);
 end;
 
+-- Отслеживание возможности передачи артефакта с навигации главному герою
+function navigationTread(playerId)
+  print "navigationTread"
+
+  local hero = playerId == PLAYER_1 and Biara or Djovanni;
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  local used = nil;
+  
+  while not used do
+    if HasHeroSkill(playerMainHero, PERK_NAVIGATION) and GetDate(DAY) == 4 then
+      transferAllArts(hero, playerMainHero);
+      
+      used = not nil;
+    end;
+  
+    sleep(20);
+  end;
+end;
+
+-- Обработчик взятия артефакта игроком
+function handleTouchNavigationArt(triggerHero)
+  print "handleTouchNavigationArt"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local navigationArts = PLAYERS_ON_NAVIGATION_ARTS_TABLE[playerId];
+
+  for _, artName in navigationArts do
+    if IsObjectExists(artName) then
+      RemoveObject(artName);
+    end;
+  end;
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  if HasHeroSkill(playerMainHero, PERK_NAVIGATION) then
+    transferAllArts(triggerHero, playerMainHero);
+    PLAYERS_USE_NAVIGATION_STATUS[playerId] = not nil;
+  else
+    navigationTread(navigationTread, playerId);
+  end;
+
+  local position = PLAYERS_POSITION_AFTER_USE_NAVIGATION[playerId];
+  
+  SetObjectPosition(triggerHero, position.x, position.y);
+end;
+
+-- Обработчик использования лодки синим игроком (т.к. до артефактов навигации ему далеко :D)
+function handleTouchBoat(heroName)
+  print "handleTouchBoat"
+
+  MoveHeroRealTime(heroName, 9, 19);
+end;
+
+-- Навык "Навигация"
+function setNavigationTriggers(heroName)
+  print "setNavigationTriggers"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local hero = playerId == PLAYER_1 and Biara or Djovanni;
+  local position = MAP_POSITION_FOR_NAVIGATION[playerId];
+  local navigationArts = PLAYERS_ON_NAVIGATION_ARTS_TABLE[playerId];
+
+  if IsObjectExists(PLAYERS_WALL_CELL_FOR_NAVIGATION[playerId]) then
+    RemoveObject(PLAYERS_WALL_CELL_FOR_NAVIGATION[playerId]);
+  end;
+
+  Trigger(OBJECT_TOUCH_TRIGGER, 'boat4', 'handleTouchBoat("'..hero..'")');
+  MoveHeroRealTime(hero, position.x, position.y);
+  
+  for _, artName in navigationArts do
+    if IsObjectExists(artName) then
+      Trigger(OBJECT_TOUCH_TRIGGER, artName, 'handleTouchNavigationArt');
+    end;
+  end;
+end;
+
+-- Вестник смерти, выдаем рыцарей смерти за навык
+function heraldOfDeath(heroName)
+  print "heraldOfDeath"
+  
+  local playerId = GetObjectOwner(heroName);
+
+  local countAllowKnightOfDeath = 16;
+  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+  
+  givePlayerSecondTown(playerId);
+  
+  SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, countAllowKnightOfDeath);
+
+  -- Если купили рыцарей - передаем их мейну игрока
+  local countBuyKnight = 0;
+
+  while countBuyKnight < countAllowKnightOfDeath and GetDate(DAY) == 3 do
+    local currentCountBuyKnight = GetObjectCreatures(dwellId, CREATURE_DEATH_KNIGHT);
+
+    if currentCountBuyKnight > 0 then
+      AddObjectCreatures(heroName, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
+      RemoveObjectCreatures(dwellId, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
+      countBuyKnight = countBuyKnight + currentCountBuyKnight;
+      PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] = not nil;
+    end;
+
+    sleep(10);
+  end;
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
@@ -1143,6 +1269,18 @@ function handleHeroAddSkill(triggerHero, skillId)
       SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + LOGISTIC_BONUS));
     end;
   end;
+  
+  -- Навигация
+  if skillId == PERK_NAVIGATION then
+    setNavigationTriggers(playerMainHero);
+  end;
+  
+  -- Вестник смерти
+  if skillId == NECROMANCER_FEAT_HERALD_OF_DEATH then
+    if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
+      startThread(heraldOfDeath, playerMainHero);
+    end;
+  end;
 end;
 
 -- Обработчик потери героем навыка
@@ -1211,6 +1349,15 @@ function handleHeroRemoveSkill(triggerHero, skill)
   
     if resultGold >= 0 then
       SetPlayerResource(playerId, GOLD, resultGold);
+    end;
+  end;
+  
+  -- Вестник смерти
+  if skill == NECROMANCER_FEAT_HERALD_OF_DEATH then
+    if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
+      local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+    
+      SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
     end;
   end;
 end;
@@ -1374,6 +1521,16 @@ function getRemovedUnremovableSkillId(playerId)
     PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] + 1;
   
     return SKILL_LOGISTICS;
+  end;
+  
+  -- Навигация
+  if HasHeroSkill(playerMainHero, PERK_NAVIGATION) == nil and PLAYERS_USE_NAVIGATION_STATUS[playerId] ~= nil then
+    return PERK_NAVIGATION;
+  end;
+  
+  -- Вестник смерти
+  if HasHeroSkill(playerMainHero, NECROMANCER_FEAT_HERALD_OF_DEATH) == nil and PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] ~= nil then
+    return NECROMANCER_FEAT_HERALD_OF_DEATH;
   end;
 
   return nil;

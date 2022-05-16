@@ -1756,16 +1756,6 @@ Disconnect_GoldPlayer2 = 0
 function AddSkill1(hero, skill)
   Disconnect_SkillPlayer1 = Disconnect_SkillPlayer1 .. ' +' .. skill
   Disconnect_GoldPlayer1 = GetPlayerResource (PLAYER_1, GOLD)
-  if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation1(); end;
-  if skill == 131 then ChangeHeroStat(hero, 2, -2); end;
-  if skill == 186 then ChangeHeroStat(hero, 2, -1); end;
-  if skill == 185 then ChangeHeroStat(hero, 4,  2); end;
-  if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
-  if (skill == 140 or skill == 219) and (RevDel1 == 3) then Revelation1(); end;
-  if skill == 102 then startThread(HeraldFunction1); end;
-  if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
-  if skill == 81 then ChangeHeroStat(hero, 3, -2); end;
-  if skill == 87 then ChangeHeroStat(hero, 3, -2); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer1 == 0 then Learning1(hero) end;
@@ -1775,11 +1765,6 @@ end;
 function AddSkill2(hero, skill)
   Disconnect_SkillPlayer2 = Disconnect_SkillPlayer2 .. ' +' .. skill
   Disconnect_GoldPlayer2 = GetPlayerResource (PLAYER_2, GOLD)
-  if skill == 21 or (HasHeroSkill(hero, 21) and GetHeroLevel(hero) == 2)then Navigation2(); end;
-  if skill == 110 or skill == 137 then GraalVision(hero, 1); end;
-  if (skill == 140 or skill == 219) and (RevDel2 == 3) then Revelation2(); end;
-  if skill == 102 then startThread(HeraldFunction2); end;
-  if skill == 81 then ChangeHeroStat(hero, STAT_MANA_POINTS, -100); end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if (skill == 3 or skill == 183) and ReturnSkillPlayer2 == 0 then Learning2(hero) end;
@@ -1794,11 +1779,6 @@ function RemoveSkill1(hero, skill)
   if skill == 16 and AvengerUse1 == 1 then ReturnSkillPlayer1 = 1; end;
   if skill == 17 and minikUse1 > 0 then ReturnSkillPlayer1 = 1; end;
   if skill == 152 and RunesChangeUse1 > 0 then ReturnSkillPlayer1 = 1; end;
-  if skill == 21 and NavUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
-  if skill == 140 or skill == 219 then RevelationDel1(hero); end;
-  if skill == 102 and HeraldUse1 == 1 then ReturnSkillPlayer1 = 1; end;
-  if skill == 102 and HeraldUse1 == 0 and ReturnSkillPlayer1 == 0 then HeraldUse1 = 2; end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if ReturnSkillPlayer1 == 0 then ArrayStatHero(hero); end;
@@ -1811,11 +1791,6 @@ function RemoveSkill2(hero, skill)
   if skill == 16 and AvengerUse2 == 1 then ReturnSkillPlayer2 = 1; end;
   if skill == 17 and minikUse2 > 0 then ReturnSkillPlayer2 = 1; end;
   if skill == 152 and RunesChangeUse2 > 0 then ReturnSkillPlayer2 = 1; end;
-  if skill == 21 and NavUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 110 or skill == 137 then GraalVision(hero, -1); end;
-  if skill == 140 or skill == 219 then RevelationDel2(hero); end;
-  if skill == 102 and HeraldUse2 == 1 then ReturnSkillPlayer2 = 1; end;
-  if skill == 102 and HeraldUse2 == 0 and ReturnSkillPlayer2 == 0 then HeraldUse2 = 2; end;
   if skill == 81 or (skill == 9 and HasHeroSkill(hero, 81)) or (skill == 10 and HasHeroSkill(hero, 81)) or (skill == 11 and HasHeroSkill(hero, 81)) or (skill == 12 and HasHeroSkill(hero, 81)) then SinergyKnowledge(hero); end;
   if skill == 87 or (skill == 9 and HasHeroSkill(hero, 87)) or (skill == 10 and HasHeroSkill(hero, 87)) or (skill == 11 and HasHeroSkill(hero, 87)) or (skill == 12 and HasHeroSkill(hero, 87)) then SinergySpellpower(hero); end;
   if ReturnSkillPlayer2 == 0 then ArrayStatHero(hero); end;
@@ -2465,135 +2440,6 @@ array_Tier7_ID = { 13, 27, 41, 55, 69, 83, 105, 112, 129, 137, 144, 151, 158, 16
 
 array_Fly_ID = {}
 array_Fly_ID = { 7, 8, 13, 27, 34, 35, 41, 43, 55, 59, 65, 83, 88, 91, 102, 109, 112, 115, 127, 137, 144, 145, 151, 154, 155, 158, 160, 163, 171, 178}
-
-
-function GraalVision(hero, stat)
---  print('1');
-  if GetCurrentMoonWeek() == 20 then       --'WEEK_OF_ANTILOPE' медекъ юрюйх
-    ChangeHeroStat(hero, 1, 3 * stat);
-  end;
---  print('2');
-  if GetCurrentMoonWeek() == 23 then         --'WEEK_OF_BADGER' медекъ гюыхрш
-    ChangeHeroStat(hero, 2, 3 * stat);
-  end;
---  print('3');
-  if GetCurrentMoonWeek() == 15 then            --'WEEK_OF_BEE' медекъ йнкднбярбю
-    ChangeHeroStat(hero, 3, 3 * stat);
-  end;
---  print('4');
-  if GetCurrentMoonWeek() == 3 then         --'WEEK_OF_BEETLE' медекъ гмюмхъ
-    ChangeHeroStat(hero, 4, 3 * stat);
-  end;
---  print('5');
-  if GetCurrentMoonWeek() == 18 then      --'WEEK_OF_BUTTERFLY' медекъ пюбмнбеяхъ
-    ChangeHeroStat(hero, 1, stat);
-    ChangeHeroStat(hero, 2, stat);
-    ChangeHeroStat(hero, 3, stat);
-    ChangeHeroStat(hero, 4, stat);
-  end;
-end;
-
-
-function GraalVisionOld(hero, race)
---  print('1');
-  if GetCurrentMoonWeek() == 20 then       --'WEEK_OF_ANTILOPE' медекъ юрюйх
-    ChangeHeroStat(hero, 1, 3);
-  end;
---  print('2');
-  if GetCurrentMoonWeek() == 23 then         --'WEEK_OF_BADGER' медекъ гюыхрш
-    ChangeHeroStat(hero, 2, 3);
-  end;
---  print('3');
-  if GetCurrentMoonWeek() == 15 then            --'WEEK_OF_BEE' медекъ йнкднбярбю
-    ChangeHeroStat(hero, 3, 3);
-  end;
---  print('4');
-  if GetCurrentMoonWeek() == 3 then         --'WEEK_OF_BEETLE' медекъ гмюмхъ
-    ChangeHeroStat(hero, 4, 3);
-  end;
---  print('5');
-  if GetCurrentMoonWeek() == 18 then      --'WEEK_OF_BUTTERFLY' медекъ пюбмнбеяхъ
-    ChangeHeroStat(hero, 1, 1);
-    ChangeHeroStat(hero, 2, 1);
-    ChangeHeroStat(hero, 3, 1);
-    ChangeHeroStat(hero, 4, 1);
-  end;
---  print('6');
-  if GetCurrentMoonWeek() == 10 then     --'WEEK_OF_CATERPILLAR' медекъ яхкш
-    if GetHeroStat(hero, 1) >= GetHeroStat(hero, 2) and GetHeroStat(hero, 1) >= GetHeroStat(hero, 3) and GetHeroStat(hero, 1) >= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 1, 3);
-    end;
-    if GetHeroStat(hero, 2) >= GetHeroStat(hero, 1) and GetHeroStat(hero, 2) >= GetHeroStat(hero, 3) and GetHeroStat(hero, 2) >= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 2, 3);
-    end;
-    if GetHeroStat(hero, 3) >= GetHeroStat(hero, 1) and GetHeroStat(hero, 3) >= GetHeroStat(hero, 2) and GetHeroStat(hero, 3) >= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 3, 3);
-    end;
-    if GetHeroStat(hero, 4) >= GetHeroStat(hero, 1) and GetHeroStat(hero, 4) >= GetHeroStat(hero, 2) and GetHeroStat(hero, 4) >= GetHeroStat(hero, 3) then
-      ChangeHeroStat(hero, 4, 3);
-    end;
-  end;
---  print('7');
-  if GetCurrentMoonWeek() == 38 then            --'WEEK_OF_DEER' медекъ пюбмнбеяхъ
-    if GetHeroStat(hero, 1) <= GetHeroStat(hero, 2) and GetHeroStat(hero, 1) <= GetHeroStat(hero, 3) and GetHeroStat(hero, 1) <= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 1, 5);
-    end;
-    if GetHeroStat(hero, 2) <= GetHeroStat(hero, 1) and GetHeroStat(hero, 2) <= GetHeroStat(hero, 3) and GetHeroStat(hero, 2) <= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 2, 5);
-    end;
-    if GetHeroStat(hero, 3) <= GetHeroStat(hero, 1) and GetHeroStat(hero, 3) <= GetHeroStat(hero, 2) and GetHeroStat(hero, 3) <= GetHeroStat(hero, 4) then
-      ChangeHeroStat(hero, 3, 5);
-    end;
-    if GetHeroStat(hero, 4) <= GetHeroStat(hero, 1) and GetHeroStat(hero, 4) <= GetHeroStat(hero, 2) and GetHeroStat(hero, 4) <= GetHeroStat(hero, 3) then
-      ChangeHeroStat(hero, 4, 5);
-    end;
-  end;
---  print('8');
-  if GetCurrentMoonWeek() == 5 then       --'WEEK_OF_DRAGONFLY' медекъ цхцюмрю
-    for i = 1, length(array_Tier7_ID) do
-      if GetHeroCreatures(hero, array_Tier7_ID[i]) > 0 then
-        AddHeroCreatures(hero, array_Tier7_ID[i], 2);
-        i = length(array_Tier7_ID);
-      end;
-    end;
-  end;
---  print('9');
-  if GetCurrentMoonWeek() == 14 then           --'WEEK_OF_EAGLE' медекъ ъямнцн меаю
-    for i = 1, length(array_Fly_ID) do
-      if GetHeroCreatures(hero, array_Fly_ID[i]) > 0 then
-        AddHeroCreatures(hero, array_Fly_ID[i], int(0.2 * GetHeroCreatures(hero, array_Fly_ID[i])));
-      end;
-    end;
-  end;
---  print('10');
-  if GetCurrentMoonWeek() == 28 then          --'WEEK_OF_FALCON' медекъ левю
-    ChangeHeroStat(hero, 1, 2);
-    ChangeHeroStat(hero, 2, 2);
-  end;
---  print('11');
-  if GetCurrentMoonWeek() == 24 then        --'WEEK_OF_FLAMINGO' медекъ люцхх
-    ChangeHeroStat(hero, 3, 3);
-    ChangeHeroStat(hero, 4, 3);
-  end;
---  print('12');
-  if GetCurrentMoonWeek() == 6 then             --'WEEK_OF_FOX' медекъ щкелемрюкеи
-    AddHeroCreatures(hero, 85 + random(4), int(20 + GetHeroStat(hero, 3) + GetHeroStat(hero, 4)));
-  end;
---  print('13');
-  if GetCurrentMoonWeek() == 11 then         --'WEEK_OF_HAMSTER' медекъ темхйяю
-    AddHeroCreatures(hero, 91, int(2 + (GetHeroStat(hero, 3) + GetHeroStat(hero, 4)) / 10));
-  end;
---  print('14');
-  if GetCurrentMoonWeek() == 29 then        --'WEEK_OF_HEDGEHOG' медекъ мюдефдш
-    ChangeHeroStat(hero, 5, 1); --GetHeroStat(hero, 5));
-    ChangeHeroStat(hero, 6, 1); --GetHeroStat(hero, 6));
-  end;
---  print('15');
-  if GetCurrentMoonWeek() == 32 then            --'WEEK_OF_LION' медекъ опхпсвемхъ
-    AddHeroCreatures(hero, 113, int(2 * (GetHeroStat(hero, 3) + GetHeroStat(hero, 4))));
-  end;
-end;
-
 
 function DeletePerk(hero, perk)
   j = 1;
@@ -3758,199 +3604,6 @@ function ChangeLevel(hero, delta)
   WarpHeroExp (hero, heroExp + deltaExp);
 end;
 
-RevDel1 = 0;
-RevDel2 = 0;
-
-function Revelation1()
-  if RevDel1 == 1 then
-    RevDel1 = 2;
-    heroLevel = GetHeroLevel(HeroMax1);
-    Exp = array_level[heroLevel - 2];
-    WarpHeroExp(HeroMax1, Exp);
-    i = 0;
-    while i < 3 do
-      race = getrace(HeroMax1);
-      rnd = random(100);
-      if rnd < PercentA[race] and GetHeroStat(HeroMax1, STAT_ATTACK) > 0  then
-        ChangeHeroStat(HeroMax1, STAT_ATTACK, -1); i = i + 1;
-      end;
-      if rnd >= PercentA[race] and rnd < (PercentA[race] + PercentD[race]) and GetHeroStat(HeroMax1, STAT_DEFENCE) > 0 then
-        ChangeHeroStat(HeroMax1, STAT_DEFENCE, -1); i = i + 1;
-      end;
-      if rnd >= (PercentA[race] + PercentD[race]) and rnd < (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax1, STAT_SPELL_POWER) > 1 then
-        ChangeHeroStat(HeroMax1, STAT_SPELL_POWER, -1); i = i + 1;
-      end;
-      if rnd >= (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax1, STAT_KNOWLEDGE) > 1 then
-        ChangeHeroStat(HeroMax1, STAT_KNOWLEDGE, -1); i = i + 1;
-      end;
-    end;
-  end;
-  if RevDel1 == 0 then
-    RevDel1 = 1;
-  end;
-  if RevDel1 == 3 then
-    if RevUse1 == 3 then
-      LevelUpHero(HeroMax1);
-      RevDel1 = 4;
---      print(Exp);
-    end;
-    if RevUse1 == 1 then
-      RevUse1 = 3;
-      heroLevel = GetHeroLevel(HeroMax1);
-      Exp = array_level[heroLevel - 2];
-      WarpHeroExp(HeroMax1, Exp);
-      i = 0;
-      while i < 3 do
-        race = getrace(HeroMax1);
-        rnd = random(100);
-        if rnd < PercentA[race] and GetHeroStat(HeroMax1, STAT_ATTACK) > 0  then
-          ChangeHeroStat(HeroMax1, STAT_ATTACK, -1); i = i + 1;
-        end;
-        if rnd >= PercentA[race] and rnd < (PercentA[race] + PercentD[race]) and GetHeroStat(HeroMax1, STAT_DEFENCE) > 0 then
-          ChangeHeroStat(HeroMax1, STAT_DEFENCE, -1); i = i + 1;
-        end;
-        if rnd >= (PercentA[race] + PercentD[race]) and rnd < (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax1, STAT_SPELL_POWER) > 1 then
-          ChangeHeroStat(HeroMax1, STAT_SPELL_POWER, -1); i = i + 1;
-        end;
-        if rnd >= (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax1, STAT_KNOWLEDGE) > 1 then
-          ChangeHeroStat(HeroMax1, STAT_KNOWLEDGE, -1); i = i + 1;
-        end;
-      end;
-      LevelUpHero(HeroMax1);
-      RevUse1 = 4;
-    end;
-  end;
-end;
-
-function Revelation2()
-  if RevDel2 == 1 then
-    RevDel2 = 2;
-    heroLevel = GetHeroLevel(HeroMax2);
-    Exp = array_level[heroLevel - 2];
-    WarpHeroExp(HeroMax2, Exp);
-    i = 0;
-    while i < 3 do
-      race = getrace(HeroMax2);
-      rnd = random(100);
-      if rnd < PercentA[race] and GetHeroStat(HeroMax2, STAT_ATTACK) > 0  then
-        ChangeHeroStat(HeroMax2, STAT_ATTACK, -1); i = i + 1;
-      end;
-      if rnd >= PercentA[race] and rnd < (PercentA[race] + PercentD[race]) and GetHeroStat(HeroMax2, STAT_DEFENCE) > 0 then
-        ChangeHeroStat(HeroMax2, STAT_DEFENCE, -1); i = i + 1;
-      end;
-      if rnd >= (PercentA[race] + PercentD[race]) and rnd < (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax2, STAT_SPELL_POWER) > 1 then
-        ChangeHeroStat(HeroMax2, STAT_SPELL_POWER, -1); i = i + 1;
-      end;
-      if rnd >= (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax2, STAT_KNOWLEDGE) > 1 then
-        ChangeHeroStat(HeroMax2, STAT_KNOWLEDGE, -1); i = i + 1;
-      end;
-    end;
-  end;
-  if RevDel2 == 0 then
-    RevDel2 = 1;
-  end;
-  if RevDel2 == 3 then
-    if RevUse2 == 3 then
-      LevelUpHero(HeroMax2);
-      RevDel2 = 4;
---      print(Exp);
-    end;
-    if RevUse2 == 1 then
-      RevUse2 = 3;
-      heroLevel = GetHeroLevel(HeroMax2);
-      Exp = array_level[heroLevel - 2];
-      WarpHeroExp(HeroMax2, Exp);
-      i = 0;
-      while i < 3 do
-        race = getrace(HeroMax2);
-        rnd = random(100);
-        if rnd < PercentA[race] and GetHeroStat(HeroMax2, STAT_ATTACK) > 0  then
-          ChangeHeroStat(HeroMax2, STAT_ATTACK, -1); i = i + 1;
-        end;
-        if rnd >= PercentA[race] and rnd < (PercentA[race] + PercentD[race]) and GetHeroStat(HeroMax2, STAT_DEFENCE) > 0 then
-          ChangeHeroStat(HeroMax2, STAT_DEFENCE, -1); i = i + 1;
-        end;
-        if rnd >= (PercentA[race] + PercentD[race]) and rnd < (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax2, STAT_SPELL_POWER) > 1 then
-          ChangeHeroStat(HeroMax2, STAT_SPELL_POWER, -1); i = i + 1;
-        end;
-        if rnd >= (PercentA[race] + PercentD[race] + PercentS[race]) and GetHeroStat(HeroMax2, STAT_KNOWLEDGE) > 1 then
-          ChangeHeroStat(HeroMax2, STAT_KNOWLEDGE, -1); i = i + 1;
-        end;
-      end;
-      LevelUpHero(HeroMax2);
-      RevUse2 = 4;
-    end;
-  end;
-end;
-
-function RevelationDel1(hero)
-  if RevDel1 == 2 then
-    heroLevel = GetHeroLevel(hero);
-    deltaExp = array_level[heroLevel] - array_level[heroLevel - 2];
-    HeroAt  = GetHeroStat(hero, 1);
-    HeroDef = GetHeroStat(hero, 2);
-    HeroSp  = GetHeroStat(hero, 3);
-    HeroKn  = GetHeroStat(hero, 4);
-    TakeAwayHeroExp(hero, deltaExp);
-    RevDel1 = 3;
-    WarpHeroExp(hero, array_level[heroLevel]);
-    ChangeHeroStat(hero, 1, HeroAt  - GetHeroStat(hero, 1));
-    ChangeHeroStat(hero, 2, HeroDef - GetHeroStat(hero, 2));
-    ChangeHeroStat(hero, 3, HeroSp  - GetHeroStat(hero, 3));
-    ChangeHeroStat(hero, 4, HeroKn  - GetHeroStat(hero, 4));
-  end;
-  if RevDel1 == 4 then
-    heroLevel = GetHeroLevel(hero);
-    deltaExp = array_level[heroLevel] - array_level[heroLevel - 2];
-    HeroAt  = GetHeroStat(hero, 1);
-    HeroDef = GetHeroStat(hero, 2);
-    HeroSp  = GetHeroStat(hero, 3);
-    HeroKn  = GetHeroStat(hero, 4);
-    TakeAwayHeroExp(hero, deltaExp);
-    RevDel1 = 3;
-    RevUse1 = 1;
-    WarpHeroExp(hero, array_level[heroLevel]);
-    ChangeHeroStat(hero, 1, HeroAt  - GetHeroStat(hero, 1));
-    ChangeHeroStat(hero, 2, HeroDef - GetHeroStat(hero, 2));
-    ChangeHeroStat(hero, 3, HeroSp  - GetHeroStat(hero, 3));
-    ChangeHeroStat(hero, 4, HeroKn  - GetHeroStat(hero, 4));
-  end;
-end;
-
-function RevelationDel2(hero)
-  if RevDel2 == 2 then
-    heroLevel = GetHeroLevel(hero);
-    deltaExp = array_level[heroLevel] - array_level[heroLevel - 2];
-    HeroAt  = GetHeroStat(hero, 1);
-    HeroDef = GetHeroStat(hero, 2);
-    HeroSp  = GetHeroStat(hero, 3);
-    HeroKn  = GetHeroStat(hero, 4);
-    TakeAwayHeroExp(hero, deltaExp);
-    RevDel2 = 3;
-    WarpHeroExp(hero, array_level[heroLevel]);
-    ChangeHeroStat(hero, 1, HeroAt  - GetHeroStat(hero, 1));
-    ChangeHeroStat(hero, 2, HeroDef - GetHeroStat(hero, 2));
-    ChangeHeroStat(hero, 3, HeroSp  - GetHeroStat(hero, 3));
-    ChangeHeroStat(hero, 4, HeroKn  - GetHeroStat(hero, 4));
-  end;
-  if RevDel2 == 4 then
-    heroLevel = GetHeroLevel(hero);
-    deltaExp = array_level[heroLevel] - array_level[heroLevel - 2];
-    HeroAt  = GetHeroStat(hero, 1);
-    HeroDef = GetHeroStat(hero, 2);
-    HeroSp  = GetHeroStat(hero, 3);
-    HeroKn  = GetHeroStat(hero, 4);
-    TakeAwayHeroExp(hero, deltaExp);
-    RevDel2 = 3;
-    RevUse2 = 1;
-    WarpHeroExp(hero, array_level[heroLevel]);
-    ChangeHeroStat(hero, 1, HeroAt  - GetHeroStat(hero, 1));
-    ChangeHeroStat(hero, 2, HeroDef - GetHeroStat(hero, 2));
-    ChangeHeroStat(hero, 3, HeroSp  - GetHeroStat(hero, 3));
-    ChangeHeroStat(hero, 4, HeroKn  - GetHeroStat(hero, 4));
-  end;
-end;
-
 Trigger( REGION_ENTER_AND_STOP_TRIGGER, 'town', 'ChangeRandomTown' );
 
 function ChangeRandomTown(hero)
@@ -4299,51 +3952,6 @@ function PathFinding(HeroWithPerk, HeroWithoutPerk, race)
 	end;
 end;
 
-NavUse1 = 0;
-NavUse2 = 0;
-
-array_artNav = {}
-array_artNav[1] = {'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19'}
-array_artNav[2] = {'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13', 'b14', 'b15', 'b16', 'b17', 'b18', 'b19'}
-
-function Navigation1()
-  SetObjectPosition('red10', 5, 5, UNDERGROUND);
-  sleep(1);
-  MoveHeroRealTime(heroes1[0], 22, 79);
-  for i = 1, length(array_artNav[1]) do
-    Trigger (OBJECT_TOUCH_TRIGGER, array_artNav[1][i],   'NavigationUse1');
-  end;
-end;
-
-function Navigation2()
-  SetObjectPosition('blue10', 5, 6, UNDERGROUND);
-  sleep(1);
-  MoveHeroRealTime(heroes2[0], 42, 29);
-  for i = 1, length(array_artNav[2]) do
-    Trigger (OBJECT_TOUCH_TRIGGER, array_artNav[2][i],   'NavigationUse2');
-  end;
-end;
-
-function NavigationUse1()
-  for i = 1, length(array_artNav[1]) do
-    if IsObjectExists(array_artNav[1][i]) == 1 then
-      RemoveObject(array_artNav[1][i]);
-    end;
-  end;
-  if HasHeroSkill(HeroMax1, 21) then transferArt (heroes1[0], HeroMax1); NavUse1 = 1; end
-  SetObjectPosition(heroes1[0], 35, 85);
-end;
-
-function NavigationUse2()
-  for i = 1, length(array_artNav[2]) do
-    if IsObjectExists(array_artNav[2][i]) == 1 then
-      RemoveObject(array_artNav[2][i]);
-    end;
-  end;
-  if HasHeroSkill(HeroMax2, 21) then transferArt (heroes2[0], HeroMax2); NavUse2 = 1; end;
-  SetObjectPosition(heroes2[0], 42, 24);
-end;
-
 function Insights(hero)
   if KnowHeroSpell(hero, array_spells[2][8].id) and KnowHeroSpell(hero, array_spells[2][9].id) and KnowHeroSpell(hero, array_spells[2][10].id) and KnowHeroSpell(hero, array_spells[2][11].id) and KnowHeroSpell(hero, array_spells[2][12].id) then
   else
@@ -4438,47 +4046,6 @@ function SaleArmy(town, hero)
   Play2DSoundForPlayers ( GetObjectOwner(hero), "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", x, y, 0);
   ShowFlyingSign({GetMapDataPath().."Estates.txt"; eq = price}, hero, GetObjectOwner(hero), 5.0);
 end;
-
-HeraldUse1 = 0;
-HeraldUse2 = 0;
-
-function HeraldFunction1()
-  SetObjectOwner('Dwel1', PLAYER_1);
-  MoveCameraForPlayers( 1, 89, 82, 0, 20, 0, 0, 0, 0, 1);
-
-  if (HasHeroSkill(HeroMax1, 102)) and HeraldUse1 == 0 then
-    SetObjectDwellingCreatures('Dwel1',  90, 16);
-  end;
-  while HeraldUse1 ~= 2 do
-    sleep(5);
-    if GetObjectCreatures('Dwel1',  90) > 0 then
-      AddObjectCreatures(HeroMax1,  90, GetObjectCreatures('Dwel1',  90));
-      HeraldUse1 = 1;
-      RemoveObjectCreatures('Dwel1',  90, GetObjectCreatures('Dwel1',  90));
-    end;
-  end;
-end;
-
-function HeraldFunction2()
-  SetObjectOwner('Dwel2', PLAYER_2);
-  MoveCameraForPlayers( 2, 81, 7, 0, 40, 0, 3.14, 0, 0, 1);
-
-  if (HasHeroSkill(HeroMax2, 102)) and HeraldUse2 == 0 then
-    SetObjectDwellingCreatures('Dwel2',  90, 16);
-  end;
-  while HeraldUse2 ~= 2 do
-    sleep(5);
-    if GetObjectCreatures('Dwel2',  90) > 0 then
-      AddObjectCreatures(HeroMax2,  90, GetObjectCreatures('Dwel2',  90));
-      HeraldUse2 = 1;
-      RemoveObjectCreatures('Dwel2',  90, GetObjectCreatures('Dwel2',  90));
-    end;
-  end;
-end;
-
-SetObjectDwellingCreatures('Dwel1', 116, 0);
-
-SetObjectDwellingCreatures('Dwel2', 116, 0);
 
 HauntMineEnable1 = 0;
 HauntMineEnable2 = 0;
@@ -4689,11 +4256,6 @@ function NecroArtSet(hero)
   if GetHeroSkillMastery(hero, HERO_SKILL_DEMONIC_RAGE) > 0 then ChangeHeroStat(hero, 1, -2); ChangeHeroStat(hero, 2, -2); end;
 end;
 
-function BoatMove(hero)
-  sleep(2);
-  MoveHeroRealTime(hero, 9, 19);
-end;
-
 function Name(hero)
   for i = 0, 7 do
     for j = 1, length(dublikat_heroes[i]) do
@@ -4718,8 +4280,6 @@ end;
 
 Trigger( OBJECT_TOUCH_TRIGGER, 'port1', 'TeleportStartZone1' ); SetObjectEnabled('port1', nil); SetDisabledObjectMode('port1', 2);
 Trigger( OBJECT_TOUCH_TRIGGER, 'port2', 'TeleportStartZone2' ); SetObjectEnabled('port2', nil); SetDisabledObjectMode('port2', 2);
-
-Trigger( OBJECT_TOUCH_TRIGGER, 'boat4', 'BoatMove' );
 
 -- Opisaniya
 

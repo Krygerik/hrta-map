@@ -585,3 +585,39 @@ PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED = {
   [PLAYER_1] = 0,
   [PLAYER_2] = 0,
 };
+
+-- Соотношение игроков на ячейки, которые необходимо удалить для навигации
+PLAYERS_WALL_CELL_FOR_NAVIGATION = {
+  [PLAYER_1] = 'red10',
+  [PLAYER_2] = 'blue10',
+};
+
+-- Соотношение игроков на ячейки, куда нужно переместить биару или джованни
+MAP_POSITION_FOR_NAVIGATION = {
+  [PLAYER_1] = { x = 22, y = 79 },
+  [PLAYER_2] = { x = 42, y = 29 },
+};
+
+-- Список имен артефактов для навигации у каждого игрока
+PLAYERS_ON_NAVIGATION_ARTS_TABLE = {
+  [PLAYER_1] = { 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19' },
+  [PLAYER_2] = { 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13', 'b14', 'b15', 'b16', 'b17', 'b18', 'b19' },
+};
+
+-- Позиция героев игрока после использования навигации
+PLAYERS_POSITION_AFTER_USE_NAVIGATION = {
+  [PLAYER_1] = { x = 35, y = 85 },
+  [PLAYER_2] = { x = 42, y = 24 },
+};
+
+-- Статус активации навыка "Навигация"
+PLAYERS_USE_NAVIGATION_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- Статус использования навыка "Вестник смерти" игроками
+PLAYERS_USE_HERALD_OF_DEATH_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};

@@ -49,3 +49,15 @@ function getReservedHeroName(playerId, dictHeroName)
     end;
   end;
 end;
+
+-- ”ниверсальный перенос артефактов между геро€ми
+function transferAllArts(sourceHero, targetHero)
+  print "transferAllArts"
+
+  for _, artData in ALL_ARTS_LIST do
+    if HasArtefact(sourceHero, artData.id) then
+      GiveArtefact(targetHero, artData.id);
+      RemoveArtefact(sourceHero, artData.id);
+    end;
+  end;
+end;

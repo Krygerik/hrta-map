@@ -13,19 +13,7 @@ function setStartedBonus()
     local secondHero = GetPlayerHeroes(playerId)[1];
     
     if bonus == STARTED_BONUSES.ART then
-      transferAllSmallArt(firstHero, secondHero);
-    end;
-  end;
-end;
-
--- Перенос ма артефактов между героями
-function transferAllSmallArt(sourceHero, targetHero)
-  print "transferAllSmallArt"
-  
-  for i = 1, length(ARTS.SMALL) do
-    if HasArtefact(sourceHero, ARTS.SMALL[i].id) then
-      GiveArtefact(targetHero, ARTS.SMALL[i].id);
-      RemoveArtefact(sourceHero, ARTS.SMALL[i].id);
+      transferAllArts(firstHero, secondHero);
     end;
   end;
 end;
