@@ -163,14 +163,6 @@ MAP_SKILLS_TO_CHANGING_STATS = {
     stat = STAT_DEFENCE,
     count = 2,
   },
-  [DEMON_FEAT_MASTER_OF_SECRETS] = {
-    stat = STAT_SPELL_POWER,
-    count = 2,
-  },
-  [KNIGHT_FEAT_CASTER_CERTIFICATE] = {
-    stat = STAT_SPELL_POWER,
-    count = 2,
-  },
   [WIZARD_FEAT_ACADEMY_AWARD] = {
     stat = STAT_SPELL_POWER,
     count = 2,
@@ -620,4 +612,16 @@ PLAYERS_USE_NAVIGATION_STATUS = {
 PLAYERS_USE_HERALD_OF_DEATH_STATUS = {
   [PLAYER_1] = nil,
   [PLAYER_2] = nil,
+};
+
+-- Количество знания, получаемого игроками за навык "Тайное преимущество"
+PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE = {
+  [PLAYER_1] = 0,
+  [PLAYER_2] = 0,
+};
+
+-- Количество колдовства, получаемого игроками за навык "Хранитель тайного"
+PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET = {
+  [PLAYER_1] = 0,
+  [PLAYER_2] = 0,
 };

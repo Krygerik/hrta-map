@@ -1184,6 +1184,102 @@ function heraldOfDeath(heroName)
   end;
 end;
 
+-- Получение поличества взятых школ магии
+function getCountMagicSchool(heroName)
+  print "getCountMagicSchool"
+
+  local magicSchoolTable = {
+    SKILL_LIGHT_MAGIC,
+    SKILL_DARK_MAGIC,
+    SKILL_DESTRUCTIVE_MAGIC,
+    SKILL_SUMMONING_MAGIC,
+  };
+  
+  local count = 0;
+  
+  for _, schoolId in magicSchoolTable do
+    if GetHeroSkillMastery(heroName, schoolId) > 0 then
+      count = count + 1;
+    end;
+  end;
+  
+  return count;
+end;
+
+-- Отслеживание изменений статистик с навыка "Тайное преимущество"
+function trackingChangeStatsForCasterCertificate(heroName)
+  print "trackingChangeStatsForCasterCertificate"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local KOEF = 2;
+
+  while GetDate(DAY) < 5 do
+    -- Если у игрока имеется навык
+    if HasHeroSkill(heroName, KNIGHT_FEAT_CASTER_CERTIFICATE) then
+      local currentCount = getCountMagicSchool(heroName);
+      local currentCountForSkill = KOEF * currentCount;
+
+      if currentCountForSkill ~= PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId] then
+        local diff = currentCountForSkill - PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId];
+
+        changeMainHeroStatsForSkills(playerId, STAT_KNOWLEDGE, diff);
+        PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId] = currentCountForSkill;
+      end
+    end;
+    
+    sleep(20);
+  end;
+end;
+
+-- Тайное преимущество
+function casterCertificate(heroName)
+  print "casterCertificate"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  
+  ChangeHeroStat(heroName, STAT_MANA_POINTS, -GetHeroStat(heroName, STAT_MANA_POINTS));
+  
+  changeMainHeroStatsForSkills(playerId, STAT_KNOWLEDGE, PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId]);
+
+  startThread(trackingChangeStatsForCasterCertificate, heroName);
+end;
+
+-- Отслеживание изменений статистик с навыка "Хранитель тайного"
+function trackingChangeStatsForMasterOfSecret(heroName)
+  print "trackingChangeStatsForMasterOfSecret"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local KOEF = 2;
+
+  while GetDate(DAY) < 5 do
+    -- Если у игрока имеется навык
+    if HasHeroSkill(heroName, DEMON_FEAT_MASTER_OF_SECRETS) then
+      local currentCount = getCountMagicSchool(heroName);
+      local currentCountForSkill = KOEF * currentCount;
+
+      if currentCountForSkill ~= PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId] then
+        local diff = currentCountForSkill - PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId];
+
+        changeMainHeroStatsForSkills(playerId, STAT_SPELL_POWER, diff);
+        PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId] = currentCountForSkill;
+      end
+    end;
+
+    sleep(20);
+  end;
+end;
+
+-- Хранитель тайного
+function masterOfSecret(heroName)
+  print "masterOfSecret"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+
+  changeMainHeroStatsForSkills(playerId, STAT_SPELL_POWER, PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId]);
+
+  startThread(trackingChangeStatsForMasterOfSecret, heroName);
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
@@ -1281,6 +1377,16 @@ function handleHeroAddSkill(triggerHero, skillId)
       startThread(heraldOfDeath, playerMainHero);
     end;
   end;
+
+  -- Тайное преимущество
+  if skillId == KNIGHT_FEAT_CASTER_CERTIFICATE then
+    casterCertificate(playerMainHero);
+  end;
+  
+  -- Хранитель тайного
+  if skillId == DEMON_FEAT_MASTER_OF_SECRETS then
+    masterOfSecret(playerMainHero);
+  end;
 end;
 
 -- Обработчик потери героем навыка
@@ -1359,6 +1465,16 @@ function handleHeroRemoveSkill(triggerHero, skill)
     
       SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
     end;
+  end;
+  
+  -- Тайное преимущество
+  if skill == KNIGHT_FEAT_CASTER_CERTIFICATE then
+    changeMainHeroStatsForSkills(playerId, STAT_KNOWLEDGE, -PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId]);
+  end;
+  
+  -- Хранитель тайного
+  if skill == DEMON_FEAT_MASTER_OF_SECRETS then
+    changeMainHeroStatsForSkills(playerId, STAT_SPELL_POWER, -PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId]);
   end;
 end;
 
@@ -1508,11 +1624,13 @@ function getRemovedUnremovableSkillId(playerId)
   end;
   
   -- Военачальник
-  if (
-    HasHeroSkill(playerMainHero, PERK_EXPERT_TRAINER) == nil
-    and GetTownBuildingLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1
-  ) then
-    return PERK_EXPERT_TRAINER;
+  if (GetTownRace(MAP_PLAYER_TO_TOWNNAME[playerId]) == RACES.HAVEN) then
+    if (
+      HasHeroSkill(playerMainHero, PERK_EXPERT_TRAINER) == nil
+      and GetTownBuildingLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) == 1
+    ) then
+      return PERK_EXPERT_TRAINER;
+    end;
   end;
   
   -- Логистика
