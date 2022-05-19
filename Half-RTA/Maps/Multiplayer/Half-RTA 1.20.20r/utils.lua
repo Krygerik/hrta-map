@@ -61,3 +61,28 @@ function transferAllArts(sourceHero, targetHero)
     end;
   end;
 end;
+
+-- —татус активации паузы игроками
+PLAYERS_PAUSE_STATUS = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
+-- —ообщение дл€ игрока, тормоз€щее выполнение кода до ответа игрока
+function awaitMessageBoxForPlayers(playerId, pathToMessage)
+  print "awaitMessageBoxForPlayers"
+  
+  PLAYERS_PAUSE_STATUS[playerId] = not nil;
+  
+  function disablePause(strPlayerId)
+    local playerId = strPlayerId + 0;
+
+    PLAYERS_PAUSE_STATUS[playerId] = nil;
+  end;
+  
+  while PLAYERS_PAUSE_STATUS[playerId] do
+    sleep(1);
+  end;
+  
+  MessageBoxForPlayers(playerId, pathToMessage, 'disablePause("'..playerId..'")');
+end;

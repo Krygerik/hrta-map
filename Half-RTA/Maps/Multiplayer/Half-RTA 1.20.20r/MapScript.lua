@@ -2382,75 +2382,6 @@ function DeletePerk(hero, perk)
   sleep(2);
 end;
 
-function transferAllArts (heroMain, hero1, hero2)
-  for i = 0, 2 do
-    for j = 1, length(array_arts[i]) do
-      if HasArtefact (hero1, array_arts[i][j].id) then
-        GiveArtefact (heroMain, array_arts[i][j].id);
-        RemoveArtefact (hero1, array_arts[i][j].id);
-      end;
-      if HasArtefact (hero2, array_arts[i][j].id) then
-        GiveArtefact (heroMain, array_arts[i][j].id);
-        RemoveArtefact (hero2, array_arts[i][j].id);
-      end;
-    end;
-  end;
-end;
-
-function transferArmy (town, heroMin, heroMax)
-  kol = 0;
-  for i = 1, 179 do
-    if GetObjectCreatures(town, i) > 0 and i ~= 87 then
-      AddHeroCreatures(heroMin, i, GetObjectCreatures(town, i));
-      RemoveObjectCreatures(town, i, GetObjectCreatures(town, i));
-    end;
-  end;
-  for i = 1, 179 do
-    if GetHeroCreatures (heroMin, i) == 1 then
-      kol = kol + 1;
-    end;
-    if GetHeroCreatures (heroMin, i) > 2 then
-      kol = 2;
-    end;
-    if kol == 2 then
-      i = 179;
-      MakeHeroInteractWithObject (heroMin, heroMax);
-      sleep(1);
-      if GetObjectOwner(heroMin) == 1 then
-        pause1 = 0;
-        MessageBoxForPlayers(GetPlayerFilter( GetObjectOwner(heroMin) ), GetMapDataPath().."transferArmy.txt", 'pause1F' );
-        while pause1 == 0 do
-          sleep(1);
-        end;
---        print('wait2');
-      end;
-      if GetObjectOwner(heroMin) == 2 then
-        pause2 = 0;
-        MessageBoxForPlayers(GetPlayerFilter( GetObjectOwner(heroMin) ), GetMapDataPath().."transferArmy.txt", 'pause2F' );
-        while pause2 == 0 do
-          sleep(1);
-        end;
---        print('wait2');
-      end;
-    end;
-  end;
-  for i = 1, 179 do
-    if GetObjectCreatures(heroMin, i) > 1 and i ~= 87 then
-      RemoveHeroCreatures(heroMin, i, (GetObjectCreatures(heroMin, i) - 1));
-    end;
-  end;
-end;
-
-function DestroyBuilding (town)
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_1, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_2, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_3, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_4, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_5, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_6, 1, 0);
-  DestroyTownBuildingToLevel(town, TOWN_BUILDING_DWELLING_7, 1, 0);
-end;
-
 function BlockBattleZone(race1, race2)
   if race1 == 1 or race2 == 1 or race1 == 4 or race2 == 4 then SetRegionBlocked ('land_block_race1', true); end;
   if race1 == 2 or race2 == 2 then SetRegionBlocked ('land_block_race2', true); end;
@@ -2460,8 +2391,6 @@ function BlockBattleZone(race1, race2)
   if race1 == 7 or race7 == 2 then SetRegionBlocked ('land_block_race7', true); end;
   if race1 == 8 or race2 == 8 then SetRegionBlocked ('land_block_race8', true); end;
 end
-
-
 
 ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_1, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
 
@@ -3005,50 +2934,8 @@ function newday ()
 end;
 
 function DayFour1()
-
-  if IsHeroInTown(HeroMax1, 'RANDOMTOWN1', 0, 1) then SetObjectPosition( HeroMax1, 44, 81); end;
-  if IsHeroInTown(HeroMin1, 'RANDOMTOWN1', 0, 1) then SetObjectPosition( HeroMin1, 44, 81); end;
-  sleep(2);
-  
-  DestroyBuilding ('RANDOMTOWN1');
-
-  ControlHeroCustomAbility(HeroMax1, CUSTOM_ABILITY_1, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax1, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax1, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax1, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-
   -- темный ритуал
   if DT_use1 == 0 and HasHeroSkill(HeroMax1, 71) then DT_use1 = 1; nap1Plus3Q(HeroMax1); end;
-
-  if hero1race ~= 4 and hero1race ~= 5 then SetObjectPosition (HeroMax1, TELEPORT_BATTLE_ZONE_PLAYER_1_X, TELEPORT_BATTLE_ZONE_PLAYER_1_Y); stop(HeroMax1); end;
-  if hero1race ~= 4 and hero1race ~= 5 then OpenCircleFog( 49, 45, 0, 15, 1 ); end;
-
-  SetPlayerResource (PLAYER_1, GOLD, 0);
-  SetObjectEnabled('market1', nil);
-
---  print(PerkSum1);
---  print(PerkSumF(HeroMax1));
-
---  if (PerkSum1) ~= (PerkSumF(HeroMax1)) and HasHeroSkill(HeroMax1, 104) then
---    pause1 = 0;
---    while (PerkSum1) ~= (PerkSumF(HeroMax1)) do
---      sleep(3);
---    end;
---    MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."PerkSum.txt", 'pause1F');
---    while pause1 == 0 do
---      sleep(1);
---    end;
---    print('wait1');
---  end;
-  
-  sleep(5);
-  stop(HeroMin1);
-  stop(HeroDop1);
-  
-  --TRANSFER ALL TO MAIN
-   transferAllArts (HeroMax1, HeroMin1, HeroDop1);
-   transferArmy ('RANDOMTOWN1', HeroMin1, HeroMax1);
-   transferArmy ('RANDOMTOWN1', HeroDop1, HeroMax1);
   
   -- возврат единички
   if RemStUn1 == 2 then
@@ -3056,11 +2943,6 @@ function DayFour1()
     if GetHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade2) > 0 then AddHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade2, 1); end; end;
   end;
 
--- холодна€ сталь и огненна€ €рость
---  if (HasHeroSkill(HeroMax1, 30) == nil and GetHeroSkillMastery(HeroMax1, SKILL_NECROMANCY) == 0 and (HasHeroSkill(HeroMax1, 104) or HasHeroSkill(HeroMax1, 82)) and (hero1race ~= 4 and hero1race ~= 5)) then
---    DublikatHero1( HeroMax1);
---  end;
---  print('sss1')
   -- мститель
   if hero1race == 4 then Avenger1(); startThread (AutoTeleportBattleZone1); end;
   -- мастер артефактов
@@ -3071,55 +2953,13 @@ function DayFour1()
   -- инфо
   if hero2race == 4 and hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax1, 1, 5.0); end;
   if hero2race == 5 and hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitMinik.txt", HeroMax1, 1, 5.0); end;
-
-
---  if hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."Wait.txt", HeroMax1, 1, 5.0); end;
 end;
 
 function DayFour2()
-
-  if IsHeroInTown(HeroMax2, 'RANDOMTOWN2', 0, 1) then SetObjectPosition( HeroMax2, 44, 12); end;
-  if IsHeroInTown(HeroMin2, 'RANDOMTOWN2', 0, 1) then SetObjectPosition( HeroMin2, 44, 12); end;
-  sleep(2);
-  
-  DestroyBuilding ('RANDOMTOWN2');
-
-  ControlHeroCustomAbility(HeroMax2, CUSTOM_ABILITY_1, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax2, CUSTOM_ABILITY_2, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax2, CUSTOM_ABILITY_3, CUSTOM_ABILITY_DISABLED);
-  ControlHeroCustomAbility(HeroMax2, CUSTOM_ABILITY_4, CUSTOM_ABILITY_DISABLED);
-  
   -- темный ритуал
   if DT_use2 == 0 and HasHeroSkill(HeroMax2, 71) then DT_use2 = 1; nap2Plus3Q(HeroMax2); end;
-
-  if hero2race ~= 4 and hero2race ~= 5 then SetObjectPosition (HeroMax2, TELEPORT_BATTLE_ZONE_PLAYER_2_X, TELEPORT_BATTLE_ZONE_PLAYER_2_Y); end;
-  if hero2race ~= 4 and hero2race ~= 5 then OpenCircleFog( 49, 45, 0, 15, 2 ); end;
-  
-  SetPlayerResource (PLAYER_2, GOLD, 0);
-  SetObjectEnabled('market2', nil);
-  
---  if (PerkSum2) ~= (PerkSumF(HeroMax2)) and HasHeroSkill(HeroMax2, 104) then
---    pause2 = 0;
---    while (PerkSum2) ~= (PerkSumF(HeroMax2)) do
---      sleep(3);
---    end;
---    MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."PerkSum.txt", 'pause2F');
---    while pause2 == 0 do
---      sleep(1);
---    end;
---    print('wait1');
---  end;
   
   if SpoilsUse2 == 0 and HasHeroSkill(HeroMax2, 129) then Spoils2(); end;
-  
-  sleep(5);
-  stop(HeroMin2);
-  stop(HeroDop2);
-
-  --TRANSFER ALL TO MAIN
-  transferAllArts (HeroMax2, HeroMin2, HeroDop2);
-  transferArmy ('RANDOMTOWN2', HeroMin2, HeroMax2);
-  transferArmy ('RANDOMTOWN2', HeroDop2, HeroMax2);
   
   -- возврат единички
   if RemStUn2 == 2 then
@@ -3127,12 +2967,6 @@ function DayFour2()
     if GetHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade2) > 0 then AddHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade2, 1); end; end;
   end;
 
--- холодна€ сталь и огненна€ €рость
---  if (HasHeroSkill(HeroMax2, 30) == nil and GetHeroSkillMastery(HeroMax2, SKILL_NECROMANCY) == 0 and (HasHeroSkill(HeroMax2, 104) or HasHeroSkill(HeroMax2, 82)) and (hero2race ~= 4 and hero2race ~= 5)) then
---    DublikatHero2( HeroMax2);
---  end;
-  
---  print('sss2')
   -- мститель
   if hero2race == 4 then Avenger2(); startThread (AutoTeleportBattleZone2); end;
   -- мастер артефактов
@@ -3143,8 +2977,6 @@ function DayFour2()
   -- инфо
   if hero1race == 4 and hero2race ~= 3 and hero2race ~= 4 and hero2race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax2, 2, 5.0); end;
   if hero1race == 5 and hero2race ~= 3 and hero2race ~= 4 and hero2race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitMinik.txt", HeroMax2, 2, 5.0); end;
-
---  if hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."Wait.txt", HeroMax1, 1, 5.0); end;
 end;
 
 

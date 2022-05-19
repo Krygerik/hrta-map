@@ -6,43 +6,6 @@ PATH_TO_DAY4_MESSAGES = PATH_TO_DAY4_SCRIPTS.."messages/";
 doFile(PATH_TO_DAY4_SCRIPTS.."day4_constants.lua");
 sleep(1);
 
--- Соотношение существ к их грейдам
-MAP_CREATURES_ON_GRADE = {
-  [CREATURE_GRIFFIN] = CREATURE_BATTLE_GRIFFIN,
-  [CREATURE_PRIEST] = CREATURE_ZEALOT,
-  [CREATURE_CAVALIER] = CREATURE_CHAMPION,
-  [CREATURE_ANGEL] = CREATURE_SERAPH,
-  [CREATURE_SUCCUBUS] = CREATURE_SUCCUBUS_SEDUCER,
-  [CREATURE_NIGHTMARE] = CREATURE_HELLMARE,
-  [CREATURE_PIT_FIEND] = CREATURE_PIT_SPAWN,
-  [CREATURE_DEVIL] = CREATURE_ARCH_DEMON,
-  [CREATURE_VAMPIRE] = CREATURE_NOSFERATU,
-  [CREATURE_LICH] = CREATURE_LICH_MASTER,
-  [CREATURE_WIGHT] = CREATURE_BANSHEE,
-  [CREATURE_BONE_DRAGON] = CREATURE_HORROR_DRAGON,
-  [CREATURE_DRUID] = CREATURE_HIGH_DRUID,
-  [CREATURE_UNICORN] = CREATURE_WHITE_UNICORN,
-  [CREATURE_TREANT] = CREATURE_ANGER_TREANT,
-  [CREATURE_GREEN_DRAGON] = CREATURE_RAINBOW_DRAGON,
-  [CREATURE_MAGI] = CREATURE_COMBAT_MAGE,
-  [CREATURE_GENIE] = CREATURE_DJINN_VIZIER,
-  [CREATURE_RAKSHASA] = CREATURE_RAKSHASA_KSHATRI,
-  [CREATURE_RAKSHASA_RUKH] = CREATURE_TITAN,
-  [CREATURE_GIANT] = CREATURE_STORM_LORD,
-  [CREATURE_RIDER] = CREATURE_BLACK_RIDER,
-  [CREATURE_HYDRA] = CREATURE_ACIDIC_HYDRA,
-  [CREATURE_MATRON] = CREATURE_SHADOW_MISTRESS,
-  [CREATURE_DEEP_DRAGON] = CREATURE_RED_DRAGON,
-  [CREATURE_BROWLER] = CREATURE_BATTLE_RAGER,
-  [CREATURE_RUNE_MAGE] = CREATURE_FLAME_KEEPER,
-  [CREATURE_THANE] = CREATURE_THUNDER_THANE,
-  [CREATURE_MAGMA_DRAGON] = CREATURE_LAVA_DRAGON,
-  [CREATURE_SHAMAN] = CREATURE_SHAMAN_HAG,
-  [CREATURE_ORCCHIEF_BUTCHER] = CREATURE_ORCCHIEF_CHIEFTAIN,
-  [CREATURE_WYVERN] = CREATURE_WYVERN_PAOKAI,
-  [CREATURE_CYCLOP] = CREATURE_CYCLOP_BLOODEYED,
-};
-
 -- Вычисление кэфа дипломатии
 function getDiplomacyKoef(heroName)
   print 'getDiplomacyKoef'
@@ -161,15 +124,152 @@ function runDiplomacy(heroName)
       end;
     end;
   end;
-  
-  print 'stashArmy'
-  print (stashArmy)
 
   -- Отдаем гарнизон игроку и следим за изменением количества существ в нем
   SetObjectOwner(MAP_GARNISON_FOR_DIPLOMACY[playerId], playerId);
   MakeHeroInteractWithObject(heroName, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
 
   startThread(clearGarnisonOnChangeTread, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
+end;
+
+-- Телепорт героя на арену
+function teleportPlayerInToBattle(playerId)
+  print "teleportPlayerInToBattle"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+
+  -- Если герой в городе, вытаскиваем его оттуда
+  if IsHeroInTown(mainHeroName, townName, 0, 1) then
+    local position = PLAYERS_TELEPORT_FROM_TOWN_POSITION[playerId];
+
+    SetObjectPosition(mainHeroName, position.x, position.y);
+  end;
+  
+  -- Телепортируем героя на выбор зоны
+  local playerRace = GetTownRace(townName);
+  
+  if playerRace ~= RACES.SYLVAN and playerRace ~= RACES.ACADEMY then
+    local position = PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId]
+    
+    SetObjectPosition(mainHeroName, position.x, position.y);
+    OpenCircleFog(49, 45, GROUND, 15, playerId);
+  end;
+end;
+
+-- Отключение всех кастомных способностей
+function disableCustomAbilities(heroName)
+  print "disableCustomAbilities"
+
+  local allCustomAbilityTable = {
+    CUSTOM_ABILITY_1,
+    CUSTOM_ABILITY_2,
+    CUSTOM_ABILITY_3,
+    CUSTOM_ABILITY_4,
+  };
+  
+  for _, ability in allCustomAbilityTable do
+    ControlHeroCustomAbility(heroName, ability, CUSTOM_ABILITY_DISABLED);
+  end;
+end;
+
+-- Уничтожаем в городе все постройки существ, исключая возможность менять их грейд
+function downgradeTown(playerId)
+  print "downgradeTown"
+
+  local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  
+  local allTownDwellTable = {
+    TOWN_BUILDING_DWELLING_1,
+    TOWN_BUILDING_DWELLING_2,
+    TOWN_BUILDING_DWELLING_3,
+    TOWN_BUILDING_DWELLING_4,
+    TOWN_BUILDING_DWELLING_5,
+    TOWN_BUILDING_DWELLING_6,
+    TOWN_BUILDING_DWELLING_7,
+  };
+  
+  for _, dwellId in allTownDwellTable do
+    DestroyTownBuildingToLevel(townName, dwellId, 0, 0);
+  end;
+end;
+
+-- Блокировка всех прочих построек игрока
+function disableAllOtherBuildings(playerId)
+  print "disableAllOtherBuildings"
+
+  local PLAYERS_MARKET = {
+    [PLAYER_1] = 'market1',
+    [PLAYER_2] = 'market2',
+  };
+
+  SetObjectEnabled(PLAYERS_MARKET[playerId], nil);
+end;
+
+-- Удаление всех очков передвижения у всех героев игрока
+function removeAllHeroMovePoints(playerId)
+  print "removeAllHeroMovePoints"
+
+  local heroes = RESULT_HERO_LIST[playerId].heroes;
+  
+  for _, heroName in heroes do
+    removeHeroMovePoints(heroName);
+  end;
+end;
+
+-- Перенос всех артефактов от побочных героев главному
+function transferAllArtsToMainHero(playerId)
+  print "transferAllArtsToMainHero"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local heroes = RESULT_HERO_LIST[playerId].heroes;
+  
+  for _, heroName in heroes do
+    if heroName ~= mainHeroName then
+      transferAllArts(heroName, mainHeroName);
+    end;
+  end;
+end;
+
+-- Перенос всех фракционных войск, забытых в городе или прочих героях
+function transferAllArmyToMain(playerId)
+  print "transferAllArmyToMain"
+
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local heroes = RESULT_HERO_LIST[playerId].heroes;
+
+  -- Если есть существа в городе
+  local takedUnitFromTown = nil;
+
+  for _, unitData in UNITS[raceId] do
+    if GetObjectCreatures(townName, unitData.id) > 0 and not takedUnitFromTown then
+      awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
+    
+      MakeHeroInteractWithObject(mainHeroName, townName);
+    
+      takedUnitFromTown = not nil;
+    end;
+  end;
+
+  -- Если доступные существа в дополнительных героях
+  for _, heroName in heroes do
+    if heroName ~= mainHeroName then
+
+      local takedUnitFromTownFromHero = nil;
+      
+      for _, unitData in UNITS[raceId] do
+        if GetObjectCreatures(heroName, unitData.id) > 0 and not takedUnitFromTownFromHero then
+          awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
+        
+          MakeHeroInteractWithObject(mainHeroName, heroName);
+
+          takedUnitFromTownFromHero = not nil;
+        end;
+      end;
+    end;
+  end;
 end;
 
 -- Точка входа
@@ -179,17 +279,35 @@ function day4_scripts()
   -- Если у расы игроков есть действия на 4 день - вызываем их
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    
+    removeAllHeroMovePoints(playerId);
+
+    disableAllOtherBuildings(playerId);
+    
+    SetPlayerResource(playerId, GOLD, 0);
+    
+    -- Дипломатия
+    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
+      runDiplomacy(mainHeroName);
+    end;
+    
+    teleportPlayerInToBattle(playerId);
+    
+    disableCustomAbilities(mainHeroName);
+    
+    downgradeTown(playerId);
+    
+    disableAllOtherBuildings(playerId);
+    
+    transferAllArtsToMainHero(playerId);
+    
+    transferAllArmyToMain(playerId);
     
     -- Отправляем на выбор заклятых
     if raceId == RACES.SYLVAN then
       -- TODO
       --avengers();
-    end;
-    
-    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    
-    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
-      runDiplomacy(mainHeroName);
     end;
   end;
 end;
