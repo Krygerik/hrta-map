@@ -37,7 +37,7 @@ function getDictionaryHeroName(heroName)
   end;
 end;
 
--- Получение словарного названия героя по его зарезервированному названию
+-- Получение зарезервированному названия героя по его словарному
 function getReservedHeroName(playerId, dictHeroName)
   print "getReservedHeroName"
 
@@ -80,9 +80,9 @@ function awaitMessageBoxForPlayers(playerId, pathToMessage)
     PLAYERS_PAUSE_STATUS[playerId] = nil;
   end;
   
+  MessageBoxForPlayers(playerId, pathToMessage, 'disablePause("'..playerId..'")');
+  
   while PLAYERS_PAUSE_STATUS[playerId] do
     sleep(1);
   end;
-  
-  MessageBoxForPlayers(playerId, pathToMessage, 'disablePause("'..playerId..'")');
 end;

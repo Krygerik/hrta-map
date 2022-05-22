@@ -138,19 +138,6 @@ function getPriceUnitByLevel(raceId, unitLevel, countUnits)
   local oneUnitPrice = UNITS[raceId][unitLevel].price1;
   local defaultUnitCount = UNITS[raceId][unitLevel].kol;
 
-  print 'raceId'
-  print (raceId)
-  print 'unitLevel'
-  print (unitLevel)
-  print 'countUnits'
-  print (countUnits)
-  print 'oneUnitPrice'
-  print (oneUnitPrice)
-  print 'defaultUnitCount'
-  print (defaultUnitCount)
-  print 'oneUnitPrice'
-  print (oneUnitPrice)
-  
   if unitLevel == 1 then
     return oneUnitPrice * defaultUnitCount * 0.1;
   end;

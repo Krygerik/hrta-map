@@ -213,7 +213,9 @@ function removeAllHeroMovePoints(playerId)
   local heroes = RESULT_HERO_LIST[playerId].heroes;
   
   for _, heroName in heroes do
-    removeHeroMovePoints(heroName);
+    local reservedHeroName = getReservedHeroName(playerId, heroName);
+
+    removeHeroMovePoints(reservedHeroName);
   end;
 end;
 
@@ -225,8 +227,10 @@ function transferAllArtsToMainHero(playerId)
   local heroes = RESULT_HERO_LIST[playerId].heroes;
   
   for _, heroName in heroes do
-    if heroName ~= mainHeroName then
-      transferAllArts(heroName, mainHeroName);
+    local reservedHeroName = getReservedHeroName(playerId, heroName);
+
+    if reservedHeroName ~= mainHeroName then
+      transferAllArts(reservedHeroName, mainHeroName);
     end;
   end;
 end;
@@ -255,15 +259,17 @@ function transferAllArmyToMain(playerId)
 
   -- ≈сли доступные существа в дополнительных геро€х
   for _, heroName in heroes do
-    if heroName ~= mainHeroName then
+    local reservedHeroName = getReservedHeroName(playerId, heroName);
+
+    if reservedHeroName ~= mainHeroName then
 
       local takedUnitFromTownFromHero = nil;
       
       for _, unitData in UNITS[raceId] do
-        if GetObjectCreatures(heroName, unitData.id) > 0 and not takedUnitFromTownFromHero then
+        if GetObjectCreatures(reservedHeroName, unitData.id) > 0 and not takedUnitFromTownFromHero then
           awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
         
-          MakeHeroInteractWithObject(mainHeroName, heroName);
+          MakeHeroInteractWithObject(mainHeroName, reservedHeroName);
 
           takedUnitFromTownFromHero = not nil;
         end;
