@@ -9,6 +9,7 @@ function day3()
   print "day3"
 
   addHeroesToPlayers();
+  startThread(controlInitialCreaturesThread);
   setHeroesInitialProperties();
   setEnemyHeroPosters();
   changePlayersArea();
@@ -18,6 +19,43 @@ function day3()
   doFile(PATH_TO_DAY3_SCRIPTS.."set_initial_resources/set_initial_resources_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."start_learning/start_learning_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."buy_hero/buy_hero_scripts.lua");
+end;
+
+-- ”становка контрол€ над стартовыми воздушками
+function controlInitialCreaturesThread()
+  print "controlInitialCreaturesThread"
+
+  while GetDate(DAY) < 5 do
+    -- ”бираем из армии героев
+    for _, playerId in PLAYER_ID_TABLE do
+      local playerData = RESULT_HERO_LIST[playerId];
+
+      for indexHero, heroName in playerData.heroes do
+
+        -- берем зарезервированных героев дл€ игроков
+        local reservedHeroName = getReservedHeroName(playerId, heroName);
+
+        local s1,s2 = GetHeroCreaturesTypes(reservedHeroName);
+
+        local countAirElemental = GetHeroCreatures(reservedHeroName, CREATURE_AIR_ELEMENTAL);
+
+        if s2 > 0 and countAirElemental > 0 then
+          RemoveHeroCreatures(reservedHeroName, CREATURE_AIR_ELEMENTAL, countAirElemental);
+        end;
+      end;
+      
+      -- ”бираем из города
+      local town = MAP_PLAYER_TO_TOWNNAME[playerId];
+      
+      local countAirElemental = GetObjectCreatures(town, CREATURE_AIR_ELEMENTAL);
+      
+      if countAirElemental > 0 then
+        RemoveObjectCreatures(town, CREATURE_AIR_ELEMENTAL, countAirElemental);
+      end;
+    end;
+  
+    sleep(10);
+  end;
 end;
 
 -- ƒобавление героев игрокам

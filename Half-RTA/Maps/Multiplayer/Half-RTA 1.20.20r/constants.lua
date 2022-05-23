@@ -677,6 +677,7 @@ HEROES = {
   RED_HEAVEN_HERO = 'RedHeavenHero03', -- Валерия
   ROLF = 'Rolf',                       -- Ролф
   ALMEGIR = 'Almegir',                 -- Ирбет
+  MAAHIR = 'Maahir',                   -- Ирбет
 };
 
 -- Соотношение игроков к подконтрольным им городам

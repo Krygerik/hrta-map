@@ -1143,91 +1143,6 @@ function int(number)
   return int_num;
 end;
 
-
-array_elf_enemy={}
-array_elf_enemy[0] = {};
-
-array_elf_enemy[1] = {
-   { ["kol"] = 44, ["id"] =  1, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 24, ["id"] =  3, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 20, ["id"] =  5, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] =  7, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] =  9, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] = 11, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 13, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[2] = {
-   { ["kol"] = 32, ["id"] = 15, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 30, ["id"] = 17, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 16, ["id"] = 19, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] = 21, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] = 23, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] =136, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 27, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[3] = {
-   { ["kol"] = 40, ["id"] = 29, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 30, ["id"] = 31, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 18, ["id"] = 34, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] = 35, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] = 37, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] = 39, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 41, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[4] = {
-   { ["kol"] = 30, ["id"] = 43, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 18, ["id"] = 45, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 14, ["id"] = 47, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  8, ["id"] = 49, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] = 51, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] = 53, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 55, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[5] = {
-   { ["kol"] = 40, ["id"] = 57, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 28, ["id"] = 59, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 18, ["id"] = 61, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] = 63, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] = 65, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] = 67, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 69, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[6] = {
-   { ["kol"] = 14, ["id"] = 92, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] = 73, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 12, ["id"] = 75, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  8, ["id"] = 77, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] = 79, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] = 81, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] = 83, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[7] = {
-   { ["kol"] = 36, ["id"] = 71, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 28, ["id"] = 94, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 14, ["id"] = 96, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 12, ["id"] = 98, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  6, ["id"] =100, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] =102, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] =105, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-array_elf_enemy[8] = {
-   { ["kol"] = 50, ["id"] =117, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 28, ["id"] =119, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 22, ["id"] =121, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] =123, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] = 10, ["id"] =125, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  4, ["id"] =127, ["blocked1"] = 0, ["blocked2"] = 0},
-   { ["kol"] =  2, ["id"] =129, ["blocked1"] = 0, ["blocked2"] = 0},
-};
-
-
 heroes1 = GetPlayerHeroes(PLAYER_1);
 heroes2 = GetPlayerHeroes(PLAYER_2);
 --HeroMax1 =heroes1[0];
@@ -1924,61 +1839,6 @@ arrayPossibleHeroes[1] = {}
 arrayPossibleHeroes[2] = {}
 arrayPossibleHeroes[3] = {}
 
-RemStUn1 = 0;
-RemStUn2 = 0;
-
-array_StartUnit = {}
-array_StartUnit = {{["grade1"] =   1, ["grade2"] = 106},
-                   {["grade1"] =  15, ["grade2"] = 131},
-                   {["grade1"] =  29, ["grade2"] = 152},
-                   {["grade1"] =  43, ["grade2"] = 145},
-                   {["grade1"] =  57, ["grade2"] = 159},
-                   {["grade1"] =  71, ["grade2"] = 138},
-                   {["grade1"] =  92, ["grade2"] = 166},
-                   {["grade1"] = 117, ["grade2"] = 173}}
-
-
-function RemoveStartUnit1()
-  while RemStUn1 == 0 do
-    Un11, Un12 = GetHeroCreaturesTypes(HeroMax1);
-    Un13, Un14 = GetHeroCreaturesTypes(HeroMin1);
-    if Un12 > 0 then
-      if GetHeroCreatures(HeroMax1, 87) > 0 then
-        RemoveHeroCreatures(HeroMax1, 87, GetHeroCreatures(HeroMax1, 87));
-        RemStUn1 = 1;
-      end;
-    end;
-    if Un14 > 0 then
-      if GetHeroCreatures(HeroMin1, 87) > 0 then
-        RemoveHeroCreatures(HeroMin1, 87, GetHeroCreatures(HeroMin1, 87));
-        RemStUn1 = 1;
-      end;
-    end;
-    sleep(5);
-  end;
-end;
-
-function RemoveStartUnit2()
-  while RemStUn2 == 0 do
-    Un21, Un22 = GetHeroCreaturesTypes(HeroMax2);
-    Un23, Un24 = GetHeroCreaturesTypes(HeroMin2);
-    if Un22 > 0 then
-      if GetHeroCreatures(HeroMax2, 87) > 0 then
-        RemoveHeroCreatures(HeroMax2, 87, GetHeroCreatures(HeroMax2, 87));
-        RemStUn2 = 1;
-      end;
-    end;
-    if Un24 > 0 then
-      if GetHeroCreatures(HeroMin2, 87) > 0 then
-        RemoveHeroCreatures(HeroMin2, 87, GetHeroCreatures(HeroMin2, 87));
-        RemStUn2 = 1;
-      end;
-    end;
-    sleep(5);
-  end;
-end;
-
-
 --------     HAVEN     INF    NECR     ELF    MAGE    LIGA    GNOM     ORC
 PercentA = {    30,     45,     10,     15,     10,     30,     20,     50};
 PercentD = {    45,     10,     30,     45,     15,     10,     30,     35};
@@ -2011,236 +1871,6 @@ function TransformPlTown (town, race)
   if race == 6 then TransformTown(town, 3); end;
   if race == 7 then TransformTown(town, 6); end;
   if race == 8 then TransformTown(town, 7); end;
-end;
-
-function DeleteRace()
-  RemoveObject('human1vrag');
-  RemoveObject('demon1vrag');
-  RemoveObject('nekr1vrag');
-  RemoveObject('elf1vrag');
-  RemoveObject('mag1vrag');
-  RemoveObject('liga1vrag');
-  RemoveObject('gnom1vrag');
-  RemoveObject('ork1vrag');
-  RemoveObject('human2vrag');
-  RemoveObject('demon2vrag');
-  RemoveObject('nekr2vrag');
-  RemoveObject('elf2vrag');
-  RemoveObject('mag2vrag');
-  RemoveObject('liga2vrag');
-  RemoveObject('gnom2vrag');
-  RemoveObject('ork2vrag');
-  RemoveObject('human1');
-  RemoveObject('demon1');
-  RemoveObject('nekr1');
-  RemoveObject('elf1');
-  RemoveObject('mag1');
-  RemoveObject('liga1');
-  RemoveObject('gnom1');
-  RemoveObject('ork1');
-  RemoveObject('human2');
-  RemoveObject('demon2');
-  RemoveObject('nekr2');
-  RemoveObject('elf2');
-  RemoveObject('mag2');
-  RemoveObject('liga2');
-  RemoveObject('gnom2');
-  RemoveObject('ork2');
-end;
-
------- ELF ARMIES ---------------------------------------------------------------
-
-function elf_arm ()
-if hero1race == 4 then
-	if hero2race == 1 then SetObjectPosition('havenarmy1', 37, 78); end;
-	if hero2race == 2 then SetObjectPosition('infarmy1', 37, 78); end;
-	if hero2race == 3 then SetObjectPosition('necroarmy1', 37, 78); end;
-	if hero2race == 4 then SetObjectPosition('elfarmy1', 37, 78); end;
-	if hero2race == 5 then SetObjectPosition('magearmy1', 37, 78); end;
-	if hero2race == 6 then SetObjectPosition('ligaarmy1', 37, 78); end;
-	if hero2race == 7 then SetObjectPosition('gnomarmy1', 37, 78); end;
-	if hero2race == 8 then SetObjectPosition('orcarmy1', 37, 78); end;
-end;
-
-if hero2race == 4 then
-	if hero1race == 1 then SetObjectPosition('havenarmy2', 25, 11); end;
-	if hero1race == 2 then SetObjectPosition('infarmy2', 25, 11); end;
-	if hero1race == 3 then SetObjectPosition('necroarmy2', 25, 11); end;
-	if hero1race == 4 then SetObjectPosition('elfarmy2', 25, 11); end;
-	if hero1race == 5 then SetObjectPosition('magearmy2', 25, 11); end;
-	if hero1race == 6 then SetObjectPosition('ligaarmy2', 25, 11); end;
-	if hero1race == 7 then SetObjectPosition('gnomarmy2', 25, 11); end;
-	if hero1race == 8 then SetObjectPosition('orcarmy2', 25, 11); end;
-end;
-end;
-
----------------------- MINIARTS ----------------------------------------------------
-
-minikUse1 = 0;
-minikUse2 = 0;
-
-function MiniArts1()
-  if minikUse1 == 0 then
-    UpgradeTownBuilding('RANDOMTOWN1', TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
-    pause1 = 0;
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_1 ), GetMapDataPath().."CreateMinik.txt", 'pause1F');
-    while pause1 == 0 do
-      sleep(1);
-    end;
-    
-    if Name(HeroMax1) == "Maahir" then DeltaRes = 15; else DeltaRes = 0; end;
-    
-    -- Джалиб
-    if Name(HeroMax1) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax1,  65); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1,  65, kolCreatures); AddHeroCreatures(HeroMax1, 68, kolCreatures); end; end;
-    if Name(HeroMax1) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax1, 163); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1, 163, kolCreatures); AddHeroCreatures(HeroMax1, 70, kolCreatures); end; end;
-
-    -- солдатская удача
-    if HasHeroSkill(HeroMax1, 32) then kolCreatures = GetHeroCreatures(HeroMax1,  57); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1,  57, kolCreatures); AddHeroCreatures(HeroMax1, 60, kolCreatures); end; end;
-    if HasHeroSkill(HeroMax1, 32) then kolCreatures = GetHeroCreatures(HeroMax1, 165); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1, 165, kolCreatures); AddHeroCreatures(HeroMax1, 64, kolCreatures); end; end;
-
-    if GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) == 1 then
-      SetPlayerResource(1,    WOOD, 10 + DeltaRes);
-    	SetPlayerResource(1,     ORE, 10 + DeltaRes);
-    	SetPlayerResource(1, MERCURY, 10 + DeltaRes);
-    	SetPlayerResource(1, CRYSTAL, 10 + DeltaRes);
-    	SetPlayerResource(1,  SULFUR, 10 + DeltaRes);
-    	SetPlayerResource(1,     GEM, 10 + DeltaRes);
-    end;
-    if GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) == 2 then
-      SetPlayerResource(1,    WOOD, 20 + DeltaRes);
-    	SetPlayerResource(1,     ORE, 20 + DeltaRes);
-    	SetPlayerResource(1, MERCURY, 20 + DeltaRes);
-    	SetPlayerResource(1, CRYSTAL, 20 + DeltaRes);
-    	SetPlayerResource(1,  SULFUR, 20 + DeltaRes);
-    	SetPlayerResource(1,     GEM, 20 + DeltaRes);
-    end;
-    if GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) >= 3 then
-      SetPlayerResource(1,    WOOD, 30 + DeltaRes);
-    	SetPlayerResource(1,     ORE, 30 + DeltaRes);
-    	SetPlayerResource(1, MERCURY, 30 + DeltaRes);
-    	SetPlayerResource(1, CRYSTAL, 30 + DeltaRes);
-    	SetPlayerResource(1,  SULFUR, 30 + DeltaRes);
-    	SetPlayerResource(1,     GEM, 30 + DeltaRes);
-    end;
-    minikUse1 = 1;
-    SetObjectPosition('port1', 39, 80, 0);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'port1', 'TeleportBattleZone1' );
-    SetObjectEnabled('port1', nil);
-    SetDisabledObjectMode('port1', 2);
-  end;
-end;
-
-function MiniArts2()
-  if minikUse2 == 0 then
-    UpgradeTownBuilding('RANDOMTOWN2', TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
-    pause2 = 0;
-    MessageBoxForPlayers(GetPlayerFilter( PLAYER_2 ), GetMapDataPath().."CreateMinik.txt", 'pause2F');
-    while pause2 == 0 do
-      sleep(1);
-    end;
-    -- холодная сталь
---    if (HasHeroSkill(HeroMax2, 104) or HasHeroSkill(HeroMax2, 82)) then
---      DublikatHero2( HeroMax2);
---    end;
-    
-    if Name(HeroMax2) == "Maahir" then DeltaRes = 15; else DeltaRes = 0; end;
-
-    -- Джалиб
-    if Name(HeroMax2) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax2,  65); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2,  65, kolCreatures); AddHeroCreatures(HeroMax2, 68, kolCreatures); end; end;
-    if Name(HeroMax2) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax2, 163); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2, 163, kolCreatures); AddHeroCreatures(HeroMax2, 70, kolCreatures); end; end;
-
-    -- солдатская удача
-    if HasHeroSkill(HeroMax2, 32) then kolCreatures = GetHeroCreatures(HeroMax2,  57); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2,  57, kolCreatures); AddHeroCreatures(HeroMax2, 60, kolCreatures); end; end;
-    if HasHeroSkill(HeroMax2, 32) then kolCreatures = GetHeroCreatures(HeroMax2, 165); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2, 165, kolCreatures); AddHeroCreatures(HeroMax2, 64, kolCreatures); end; end;
-
-    if GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) == 1 then
-      SetPlayerResource(2,    WOOD, 10 + DeltaRes);
-    	SetPlayerResource(2,     ORE, 10 + DeltaRes);
-    	SetPlayerResource(2, MERCURY, 10 + DeltaRes);
-    	SetPlayerResource(2, CRYSTAL, 10 + DeltaRes);
-    	SetPlayerResource(2,  SULFUR, 10 + DeltaRes);
-    	SetPlayerResource(2,     GEM, 10 + DeltaRes);
-    end;
-    if GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) == 2 then
-      SetPlayerResource(2,    WOOD, 20 + DeltaRes);
-    	SetPlayerResource(2,     ORE, 20 + DeltaRes);
-    	SetPlayerResource(2, MERCURY, 20 + DeltaRes);
-    	SetPlayerResource(2, CRYSTAL, 20 + DeltaRes);
-    	SetPlayerResource(2,  SULFUR, 20 + DeltaRes);
-    	SetPlayerResource(2,     GEM, 20 + DeltaRes);
-    end;
-    if GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) >= 3 then
-      SetPlayerResource(2,    WOOD, 30 + DeltaRes);
-    	SetPlayerResource(2,     ORE, 30 + DeltaRes);
-    	SetPlayerResource(2, MERCURY, 30 + DeltaRes);
-    	SetPlayerResource(2, CRYSTAL, 30 + DeltaRes);
-    	SetPlayerResource(2,  SULFUR, 30 + DeltaRes);
-    	SetPlayerResource(2,     GEM, 30 + DeltaRes);
-    end;
-    minikUse2 = 1;
-    SetObjectPosition('port2', 47, 11, 0);
-    Trigger( OBJECT_TOUCH_TRIGGER, 'port2', 'TeleportBattleZone2' );
-    SetObjectEnabled('port2', nil);
-    SetDisabledObjectMode('port2', 2);
-  end;
-end;
-
-function UpgradeMiniArts1()
-  heroes1 = GetPlayerHeroes(PLAYER_1);
-  for i = 1, (length(heroes1) - 1) do
-    if IsHeroInTown(heroes1[i], 'RANDOMTOWN1', 1, 0) then
-      x, y = GetObjectPosition(heroes1[i]);
-      MoveHeroRealTime(heroes1[i], x, y - 2);
-    end;
-  end;
-  sleep(2);
-  HeroKnowledge1 = GetHeroStat(HeroMax1, 4);
-  if HeroMax1 == "Maahir" or HeroMax1 == "Maahir2" then DeltaKnow1 = int(0.25 * GetHeroLevel(HeroMax1)); else DeltaKnow1 = 0; end;
---  DeltaKnow1 = GetHeroSkillMastery(HeroMax1, SKILL_ARTIFICIER) * 5 - 5 - GetHeroStat(HeroMax1, 1) - GetHeroStat(HeroMax1, 2);
---  if (HeroKnowledge1 + DeltaKnow1) < 2 then DeltaKnow1 = 1 - HeroKnowledge1; end;
-  ChangeHeroStat(HeroMax1, 4, DeltaKnow1);
-  UpgradeTownBuilding('RANDOMTOWN1', TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
-  DisableAutoEnterTown('RANDOMTOWN1', true);
-  MakeHeroInteractWithObject (HeroMax1, 'RANDOMTOWN1');
-  ChangeHeroStat(HeroMax1, 4, 0 - DeltaKnow1);
-  x, y = GetObjectPosition(HeroMax1);
-
-  if x ~= 43 then
-    MoveHeroRealTime(HeroMax1, x-1, y);
-    MoveHeroRealTime(HeroMax1, x, y);
-  else
-    MoveHeroRealTime(HeroMax1, x+1, y);
-    MoveHeroRealTime(HeroMax1, x, y);
-  end;
-
-end;
-
-function UpgradeMiniArts2()
-  heroes2 = GetPlayerHeroes(PLAYER_2);
-  for i = 1, (length(heroes2) - 1) do
-    if IsHeroInTown(heroes2[i], 'RANDOMTOWN2', 1, 0) then
-      x, y = GetObjectPosition(heroes2[i]);
-      MoveHeroRealTime(heroes2[i], x, y + 2);
-    end;
-  end;
-  sleep(2);
-  HeroKnowledge2 = GetHeroStat(HeroMax2, 4);
-  if HeroMax1 == "Maahir" or HeroMax1 == "Maahir2" then DeltaKnow2 = int(0.25 * GetHeroLevel(HeroMax1)); else DeltaKnow2 = 0; end;
---  DeltaKnow2 = GetHeroSkillMastery(HeroMax2, SKILL_ARTIFICIER) * 5 - 5 - GetHeroStat(HeroMax2, 1) - GetHeroStat(HeroMax2, 2);
---  if (HeroKnowledge2 + DeltaKnow2) < 2 then DeltaKnow2 = 1 - HeroKnowledge2; end;
-  ChangeHeroStat(HeroMax2, 4, DeltaKnow2);
-  UpgradeTownBuilding('RANDOMTOWN2', TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
-  DisableAutoEnterTown('RANDOMTOWN2', true);
-  MakeHeroInteractWithObject (HeroMax2, 'RANDOMTOWN2');
-  ChangeHeroStat(HeroMax2, 4, 0 - DeltaKnow2);
-  x, y = GetObjectPosition(HeroMax2);
-  if x ~= 43 then
-    MoveHeroRealTime(HeroMax2, x-1, y);
-    MoveHeroRealTime(HeroMax2, x, y);
-  else
-    MoveHeroRealTime(HeroMax2, x+1, y);
-    MoveHeroRealTime(HeroMax2, x, y);
-  end;
 end;
 
 ------- BONUS -----------------------------------------------------------------------
@@ -2645,11 +2275,6 @@ function newday ()
      --if GetHeroSkillMastery(HeroMax1, 14) > 0 and Name(HeroMax1) ~= "Nymus" then UpgradeTownBuilding('RANDOMTOWN1', TOWN_BUILDING_INFERNO_INFERNAL_LOOM); end;--TransformPlTown('TOWN2', hero1race); SetObjectOwner('TOWN2', PLAYER_1); UpgradeTownBuilding('TOWN2', TOWN_BUILDING_INFERNO_INFERNAL_LOOM); end;
      --if GetHeroSkillMastery(HeroMax2, 14) > 0 and Name(HeroMax2) ~= "Nymus" then UpgradeTownBuilding('RANDOMTOWN2', TOWN_BUILDING_INFERNO_INFERNAL_LOOM); end;--TransformPlTown('TOWN4', hero2race); SetObjectOwner('TOWN4', PLAYER_2); UpgradeTownBuilding('TOWN4', TOWN_BUILDING_INFERNO_INFERNAL_LOOM); end;
 
-
-     -- мастер артефактов
---     if hero1race == 5 then UpgradeMiniArts1(); end;
---     if hero2race == 5 then UpgradeMiniArts2(); end;
-
      -- мститель
      if GetHeroSkillMastery(HeroMax1, SKILL_AVENGER) == 4 then TransformPlTown('TOWN1', 4); SetObjectOwner('TOWN1', PLAYER_1); UpgradeTownBuilding('TOWN1', TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD); TransformPlTown('TOWN2', 4); SetObjectOwner('TOWN2', PLAYER_1); UpgradeTownBuilding('TOWN2', TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD); end;
      if GetHeroSkillMastery(HeroMax2, SKILL_AVENGER) == 4 then TransformPlTown('TOWN5', 4); SetObjectOwner('TOWN5', PLAYER_2); UpgradeTownBuilding('TOWN5', TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD); TransformPlTown('TOWN6', 4); SetObjectOwner('TOWN6', PLAYER_2); UpgradeTownBuilding('TOWN6', TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD); end;
@@ -2934,46 +2559,42 @@ function newday ()
 end;
 
 function DayFour1()
-  -- темный ритуал
-  if DT_use1 == 0 and HasHeroSkill(HeroMax1, 71) then DT_use1 = 1; nap1Plus3Q(HeroMax1); end;
-  
-  -- возврат единички
-  if RemStUn1 == 2 then
-    if GetHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade1) > 0 then AddHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade1, 1); else
-    if GetHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade2) > 0 then AddHeroCreatures(HeroMax1, array_StartUnit[hero1race].grade2, 1); end; end;
-  end;
-
-  -- мститель
-  if hero1race == 4 then Avenger1(); startThread (AutoTeleportBattleZone1); end;
-  -- мастер артефактов
-  if hero1race == 5 then MiniArts1(); startThread (AutoTeleportBattleZone1); end;
   -- некромантия
   if hero1race == 3 and (HasHeroSkill(HeroMax1, 30)) == nil then NecroBonus1(HeroMax1); end;
   
+  -- Аларон
+  if (HeroMax1 == "Ildar" or HeroMax1 == "Ildar2") and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) == 3 then SubHero(HeroMax1, "Ildar3"); HeroMax1 = "Ildar3"; sleep(3); end;
+  if (HeroMax1 == "Ildar" or HeroMax1 == "Ildar2") and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_LIGHT_MAGIC); end;
+
+  -- Джалиб
+  if Name(HeroMax1) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax1,  65); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1,  65, kolCreatures); AddHeroCreatures(HeroMax1, 68, kolCreatures); end; end;
+  if Name(HeroMax1) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax1, 163); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1, 163, kolCreatures); AddHeroCreatures(HeroMax1, 70, kolCreatures); end; end;
+
+  -- солдатская удача
+  if HasHeroSkill(HeroMax1, 32) then kolCreatures = GetHeroCreatures(HeroMax1,  57); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1,  57, kolCreatures); AddHeroCreatures(HeroMax1, 60, kolCreatures); end; end;
+  if HasHeroSkill(HeroMax1, 32) then kolCreatures = GetHeroCreatures(HeroMax1, 165); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax1, 165, kolCreatures); AddHeroCreatures(HeroMax1, 64, kolCreatures); end; end;
+
   -- инфо
   if hero2race == 4 and hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax1, 1, 5.0); end;
   if hero2race == 5 and hero1race ~= 3 and hero1race ~= 4 and hero1race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitMinik.txt", HeroMax1, 1, 5.0); end;
 end;
 
 function DayFour2()
-  -- темный ритуал
-  if DT_use2 == 0 and HasHeroSkill(HeroMax2, 71) then DT_use2 = 1; nap2Plus3Q(HeroMax2); end;
-  
-  if SpoilsUse2 == 0 and HasHeroSkill(HeroMax2, 129) then Spoils2(); end;
-  
-  -- возврат единички
-  if RemStUn2 == 2 then
-    if GetHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade1) > 0 then AddHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade1, 1); else
-    if GetHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade2) > 0 then AddHeroCreatures(HeroMax2, array_StartUnit[hero2race].grade2, 1); end; end;
-  end;
-
-  -- мститель
-  if hero2race == 4 then Avenger2(); startThread (AutoTeleportBattleZone2); end;
-  -- мастер артефактов
-  if hero2race == 5 then MiniArts2(); startThread (AutoTeleportBattleZone2); end;
   -- некромантия
   if hero2race == 3 and (HasHeroSkill(HeroMax2, 30)) == nil then NecroBonus2(HeroMax2); end;
   
+  -- Аларон
+  if (HeroMax1 == "Ildar" or HeroMax1 == "Ildar2") and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) == 3 then SubHero(HeroMax1, "Ildar3"); HeroMax1 = "Ildar3"; sleep(3); end;
+  if (HeroMax1 == "Ildar" or HeroMax1 == "Ildar2") and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_LIGHT_MAGIC) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_LIGHT_MAGIC); end;
+
+  -- Джалиб
+  if Name(HeroMax2) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax2,  65); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2,  65, kolCreatures); AddHeroCreatures(HeroMax2, 68, kolCreatures); end; end;
+  if Name(HeroMax2) == "Tan" then kolCreatures = GetHeroCreatures(HeroMax2, 163); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2, 163, kolCreatures); AddHeroCreatures(HeroMax2, 70, kolCreatures); end; end;
+
+  -- солдатская удача
+  if HasHeroSkill(HeroMax2, 32) then kolCreatures = GetHeroCreatures(HeroMax2,  57); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2,  57, kolCreatures); AddHeroCreatures(HeroMax2, 60, kolCreatures); end; end;
+  if HasHeroSkill(HeroMax2, 32) then kolCreatures = GetHeroCreatures(HeroMax2, 165); if kolCreatures > 0 then RemoveHeroCreatures(HeroMax2, 165, kolCreatures); AddHeroCreatures(HeroMax2, 64, kolCreatures); end; end;
+
   -- инфо
   if hero1race == 4 and hero2race ~= 3 and hero2race ~= 4 and hero2race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitAvenger.txt", HeroMax2, 2, 5.0); end;
   if hero1race == 5 and hero2race ~= 3 and hero2race ~= 4 and hero2race ~= 5 then ShowFlyingSign(GetMapDataPath().."WaitMinik.txt", HeroMax2, 2, 5.0); end;

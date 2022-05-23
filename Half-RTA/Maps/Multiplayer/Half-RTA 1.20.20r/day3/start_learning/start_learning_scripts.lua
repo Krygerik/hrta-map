@@ -683,7 +683,7 @@ end;
 function infitityMoveTread(heroName)
   print "infitityMoveTread"
   
-  while not nil do
+  while GetDate(DAY) < 4 do
     if GetHeroStat(heroName, STAT_MOVE_POINTS) < 30000 then
       addHeroMovePoints(heroName);
     end;
@@ -885,13 +885,20 @@ function darkRitualTread(heroName)
   
   local playerId = GetPlayerFilter(GetObjectOwner(heroName));
   
-  while not PLAYERS_USE_DARK_RITUAL_STATUS[playerId] and GetDate(DAY) == 3 do
-    if GetHeroStat(heroName, STAT_MANA_POINTS) > 0 then
-      questionDRTakeAttack(playerId);
-    
-      ChangeHeroStat(heroName, STAT_MOVE_POINTS, 30000);
-      ChangeHeroStat(heroName, STAT_MANA_POINTS, 0 - GetHeroStat(heroName, STAT_MANA_POINTS));
-    end;
+  while not PLAYERS_USE_DARK_RITUAL_STATUS[playerId] do
+    if HasHeroSkill(heroName, PERK_DARK_RITUAL) then
+      if GetDate(DAY) == 3 and GetHeroStat(heroName, STAT_MANA_POINTS) > 0 then
+        questionDRTakeAttack(playerId);
+
+        ChangeHeroStat(heroName, STAT_MOVE_POINTS, 30000);
+        ChangeHeroStat(heroName, STAT_MANA_POINTS, 0 - GetHeroStat(heroName, STAT_MANA_POINTS));
+      end;
+
+      if GetDate(DAY) == 4 then
+        questionDRTakeAttack(playerId);
+        PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
+      end;
+    end
     
     sleep(20);
   end;
@@ -1483,6 +1490,24 @@ function setSpoilsTrigger(playerId)
   print "setSpoilsTrigger"
 
   Trigger(OBJECT_TOUCH_TRIGGER, MAP_MERCHANT_ON_PLAYER[playerId], 'handleTouchArtifactMerchant');
+  startThread(spoilsOfWarThread, playerId);
+end;
+
+-- Установка слежки за трофеями, если их не используют до 4 дня
+function spoilsOfWarThread(strPlayerId)
+  print "spoilsOfWarThread"
+  
+  local playerId =strPlayerId + 0;
+  
+  while not PLAYERS_USE_SPOILS_STATUS[playerId] do
+    if GetDate(DAY) == 4 and HasHeroSkill(playerMainHero, WIZARD_FEAT_SPOILS_OF_WAR) then
+      spoilsOfWar(playerId);
+
+      PLAYERS_USE_SPOILS_STATUS[playerId] = not nil;
+    end;
+
+    sleep(20);
+  end;
 end;
 
 -- Обработчик касания героя с лавкой

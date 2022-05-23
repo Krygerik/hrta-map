@@ -53,3 +53,89 @@ PLAYERS_TELEPORT_TO_BATTLE_POSITION = {
   [PLAYER_1] = { x = 43, y = 45 },
   [PLAYER_2] = { x = 54, y = 45 },
 };
+
+-- Гарнизоны для сражения с эльфом
+ELF_ENEMY_GARNISONS = {
+  [RACES.HAVEN] = {
+    { kol = 44, id =  1 },
+    { kol = 24, id =  3 },
+    { kol = 20, id =  5 },
+    { kol = 10, id =  7 },
+    { kol =  6, id =  9 },
+    { kol =  4, id = 11 },
+    { kol =  2, id = 13 },
+  },
+  [RACES.INFERNO] = {
+    { kol = 32, id = 15 },
+    { kol = 30, id = 17 },
+    { kol = 16, id = 19 },
+    { kol = 10, id = 21 },
+    { kol =  6, id = 23 },
+    { kol =  4, id =136 },
+    { kol =  2, id = 27 },
+  },
+  [RACES.NECROPOLIS] = {
+    { kol = 40, id = 29 },
+    { kol = 30, id = 31 },
+    { kol = 18, id = 34 },
+    { kol = 10, id = 35 },
+    { kol =  6, id = 37 },
+    { kol =  4, id = 39 },
+    { kol =  2, id = 41 },
+  },
+  [RACES.SYLVAN] = {
+    { kol = 30, id = 43 },
+    { kol = 18, id = 45 },
+    { kol = 14, id = 47 },
+    { kol =  8, id = 49 },
+    { kol =  6, id = 51 },
+    { kol =  4, id = 53 },
+    { kol =  2, id = 55 },
+  },
+  [RACES.ACADEMY] = {
+    { kol = 40, id = 57 },
+    { kol = 28, id = 59 },
+    { kol = 18, id = 61 },
+    { kol = 10, id = 63 },
+    { kol =  6, id = 65 },
+    { kol =  4, id = 67 },
+    { kol =  2, id = 69 },
+  },
+  [RACES.DUNGEON] = {
+    { kol = 14, id = 92 },
+    { kol = 10, id = 73 },
+    { kol = 12, id = 75 },
+    { kol =  8, id = 77 },
+    { kol =  6, id = 79 },
+    { kol =  4, id = 81 },
+    { kol =  2, id = 83 },
+  },
+  [RACES.FORTRESS] = {
+    { kol = 36, id =  71 },
+    { kol = 28, id =  94 },
+    { kol = 14, id =  96 },
+    { kol = 12, id =  98 },
+    { kol =  6, id = 100 },
+    { kol =  4, id = 102 },
+    { kol =  2, id = 105 },
+  },
+  [RACES.STRONGHOLD] = {
+    { kol = 50, id = 117 },
+    { kol = 28, id = 119 },
+    { kol = 22, id = 121 },
+    { kol = 10, id = 123 },
+    { kol = 10, id = 125 },
+    { kol =  4, id = 127 },
+    { kol =  2, id = 129 },
+  },
+};
+
+PLAYERS_PORTAL_TO_BATTLE_NAME = {
+  [PLAYER_1] = 'port1',
+  [PLAYER_2] = 'port2',
+};
+
+PLAYERS_PORTAL_TO_BATTLE_POSITION = {
+  [PLAYER_1] = { x = 39, y = 80 },
+  [PLAYER_2] = { x = 47, y = 11 },
+};
