@@ -679,6 +679,8 @@ HEROES = {
   ALMEGIR = 'Almegir',                 -- Ирбет
   MAAHIR = 'Maahir',                   -- Маахир
   BEREIN = 'Berein',                   -- Маркел
+  TAN = 'Tan',                         -- Джалиб
+  ILDAR = 'Ildar',                     -- Аларон
 };
 
 -- Соотношение игроков к подконтрольным им городам

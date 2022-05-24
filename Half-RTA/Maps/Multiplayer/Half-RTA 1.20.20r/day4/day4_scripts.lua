@@ -587,6 +587,186 @@ function prepareSelectNecromancy(playerId)
   end;
 end;
 
+-- Замена определенного существа в герое на другое
+function replaceUnitInHero(heroName, targetUnitId, replaceUnitId)
+  print "replaceUnitInHero"
+
+  local countGenie = GetHeroCreatures(heroName, targetUnitId);
+
+  if countGenie > 0 then
+    RemoveHeroCreatures(heroName, targetUnitId, countGenie);
+    -- ID изменено на ID джинов с неосязаемостью >_<
+    AddHeroCreatures(heroName, replaceUnitId, countGenie);
+  end;
+end;
+
+-- Замена обычных существ на существ с рташными особенностями
+-- Тут такие приколы с ID существ накручено, мое увожение >_<
+function replaceCommonUnitOnSpecial(playerId)
+  print "replaceCommonUnitOnSpecial"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  
+  -- Джалиб
+  if dictHeroName == HEROES.TAN then
+    replaceUnitInHero(mainHeroName, CREATURE_GENIE, CREATURE_RAKSHASA_RUKH);
+    replaceUnitInHero(mainHeroName, CREATURE_DJINN_VIZIER, CREATURE_TITAN);
+  end;
+  
+  -- солдатская удача
+  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
+    replaceUnitInHero(mainHeroName, CREATURE_GREMLIN, CREATURE_OBSIDIAN_GARGOYLE);
+    replaceUnitInHero(mainHeroName, CREATURE_STORM_LORD, CREATURE_ARCH_MAGI);
+  end;
+end;
+
+-- Передача всего имеющегося у героя новому
+-- В этой функции ваще влом избавляться от магических цифр
+function replaceMainHero(playerId, newHeroName)
+  print "replaceMainHero"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  -- Навыки
+  local stashSkills = {};
+  
+  for indexSkill, skillId in ALL_SKILLS_TABLE do
+    stashSkills[indexSkill] = GetHeroSkillMastery(mainHeroName, skillId);
+  end;
+  
+  -- Умения
+  local mainHeroPerksTable = {};
+  
+  for _, perkId in ALL_PERKS_TABLE do
+    if HasHeroSkill(mainHeroName, perkId) then
+      mainHeroPerksTable[length(mainHeroPerksTable) + 1] = perkId;
+    end;
+  end;
+  
+  -- Артефакты
+  local mainHeroArtsTable = {};
+  
+  for _, artData in ALL_ARTS_LIST do
+    if HasArtefact(mainHeroName, artData.id) then
+      mainHeroArtsTable[length(mainHeroArtsTable) - 1] = artData.id;
+    end;
+  end;
+  
+  -- Существа
+  local stashUnits = {
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+    { id = 0, kol = 0},
+  };
+  
+  stashUnits[1].id, stashUnits[2].id, stashUnits[3].id, stashUnits[4].id, stashUnits[5].id, stashUnits[6].id, stashUnits[7].id = GetHeroCreaturesTypes(mainHeroName);
+  
+  for _, unit in stashUnits do
+    if unit.id > 0 then
+      unit.kol = GetHeroCreatures(mainHeroName, unit.id);
+    end;
+  end;
+  
+  -- Машинки
+  local warMachinesTable = {};
+  
+  for machineId = 1, 4 do
+    if HasHeroWarMachine(mainHeroName, machineId) and machineId ~= 2 then
+      warMachinesTable[length(warMachinesTable) + 1] = machineId;
+    end;
+  end;
+  
+  -- Показываем фокусы с заменой героя
+  local x, y = GetObjectPosition(mainHeroName);
+  local heroExp = GetHeroStat(mainHeroName, STAT_EXPERIENCE);
+  
+  RemoveObject(mainHeroName);
+  DeployReserveHero(newHeroName, x, y, GROUND);
+  Trigger(HERO_ADD_SKILL_TRIGGER, newHeroName, 'noop');
+  WarpHeroExp(newHeroName, heroExp);
+  
+  -- Обучаем навыкам
+  for skillId, skillMastery in stashSkills do
+    if skillMastery > 0 then
+      for i = 1, skillMastery do
+        GiveHeroSkill(newHeroName, skillId);
+      end;
+    end;
+  end;
+  
+  -- Обучаем умениям
+  for _, perkId in mainHeroPerksTable do
+    GiveHeroSkill(newHeroName, perkId);
+    
+    if perkId == RANGER_FEAT_FOREST_GUARD_EMBLEM and GetHeroCreatures(newHeroName, CREATURE_BLADE_SINGER) > 0 then
+      RemoveHeroCreatures(newHeroName, CREATURE_BLADE_SINGER, 10);
+    end;
+    if perkId == HERO_SKILL_DEFEND_US_ALL and GetHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER) > 0 then
+      RemoveHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER, 15);
+    end;
+  end;
+  
+  -- Передаем армию
+  for index, unit in stashUnits do
+    if unit.id > 0 then
+      AddHeroCreatures(newHeroName, unit.id, unit.kol);
+      
+      local countAirElem = GetHeroCreatures(newHeroName, CREATURE_AIR_ELEMENTAL);
+      
+      if countAirElem > 0 then
+        RemoveHeroCreatures(newHeroName, CREATURE_AIR_ELEMENTAL, countAirElem);
+      end;
+    end;
+  end;
+  
+  -- Передаем арты
+  for _, artId in mainHeroArtsTable do
+    GiveArtefact(newHeroName, artId);
+  end;
+  
+  -- Машинки
+  for _, machineId in warMachinesTable do
+    GiveHeroWarMachine(newHeroName, machineId);
+  end;
+
+  -- Производим подмену в свойствах
+  PLAYERS_MAIN_HERO_PROPS[playerId].name = newHeroName;
+  
+  refreshMainHeroStats(playerId);
+end;
+
+-- Замена обычного героя на героя с рташными особенностями
+function replaceHeroOnSpecial(playerId)
+  print "replaceHeroOnSpecial"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  
+  -- Аларон
+  if dictHeroName == HEROES.ILDAR then
+    local lightMagicLevel = GetHeroSkillMastery(mainHeroName, SKILL_LIGHT_MAGIC);
+  
+    if lightMagicLevel == 3 then
+      local PLAYERS_ADD_ALARON = {
+        [PLAYER_1] = "Ildar3",
+        [PLAYER_2] = "Ildar4",
+      };
+    
+      replaceMainHero(playerId, PLAYERS_ADD_ALARON[playerId]);
+    end;
+
+    if lightMagicLevel < 3 and lightMagicLevel > 0 then
+      Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
+      GiveHeroSkill(mainHeroName, SKILL_LIGHT_MAGIC);
+    end;
+  end;
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -618,6 +798,10 @@ function day4_scripts()
     transferAllArtsToMainHero(playerId);
 
     transferAllArmyToMain(playerId);
+
+    replaceCommonUnitOnSpecial(playerId);
+    
+    replaceHeroOnSpecial(playerId);
 
     -- Отправляем на выбор заклятых
     if raceId == RACES.SYLVAN then

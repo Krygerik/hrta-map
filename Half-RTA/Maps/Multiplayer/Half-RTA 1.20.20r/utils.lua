@@ -2,8 +2,6 @@
 
 -- Снимает все очки передвижения у переданного героя до 0
 function removeHeroMovePoints(hero)
-  print "removeHeroMovePoints"
-
   local currentHeroMovePoints = GetHeroStat(hero, STAT_MOVE_POINTS);
 
   ChangeHeroStat(hero, STAT_MOVE_POINTS, -currentHeroMovePoints);
@@ -11,8 +9,6 @@ end;
 
 -- Добавляет очки передвижения у переданному герою
 function addHeroMovePoints(hero)
-  print "addHeroMovePoints"
-  
   removeHeroMovePoints(hero);
 
   local ADD_MOVE_POINTS = 30000;
@@ -22,8 +18,6 @@ end;
 
 -- Получение словарного названия героя по его зарезервированному названию
 function getDictionaryHeroName(heroName)
-  print "getDictionaryHeroName"
-  
   for indexHero = 1, length(MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME) do
     local heroReservedNamesTable = MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME[indexHero];
     
@@ -39,8 +33,6 @@ end;
 
 -- Получение зарезервированному названия героя по его словарному
 function getReservedHeroName(playerId, dictHeroName)
-  print "getReservedHeroName"
-
   for indexHero = 1, length(MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME) do
     local heroReservedNamesTable = MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME[indexHero];
     
