@@ -326,9 +326,6 @@ function prepareForChoiceEnemy(playerId)
     end;
   end;
   
-  print('opponentRaceId')
-  print (opponentRaceId)
-  
   local avengersEnemies = ELF_ENEMY_GARNISONS[opponentRaceId];
   
   StartCombat(
@@ -441,6 +438,155 @@ function prepareForCraftMiniArtifacts(playerId)
   createPortalToBattleField(playerId);
 end;
 
+-- Бонус к некромантии
+function getNecromancyCoef(heroName)
+  print "getNecromancyCoef"
+
+  local coef = 1;
+  
+  local dictHeroName = getDictionaryHeroName(heroName);
+
+  -- Бонус к некромантии для Маркела
+  if dictHeroName == HEROES.BEREIN then
+    local MARKEL_KOEF = 0.02;
+
+    coef = coef + MARKEL_KOEF * GetHeroLevel(heroName);
+  end;
+  
+  -- Бонус за повелителя мертвых
+  if HasHeroSkill(heroName, NECROMANCER_FEAT_LORD_OF_UNDEAD) then
+    local LORD_OF_UNDEAD_KOEF = 1.301;
+    
+    coef = coef * LORD_OF_UNDEAD_KOEF;
+  end;
+  
+  return coef;
+end;
+
+-- Подготавливаем выбор существ с некромантии
+function prepareSelectNecromancy(playerId)
+  print "prepareSelectNecromancy"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local countAllowStack = GetHeroSkillMastery(mainHeroName, SKILL_NECROMANCY);
+  
+  awaitMessageBoxForPlayers(playerId, { PATH_TO_DAY4_MESSAGES.."necromance_info.txt"; eq = countAllowStack });
+  
+  local stash = {
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+  };
+  
+  local garnisonName = MAP_GARNISON_FOR_NECROMANCY[playerId];
+
+  DenyGarrisonCreaturesTakeAway(garnisonName, 1);
+  SetObjectOwner(garnisonName, playerId);
+  
+  stash[1].id, stash[2].id, stash[3].id, stash[4].id, stash[5].id, stash[6].id, stash[7].id = GetHeroCreaturesTypes(mainHeroName);
+  
+  local coef = getNecromancyCoef(mainHeroName);
+
+  for _, stachedUnit in stash do
+    for _, dictUnit in UNITS[RACES.NECROPOLIS] do
+      if stachedUnit.id == dictUnit.id then
+        local countUnit = MAP_UNIT_LEVEL_ON_DEFAULT_UNIT_COUNT[dictUnit.lvl] * coef;
+
+        AddObjectCreatures(garnisonName, dictUnit.id, countUnit);
+      end;
+    end;
+  end;
+  
+  MakeHeroInteractWithObject(mainHeroName, garnisonName);
+  
+  local garnisonStash = {
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+    { kol = 0, id = 0 },
+  };
+
+  garnisonStash[1].id, garnisonStash[2].id, garnisonStash[3].id, garnisonStash[4].id, garnisonStash[5].id, garnisonStash[6].id, garnisonStash[7].id = GetObjectCreaturesTypes(garnisonName);
+  
+  for _, stashedArmy in garnisonStash do
+    if stashedArmy.id > 0 then
+      stashedArmy.kol = GetObjectCreatures(garnisonName, stashedArmy.id);
+    end;
+  end;
+  
+  local countTakedUnits = 0;
+  
+  while countTakedUnits < countAllowStack do
+    for _, stashedArmy in garnisonStash do
+      if stashedArmy.id > 0 then
+        local currentCountUnits = GetObjectCreatures(garnisonName, stashedArmy.id);
+        local diffUnits = stashedArmy.kol - currentCountUnits;
+        
+        -- Если появилась разница в количестве войск - значит ее взял игрок
+        if diffUnits > 0 then
+          countTakedUnits = countTakedUnits + 1;
+          
+          stashedArmy.kol = 0;
+
+          -- Если игрок отделил часть юнитов - считаем, что он использовал на них некромантию
+          if currentCountUnits > 0 then
+            RemoveObjectCreatures(garnisonName, stashedArmy.id, currentCountUnits);
+          end;
+          
+          -- Если есть вечное рабство
+          if HasHeroSkill(mainHeroName, PERK_NO_REST_FOR_THE_WICKED) then
+            -- Если взяли обычный грейд существ
+            local altGradeId = MAP_NECRO_UNIT_ON_GRADE_UNIT[stashedArmy.id];
+
+            if altGradeId ~= nil and GetHeroCreatures(mainHeroName, altGradeId) > 0 then
+              AddHeroCreatures(mainHeroName, altGradeId, diffUnits);
+              RemoveObjectCreatures(garnisonName, altGradeId, GetObjectCreatures(garnisonName, altGradeId));
+              
+              -- Убираем всех существ альтернативного грейда, если их забрали через вечное рабство
+              for _, stash in garnisonStash do
+                if stash.id == altGradeId then
+                  stash.kol = 0;
+                end;
+              end;
+            end;
+            
+            -- Если взяли альтернативный грейд существ
+            local gradeId = MAP_NECRO_GRADE_UNIT_ON_UNIT[stashedArmy.id];
+
+            if gradeId ~= nil and GetHeroCreatures(mainHeroName, gradeId) > 0 then
+              AddHeroCreatures(mainHeroName, gradeId, diffUnits);
+              RemoveObjectCreatures(garnisonName, gradeId, GetObjectCreatures(garnisonName, gradeId));
+
+              -- Убираем всех существ альтернативного грейда, если их забрали через вечное рабство
+              for _, stash in garnisonStash do
+                if stash.id == gradeId then
+                  stash.kol = 0;
+                end;
+              end;
+            end;
+          end;
+        end;
+      end;
+    end;
+    
+    sleep(1);
+  end;
+  
+  -- Забираем все оставшиеся войска из гарнизона
+  for _, stashedArmy in garnisonStash do
+    if stashedArmy.kol > 0 then
+      RemoveObjectCreatures(garnisonName, stashedArmy.id, stashedArmy.kol);
+    end;
+  end;
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -449,9 +595,6 @@ function day4_scripts()
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    
-    print('RESULT_HERO_LIST[playerId].raceId')
-    print(RESULT_HERO_LIST[playerId].raceId)
     
     removeAllHeroMovePoints(playerId);
 
@@ -484,6 +627,11 @@ function day4_scripts()
     -- Отправляем на крафт миников
     if raceId == RACES.ACADEMY then
       prepareForCraftMiniArtifacts(playerId);
+    end;
+    
+    -- Предлагаем выбрать существ с некромантии
+    if raceId == RACES.NECROPOLIS then
+      prepareSelectNecromancy(playerId);
     end;
   end;
 end;
