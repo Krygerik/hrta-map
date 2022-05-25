@@ -415,13 +415,13 @@ function prepareForCraftMiniArtifacts(playerId)
   print "prepareForCraftMiniArtifacts"
   
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  local opponentPlayerId = PLAYERS_OPPONENT[playerId];
   
   UpgradeTownBuilding(townName, TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
   
   awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."create_mini_arts_info.txt");
   
   if opponentRaceId ~= RACES.SYLVAN and opponentRaceId ~= RACES.ACADEMY then
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
     local enemyMainHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
     ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt", enemyMainHeroName, opponentPlayerId, 5.0);
@@ -767,6 +767,91 @@ function replaceHeroOnSpecial(playerId)
   end;
 end;
 
+-- Получение ИД игрока, выбирающего поле для битвы
+function getSelectedBattlefieldPlayerId()
+  print "getSelectedBattlefieldPlayerId"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    local dictHeroName = getDictionaryHeroName(mainHeroName);
+    
+    -- Ниброс имеет приоритет над всем
+    if dictHeroName == HEROES.JAZAZ then
+      return playerId;
+    end;
+  end;
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+    -- Нахождение пути дает возможность выбора
+    if HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
+      return playerId;
+    end;
+  end;
+  
+  -- Если нет иных причин - по умолчанию выбирает синий
+  return PLAYER_2;
+end;
+
+-- Подготовка места для выбора поля боя
+function prepareSelectBattlefield()
+  print "prepareSelectBattlefield"
+  
+  local choicePlayerId = getSelectedBattlefieldPlayerId();
+  
+  -- Если поле выбирает красный игрок, то рокируем их
+  if choicePlayerId == PLAYER_1 then
+    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+    local playerPosition = PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId];
+    local opponentPosition = PLAYERS_TELEPORT_TO_BATTLE_POSITION[opponentPlayerId];
+
+    -- Меняем их точки для телепортации
+    PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId] = opponentPosition;
+    PLAYERS_TELEPORT_TO_BATTLE_POSITION[opponentPlayerId] = playerPosition;
+  end;
+  
+  blockBattlefields(choicePlayerId);
+end;
+
+-- Запрет выбора родных земель
+function blockFriendlyBattlefield()
+  print "blockFriendlyBattlefield"
+  
+  -- Соотношение расу на регион родной земли
+  local MAP_RACE_ON_NATIVE_REGIONS = {
+    [RACES.HAVEN] = 'land_block_race1',
+    [RACES.INFERNO] = 'land_block_race2',
+    [RACES.NECROPOLIS] = 'land_block_race3',
+    [RACES.SYLVAN] = 'land_block_race1',
+    [RACES.ACADEMY] = 'land_block_race5',
+    [RACES.DUNGEON] = 'land_block_race6',
+    [RACES.FORTRESS] = 'land_block_race7',
+    [RACES.STRONGHOLD] = 'land_block_race8',
+  };
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
+    
+    SetRegionBlocked(MAP_RACE_ON_NATIVE_REGIONS[playerRaceId], not nil);
+  end;
+end;
+
+-- Блокировки полей для выбора
+function blockBattlefields(choisePlayerId)
+  print "blockBattlefields"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  
+  -- Случай, когда доступны все поля для выбора
+  if dictHeroName == HEROES.JAZAZ or HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
+    return nil;
+  end;
+
+  blockFriendlyBattlefield();
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -786,8 +871,6 @@ function day4_scripts()
     if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
       runDiplomacy(mainHeroName);
     end;
-
-    teleportPlayerInToBattle(playerId);
 
     disableCustomAbilities(mainHeroName);
     
@@ -817,6 +900,12 @@ function day4_scripts()
     if raceId == RACES.NECROPOLIS then
       prepareSelectNecromancy(playerId);
     end;
+  end;
+  
+  prepareSelectBattlefield();
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    teleportPlayerInToBattle(playerId);
   end;
 end;
 

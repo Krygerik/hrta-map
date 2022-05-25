@@ -1572,60 +1572,6 @@ array_Tier7_ID = { 13, 27, 41, 55, 69, 83, 105, 112, 129, 137, 144, 151, 158, 16
 array_Fly_ID = {}
 array_Fly_ID = { 7, 8, 13, 27, 34, 35, 41, 43, 55, 59, 65, 83, 88, 91, 102, 109, 112, 115, 127, 137, 144, 145, 151, 154, 155, 158, 160, 163, 171, 178}
 
-function DeletePerk(hero, perk)
-  j = 1;
-  for i = 1, 26 do
-    array_skills_Hero[i] = GetHeroSkillMastery(HeroMax1, array_skills[i]);
-  end;
-  for i = 1, 189 do
-    if HasHeroSkill( HeroMax1, array_perks[i]) then
-      array_perks_Hero[j] = array_perks[i];
-      j = j + 1;
-      kol_perks_Hero = j;
-    end;
-  end;
-  expHero = GetHeroStat(HeroMax1, STAT_EXPERIENCE);
-  attHero = GetHeroStat(HeroMax1, STAT_ATTACK);
-  defHero = GetHeroStat(HeroMax1, STAT_DEFENCE);
-  spHero  = GetHeroStat(HeroMax1, STAT_SPELL_POWER);
-  knHero  = GetHeroStat(HeroMax1, STAT_KNOWLEDGE);
-  Trigger( HERO_ADD_SKILL_TRIGGER, hero, 'no');
-  Trigger( HERO_REMOVE_SKILL_TRIGGER, hero, 'no');
-  TakeAwayHeroExp(hero, expHero - 1);
-  WarpHeroExp(hero, expHero);
-  TakeAwayHeroExp(hero, expHero - 1);
-  WarpHeroExp(hero, expHero);
-  for i = 1, 26 do
-    for j = 1, array_skills_Hero[i] do
-      if array_skills_Hero[i] >= j then
-        if GetHeroSkillMastery(hero, array_skills[i]) < array_skills_Hero[i] then
-          GiveHeroSkill(hero, array_skills[i]);
-        end;
-      end;
-    end;
-  end;
-  for i = 1, kol_perks_Hero do
-    if array_perks_Hero[i] ~= perk then
-      GiveHeroSkill(hero, array_perks_Hero[i]);
-    end;
-  end;
-  ChangeHeroStat(hero, STAT_ATTACK, attHero - GetHeroStat(HeroMax1, STAT_ATTACK));
-  ChangeHeroStat(hero, STAT_DEFENCE, defHero - GetHeroStat(HeroMax1, STAT_DEFENCE));
-  ChangeHeroStat(hero, STAT_SPELL_POWER, spHero - GetHeroStat(HeroMax1, STAT_SPELL_POWER));
-  ChangeHeroStat(hero, STAT_KNOWLEDGE, knHero - GetHeroStat(HeroMax1, STAT_KNOWLEDGE));
-  sleep(2);
-end;
-
-function BlockBattleZone(race1, race2)
-  if race1 == 1 or race2 == 1 or race1 == 4 or race2 == 4 then SetRegionBlocked ('land_block_race1', true); end;
-  if race1 == 2 or race2 == 2 then SetRegionBlocked ('land_block_race2', true); end;
-  if race1 == 3 or race2 == 3 then SetRegionBlocked ('land_block_race3', true); end;
-  if race1 == 5 or race2 == 5 then SetRegionBlocked ('land_block_race5', true); end;
-  if race1 == 6 or race2 == 6 then SetRegionBlocked ('land_block_race6', true); end;
-  if race1 == 7 or race7 == 2 then SetRegionBlocked ('land_block_race7', true); end;
-  if race1 == 8 or race2 == 8 then SetRegionBlocked ('land_block_race8', true); end;
-end
-
 ControlHeroCustomAbility(heroes1[0], CUSTOM_ABILITY_1, CUSTOM_ABILITY_ENABLED); Trigger(CUSTOM_ABILITY_TRIGGER, "Function_CUSTOM_F");
 
 kolUnit1 = {}
@@ -1642,25 +1588,6 @@ function newday ()
 
   if GetDate (DAY) == 3 then
     doFile(GetMapDataPath().."day3/day3_scripts.lua");
-  end;
-
-  if GetDate (DAY) == 4 then
-    if ((HasHeroSkill(HeroMax1, 19) and HasHeroSkill(HeroMax2, 19) == nil) and Name(HeroMax2) ~= "Jazaz") or Name(HeroMax1) == "Jazaz" then
-      TELEPORT_BATTLE_ZONE_PLAYER_1_X, TELEPORT_BATTLE_ZONE_PLAYER_2_X = TELEPORT_BATTLE_ZONE_PLAYER_2_X, TELEPORT_BATTLE_ZONE_PLAYER_1_X
-      TELEPORT_BATTLE_ZONE_PLAYER_1_Y, TELEPORT_BATTLE_ZONE_PLAYER_2_Y = TELEPORT_BATTLE_ZONE_PLAYER_2_Y, TELEPORT_BATTLE_ZONE_PLAYER_1_Y
-    end
-
-    BlockBattleZone(hero1race, hero2race)
-
-    if HasHeroSkill(HeroMax1, 19) or HasHeroSkill(HeroMax2, 19) or Name(HeroMax1) == "Jazaz" or Name(HeroMax2) == "Jazaz" then
-      SetRegionBlocked ('land_block_race1', false);
-      SetRegionBlocked ('land_block_race2', false);
-      SetRegionBlocked ('land_block_race3', false);
-      SetRegionBlocked ('land_block_race5', false);
-      SetRegionBlocked ('land_block_race6', false);
-      SetRegionBlocked ('land_block_race7', false);
-      SetRegionBlocked ('land_block_race8', false);
-    end;
   end;
 
   if GetDate (DAY) == 5 then
@@ -1798,18 +1725,6 @@ function newday ()
      -- охота на демонов (орочье восполнение маны)
 --     if (HasHeroSkill(HeroMax1, 213)) then DestroyTownBuildingToLevel('RANDOMTOWN2', TOWN_BUILDING_INFERNO_INFERNAL_LOOM, 0); end;
 --     if (HasHeroSkill(HeroMax2, 213)) then DestroyTownBuildingToLevel('RANDOMTOWN1', TOWN_BUILDING_INFERNO_INFERNAL_LOOM, 0); end;
-
-     -- боевая закалка (катапульта)
---     if (HasHeroSkill(HeroMax1, 24)) and (HasHeroSkill(HeroMax2, 126)) then DeletePerk(HeroMax2, WIZARD_FEAT_REMOTE_CONTROL); end;
---     if (HasHeroSkill(HeroMax1, 24)) and (HasHeroSkill(HeroMax2, 107)) then DeletePerk(HeroMax2, NECROMANCER_FEAT_DEADLY_COLD); end;
---     if (HasHeroSkill(HeroMax2, 24)) and (HasHeroSkill(HeroMax1, 126)) then DeletePerk(HeroMax1, WIZARD_FEAT_REMOTE_CONTROL); end;
---     if (HasHeroSkill(HeroMax2, 24)) and (HasHeroSkill(HeroMax1, 107)) then DeletePerk(HeroMax1, NECROMANCER_FEAT_DEADLY_COLD); end;
-
-     -- небесный щит
---     if (HasHeroSkill(HeroMax1,  40)) and HeroHasSpellShield1 == 1 then DeletePerk(HeroMax1,         PERK_MYSTICISM); GiveHeroSkill(HeroMax1, 166); end;
---     if (HasHeroSkill(HeroMax1, 166)) and HeroHasSpellShield1 == 0 then DeletePerk(HeroMax1, HERO_SKILL_RUNIC_ARMOR); GiveHeroSkill(HeroMax1,  40); end;
---     if (HasHeroSkill(HeroMax2,  40)) and HeroHasSpellShield2 == 1 then DeletePerk(HeroMax2,         PERK_MYSTICISM); GiveHeroSkill(HeroMax2, 166); end;
---     if (HasHeroSkill(HeroMax2, 166)) and HeroHasSpellShield2 == 0 then DeletePerk(HeroMax2, HERO_SKILL_RUNIC_ARMOR); GiveHeroSkill(HeroMax2,  40); end;
 
      -- помощь гоблинов
      --if (HasHeroSkill(HeroMax1, 182)) and (GetHeroCreatures(HeroMax1, 117) > 0) then kolCreatures = GetHeroCreatures(HeroMax1, 117); RemoveHeroCreatures(HeroMax1, 117, kolCreatures); AddHeroCreatures(HeroMax1, 118, kolCreatures); end;
