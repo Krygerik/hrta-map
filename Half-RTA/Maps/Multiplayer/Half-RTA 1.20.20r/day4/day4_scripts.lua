@@ -619,6 +619,14 @@ function replaceCommonUnitOnSpecial(playerId)
     replaceUnitInHero(mainHeroName, CREATURE_GREMLIN, CREATURE_OBSIDIAN_GARGOYLE);
     replaceUnitInHero(mainHeroName, CREATURE_STORM_LORD, CREATURE_ARCH_MAGI);
   end;
+
+  -- фикс бага с грифонами (Когда приземляется за поле боя)
+  local countGriffin = GetHeroCreatures(mainHeroName, CREATURE_GRIFFIN);
+  
+  if countGriffin > 0 then
+    RemoveHeroCreatures(mainHeroName, CREATURE_GRIFFIN, countGriffin);
+    AddHeroCreatures(mainHeroName, CREATURE_ROYAL_GRIFFIN, countGriffin);
+  end;
 end;
 
 -- Передача всего имеющегося у героя новому
@@ -740,6 +748,16 @@ function replaceMainHero(playerId, newHeroName)
   refreshMainHeroStats(playerId);
 end;
 
+
+----------------
+-- Рутгер
+if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) == 3 then SubHero(HeroMax1, "Brem3"); HeroMax1 = "Brem3"; sleep(3); end;
+if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_TRAINING); end;
+
+if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) == 3 then SubHero(HeroMax2, "Brem4"); HeroMax2 = "Brem4"; sleep(3); end;
+if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no'); GiveHeroSkill(HeroMax2, SKILL_TRAINING); end;
+----------------
+
 -- Замена обычного героя на героя с рташными особенностями
 function replaceHeroOnSpecial(playerId)
   print "replaceHeroOnSpecial"
@@ -752,17 +770,55 @@ function replaceHeroOnSpecial(playerId)
     local lightMagicLevel = GetHeroSkillMastery(mainHeroName, SKILL_LIGHT_MAGIC);
   
     if lightMagicLevel == 3 then
-      local PLAYERS_ADD_ALARON = {
+      local PLAYERS_SUPER_EXPERT_HERO = {
         [PLAYER_1] = "Ildar3",
         [PLAYER_2] = "Ildar4",
       };
     
-      replaceMainHero(playerId, PLAYERS_ADD_ALARON[playerId]);
+      replaceMainHero(playerId, PLAYERS_SUPER_EXPERT_HERO[playerId]);
     end;
 
     if lightMagicLevel < 3 and lightMagicLevel > 0 then
       Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
       GiveHeroSkill(mainHeroName, SKILL_LIGHT_MAGIC);
+    end;
+  end;
+  
+  -- Рутгер
+  if dictHeroName == HEROES.BREM then
+    local trainingLevel = GetHeroSkillMastery(mainHeroName, SKILL_TRAINING);
+
+    if trainingLevel == 3 then
+      local PLAYERS_SUPER_EXPERT_HERO = {
+        [PLAYER_1] = "Brem3",
+        [PLAYER_2] = "Brem4",
+      };
+
+      replaceMainHero(playerId, PLAYERS_SUPER_EXPERT_HERO[playerId]);
+    end;
+
+    if trainingLevel < 3 and trainingLevel > 0 then
+      Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
+      GiveHeroSkill(mainHeroName, SKILL_TRAINING);
+    end;
+  end;
+  
+  -- Илайя
+  if dictHeroName == HEROES.SHADWYN then
+    local invocationLevel = GetHeroSkillMastery(mainHeroName, SKILL_INVOCATION);
+
+    if invocationLevel == 3 then
+      local PLAYERS_SUPER_EXPERT_HERO = {
+        [PLAYER_1] = "Shadwyn3",
+        [PLAYER_2] = "Shadwyn4",
+      };
+
+      replaceMainHero(playerId, PLAYERS_SUPER_EXPERT_HERO[playerId]);
+    end;
+
+    if invocationLevel < 3 and invocationLevel > 0 then
+      Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
+      GiveHeroSkill(mainHeroName, SKILL_INVOCATION);
     end;
   end;
 end;
@@ -852,6 +908,209 @@ function blockBattlefields(choisePlayerId)
   blockFriendlyBattlefield();
 end;
 
+-- Менторство
+function skillMentoring(heroName)
+  print "skillMentoring"
+  
+  local MENTORINT_ADDITIONAL_LEVEL = 8;
+  
+  local heroLevel = GetHeroLevel(heroName);
+  local needExp = TOTAL_EXPERIENCE_BY_LEVEL[heroLevel + MENTORINT_ADDITIONAL_LEVEL] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
+  
+  WarpHeroExp(heroName, GetHeroStat(heroName, STAT_EXPERIENCE) + needExp);
+end;
+
+-- Бонус с короны лидерства
+function crownOfLeader(heroName)
+  print "crownOfLeader"
+  
+  local CROWN_OF_LEADER_BONUS = 1;
+  local units = {};
+
+  units[1], units[2], units[3], units[4], units[5], units[6], units[7] = GetHeroCreaturesTypes(heroName);
+
+  for _, unitId in units do
+    if unitId > 0 then
+      AddHeroCreatures(heroName, unitId, CROWN_OF_LEADER_BONUS);
+    end;
+  end;
+end;
+
+-- Спеца кигана
+function kiganSpec(heroName)
+  print "kiganSpec"
+  
+  local KIGAN_BY_LVL_COEF = 6;
+  local heroLevel = GetHeroLevel(heroName);
+  
+  
+  if GetHeroCreatures(heroName, CREATURE_GOBLIN) > 0 then
+    AddHeroCreatures(heroName, CREATURE_GOBLIN, KIGAN_BY_LVL_COEF * heroLevel);
+  else
+    AddHeroCreatures(heroName, CREATURE_GOBLIN_DEFILER, KIGAN_BY_LVL_COEF * heroLevel);
+  end;
+end;
+
+-- Спеца Орландо
+function orlandoSpec(heroName)
+  print "orlandoSpec"
+
+  local ORLANDO_BONUS_BY_LEVEL = 0.1;
+  local heroLevel = GetHeroLevel(heroName);
+  
+  if GetHeroCreatures(heroName, CREATURE_DEVIL) >= GetHeroCreatures(heroName, CREATURE_ARCH_DEMON) then
+    AddHeroCreatures(heroName, CREATURE_DEVIL, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
+  else
+    AddHeroCreatures(heroName, CREATURE_ARCH_DEMON	, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
+  end;
+end;
+
+-- Имеется ли заклинание в текущем наборе игрока
+function getSpellHasInPlayerSet(playerId, spellId)
+  print "getSpellHasInPlayerSet"
+
+  -- Номер набора заклинаний
+  local spellSetNumber = mod(PLAYERS_GENERATED_SPELLS[playerId].countResetSpells, 2) + 1;
+  local spellSet = PLAYERS_GENERATED_SPELLS[playerId].spells[spellSetNumber];
+
+  print'spellId'
+  print(spellId)
+  print'spellSet'
+  print(spellSet)
+  
+  for _, spellData in spellSet do
+    if spellData.id == spellId then
+      return not nil;
+    end;
+  end;
+  
+  return nil;
+end;
+
+-- Имеется ли руна в текущем наборе игрока
+function getRunesHasInPlayerSet(playerId, runeId)
+  print "getRunesHasInPlayerSet"
+  
+  -- Номер набора рун
+  local runesSetNumber = mod(PLAYERS_GENERATED_SPELLS[playerId].countResetRunes, 2) + 1;
+  local runesSet = PLAYERS_GENERATED_SPELLS[playerId].runes[runesSetNumber];
+
+  print'runesSet'
+  print(runesSet)
+  
+  for _, runeData in runesSet do
+    if runeData.id == runeId then
+      return not nil;
+    end;
+  end;
+
+  return nil;
+end;
+
+-- Обучение ГГ игрока всем доступным заклинаниям
+function teachMainHeroSpells(playerId)
+  print "teachMainHeroSpells"
+  
+  -- Соотношение ручного перечисления школ магии на внутреигровой
+  local MAP_CUSTOM_SKILL_TO_INNER = {
+    [TYPE_MAGICS.LIGHT] = SKILL_LIGHT_MAGIC,
+    [TYPE_MAGICS.DARK] = SKILL_DARK_MAGIC,
+    [TYPE_MAGICS.DESTRUCTIVE] = SKILL_DESTRUCTIVE_MAGIC,
+    [TYPE_MAGICS.SUMMON] = SKILL_SUMMONING_MAGIC,
+    [TYPE_MAGICS.RUNES] = HERO_SKILL_RUNELORE,
+    [TYPE_MAGICS.WARCRIES] = HERO_SKILL_DEMONIC_RAGE,
+  };
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+  for skillId, skillSpellSet in SPELLS do
+    for _, spellData in skillSpellSet do
+      if skillId ~= TYPE_MAGICS.RUNES and skillId ~= TYPE_MAGICS.WARCRIES then
+        local playerHasSpell = getSpellHasInPlayerSet(playerId, spellData.id);
+
+        if playerHasSpell then
+          local innerSkillId = MAP_CUSTOM_SKILL_TO_INNER[skillId];
+        
+          if spellData.level < 3 then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+
+          if (
+            spellData.level == 3
+            and (HasHeroSkill(mainHeroName, PERK_WISDOM) or GetHeroSkillMastery(mainHeroName, innerSkillId) > 0)
+          ) then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+
+          if (
+            spellData.level == 4
+            and (
+              (HasHeroSkill(mainHeroName, PERK_WISDOM) and HasArtefact(mainHeroName, ARTIFACT_NECROMANCER_PENDANT, 1))
+              or GetHeroSkillMastery(mainHeroName, innerSkillId) > 1
+            )
+          ) then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+
+          if spellData.level == 5 and GetHeroSkillMastery(mainHeroName, innerSkillId) > 2 then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+        end;
+      end;
+      
+      -- Руны
+      if skillId == TYPE_MAGICS.RUNES then
+        local playerHasRune = getRunesHasInPlayerSet(playerId, spellData.id);
+        
+        if playerHasRune then
+          if spellData.level < 4 then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+          
+          if spellData.level < 5 and GetHeroSkillMastery(mainHeroName, HERO_SKILL_RUNELORE) > 1 then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+          
+          if spellData.level == 5 and GetHeroSkillMastery(mainHeroName, HERO_SKILL_RUNELORE) > 2 then
+            TeachHeroSpell(mainHeroName, spellData.id);
+          end;
+        end;
+      end;
+      
+      -- Кличи
+      if skillId == TYPE_MAGICS.WARCRIES then
+        local playerHasSpell = getSpellHasInPlayerSet(playerId, spellData.id);
+        
+        if playerHasSpell then
+          TeachHeroSpell(mainHeroName, spellData.id);
+        end;
+      end;
+    end;
+  end;
+  
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  
+  -- TODO: Чет инга не изучает свои рунки
+  -- Отдаем Инге ее рунки
+  if dictHeroName == HEROES.UNA then
+    local ingaRunes = PLAYERS_GENERATED_SPELLS[playerId].ingaRunes;
+    
+    for _, runeId in ingaRunes do
+      TeachHeroSpell(mainHeroName, runeId);
+    end;
+  end;
+  
+  -- Заклы как стартовый бонус
+  local bonusSpells = PLAYERS_GENERATED_SPELLS[playerId].bonus_spells;
+  
+  for _, spellData in bonusSpells do
+    print 'spellData';
+    print (spellData);
+  
+    TeachHeroSpell(mainHeroName, spellData.id);
+  end;
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -860,6 +1119,7 @@ function day4_scripts()
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    local dictHeroName = getDictionaryHeroName(mainHeroName);
     
     removeAllHeroMovePoints(playerId);
 
@@ -870,6 +1130,16 @@ function day4_scripts()
     -- Дипломатия
     if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
       runDiplomacy(mainHeroName);
+    end;
+    
+    -- Менторство
+    if HasHeroSkill(mainHeroName, HERO_SKILL_MENTORING) then
+      skillMentoring(mainHeroName);
+    end;
+    
+    -- Корона Лидерства
+    if HasArtefact(mainHeroName, ARTIFACT_CROWN_OF_LEADER, 1) then
+      crownOfLeader(mainHeroName);
     end;
 
     disableCustomAbilities(mainHeroName);
@@ -885,6 +1155,18 @@ function day4_scripts()
     replaceCommonUnitOnSpecial(playerId);
     
     replaceHeroOnSpecial(playerId);
+    
+    teachMainHeroSpells(playerId);
+    
+    -- Киган
+    if dictHeroName == HEROES.KIGAN then
+      kiganSpec(mainHeroName)
+    end;
+    
+    -- Орландо
+    if dictHeroName == HEROES.ORLANDO then
+      orlandoSpec(mainHeroName)
+    end;
 
     -- Отправляем на выбор заклятых
     if raceId == RACES.SYLVAN then

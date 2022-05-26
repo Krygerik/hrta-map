@@ -1290,32 +1290,6 @@ end;
 
 --------------------------------- SPELL NABOR ----------------------------------
 
-spells = {};
-spells[0]={{["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}};
-spells[1]={{["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}};
-spells[2]={{["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}};
-spells[3]={{["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0},
-           {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}, {["m"] = 0, ["sp"] = 0}};
-
-BonusSpells = {}
-BonusSpells[0] = {["m1"] = 0, ["sp1"] = 0, ["m2"] = 0, ["sp2"] = 0};
-BonusSpells[1] = {["m1"] = 0, ["sp1"] = 0, ["m2"] = 0, ["sp2"] = 0};
-
 for i = 0, 5 do
   k = 12;
   if i == 4 then k = 10; end;
@@ -1325,90 +1299,6 @@ for i = 0, 5 do
     OverrideObjectTooltipNameAndDescription (array_spells[i][j].name2, GetMapDataPath()..array_spells[i][j].text, GetMapDataPath().."notext.txt");
     OverrideObjectTooltipNameAndDescription (array_spells[i][j].name3, GetMapDataPath()..array_spells[i][j].text, GetMapDataPath().."notext.txt");
     OverrideObjectTooltipNameAndDescription (array_spells[i][j].name4, GetMapDataPath()..array_spells[i][j].text, GetMapDataPath().."notext.txt");
-  end;
-end;
-
-
-place_spell = {};
-place_spell[0] = {
-                  {["x"] = 33, ["y"] = 87}, {["x"] = 34, ["y"] = 87}, {["x"] = 35, ["y"] = 87}, {["x"] = 36, ["y"] = 87}, {["x"] = 37, ["y"] = 87},
-                  {["x"] = 33, ["y"] = 88}, {["x"] = 34, ["y"] = 88}, {["x"] = 35, ["y"] = 88}, {["x"] = 36, ["y"] = 88}, {["x"] = 37, ["y"] = 88},
-                  {["x"] = 38, ["y"] = 87}, {["x"] = 39, ["y"] = 87}, {["x"] = 38, ["y"] = 88}, {["x"] = 39, ["y"] = 88},
-                  {["x"] = 33, ["y"] = 89}, {["x"] = 34, ["y"] = 89}, {["x"] = 35, ["y"] = 89}, {["x"] = 36, ["y"] = 89}, {["x"] = 37, ["y"] = 89},
-                  {["x"] = 33, ["y"] = 90}, {["x"] = 34, ["y"] = 90}, {["x"] = 35, ["y"] = 90}, {["x"] = 36, ["y"] = 90}, {["x"] = 37, ["y"] = 90}
-                 };
-place_spell[1] = {
-                  {["x"] = 44, ["y"] = 22}, {["x"] = 43, ["y"] = 22}, {["x"] = 42, ["y"] = 22}, {["x"] = 41, ["y"] = 22}, {["x"] = 40, ["y"] = 22},
-                  {["x"] = 44, ["y"] = 21}, {["x"] = 43, ["y"] = 21}, {["x"] = 42, ["y"] = 21}, {["x"] = 41, ["y"] = 21}, {["x"] = 40, ["y"] = 21},
-                  {["x"] = 39, ["y"] = 22}, {["x"] = 38, ["y"] = 22}, {["x"] = 39, ["y"] = 21}, {["x"] = 38, ["y"] = 21},
-                  {["x"] = 44, ["y"] = 20}, {["x"] = 43, ["y"] = 20}, {["x"] = 42, ["y"] = 20}, {["x"] = 41, ["y"] = 20}, {["x"] = 40, ["y"] = 20},
-                  {["x"] = 44, ["y"] = 19}, {["x"] = 43, ["y"] = 19}, {["x"] = 42, ["y"] = 19}, {["x"] = 41, ["y"] = 19}, {["x"] = 40, ["y"] = 19},
-                 };
-
-HeroHasSpellShield1 = 0;
-HeroHasSpellShield2 = 0;
-
-function TeachSpell (hero, nabor)
-  if nabor == 0 then
-    if SpellResetUse1 == 2 then
-      nabor = 2;
-    end;
-  end;
-  if nabor == 1 then
-    if SpellResetUse2 == 2 then
-      nabor = 3;
-    end;
-  end;
-
-  for i = 1, 24 do
-    if spells[nabor][i].m < 4 and spells[nabor][i].sp ~= 0 then
-      if array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 1 or array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 2 then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
-        if (nabor == 0 or nabor == 2) and HasHeroSkill(HeroMax2, PERK_SCHOLAR) and GetHeroSkillMastery(HeroMax2, HERO_SKILL_DEMONIC_RAGE) == 0 then TeachHeroSpell(HeroMax2, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id); end;
-        if (nabor == 1 or nabor == 3) and HasHeroSkill(HeroMax1, PERK_SCHOLAR) and GetHeroSkillMastery(HeroMax1, HERO_SKILL_DEMONIC_RAGE) == 0 then TeachHeroSpell(HeroMax1, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id); end;
-      end;
-      if array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 3 and HasHeroSkill(hero, PERK_WISDOM) then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
-      end;
-      if array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 4 and HasHeroSkill(hero, PERK_WISDOM) and HasArtefact( hero, 71, 1) then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
-      end;
-
-      if spells[nabor][i].m == 0 then magic = SKILL_LIGHT_MAGIC; end;
-      if spells[nabor][i].m == 1 then magic = SKILL_DARK_MAGIC; end;
-      if spells[nabor][i].m == 2 then magic = SKILL_DESTRUCTIVE_MAGIC; end;
-      if spells[nabor][i].m == 3 then magic = SKILL_SUMMONING_MAGIC; end;
-      if GetHeroSkillMastery( hero, magic) >= 1 and array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 3 then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
-      end;
-      if GetHeroSkillMastery( hero, magic) >= 2 and array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 4 then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
-      end;
-      if GetHeroSkillMastery( hero, magic) >= 3 and array_spells[spells[nabor][i].m][spells[nabor][i].sp].level == 5 then
-        TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
---        if array_spells[spells[nabor][i].m][spells[nabor][i].sp].id == 34 and hero == HeroMax1 then HeroHasSpellShield1 = 1; end;
---        if array_spells[spells[nabor][i].m][spells[nabor][i].sp].id == 34 and hero == HeroMax2 then HeroHasSpellShield2 = 1; end;
-      end;
-    end;
-    if spells[nabor][i].m == 4 and spells[nabor][i].sp ~= 0 then
-      NaborRun = nabor;
-      if nabor == 2 then NaborRun = 0; end;
-      if nabor == 3 then NaborRun = 1; end;
-      if (GetHeroSkillMastery( hero, HERO_SKILL_RUNELORE) == 1 and array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].level < 4) then
-        TeachHeroSpell(hero, array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].id);
-      end;
-      if (GetHeroSkillMastery( hero, HERO_SKILL_RUNELORE) == 2 and array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].level < 5) then
-        TeachHeroSpell(hero, array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].id);
-      end;
-      if (GetHeroSkillMastery( hero, HERO_SKILL_RUNELORE) > 2 and array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].level < 6) then
-        TeachHeroSpell(hero, array_spells[spells[NaborRun][i].m][spells[NaborRun][i].sp].id);
-      end;
-    end;
-    if spells[nabor][i].m == 5 and spells[nabor][i].sp ~= 0 and GetHeroSkillMastery( hero, HERO_SKILL_DEMONIC_RAGE) > 0 then
-      TeachHeroSpell(hero, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id);
---      if nabor == 0 and HasHeroSkill(HeroMax2, PERK_SCHOLAR) and GetHeroSkillMastery(HeroMax2, HERO_SKILL_DEMONIC_RAGE) > 0 then TeachHeroSpell(HeroMax2, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id); end;
---      if nabor == 1 and HasHeroSkill(HeroMax1, PERK_SCHOLAR) and GetHeroSkillMastery(HeroMax1, HERO_SKILL_DEMONIC_RAGE) > 0 then TeachHeroSpell(HeroMax1, array_spells[spells[nabor][i].m][spells[nabor][i].sp].id); end;
-    end;
   end;
 end;
   
@@ -1582,69 +1472,7 @@ kolUnit2 = { 0, 0, 0, 0, 0, 0, 0}
 
 -- обработчик наступления нового дня
 function newday ()
-  if GetDate (DAY) == 2 then
-    doFile(GetMapDataPath().."day2/day2_scripts.lua");
-  end;
-
-  if GetDate (DAY) == 3 then
-    doFile(GetMapDataPath().."day3/day3_scripts.lua");
-  end;
-
   if GetDate (DAY) == 5 then
-     -- менторство
-     if (HasHeroSkill(HeroMax1, 169)) then ChangeLevel(HeroMax1, 8); if Name(HeroMax1) == "Una" then SpecInga1(); end; end;
-     if (HasHeroSkill(HeroMax2, 169)) then ChangeLevel(HeroMax2, 8); if Name(HeroMax2) == "Una" then SpecInga2(); end; end;
-
-     sleep(2);
-
-     stop(HeroMax1); stop(HeroMax2); stop(HeroMin1); stop(HeroMin2);
-
-     -- фикс бага с грифонами
-     if GetHeroCreatures(HeroMax1, 7) > 0 then kolCreatures = GetHeroCreatures(HeroMax1, 7); RemoveHeroCreatures(HeroMax1, 7, kolCreatures); AddHeroCreatures(HeroMax1, 8, kolCreatures); end;
-     if GetHeroCreatures(HeroMax2, 7) > 0 then kolCreatures = GetHeroCreatures(HeroMax2, 7); RemoveHeroCreatures(HeroMax2, 7, kolCreatures); AddHeroCreatures(HeroMax2, 8, kolCreatures); end;
-
-
-     ------------- АРТЕФАКТЫ ---------------
-
-     -- тюрбан просвещенности
-     if HasArtefact(HeroMax1, 34, 1) then ChangeLevel(HeroMax1, 6); end;
-     if HasArtefact(HeroMax2, 34, 1) then ChangeLevel(HeroMax2, 6); end;
-     
-     -- корона лидерства
-     if HasArtefact(HeroMax1, 88, 1) then CrownLeader(HeroMax1); end;
-     if HasArtefact(HeroMax2, 88, 1) then CrownLeader(HeroMax2); end;
-
-     ------------- ГЕРОИ ---------------
-
-     -- Рутгер
-     if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) == 3 then SubHero(HeroMax1, "Brem3"); HeroMax1 = "Brem3"; sleep(3); end;
-     if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_TRAINING); end;
-
-     if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) == 3 then SubHero(HeroMax2, "Brem4"); HeroMax2 = "Brem4"; sleep(3); end;
-     if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no'); GiveHeroSkill(HeroMax2, SKILL_TRAINING); end;
-
-     -- Илайя
-     if (HeroMax1 == "Shadwyn" or HeroMax1 == "Shadwyn2") and GetHeroSkillMastery(HeroMax1, SKILL_INVOCATION) == 3 then SubHero(HeroMax1, "Shadwyn3"); HeroMax1 = "Shadwyn3"; sleep(3); end;
-     if (HeroMax1 == "Shadwyn" or HeroMax1 == "Shadwyn2") and GetHeroSkillMastery(HeroMax1, SKILL_INVOCATION) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_INVOCATION) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_INVOCATION); end;
-
-     if (HeroMax2 == "Shadwyn" or HeroMax2 == "Shadwyn2") and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) == 3 then SubHero(HeroMax2, "Shadwyn4"); HeroMax2 = "Shadwyn4"; sleep(3); end;
-     if (HeroMax2 == "Shadwyn" or HeroMax2 == "Shadwyn2") and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) < 3 and GetHeroSkillMastery(HeroMax2, SKILL_INVOCATION) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no'); GiveHeroSkill(HeroMax2, SKILL_INVOCATION); end;
-
-     -- Киган
-     if Name(HeroMax1) == "Hero9" then
-     if GetHeroCreatures(HeroMax1, 117) > 0 then AddHeroCreatures(HeroMax1, 117, 6 * GetHeroLevel(HeroMax1)); else AddHeroCreatures(HeroMax1, 173, 6 * GetHeroLevel(HeroMax1)); end; end;
-     if Name(HeroMax2) == "Hero9" then
-     if GetHeroCreatures(HeroMax2, 117) > 0 then AddHeroCreatures(HeroMax2, 117, 6 * GetHeroLevel(HeroMax2)); else AddHeroCreatures(HeroMax2, 173, 6 * GetHeroLevel(HeroMax2)); end; end;
-
-     -- Орландо
-     if Name(HeroMax1) == "Orlando" then
-     if GetHeroCreatures(HeroMax1, 27) >= GetHeroCreatures(HeroMax1, 137) then AddHeroCreatures(HeroMax1, 27, 1 + floor(GetHeroLevel(HeroMax1)/10)); else AddHeroCreatures(HeroMax1, 137, 1 + floor(GetHeroLevel(HeroMax1)/10)); end; end;
-     if Name(HeroMax2) == "Orlando" then
-     if GetHeroCreatures(HeroMax2, 27) >= GetHeroCreatures(HeroMax2, 137) then AddHeroCreatures(HeroMax2, 27, 1 + floor(GetHeroLevel(HeroMax2)/10)); else AddHeroCreatures(HeroMax2, 137, 1 + floor(GetHeroLevel(HeroMax2)/10)); end; end;
-
-
-     TeachSpell (HeroMax1, 0);
-     TeachSpell (HeroMax2, 1);
      Scholar (HeroMax1, 0);
      Scholar (HeroMax2, 1);
 
@@ -2260,20 +2088,6 @@ function InfoPlayer(hero, player, race, mentoring)
 --  print(Info_Hero_Skills);
 --  print(Info_Hero_Perks);
 end;
-
-
------------------------ HERO SPEC -------------------------
-
-function CrownLeader(hero)
-  kol_u[1]=0;kol_u[2]=0;kol_u[3]=0;kol_u[4]=0;kol_u[5]=0;kol_u[6]=0;kol_u[7]=0;
-  kol_u[1], kol_u[2], kol_u[3], kol_u[4], kol_u[5], kol_u[6], kol_u[7] = GetHeroCreaturesTypes(hero);
-  for i = 1, 7 do
-    if kol_u[i] > 0 then
-      AddHeroCreatures(hero, kol_u[i], 1);
-    end;
-  end;
-end;
-
 
 ----------------------------- GLOBAL MODE --------------------------------------
 
