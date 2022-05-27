@@ -961,7 +961,7 @@ function orlandoSpec(heroName)
   if GetHeroCreatures(heroName, CREATURE_DEVIL) >= GetHeroCreatures(heroName, CREATURE_ARCH_DEMON) then
     AddHeroCreatures(heroName, CREATURE_DEVIL, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
   else
-    AddHeroCreatures(heroName, CREATURE_ARCH_DEMON	, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, CREATURE_ARCH_DEMON, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
   end;
 end;
 
@@ -973,11 +973,6 @@ function getSpellHasInPlayerSet(playerId, spellId)
   local spellSetNumber = mod(PLAYERS_GENERATED_SPELLS[playerId].countResetSpells, 2) + 1;
   local spellSet = PLAYERS_GENERATED_SPELLS[playerId].spells[spellSetNumber];
 
-  print'spellId'
-  print(spellId)
-  print'spellSet'
-  print(spellSet)
-  
   for _, spellData in spellSet do
     if spellData.id == spellId then
       return not nil;
@@ -995,9 +990,6 @@ function getRunesHasInPlayerSet(playerId, runeId)
   local runesSetNumber = mod(PLAYERS_GENERATED_SPELLS[playerId].countResetRunes, 2) + 1;
   local runesSet = PLAYERS_GENERATED_SPELLS[playerId].runes[runesSetNumber];
 
-  print'runesSet'
-  print(runesSet)
-  
   for _, runeData in runesSet do
     if runeData.id == runeId then
       return not nil;
@@ -1010,16 +1002,6 @@ end;
 -- Обучение ГГ игрока всем доступным заклинаниям
 function teachMainHeroSpells(playerId)
   print "teachMainHeroSpells"
-  
-  -- Соотношение ручного перечисления школ магии на внутреигровой
-  local MAP_CUSTOM_SKILL_TO_INNER = {
-    [TYPE_MAGICS.LIGHT] = SKILL_LIGHT_MAGIC,
-    [TYPE_MAGICS.DARK] = SKILL_DARK_MAGIC,
-    [TYPE_MAGICS.DESTRUCTIVE] = SKILL_DESTRUCTIVE_MAGIC,
-    [TYPE_MAGICS.SUMMON] = SKILL_SUMMONING_MAGIC,
-    [TYPE_MAGICS.RUNES] = HERO_SKILL_RUNELORE,
-    [TYPE_MAGICS.WARCRIES] = HERO_SKILL_DEMONIC_RAGE,
-  };
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
@@ -1104,10 +1086,86 @@ function teachMainHeroSpells(playerId)
   local bonusSpells = PLAYERS_GENERATED_SPELLS[playerId].bonus_spells;
   
   for _, spellData in bonusSpells do
-    print 'spellData';
-    print (spellData);
-  
     TeachHeroSpell(mainHeroName, spellData.id);
+  end;
+end;
+
+-- Ученый (Дает все заклинания 1-2 уровней, известные оппоненту)
+function perkScholar(playerId)
+  print "perkScholar"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+  
+  local MAGIC_SCHOOL_TABLE = {
+    TYPE_MAGICS.LIGHT,
+    TYPE_MAGICS.DARK,
+    TYPE_MAGICS.DESTRUCTIVE,
+    TYPE_MAGICS.SUMMON,
+  };
+  
+  for _, customSkillId in MAGIC_SCHOOL_TABLE do
+    local skillSpellSet = SPELLS[customSkillId];
+    
+    for _, spellData in skillSpellSet do
+      if spellData.level < 3 and KnowHeroSpell(opponentHeroName, spellData.id) then
+        TeachHeroSpell(mainHeroName, spellData.id);
+      end
+    end;
+  end;
+end;
+
+-- Выдача гному ресурсов в соответствии с его навыками
+function giveRuneResources(playerId)
+  print "giveRuneResources"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+
+  local countLowRes = 7;
+  local countHighRes = 5;
+
+  -- Бранд
+  if dictHeroName == HEROES.BRAND then
+    -- Количество уровней для увеличения ресурсов на 1
+    local BRAND_LEVEL_BY_RUNE = 6;
+    local brandResCount = floor(GetHeroLevel(mainHeroName)/BRAND_LEVEL_BY_RUNE);
+
+    countLowRes = countLowRes + brandResCount;
+    countHighRes = countHighRes + brandResCount;
+  end;
+
+  for _, resId in { WOOD, ORE } do
+    SetPlayerResource(playerId, resId, countLowRes);
+  end;
+  
+  for _, resId in { MERCURY, CRYSTAL, SULFUR, GEM } do
+    SetPlayerResource(playerId, resId, countHighRes);
+  end;
+end;
+
+-- Сбор войск
+function perkRecruitment(playerId)
+  print "perkRecruitment"
+  
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  -- Коэффициент добавления юнитов из города
+  local RECTUIMENT_COEF = 0.1
+  
+  local stash = {};
+  
+  stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(mainHeroName);
+  
+  for _, armyId in stash do
+    for _, dictUnit in UNITS[raceId] do
+      if armyId == dictUnit.id and dictUnit.lvl < 4 then
+        local unitInTown = RESULT_ARMY_INTO_TOWN[playerId][dictUnit.lvl];
+        
+        AddHeroCreatures(mainHeroName, dictUnit.id, floor(unitInTown.count * RECTUIMENT_COEF));
+      end;
+    end;
   end;
 end;
 
@@ -1158,6 +1216,16 @@ function day4_scripts()
     
     teachMainHeroSpells(playerId);
     
+    -- Ученый
+    if HasHeroSkill(mainHeroName, PERK_SCHOLAR) then
+      perkScholar(playerId);
+    end;
+    
+    -- Сбор войск
+    if HasHeroSkill(mainHeroName, PERK_RECRUITMENT) then
+      perkRecruitment(playerId);
+    end;
+    
     -- Киган
     if dictHeroName == HEROES.KIGAN then
       kiganSpec(mainHeroName)
@@ -1181,6 +1249,11 @@ function day4_scripts()
     -- Предлагаем выбрать существ с некромантии
     if raceId == RACES.NECROPOLIS then
       prepareSelectNecromancy(playerId);
+    end;
+    
+    -- Гному даем ресурсы на руны
+    if raceId == RACES.FORTRESS then
+      giveRuneResources(playerId);
     end;
   end;
   

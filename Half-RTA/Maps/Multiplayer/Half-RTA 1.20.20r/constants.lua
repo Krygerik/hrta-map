@@ -686,6 +686,7 @@ HEROES = {
   SHADWYN = 'Shadwyn',                 -- »лай€
   KIGAN = 'Hero9',                     --  иган
   ORLANDO = 'Orlando',                 -- ќрландо
+  BRAND = 'Brand',                     -- Ѕранд
 };
 
 -- —оотношение игроков к подконтрольным им городам
