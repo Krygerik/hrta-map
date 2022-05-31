@@ -748,16 +748,6 @@ function replaceMainHero(playerId, newHeroName)
   refreshMainHeroStats(playerId);
 end;
 
-
-----------------
--- Рутгер
-if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) == 3 then SubHero(HeroMax1, "Brem3"); HeroMax1 = "Brem3"; sleep(3); end;
-if (HeroMax1 == "Brem" or HeroMax1 == "Brem2") and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax1, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax1, 'no'); GiveHeroSkill(HeroMax1, SKILL_TRAINING); end;
-
-if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) == 3 then SubHero(HeroMax2, "Brem4"); HeroMax2 = "Brem4"; sleep(3); end;
-if (HeroMax2 == "Brem" or HeroMax2 == "Brem2") and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) < 3 and GetHeroSkillMastery(HeroMax2, SKILL_TRAINING) > 0 then Trigger( HERO_ADD_SKILL_TRIGGER, HeroMax2, 'no'); GiveHeroSkill(HeroMax2, SKILL_TRAINING); end;
-----------------
-
 -- Замена обычного героя на героя с рташными особенностями
 function replaceHeroOnSpecial(playerId)
   print "replaceHeroOnSpecial"
@@ -1169,36 +1159,377 @@ function perkRecruitment(playerId)
   end;
 end;
 
+-- ВОсполняем ману
+function refreshPlayerMana(playerId)
+  print "refreshPlayerMana"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 1000);
+end;
+
+-- Запуск скриптовых умений героя
+function checkAndRunHeroPerks(playerId)
+  print "checkAndRunHeroPerks"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  -- Дипломатия
+  if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
+    runDiplomacy(mainHeroName);
+  end;
+  
+  -- Менторство
+  if HasHeroSkill(mainHeroName, HERO_SKILL_MENTORING) then
+    skillMentoring(mainHeroName);
+  end;
+  
+  -- Ученый
+  if HasHeroSkill(mainHeroName, PERK_SCHOLAR) then
+    perkScholar(playerId);
+  end;
+  
+  -- Сбор войск
+  if HasHeroSkill(mainHeroName, PERK_RECRUITMENT) then
+    perkRecruitment(playerId);
+  end;
+  
+  -- Сумерки
+  if HasHeroSkill(mainHeroName, NECROMANCER_FEAT_TWILIGHT) then
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 5);
+    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 30);
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -5);
+  end;
+  
+  -- сопротивление
+  if HasHeroSkill(mainHeroName, WIZARD_FEAT_SEAL_OF_PROTECTION) then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, 10);
+  end;
+  
+  -- выносливость
+  if HasHeroSkill(mainHeroName, HERO_SKILL_BODYBUILDING) then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, 5);
+  end;
+  
+  -- мародерство
+  if HasHeroSkill(mainHeroName, HERO_SKILL_SNATCH) then
+    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+    
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_SPEED, -1);
+  end;
+  
+  -- родные земли
+  if HasHeroSkill(mainHeroName, KNIGHT_FEAT_ROAD_HOME) then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_SPEED, 1);
+  end;
+
+  -- сила против магии
+  if HasHeroSkill(mainHeroName, HERO_SKILL_MIGHT_OVER_MAGIC) then
+    if frac(GetHeroStat(mainHeroName, STAT_SPELL_POWER) / 2) == 0.5 then
+      ChangeHeroStat(mainHeroName, STAT_SPELL_POWER, 1);
+    end;
+  end;
+
+  -- лесное коварство
+  if HasHeroSkill(mainHeroName, RANGER_FEAT_CUNNING_OF_THE_WOODS) then
+    local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  
+    UpgradeTownBuilding(townName, TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD);
+  end;
+  
+  -- чувство стихий
+  if HasHeroSkill(mainHeroName, NECROMANCER_FEAT_ABSOLUTE_FEAR) then
+    local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+
+    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS, 1);
+    UpgradeTownBuilding(townName, TOWN_BUILDING_DUNGEON_ALTAR_OF_ELEMENTS);
+  end;
+  
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  local leadershipLevel = GetHeroSkillMastery(mainHeroName, SKILL_LEADERSHIP);
+  
+  -- некролидерство
+  if raceId == RACES.NECROPOLIS and leadershipLevel > 0 then
+    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+    local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+    
+    local opponentLeadershipLevel = GetHeroSkillMastery(opponentHeroName, SKILL_LEADERSHIP);
+    
+    if opponentLeadershipLevel > 0 and leadershipLevel >= opponentLeadershipLevel then
+      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - opponentLeadershipLevel);
+    end;
+    
+    if opponentLeadershipLevel > 0 and leadershipLevel < opponentLeadershipLevel then
+      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - leadershipLevel);
+    end;
+  end;
+  
+  -- управление машинами
+  if GetHeroSkillMastery(mainHeroName, SKILL_WAR_MACHINES) > 0 then
+    GiveHeroWarMachine(mainHeroName, WAR_MACHINE_BALLISTA);
+    GiveHeroWarMachine(mainHeroName, WAR_MACHINE_FIRST_AID_TENT);
+    GiveHeroWarMachine(mainHeroName, WAR_MACHINE_AMMO_CART);
+  end;
+
+  -- ангел-хранитель
+  if HasHeroSkill(mainHeroName, KNIGHT_FEAT_GUARDIAN_ANGEL) then
+    local ANGEL_MAP = {
+      [CREATURE_ANGEL] = CREATURE_GOBLIN_TRAPPER,
+      [CREATURE_SERAPH] = CREATURE_WAR_UNICORN,
+    };
+
+    for angelId, superAngelId in ANGEL_MAP do
+      replaceUnitInHero(mainHeroName, angelId, superAngelId);
+    end;
+  end;
+
+  -- солдатская удача
+  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
+    local MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE = {
+      [CREATURE_SUCCUBUS_SEDUCER] = CREATURE_IMP,
+      [CREATURE_DEVIL] = CREATURE_FRIGHTFUL_NIGHTMARE,
+      [CREATURE_POLTERGEIST] = CREATURE_SKELETON_ARCHER,
+      [CREATURE_DRYAD] = CREATURE_SPRITE,
+      [CREATURE_STONE_DEFENDER] = CREATURE_STOUT_DEFENDER,
+      [CREATURE_SHADOW_MISTRESS] = CREATURE_BLACK_DRAGON,
+      [CREATURE_THANE] = CREATURE_WARLORD,
+      [CREATURE_THUNDER_THANE] = CREATURE_AXE_THROWER,
+      [CREATURE_ANGEL] = CREATURE_ARCHANGEL,
+      [CREATURE_GOBLIN_TRAPPER] = CREATURE_MASTER_GENIE,
+    };
+  
+    for unitId, unitWithLucky in MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE do
+      replaceUnitInHero(mainHeroName, unitId, unitWithLucky);
+    end;
+  end;
+end;
+
+-- Запуск скриптовых специализаций героев
+function checkAndRunHeroSpec(playerId)
+  print "checkAndRunHeroSpec"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  
+  -- Киган
+  if dictHeroName == HEROES.KIGAN then
+    kiganSpec(mainHeroName);
+  end;
+
+  -- Орландо
+  if dictHeroName == HEROES.ORLANDO then
+    orlandoSpec(mainHeroName);
+  end;
+  
+  -- Таланар
+  if dictHeroName == HEROES.NADAUR then
+    local MAP_REPLACE_UNIT = {
+      [45] = 46,
+      [146] = 18,
+      [47] = 48,
+      [147] = 20,
+      [49] = 50,
+      [148] = 22,
+    };
+    
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
+
+  -- Файдаэн
+  if dictHeroName == HEROES.HEAM then
+    local MAP_REPLACE_UNIT = {
+      [47] = 62,
+      [147] = 76,
+      [49] = 72,
+      [148] = 74,
+    };
+    
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
+  
+  -- Эрин
+  if dictHeroName == HEROES.ERUINA then
+    local MAP_REPLACE_UNIT = {
+      [81] = 82,
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
+  
+  -- Соргал
+  if dictHeroName == HEROES.FERIGL then
+    local MAP_REPLACE_UNIT = {
+      [77] = 200 + ceil(0.5 * (GetHeroLevel(mainHeroName) - FREE_LEARNING_LEVEL)),
+      [141] = 210 + ceil(0.5 * (GetHeroLevel(mainHeroName) - FREE_LEARNING_LEVEL)),
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
+  
+  -- Вульфстен
+  if dictHeroName == HEROES.WULFSTAN then
+    local MAP_REPLACE_UNIT = {
+      [98] = 99,
+      [169] = 80,
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
+  
+  -- Грок
+  if dictHeroName == HEROES.GROK then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_SPEED, 1);
+  end;
+
+  -- Марбас
+  if dictHeroName == HEROES.MARDER then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(mainHeroName)));
+  end;
+
+  -- Куджин
+  if dictHeroName == HEROES.KUJIN then
+    local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+
+    UpgradeTownBuilding(townName, TOWN_BUILDING_STRONGHOLD_PILE_OF_OUR_FOES);
+  end;
+end;
+
+-- Запуск фракционных плюшек
+function runRaceAbility(playerId)
+  print "runRaceAbility"
+
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  
+  -- Отправляем на выбор заклятых
+  if raceId == RACES.SYLVAN then
+    prepareForChoiceEnemy(playerId);
+  end;
+
+  -- Отправляем на крафт миников
+  if raceId == RACES.ACADEMY then
+    prepareForCraftMiniArtifacts(playerId);
+  end;
+
+  -- Предлагаем выбрать существ с некромантии
+  if raceId == RACES.NECROPOLIS then
+    prepareSelectNecromancy(playerId);
+  end;
+
+  -- Гному даем ресурсы на руны
+  if raceId == RACES.FORTRESS then
+    giveRuneResources(playerId);
+  end;
+end;
+
+-- Если у героя есть скриптованные арты - активируем их
+function runScriptingArtifacts(playerId)
+  print "runScriptingArtifacts"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  
+  -- Корона Лидерства
+  if HasArtefact(mainHeroName, ARTIFACT_CROWN_OF_LEADER, 1) then
+    crownOfLeader(mainHeroName);
+  end;
+  
+  -- посох преисподней
+  if HasArtefact(mainHeroName, 7, 1) then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_INITIATIVE, -1);
+  end;
+
+  -- воля ургаша
+  if raceId == RACES.INFERNO and HasArtefact(mainHeroName, ARTIFACT_NIGHTMARISH_RING, 1) and HasArtefact(mainHeroName, ARTIFACT_HELM_OF_CHAOS, 1) then
+    local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+    
+    UpgradeTownBuilding(townName, TOWN_BUILDING_INFERNO_INFERNAL_LOOM);
+  end;
+  
+  -- объятия смерти
+  if HasArtefact(mainHeroName, 7, 1) and HasArtefact(mainHeroName, 33, 1) then
+    local MAP_RACE_ON_PRIMARY_STAT = {
+      [RACES.HAVEN] = STAT_ATTACK,
+      [RACES.INFERNO] = STAT_ATTACK,
+      [RACES.NECROPOLIS] = STAT_DEFENCE,
+      [RACES.SYLVAN] = STAT_DEFENCE,
+      [RACES.ACADEMY] = STAT_SPELL_POWER,
+      [RACES.DUNGEON] = STAT_ATTACK,
+      [RACES.FORTRESS] = STAT_DEFENCE,
+      [RACES.STRONGHOLD] = STAT_ATTACK,
+    };
+    local MAP_RACE_ON_SECONDARY_STAT = {
+      [RACES.HAVEN] = STAT_DEFENCE,
+      [RACES.INFERNO] = STAT_KNOWLEDGE,
+      [RACES.NECROPOLIS] = STAT_SPELL_POWER,
+      [RACES.SYLVAN] = STAT_KNOWLEDGE,
+      [RACES.ACADEMY] = STAT_KNOWLEDGE,
+      [RACES.DUNGEON] = STAT_SPELL_POWER,
+      [RACES.FORTRESS] = STAT_SPELL_POWER,
+      [RACES.STRONGHOLD] = STAT_DEFENCE,
+    };
+    
+    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+    local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+    
+    ChangeHeroStat(opponentHeroName, MAP_RACE_ON_PRIMARY_STAT[opponentRaceId], -2);
+    ChangeHeroStat(opponentHeroName, MAP_RACE_ON_SECONDARY_STAT[opponentRaceId], -2);
+  end;
+  
+  -- свиток маны
+  if HasArtefact(mainHeroName, 10, 1) then
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 50);
+    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 25);
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -50);
+  end;
+  
+  -- кольцо грешников
+  if HasArtefact(mainHeroName, 70, 1) then
+    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+
+    local artCount = GetHeroArtifactsCount(mainHeroName, 70, 1);
+    
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -artCount);
+  end;
+  
+  -- Сет гномов
+  local countDwarfSet = GetArtifactSetItemsCount(mainHeroName, 5, 1);
+  
+  if countDwarfSet > 1 then
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, 5 * countDwarfSet);
+    
+    if raceId == RACES.FORTRESS then
+      ChangeHeroStat(mainHeroName, STAT_SPELL_POWER, 4);
+    end;
+  end;
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
 
   -- Если у расы игроков есть действия на 4 день - вызываем их
   for _, playerId in PLAYER_ID_TABLE do
-    local raceId = RESULT_HERO_LIST[playerId].raceId;
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    local dictHeroName = getDictionaryHeroName(mainHeroName);
-    
+
     removeAllHeroMovePoints(playerId);
 
     disableAllOtherBuildings(playerId);
     
     SetPlayerResource(playerId, GOLD, 0);
-    
-    -- Дипломатия
-    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
-      runDiplomacy(mainHeroName);
-    end;
-    
-    -- Менторство
-    if HasHeroSkill(mainHeroName, HERO_SKILL_MENTORING) then
-      skillMentoring(mainHeroName);
-    end;
-    
-    -- Корона Лидерства
-    if HasArtefact(mainHeroName, ARTIFACT_CROWN_OF_LEADER, 1) then
-      crownOfLeader(mainHeroName);
-    end;
 
     disableCustomAbilities(mainHeroName);
     
@@ -1216,51 +1547,21 @@ function day4_scripts()
     
     teachMainHeroSpells(playerId);
     
-    -- Ученый
-    if HasHeroSkill(mainHeroName, PERK_SCHOLAR) then
-      perkScholar(playerId);
-    end;
+    checkAndRunHeroPerks(playerId);
     
-    -- Сбор войск
-    if HasHeroSkill(mainHeroName, PERK_RECRUITMENT) then
-      perkRecruitment(playerId);
-    end;
+    checkAndRunHeroSpec(playerId);
     
-    -- Киган
-    if dictHeroName == HEROES.KIGAN then
-      kiganSpec(mainHeroName)
-    end;
+    runRaceAbility(playerId);
     
-    -- Орландо
-    if dictHeroName == HEROES.ORLANDO then
-      orlandoSpec(mainHeroName)
-    end;
-
-    -- Отправляем на выбор заклятых
-    if raceId == RACES.SYLVAN then
-      prepareForChoiceEnemy(playerId);
-    end;
-    
-    -- Отправляем на крафт миников
-    if raceId == RACES.ACADEMY then
-      prepareForCraftMiniArtifacts(playerId);
-    end;
-    
-    -- Предлагаем выбрать существ с некромантии
-    if raceId == RACES.NECROPOLIS then
-      prepareSelectNecromancy(playerId);
-    end;
-    
-    -- Гному даем ресурсы на руны
-    if raceId == RACES.FORTRESS then
-      giveRuneResources(playerId);
-    end;
+    runScriptingArtifacts(playerId);
   end;
   
   prepareSelectBattlefield();
   
   for _, playerId in PLAYER_ID_TABLE do
     teleportPlayerInToBattle(playerId);
+    
+    refreshPlayerMana(playerId);
   end;
 end;
 

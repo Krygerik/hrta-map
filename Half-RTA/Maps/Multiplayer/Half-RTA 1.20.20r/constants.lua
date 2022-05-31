@@ -687,7 +687,16 @@ HEROES = {
   KIGAN = 'Hero9',                     -- Киган
   ORLANDO = 'Orlando',                 -- Орландо
   BRAND = 'Brand',                     -- Бранд
+  NADAUR = 'Nadaur',                   -- Таланар
+  HEAM = 'Heam',                       -- Файдаэн
+  ERUINA = 'Eruina',                   -- Эрин
+  FERIGL = 'Ferigl',                   -- Соргал
+  WULFSTAN = 'Wulfstan',               -- Вульфстен
+  GROK = 'Grok',                       -- Грок
+  MARDER = 'Marder',                   -- Марбас
+  KUJIN = 'Kujin',                     -- Куджин
 };
+
 
 -- Соотношение игроков к подконтрольным им городам
 MAP_PLAYER_TO_TOWNNAME = {
