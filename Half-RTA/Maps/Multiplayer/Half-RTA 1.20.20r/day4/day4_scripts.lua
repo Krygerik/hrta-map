@@ -373,6 +373,8 @@ function createPortalToBattleField(playerId)
   local portalPosition = PLAYERS_PORTAL_TO_BATTLE_POSITION[playerId];
 
   SetObjectPosition(portalName, portalPosition.x, portalPosition.y, GROUND);
+  OverrideObjectTooltipNameAndDescription(portalName, PATH_TO_DAY4_MESSAGES.."portal_name.txt", PATH_TO_DAY4_MESSAGES.."portal_description.txt");
+  
   Trigger(OBJECT_TOUCH_TRIGGER, portalName, 'teleportHeroToSelectBattlefield');
   SetObjectEnabled(portalName, nil);
   SetDisabledObjectMode(portalName, 2);
