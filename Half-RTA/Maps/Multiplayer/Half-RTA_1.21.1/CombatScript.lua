@@ -496,11 +496,6 @@ function UnitMoveNonBlocking(unit)
 	end
 
   for side, hero in {[0]=GetHero(0); GetHero(1)} do
-    print 'side';
-    print (side);
-    print 'hero';
-    print (hero);
-
     -- Курак
     if IsNamedHero(hero, 'Quroq') and num_turn[1] == 1 then
       quroq_creatures[side] = extend({}, GetCreatures(side))

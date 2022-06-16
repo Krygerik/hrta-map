@@ -1686,6 +1686,9 @@ function removeHeroSkill(heroName, removeSkillId)
 
   Trigger(HERO_ADD_SKILL_TRIGGER, heroName, 'noop');
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'noop');
+  
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
 
   -- Список текущих навыков героя { skillId, skillLevel }[]
   local heroSkillIdList = {};
@@ -1719,7 +1722,14 @@ function removeHeroSkill(heroName, removeSkillId)
     end;
 
     if maxSkillLevel > 0 then
-      for level = 1, savedSkill.skillLevel do
+      local countReturnLevel = savedSkill.skillLevel;
+
+      -- Фракционный навык не снимается до нуля, поэтому убираем один уровень навыка
+      if MAP_RACE_ON_RACE_SKILL[playerRaceId] == savedSkill.skillId then
+        countReturnLevel = countReturnLevel - 1;
+      end;
+    
+      for level = 1, countReturnLevel do
         GiveHeroSkill(heroName, savedSkill.skillId);
       end;
     end;

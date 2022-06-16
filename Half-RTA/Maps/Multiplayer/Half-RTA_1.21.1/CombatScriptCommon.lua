@@ -175,8 +175,6 @@ end
 
 NewHandler(HANDLERS.START, CommonDefaults)
 
-print ("GetGameVar('execution_thread'): "..GetGameVar('execution_thread')..'<-');
-
 if GetGameVar('execution_thread') == '1' then
 	startThread(InitScripts)
 	NewHandler(HANDLERS.PREPARE, InitRandom)
