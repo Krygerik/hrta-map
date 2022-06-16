@@ -12,7 +12,6 @@ RANDOM_GROUPS_HERO_ICONS = {
           { name = nil, red = { icon = nil, x = 33, y = 90 }, blue = { icon = nil, x = 44, y = 25 } },
           { name = nil, red = { icon = nil, x = 31, y = 89 }, blue = { icon = nil, x = 46, y = 24 } },
           { name = nil, red = { icon = nil, x = 32, y = 89 }, blue = { icon = nil, x = 45, y = 24 } },
-          { name = nil, red = { icon = nil, x = 31, y = 88 }, blue = { icon = nil, x = 46, y = 23 } },
         }
       },
       {
@@ -24,7 +23,6 @@ RANDOM_GROUPS_HERO_ICONS = {
           { name = nil, red = { icon = nil, x = 33, y = 84 }, blue = { icon = nil, x = 44, y = 19 } },
           { name = nil, red = { icon = nil, x = 31, y = 85 }, blue = { icon = nil, x = 46, y = 20 } },
           { name = nil, red = { icon = nil, x = 32, y = 85 }, blue = { icon = nil, x = 45, y = 20 } },
-          { name = nil, red = { icon = nil, x = 31, y = 86 }, blue = { icon = nil, x = 46, y = 21 } },
         }
       },
     },
@@ -41,7 +39,6 @@ RANDOM_GROUPS_HERO_ICONS = {
           { name = nil, red = { icon = nil, x = 37, y = 90 }, blue = { icon = nil, x = 40, y = 25 } },
           { name = nil, red = { icon = nil, x = 39, y = 89 }, blue = { icon = nil, x = 38, y = 24 } },
           { name = nil, red = { icon = nil, x = 38, y = 89 }, blue = { icon = nil, x = 39, y = 24 } },
-          { name = nil, red = { icon = nil, x = 39, y = 88 }, blue = { icon = nil, x = 38, y = 23 } },
         }
       },
       {
@@ -53,7 +50,6 @@ RANDOM_GROUPS_HERO_ICONS = {
           { name = nil, red = { icon = nil, x = 37, y = 84 }, blue = { icon = nil, x = 40, y = 19 } },
           { name = nil, red = { icon = nil, x = 39, y = 85 }, blue = { icon = nil, x = 38, y = 20 } },
           { name = nil, red = { icon = nil, x = 38, y = 85 }, blue = { icon = nil, x = 39, y = 20 } },
-          { name = nil, red = { icon = nil, x = 39, y = 86 }, blue = { icon = nil, x = 38, y = 21 } },
         }
       },
     },
@@ -139,11 +135,13 @@ function generateRandomGroupHero(redRaceId, blueRaceId)
   for playerId = 1, length(RANDOM_GROUPS_HERO_ICONS) do
     local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
 
+    -- ОПА ОП, ГАВНОКОД!
+    -- Я не понимаю, почему и зачем я надумался передавать сюда расы и их потом вычислять. Наркоман
     playerData.raceId = playerId == PLAYER_1 and redRaceId or blueRaceId;
 
     for groupIndex = 1, length(playerData.heroGroups) do
       local group = playerData.heroGroups[groupIndex];
-      local randomHeroIndexList = generateRandomHeroIndexesByRace(playerData.raceId, 6);
+      local randomHeroIndexList = generateRandomHeroIndexesByRace(playerData.raceId, 5);
 
       for randomIndex, heroIndex in randomHeroIndexList do
         local dictionaryHero = HEROES_BY_RACE[playerData.raceId][heroIndex];
@@ -384,6 +382,9 @@ function setRandomHeroFromHeroList(playerId, raceId, heroList)
   RESULT_HERO_LIST[playerId].raceId = raceId;
 
   local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
+  local opponentResultHeroes = RESULT_HERO_LIST[PLAYERS_OPPONENT[playerId]].heroes;
+
+  -- TODO: ЗАПРЕТИТЬ ГЕНЕРИТЬ ГЕРОЕВ, КОТОРЫЕ ЕСТЬ У ОППОНЕНТА
 
   for resultHeroIndex = 1, 2 do
     local randomSelectedHero;

@@ -390,7 +390,13 @@ function teleportHeroToSelectBattlefield(triggerHero)
   SetObjectPosition(triggerHero, position.x, position.y);
   OpenCircleFog(48, 45, GROUND, 15, playerId);
 
-  removeHeroMovePoints(triggerHero);
+  local choisedFieldPlayerId = getSelectedBattlefieldPlayerId();
+
+  if choisedFieldPlayerId == playerId then
+    addHeroMovePoints(triggerHero);
+  else
+    removeHeroMovePoints(triggerHero);
+  end;
 end;
 
 -- ѕолучение количества ресурсов, получаемых дл€ изготовки миниартефактов
@@ -436,6 +442,10 @@ function prepareForCraftMiniArtifacts(playerId)
   for _, recourceId in allRecourcesTable do
     SetPlayerResource(playerId, recourceId, countResources);
   end;
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  addHeroMovePoints(mainHeroName);
   
   createPortalToBattleField(playerId);
 end;

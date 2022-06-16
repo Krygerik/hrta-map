@@ -152,7 +152,6 @@ function setEnemyHeroPosters()
 
   local ENEMY_POSTERS_POSITION = {
     [PLAYER_1] = {
-      { x = 31, y = 85 },
       { x = 31, y = 86 },
       { x = 31, y = 87 },
       { x = 31, y = 88 },
@@ -165,7 +164,6 @@ function setEnemyHeroPosters()
       { x = 46, y = 21 },
       { x = 46, y = 22 },
       { x = 46, y = 23 },
-      { x = 46, y = 24 },
     },
   };
   

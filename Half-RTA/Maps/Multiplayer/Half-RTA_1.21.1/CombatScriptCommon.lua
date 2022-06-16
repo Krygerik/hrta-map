@@ -33,6 +33,8 @@ function InitRandom()
 end
 
 function InitScripts()
+  print "InitScripts"
+
 	doFile(PATH .. 'CombatScript.lua')
 end
 
@@ -172,6 +174,8 @@ end
 ---------------------------------------------------------------------------------------------------
 
 NewHandler(HANDLERS.START, CommonDefaults)
+
+print ("GetGameVar('execution_thread'): "..GetGameVar('execution_thread')..'<-');
 
 if GetGameVar('execution_thread') == '1' then
 	startThread(InitScripts)

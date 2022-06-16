@@ -38,7 +38,6 @@ HERO_2_TURN = 0
 
 
 HEROES_INFO = parse(GetGameVar('heroes_info'))()
---print(HEROES_INFO)
 
 function shuffle(t)
 	local n = getn(t)
@@ -240,6 +239,8 @@ function OnPrepare()
 end
 
 function OnStart()
+  print "OnStart"
+
   consoleCmd('game_writelog 1')
 
   rage_sum_prev = 0
@@ -451,6 +452,7 @@ function HandleHeroesOnStart(hero, side)
 end
 
 function UnitMoveNonBlocking(unit)
+  print "UnitMoveNonBlocking"
 
   if current_turn[unit] then
 		if current_turn[unit] == 2 then
@@ -493,8 +495,11 @@ function UnitMoveNonBlocking(unit)
 		creature_dead[unit] = nil
 	end
 
-
   for side, hero in {[0]=GetHero(0); GetHero(1)} do
+    print 'side';
+    print (side);
+    print 'hero';
+    print (hero);
 
     -- Курак
     if IsNamedHero(hero, 'Quroq') and num_turn[1] == 1 then
@@ -811,6 +816,8 @@ function UnitMoveNonBlocking(unit)
 end
 
 function ReadyUnitThread()
+  print "ReadyUnitThread"
+
 	while 1 do
 		repeat sleep() until combatReadyPerson()
 		local unit = combatReadyPerson()

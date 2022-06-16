@@ -12,16 +12,10 @@ function checkNeedAutoTransferHero()
   end;
 end;
 
--- Запуск предварительного боя, чтобы установить внутрибоевые переменные
--- т.к. боевые скрипты используются для всех боев,
--- установленные переменные позволяют понять,
--- что это бой между игроками и его надо контролировать скриптами
-function runPreBattle()
-  print "runPreBattle"
-  
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name;
-  StartCombat(mainHeroName, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)');
-  
+-- Генерим сид
+function generateSeed()
+  print "generateSeed"
+
   local t = {};
   
 	for i=1,6 do
@@ -79,8 +73,10 @@ end;
 function day5_scripts()
   print "day5_scripts"
 
-  runPreBattle();
   saveHeroesInfoInToBattle();
+  generateSeed();
+  
+  consoleCmd("@SetGameVar('execution_thread', '1')");
   
   local p1MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name;
   local p2MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_2].name;
