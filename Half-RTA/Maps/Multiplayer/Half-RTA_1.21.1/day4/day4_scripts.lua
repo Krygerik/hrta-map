@@ -98,12 +98,21 @@ function runDiplomacy(heroName)
   for _, stashItem in stashArmy do
     if stashItem.id1 ~= nil then
       for gradeCreatureId, altGradeCreatureId in MAP_CREATURES_ON_GRADE do
-        if stashItem.id1 == gradeCreatureId and GetHeroCreatures(heroName, gradeCreatureId) < GetHeroCreatures(heroName, altGradeCreatureId) then
-          stashItem.id2 = altGradeCreatureId;
-        end;
-
-        if stashItem.id1 == altGradeCreatureId then
-          stashItem.id2 = gradeCreatureId;
+        if stashItem.id1 == gradeCreatureId or stashItem.id1 == altGradeCreatureId then
+          if GetHeroCreatures(heroName, gradeCreatureId) == 0 then
+            stashItem.id2 = gradeCreatureId;
+          elseif GetHeroCreatures(heroName, altGradeCreatureId) == 0 then
+            stashItem.id2 = altGradeCreatureId;
+          else
+            -- Чтобы эффект не дублировался
+            if stashItem.id1 == gradeCreatureId then
+              if GetHeroCreatures(heroName, gradeCreatureId) >= GetHeroCreatures(heroName, altGradeCreatureId) then
+                stashItem.id2 = altGradeCreatureId;
+              else
+                stashItem.id2 = gradeCreatureId;
+              end;
+            end;
+          end;
         end;
       end;
     end;
@@ -1188,7 +1197,7 @@ function checkAndRunHeroPerks(playerId)
   
   -- Дипломатия
   if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
-    runDiplomacy(mainHeroName);
+    startThread(runDiplomacy, mainHeroName);
   end;
   
   -- Менторство
@@ -1426,17 +1435,17 @@ function runRaceAbility(playerId)
   
   -- Отправляем на выбор заклятых
   if raceId == RACES.SYLVAN then
-    prepareForChoiceEnemy(playerId);
+    startThread(prepareForChoiceEnemy, playerId);
   end;
 
   -- Отправляем на крафт миников
   if raceId == RACES.ACADEMY then
-    prepareForCraftMiniArtifacts(playerId);
+    startThread(prepareForCraftMiniArtifacts, playerId);
   end;
 
   -- Предлагаем выбрать существ с некромантии
   if raceId == RACES.NECROPOLIS then
-    prepareSelectNecromancy(playerId);
+    startThread(prepareSelectNecromancy, playerId);
   end;
 
   -- Гному даем ресурсы на руны
@@ -1499,7 +1508,7 @@ function runScriptingArtifacts(playerId)
     ChangeHeroStat(opponentHeroName, MAP_RACE_ON_PRIMARY_STAT[opponentRaceId], -2);
     ChangeHeroStat(opponentHeroName, MAP_RACE_ON_SECONDARY_STAT[opponentRaceId], -2);
   end;
-  
+
   -- свиток маны
   if HasArtefact(mainHeroName, 10, 1) then
     ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 50);
@@ -1547,8 +1556,6 @@ function day4_scripts()
     
     downgradeTown(playerId);
 
-    disableAllOtherBuildings(playerId);
-
     transferAllArtsToMainHero(playerId);
 
     transferAllArmyToMain(playerId);
@@ -1556,6 +1563,8 @@ function day4_scripts()
     replaceCommonUnitOnSpecial(playerId);
     
     replaceHeroOnSpecial(playerId);
+    
+    refreshPlayerMana(playerId);
     
     teachMainHeroSpells(playerId);
     
@@ -1572,8 +1581,6 @@ function day4_scripts()
   
   for _, playerId in PLAYER_ID_TABLE do
     teleportPlayerInToBattle(playerId);
-    
-    refreshPlayerMana(playerId);
   end;
 end;
 

@@ -27,14 +27,17 @@ function handleNewDay()
   end;
 
   if GetDate(DAY) == 3 then
+    sleep(5);
     doFile(GetMapDataPath().."day3/day3_scripts.lua");
   end;
   
   if GetDate(DAY) == 4 then
+    sleep(5);
     doFile(GetMapDataPath().."day4/day4_scripts.lua");
   end;
   
   if GetDate(DAY) == 5 then
+    sleep(5);
     doFile(GetMapDataPath().."day5/day5_scripts.lua");
   end;
 end;

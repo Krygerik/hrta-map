@@ -175,6 +175,10 @@ function setEnemyHeroPosters()
       local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
       
       SetObjectPosition(iconName, ENEMY_POSTERS_POSITION[playerId][indexHero].x, ENEMY_POSTERS_POSITION[playerId][indexHero].y, GROUND);
+
+      if playerId == PLAYER_2 then
+        SetObjectRotation(iconName, 180);
+      end;
     end;
   end;
 end;
