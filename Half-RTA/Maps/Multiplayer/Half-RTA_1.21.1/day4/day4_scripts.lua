@@ -397,7 +397,10 @@ function teleportHeroToSelectBattlefield(triggerHero)
   local position = PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId];
 
   SetObjectPosition(triggerHero, position.x, position.y);
-  OpenCircleFog(48, 45, GROUND, 15, playerId);
+  SetObjectOwner(PLAYERS_BOAT[playerId], playerId);
+  SetObjectOwner(PLAYERS_TOWER[playerId], playerId);
+
+  OpenCircleFog(47, 46, GROUND, 15, playerId);
 
   local choisedFieldPlayerId = getSelectedBattlefieldPlayerId();
 
@@ -433,6 +436,7 @@ function prepareForCraftMiniArtifacts(playerId)
   
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
   
   UpgradeTownBuilding(townName, TOWN_BUILDING_ACADEMY_ARCANE_FORGE);
   
@@ -869,54 +873,75 @@ function prepareSelectBattlefield()
   
   -- Если поле выбирает красный игрок, то рокируем их
   if choicePlayerId == PLAYER_1 then
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
-    local playerPosition = PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId];
+    local opponentPlayerId = PLAYERS_OPPONENT[choicePlayerId];
+    local playerPosition = PLAYERS_TELEPORT_TO_BATTLE_POSITION[choicePlayerId];
     local opponentPosition = PLAYERS_TELEPORT_TO_BATTLE_POSITION[opponentPlayerId];
 
     -- Меняем их точки для телепортации
-    PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId] = opponentPosition;
+    PLAYERS_TELEPORT_TO_BATTLE_POSITION[choicePlayerId] = opponentPosition;
     PLAYERS_TELEPORT_TO_BATTLE_POSITION[opponentPlayerId] = playerPosition;
+    
+    -- Меняем их декор
+    PLAYERS_BOAT[choicePlayerId], PLAYERS_BOAT[opponentPlayerId] = PLAYERS_BOAT[opponentPlayerId], PLAYERS_BOAT[choicePlayerId];
+    PLAYERS_TOWER[choicePlayerId], PLAYERS_TOWER[opponentPlayerId] = PLAYERS_TOWER[opponentPlayerId], PLAYERS_TOWER[choicePlayerId];
   end;
   
-  blockBattlefields(choicePlayerId);
+  blockFriendlyBattlefield();
 end;
 
 -- Запрет выбора родных земель
 function blockFriendlyBattlefield()
   print "blockFriendlyBattlefield"
   
-  -- Соотношение расу на регион родной земли
-  local MAP_RACE_ON_NATIVE_REGIONS = {
-    [RACES.HAVEN] = 'land_block_race1',
-    [RACES.INFERNO] = 'land_block_race2',
-    [RACES.NECROPOLIS] = 'land_block_race3',
-    [RACES.SYLVAN] = 'land_block_race1',
-    [RACES.ACADEMY] = 'land_block_race5',
-    [RACES.DUNGEON] = 'land_block_race6',
-    [RACES.FORTRESS] = 'land_block_race7',
-    [RACES.STRONGHOLD] = 'land_block_race8',
-  };
+  local choisePlayerId = getSelectedBattlefieldPlayerId();
+  local choisePlayerRaceId = RESULT_HERO_LIST[choisePlayerId].raceId;
+  local choiseHeroName = PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name;
+  local choiseDictHeroName = getDictionaryHeroName(choiseHeroName);
   
+  -- Блокируем родные поляны с маленькими препятствиями
   for _, playerId in PLAYER_ID_TABLE do
     local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
     
-    SetRegionBlocked(MAP_RACE_ON_NATIVE_REGIONS[playerRaceId], not nil);
+    -- Т.к. через их поля надо проходить, блокировать их низя :(
+    if playerRaceId ~= RACES.STRONGHOLD and playerRaceId ~= RACES.ACADEMY then
+      SetRegionBlocked(MAP_RACE_ON_NATIVE_REGIONS[playerRaceId], not nil);
+    end;
   end;
-end;
-
--- Блокировки полей для выбора
-function blockBattlefields(choisePlayerId)
-  print "blockBattlefields"
   
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name;
-  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  -- Придурку-Нибросу разрешаем посещать его родную поляну
+  if choiseDictHeroName == HEROES.JAZAZ then
+    SetRegionBlocked(MAP_RACE_ON_NATIVE_REGIONS[RACES.INFERNO], nil);
+  end;
   
-  -- Случай, когда доступны все поля для выбора
-  if dictHeroName == HEROES.JAZAZ or HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
-    return nil;
+  local opponentPlayerId = PLAYERS_OPPONENT[choisePlayerId];
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+  
+  -- При отсутствии "Нахождения пути" или наличии его у обоих игроков, выбрать поляну с большими препятствиями невозможно
+  if (
+    HasHeroSkill(choiseHeroName, PERK_PATHFINDING) == nil
+    or (HasHeroSkill(choiseHeroName, PERK_PATHFINDING) and HasHeroSkill(opponentHeroName, PERK_PATHFINDING))
+  ) then
+    for _, region in MAP_RACE_ON_ADDITIONAL_REGIONS do
+      SetRegionBlocked(region, not nil);
+    end;
+    
+    -- Каменные залы
+    SetRegionBlocked('land_block0', not nil);
   end;
 
-  blockFriendlyBattlefield();
+  -- Если у игрока есть "Нахождение пути", блочим родные земельки с большими препятствиями
+  -- Также разрешаем выбрать родные земли с маленькими препятствиями
+  if HasHeroSkill(choiseHeroName, PERK_PATHFINDING) and HasHeroSkill(opponentHeroName, PERK_PATHFINDING) == nil then
+    SetRegionBlocked(MAP_RACE_ON_NATIVE_REGIONS[choisePlayerRaceId], nil);
+    
+    for _, playerId in PLAYER_ID_TABLE do
+      local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
+
+      if playerRaceId ~= RACES.STRONGHOLD and playerRaceId ~= RACES.ACADEMY then
+        SetRegionBlocked(MAP_RACE_ON_ADDITIONAL_REGIONS[playerRaceId], not nil);
+      end;
+    end;
+  end;
 end;
 
 -- Менторство
