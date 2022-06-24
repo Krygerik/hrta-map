@@ -37,10 +37,8 @@ MAP_LEVEL_BY_PRICE = {
   [22] = 10000,
   [23] = 10500,
   [24] = 11000,
+  [25] = 11500,
 };
-
--- ћаксимальный левел, доступный дл€ прокачки
-MAXIMUM_AVAILABLE_LEVEL = 24;
 
 --  оличества уровней, предоставл€емых игроку дл€ обучени€ бесплатно
 FREE_LEARNING_LEVEL = 18;
@@ -591,4 +589,10 @@ MAP_RACE_ON_RACE_SKILL = {
   [RACES.DUNGEON] = SKILL_INVOCATION,
   [RACES.FORTRESS] = HERO_SKILL_RUNELORE,
   [RACES.STRONGHOLD] = HERO_SKILL_DEMONIC_RAGE,
+};
+
+-- —оотношение разрешенных к покупке уровней
+PLAYERS_ALLOW_BUYING_LEVEL = {
+  [PLAYER_1] = 6,
+  [PLAYER_2] = 6,
 };

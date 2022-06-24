@@ -252,11 +252,11 @@ function getPriceBuySkill(playerId)
   
   -- на старте прокачки
   if playerMainHeroName == nil then
-    return 8000;
+    return 14000;
   end;
   
   -- если герой уже прокачан
-  return 5000;
+  return 12000;
 end;
 
 -- Возвращает статус, что герой уже имеет максимум навыков
@@ -339,8 +339,23 @@ function addHeroOfferSkill(heroName, skillIdStr, priceStr)
 
   local skillId = skillIdStr + 0;
   local price = priceStr + 0;
+  local COUNT_LEVEL_BY_SKILL_OFFER = 1;
   
   local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
+  local heroLevel = GetHeroLevel(heroName);
+  
+  if heroLevel == 1 then
+    PLAYERS_MAIN_HERO_PROPS[playerId].name = heroName;
+    setControlStatsTriggerOnHero(playerId);
+  end;
+
+  local needExp = TOTAL_EXPERIENCE_BY_LEVEL[heroLevel + COUNT_LEVEL_BY_SKILL_OFFER] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
+  WarpHeroExp(heroName, GetHeroStat(heroName, STAT_EXPERIENCE) + needExp);
+
+  -- Генерируем случайный стат за левел
+  local randomGenerateStatId = getRandomStatByRace(playerRaceId);
+  changeMainHeroMainStat(playerId, randomGenerateStatId);
 
   GiveHeroSkill(heroName, skillIdStr);
   Trigger(OBJECT_TOUCH_TRIGGER, BUY_SKILL_OBJECTS_NAME[playerId], 'noop');
@@ -390,7 +405,10 @@ function questionLearning(triggerHero)
   local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
   -- Предложение начать бесплатное обучение
-  if playerMainHeroName == nil then
+  if (
+    playerMainHeroName == nil
+    or (playerMainHeroName ~= nil and GetHeroLevel(playerMainHeroName) < HALF_FREE_LEARNING_LEVEL)
+  ) then
     QuestionBoxForPlayers(
       playerId,
       question,
@@ -404,7 +422,7 @@ function questionLearning(triggerHero)
   local playerMainHeroLvl = GetHeroLevel(playerMainHeroName);
 
   -- Предложение продолжить бесплатное обучение
-  if playerMainHeroLvl == HALF_FREE_LEARNING_LEVEL then
+  if playerMainHeroLvl >= HALF_FREE_LEARNING_LEVEL and playerMainHeroLvl < FREE_LEARNING_LEVEL then
     QuestionBoxForPlayers(
       playerId,
       PATH_TO_START_LEARNING_MESSAGES..'question_continue_learning.txt',
@@ -416,7 +434,7 @@ function questionLearning(triggerHero)
   end;
   
   -- Если достигнут максимум в прокачке
-  if playerMainHeroLvl >= MAXIMUM_AVAILABLE_LEVEL then
+  if PLAYERS_ALLOW_BUYING_LEVEL[playerId] == 0 then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES..'hero_already_has_the_maximum_level.txt');
 
     return nil;
@@ -708,39 +726,46 @@ function learning(strPlayerId, heroName, stage)
   print "learning"
 
   local playerId = strPlayerId + 0;
+  local heroLevel = GetHeroLevel(heroName);
 
   -- Начало бесплатной прокачки
   if stage == '1' then
-     PLAYERS_MAIN_HERO_PROPS[playerId].name = heroName;
-     setControlStatsTriggerOnHero(playerId);
-     
-     -- Если опп заюзал разведку - отчитываемся о начале прокачки
-     local enemyPlayerId = PLAYERS_OPPONENT[playerId];
-     
-     if PLAYER_SCOUTING_WAITING_STATUS[enemyPlayerId] ~= nil then
-       MessageBoxForPlayers(enemyPlayerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_start_learning.txt" );
-       
-       scouting(enemyPlayerId);
-     end;
+    if heroLevel == 1 then
+      PLAYERS_MAIN_HERO_PROPS[playerId].name = heroName;
+      setControlStatsTriggerOnHero(playerId);
+    end;
 
-     startThread(infitityMoveTread, heroName);
-     
-     checkAndRunHeroSpec(heroName);
-     
-     startLogisticCompensation(heroName);
-     
-     -- Навигация
-     if HasHeroSkill(heroName, PERK_NAVIGATION) then
-       setNavigationTriggers(heroName);
-     end;
+    -- Если опп заюзал разведку - отчитываемся о начале прокачки
+    local enemyPlayerId = PLAYERS_OPPONENT[playerId];
 
-     ChangeHeroStat(heroName, STAT_EXPERIENCE, TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]);
+    if PLAYER_SCOUTING_WAITING_STATUS[enemyPlayerId] ~= nil then
+      MessageBoxForPlayers(enemyPlayerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_start_learning.txt" );
+
+      scouting(enemyPlayerId);
+    end;
+
+    startThread(infitityMoveTread, heroName);
+
+    checkAndRunHeroSpec(heroName);
+
+    startLogisticCompensation(heroName);
+
+    -- Навигация
+    if HasHeroSkill(heroName, PERK_NAVIGATION) then
+      setNavigationTriggers(heroName);
+    end;
+
+    local needExperience = heroLevel == 1
+      and TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]
+      or TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
+
+    ChangeHeroStat(heroName, STAT_EXPERIENCE, needExperience);
   end;
   
   -- Продолжение бесплатной прокачки
   if stage == '2' then
     local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[FREE_LEARNING_LEVEL] - TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL];
+    local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
     
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
   end;
@@ -751,8 +776,12 @@ function learning(strPlayerId, heroName, stage)
     local playerMainHeroLevel = GetHeroLevel(playerMainHeroName);
     local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[playerMainHeroLevel + 1] - TOTAL_EXPERIENCE_BY_LEVEL[playerMainHeroLevel];
     
+    PLAYERS_ALLOW_BUYING_LEVEL[playerId] = PLAYERS_ALLOW_BUYING_LEVEL[playerId] - 1;
+    
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
     
+    -- TODO: Для Винраэля учитывать скидку на этапе стоимости,
+    -- чтобы можно было покупать уровень, если денег хватит только со скидкой
     local needGold = MAP_LEVEL_BY_PRICE[playerMainHeroLevel + 1];
 
     SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - needGold);
