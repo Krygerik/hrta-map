@@ -339,23 +339,8 @@ function teachMainHeroSpells(playerId)
     end;
   end;
 
-  local dictHeroName = getDictionaryHeroName(mainHeroName);
-
-  -- TODO: Чет инга не изучает свои рунки
-  -- Отдаем Инге ее рунки
-  if dictHeroName == HEROES.UNA then
-    local ingaRunes = PLAYERS_GENERATED_SPELLS[playerId].ingaRunes;
-
-    for _, runeId in ingaRunes do
-      TeachHeroSpell(mainHeroName, runeId);
-    end;
-  end;
-
   -- Заклы как стартовый бонус
   local bonusSpells = PLAYERS_GENERATED_SPELLS[playerId].bonus_spells;
-
-  print "bonusSpells"
-  print (bonusSpells)
 
   for _, spellData in bonusSpells do
     TeachHeroSpell(mainHeroName, spellData.id);
@@ -447,7 +432,7 @@ function getOtherRandomRaceId()
     end;
   end;
 
-  local randomIndex = random(length(resultRaceIdTable)) + 1;
+  local randomIndex = random(length(resultRaceIdTable));
 
   return resultRaceIdTable[randomIndex];
 end;
@@ -470,14 +455,17 @@ function checkAndMoveHeroFromFrendlyField()
   local choisePlayerId = getSelectedBattlefieldPlayerId();
   local choiseHeroName = PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name;
   local choisePlayerRaceId = RESULT_HERO_LIST[choisePlayerId].raceId;
-
+  
+  local opponentPlayerId = PLAYERS_OPPONENT[choisePlayerId];
+  local opponentPlayerRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+  
   -- С нахождением пути можно безобразничать как угодно
   if HasHeroSkill(choiseHeroName, PERK_PATHFINDING) then
     return nil;
   end;
 
-  for raceId, raceRegion in MAP_RACE_ON_NATIVE_REGIONS do
-    if IsObjectInRegion(choiseHeroName, raceRegion) and choisePlayerRaceId == raceId then
+  for regionRaceId, raceRegion in MAP_RACE_ON_NATIVE_REGIONS do
+    if IsObjectInRegion(choiseHeroName, raceRegion) and (regionRaceId == choisePlayerRaceId or regionRaceId == opponentPlayerRaceId) then
       local randomRaceId = getOtherRandomRaceId();
       local raceFieldPosition = RACE_ON_FRENDLY_FIELD_POSITION[randomRaceId];
 
@@ -712,12 +700,78 @@ function orlandoSpec(heroName)
   end;
 end;
 
+-- Специализация Инги
+function specInga(heroName)
+  print "specInga"
+
+  -- За сколько уровней ИНГА учит руну
+  local LVL_FOR_TEACH_RUNE = 7;
+
+  local playerId = GetObjectOwner(heroName);
+  local ingaLevel = GetHeroLevel(heroName);
+
+  local countIngaRune = floor(ingaLevel / LVL_FOR_TEACH_RUNE);
+  local playerRuneSet = getCurrentPlayerRuneSet(playerId);
+
+  if countIngaRune > 0 then
+    local allowRuneLevel = MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS[GetHeroSkillMastery(heroName, HERO_SKILL_RUNELORE)]
+    local canTeachRunesTable = {};
+
+    -- Заполняем список возможных для изучения рун
+    for _, runeData in SPELLS[TYPE_MAGICS.RUNES] do
+      if allowRuneLevel >= runeData.level then
+        local heroKnowThisRune = nil;
+
+        for _, heroRuneData in playerRuneSet do
+          if heroRuneData.id == runeData.id then
+            heroKnowThisRune = not nil;
+          end;
+        end;
+
+        if not heroKnowThisRune then
+          canTeachRunesTable[length(canTeachRunesTable) + 1] = runeData.id
+        end;
+      end
+    end;
+
+    -- Формируем итоговый список рун для изучения
+    local teachRuneTable = {};
+
+    for indexTeachRune = 1, countIngaRune do
+      local isAddedRune;
+      local randomIndex;
+
+      repeat
+        isAddedRune = nil;
+        randomIndex = random(length(canTeachRunesTable)) + 1;
+
+        for _, addedRune in teachRuneTable do
+          if addedRune == canTeachRunesTable[randomIndex] then
+            isAddedRune = not nil;
+          end;
+        end;
+      until not isAddedRune
+
+      teachRuneTable[length(teachRuneTable) + 1] = canTeachRunesTable[randomIndex];
+    end;
+
+    -- Обучаем героя новым рунам
+    for _, newRuneId in teachRuneTable do
+      TeachHeroSpell(heroName, newRuneId);
+    end;
+  end;
+end;
+
 -- Запуск скриптовых специализаций героев
 function runHeroSpecialization(playerId)
   print "runHeroSpecialization"
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local dictHeroName = getDictionaryHeroName(mainHeroName);
+
+  if dictHeroName == HEROES.UNA then
+    specInga(mainHeroName);
+  end;
 
   -- Киган
   if dictHeroName == HEROES.KIGAN then
@@ -922,6 +976,8 @@ function runBattle()
   consoleCmd("@SetGameVar('execution_thread', '1')");
 
   checkAndMoveHeroFromFrendlyField();
+  
+  sleep(5);
 
   local p1MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name;
   local p2MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_2].name;
@@ -954,7 +1010,7 @@ function day6_scripts()
     
     checkAndRunHeroPerks(playerId);
 
-    checkAndRunHeroSpec(playerId);
+    runHeroSpecialization(playerId);
 
     runScriptingArtifacts(playerId);
   end;

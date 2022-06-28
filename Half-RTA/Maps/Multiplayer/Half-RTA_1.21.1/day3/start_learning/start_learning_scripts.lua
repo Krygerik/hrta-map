@@ -498,78 +498,6 @@ function specEllainaTread(heroName)
   end;
 end;
 
--- Отслеживание спецы Инги
-function specIngaTread(heroName)
-  print "specIngaTread"
-
-  local playerId = GetObjectOwner(heroName);
-
-  while GetDate(DAY) < 6 do
-    local ingaLevel = GetHeroLevel(heroName);
-    local countFreeRune = ingaLevel / LVL_FOR_TEACH_RUNE - mod(ingaLevel, LVL_FOR_TEACH_RUNE);
-    local countNeedTeachRune = countFreeRune - length(PLAYERS_GENERATED_SPELLS[playerId].ingaRunes);
-
-    if countNeedTeachRune > 0 then
-      local allowRuneLevel = MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS[GetHeroSkillMastery(heroName, HERO_SKILL_RUNELORE)]
-      local canTeachRunesTable = {};
-
-      -- Заполняем список возможных для изучения рун
-      for _, runeData in SPELLS[TYPE_MAGICS.RUNES] do
-        if allowRuneLevel >= runeData.level then
-          local heroKnowThisRune = nil;
-
-          for _, heroRuneId in PLAYERS_GENERATED_SPELLS[playerId].ingaRunes do
-            if heroRuneId == runeData.id then
-              heroKnowThisRune = 1;
-            end;
-          end;
-
-          for _, heroRuneId in PLAYERS_GENERATED_SPELLS[playerId].runes do
-            if heroRuneId == runeData.id then
-              heroKnowThisRune = 1;
-            end;
-          end;
-
-          if not heroKnowThisRune then
-            canTeachRunesTable[length(canTeachRunesTable) + 1] = runeData.id
-          end;
-        end
-      end;
-
-      -- Формируем итоговый список рун для изучения
-      local teachRuneTable = {};
-
-      for indexTeachRune = 1, countNeedTeachRune do
-        local isAddedRune;
-        local randomIndex;
-
-        repeat
-          isAddedRune = nil;
-          randomIndex = random(length(canTeachRunesTable)) + 1;
-
-          for _, addedRune in teachRuneTable do
-            if addedRune == canTeachRunesTable[randomIndex] then
-              isAddedRune = not nil;
-            end;
-          end;
-        until not isAddedRune
-
-        teachRuneTable[length(teachRuneTable) + 1] = canTeachRunesTable[randomIndex];
-      end;
-
-      -- Обучаем героя новым рунам
-      for _, newRuneId in teachRuneTable do
-        local ingaRunes = PLAYERS_GENERATED_SPELLS[playerId].ingaRunes;
-
-        ingaRunes[length(ingaRunes)] = newRuneId;
-        TeachHeroSpell(heroName, newRuneId);
-      end;
-    end;
-
-    sleep(10);
-  end;
-end;
-
 -- Выдача игроку дополнительного замка с дополнительными существами
 function givePlayerSecondTown(playerId)
   print "givePlayerSecondTown"
@@ -674,10 +602,6 @@ function checkAndRunHeroSpec(heroName)
   -- Если скриптовая спеца - запускаем ее
   if dictHeroName == HEROES.NATHANIEL then
     startThread(specEllainaTread, heroName);
-  end;
-
-  if dictHeroName == HEROES.UNA then
-    startThread(specIngaTread, heroName);
   end;
 
   if dictHeroName == HEROES.NIKOLAS then

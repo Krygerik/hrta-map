@@ -719,7 +719,6 @@ PLAYERS_GENERATED_SPELLS = {
       {},
       {},
     },
-    ingaRunes = {},
   },
   [PLAYER_2] = {
     countResetSpells = 0,
@@ -733,7 +732,6 @@ PLAYERS_GENERATED_SPELLS = {
       {},
       {},
     },
-    ingaRunes = {},
   },
 };
 
