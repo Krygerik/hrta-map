@@ -1,3 +1,9 @@
+
+PATH_TO_CHOISE_OF_HEROES = PATH_TO_DAY1_MODULE.."choice_of_heroes/";
+
+doFile(PATH_TO_CHOISE_OF_HEROES.."common.lua");
+sleep(1);
+
 -- Структура, описывающая группы, состоящих из 6 случайных героев выбранных ранее рас
 RANDOM_GROUPS_HERO_ICONS = {
   [PLAYER_1] = {
@@ -373,58 +379,6 @@ function finishGroupCherk()
     -- Выбор 2 случайных героев из переданного списка
     setRandomHeroFromHeroList(playerId, playerData.raceId, selectedHeroes);
   end;
-end;
-
--- Выбор случайных 2 героев из переданного списка и 1 рандомным
-function setRandomHeroFromHeroList(playerId, raceId, heroList)
-  print "setRandomHeroFromHeroList"
-
-  RESULT_HERO_LIST[playerId].raceId = raceId;
-
-  local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
-  local opponentResultHeroes = RESULT_HERO_LIST[PLAYERS_OPPONENT[playerId]].heroes;
-
-  -- TODO: ЗАПРЕТИТЬ ГЕНЕРИТЬ ГЕРОЕВ, КОТОРЫЕ ЕСТЬ У ОППОНЕНТА
-
-  for resultHeroIndex = 1, 2 do
-    local randomSelectedHero;
-    local countEqualHeroNames = 0;
-
-    -- Повторять, пока не сгенерируем индекс героя, которого не выбрали
-    repeat
-      local randomIndex = random(length(heroList)) + 1;
-      randomSelectedHero = heroList[randomIndex];
-      countEqualHeroNames = 0;
-
-      for heroIndex, heroName in resultHeroes do
-        if heroName == randomSelectedHero then
-          countEqualHeroNames = countEqualHeroNames + 1;
-        end;
-      end;
-    until countEqualHeroNames == 0;
-
-    resultHeroes[resultHeroIndex] = randomSelectedHero;
-  end;
-
-  -- Заполняем список еще одним случайным героем этой расы
-  local allHeroesByRace = HEROES_BY_RACE[raceId];
-  local randomHero;
-  local countEqualHeroNames = 0;
-
-  -- Повторяем, пока не зарандомим не выбранного героя
-  repeat
-    local randomIndex = random(length(allHeroesByRace)) + 1;
-    randomHero = allHeroesByRace[randomIndex];
-    countEqualHeroNames = 0;
-
-    for i, resultHero in resultHeroes do
-      if resultHero == randomHero.name then
-        countEqualHeroNames = countEqualHeroNames + 1;
-      end;
-    end;
-  until countEqualHeroNames == 0;
-
-  resultHeroes[3] = randomHero.name;
 end;
 
 cherkGroupHeroes();

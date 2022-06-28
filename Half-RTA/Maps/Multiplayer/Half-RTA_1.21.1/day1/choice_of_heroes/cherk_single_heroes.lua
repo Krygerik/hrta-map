@@ -1,3 +1,9 @@
+
+PATH_TO_CHOISE_OF_HEROES = PATH_TO_DAY1_MODULE.."choice_of_heroes/";
+
+doFile(PATH_TO_CHOISE_OF_HEROES.."common.lua");
+sleep(1);
+
 -- —писок случайных героев дл€ выбранных рас
 randomHeroList = {
   [PLAYER_1] = {
@@ -417,55 +423,6 @@ function setResultHeroes()
     -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
     setRandomHeroFromHeroList(playerId, heroList[1].raceId, selectedHero);
   end;
-end;
-
--- ¬ыбор случайных 2 героев из переданного списка и 1 рандомным
-function setRandomHeroFromHeroList(playerId, raceId, heroList)
-  print "setRandomHeroFromHeroList"
-
-  RESULT_HERO_LIST[playerId].raceId = raceId;
-
-  local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
-
-  for resultHeroIndex = 1, 2 do
-    local randomSelectedHero;
-    local countEqualHeroNames = 0;
-
-    -- ѕовтор€ть, пока не сгенерируем индекс геро€, которого не выбрали
-    repeat
-      local randomIndex = random(length(heroList)) + 1;
-      randomSelectedHero = heroList[randomIndex];
-      countEqualHeroNames = 0;
-
-      for heroIndex, heroName in resultHeroes do
-        if heroName == randomSelectedHero then
-          countEqualHeroNames = countEqualHeroNames + 1;
-        end;
-      end;
-    until countEqualHeroNames == 0;
-
-    resultHeroes[resultHeroIndex] = randomSelectedHero;
-  end;
-
-  -- «аполн€ем список еще одним случайным героем этой расы
-  local allHeroesByRace = HEROES_BY_RACE[raceId];
-  local randomHero;
-  local countEqualHeroNames = 0;
-
-  -- ѕовтор€ем, пока не зарандомим не выбранного геро€
-  repeat
-    local randomIndex = random(length(allHeroesByRace)) + 1;
-    randomHero = allHeroesByRace[randomIndex];
-    countEqualHeroNames = 0;
-
-    for i, resultHero in resultHeroes do
-      if resultHero == randomHero.name then
-        countEqualHeroNames = countEqualHeroNames + 1;
-      end;
-    end;
-  until countEqualHeroNames == 0;
-
-  resultHeroes[3] = randomHero.name;
 end;
 
 cherkSingleHeroes();

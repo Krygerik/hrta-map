@@ -40,6 +40,11 @@ function handleNewDay()
     sleep(5);
     doFile(GetMapDataPath().."day5/day5_scripts.lua");
   end;
+  
+  if GetDate(DAY) == 6 then
+    sleep(5);
+    doFile(GetMapDataPath().."day6/day6_scripts.lua");
+  end;
 end;
 
 -- Корневые триггеры
