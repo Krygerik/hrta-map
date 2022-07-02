@@ -233,6 +233,7 @@ function teleportHeroToSelectBattlefield(triggerHero)
   SetObjectOwner(PLAYERS_BOAT[playerId], playerId);
   SetObjectOwner(PLAYERS_TOWER[playerId], playerId);
 
+  MoveCameraForPlayers(playerId, position.x, position.y, GROUND, 50, 1.57, 0, 0, 0, 1);
   OpenCircleFog(47, 46, GROUND, 16, playerId);
 
   local choisedFieldPlayerId = getSelectedBattlefieldPlayerId();

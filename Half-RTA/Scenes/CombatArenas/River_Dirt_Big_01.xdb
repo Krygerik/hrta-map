@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AdventureFlybyScene>
-	<Scenery href="/Maps/CombatArenas/Subterra_Dwarven_01/map.xdb#xpointer(/AdvMapDesc)"/>
+<AdventureFlybyScene ObjectRecordID="1000069">
+	<Scenery href="/Maps/CombatArenas/River_Dirt_Big_01/River_Dirt_Big_01.xdb#xpointer(/AdvMapDesc)"/>
 	<cameraFlyupRole>
 		<Model/>
 		<AnimSet/>
@@ -13,16 +13,16 @@
 	</skyRole>
 	<MountPoint>
 		<Pos>
-			<x>41</x>
-			<y>54</y>
+			<x>32</x>
+			<y>37</y>
 		</Pos>
 		<Rot>0</Rot>
 	</MountPoint>
 	<AdditionalHeight>0</AdditionalHeight>
 	<Music/>
-	<AmbientSoundSet href="/Sounds/_(Ambient)/TerrainAmbients/DwarfDungeon.xdb#xpointer(/AmbientSoundSet)"/>
+	<AmbientSoundSet/>
 	<TextFormatFileRef href=""/>
-	<ObstaclesGroup href="subterra_dwarven.(ArenaObstaclesGroup).xdb#xpointer(/ArenaObstaclesGroup)"/>
+	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/DirtArena/DirtObstaclesBig.xdb#xpointer(/ArenaObstaclesGroup)"/>
 	<CamerasSet/>
 	<MeleeAttackPoints>
 		<Use>false</Use>

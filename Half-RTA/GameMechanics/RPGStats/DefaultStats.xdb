@@ -246,7 +246,7 @@
 		</AstrologerCallWeekCost>
 		<SacrificialAltar_ArtifactCostOfGoldToExpCoef>0.5</SacrificialAltar_ArtifactCostOfGoldToExpCoef>
 		<SacrificialAltar_CreatureHitsToExpCoef>3</SacrificialAltar_CreatureHitsToExpCoef>
-		<Marketplace_ArtifactSellCostOfGoldCoef>0.5</Marketplace_ArtifactSellCostOfGoldCoef>
+		<Marketplace_ArtifactSellCostOfGoldCoef>0.7</Marketplace_ArtifactSellCostOfGoldCoef>
 	</adventure>
 	<combat>
 		<DamageIncrease>0.05</DamageIncrease>
@@ -747,13 +747,13 @@
 									<Spells/>
 									<Abilities/>
 								</Item>
-                                                                <Item>
+								<Item>
 									<Type>DEMON_RAGE_BONUS_SPELL</Type>
 									<IntParam>0</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells>
 										<Item>SPELL_DEFLECT_ARROWS</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus1>
@@ -772,14 +772,14 @@
 									<Spells/>
 									<Abilities/>
 								</Item>
-                                                                <Item>
+								<Item>
 									<Type>DEMON_RAGE_BONUS_SPELL</Type>
 									<IntParam>0</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells>
 										<Item>SPELL_DEFLECT_ARROWS</Item>
 										<Item>SPELL_TELEPORT</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus2>
@@ -791,7 +791,7 @@
 									<Spells/>
 									<Abilities/>
 								</Item>
-                                                                <Item>
+								<Item>
 									<Type>DEMON_RAGE_BONUS_SPELL</Type>
 									<IntParam>0</IntParam>
 									<FloatParam>0</FloatParam>
@@ -799,7 +799,7 @@
 										<Item>SPELL_DEFLECT_ARROWS</Item>
 										<Item>SPELL_TELEPORT</Item>
 										<Item>SPELL_MASS_DISRUPTING_RAY</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus3>
@@ -829,7 +829,7 @@
 										<Item>SPELL_LAND_MINE</Item>
 										<Item>SPELL_MAGIC_ARROW</Item>
 										<Item>SPELL_STONE_SPIKES</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus1>
@@ -871,7 +871,7 @@
 										<Item>SPELL_STONE_SPIKES</Item>
 										<Item>SPELL_LIGHTNING_BOLT</Item>
 										<Item>SPELL_ICE_BOLT</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus2>
@@ -916,7 +916,7 @@
 										<Item>SPELL_FIREBALL</Item>
 										<Item>SPELL_FROST_RING</Item>
 										<Item>SPELL_FIREWALL</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus3>
@@ -1014,7 +1014,7 @@
 										<Item>SPELL_LAND_MINE</Item>
 										<Item>SPELL_MAGIC_ARROW</Item>
 										<Item>SPELL_STONE_SPIKES</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus1>
@@ -1048,7 +1048,7 @@
 										<Item>SPELL_STONE_SPIKES</Item>
 										<Item>SPELL_LIGHTNING_BOLT</Item>
 										<Item>SPELL_ICE_BOLT</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus2>
@@ -1091,7 +1091,7 @@
 										<Item>SPELL_FIREBALL</Item>
 										<Item>SPELL_FROST_RING</Item>
 										<Item>SPELL_FIREWALL</Item>
-                                                                        </Spells>
+									</Spells>
 									<Abilities/>
 								</Item>
 							</Bonus3>
@@ -1311,7 +1311,7 @@
 				<Training>
 					<BasicDamageBonus>0</BasicDamageBonus>
 					<AdvancedDamageBonus>0.5</AdvancedDamageBonus>
-					<ExpertDamageBonus>1.0</ExpertDamageBonus>
+					<ExpertDamageBonus>1</ExpertDamageBonus>
 					<ExtraExpertDamageBonus>1.5</ExtraExpertDamageBonus>
 					<TrainingPointsPerWeek>15</TrainingPointsPerWeek>
 					<TrainingPointsPerWeek_Upgraded>30</TrainingPointsPerWeek_Upgraded>
@@ -1325,7 +1325,7 @@
 					</Suserain_CostDiscount>
 				</Training>
 				<Prayer_DefenceBonus>2</Prayer_DefenceBonus>
-				<Prayer_InitiativeBonus>0.10</Prayer_InitiativeBonus>
+				<Prayer_InitiativeBonus>0.1</Prayer_InitiativeBonus>
 				<WhiteKnight_PrayerMultiplier>1.5</WhiteKnight_PrayerMultiplier>
 				<Encourage_ATBIncrease>0.5</Encourage_ATBIncrease>
 				<Retribution_DamageBonusPerMorale>0.05</Retribution_DamageBonusPerMorale>
@@ -1915,7 +1915,7 @@
 				</DeathTread>
 				<SpiritLink_HPForOneMana>75</SpiritLink_HPForOneMana>
 				<DeathScream_MoralePenalty>2</DeathScream_MoralePenalty>
-				<DeathScream_InitiativePenalty>0.10</DeathScream_InitiativePenalty>
+				<DeathScream_InitiativePenalty>0.1</DeathScream_InitiativePenalty>
 				<DarkEissary_DeathScreamMultiplier>1.5</DarkEissary_DeathScreamMultiplier>
 			</Necromancer>
 			<Warlock>
@@ -2152,7 +2152,7 @@
 				<SacredHammer_SpellToCast>SPELL_BLOODLUST</SacredHammer_SpellToCast>
 				<Economist_FineRuneChanceBonusBase>0.5</Economist_FineRuneChanceBonusBase>
 				<Economist_FineRuneChanceBonusPerLevel>0</Economist_FineRuneChanceBonusPerLevel>
-				<FineRuneProbability>0.67</FineRuneProbability>
+				<FineRuneProbability>0</FineRuneProbability>
 				<StrongRuneCostConstant>2</StrongRuneCostConstant>
 				<StrongAndFineRuneCostConstant>2</StrongAndFineRuneCostConstant>
 			</Runemage>

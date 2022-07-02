@@ -165,12 +165,6 @@ function refreshMainHeroStats(playerId)
         changeStatValue = changeStatValue + playerMainHero.learning[learningLevel][statId]
       end;
     end;
-    
-    -- Добавляем костыльно статы с образла при рефреше
-    -- Заброшенные шахты и СА мага были переделаны под астрологию
-    if HasHeroSkill(playerMainHero.name, NECROMANCER_FEAT_HAUNT_MINE) or HasHeroSkill(playerMainHero.name, WIZARD_FEAT_ABSOLUTE_WIZARDY) then
-      changeStatValue = changeStatValue + MAP_WEEK_ON_ASTROLOGY_STATS[GetCurrentMoonWeek()][statId]
-    end;
 
     ChangeHeroStat(playerMainHero.name, statId, changeStatValue);
   end;
@@ -263,6 +257,7 @@ end;
 function getIsHeroHasMaximumCountSkills(heroName)
   print "getIsHeroHasMaximumCountSkills"
   
+  local MAXIMUM_COUNT_HAS_HERO_SKILL = 5;
   local countSkills = 0;
   
   for _, skillId in ALL_NOT_RACES_SKILL_LIST do
@@ -271,7 +266,7 @@ function getIsHeroHasMaximumCountSkills(heroName)
     end;
   end;
   
-  return countSkills == 6;
+  return countSkills == MAXIMUM_COUNT_HAS_HERO_SKILL;
 end;
 
 -- Обработчик взаимодействия с алтарем для покупки базы
@@ -679,17 +674,16 @@ function learning(strPlayerId, heroName, stage)
       setNavigationTriggers(heroName);
     end;
 
-    local needExperience = heroLevel == 1
-      and TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL]
-      or TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
+    local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
 
     ChangeHeroStat(heroName, STAT_EXPERIENCE, needExperience);
   end;
   
   -- Продолжение бесплатной прокачки
   if stage == '2' then
+    local SECOND_HALF_LEARNING_LEVEL = 9;
     local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[HALF_FREE_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
+    local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[SECOND_HALF_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
     
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
   end;
@@ -1240,6 +1234,18 @@ function masterOfSecret(heroName)
   startThread(trackingChangeStatsForMasterOfSecret, heroName);
 end;
 
+-- Получение данных по статистикам, которые изменяет данный навык
+function getSkillWithStatsDataById(skillId)
+  print "getSkillWithStatsDataById"
+  
+  -- Заброшенные шахты и СА мага были переделаны под астрологию
+  if skillId == WIZARD_FEAT_ABSOLUTE_WIZARDY or skillId == NECROMANCER_FEAT_HAUNT_MINE then
+    return MAP_WEEK_ON_ASTROLOGY_STATS[GetCurrentMoonWeek()];
+  end;
+  
+  return MAP_SKILLS_TO_CHANGING_STATS[skillId];
+end;
+
 -- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
@@ -1267,11 +1273,15 @@ function handleHeroAddSkill(triggerHero, skillId)
     return nil;
   end;
 
-  local skillWithStats = MAP_SKILLS_TO_CHANGING_STATS[skillId];
+  local skillWithStats = getSkillWithStatsDataById(skillId);
 
   -- Если навык, дающий статы
   if skillWithStats ~= nil then
-    changeMainHeroStatsForSkills(playerId, skillWithStats.stat, skillWithStats.count);
+    for _, statId in { STAT_ATTACK, STAT_DEFENCE, STAT_SPELL_POWER, STAT_KNOWLEDGE } do
+      if skillWithStats[statId] ~= nil then
+        changeMainHeroStatsForSkills(playerId, statId, skillWithStats[statId]);
+      end;
+    end;
   end;
 
   -- если взяли образование
@@ -1363,11 +1373,15 @@ function handleHeroRemoveSkill(triggerHero, skill)
     return nil;
   end;
 
-  local change = MAP_SKILLS_TO_CHANGING_STATS[skill];
+  local skillWithStats = getSkillWithStatsDataById(skill);
   
-  -- Если обычный навык, дающий статы
-  if change ~= nil then
-    changeMainHeroStatsForSkills(playerId, change.stat, -change.count)
+  -- Если навык, дающий статы
+  if skillWithStats ~= nil then
+    for _, statId in { STAT_ATTACK, STAT_DEFENCE, STAT_SPELL_POWER, STAT_KNOWLEDGE } do
+      if skillWithStats[statId] ~= nil then
+        changeMainHeroStatsForSkills(playerId, statId, -skillWithStats[statId]);
+      end;
+    end;
   end;
 
   -- если образование

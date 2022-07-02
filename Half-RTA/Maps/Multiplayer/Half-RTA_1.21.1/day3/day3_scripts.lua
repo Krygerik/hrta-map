@@ -116,7 +116,11 @@ function setHeroesInitialProperties()
   end;
   
   SetObjectPosition(Biara, 35, 85);
+  MoveCameraForPlayers(PLAYER_1, 35, 85, GROUND, 50, 1.57, 0, 0, 0, 1);
+  
   SetObjectPosition(Djovanni, 42, 24);
+  MoveCameraForPlayers(PLAYER_2, 42, 24, GROUND, 50, 1.57, 3.14, 0, 0, 1);
+
   
   -- Непонятно, зачем выдавать им эти перки?)
   GiveHeroSkill(Biara, PERK_DEMONIC_FIRE);

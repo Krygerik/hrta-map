@@ -44,7 +44,7 @@ MAP_LEVEL_BY_PRICE = {
 FREE_LEARNING_LEVEL = 18;
 
 -- Половина количества уровней, предоставляемых игроку для обучения бесплатно
-HALF_FREE_LEARNING_LEVEL = 9;
+HALF_FREE_LEARNING_LEVEL = 8;
 
 -- Шанс выпадения статов для каждой фракции
 DROP_STAT_PERCENT_BY_RACE = {
@@ -101,40 +101,31 @@ DROP_STAT_PERCENT_BY_RACE = {
 -- мапинг навыка на стат, которые он меняет
 MAP_SKILLS_TO_CHANGING_STATS = {
   [RANGER_FEAT_FOREST_GUARD_EMBLEM] = {
-    stat = STAT_ATTACK,
-    count = 2,
+    [STAT_ATTACK] = 2,
   },
   [HERO_SKILL_BODYBUILDING] = {
-    stat = STAT_DEFENCE,
-    count = 2,
+    [STAT_DEFENCE] = 2,
   },
   [HERO_SKILL_DEFEND_US_ALL] = {
-    stat = STAT_DEFENCE,
-    count = 2,
+    [STAT_DEFENCE] = 2,
   },
   [WIZARD_FEAT_SEAL_OF_PROTECTION] = {
-    stat = STAT_DEFENCE,
-    count = 2,
+    [STAT_DEFENCE] = 2,
   },
   [WIZARD_FEAT_ACADEMY_AWARD] = {
-    stat = STAT_SPELL_POWER,
-    count = 2,
+    [STAT_SPELL_POWER] = 2,
   },
   [RANGER_FEAT_INSIGHTS] = {
-    stat = STAT_SPELL_POWER,
-    count = 2,
+    [STAT_SPELL_POWER] = 2,
   },
   [WARLOCK_FEAT_SECRETS_OF_DESTRUCTION] = {
-    stat = STAT_KNOWLEDGE,
-    count = 2,
+    [STAT_KNOWLEDGE] = 2,
   },
   [KNIGHT_FEAT_STUDENT_AWARD] = {
-    stat = STAT_KNOWLEDGE,
-    count = 2,
+    [STAT_KNOWLEDGE] = 2,
   },
   [NECROMANCER_FEAT_LORD_OF_UNDEAD] = {
-    stat = STAT_KNOWLEDGE,
-    count = 1,
+    [STAT_KNOWLEDGE] = 1,
   },
 };
 
@@ -183,6 +174,10 @@ BUY_SKILL_QUESTIONS = {
   [SKILL_DARK_MAGIC] = "question_buy_dark.txt",
   [SKILL_LIGHT_MAGIC] = "question_buy_light_magic.txt",
   [SKILL_SUMMONING_MAGIC] = "question_buy_summoning_magic.txt",
+  [HERO_SKILL_SHATTER_DESTRUCTIVE_MAGIC] = "question_buy_shatter_destructive_magic.txt",
+  [HERO_SKILL_SHATTER_DARK_MAGIC] = "question_buy_shatter_dark_magic.txt",
+  [HERO_SKILL_SHATTER_LIGHT_MAGIC] = "question_buy_shatter_light_magic.txt",
+  [HERO_SKILL_SHATTER_SUMMONING_MAGIC] = "question_buy_shatter_summoning_magic.txt",
 };
 
 -- Список разрешенных для покупки навыков по расам
@@ -263,6 +258,10 @@ ALLOW_BUY_SKILL_LIST_BY_RACE = {
     SKILL_LUCK,
     SKILL_OFFENCE,
     SKILL_DEFENCE,
+    HERO_SKILL_SHATTER_DESTRUCTIVE_MAGIC,
+    HERO_SKILL_SHATTER_DARK_MAGIC,
+    HERO_SKILL_SHATTER_LIGHT_MAGIC,
+    HERO_SKILL_SHATTER_SUMMONING_MAGIC,
   },
 };
 

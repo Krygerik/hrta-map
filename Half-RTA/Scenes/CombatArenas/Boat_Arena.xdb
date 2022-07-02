@@ -13,16 +13,16 @@
 	</skyRole>
 	<MountPoint>
 		<Pos>
-			<x>84.3</x>
-			<y>90.5</y>
+			<x>84</x>
+			<y>91</y>
 		</Pos>
 		<Rot>0</Rot>
 	</MountPoint>
-	<AdditionalHeight>13.7</AdditionalHeight>
+	<AdditionalHeight>16.7</AdditionalHeight>
 	<Music/>
 	<AmbientSoundSet href="/Sounds/_(Ambient)/TerrainAmbients/Water.xdb#xpointer(/AmbientSoundSet)"/>
 	<TextFormatFileRef href=""/>
-	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/BoatArenaObstacles.xdb#xpointer(/ArenaObstaclesGroup)"/>
+	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/BoatArena/BoatArenaObstacles.xdb#xpointer(/ArenaObstaclesGroup)"/>
 	<CamerasSet href="/_(CamerasSet)/Default.(CamerasSet).xdb#xpointer(/CamerasSet)"/>
 	<MeleeAttackPoints>
 		<Use>true</Use>

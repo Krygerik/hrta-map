@@ -370,10 +370,18 @@ function CreatureDead(unit)
   local type = GetCreatureType(unit)
   for side, hero in {[0]=GetHero(0); GetHero(1)} do
     if GetHeroSkillMastery(hero, 170) > 0 and GetHeroSkillMastery(hero, 15) > 0 and type < 900 and (GetUnitSide(unit) ~= GetUnitSide(hero))  then
-      repeat sleep() until combatReadyPerson()
-      local next_creature = combatReadyPerson()
-      SetATB(GetEnemyHero(unit), 0)
---      SetATB(next_creature, 0.999)
+      combatSetPause(1)
+
+      local creatures_necro = GetCreatures(side)
+      -- TODO: ÊÀÊ ÇÄÅÑÜ ÌÎÆÅÒ ÏÎËÓ×ÈÒÜÑß length(creatures_necro)???
+      local unit_get_move = random(length(creatures_necro) + 1) - 1
+
+      if unit_get_move == (length(creatures_necro)) then
+        SetATB(hero, 1)
+      else
+        SetATB(creatures_necro[unit_get_move], 1)
+      end
+      combatSetPause(nil)
   	end
 	end
 

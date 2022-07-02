@@ -413,6 +413,12 @@ function giveRuneResources(playerId)
     countLowRes = countLowRes + brandResCount;
     countHighRes = countHighRes + brandResCount;
   end;
+  
+  -- Завершенка дает по 3 каждого ресурса
+  if HasHeroSkill(mainHeroName, HERO_SKILL_FINE_RUNE) then
+    countLowRes = countLowRes + 3;
+    countHighRes = countHighRes + 3;
+  end;
 
   for _, resId in { WOOD, ORE } do
     SetPlayerResource(playerId, resId, countLowRes);
@@ -458,6 +464,10 @@ function teleportMainHeroToNearTown(playerId)
   local position = PLAYERS_TELEPORT_NEAR_TOWN_POSITION[playerId];
 
   SetObjectPosition(mainHeroName, position.x, position.y);
+  
+  local rotate = playerId == PLAYER_2 and 3.14 or 0;
+  
+  MoveCameraForPlayers(playerId, position.x, position.y, GROUND, 50, 1.57, rotate, 0, 0, 1);
 end;
 
 -- Показ игроку информацию о необходимых действиях на текущий день
