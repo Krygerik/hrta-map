@@ -508,6 +508,24 @@ function givePlayerSecondTown(playerId)
   end;
 end;
 
+-- Передача юнитов из двелла - главному герою игрока
+function transferUnitsFromDwellToHero(playerId, creatureId, countCreature)
+  print "transferUnitsFromDwellToHero"
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+  
+  -- Если игрок заказал доставку на дом
+  if IsHeroInTown(mainHeroName, townName, 0, 1) then
+    AddObjectCreatures(townName, creatureId, countCreature);
+  else
+    AddObjectCreatures(mainHeroName, creatureId, countCreature);
+  end;
+
+  RemoveObjectCreatures(dwellId, creatureId, countCreature);
+end;
+
 -- Отслеживание спецы Николаса
 function specNikolasTread(heroName)
   print "specNikolasTread"
@@ -516,7 +534,7 @@ function specNikolasTread(heroName)
 
   local countAllowMummy = 40;
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
-  
+
   givePlayerSecondTown(playerId);
   SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
 
@@ -527,8 +545,7 @@ function specNikolasTread(heroName)
     local currentCountBuyMummy = GetObjectCreatures(dwellId, CREATURE_MUMMY);
     
     if currentCountBuyMummy > 0 then
-      AddObjectCreatures(heroName, CREATURE_MUMMY, currentCountBuyMummy);
-      RemoveObjectCreatures(dwellId, CREATURE_MUMMY, currentCountBuyMummy);
+      transferUnitsFromDwellToHero(playerId, CREATURE_MUMMY, currentCountBuyMummy);
       countBuyMummy = countBuyMummy + currentCountBuyMummy;
     end;
 
@@ -645,10 +662,11 @@ function learning(strPlayerId, heroName, stage)
   print "learning"
 
   local playerId = strPlayerId + 0;
-  local heroLevel = GetHeroLevel(heroName);
 
   -- Начало бесплатной прокачки
   if stage == '1' then
+    local heroLevel = GetHeroLevel(heroName);
+  
     if heroLevel == 1 then
       PLAYERS_MAIN_HERO_PROPS[playerId].name = heroName;
       setControlStatsTriggerOnHero(playerId);
@@ -682,7 +700,10 @@ function learning(strPlayerId, heroName, stage)
   -- Продолжение бесплатной прокачки
   if stage == '2' then
     local SECOND_HALF_LEARNING_LEVEL = 9;
+    
     local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    local heroLevel = GetHeroLevel(playerMainHeroName);
+    
     local needExperience = TOTAL_EXPERIENCE_BY_LEVEL[SECOND_HALF_LEARNING_LEVEL + heroLevel] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
     
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
@@ -1128,9 +1149,10 @@ function heraldOfDeath(heroName)
     local currentCountBuyKnight = GetObjectCreatures(dwellId, CREATURE_DEATH_KNIGHT);
 
     if currentCountBuyKnight > 0 then
-      AddObjectCreatures(heroName, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
-      RemoveObjectCreatures(dwellId, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
+      transferUnitsFromDwellToHero(playerId, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
+      
       countBuyKnight = countBuyKnight + currentCountBuyKnight;
+      
       PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] = not nil;
     end;
 
