@@ -1946,7 +1946,7 @@ function scouting(strPlayerId)
     
     -- Показываем тех героев, которые выпали оппоненту
     for _, heroName in enemyChoisedHeroes do
-      if heroName ~= enemyHeroes[1] and heroName ~= enemyHeroes[2] then
+       if heroName ~= enemyHeroes[1] and heroName ~= enemyHeroes[2] then
         local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
 
         SetObjectPosition(iconName, 1, 1, UNDERGROUND);
@@ -1968,7 +1968,9 @@ function scouting(strPlayerId)
   
   -- Показываем ГГ врага
   for _, heroName in enemyChoisedHeroes do
-    if heroName ~= enemyMainHero then
+    local reservedHeroName = getReservedHeroName(enemyPlayerId, heroName);
+
+    if reservedHeroName ~= enemyMainHero then
       local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
     
       SetObjectPosition(iconName, 1, 1, UNDERGROUND);

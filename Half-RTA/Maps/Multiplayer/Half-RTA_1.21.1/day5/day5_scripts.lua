@@ -154,12 +154,30 @@ function getSelectedBattlefieldPlayerId()
     end;
   end;
 
+  local countPlayersWithPathFinding = 0;
+
   for _, playerId in PLAYER_ID_TABLE do
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
     -- Ќахождение пути дает возможность выбора
     if HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
-      return playerId;
+      countPlayersWithPathFinding = countPlayersWithPathFinding + 1;
+    end;
+  end;
+  
+  -- ≈сли оба игрока с нахождением пути - они взаимоисключаютс€
+  if countPlayersWithPathFinding == 2 then
+    return PLAYER_2;
+  end;
+
+  if countPlayersWithPathFinding == 1 then
+    for _, playerId in PLAYER_ID_TABLE do
+      local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+      -- Ќахождение пути дает возможность выбора
+      if HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
+        return playerId;
+      end;
     end;
   end;
 

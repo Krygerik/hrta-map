@@ -57,7 +57,9 @@ function buyHero(strPlayerId)
   local playerId = strPlayerId + 0;
   local heroFromTavern = RESULT_HERO_LIST[playerId].heroes[3];
   
-  addHeroMovePoints(heroFromTavern);
+  local reservedHeroName = getReservedHeroName(playerId, heroFromTavern);
+  
+  addHeroMovePoints(reservedHeroName);
   MAP_PLAYER_ON_BUY_HERO_STATUS[playerId] = not nil;
   
   SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - BUY_HERO_COST);
