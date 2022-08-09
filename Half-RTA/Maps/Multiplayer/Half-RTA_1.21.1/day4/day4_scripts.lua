@@ -203,8 +203,6 @@ function prepareForChoiceEnemy(playerId)
       end;
     end;
   end;
-  
-  addHeroMovePoints(mainHeroName);
 end;
 
 -- Получение количества ресурсов, получаемых для изготовки миниартефактов
@@ -241,10 +239,6 @@ function prepareForCraftMiniArtifacts(playerId)
   for _, recourceId in allRecourcesTable do
     SetPlayerResource(playerId, recourceId, countResources);
   end;
-  
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  
-  addHeroMovePoints(mainHeroName);
 end;
 
 -- Бонус к некромантии
@@ -456,20 +450,6 @@ function runRaceAbility(playerId)
   end;
 end;
 
--- Телепорт главного героя перед городом
-function teleportMainHeroToNearTown(playerId)
-  print "teleportMainHeroToNearTown"
-
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  local position = PLAYERS_TELEPORT_NEAR_TOWN_POSITION[playerId];
-
-  SetObjectPosition(mainHeroName, position.x, position.y);
-  
-  local rotate = playerId == PLAYER_2 and 3.14 or 0;
-  
-  MoveCameraForPlayers(playerId, position.x, position.y, GROUND, 50, 1.57, rotate, 0, 0, 1);
-end;
-
 -- Показ игроку информацию о необходимых действиях на текущий день
 function showDay4InfoMessage(playerId)
   print "showDay4InfoMessage"
@@ -502,13 +482,37 @@ function showDay4InfoMessage(playerId)
       awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt");
     end;
   end;
+end;
+
+-- Телепорт главного героя перед городом
+function teleportMainHeroToNearTown(playerId)
+  print "teleportMainHeroToNearTown"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local position = PLAYERS_TELEPORT_NEAR_TOWN_POSITION[playerId];
+
+  SetObjectPosition(mainHeroName, position.x, position.y);
+
+  local rotate = playerId == PLAYER_2 and 3.14 or 0;
+
+  MoveCameraForPlayers(playerId, position.x, position.y, GROUND, 50, 1.57, rotate, 0, 0, 1);
   
-  if (
-    raceId ~= RACES.SYLVAN and raceId ~= RACES.ACADEMY and raceId ~= RACES.NECROPOLIS
-    and opponentRaceId ~= RACES.SYLVAN and opponentRaceId ~= RACES.ACADEMY
-  ) then
-    awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."please_skip_turn.txt");
-  end
+  addHeroMovePoints(mainHeroName);
+end;
+
+-- Телепортируем героев в их места на карте
+function additionalDayBeforeSelectBattlefield()
+  print "additionalDayBeforeSelectBattlefield"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local raceId = RESULT_HERO_LIST[playerId].raceId;
+    
+    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY then
+      teleportMainHeroToNearTown(playerId);
+    else
+      preliminaryTeleportHeroToSelectBattlefield(playerId);
+    end;
+  end;
 end;
 
 -- Точка входа
@@ -532,12 +536,18 @@ function day4_scripts()
     transferAllArtsToMainHero(playerId);
 
     transferAllArmyToMain(playerId);
-    
-    teleportMainHeroToNearTown(playerId);
-    
+
     showDay4InfoMessage(playerId);
     
     runRaceAbility(playerId);
+  end;
+  
+  if needPostponeBattle() then
+    -- Объявляем промежуточный день для фракционных плюшек
+    additionalDayBeforeSelectBattlefield();
+  else
+    -- Отправляем на выбор поляны
+    selectBattlefield();
   end;
 end;
 

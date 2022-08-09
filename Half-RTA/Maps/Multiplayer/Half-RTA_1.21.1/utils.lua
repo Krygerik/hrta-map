@@ -78,3 +78,63 @@ function awaitMessageBoxForPlayers(playerId, pathToMessage)
     sleep(1);
   end;
 end;
+
+-- Возвращает результат - нужно ли отложить выбор поля на 1 день
+function needPostponeBattle()
+  print "needPostponeBattle"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local raceId = RESULT_HERO_LIST[playerId].raceId;
+
+    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY then
+      return not nil;
+    end;
+  end;
+
+  return nil;
+end;
+
+-- Получение ИД игрока, выбирающего поле для битвы
+function getSelectedBattlefieldPlayerId()
+  print "getSelectedBattlefieldPlayerId"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+    local dictHeroName = getDictionaryHeroName(mainHeroName);
+
+    -- Ниброс имеет приоритет над всем
+    if dictHeroName == HEROES.JAZAZ then
+      return playerId;
+    end;
+  end;
+
+  local countPlayersWithPathFinding = 0;
+
+  for _, playerId in PLAYER_ID_TABLE do
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+    -- Нахождение пути дает возможность выбора
+    if HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
+      countPlayersWithPathFinding = countPlayersWithPathFinding + 1;
+    end;
+  end;
+
+  -- Если оба игрока с нахождением пути - они взаимоисключаются
+  if countPlayersWithPathFinding == 2 then
+    return PLAYER_2;
+  end;
+
+  if countPlayersWithPathFinding == 1 then
+    for _, playerId in PLAYER_ID_TABLE do
+      local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+
+      -- Нахождение пути дает возможность выбора
+      if HasHeroSkill(mainHeroName, PERK_PATHFINDING) then
+        return playerId;
+      end;
+    end;
+  end;
+
+  -- Если нет иных причин - по умолчанию выбирает синий
+  return PLAYER_2;
+end;

@@ -15,6 +15,8 @@ sleep(1)
 doFile(GetMapDataPath()..'common.lua');
 doFile(GetMapDataPath()..'utils.lua');
 doFile(GetMapDataPath()..'constants.lua');
+doFile(GetMapDataPath()..'modules/modules.lua');
+
 sleep(1)
 
 removeHeroMovePoints(Biara);

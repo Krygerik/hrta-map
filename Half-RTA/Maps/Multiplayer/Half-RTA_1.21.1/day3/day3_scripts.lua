@@ -104,9 +104,10 @@ function setHeroesInitialProperties()
       ChangeHeroStat(reservedHeroName, STAT_MANA_POINTS, 0 - heroMana);
       LockMinHeroSkillsAndAttributes(reservedHeroName);
       
-      -- Отнимаем очки передвижения у героя из таверны
+      -- Герою из таверны даем 5 мувов, чтоб мог себя выкупить
       if indexHero == 3 then
         removeHeroMovePoints(reservedHeroName);
+        ChangeHeroStat(reservedHeroName, STAT_MOVE_POINTS, 500);
       end;
       
       for _, skill in INITIAL_HERO_SKILLS[heroName] do
@@ -121,7 +122,6 @@ function setHeroesInitialProperties()
   SetObjectPosition(Djovanni, 42, 24);
   MoveCameraForPlayers(PLAYER_2, 42, 24, GROUND, 50, 1.57, 3.14, 0, 0, 1);
 
-  
   -- Непонятно, зачем выдавать им эти перки?)
   GiveHeroSkill(Biara, PERK_DEMONIC_FIRE);
   GiveHeroSkill(Biara, HERO_SKILL_SNATCH);

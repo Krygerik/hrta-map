@@ -17,12 +17,19 @@ MAP_PLAYER_ON_BUY_HERO_STATUS = {
   [PLAYER_2] = nil,
 };
 
+-- Соотношение ИД регионов, запрещающих подходить к герою в таверне
+MAP_BUY_HERO_REGION_ON_PLAYER = {
+  [PLAYER_1] = 'tavern1',
+  [PLAYER_2] = 'tavern2',
+};
+
 -- Функционал покупки дополнительного героя из таверны
 function buy_hero_scripts()
   print "buy_hero_scripts"
   
   for _, playerId in PLAYER_ID_TABLE do
     SetObjectEnabled(MAP_BUY_HERO_OBJECT_ON_PLAYER[playerId], nil);
+    SetRegionBlocked (MAP_BUY_HERO_REGION_ON_PLAYER[playerId], not nil);
     Trigger(OBJECT_TOUCH_TRIGGER, MAP_BUY_HERO_OBJECT_ON_PLAYER[playerId], 'handleTouchBuyHeroObject');
   end;
 end;
@@ -63,6 +70,7 @@ function buyHero(strPlayerId)
   MAP_PLAYER_ON_BUY_HERO_STATUS[playerId] = not nil;
   
   SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - BUY_HERO_COST);
+  SetRegionBlocked (MAP_BUY_HERO_REGION_ON_PLAYER[playerId], nil);
 end;
 
 buy_hero_scripts();
