@@ -1928,7 +1928,7 @@
 			<Wizard>
 				<Unsummon_DamagePerHeroLevel>15</Unsummon_DamagePerHeroLevel>
 				<Unsummon_DamagePerSkillMastery>100</Unsummon_DamagePerSkillMastery>
-				<MeltArtifact_HealPerArtifactEffectPerHeroLevel>5</MeltArtifact_HealPerArtifactEffectPerHeroLevel>
+				<MeltArtifact_HealPerArtifactEffectPerHeroLevel>6</MeltArtifact_HealPerArtifactEffectPerHeroLevel>
 				<MeltArtifact_ATBUsage>0.25</MeltArtifact_ATBUsage>
 			</Wizard>
 			<Ranger>
