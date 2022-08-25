@@ -147,7 +147,7 @@ function generateRandomGroupHero(redRaceId, blueRaceId)
 
     for groupIndex = 1, length(playerData.heroGroups) do
       local group = playerData.heroGroups[groupIndex];
-      local randomHeroIndexList = generateRandomHeroIndexesByRace(playerData.raceId, 5);
+      local randomHeroIndexList = generateRandomHeroIndexesByRace(playerId, playerData.raceId, 5);
 
       for randomIndex, heroIndex in randomHeroIndexList do
         local dictionaryHero = HEROES_BY_RACE[playerData.raceId][heroIndex];
@@ -161,9 +161,17 @@ function generateRandomGroupHero(redRaceId, blueRaceId)
 end;
 
 -- √енераци€ определенного количества не повтор€ющихс€ индексов героев по расе
-function generateRandomHeroIndexesByRace(raceId, count)
+-- ≈сли count будет больше, чем минимальное количество героев у фракции/2 - будет бесконечный цикл (краш)
+function generateRandomHeroIndexesByRace(playerId, raceId, count)
   print "generateRandomHeroIndexesByRace"
 
+  -- ѕолучаем список зан€тых героев из первой группы
+  local existHeroNameList = {};
+  
+  for _, heroData in RANDOM_GROUPS_HERO_ICONS[playerId].heroGroups[1].heroes do
+    existHeroNameList[length(existHeroNameList) + 1] = heroData.name
+  end;
+  
   local resultIndexList = {};
 
   for i = 1, count do
@@ -176,8 +184,16 @@ function generateRandomHeroIndexesByRace(raceId, count)
       randomHeroIndex = random(length(allHeroes)) + 1;
       countExistIndex = 0;
 
+      -- «апрещаем повторени€ в генерируемом списке
       for i, index in resultIndexList do
         if index == randomHeroIndex then
+          countExistIndex = countExistIndex + 1;
+        end;
+      end;
+      
+      -- «апрещаем повторную генерацию героев из первого списка
+      for _, heroName in existHeroNameList do
+        if heroName == allHeroes[randomHeroIndex].name then
           countExistIndex = countExistIndex + 1;
         end;
       end;
