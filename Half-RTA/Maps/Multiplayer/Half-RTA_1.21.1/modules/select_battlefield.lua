@@ -21,7 +21,10 @@ PLAYERS_TOWER = {
 };
 
 -- Был ли совершен предварительный телепорт героя на поляну
-HAS_BEEN_PRELIMINARY_TELEPORT = 0;
+HAS_BEEN_PRELIMINARY_TELEPORT = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
 
 -- Соотношение расы на регион родной земли с маленькими препятствиями
 MAP_RACE_ON_NATIVE_REGIONS = {
@@ -257,7 +260,7 @@ function preliminaryTeleportHeroToSelectBattlefield(playerId)
 
   ShowFlyingSign(PATH_TO_MODULES_MESSAGES.."please_skip_turn.txt", mainHeroName, playerId, 5.0);
   
-  HAS_BEEN_PRELIMINARY_TELEPORT = 1;
+  HAS_BEEN_PRELIMINARY_TELEPORT[playerId] = not nil;
 end;
 
 -- Показываем игроку сообщение с необходимым действием
@@ -292,11 +295,11 @@ end;
 function checkAndTeleportHeroToSelectBattlefield(playerId)
   print "checkAndTeleportHeroToSelectBattlefield"
   
-  if HAS_BEEN_PRELIMINARY_TELEPORT == 0 then
+  if HAS_BEEN_PRELIMINARY_TELEPORT[playerId] then
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
     local x, y = GetObjectPosition(mainHeroName);
     local position = PLAYERS_TELEPORT_TO_BATTLE_POSITION[playerId];
-
+    
     -- Если герой уже стоит на свое месте для телепортации - оставляем его там, иначе - телепортируем
     if position.x ~= x or position.y ~= y then
       teleportHeroToSelectBattlefield(playerId);

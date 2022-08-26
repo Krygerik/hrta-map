@@ -1123,6 +1123,10 @@ function runScriptingArtifacts(playerId)
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local raceId = RESULT_HERO_LIST[playerId].raceId;
+  
+  local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
   -- Корона Лидерства
   if HasArtefact(mainHeroName, ARTIFACT_CROWN_OF_LEADER, 1) then
@@ -1131,7 +1135,7 @@ function runScriptingArtifacts(playerId)
 
   -- посох преисподней
   if HasArtefact(mainHeroName, 7, 1) then
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_INITIATIVE, -1);
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_INITIATIVE, -1);
   end;
 
   -- воля ургаша
@@ -1164,10 +1168,6 @@ function runScriptingArtifacts(playerId)
       [RACES.STRONGHOLD] = STAT_DEFENCE,
     };
 
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
-    local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
-    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
-
     ChangeHeroStat(opponentHeroName, MAP_RACE_ON_PRIMARY_STAT[opponentRaceId], -2);
     ChangeHeroStat(opponentHeroName, MAP_RACE_ON_SECONDARY_STAT[opponentRaceId], -2);
   end;
@@ -1181,9 +1181,6 @@ function runScriptingArtifacts(playerId)
 
   -- кольцо грешников
   if HasArtefact(mainHeroName, 70, 1) then
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
-    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
-
     local artCount = GetHeroArtifactsCount(mainHeroName, 70, 1);
 
     GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -artCount);
