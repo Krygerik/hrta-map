@@ -26,6 +26,18 @@ HAS_BEEN_PRELIMINARY_TELEPORT = {
   [PLAYER_2] = nil,
 };
 
+function getHasBeenPreliminaryTeleport()
+  print "getHasBeenPreliminaryTeleport"
+  
+  for _, hasBeen in HAS_BEEN_PRELIMINARY_TELEPORT do
+    if hasBeen then
+      return not nil;
+    end;
+  end;
+  
+  return nil;
+end;
+
 -- Соотношение расы на регион родной земли с маленькими препятствиями
 MAP_RACE_ON_NATIVE_REGIONS = {
   [RACES.HAVEN] = 'land_block_race1',
@@ -472,7 +484,7 @@ end;
 function selectBattlefield()
   print "selectBattlefield"
 
-  if HAS_BEEN_PRELIMINARY_TELEPORT == 0 then
+  if not getHasBeenPreliminaryTeleport() then
     prepareSelectBattlefield();
   end;
 

@@ -633,19 +633,6 @@ function checkAndRunHeroSpec(heroName)
   end;
 end;
 
--- ќтслеживает геро€ и посто€нно пополн€ет ему очки передвижени€
-function infitityMoveTread(heroName)
-  print "infitityMoveTread"
-  
-  while GetDate(DAY) < 4 do
-    if GetHeroStat(heroName, STAT_MOVE_POINTS) < 30000 then
-      addHeroMovePoints(heroName);
-    end;
-    
-    sleep(20);
-  end;
-end;
-
 -- ¬ысчитывает компенсацию за стартовые навыки логистики
 function startLogisticCompensation(heroName)
   print "startLogisticCompensation"
@@ -680,8 +667,6 @@ function learning(strPlayerId, heroName, stage)
 
       scouting(enemyPlayerId);
     end;
-
-    startThread(infitityMoveTread, heroName);
 
     checkAndRunHeroSpec(heroName);
 
@@ -949,6 +934,8 @@ function darkRitualUpStat(strPlayerId, strUpStatId)
   mainHeroProps.stats[upStatId] = mainHeroProps.stats[upStatId] + resultStatValue;
   
   refreshMainHeroStats(playerId);
+  
+  addHeroMovePoints(mainHeroProps.name);
   
   PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
 end;
