@@ -2822,54 +2822,11 @@
 					<Item href="/Text/Game/Skills/Common/Sorcery/Mysticism/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
+				<SkillType>SKILLTYPE_STANDART_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_LEARNING</BasicSkillID>
-				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_KNIGHT</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_DEMON_LORD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RANGER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_NECROMANCER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WIZARD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WARLOCK</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RUNEMAGE</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_SECRETS</Item>
-						</dependenciesIDs>
-					</Item>
-				</SkillPrerequisites>
+				<BasicSkillID>HERO_SKILL_SORCERY</BasicSkillID>
+				<SkillPrerequisites/>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -8272,7 +8229,7 @@
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_TAP_RUNES</Item>
+							<Item>HERO_SKILL_EAGLE_EYE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -9084,8 +9041,8 @@
 			<ID>HERO_SKILL_SUN_FIRE</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses_grey.xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Ranger/DestructiveMagic_SunFire_grey.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Ranger/DestructiveMagic_SunFire.(Texture).xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
@@ -9096,46 +9053,89 @@
 					<Item href="/Text/Game/Skills/Common/DestructiveMagic/SunFire/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_STANDART_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NONE</HeroClass>
+				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
+				<HeroClass>HERO_CLASS_RANGER</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_SORCERY</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_DESTRUCTIVE_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_KNIGHT</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RANGER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WIZARD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_DEMON_LORD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_NECROMANCER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WARLOCK</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RUNEMAGE</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Haven>
 					<Sylvan>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Sylvan>
 					<Academy>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Academy>
 					<Dungeon>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Dungeon>
 					<Necropolis>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Necropolis>
 					<Inferno>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Inferno>
 					<Fortress>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>1000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Fortress>
 					<Stronghold>
 						<CommanderValue>0</CommanderValue>
@@ -10245,43 +10245,43 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -11661,7 +11661,6 @@
 		<Item>
 			<ID>HERO_SKILL_PAYBACK</ID>
 			<obj>
-
 				<Texture>
 					<Item href="/Textures/HeroScreen/Feats/Knight/Luck_GrailVision_grey.xdb#xpointer(/Texture)"/>
 					<Item href="/Textures/HeroScreen/Feats/Knight/Luck_GrailVision.xdb#xpointer(/Texture)"/>
@@ -12511,7 +12510,7 @@
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_EAGLE_EYE</Item>
+							<Item>HERO_SKILL_HAUNT_MINE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -13691,7 +13690,7 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>
-							<Item>HERO_SKILL_MYSTICISM</Item>
+							<Item>HERO_SKILL_HAUNT_MINE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -13710,21 +13709,21 @@
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>
-							<Item>HERO_SKILL_MYSTICISM</Item>
+							<Item>HERO_SKILL_HAUNT_MINE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>
-							<Item>HERO_SKILL_MYSTICISM</Item>
+							<Item>HERO_SKILL_HAUNT_MINE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>
-							<Item>HERO_SKILL_MYSTICISM</Item>
+							<Item>HERO_SKILL_HAUNT_MINE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -13798,7 +13797,7 @@
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs>
-				        <Item>SPELL_EFFECT_PREPARATION</Item>
+					<Item>SPELL_EFFECT_PREPARATION</Item>
 				</spellBuffs>
 				<BasicSkillID>HERO_SKILL_DEFENCE</BasicSkillID>
 				<SkillPrerequisites>
@@ -14220,7 +14219,7 @@
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SUN_FIRE</Item>
+							<Item>HERO_SKILL_MYSTICISM</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -16837,22 +16836,22 @@
 			<ID>HERO_SKILL_BARBARIAN_MYSTICISM</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Perks/Invocation_ElementalVision_grey.xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Perks/Invocation_ElementalVision.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Perks/Sorcery_Mysticism_grey.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Perks/Sorcery_Mysticism.xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
-					<Item href="/Text/Game/Skills/Unique/Invocation/ElementalVision/Name.txt"/>
+					<Item href="/Text/Game/Skills/Common/Sorcery/Mysticism/Name.txt"/>
 				</NameFileRef>
 				<CommonNameFileRef href=""/>
 				<DescriptionFileRef>
-					<Item href="/Text/Game/Skills/Unique/Invocation/ElementalVision/Description.txt"/>
+					<Item href="/Text/Game/Skills/Common/Sorcery/Mysticism/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
+				<SkillType>SKILLTYPE_STANDART_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_VOICE</BasicSkillID>
 				<SkillPrerequisites/>
 				<AIRacesValues>
 					<Haven>
@@ -17117,8 +17116,8 @@
 			<ID>HERO_SKILL_BARBARIAN_SUN_FIRE</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses_grey.xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Ranger/DestructiveMagic_SunFire_grey.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Ranger/DestructiveMagic_SunFire.(Texture).xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
@@ -17129,11 +17128,18 @@
 					<Item href="/Text/Game/Skills/Common/DestructiveMagic/SunFire/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_STANDART_PERK</SkillType>
+				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_VOICE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_SHATTER_DESTRUCTIVE_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_BARBARIAN</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_CORRUPT_DESTRUCTIVE</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>1000</CommanderValue>

@@ -22,7 +22,7 @@ QUROQ_ABSORBING = 0.0005
 
 RITUAL_ENEMY_MANA_SPENT = 3
 ALMEGIR_RITUAL_PER_LEVEL = 0.05
-MYSTICISM_MANA_PER_TURN_REGENERATION = 5
+MYSTICISM_MANA_PER_TURN_REGENERATION = 3
 AMMO_CART_REPAIR = 100
 ASHA_ALLY_TARGETS = 4
 ASHA_ENEMY_TARGETS = 0
@@ -737,7 +737,7 @@ function UnitMoveNonBlocking(unit)
 		end
 		
 		-- восполнение маны    unit_mana_spent
-		if GetHeroSkillMastery(unit, 40) > 0 then
+		if GetHeroSkillMastery(unit, 40) > 0 or GetHeroSkillMastery(unit, 213) > 0 then
 			local max_mana = GetUnitMaxManaPoints(unit)
 			if GetUnitManaPoints(unit) < max_mana then
 				local new_mana = GetUnitManaPoints(unit) + MYSTICISM_MANA_PER_TURN_REGENERATION
