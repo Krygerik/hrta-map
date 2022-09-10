@@ -575,36 +575,6 @@ function specVegeyrTread(heroName)
   end;
 end;
 
--- Отслеживание спецы Валерии
-function specValeriaTread(heroName)
-  print "specValeriaTread"
-  
-  local isSpecUsed = nil;
-
-  local MAP_SPELLS_ON_MASS_SPELLS = {
-    [SPELL_CURSE] = SPELL_MASS_CURSE,
-    [SPELL_SLOW] = SPELL_MASS_SLOW,
-    [SPELL_DISRUPTING_RAY] = SPELL_MASS_DISRUPTING_RAY,
-    [SPELL_PLAGUE] = SPELL_MASS_PLAGUE,
-    [SPELL_WEAKNESS] = SPELL_MASS_WEAKNESS,
-    [SPELL_FORGETFULNESS] = SPELL_MASS_FORGETFULNESS,
-  };
-
-  while not isSpecUsed do
-    if GetDate(DAY) == 5 then
-      for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
-        if KnowHeroSpell(heroName, spellId) then
-          TeachHeroSpell(heroName, massSpellId);
-        end;
-      end;
-      
-      isSpecUsed = not nil;
-    end;
-
-    sleep(10);
-  end;
-end;
-
 -- Проверка героя на наличие скриптовых специализаций и их запуск
 function checkAndRunHeroSpec(heroName)
   print "checkAndRunHeroSpec"
@@ -622,10 +592,6 @@ function checkAndRunHeroSpec(heroName)
 
   if dictHeroName == HEROES.VEGEYR then
     startThread(specVegeyrTread, heroName);
-  end;
-
-  if dictHeroName == HEROES.RED_HEAVEN_HERO then
-    startThread(specValeriaTread, heroName);
   end;
   
   if dictHeroName == HEROES.ALMEGIR then
@@ -1915,6 +1881,29 @@ function moveCameraOnEnemyHero(playerId)
   end;
 end;
 
+-- Показываем набор героев, который выпал оппоненту
+function showResultHeroList(enemyPlayerId, dictMainHeroName)
+  print "showResultHeroList"
+  
+  local playerId = PLAYERS_OPPONENT[enemyPlayerId];
+  
+  local enemyHeroes = RESULT_HERO_LIST[enemyPlayerId].heroes;
+  local enemyChoisedHeroes = RESULT_HERO_LIST[enemyPlayerId].choised_heroes;
+  
+  for _, heroName in enemyChoisedHeroes do
+    if (
+       (heroName ~= enemyHeroes[1] and heroName ~= enemyHeroes[2])
+       or (dictMainHeroName ~= nil and heroName ~= dictMainHeroName)
+    ) then
+      local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
+
+      SetObjectPosition(iconName, 1, 1, UNDERGROUND);
+    end;
+  end;
+
+  moveCameraOnEnemyHero(playerId);
+end;
+
 -- Активация разведки
 function scouting(strPlayerId)
   print "scouting"
@@ -1930,17 +1919,8 @@ function scouting(strPlayerId)
   -- Если оппонент еще не начал прокачку
   if enemyMainHero == nil then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_has_not_main_hero.txt" );
-    
-    -- Показываем тех героев, которые выпали оппоненту
-    for _, heroName in enemyChoisedHeroes do
-      if heroName ~= enemyHeroes[1] and heroName ~= enemyHeroes[2] then
-        local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
 
-        SetObjectPosition(iconName, 1, 1, UNDERGROUND);
-      end;
-    end;
-    
-    moveCameraOnEnemyHero(playerId);
+    showResultHeroList(enemyPlayerId);
     
     PLAYER_SCOUTING_WAITING_STATUS[playerId] = not nil;
     return nil;
@@ -1952,19 +1932,13 @@ function scouting(strPlayerId)
   if dictMainHeroName == enemyHeroes[3] then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_buy_hero.txt");
 
+    showResultHeroList(enemyPlayerId);
+
     return nil;
   end;
-  
+
   -- Показываем ГГ врага
-  for _, heroName in enemyChoisedHeroes do
-    if heroName ~= dictMainHeroName then
-      local iconName = getHeroIconByHeroName(enemyPlayerId, heroName);
-    
-      SetObjectPosition(iconName, 1, 1, UNDERGROUND);
-    end;
-  end;
-  
-  moveCameraOnEnemyHero(playerId);
+  showResultHeroList(enemyPlayerId, dictMainHeroName);
 end;
 
 

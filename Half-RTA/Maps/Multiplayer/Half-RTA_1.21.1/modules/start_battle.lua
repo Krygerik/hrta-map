@@ -584,6 +584,26 @@ function specInga(heroName)
   end;
 end;
 
+-- Отслеживание спецы Валерии
+function specValeriaTread(heroName)
+  print "specValeriaTread"
+
+  local MAP_SPELLS_ON_MASS_SPELLS = {
+    [SPELL_CURSE] = SPELL_MASS_CURSE,
+    [SPELL_SLOW] = SPELL_MASS_SLOW,
+    [SPELL_DISRUPTING_RAY] = SPELL_MASS_DISRUPTING_RAY,
+    [SPELL_PLAGUE] = SPELL_MASS_PLAGUE,
+    [SPELL_WEAKNESS] = SPELL_MASS_WEAKNESS,
+    [SPELL_FORGETFULNESS] = SPELL_MASS_FORGETFULNESS,
+  };
+
+  for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
+    if KnowHeroSpell(heroName, spellId) then
+      TeachHeroSpell(heroName, massSpellId);
+    end;
+  end;
+end;
+
 -- Запуск скриптовых специализаций героев
 function runHeroSpecialization(playerId)
   print "runHeroSpecialization"
@@ -593,6 +613,10 @@ function runHeroSpecialization(playerId)
 
   if dictHeroName == HEROES.UNA then
     specInga(mainHeroName);
+  end;
+  
+  if dictHeroName == HEROES.RED_HEAVEN_HERO then
+    specValeriaTread(mainHeroName);
   end;
 
   -- Киган
