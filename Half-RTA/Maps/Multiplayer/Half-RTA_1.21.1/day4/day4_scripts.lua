@@ -700,6 +700,42 @@ function replaceHeroOnSpecial(playerId)
   end;
 end;
 
+-- Замена определенного существа в герое на другое
+function replaceUnitInHero(heroName, targetUnitId, replaceUnitId)
+  print "replaceUnitInHero"
+
+  local creatureCount = GetHeroCreatures(heroName, targetUnitId);
+
+  if creatureCount > 0 then
+    RemoveHeroCreatures(heroName, targetUnitId, creatureCount);
+    AddHeroCreatures(heroName, replaceUnitId, creatureCount);
+  end;
+end;
+
+-- Замена обычных существ на существ с рташными особенностями
+-- Тут такие приколы с ID существ накручено, мое увожение >_<
+function replaceCommonUnitOnSpecial(playerId)
+  print "replaceCommonUnitOnSpecial"
+
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+
+  -- Джалиб
+  if dictHeroName == HEROES.TAN then
+    replaceUnitInHero(mainHeroName, CREATURE_GENIE, CREATURE_RAKSHASA_RUKH);
+    replaceUnitInHero(mainHeroName, CREATURE_DJINN_VIZIER, CREATURE_TITAN);
+  end;
+
+  -- солдатская удача
+  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
+    replaceUnitInHero(mainHeroName, CREATURE_GREMLIN, CREATURE_OBSIDIAN_GARGOYLE);
+    replaceUnitInHero(mainHeroName, CREATURE_STORM_LORD, CREATURE_ARCH_MAGI);
+  end;
+
+  -- фикс бага с грифонами (Когда приземляется за поле боя)
+  replaceUnitInHero(mainHeroName, CREATURE_GRIFFIN, CREATURE_ROYAL_GRIFFIN);
+end;
+
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -723,6 +759,8 @@ function day4_scripts()
     transferAllArmyToMain(playerId);
     
     replaceHeroOnSpecial(playerId);
+
+    replaceCommonUnitOnSpecial(playerId);
 
     showDay4InfoMessage(playerId);
     

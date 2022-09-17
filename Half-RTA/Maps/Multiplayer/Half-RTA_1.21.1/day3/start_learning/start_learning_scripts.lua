@@ -593,9 +593,21 @@ function checkAndRunHeroSpec(heroName)
   if dictHeroName == HEROES.VEGEYR then
     startThread(specVegeyrTread, heroName);
   end;
-  
-  if dictHeroName == HEROES.ALMEGIR then
+
+  if HasHeroSkill(heroName, PERK_DARK_RITUAL) then
     startThread(darkRitualTread, heroName);
+  end;
+  
+  -- Навигация
+  if HasHeroSkill(heroName, PERK_NAVIGATION) then
+    setNavigationTriggers(heroName);
+  end;
+
+  for skillId, customAbility in MAP_SKILL_ON_CUSTOM_ABILITY do
+    if HasHeroSkill(heroName, skillId) then
+      ControlHeroCustomAbility(heroName, customAbility, CUSTOM_ABILITY_ENABLED);
+      Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
+    end;
   end;
 end;
 

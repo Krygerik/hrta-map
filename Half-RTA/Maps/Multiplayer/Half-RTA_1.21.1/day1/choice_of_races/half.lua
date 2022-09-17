@@ -129,6 +129,8 @@ function half_choice_of_races()
   SetObjectPosition(Biara, 34, 87, GROUND);
   SetObjectPosition(Djovanni, 43, 22, GROUND);
 
+  removeHeroMovePoints(Djovanni);
+
   for raceIndex = 0, 9 do
     local randomRaceId;
     local countEqualRace;

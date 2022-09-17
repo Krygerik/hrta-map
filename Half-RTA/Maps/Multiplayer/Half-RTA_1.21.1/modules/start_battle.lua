@@ -53,43 +53,6 @@ function refreshPlayerMana(playerId)
   ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 1000);
 end;
 
--- Замена определенного существа в герое на другое
-function replaceUnitInHero(heroName, targetUnitId, replaceUnitId)
-  print "replaceUnitInHero"
-
-  local countGenie = GetHeroCreatures(heroName, targetUnitId);
-
-  if countGenie > 0 then
-    RemoveHeroCreatures(heroName, targetUnitId, countGenie);
-    -- ID изменено на ID джинов с неосязаемостью >_<
-    AddHeroCreatures(heroName, replaceUnitId, countGenie);
-  end;
-end;
-
--- Замена обычных существ на существ с рташными особенностями
--- Тут такие приколы с ID существ накручено, мое увожение >_<
-function replaceCommonUnitOnSpecial(playerId)
-  print "replaceCommonUnitOnSpecial"
-
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  local dictHeroName = getDictionaryHeroName(mainHeroName);
-
-  -- Джалиб
-  if dictHeroName == HEROES.TAN then
-    replaceUnitInHero(mainHeroName, CREATURE_GENIE, CREATURE_RAKSHASA_RUKH);
-    replaceUnitInHero(mainHeroName, CREATURE_DJINN_VIZIER, CREATURE_TITAN);
-  end;
-
-  -- солдатская удача
-  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
-    replaceUnitInHero(mainHeroName, CREATURE_GREMLIN, CREATURE_OBSIDIAN_GARGOYLE);
-    replaceUnitInHero(mainHeroName, CREATURE_STORM_LORD, CREATURE_ARCH_MAGI);
-  end;
-
-  -- фикс бага с грифонами (Когда приземляется за поле боя)
-  replaceUnitInHero(mainHeroName, CREATURE_GRIFFIN, CREATURE_ROYAL_GRIFFIN);
-end;
-
 -- Обучение ГГ игрока всем доступным заклинаниям
 function teachMainHeroSpells(playerId)
   print "teachMainHeroSpells"
@@ -277,9 +240,15 @@ function checkAndMoveHeroFromFrendlyField()
   local choisePlayerId = getSelectedBattlefieldPlayerId();
   local choiseHeroName = PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name;
   local choisePlayerRaceId = RESULT_HERO_LIST[choisePlayerId].raceId;
+  local choiseDictHeroName = getDictionaryHeroName(choiseHeroName);
 
   local opponentPlayerId = PLAYERS_OPPONENT[choisePlayerId];
   local opponentPlayerRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+    
+  -- Нибросу не запрещаем находиться на его родной поляне
+  if choiseDictHeroName == HEROES.JAZAZ then
+    return nil;
+  end;
 
   -- С нахождением пути можно безобразничать как угодно
   if HasHeroSkill(choiseHeroName, PERK_PATHFINDING) then
@@ -812,20 +781,23 @@ end;
 -- Механическая подготовка и запуск битвы
 function runBattle()
   print "runBattle"
+  
+  local p1MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name;
+  local p2MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_2].name;
+  
+  local choisePlayerId = getSelectedBattlefieldPlayerId();
+
+  -- Прогружаем боевые скрипты
+  StartCombat(PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)')
+
+  sleep(5);
 
   saveHeroesInfoInToBattle();
   generateSeed();
 
-  consoleCmd("@SetGameVar('execution_thread', '1')");
-
   checkAndMoveHeroFromFrendlyField();
 
   sleep(5);
-
-  local p1MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name;
-  local p2MainHeroName = PLAYERS_MAIN_HERO_PROPS[PLAYER_2].name;
-
-  local choisePlayerId = getSelectedBattlefieldPlayerId();
 
   while IsHeroAlive(p1MainHeroName) and IsHeroAlive(p2MainHeroName) do
     if choisePlayerId == PLAYER_2 then
@@ -849,8 +821,6 @@ function startBattle()
     checkAndRunHeroPerks(playerId);
 
     runHeroSpecialization(playerId);
-
-    replaceCommonUnitOnSpecial(playerId);
 
     runScriptingArtifacts(playerId);
   end;
