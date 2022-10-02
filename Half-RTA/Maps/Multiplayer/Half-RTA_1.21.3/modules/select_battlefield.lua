@@ -62,47 +62,6 @@ MAP_RACE_ON_ADDITIONAL_REGIONS = {
   --[RACES.STRONGHOLD] = '',
 };
 
--- Соотношение существ к их грейдам
-MAP_CREATURES_ON_GRADE = {
-  -- Стандартные существа из замка
-  [CREATURE_PRIEST] = CREATURE_ZEALOT,
-  [CREATURE_CAVALIER] = CREATURE_CHAMPION,
-  [CREATURE_ANGEL] = CREATURE_SERAPH,
-  [CREATURE_SUCCUBUS] = CREATURE_SUCCUBUS_SEDUCER,
-  [CREATURE_NIGHTMARE] = CREATURE_HELLMARE,
-  [CREATURE_PIT_FIEND] = CREATURE_PIT_SPAWN,
-  [CREATURE_DEVIL] = CREATURE_ARCH_DEMON,
-  [CREATURE_VAMPIRE] = CREATURE_NOSFERATU,
-  [CREATURE_LICH] = CREATURE_LICH_MASTER,
-  [CREATURE_WIGHT] = CREATURE_BANSHEE,
-  [CREATURE_BONE_DRAGON] = CREATURE_HORROR_DRAGON,
-  [CREATURE_DRUID] = CREATURE_HIGH_DRUID,
-  [CREATURE_UNICORN] = CREATURE_WHITE_UNICORN,
-  [CREATURE_TREANT] = CREATURE_ANGER_TREANT,
-  [CREATURE_GREEN_DRAGON] = CREATURE_RAINBOW_DRAGON,
-  [CREATURE_MAGI] = CREATURE_COMBAT_MAGE,
-  [CREATURE_GENIE] = CREATURE_DJINN_VIZIER,
-  [CREATURE_RAKSHASA] = CREATURE_RAKSHASA_KSHATRI,
-  [CREATURE_RAKSHASA_RUKH] = CREATURE_TITAN,
-  [CREATURE_GIANT] = CREATURE_STORM_LORD,
-  [CREATURE_RIDER] = CREATURE_BLACK_RIDER,
-  [CREATURE_HYDRA] = CREATURE_ACIDIC_HYDRA,
-  [CREATURE_MATRON] = CREATURE_SHADOW_MISTRESS,
-  [CREATURE_DEEP_DRAGON] = CREATURE_RED_DRAGON,
-  [CREATURE_BROWLER] = CREATURE_BATTLE_RAGER,
-  [CREATURE_RUNE_MAGE] = CREATURE_FLAME_KEEPER,
-  [CREATURE_THANE] = CREATURE_THUNDER_THANE,
-  [CREATURE_MAGMA_DRAGON] = CREATURE_LAVA_DRAGON,
-  [CREATURE_SHAMAN] = CREATURE_SHAMAN_HAG,
-  [CREATURE_ORCCHIEF_BUTCHER] = CREATURE_ORCCHIEF_CHIEFTAIN,
-  [CREATURE_WYVERN] = CREATURE_WYVERN_PAOKAI,
-  [CREATURE_CYCLOP] = CREATURE_CYCLOP_BLOODEYED,
-
-  -- Специальные существа, замененные навыками или или специализациями
-  [CREATURE_ROYAL_GRIFFIN] = CREATURE_BATTLE_GRIFFIN, -- Гриффоны без бага?
-  [CREATURE_RAKSHASA_RUKH] = CREATURE_TITAN, -- Джины Джалиба
-};
-
 -- Гарнизоны для сражения с эльфом
 ELF_ENEMY_GARNISONS = {
   [RACES.HAVEN] = {
@@ -177,12 +136,6 @@ ELF_ENEMY_GARNISONS = {
     { kol =  4, id = 127 },
     { kol =  2, id = 129 },
   },
-};
-
--- Соотношение игроков на Id гарнизонов для дипломатии
-MAP_GARNISON_FOR_DIPLOMACY = {
-  [PLAYER_1] = 'Garrison3',
-  [PLAYER_2] = 'Garrison4',
 };
 
 -- Запрет выбора родных земель
@@ -389,101 +342,6 @@ function clearGarnisonOnChangeTread(garnisonName)
   end;
 end;
 
--- Вычисление кэфа дипломатии
-function getDiplomacyKoef(heroName)
-  print 'getDiplomacyKoef'
-
-  local DIPLOMACY_DEFAULT_COEF = 0.4;
-
-  local dictHeroName = getDictionaryHeroName(heroName);
-
-  if dictHeroName == HEROES.ROLF then
-    return 2 * DIPLOMACY_DEFAULT_COEF;
-  end;
-
-  return DIPLOMACY_DEFAULT_COEF;
-end;
-
--- Активация навыка "Дипломатия"
-function runDiplomacy(heroName)
-  print 'runDiplomacy'
-
-  local playerId = GetObjectOwner(heroName);
-
-  awaitMessageBoxForPlayers(playerId, PATH_TO_MODULES_MESSAGES.."diplomacy.txt");
-
-  local stashArmy = {
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-  };
-
-  stashArmy[1].id1, stashArmy[2].id1, stashArmy[3].id1, stashArmy[4].id1, stashArmy[5].id1, stashArmy[6].id1, stashArmy[7].id1 = GetHeroCreaturesTypes(heroName);
-
-  -- Выясняем, какие грейды будем предлагать
-  for _, stashItem in stashArmy do
-    if stashItem.id1 ~= nil then
-      for gradeCreatureId, altGradeCreatureId in MAP_CREATURES_ON_GRADE do
-        if stashItem.id1 == gradeCreatureId or stashItem.id1 == altGradeCreatureId then
-          if GetHeroCreatures(heroName, gradeCreatureId) == 0 then
-            stashItem.id2 = gradeCreatureId;
-          elseif GetHeroCreatures(heroName, altGradeCreatureId) == 0 then
-            stashItem.id2 = altGradeCreatureId;
-          else
-            -- Чтобы эффект не дублировался
-            if stashItem.id1 == gradeCreatureId then
-              if GetHeroCreatures(heroName, gradeCreatureId) >= GetHeroCreatures(heroName, altGradeCreatureId) then
-                stashItem.id2 = altGradeCreatureId;
-              else
-                stashItem.id2 = gradeCreatureId;
-              end;
-            end;
-          end;
-        end;
-      end;
-    end;
-  end;
-
-  local diplomacyKoef = getDiplomacyKoef(heroName);
-
-  -- Добавляем в гарнизон армию, возможную для присоединения через дипломатию
-  DenyGarrisonCreaturesTakeAway(MAP_GARNISON_FOR_DIPLOMACY[playerId], not nil);
-
-  for _, stashItem in stashArmy do
-    for _, raceId in RACES do
-      for _, unitData in UNITS[raceId] do
-        if stashItem.id1 == unitData.id and stashItem.id2 ~= nil then
-          stashItem.kol = diplomacyKoef * unitData.kol;
-          AddObjectCreatures(MAP_GARNISON_FOR_DIPLOMACY[playerId], stashItem.id2, stashItem.kol);
-        end;
-      end;
-    end;
-  end;
-
-  -- Отдаем гарнизон игроку и следим за изменением количества существ в нем
-  SetObjectOwner(MAP_GARNISON_FOR_DIPLOMACY[playerId], playerId);
-  MakeHeroInteractWithObject(heroName, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
-
-  startThread(clearGarnisonOnChangeTread, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
-end;
-
--- Навык дипломатии
-function checkAndRunDiplomacy()
-  print "checkAndRunDiplomacy"
-
-  for _, playerId in PLAYER_ID_TABLE do
-    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-
-    -- Дипломатия
-    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
-      startThread(runDiplomacy, mainHeroName);
-    end;
-  end;
-end;
 
 function selectBattlefield()
   print "selectBattlefield"
@@ -497,8 +355,6 @@ function selectBattlefield()
     
     showSelectBattlefieldMessage(playerId);
   end;
-  
-  checkAndRunDiplomacy();
   
   giveMovePointsSelectableHero();
 end;

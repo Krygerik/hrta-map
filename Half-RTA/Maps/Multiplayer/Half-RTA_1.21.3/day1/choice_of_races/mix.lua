@@ -866,7 +866,7 @@ function handleMixChoiseOfRaceSelectRace(iconName)
   addRaceToResultList(player, raceId);
   
   local countHeroList = getCountResultHeroList();
-  
+
   if countHeroList < 2 then
     -- Конец черка
     removeHeroMovePoints(Biara);

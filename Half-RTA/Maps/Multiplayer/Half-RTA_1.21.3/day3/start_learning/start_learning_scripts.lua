@@ -2006,7 +2006,7 @@ function applyFortunareAdventureDiscount(strPlayerId)
   local playerId = strPlayerId + 0;
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
-  local discountCoefficient = 0.2;
+  local discountCoefficient = 0.25;
   local discount = 0;
 
   for _, art in ALL_ARTS_LIST do

@@ -104,13 +104,13 @@ function setHeroesInitialProperties()
       
       ChangeHeroStat(reservedHeroName, STAT_MANA_POINTS, 0 - heroMana);
       LockMinHeroSkillsAndAttributes(reservedHeroName);
-      
+
       -- √ерою из таверны даем 5 мувов, чтоб мог себ€ выкупить
       if indexHero == 3 then
         removeHeroMovePoints(reservedHeroName);
         ChangeHeroStat(reservedHeroName, STAT_MOVE_POINTS, 500);
       end;
-      
+
       for _, skill in INITIAL_HERO_SKILLS[heroName] do
         GiveHeroSkill(reservedHeroName, skill);
       end;

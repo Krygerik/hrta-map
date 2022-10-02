@@ -544,7 +544,6 @@ function startChoosingHeroes(resultPairIndex)
   print "startChoosingHeroes"
 
   local selectedPair = selectedRacePair[resultPairIndex];
-  local redRaceId, blueRaceId;
 
   for sideIndex = 1, length(selectedPair) do
     local side = selectedPair[sideIndex];

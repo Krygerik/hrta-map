@@ -12,19 +12,24 @@ local Djovanni = GetPlayerHeroes(PLAYER_2)[0]
 if GAME_MODE.MATCHUPS then
    addHeroMovePoints(Biara);
    addHeroMovePoints(Djovanni);
+
    ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."cherk_matchups.txt", Biara, 1, 5.0);
    ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."cherk_matchups.txt", Djovanni, 2, 5.0);
 end;
 
 -- получерк
 if GAME_MODE.HALF then
-   addHeroMovePoints(Biara);
-   ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."choose_race.txt", Biara, 1, 5.0);
+  addHeroMovePoints(Biara);
+  removeHeroMovePoints(Djovanni);
+
+  ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."choose_race.txt", Biara, 1, 5.0);
 end;
 
 -- смешанный черк
 if GAME_MODE.MIX then
   addHeroMovePoints(Biara);
+  removeHeroMovePoints(Djovanni);
+
   ShowFlyingSign(PATH_TO_MODULE_MESSAGES.."mix_cherk_desc.txt", Biara, 1, 5.0);
 end;
 

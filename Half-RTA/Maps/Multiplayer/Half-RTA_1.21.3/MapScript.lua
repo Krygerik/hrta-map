@@ -34,6 +34,10 @@ function handleNewDay()
   end;
   
   if GetDate(DAY) == 4 then
+    for _, playerId in PLAYER_ID_TABLE do
+      SetPlayerResource (playerId, GOLD, 0);
+    end;
+
     sleep(5);
     doFile(GetMapDataPath().."day4/day4_scripts.lua");
   end;

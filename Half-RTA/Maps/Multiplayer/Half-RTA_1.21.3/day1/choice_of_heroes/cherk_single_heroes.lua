@@ -398,9 +398,30 @@ function getCountSideFullfied()
   return countSide;
 end;
 
+-- Удаление оставшихся групп героев
+function deleteResultHeroIcons()
+  print "deleteResultHeroIcons"
+
+  -- Расставляем сгенерированных героев для выбора
+  for playerId = 1, length(randomHeroList) do
+    local heroList = randomHeroList[playerId];
+
+    for heroIndex = 1, length(heroList) do
+      local heroData = heroList[heroIndex];
+
+      hideHeroToUnderground(playerId, heroData.name);
+      hideHeroToUnderground(playerId, heroData.name);
+    end;
+  end;
+end;
+
 -- Получение конечного списка героев для обоих игроков
 function setResultHeroes()
   print "setResultHeroes"
+
+  sleep(1);
+
+  deleteResultHeroIcons();
 
   for playerId = 1, length(randomHeroList) do
     local heroList = randomHeroList[playerId]
