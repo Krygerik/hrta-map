@@ -5215,7 +5215,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_FOREST_GUARD_EMBLEM</Item>
+							<Item>HERO_SKILL_RECRUITMENT</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -5239,7 +5239,7 @@
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_BATTLE_ELATION</Item>
+							<Item>HERO_SKILL_RECRUITMENT</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -8369,48 +8369,56 @@
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_PRAYER</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_CUNNING_OF_THE_WOODS</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_SPIRIT_LINK</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_STRONG_RUNE</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MIGHT_OVER_MAGIC</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -11100,7 +11108,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_RECRUITMENT</Item>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -11112,13 +11120,13 @@
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_RECRUITMENT</Item>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_RECRUITMENT</Item>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>

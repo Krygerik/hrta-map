@@ -329,6 +329,21 @@ function perkRecruitment(playerId)
   end;
 end;
 
+-- Марш големов
+function perkFeatMarchOfTheMachines(heroName)
+  print "perkFeatMarchOfTheMachines"
+  local heroLevel = GetHeroLevel(heroName);
+  print(heroName)
+  local BONUS_VALUE = 10 + 10 * (floor(heroLevel/10));
+
+    if (GetHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM) > 0) then
+      AddHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM, BONUS_VALUE);
+    elseif (GetHeroCreatures(heroName, CREATURE_IRON_GOLEM) > 0) then
+      AddHeroCreatures(heroName, CREATURE_IRON_GOLEM, BONUS_VALUE);
+    end;
+end;
+
+
 -- Запуск скриптовых умений героя
 function checkAndRunHeroPerks(playerId)
   print "checkAndRunHeroPerks"
@@ -348,6 +363,11 @@ function checkAndRunHeroPerks(playerId)
   -- Сбор войск
   if HasHeroSkill(mainHeroName, PERK_RECRUITMENT) then
     perkRecruitment(playerId);
+  end;
+  
+  -- Марш машин (выдача големов)
+  if HasHeroSkill(mainHeroName, WIZARD_FEAT_MARCH_OF_THE_MACHINES) then
+    perkFeatMarchOfTheMachines(mainHeroName);
   end;
 
   -- Сумерки
