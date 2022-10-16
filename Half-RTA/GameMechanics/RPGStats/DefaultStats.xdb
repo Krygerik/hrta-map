@@ -376,7 +376,7 @@
 				<LiquidFlameBreath_DamagePerCreature>15</LiquidFlameBreath_DamagePerCreature>
 				<LiquidFlameBreath_MinDuration>2</LiquidFlameBreath_MinDuration>
 				<LiquidFlameBreath_MaxDuration>2</LiquidFlameBreath_MaxDuration>
-				<PreparedPosition_DefenceBonus>10</PreparedPosition_DefenceBonus>
+				<PreparedPosition_DefenceBonus>5</PreparedPosition_DefenceBonus>
 				<BattleRage_InitiativeBonus>2</BattleRage_InitiativeBonus>
 				<BattleRage_AttackBonus>5</BattleRage_AttackBonus>
 				<BattleRage_EffectDuration>2</BattleRage_EffectDuration>
