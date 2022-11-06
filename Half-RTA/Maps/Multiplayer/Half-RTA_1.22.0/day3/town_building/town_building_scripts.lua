@@ -56,6 +56,10 @@ function setTownMaximumLevel(townName, raceId)
     UpgradeTownBuilding(townName, dwelling);
   end;
 
+  if raceId == RACES.HAVEN then
+    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_HAVEN_TRAINING_GROUNDS, 0);
+  end;
+
   SetTownBuildingLimitLevel(townName, TOWN_BUILDING_TOWN_HALL, 1);
   SetTownBuildingLimitLevel(townName, TOWN_BUILDING_FORT, 0);
   SetTownBuildingLimitLevel(townName, TOWN_BUILDING_MARKETPLACE, 0);

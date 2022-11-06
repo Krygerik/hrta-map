@@ -366,8 +366,12 @@ function checkAndRunHeroPerks(playerId)
   
   -- Тайный ритуал
   if HasHeroSkill(mainHeroName, PERK_DARK_RITUAL) then
+    local dictHeroName = getDictionaryHeroName(mainHeroName);
+    
+    local manaBonus = dictHeroName == HEROES.ALMEGIR and 100 or 50;
+  
     ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 10);
-    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 50);
+    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, manaBonus);
     ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -10);
   end;
 

@@ -231,9 +231,6 @@ function prepareForHavenTraining(playerId)
   for _, tierLvl in tierUnitForTrainingTable do
     local unitName = PLAYERS_TRAINING_UNITS[playerId][tierLvl];
     local unitPosition = PLAYERS_TRAINING_UNITS_POSITION[playerId][tierLvl];
-    
-    print(GetMapDataPath()..'day4/modules/unit_'.. tierLvl .."_tier_name.txt")
-    print(GetMapDataPath()..'day4/modules/unit_'.. tierLvl .."_tier_desc.txt")
 
     SetObjectPosition(unitName, unitPosition.x, unitPosition.y);
 

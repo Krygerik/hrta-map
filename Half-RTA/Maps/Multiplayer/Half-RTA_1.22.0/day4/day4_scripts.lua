@@ -643,6 +643,9 @@ function replaceMainHero(playerId, newHeroName)
 
   RemoveObject(mainHeroName);
   DeployReserveHero(newHeroName, x, y, GROUND);
+  
+  repeat sleep() until IsObjectExists(newHeroName);
+  
   Trigger(HERO_ADD_SKILL_TRIGGER, newHeroName, 'noop');
   WarpHeroExp(newHeroName, heroExp);
 
