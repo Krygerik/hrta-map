@@ -1299,11 +1299,6 @@ function handleHeroAddSkill(triggerHero, skillId)
     startThread(darkRitualTread, playerMainHero);
   end;
   
-  -- Военачальник
-  if skillId == PERK_EXPERT_TRAINER then
-    SetTownBuildingLimitLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 1);
-  end;
-  
   -- Лесной лидер
   if skillId == RANGER_FEAT_FOREST_GUARD_EMBLEM then
     forestGuard(playerMainHero);
@@ -1400,12 +1395,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
   if skill == KNIGHT_FEAT_STUDENT_AWARD then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - STUDENT_AWARD_GOLD));
   end;
-  
-  -- Военачальник
-  if skill == PERK_EXPERT_TRAINER and GetTownBuildingLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES) < 1 then
-    SetTownBuildingLimitLevel(MAP_PLAYER_TO_TOWNNAME[playerId], TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0);
-  end;
-  
+
   -- Логистика
   if skill == SKILL_LOGISTICS then
     local resultGold = GetPlayerResource (playerId, GOLD) - LOGISTIC_BONUS;
@@ -1601,7 +1591,7 @@ function getRemovedUnremovableSkillId(playerId)
   if HasHeroSkill(playerMainHero, PERK_DARK_RITUAL) == nil and PLAYERS_USE_DARK_RITUAL_STATUS[playerId] ~= nil then
     return PERK_DARK_RITUAL;
   end;
-  
+
   -- Военачальник
   if (GetTownRace(MAP_PLAYER_TO_TOWNNAME[playerId]) == RACES.HAVEN) then
     if (
@@ -1611,7 +1601,7 @@ function getRemovedUnremovableSkillId(playerId)
       return PERK_EXPERT_TRAINER;
     end;
   end;
-  
+
   -- Логистика
   if PLAYERS_LOGISTICS_DEBT[playerId] > 0 then
     PLAYERS_LOGISTICS_DEBT[playerId] = PLAYERS_LOGISTICS_DEBT[playerId] - LOGISTIC_BONUS;

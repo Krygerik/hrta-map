@@ -86,7 +86,7 @@ function needPostponeBattle()
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
 
-    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY then
+    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY or raceId == RACES.HAVEN then
       return not nil;
     end;
   end;

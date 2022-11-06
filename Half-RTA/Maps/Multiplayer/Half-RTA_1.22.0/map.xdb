@@ -10044,7 +10044,7 @@
 				<Name>spell_nabor1</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -10062,7 +10062,7 @@
 				<Name>spell_nabor2</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -10080,7 +10080,7 @@
 				<Name>spell_nabor4</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -10098,7 +10098,7 @@
 				<Name>spell_nabor3</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -30601,7 +30601,7 @@
 				<Name>spell_nabor3</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -30619,7 +30619,7 @@
 				<Name>spell_nabor3</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<Shared href="/MapObjects/Wood.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -38930,8 +38930,8 @@
 				<ScalePercent>100</ScalePercent>
 			</AdvMapStatic>
 		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_EF4B39E3-CFCF-4704-88D1-E0A9C035FB69">
-			<AdvMapMonster>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_CE345F58-340B-48C7-88DF-C6D3D9F2BEBF">
+			<AdvMapTreasure>
 				<Pos>
 					<x>84</x>
 					<y>45</y>
@@ -38942,164 +38942,14 @@
 				<Name>training_peasant_1</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Landlord.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
 				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
+			</AdvMapTreasure>
 		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_56060EC5-93D4-47F2-8722-ECE0B763DE07">
-			<AdvMapMonster>
-				<Pos>
-					<x>85</x>
-					<y>45</y>
-					<z>0</z>
-				</Pos>
-				<Rot>0</Rot>
-				<Floor>0</Floor>
-				<Name>training_archer_1</Name>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Longbowman.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
-				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
-				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
-		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_41618568-1648-47D1-AA41-45F57B2014FB">
-			<AdvMapMonster>
-				<Pos>
-					<x>86</x>
-					<y>45</y>
-					<z>0</z>
-				</Pos>
-				<Rot>0</Rot>
-				<Floor>0</Floor>
-				<Name>training_footman_1</Name>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Vindicator.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
-				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
-				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
-		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_0BD0ED24-6BBE-4D5C-BC16-EA3E0348A403">
-			<AdvMapMonster>
-				<Pos>
-					<x>87</x>
-					<y>45</y>
-					<z>0</z>
-				</Pos>
-				<Rot>0</Rot>
-				<Floor>0</Floor>
-				<Name>training_priest_1</Name>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Zealot.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
-				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
-				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
-		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_4E4EE614-7597-4B16-AD71-7D7FFAE93578">
-			<AdvMapMonster>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_48C0C01E-298B-46C0-8E3F-BE537F49ED40">
+			<AdvMapTreasure>
 				<Pos>
 					<x>84</x>
 					<y>44</y>
@@ -39110,38 +38960,14 @@
 				<Name>training_peasant_2</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Landlord.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
 				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
+			</AdvMapTreasure>
 		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_BBFC234F-36A0-46FB-9948-939D6BAEBD84">
-			<AdvMapMonster>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_18840718-BDD5-4DB4-BA32-A9B64026DC81">
+			<AdvMapTreasure>
 				<Pos>
 					<x>85</x>
 					<y>44</y>
@@ -39152,38 +38978,32 @@
 				<Name>training_archer_2</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Longbowman.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
 				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
+			</AdvMapTreasure>
 		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_CCCD4902-1926-4830-BEE6-B118F4516221">
-			<AdvMapMonster>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_A87C2FA4-B13A-4CF5-AA61-28F8F105243F">
+			<AdvMapTreasure>
+				<Pos>
+					<x>85</x>
+					<y>45</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>0</Floor>
+				<Name>training_archer_1</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_FCED244A-E417-4342-9EC2-22E18E1AFA99">
+			<AdvMapTreasure>
 				<Pos>
 					<x>86</x>
 					<y>44</y>
@@ -39194,38 +39014,32 @@
 				<Name>training_footman_2</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Vindicator.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
 				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
+			</AdvMapTreasure>
 		</Item>
-		<Item href="#n:inline(AdvMapMonster)" id="item_318F7E9B-1606-4448-9329-6A00ECB80A93">
-			<AdvMapMonster>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_D1A776F3-1FF0-4C14-BB08-C05105185E73">
+			<AdvMapTreasure>
+				<Pos>
+					<x>86</x>
+					<y>45</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>0</Floor>
+				<Name>training_footman_1</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_0A8FF253-9E7B-47E9-9F10-BC7C5568B2C9">
+			<AdvMapTreasure>
 				<Pos>
 					<x>87</x>
 					<y>44</y>
@@ -39236,45 +39050,39 @@
 				<Name>training_priest_2</Name>
 				<CombatScript/>
 				<pointLights/>
-				<Shared href="/MapObjects/Haven/Renegates/Zealot.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
-				<Custom>false</Custom>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
-				<Amount2>0</Amount2>
-				<AttackType>ATTACK_ANY</AttackType>
-				<MoveType>MOVE_ANY</MoveType>
-				<DoesNotGrow>false</DoesNotGrow>
 				<MessageFileRef href=""/>
-				<Script/>
-				<Resources>
-					<Wood>0</Wood>
-					<Ore>0</Ore>
-					<Mercury>0</Mercury>
-					<Crystal>0</Crystal>
-					<Sulfur>0</Sulfur>
-					<Gem>0</Gem>
-					<Gold>0</Gold>
-				</Resources>
-				<ArtifactID>ARTIFACT_NONE</ArtifactID>
-				<Mood>MONSTER_MOOD_AGGRESSIVE</Mood>
-				<Courage>MONSTER_COURAGE_CAN_FLEE_JOIN</Courage>
-				<AllowQuickCombat>true</AllowQuickCombat>
-				<DoesNotDependOnDifficulty>false</DoesNotDependOnDifficulty>
-				<AdditionalStacks/>
-				<SingleMonsterNameFileRef href=""/>
-				<MultipleMonstersNameFileRef href=""/>
-				<RacesRandomGroupID>0</RacesRandomGroupID>
-				<relationsOverrides/>
-			</AdvMapMonster>
+			</AdvMapTreasure>
 		</Item>
-		<Item href="#n:inline(AdvMapGarrison)" id="item_C2FEA04F-1B5E-4826-A60A-1572414F11F4">
-			<AdvMapGarrison>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_1F491239-539E-4DB2-AC8B-6E08F68AA71E">
+			<AdvMapTreasure>
 				<Pos>
-					<x>90</x>
+					<x>87</x>
 					<y>45</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
 				<Floor>0</Floor>
+				<Name>training_priest_1</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Ore.(AdvMapTreasureShared) (2) (2) (2) (2).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapGarrison)" id="item_792CA6FA-FC2F-47A3-87D0-E83093FD580C">
+			<AdvMapGarrison>
+				<Pos>
+					<x>42</x>
+					<y>30</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
 				<Name>training_garrison_1</Name>
 				<CombatScript/>
 				<pointLights/>
@@ -39291,15 +39099,15 @@
 				<TownType>TOWN_HEAVEN</TownType>
 			</AdvMapGarrison>
 		</Item>
-		<Item href="#n:inline(AdvMapGarrison)" id="item_A59A9416-2F1C-4927-AFAA-2A5DD37A91D8">
+		<Item href="#n:inline(AdvMapGarrison)" id="item_3A43F77F-1C9D-4915-8EC5-04241CBE36E4">
 			<AdvMapGarrison>
 				<Pos>
-					<x>90</x>
-					<y>43</y>
+					<x>42</x>
+					<y>28</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
-				<Floor>0</Floor>
+				<Floor>1</Floor>
 				<Name>training_garrison_2</Name>
 				<CombatScript/>
 				<pointLights/>

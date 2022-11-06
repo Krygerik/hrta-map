@@ -64,11 +64,6 @@ function setTownMaximumLevel(townName, raceId)
   SetTownBuildingLimitLevel(townName, TOWN_BUILDING_BLACKSMITH, 0);
   SetTownBuildingLimitLevel(townName, TOWN_BUILDING_MAGIC_GUILD, 0);
 
-  if raceId == RACES.HAVEN then
-    UpgradeTownBuilding(townName, TOWN_BUILDING_HAVEN_TRAINING_GROUNDS);
-    SetTownBuildingLimitLevel(townName, TOWN_BUILDING_HAVEN_MONUMENT_TO_FALLEN_HEROES, 0);
-    UpgradeTownBuilding(townName, TOWN_BUILDING_HAVEN_FARMS);
-  end;
   if raceId == RACES.ACADEMY then
     UpgradeTownBuilding(townName, TOWN_BUILDING_ACADEMY_ARTIFACT_MERCHANT);
   end;

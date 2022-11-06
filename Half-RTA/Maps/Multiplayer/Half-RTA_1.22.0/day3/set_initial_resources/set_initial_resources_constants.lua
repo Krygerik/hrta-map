@@ -7,7 +7,7 @@ INITIAL_RESOURCES = {
      [CRYSTAL] = 0,
      [SULFUR] = 0,
      [GEM] = 0,
-     [GOLD] = 135000,
+     [GOLD] = 130000,
    },
    [RACES.INFERNO] = {
      [WOOD] = 0,

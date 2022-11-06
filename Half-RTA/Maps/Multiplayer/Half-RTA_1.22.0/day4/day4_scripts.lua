@@ -494,6 +494,12 @@ function runRaceAbility(playerId)
   if raceId == RACES.FORTRESS then
     giveRuneResources(playerId);
   end;
+
+  -- Хумов радуем новым тренингом
+  -- Условие на игрока 1, чтобы функции инициализировались 1 раз
+  if raceId == RACES.HAVEN and playerId == PLAYER_1 then
+    doFile(PATH_TO_DAY4_SCRIPTS..'modules/training.lua');
+  end
 end;
 
 -- Показ игроку информацию о необходимых действиях на текущий день
@@ -501,31 +507,40 @@ function showDay4InfoMessage(playerId)
   print "showDay4InfoMessage"
   
   local raceId = RESULT_HERO_LIST[playerId].raceId;
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
   if raceId == RACES.SYLVAN then
-    awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."avenger_info.txt");
+    ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."avenger_info.txt", mainHeroName, playerId, 5);
   end;
   
   if raceId == RACES.ACADEMY then
-    awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."create_mini_arts_info.txt");
+    ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."create_mini_arts_info.txt", mainHeroName, playerId, 5);
   end;
   
   if raceId == RACES.NECROPOLIS then
-    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-    
-    awaitMessageBoxForPlayers(playerId, { PATH_TO_DAY4_MESSAGES.."necromance_info.txt"; eq = GetHeroSkillMastery(mainHeroName, SKILL_NECROMANCY) });
+    ShowFlyingSign({ PATH_TO_DAY4_MESSAGES.."necromance_info.txt"; eq = GetHeroSkillMastery(mainHeroName, SKILL_NECROMANCY) }, mainHeroName, playerId, 5);
   end;
   
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
   local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+  local opponentMainHero = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
-  if raceId ~= RACES.SYLVAN and raceId ~= RACES.ACADEMY and raceId ~= RACES.NECROPOLIS then
+  if
+    raceId ~= RACES.SYLVAN
+    and raceId ~= RACES.ACADEMY
+    and raceId ~= RACES.NECROPOLIS
+    and raceId ~= RACES.HAVEN
+  then
     if opponentRaceId == RACES.SYLVAN then
-      awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."enemy_avenger_info.txt");
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."enemy_avenger_info.txt", opponentMainHero, playerId, 5);
     end;
     
     if opponentRaceId == RACES.ACADEMY then
-      awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt");
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt", opponentMainHero, playerId, 5);
+    end;
+
+    if opponentRaceId == RACES.HAVEN then
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."training_enemy_info.txt", opponentMainHero, playerId, 5);
     end;
   end;
 end;
@@ -553,7 +568,7 @@ function additionalDayBeforeSelectBattlefield()
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
     
-    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY then
+    if raceId == RACES.SYLVAN or raceId == RACES.ACADEMY or raceId == RACES.HAVEN then
       teleportMainHeroToNearTown(playerId);
     else
       preliminaryTeleportHeroToSelectBattlefield(playerId);

@@ -27,11 +27,6 @@ function setInitialResources()
 
           ShowFlyingSign({PATH_TO_SET_INIT_RESOURCES_MESSAGES.."start_gold.txt"; eq = randomStartGold}, secondHero, playerId, 5.0);
         end;
-
-        -- Показываем уведомление Ордену Порядка, почему у него на 5 больше, чем у других фракций :)
-        if raceId == RACES.HAVEN then
-          ShowFlyingSign(PATH_TO_SET_INIT_RESOURCES_MESSAGES.."human_gold_bonus.txt", secondHero, playerId, 7.0);
-        end;
       end;
       
       SetPlayerResource(playerId, resourceId, resValue);
