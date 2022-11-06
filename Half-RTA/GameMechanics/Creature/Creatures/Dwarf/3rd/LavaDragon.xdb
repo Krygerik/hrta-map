@@ -42,7 +42,7 @@
 	<flybySequence/>
 	<Visual href="/GameMechanics/CreatureVisual/Creatures/Dwarf/3rd/LavaDragon.(CreatureVisual).xdb#xpointer(/CreatureVisual)"/>
 	<Range>0</Range>
-	<BaseCreature>CREATURE_MAGMA_DRAGON</BaseCreature>
+	<BaseCreature>CREATURE_FIRE_DRAGON</BaseCreature>
 	<Upgrades/>
 	<Abilities>
 		<Item>ABILITY_ELEMENTAL</Item>

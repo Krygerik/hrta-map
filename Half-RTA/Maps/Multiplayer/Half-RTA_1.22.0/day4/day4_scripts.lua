@@ -508,7 +508,7 @@ function showDay4InfoMessage(playerId)
   
   local raceId = RESULT_HERO_LIST[playerId].raceId;
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  
+
   if raceId == RACES.SYLVAN then
     ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."avenger_info.txt", mainHeroName, playerId, 5);
   end;

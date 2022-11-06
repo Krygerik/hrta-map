@@ -762,75 +762,18 @@ function setControlStatsTriggerOnHero(playerId)
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
 end;
 
--- Вопрос игроку, желает ли он повысить нападение за счет ТР
-function questionDRTakeAttack(strPlayerId)
-  local playerId = strPlayerId + 0;
-
-  QuestionBoxForPlayers(
-    playerId,
-    PATH_TO_START_LEARNING_MESSAGES.."question_get_attack_dark_ritual.txt",
-    'darkRitualUpStat("'..playerId..'", "'..STAT_ATTACK..'")',
-    'questionDRTakeDefence("'..playerId..'")'
-  );
-end;
-
--- Вопрос игроку, желает ли он повысить защиту за счет ТР
-function questionDRTakeDefence(strPlayerId)
-  local playerId = strPlayerId + 0;
-
-  QuestionBoxForPlayers(
-    playerId,
-    PATH_TO_START_LEARNING_MESSAGES.."question_get_defence_dark_ritual.txt",
-    'darkRitualUpStat("'..playerId..'", "'..STAT_DEFENCE..'")',
-    'questionDRTakeSpellPower("'..playerId..'")'
-  );
-end;
-
--- Вопрос игроку, желает ли он повысить колдовство за счет ТР
-function questionDRTakeSpellPower(strPlayerId)
-  local playerId = strPlayerId + 0;
-
-  QuestionBoxForPlayers(
-    playerId,
-    PATH_TO_START_LEARNING_MESSAGES.."question_get_spell_power_dark_ritual.txt",
-    'darkRitualUpStat("'..playerId..'", "'..STAT_SPELL_POWER..'")',
-    'questionDRTakeKnowledge("'..playerId..'")'
-  );
-end;
-
--- Вопрос игроку, желает ли он повысить знание за счет ТР
-function questionDRTakeKnowledge(strPlayerId)
-  local playerId = strPlayerId + 0;
-
-  QuestionBoxForPlayers(
-    playerId,
-    PATH_TO_START_LEARNING_MESSAGES.."question_get_knowledge_dark_ritual.txt",
-    'darkRitualUpStat("'..playerId..'", "'..STAT_KNOWLEDGE..'")',
-    'noop'
-  );
-end;
-
 -- Отслеживание активации Темного ритуала
 function darkRitualTread(heroName)
   print "darkRitualTread"
-  
-  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
-  
-  while not PLAYERS_USE_DARK_RITUAL_STATUS[playerId] do
-    if HasHeroSkill(heroName, PERK_DARK_RITUAL) then
-      if GetDate(DAY) == 3 and GetHeroStat(heroName, STAT_MANA_POINTS) > 0 then
-        questionDRTakeAttack(playerId);
 
+  while GetDate(DAY) == 3 do
+    if HasHeroSkill(heroName, PERK_DARK_RITUAL) then
+      if GetHeroStat(heroName, STAT_MANA_POINTS) > 0 then
         ChangeHeroStat(heroName, STAT_MOVE_POINTS, 30000);
         ChangeHeroStat(heroName, STAT_MANA_POINTS, 0 - GetHeroStat(heroName, STAT_MANA_POINTS));
       end;
-
-      if GetDate(DAY) == 4 then
-        questionDRTakeAttack(playerId);
-        PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
-      end;
     end
-    
+
     sleep(20);
   end;
 end;
@@ -868,54 +811,6 @@ function safetyRemoveStat(playerId, statId, diff)
   end;
   
   return not nil;
-end;
-
--- Получение значения изменения каждого параметра
-function getCountDarkRitualStat(playerId)
-  print "getCountDarkRitualStat"
-  
-  local mainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  
-  local dictHeroName = getDictionaryHeroName(mainHero);
-  
-  local defaultCount = 1;
-  
-  if dictHeroName == HEROES.ALMEGIR then
-    return defaultCount * 2;
-  end;
-  
-  return defaultCount;
-end;
-
--- Повышение статистики с темного ритуала
-function darkRitualUpStat(strPlayerId, strUpStatId)
-  print "darkRitualUpStat"
-  
-  local playerId = strPlayerId + 0;
-  local upStatId = strUpStatId + 0;
-  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
-
-  local changeStatValue = getCountDarkRitualStat(playerId);
-
-  local resultStatValue = changeStatValue;
-  
-  for _, statId in ALL_MAIN_STATS_LIST do
-    if upStatId ~= statId then
-      local success = safetyRemoveStat(playerId, statId, changeStatValue);
-      
-      if success then
-        resultStatValue = resultStatValue + changeStatValue;
-      end;
-    end;
-  end;
-  
-  mainHeroProps.stats[upStatId] = mainHeroProps.stats[upStatId] + resultStatValue;
-  
-  refreshMainHeroStats(playerId);
-  
-  addHeroMovePoints(mainHeroProps.name);
-  
-  PLAYERS_USE_DARK_RITUAL_STATUS[playerId] = not nil;
 end;
 
 -- Удаление стека, полученного с навыка "Лесной лидер"
@@ -1298,7 +1193,7 @@ function handleHeroAddSkill(triggerHero, skillId)
   if skillId == PERK_DARK_RITUAL then
     startThread(darkRitualTread, playerMainHero);
   end;
-  
+
   -- Лесной лидер
   if skillId == RANGER_FEAT_FOREST_GUARD_EMBLEM then
     forestGuard(playerMainHero);
@@ -1587,11 +1482,6 @@ function getRemovedUnremovableSkillId(playerId)
     return PERK_ESTATES;
   end;
   
-  -- Темный ритуал
-  if HasHeroSkill(playerMainHero, PERK_DARK_RITUAL) == nil and PLAYERS_USE_DARK_RITUAL_STATUS[playerId] ~= nil then
-    return PERK_DARK_RITUAL;
-  end;
-
   -- Военачальник
   if (GetTownRace(MAP_PLAYER_TO_TOWNNAME[playerId]) == RACES.HAVEN) then
     if (

@@ -34,6 +34,7 @@
 		<Gem>0</Gem>
 		<Gold>3400</Gold>
 	</Cost>
+	<PresetPrice>0</PresetPrice>
 	<SubjectOfRandomGeneration>true</SubjectOfRandomGeneration>
 	<MonsterShared href="/MapObjects/Dwarf/Fire_Dragon.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>
 	<CombatSize>2</CombatSize>
@@ -42,7 +43,10 @@
 	<Visual href="/GameMechanics/CreatureVisual/Creatures/Dwarf/Fire_Dragon.xdb#xpointer(/CreatureVisual)"/>
 	<Range>0</Range>
 	<BaseCreature>CREATURE_UNKNOWN</BaseCreature>
-	<Upgrades/>
+	<Upgrades>
+		<Item>CREATURE_MAGMA_DRAGON</Item>
+		<Item>CREATURE_LAVA_DRAGON</Item>
+	</Upgrades>
 	<Abilities>
 		<Item>ABILITY_ELEMENTAL</Item>
 		<Item>ABILITY_IMMUNITY_TO_FIRE</Item>

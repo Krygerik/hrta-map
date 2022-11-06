@@ -461,12 +461,6 @@ MAP_STATS_ON_MINIMUM = {
 -- Стоимость продажи параметра
 SELL_STAT_PRICE = 2500;
 
--- Статус использования "Темного ритуала" игроками
-PLAYERS_USE_DARK_RITUAL_STATUS = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
-};
-
 -- Скидка на покупку уровней для Винраэля
 ELLESHAR_DISCOUNT = 2500;
 

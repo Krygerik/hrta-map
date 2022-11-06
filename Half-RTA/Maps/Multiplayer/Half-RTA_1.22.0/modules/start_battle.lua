@@ -132,19 +132,6 @@ function teachMainHeroSpells(playerId)
   end;
 end;
 
--- Проверяем, не находится ли герой на запрещенке
-function checkNeedAutoTransferHero()
-  print "checkNeedAutoTransferHero"
-
-  local activePlayerId = getSelectedBattlefieldPlayerId();
-  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[activePlayerId].name;
-  local dictHeroName = getDictionaryHeroName(mainHeroName);
-
-  if HasHeroSkill(mainHeroName, PERK_PATHFINDING) == nil and dictHeroName ~= HEROES.JAZAZ then
-    -- Добавить передвижение героя на
-  end;
-end;
-
 -- Генерим сид
 function generateSeed()
   print "generateSeed"
@@ -376,6 +363,13 @@ function checkAndRunHeroPerks(playerId)
     ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 30);
     ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -5);
   end;
+  
+  -- Тайный ритуал
+  if HasHeroSkill(mainHeroName, PERK_DARK_RITUAL) then
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 10);
+    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, 50);
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -10);
+  end;
 
   -- сопротивление
   if HasHeroSkill(mainHeroName, WIZARD_FEAT_SEAL_OF_PROTECTION) then
@@ -481,18 +475,18 @@ function checkAndRunHeroPerks(playerId)
     end;
   end;
 
-  -- Заклинания за "Бесшумного преследователя"
+  -- Заклинания за "Бесшумный преследователь"
   if HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) then
     if raceId == RACES.STRONGHOLD then
       TeachHeroSpell(mainHeroName, SPELL_WARCRY_FEAR_MY_ROAR);
     end;
 
     if raceId == RACES.HAVEN or raceId == RACES.ACADEMY or raceId == RACES.FORTRESS or raceId == RACES.SYLVAN then
-      TeachHeroSpell(mainHeroName, SPELL_MASS_DEFLECT_ARROWS);
+      TeachHeroSpell(mainHeroName, SPELL_DEFLECT_ARROWS);
     end;
 
     if raceId == RACES.DUNGEON or raceId == RACES.INFERNO or raceId == RACES.NECROPOLIS then
-      TeachHeroSpell(mainHeroName, SPELL_MASS_FORGETFULNESS);
+      TeachHeroSpell(mainHeroName, SPELL_FORGETFULNESS);
     end;
   end;
 end;

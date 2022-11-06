@@ -12,7 +12,6 @@
 	<Level>4</Level>
 	<MagicSchool>MAGIC_SCHOOL_RUNIC</MagicSchool>
 	<RequiredHeroLevel>0</RequiredHeroLevel>
-	<IsAimed>false</IsAimed>
 	<TrainedCost>0</TrainedCost>
 	<damage>
 		<Item>
@@ -51,7 +50,7 @@
 		</Item>
 	</duration>
 	<sSpellCost>
-		<Wood>0</Wood>
+		<Wood>1</Wood>
 		<Ore>0</Ore>
 		<Mercury>1</Mercury>
 		<Crystal>0</Crystal>
@@ -59,11 +58,15 @@
 		<Gem>0</Gem>
 		<Gold>0</Gold>
 	</sSpellCost>
+	<IsAimed>false</IsAimed>
 	<IsAreaAttack>false</IsAreaAttack>
 	<CanSelectDead>false</CanSelectDead>
 	<Target>TARGET_FRIEND</Target>
 	<Element>ELEMENT_NONE</Element>
+	<DamageIsElemental>true</DamageIsElemental>
 	<visuals>
 		<Item href="RuneOfStunning.(SpellVisual).xdb#xpointer(/SpellVisual)"/>
 	</visuals>
+	<PresetPrice>0</PresetPrice>
+	<AvailableForPresets>true</AvailableForPresets>
 </Spell>
