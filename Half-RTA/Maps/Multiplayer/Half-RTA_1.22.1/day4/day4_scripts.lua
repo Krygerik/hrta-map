@@ -469,6 +469,8 @@ function giveRuneResources(playerId)
   end;
 end;
 
+ACTIVE_TRAINING_STATUS = nil;
+
 -- Запуск фракционных плюшек
 function runRaceAbility(playerId)
   print "runRaceAbility"
@@ -496,8 +498,9 @@ function runRaceAbility(playerId)
   end;
 
   -- Хумов радуем новым тренингом
-  -- Условие на игрока 1, чтобы функции инициализировались 1 раз
-  if raceId == RACES.HAVEN and playerId == PLAYER_1 then
+  if raceId == RACES.HAVEN and not ACTIVE_TRAINING_STATUS then
+    ACTIVE_TRAINING_STATUS = not nil;
+    
     doFile(PATH_TO_DAY4_SCRIPTS..'modules/training.lua');
   end
 end;
@@ -523,7 +526,6 @@ function showDay4InfoMessage(playerId)
   
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
   local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
-  local opponentMainHero = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
   if
     raceId ~= RACES.SYLVAN
@@ -532,15 +534,15 @@ function showDay4InfoMessage(playerId)
     and raceId ~= RACES.HAVEN
   then
     if opponentRaceId == RACES.SYLVAN then
-      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."enemy_avenger_info.txt", opponentMainHero, playerId, 5);
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."enemy_avenger_info.txt", mainHeroName, playerId, 5);
     end;
     
     if opponentRaceId == RACES.ACADEMY then
-      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt", opponentMainHero, playerId, 5);
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."create_mini_arts_enemy_info.txt", mainHeroName, playerId, 5);
     end;
 
     if opponentRaceId == RACES.HAVEN then
-      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."training_enemy_info.txt", opponentMainHero, playerId, 5);
+      ShowFlyingSign(PATH_TO_DAY4_MESSAGES.."training_enemy_info.txt", mainHeroName, playerId, 5);
     end;
   end;
 end;
@@ -904,8 +906,14 @@ function day4_scripts()
     transferAllArtsToMainHero(playerId);
 
     transferAllArmyToMain(playerId);
-    
+  end;
+  
+  for _, playerId in PLAYER_ID_TABLE do
     replaceHeroOnSpecial(playerId);
+  end;
+  
+  for _, playerId in PLAYER_ID_TABLE do
+    local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
     -- Дипломатия
     if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
