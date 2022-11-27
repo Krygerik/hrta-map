@@ -316,18 +316,102 @@ function perkRecruitment(playerId)
   end;
 end;
 
+--Дипломатия
+function perkDiplomacy(playerId)
+  print "perkDiplomacy"
+  
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  -- Коэффициент добавления юнитов из города
+  local DIPLOMACY_COEF = 0.25
+
+  local stash = {};
+  
+  local dictUnitsWizard = {
+    [CREATURE_ZEALOT] = 5,
+    [CREATURE_PRIEST] = 5,
+    
+    [CREATURE_PIT_FIEND] = 6,
+    
+    [CREATURE_LICH_MASTER] = 5,
+    [CREATURE_LICH] = 5,
+    
+    [CREATURE_HIGH_DRUID] = 4,
+    [CREATURE_DRUID] = 4,
+
+    [CREATURE_COMBAT_MAGE] = 4,
+    [CREATURE_MAGI] = 4,
+
+    [CREATURE_SHADOW_MISTRESS] = 6,
+    [CREATURE_MATRON] = 6,
+
+    [CREATURE_FLAME_KEEPER] = 5,
+    [CREATURE_RUNE_MAGE] = 5,
+
+    [CREATURE_SHAMAN_HAG] = 4,
+    [CREATURE_SHAMAN] = 4,
+
+    }
+    
+  local dictUnitsForRolf = {
+    [CREATURE_BROWLER] = 4,
+    [CREATURE_BATTLE_RAGER] = 4,
+    [CREATURE_FLAME_KEEPER] = 5,
+    [CREATURE_RUNE_MAGE] = 5,
+    [CREATURE_THANE] = 6,
+    [CREATURE_THUNDER_THANE] = 6,
+    [CREATURE_MAGMA_DRAGON] = 7,
+    [CREATURE_LAVA_DRAGON] = 7,
+    }
+
+  stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(mainHeroName);
+  
+  local dictHeroName = getDictionaryHeroName(mainHeroName);
+  if dictHeroName == HEROES.ROLF then
+    for currentLvl = 4, 7 do
+      local giveCreature = nil;
+      
+      for highLvlCreatureId, highLvlCreatureLvl in dictUnitsForRolf do
+        if highLvlCreatureLvl == currentLvl and not giveCreature then
+          for _, armyId in stash do
+            if armyId == highLvlCreatureId then
+              local unitInTown = RESULT_ARMY_INTO_TOWN[playerId][highLvlCreatureLvl];
+              
+              AddHeroCreatures(mainHeroName, highLvlCreatureId, floor(unitInTown.count * DIPLOMACY_COEF));
+              giveCreature = not nil
+            end
+          end
+        end
+      end
+    end
+    return nil
+  end
+  
+  for _, armyId in stash do
+    for wizardId, wizardLvl in dictUnitsWizard do
+      if armyId == wizardId then
+
+        local unitInTown = RESULT_ARMY_INTO_TOWN[playerId][wizardLvl];
+        AddHeroCreatures(mainHeroName, wizardId, floor(unitInTown.count * DIPLOMACY_COEF));
+
+        return nil
+      end;
+     end;
+  end;
+end;
+
+
 -- Марш големов
 function perkFeatMarchOfTheMachines(heroName)
   print "perkFeatMarchOfTheMachines"
   local heroLevel = GetHeroLevel(heroName);
-  print(heroName)
   local BONUS_VALUE = 10 + 10 * (floor(heroLevel/10));
 
-    if (GetHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM) > 0) then
-      AddHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM, BONUS_VALUE);
-    elseif (GetHeroCreatures(heroName, CREATURE_IRON_GOLEM) > 0) then
-      AddHeroCreatures(heroName, CREATURE_IRON_GOLEM, BONUS_VALUE);
-    end;
+  if (GetHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM) > 0) then
+    AddHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM, BONUS_VALUE);
+  elseif (GetHeroCreatures(heroName, CREATURE_IRON_GOLEM) > 0) then
+    AddHeroCreatures(heroName, CREATURE_IRON_GOLEM, BONUS_VALUE);
+  end;
 end;
 
 
@@ -350,6 +434,11 @@ function checkAndRunHeroPerks(playerId)
   -- Сбор войск
   if HasHeroSkill(mainHeroName, PERK_RECRUITMENT) then
     perkRecruitment(playerId);
+  end;
+  
+    -- Дипломатия
+  if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
+    perkDiplomacy(playerId);
   end;
   
   -- Марш машин (выдача големов)
@@ -510,17 +599,34 @@ function kiganSpec(heroName)
   end;
 end;
 
+function getOrlandoCreature(heroName)
+  local creatureDevilsList = {CREATURE_DEVIL, CREATURE_ARCH_DEMON, CREATURE_FRIGHTFUL_NIGHTMARE};
+  local maxCountDevilId = nil;
+  
+  for _, devilId in creatureDevilsList do
+    if maxCountDevilId == nil then
+      if GetHeroCreatures(heroName, devilId) > 0 then
+        maxCountDevilId = devilId
+      end
+    else
+      if GetHeroCreatures(heroName, devilId) > GetHeroCreatures(heroName, maxCountDevilId) then
+          maxCountDevilId = devilId
+      end;
+    end;
+  end;
+
+  return maxCountDevilId
+end;
+
 -- Спеца Орландо
 function orlandoSpec(heroName)
   print "orlandoSpec"
 
   local ORLANDO_BONUS_BY_LEVEL = 0.1;
   local heroLevel = GetHeroLevel(heroName);
-
-  if GetHeroCreatures(heroName, CREATURE_DEVIL) >= GetHeroCreatures(heroName, CREATURE_ARCH_DEMON) then
-    AddHeroCreatures(heroName, CREATURE_DEVIL, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
-  else
-    AddHeroCreatures(heroName, CREATURE_ARCH_DEMON, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
+  local devilId = getOrlandoCreature(heroName)
+  if devilId ~= nil then
+    AddHeroCreatures(heroName, devilId, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
   end;
 end;
 

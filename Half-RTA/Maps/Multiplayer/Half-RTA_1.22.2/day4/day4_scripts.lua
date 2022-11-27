@@ -661,14 +661,21 @@ function replaceMainHero(playerId, newHeroName)
   end;
 
   -- Обучаем умениям
-  for _, perkId in mainHeroPerksTable do
-    GiveHeroSkill(newHeroName, perkId);
-
-    if perkId == RANGER_FEAT_FOREST_GUARD_EMBLEM and GetHeroCreatures(newHeroName, CREATURE_BLADE_SINGER) > 0 then
-      RemoveHeroCreatures(newHeroName, CREATURE_BLADE_SINGER, 10);
-    end;
-    if perkId == HERO_SKILL_DEFEND_US_ALL and GetHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER) > 0 then
-      RemoveHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER, 15);
+  local allPerkExist = not nil
+  while allPerkExist do
+    allPerkExist = nil
+    for _, perkId in mainHeroPerksTable do
+      print(perkId)
+      GiveHeroSkill(newHeroName, perkId);
+      if HasHeroSkill(newHeroName, perkId) == nil then
+        allPerkExist = not nil
+      end
+      if perkId == RANGER_FEAT_FOREST_GUARD_EMBLEM and GetHeroCreatures(newHeroName, CREATURE_BLADE_SINGER) > 0 then
+        RemoveHeroCreatures(newHeroName, CREATURE_BLADE_SINGER, 10);
+      end;
+      if perkId == HERO_SKILL_DEFEND_US_ALL and GetHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER) > 0 then
+        RemoveHeroCreatures(newHeroName, CREATURE_GOBLIN_DEFILER, 15);
+      end;
     end;
   end;
 
@@ -803,88 +810,6 @@ function replaceCommonUnitOnSpecial(playerId)
 end;
 
 
--- Вычисление кэфа дипломатии
-function getDiplomacyKoef(heroName)
-  print 'getDiplomacyKoef'
-
-  local DIPLOMACY_DEFAULT_COEF = 0.4;
-
-  local dictHeroName = getDictionaryHeroName(heroName);
-
-  if dictHeroName == HEROES.ROLF then
-    return 2 * DIPLOMACY_DEFAULT_COEF;
-  end;
-
-  return DIPLOMACY_DEFAULT_COEF;
-end;
-
--- Активация навыка "Дипломатия"
-function runDiplomacy(heroName)
-  print 'runDiplomacy'
-
-  local playerId = GetObjectOwner(heroName);
-
-  awaitMessageBoxForPlayers(playerId, PATH_TO_MODULES_MESSAGES.."diplomacy.txt");
-
-  local stashArmy = {
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-    { kol = nil, id1 = nil, id2 = nil },
-  };
-
-  stashArmy[1].id1, stashArmy[2].id1, stashArmy[3].id1, stashArmy[4].id1, stashArmy[5].id1, stashArmy[6].id1, stashArmy[7].id1 = GetHeroCreaturesTypes(heroName);
-
-  -- Выясняем, какие грейды будем предлагать
-  for _, stashItem in stashArmy do
-    if stashItem.id1 ~= nil then
-      for gradeCreatureId, altGradeCreatureId in MAP_CREATURES_ON_GRADE do
-        if stashItem.id1 == gradeCreatureId or stashItem.id1 == altGradeCreatureId then
-          if GetHeroCreatures(heroName, gradeCreatureId) == 0 then
-            stashItem.id2 = gradeCreatureId;
-          elseif GetHeroCreatures(heroName, altGradeCreatureId) == 0 then
-            stashItem.id2 = altGradeCreatureId;
-          else
-            -- Чтобы эффект не дублировался
-            if stashItem.id1 == gradeCreatureId then
-              if GetHeroCreatures(heroName, gradeCreatureId) >= GetHeroCreatures(heroName, altGradeCreatureId) then
-                stashItem.id2 = altGradeCreatureId;
-              else
-                stashItem.id2 = gradeCreatureId;
-              end;
-            end;
-          end;
-        end;
-      end;
-    end;
-  end;
-
-  local diplomacyKoef = getDiplomacyKoef(heroName);
-
-  -- Добавляем в гарнизон армию, возможную для присоединения через дипломатию
-  DenyGarrisonCreaturesTakeAway(MAP_GARNISON_FOR_DIPLOMACY[playerId], 1);
-
-  for _, stashItem in stashArmy do
-    for _, raceId in RACES do
-      for _, unitData in UNITS[raceId] do
-        if stashItem.id1 == unitData.id and stashItem.id2 ~= nil then
-          stashItem.kol = ceil(diplomacyKoef * unitData.kol);
-          AddObjectCreatures(MAP_GARNISON_FOR_DIPLOMACY[playerId], stashItem.id2, stashItem.kol);
-        end;
-      end;
-    end;
-  end;
-
-  -- Отдаем гарнизон игроку и следим за изменением количества существ в нем
-  SetObjectOwner(MAP_GARNISON_FOR_DIPLOMACY[playerId], playerId);
-  MakeHeroInteractWithObject(heroName, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
-
-  startThread(clearGarnisonOnChangeTread, MAP_GARNISON_FOR_DIPLOMACY[playerId]);
-end;
-
 -- Точка входа
 function day4_scripts()
   print "day4_scripts"
@@ -914,11 +839,6 @@ function day4_scripts()
   
   for _, playerId in PLAYER_ID_TABLE do
     local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-
-    -- Дипломатия
-    if HasHeroSkill(mainHeroName, PERK_DIPLOMACY) then
-      startThread(runDiplomacy, mainHeroName);
-    end;
 
     replaceCommonUnitOnSpecial(playerId);
 

@@ -288,61 +288,6 @@ function giveMovePointsSelectableHero()
   addHeroMovePoints(mainHeroName);
 end;
 
-
--- Отслеживание изменений в армии гарнизона и очищение его
-function clearGarnisonOnChangeTread(garnisonName)
-  print 'clearGarnisonOnChangeTread'
-
-  local initArmy = {
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-    { kol = nil, id = nil },
-  };
-
-  -- Странная херня, если существа нет, то берется ИД = 0
-  initArmy[1].id, initArmy[2].id, initArmy[3].id, initArmy[4].id, initArmy[5].id, initArmy[6].id, initArmy[7].id = GetObjectCreaturesTypes(garnisonName);
-
-  -- Считаем, сколько существ есть вначале
-  for _, army in initArmy do
-    if army.id ~= 0 then
-      army.kol = GetObjectCreatures(garnisonName, army.id);
-    end;
-  end;
-
-  -- Следим, чтобы игрок не взял больше
-  local playerTakeArmy = nil;
-
-  while not playerTakeArmy do
-    for _, army in initArmy do
-      if army.id ~= 0 then
-        local currentCountUnits = GetObjectCreatures(garnisonName, army.id);
-
-        if currentCountUnits < army.kol then
-          playerTakeArmy = not nil;
-        end;
-      end;
-    end;
-
-    sleep(1);
-  end;
-
-  -- Удаляем все, что осталось из гарнизона
-  for _, army in initArmy do
-    if army.id ~= 0 then
-      local currentCountUnits = GetObjectCreatures(garnisonName, army.id);
-
-      if currentCountUnits > 0 then
-        RemoveObjectCreatures(garnisonName, army.id, currentCountUnits);
-      end;
-    end;
-  end;
-end;
-
-
 function selectBattlefield()
   print "selectBattlefield"
 
