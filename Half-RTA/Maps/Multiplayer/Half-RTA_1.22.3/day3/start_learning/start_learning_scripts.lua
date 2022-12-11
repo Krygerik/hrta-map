@@ -966,12 +966,12 @@ function setNavigationTriggers(heroName)
   end;
 end;
 
--- Вестник смерти, выдаем рыцарей смерти за навык
+-- Вестник смерти, выдаем мумий за навык
 function heraldOfDeath(heroName)
   print "heraldOfDeath"
   
   local playerId = GetObjectOwner(heroName);
-  local countAllowMummy = 20;
+  local countAllowMummy = 24;
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
   
   givePlayerSecondTown(playerId);
@@ -999,7 +999,7 @@ function noRestForTheWicked(heroName)
 
   local playerId = GetObjectOwner(heroName);
 
-  local countAllowKnightOfDeath = 16;
+  local countAllowKnightOfDeath = 14;
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
 
   givePlayerSecondTown(playerId);
@@ -1320,7 +1320,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
     if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
       local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
     
-      SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
+      SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, 0);
     end;
   end;
   

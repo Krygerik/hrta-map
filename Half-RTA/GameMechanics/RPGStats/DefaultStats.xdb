@@ -1309,10 +1309,10 @@
 				<HoldGround_DefendBonusMultiplier>2</HoldGround_DefendBonusMultiplier>
 				<HoldGround_TakeRootsBonusMultiplier>2</HoldGround_TakeRootsBonusMultiplier>
 				<Training>
-					<BasicDamageBonus>0</BasicDamageBonus>
+					<BasicDamageBonus>0.25</BasicDamageBonus>
 					<AdvancedDamageBonus>0.5</AdvancedDamageBonus>
-					<ExpertDamageBonus>1</ExpertDamageBonus>
-					<ExtraExpertDamageBonus>1.5</ExtraExpertDamageBonus>
+					<ExpertDamageBonus>0.75</ExpertDamageBonus>
+					<ExtraExpertDamageBonus>1</ExtraExpertDamageBonus>
 					<TrainingPointsPerWeek>15</TrainingPointsPerWeek>
 					<TrainingPointsPerWeek_Upgraded>30</TrainingPointsPerWeek_Upgraded>
 					<BaseCostMultiplier>1</BaseCostMultiplier>
@@ -2066,7 +2066,7 @@
 				<CavalryCommander_JoustingBonus>0.1</CavalryCommander_JoustingBonus>
 				<CavalryCommander_JoustingBonusPerLevel>0.02</CavalryCommander_JoustingBonusPerLevel>
 				<CavalryCommander_HolyChargeBonus>0</CavalryCommander_HolyChargeBonus>
-				<Expediter_HasteBonusPerLevel>0.01</Expediter_HasteBonusPerLevel>
+				<Expediter_HasteBonusPerLevel>0.008</Expediter_HasteBonusPerLevel>
 				<Wanderer_MPBonusBase>0</Wanderer_MPBonusBase>
 				<Wanderer_MPBonusPerLevel>0.01</Wanderer_MPBonusPerLevel>
 				<Wanderer_LevelDivisor>2</Wanderer_LevelDivisor>
@@ -2080,7 +2080,7 @@
 				<Beater_MPBonusPerLevel>0.01</Beater_MPBonusPerLevel>
 				<Beater_LevelDivisor>4</Beater_LevelDivisor>
 				<Furious_InitiativeBonusBase>0</Furious_InitiativeBonusBase>
-				<Furious_InitiativeBonusPerLevel>0.004</Furious_InitiativeBonusPerLevel>
+				<Furious_InitiativeBonusPerLevel>0.005</Furious_InitiativeBonusPerLevel>
 			</Demonlord>
 			<Ranger>
 				<CallOfTheWasp_DamageBonusPerLevel>0.05</CallOfTheWasp_DamageBonusPerLevel>
@@ -2092,7 +2092,7 @@
 			</Ranger>
 			<Necromancer>
 				<Soulhunter_ManesSummonedBase>0</Soulhunter_ManesSummonedBase>
-				<Soulhunter_ManesSummonedPerLevel>1</Soulhunter_ManesSummonedPerLevel>
+				<Soulhunter_ManesSummonedPerLevel>2</Soulhunter_ManesSummonedPerLevel>
 				<Reanimator_SpellpowerBonus>1</Reanimator_SpellpowerBonus>
 				<Reanimator_SpellpowerBonusLevelDivisor>2</Reanimator_SpellpowerBonusLevelDivisor>
 				<Reanimator_SpellpowerBonusPerLevel>1</Reanimator_SpellpowerBonusPerLevel>
@@ -2136,9 +2136,9 @@
 				<PowerBargain_CostReduce>0</PowerBargain_CostReduce>
 				<PowerBargain_CostReducePerLevel>0.02</PowerBargain_CostReducePerLevel>
 				<Prudent_InitiativeDisbonusBase>0</Prudent_InitiativeDisbonusBase>
-				<Prudent_InitiativeDisbonusPerLevel>0.004</Prudent_InitiativeDisbonusPerLevel>
+				<Prudent_InitiativeDisbonusPerLevel>0.005</Prudent_InitiativeDisbonusPerLevel>
 				<Evasive_DamageReduceBase>0</Evasive_DamageReduceBase>
-				<Evasive_DamageReducePerLevel>0.015</Evasive_DamageReducePerLevel>
+				<Evasive_DamageReducePerLevel>0.02</Evasive_DamageReducePerLevel>
 			</Warlock>
 			<Runemage>
 				<BorderGuard_DistanceFromCityInDays>1</BorderGuard_DistanceFromCityInDays>
@@ -2148,7 +2148,7 @@
 				<MountainKing_ActiveRune>SPELL_RUNE_OF_STUNNING</MountainKing_ActiveRune>
 				<Researcher_ChanceToGetExtraRune>0</Researcher_ChanceToGetExtraRune>
 				<SacredHammer_ChanceToCastBase>0</SacredHammer_ChanceToCastBase>
-				<SacredHammer_ChanceToCastPerLevel>0.02</SacredHammer_ChanceToCastPerLevel>
+				<SacredHammer_ChanceToCastPerLevel>0.03</SacredHammer_ChanceToCastPerLevel>
 				<SacredHammer_SpellToCast>SPELL_BLOODLUST</SacredHammer_SpellToCast>
 				<Economist_FineRuneChanceBonusBase>0.5</Economist_FineRuneChanceBonusBase>
 				<Economist_FineRuneChanceBonusPerLevel>0</Economist_FineRuneChanceBonusPerLevel>

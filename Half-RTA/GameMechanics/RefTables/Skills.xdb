@@ -8706,7 +8706,6 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_LUCKY_STRIKE</Item>
-							<Item>HERO_SKILL_MULTISHOT</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -11768,7 +11767,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_STORM_WIND</Item>
+							<Item>HERO_SKILL_MASTER_OF_WRATH</Item>
 							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>

@@ -54,10 +54,10 @@ MAP_TIER_TO_UNIT_NAME = {
 };
 
 MAP_TIER_TO_TRAINING_POINTS = {
-  [1] = 4,
-  [2] = 5,
-  [3] = 10,
-  [5] = 25,
+  [1] = 5,
+  [2] = 6,
+  [3] = 15,
+  [5] = 30,
 };
 
 -- Очки тренинга игроков
@@ -72,10 +72,10 @@ function calculatePlayerTrainingPoints(playerId)
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
   local trainingLevel = GetHeroSkillMastery(mainHeroName, SKILL_TRAINING);
-  local POINTS_PER_TRAINING_LEVEL = 50;
-  local POINTS_PER_EXPERT_TRAINING = 50;
-  local INITIAL_TRAINING_POINTS = 100;
-  
+  local POINTS_PER_TRAINING_LEVEL = 60;
+  local POINTS_PER_EXPERT_TRAINING = 120;
+  local INITIAL_TRAINING_POINTS = 0;
+
   local summaryPoints = INITIAL_TRAINING_POINTS + trainingLevel * POINTS_PER_TRAINING_LEVEL;
   
   if HasHeroSkill(mainHeroName, PERK_EXPERT_TRAINER) then
@@ -196,7 +196,7 @@ function prepareForHavenTraining(playerId)
 
     for _, count in MAP_OPTION_COUNT_UNIT do
       local unitName = halfUnitName..count;
-      
+
       SetObjectEnabled(unitName, nil);
 
       OverrideObjectTooltipNameAndDescription(

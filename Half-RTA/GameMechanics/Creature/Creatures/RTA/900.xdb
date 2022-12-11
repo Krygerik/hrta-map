@@ -16,11 +16,11 @@
 		</Item>
 		<Item>
 			<Spell>SPELL_MASS_STONESKIN</Spell>
-			<Mastery>MASTERY_EXPERT</Mastery>
+			<Mastery>MASTERY_ADVANCED</Mastery>
 		</Item>
                 <Item>
 			<Spell>SPELL_MASS_DEFLECT_ARROWS</Spell>
-			<Mastery>MASTERY_EXPERT</Mastery>
+			<Mastery>MASTERY_ADVANCED</Mastery>
 		</Item>
                 <Item>
 			<Spell>SPELL_MAGIC_FIST</Spell>

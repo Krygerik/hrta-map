@@ -354,8 +354,8 @@ function perkDiplomacy(playerId)
     }
     
   local dictUnitsForRolf = {
-    [CREATURE_BROWLER] = 4,
-    [CREATURE_BATTLE_RAGER] = 4,
+ --   [CREATURE_BROWLER] = 4,
+  --  [CREATURE_BATTLE_RAGER] = 4,
     [CREATURE_FLAME_KEEPER] = 5,
     [CREATURE_RUNE_MAGE] = 5,
     [CREATURE_THANE] = 6,
@@ -368,7 +368,7 @@ function perkDiplomacy(playerId)
   
   local dictHeroName = getDictionaryHeroName(mainHeroName);
   if dictHeroName == HEROES.ROLF then
-    for currentLvl = 4, 7 do
+    for currentLvl = 5, 7 do
       local giveCreature = nil;
       
       for highLvlCreatureId, highLvlCreatureLvl in dictUnitsForRolf do
@@ -457,11 +457,11 @@ function checkAndRunHeroPerks(playerId)
   if HasHeroSkill(mainHeroName, PERK_DARK_RITUAL) then
     local dictHeroName = getDictionaryHeroName(mainHeroName);
     
-    local manaBonus = dictHeroName == HEROES.ALMEGIR and 100 or 50;
+    local manaBonus = dictHeroName == HEROES.ALMEGIR and 80 or 40;
   
-    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 10);
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 8);
     ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, manaBonus);
-    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -10);
+    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -8);
   end;
 
   -- сопротивление
@@ -809,7 +809,7 @@ function runHeroSpecialization(playerId)
 
   -- Марбас
   if dictHeroName == HEROES.MARDER then
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(mainHeroName)));
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.5 * GetHeroLevel(mainHeroName)));
   end;
 
   -- Куджин

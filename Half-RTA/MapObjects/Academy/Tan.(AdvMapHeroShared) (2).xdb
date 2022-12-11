@@ -56,7 +56,6 @@
 		<skills/>
 		<perkIDs/>
 		<spellIDs>
-			<Item>SPELL_DISPEL</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

@@ -257,9 +257,9 @@ function getCountResourcesForMiniArts(playerId)
   
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local dictHeroName = getDictionaryHeroName(mainHeroName);
-  local RESOURCES_BY_ARTIFICIER = 10;
+  local RESOURCES_BY_ARTIFICIER = 30;
   
-  local result = GetHeroSkillMastery(mainHeroName, SKILL_ARTIFICIER) * RESOURCES_BY_ARTIFICIER;
+  local result = RESOURCES_BY_ARTIFICIER;
   
   if dictHeroName == HEROES.MAAHIR then
     local MAAHIR_BONUS_RESOURCES = 15;
@@ -297,7 +297,7 @@ function getNecromancyCoef(heroName)
 
   -- Бонус к некромантии для Маркела
   if dictHeroName == HEROES.BEREIN then
-    local MARKEL_KOEF = 0.01;
+    local MARKEL_KOEF = 0.02;
 
     coef = coef + MARKEL_KOEF * GetHeroLevel(heroName);
   end;

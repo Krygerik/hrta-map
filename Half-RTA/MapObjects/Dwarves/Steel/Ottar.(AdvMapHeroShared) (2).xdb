@@ -58,7 +58,6 @@
 			<Item>HERO_SKILL_BARBARIAN_ANCIENT_SMITHY</Item>
 		</perkIDs>
 		<spellIDs>
-			<Item>SPELL_BLOODLUST</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

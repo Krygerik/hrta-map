@@ -504,16 +504,6 @@ function UnitMoveNonBlocking(unit)
 	end
 
   for side, hero in {[0]=GetHero(0); GetHero(1)} do
-    -- Курак
-    if IsNamedHero(hero, 'Quroq') and num_turn[1] == 1 then
-      quroq_creatures[side] = extend({}, GetCreatures(side))
-      for i, creature in quroq_creatures[side] do
-        rage_sum_prev = GetRagePoints(creature) + rage_sum_prev
-      end
-      quroq_mana = 0
-      quroq_mana_frac = 0
---      print('rage_sum_prev=',rage_sum_prev)
-    end
 
     -- чародейская защита
     if GetHeroSkillMastery(hero, 176) > 0 and num_turn[1] == 1 then
@@ -610,43 +600,6 @@ function UnitMoveNonBlocking(unit)
 	
 	local unit_mana_spent = init_mana - GetUnitManaPoints(unit)
 	local cur_enemy_hero_mana = GetUnitManaPoints(enemy_hero)
-	
-  -- Курак
-  if IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(enemy_hero, 'Quroq') then
-    local quroq_side = 0
-    local rage_sum_new = 0
-    local rage_delta = 0
-    if (IsNamedHero(ally_hero, 'Quroq') and we == 0) or (IsNamedHero(enemy_hero, 'Quroq') and we == 1) then quroq_side = 0 else quroq_side = 1 end
-    quroq_creatures[quroq_side] = extend({}, GetCreatures(quroq_side))
-    for i, creature in quroq_creatures[quroq_side] do
-      rage_sum_new = GetRagePoints(creature) + rage_sum_new
-    end
-    --print('rage_sum_new=',rage_sum_new)
-    rage_delta = rage_sum_new - rage_sum_prev
-    --print('rage_delta=',rage_delta)
-    if (quroq_mana_frac + QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side))) > 0 then
-      quroq_mana      = floor(QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) + quroq_mana_frac)
-      quroq_mana_frac =  frac(QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) + quroq_mana_frac)
---    elseif ((-1) * QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac) < 0 then
---      print( QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac )
---      quroq_mana      = (-1) * floor((-1) * QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac + 1)
---      quroq_mana_frac = (-1) *  frac((-1) * QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac)
-    else
-      quroq_mana      = (-1) * floor((-1) * QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac)
-      quroq_mana_frac = (-1) *  frac((-1) * QUROQ_ABSORBING * rage_delta * GetHeroLevel(GetHero(quroq_side)) - quroq_mana_frac)
-    end
-    --print('quroq_mana=',quroq_mana)
-    --print('quroq_mana_frac=',quroq_mana_frac)
-    if quroq_mana >= 0 then
-      SetUnitManaPoints(GetHero(quroq_side), quroq_mana + GetUnitManaPoints(GetHero(quroq_side)))
-    elseif (quroq_mana < 0 and (-1) * quroq_mana < GetUnitManaPoints(GetHero(quroq_side))) then
-      SetUnitManaPoints(GetHero(quroq_side), GetUnitManaPoints(GetHero(quroq_side)) - intg((-1) * quroq_mana))
-    else
-      SetUnitManaPoints(GetHero(quroq_side), 0)
-    end
-    rage_sum_prev = rage_sum_new
-    --print('rage_sum_prev=',rage_sum_prev)
-  end
   
   -- Аргат --Hero2   закл накладывается при получении нового уровня крови
 --  if IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(enemy_hero, 'Quroq') then   --name Hero2
