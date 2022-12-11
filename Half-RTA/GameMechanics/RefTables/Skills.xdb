@@ -8491,7 +8491,7 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_BALLISTA</Item>
-							<Item>HERO_SKILL_FIRST_AID</Item>
+							<Item>SKILL_CATAPULT</Item>
 							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
