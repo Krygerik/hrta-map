@@ -59,9 +59,7 @@
 				<SkillID>HERO_SKILL_LIGHT_MAGIC</SkillID>
 			</Item>
 		</skills>
-                <perkIDs>
-			<Item>HERO_SKILL_SNIPE_DEAD</Item>
-		</perkIDs>
+        <perkIDs/>
 		<spellIDs/>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

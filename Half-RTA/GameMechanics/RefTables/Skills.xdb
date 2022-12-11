@@ -4469,10 +4469,10 @@
 					<Item href="/Text/Game/Skills/Unique/Avenger/SnipeDead/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NONE</HeroClass>
+				<SkillType>SKILLTYPE_CLASS_PERK</SkillType>
+				<HeroClass>HERO_CLASS_RANGER</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_AVENGER</BasicSkillID>
 				<SkillPrerequisites/>
 				<AIRacesValues>
 					<Haven>
@@ -4481,10 +4481,10 @@
 						<FreelancerValue>0</FreelancerValue>
 					</Haven>
 					<Sylvan>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
-					</Sylvan>
+                        <CommanderValue>1000</CommanderValue>
+                        <CollectorSupplierValue>1000</CollectorSupplierValue>
+                        <FreelancerValue>3000</FreelancerValue>
+                    </Sylvan>
 					<Academy>
 						<CommanderValue>0</CommanderValue>
 						<CollectorSupplierValue>0</CollectorSupplierValue>
@@ -8382,7 +8382,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_CUNNING_OF_THE_WOODS</Item>
+							<Item>HERO_SKILL_SNIPE_DEAD</Item>
 							<Item>HERO_SKILL_SCOUTING</Item>
 						</dependenciesIDs>
 					</Item>
@@ -8558,10 +8558,10 @@
 					<Item href="/Text/Game/Skills/Common/Learning/CunningOfTheWoods/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
-				<SkillType>SKILLTYPE_CLASS_PERK</SkillType>
-				<HeroClass>HERO_CLASS_RANGER</HeroClass>
+				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
+				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_AVENGER</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
 				<SkillPrerequisites/>
 				<AIRacesValues>
 					<Haven>
@@ -8570,9 +8570,9 @@
 						<FreelancerValue>0</FreelancerValue>
 					</Haven>
 					<Sylvan>
-						<CommanderValue>3000</CommanderValue>
-						<CollectorSupplierValue>1000</CollectorSupplierValue>
-						<FreelancerValue>4000</FreelancerValue>
+						<CommanderValue>0</CommanderValue>
+						<CollectorSupplierValue>0</CollectorSupplierValue>
+						<FreelancerValue>0</FreelancerValue>
 					</Sylvan>
 					<Academy>
 						<CommanderValue>0</CommanderValue>
@@ -10702,7 +10702,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_CUNNING_OF_THE_WOODS</Item>
+							<Item>HERO_SKILL_SNIPE_DEAD</Item>
 							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
