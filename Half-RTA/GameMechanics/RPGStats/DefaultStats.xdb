@@ -277,7 +277,7 @@
 			<Inferno>
 				<ManaStealPerWeekPopulation>1</ManaStealPerWeekPopulation>
 				<SearingAuraDamageHits>8</SearingAuraDamageHits>
-				<AxeOfSlaughterDamageHits>2</AxeOfSlaughterDamageHits>
+				<AxeOfSlaughterDamageHits>1.75</AxeOfSlaughterDamageHits>
 				<SyphonManaCoef>0.5</SyphonManaCoef>
 				<Leap_JumpDistanceMin>3</Leap_JumpDistanceMin>
 				<Leap_JumpDistanceMax>8</Leap_JumpDistanceMax>

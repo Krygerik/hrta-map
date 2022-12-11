@@ -301,14 +301,7 @@ function getNecromancyCoef(heroName)
 
     coef = coef + MARKEL_KOEF * GetHeroLevel(heroName);
   end;
-  
-  -- Бонус за повелителя мертвых
-  if HasHeroSkill(heroName, NECROMANCER_FEAT_LORD_OF_UNDEAD) then
-    local LORD_OF_UNDEAD_KOEF = 1.301;
-    
-    coef = coef * LORD_OF_UNDEAD_KOEF;
-  end;
-  
+
   return coef;
 end;
 
@@ -318,6 +311,10 @@ function prepareSelectNecromancy(playerId)
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local countAllowStack = GetHeroSkillMastery(mainHeroName, SKILL_NECROMANCY);
+
+  if HasHeroSkill(heroName, NECROMANCER_FEAT_LORD_OF_UNDEAD) then
+    countAllowStack = countAllowStack + 1;
+  end;
   
   local stash = {
     { kol = 0, id = 0 },
