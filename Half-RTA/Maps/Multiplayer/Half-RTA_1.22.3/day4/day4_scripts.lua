@@ -312,7 +312,7 @@ function prepareSelectNecromancy(playerId)
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local countAllowStack = GetHeroSkillMastery(mainHeroName, SKILL_NECROMANCY);
 
-  if HasHeroSkill(heroName, NECROMANCER_FEAT_LORD_OF_UNDEAD) then
+  if HasHeroSkill(mainHeroName, NECROMANCER_FEAT_LORD_OF_UNDEAD) then
     countAllowStack = countAllowStack + 1;
   end;
   
