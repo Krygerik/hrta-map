@@ -12,23 +12,22 @@
 	<Level>3</Level>
 	<MagicSchool>MAGIC_SCHOOL_DESTRUCTIVE</MagicSchool>
 	<RequiredHeroLevel>0</RequiredHeroLevel>
-	<IsAimed>true</IsAimed>
 	<TrainedCost>9</TrainedCost>
 	<damage>
 		<Item>
-			<Base>100</Base>
+			<Base>96</Base>
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
-			<Base>100</Base>
+			<Base>96</Base>
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
-			<Base>150</Base>
+			<Base>132</Base>
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
-			<Base>200</Base>
+			<Base>168</Base>
 			<PerPower>12</PerPower>
 		</Item>
 	</damage>
@@ -42,11 +41,15 @@
 		<Gem>0</Gem>
 		<Gold>0</Gold>
 	</sSpellCost>
+	<IsAimed>true</IsAimed>
 	<IsAreaAttack>true</IsAreaAttack>
 	<CanSelectDead>false</CanSelectDead>
 	<Target>TARGET_HOSTILE</Target>
 	<Element>ELEMENT_WATER</Element>
+	<DamageIsElemental>true</DamageIsElemental>
 	<visuals>
 		<Item href="FrostRing.(SpellVisual).xdb#xpointer(/SpellVisual)"/>
 	</visuals>
+	<PresetPrice>0</PresetPrice>
+	<AvailableForPresets>true</AvailableForPresets>
 </Spell>

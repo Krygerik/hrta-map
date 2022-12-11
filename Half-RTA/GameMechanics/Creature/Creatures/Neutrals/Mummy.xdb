@@ -6,7 +6,7 @@
 	<MinDamage>20</MinDamage>
 	<MaxDamage>30</MaxDamage>
 	<Speed>3</Speed>
-	<Initiative>15</Initiative>
+	<Initiative>13</Initiative>
 	<Flying>false</Flying>
 	<Health>50</Health>
 	<KnownSpells>

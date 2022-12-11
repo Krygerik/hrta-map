@@ -7421,7 +7421,6 @@
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MASTER_OF_SECRETS</Item>
-							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
