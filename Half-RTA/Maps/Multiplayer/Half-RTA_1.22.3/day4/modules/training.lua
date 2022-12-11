@@ -8,35 +8,25 @@ PLAYERS_TRAINING_GARRISONS = {
 
 tierUnitForTrainingTable = {1, 2, 3, 5};
 
+PLAYERS_TO_POSITION = {
+  [PLAYER_1] = { x = 88, y = 73 },
+  [PLAYER_2] = { x = 81, y = 25 },
+}
+
 PLAYERS_TRAINING_UNITS = {
   [PLAYER_1] = {
-    [1] = 'training_peasant_1',
-    [2] = 'training_archer_1',
-    [3] = 'training_footman_1',
-    [5] = 'training_priest_1',
+    [1] = 'training_peasant_1_',
+    [2] = 'training_archer_1_',
+    [3] = 'training_footman_1_',
+    [5] = 'training_priest_1_',
   },
   [PLAYER_2] = {
-    [1] = 'training_peasant_2',
-    [2] = 'training_archer_2',
-    [3] = 'training_footman_2',
-    [5] = 'training_priest_2',
+    [1] = 'training_peasant_2_',
+    [2] = 'training_archer_2_',
+    [3] = 'training_footman_2_',
+    [5] = 'training_priest_2_',
   },
 };
-
-PLAYERS_TRAINING_UNITS_POSITION = {
-  [PLAYER_1] = {
-    [1] = { x = 44, y = 81 },
-    [2] = { x = 46, y = 81 },
-    [3] = { x = 48, y = 81 },
-    [5] = { x = 50, y = 81 },
-  },
-  [PLAYER_2] = {
-    [1] = { x = 46, y = 12 },
-    [2] = { x = 44, y = 12 },
-    [3] = { x = 42, y = 12 },
-    [5] = { x = 40, y = 12 },
-  },
-}
 
 MAP_OPTION_COUNT_UNIT = {
   1,
@@ -46,6 +36,7 @@ MAP_OPTION_COUNT_UNIT = {
   25,
 };
 
+-- Соотношение уровня существа к уровню получаемого
 MAP_TIER_TO_TRAINED_TIER = {
   [1] = 2,
   [2] = 3,
@@ -53,6 +44,7 @@ MAP_TIER_TO_TRAINED_TIER = {
   [5] = 6,
 }
 
+-- Соотношение уровня к существам
 MAP_TIER_TO_UNIT_NAME = {
   [1] = { CREATURE_PEASANT, CREATURE_LANDLORD },
   [2] = { CREATURE_ARCHER, CREATURE_LONGBOWMAN },
@@ -72,12 +64,6 @@ MAP_TIER_TO_TRAINING_POINTS = {
 PLAYERS_TRAINING_POINTS = {
   [PLAYER_1] = 0,
   [PLAYER_2] = 0,
-}
-
--- Выбранный уровень существ для тренировки
-PLAYERS_SELECTED_TIER = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
 }
 
 function calculatePlayerTrainingPoints(playerId)
@@ -128,16 +114,13 @@ function garrisonWatcherTread(playerId)
 end;
 
 -- Обработчик выбора опции тренинга
-function handleSelectTrainingOption(playerId, optionNumber)
+function handleSelectTrainingOption(strPlayerId, strTier, strCountUnits)
   print "handleSelectTrainingOption"
 
-  local tierLvl = PLAYERS_SELECTED_TIER[playerId];
+  local playerId = strPlayerId + 0;
+  local countUnits = strCountUnits + 0;
+  local tierLvl = strTier + 0;
 
-  if optionNumber == -1 then
-    return nil;
-  end;
-
-  local countUnits = MAP_OPTION_COUNT_UNIT[optionNumber];
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
   local needPoints = countUnits * MAP_TIER_TO_TRAINING_POINTS[tierLvl];
@@ -148,7 +131,7 @@ function handleSelectTrainingOption(playerId, optionNumber)
       {GetMapDataPath()..'day4/modules/not_enough_point.txt'; eq1=needPoints, eq2=currentPoints},
       mainHeroName,
       playerId,
-      5
+      7
     );
 
     return nil;
@@ -187,65 +170,42 @@ function handleSelectTrainingOption(playerId, optionNumber)
   );
 end;
 
--- Обработчик касания существа, которое хотят тренировать
-function handleTouchTrainingUnit(strPlayerId, strUnitTierLvl)
-  print "handleTouchTrainingUnit"
+-- Вопрос, чтобы избежать случайного клика
+function questionSelectTrainingOption(playerId, levelUnit, countUnits)
+  print "questionSelectTrainingOption"
 
-  local playerId = strPlayerId + 0;
-  local unitTierLvl = strUnitTierLvl + 0;
-
-  local MAP_TIER_TO_ICON = {
-    [1] = "/Textures/Interface/CombatArena/Faces/Heaven/ico_Militiaman_128.xdb#xpointer(/Texture)",
-    [2] = "/Textures/Interface/CombatArena/Faces/Heaven/ico_Archer_128.xdb#xpointer(/Texture)",
-    [3] = "/Textures/Interface/CombatArena/Faces/Heaven/ico_Footman_128.xdb#xpointer(/Texture)",
-    [5] = "/Textures/Interface/CombatArena/Faces/Heaven/ico_Priest_128.xdb#xpointer(/Texture)",
-  };
-  
-  PLAYERS_SELECTED_TIER[playerId] = unitTierLvl;
-
-  TalkBoxForPlayers(
+  QuestionBoxForPlayers(
     playerId,
-    MAP_TIER_TO_ICON[unitTierLvl],
-    nil,
-    GetMapDataPath()..'day4/modules/description.txt',
-    nil,
-    'handleSelectTrainingOption',
-    1,
-    GetMapDataPath()..'day4/modules/title.txt',
-    GetMapDataPath()..'day4/modules/select_count_unit.txt',
-    1,
-    GetMapDataPath()..'day4/modules/option_1.txt',
-    GetMapDataPath()..'day4/modules/option_3.txt',
-    GetMapDataPath()..'day4/modules/option_5.txt',
-    GetMapDataPath()..'day4/modules/option_10.txt',
-    GetMapDataPath()..'day4/modules/option_25.txt'
+    GetMapDataPath()..'day4/modules/question_select_option.txt',
+    'handleSelectTrainingOption('..playerId..', '..levelUnit..', '..countUnits..')',
+    'noop'
   );
-end
+end;
 
 -- Новый скриптовый тренинг
 function prepareForHavenTraining(playerId)
   print "prepareForHavenTraining"
 
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  SetObjectPosition(mainHeroName, PLAYERS_TO_POSITION[playerId].x, PLAYERS_TO_POSITION[playerId].y);
+
   calculatePlayerTrainingPoints(playerId);
 
   for _, tierLvl in tierUnitForTrainingTable do
-    local unitName = PLAYERS_TRAINING_UNITS[playerId][tierLvl];
-    local unitPosition = PLAYERS_TRAINING_UNITS_POSITION[playerId][tierLvl];
+    local halfUnitName = PLAYERS_TRAINING_UNITS[playerId][tierLvl];
 
-    SetObjectPosition(unitName, unitPosition.x, unitPosition.y);
+    for _, count in MAP_OPTION_COUNT_UNIT do
+      local unitName = halfUnitName..count;
+      
+      SetObjectEnabled(unitName, nil);
 
-    if playerId == PLAYER_2 then
-      SetObjectRotation(unitName, 180);
+      OverrideObjectTooltipNameAndDescription(
+        unitName,
+        GetMapDataPath()..'day4/modules/unit_'.. count .."_tier_name.txt",
+        GetMapDataPath()..'day4/modules/unit_'.. tierLvl .."_tier_desc.txt"
+      );
+      Trigger(OBJECT_TOUCH_TRIGGER, unitName, 'questionSelectTrainingOption('..playerId..','..tierLvl..','..count..')');
     end;
-    
-    SetObjectEnabled(unitName, nil);
-
-    OverrideObjectTooltipNameAndDescription(
-      unitName,
-      GetMapDataPath()..'day4/modules/unit_'.. tierLvl .."_tier_name.txt",
-      GetMapDataPath()..'day4/modules/unit_'.. tierLvl .."_tier_desc.txt"
-    );
-    Trigger(OBJECT_TOUCH_TRIGGER, unitName, 'handleTouchTrainingUnit('..playerId..','..tierLvl..')');
   end;
 
   startThread(garrisonWatcherTread, playerId);

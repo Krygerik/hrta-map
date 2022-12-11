@@ -19,9 +19,6 @@ doFile(GetMapDataPath()..'modules/modules.lua');
 
 sleep(1)
 
-removeHeroMovePoints(Biara);
-removeHeroMovePoints(Djovanni);
-
 -- Обработчик наступления нового дня
 function handleNewDay()
   if GetDate(DAY) == 2 then

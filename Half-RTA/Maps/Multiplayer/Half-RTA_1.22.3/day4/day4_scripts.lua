@@ -386,39 +386,6 @@ function prepareSelectNecromancy(playerId)
           if currentCountUnits > 0 then
             RemoveObjectCreatures(garnisonName, stashedArmy.id, currentCountUnits);
           end;
-          
-          -- Если есть вечное рабство
-          if HasHeroSkill(mainHeroName, PERK_NO_REST_FOR_THE_WICKED) then
-            -- Если взяли обычный грейд существ
-            local altGradeId = MAP_NECRO_UNIT_ON_GRADE_UNIT[stashedArmy.id];
-
-            if altGradeId ~= nil and GetHeroCreatures(mainHeroName, altGradeId) > 0 then
-              AddHeroCreatures(mainHeroName, altGradeId, diffUnits);
-              RemoveObjectCreatures(garnisonName, altGradeId, GetObjectCreatures(garnisonName, altGradeId));
-              
-              -- Убираем всех существ альтернативного грейда, если их забрали через вечное рабство
-              for _, stash in garnisonStash do
-                if stash.id == altGradeId then
-                  stash.kol = 0;
-                end;
-              end;
-            end;
-            
-            -- Если взяли альтернативный грейд существ
-            local gradeId = MAP_NECRO_GRADE_UNIT_ON_UNIT[stashedArmy.id];
-
-            if gradeId ~= nil and GetHeroCreatures(mainHeroName, gradeId) > 0 then
-              AddHeroCreatures(mainHeroName, gradeId, diffUnits);
-              RemoveObjectCreatures(garnisonName, gradeId, GetObjectCreatures(garnisonName, gradeId));
-
-              -- Убираем всех существ альтернативного грейда, если их забрали через вечное рабство
-              for _, stash in garnisonStash do
-                if stash.id == gradeId then
-                  stash.kol = 0;
-                end;
-              end;
-            end;
-          end;
         end;
       end;
     end;

@@ -560,6 +560,12 @@ PLAYERS_USE_HERALD_OF_DEATH_STATUS = {
   [PLAYER_2] = nil,
 };
 
+-- Статус использования навыка "Вечное рабство" игроками
+PLAYERS_USE_NO_REST_FOR_THE_WICKED = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};
+
 -- Количество знания, получаемого игроками за навык "Тайное преимущество"
 PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE = {
   [PLAYER_1] = 0,

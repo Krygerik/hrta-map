@@ -526,33 +526,6 @@ function transferUnitsFromDwellToHero(playerId, creatureId, countCreature)
   RemoveObjectCreatures(dwellId, creatureId, countCreature);
 end;
 
--- Отслеживание спецы Николаса
-function specNikolasTread(heroName)
-  print "specNikolasTread"
-
-  local playerId = GetObjectOwner(heroName);
-
-  local countAllowMummy = 40;
-  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
-
-  givePlayerSecondTown(playerId);
-  SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
-
-  -- Если купили мумий - передаем их мейну игрока
-  local countBuyMummy = 0;
-
-  while countBuyMummy < countAllowMummy and GetDate(DAY) == 3 do
-    local currentCountBuyMummy = GetObjectCreatures(dwellId, CREATURE_MUMMY);
-    
-    if currentCountBuyMummy > 0 then
-      transferUnitsFromDwellToHero(playerId, CREATURE_MUMMY, currentCountBuyMummy);
-      countBuyMummy = countBuyMummy + currentCountBuyMummy;
-    end;
-
-    sleep(10);
-  end;
-end;
-
 -- Отслеживание спецы Свеи
 function specVegeyrTread(heroName)
   print "specVegeyrTread"
@@ -596,6 +569,10 @@ function checkAndRunHeroSpec(heroName)
 
   if HasHeroSkill(heroName, PERK_DARK_RITUAL) then
     startThread(darkRitualTread, heroName);
+  end;
+  
+  if HasHeroSkill(heroName, PERK_NO_REST_FOR_THE_WICKED) then
+    startThread(noRestForTheWicked, heroName);
   end;
   
   -- Навигация
@@ -994,12 +971,39 @@ function heraldOfDeath(heroName)
   print "heraldOfDeath"
   
   local playerId = GetObjectOwner(heroName);
-
-  local countAllowKnightOfDeath = 16;
+  local countAllowMummy = 20;
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
   
   givePlayerSecondTown(playerId);
-  
+  SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
+
+  -- Если купили рыцарей - передаем их мейну игрока
+  local countBuyMummy = 0;
+
+  while countBuyMummy < countAllowMummy and GetDate(DAY) == 3 do
+    local currentCountBuyMummy = GetObjectCreatures(dwellId, CREATURE_MUMMY);
+
+    if currentCountBuyMummy > 0 then
+      transferUnitsFromDwellToHero(playerId, CREATURE_MUMMY, currentCountBuyMummy);
+      countBuyMummy = countBuyMummy + currentCountBuyMummy;
+      
+      PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] = not nil;
+    end;
+
+    sleep(10);
+  end;
+end;
+
+function noRestForTheWicked(heroName)
+  print "noRestForTheWicked"
+
+  local playerId = GetObjectOwner(heroName);
+
+  local countAllowKnightOfDeath = 16;
+  local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+
+  givePlayerSecondTown(playerId);
+
   SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, countAllowKnightOfDeath);
 
   -- Если купили рыцарей - передаем их мейну игрока
@@ -1010,10 +1014,10 @@ function heraldOfDeath(heroName)
 
     if currentCountBuyKnight > 0 then
       transferUnitsFromDwellToHero(playerId, CREATURE_DEATH_KNIGHT, currentCountBuyKnight);
-      
+
       countBuyKnight = countBuyKnight + currentCountBuyKnight;
-      
-      PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] = not nil;
+
+      PLAYERS_USE_NO_REST_FOR_THE_WICKED[playerId] = not nil;
     end;
 
     sleep(10);
@@ -1224,6 +1228,13 @@ function handleHeroAddSkill(triggerHero, skillId)
       startThread(heraldOfDeath, playerMainHero);
     end;
   end;
+  
+    -- Вечное рабство
+  if skillId == PERK_NO_REST_FOR_THE_WICKED then
+    if PLAYERS_USE_NO_REST_FOR_THE_WICKED[playerId] == nil then
+      startThread(noRestForTheWicked, playerMainHero);
+    end;
+  end;
 
   -- Тайное преимущество
   if skillId == KNIGHT_FEAT_CASTER_CERTIFICATE then
@@ -1309,6 +1320,15 @@ function handleHeroRemoveSkill(triggerHero, skill)
     if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
       local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
     
+      SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
+    end;
+  end;
+  
+  -- Вечное рабство
+  if skill == PERK_NO_REST_FOR_THE_WICKED then
+    if PLAYERS_USE_NO_REST_FOR_THE_WICKED[playerId] == nil then
+      local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
+
       SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, 0);
     end;
   end;
@@ -1508,6 +1528,11 @@ function getRemovedUnremovableSkillId(playerId)
   -- Вестник смерти
   if HasHeroSkill(playerMainHero, NECROMANCER_FEAT_HERALD_OF_DEATH) == nil and PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] ~= nil then
     return NECROMANCER_FEAT_HERALD_OF_DEATH;
+  end;
+  
+  -- Вестник смерти
+  if HasHeroSkill(playerMainHero, PERK_NO_REST_FOR_THE_WICKED) == nil and PLAYERS_USE_NO_REST_FOR_THE_WICKED[playerId] ~= nil then
+    return PERK_NO_REST_FOR_THE_WICKED;
   end;
 
   return nil;

@@ -600,7 +600,6 @@ function changeChooseArea()
   RemoveObject('red7');
   RemoveObject('red8');
   RemoveObject('red9');
-  RemoveObject('red11');
   RemoveObject('red12');
   RemoveObject('red13');
   RemoveObject('red14');
