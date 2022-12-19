@@ -13470,8 +13470,7 @@
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_PATHFINDING</Item>
-							<Item>HERO_SKILL_DEMONIC_FIRE</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
