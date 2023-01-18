@@ -58,7 +58,6 @@
 			<Item>HERO_SKILL_DEMONIC_RETALIATION</Item>
 		</perkIDs>
 		<spellIDs>
-			<Item>SPELL_TELEPORT</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

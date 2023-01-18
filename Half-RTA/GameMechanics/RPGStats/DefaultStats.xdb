@@ -277,7 +277,7 @@
 			<Inferno>
 				<ManaStealPerWeekPopulation>1</ManaStealPerWeekPopulation>
 				<SearingAuraDamageHits>8</SearingAuraDamageHits>
-				<AxeOfSlaughterDamageHits>1.75</AxeOfSlaughterDamageHits>
+				<AxeOfSlaughterDamageHits>1</AxeOfSlaughterDamageHits>
 				<SyphonManaCoef>0.5</SyphonManaCoef>
 				<Leap_JumpDistanceMin>3</Leap_JumpDistanceMin>
 				<Leap_JumpDistanceMax>8</Leap_JumpDistanceMax>
@@ -381,7 +381,7 @@
 				<BattleRage_AttackBonus>5</BattleRage_AttackBonus>
 				<BattleRage_EffectDuration>2</BattleRage_EffectDuration>
 				<FlameWave_WaveLength>5</FlameWave_WaveLength>
-				<FlameWave_ProcFactor>1.5</FlameWave_ProcFactor>
+				<FlameWave_ProcFactor>2</FlameWave_ProcFactor>
 				<FlameWave_WaveSpeed>15</FlameWave_WaveSpeed>
 				<Flamestrike_DamageMultipiler>1</Flamestrike_DamageMultipiler>
 				<PawStrike_ProcFactor>0.75</PawStrike_ProcFactor>
@@ -1269,7 +1269,7 @@
 					<HealthToRageTransferCoef>1200</HealthToRageTransferCoef>
 				</DemonRage>
 				<VenomDuration>3</VenomDuration>
-				<VenomDamagePerPower>8</VenomDamagePerPower>
+				<VenomDamagePerPower>10</VenomDamagePerPower>
 				<SwallowGoblinRange>1</SwallowGoblinRange>
 				<SacrificeGoblinRange>1</SacrificeGoblinRange>
 				<SacrificeGoblin_ManaRestorePerHP>2</SacrificeGoblin_ManaRestorePerHP>
@@ -1281,7 +1281,7 @@
 				<Treachery>30</Treachery>
 				<PresenceOfCommanderInitiativeInc>1</PresenceOfCommanderInitiativeInc>
 				<FierceRetaliationCoef>2</FierceRetaliationCoef>
-				<ScavengerCoef>0.4</ScavengerCoef>
+				<ScavengerCoef>0.3</ScavengerCoef>
 				<CrushigBlowCoef>10</CrushigBlowCoef>
 				<CrushingBlow_ProcFactor>1</CrushingBlow_ProcFactor>
 				<OrderOfTheChiefDamageCoef>1</OrderOfTheChiefDamageCoef>
@@ -1309,10 +1309,10 @@
 				<HoldGround_DefendBonusMultiplier>2</HoldGround_DefendBonusMultiplier>
 				<HoldGround_TakeRootsBonusMultiplier>2</HoldGround_TakeRootsBonusMultiplier>
 				<Training>
-					<BasicDamageBonus>0.25</BasicDamageBonus>
-					<AdvancedDamageBonus>0.5</AdvancedDamageBonus>
-					<ExpertDamageBonus>0.75</ExpertDamageBonus>
-					<ExtraExpertDamageBonus>1</ExtraExpertDamageBonus>
+					<BasicDamageBonus>0.3</BasicDamageBonus>
+					<AdvancedDamageBonus>0.6</AdvancedDamageBonus>
+					<ExpertDamageBonus>0.9</ExpertDamageBonus>
+					<ExtraExpertDamageBonus>0.9</ExtraExpertDamageBonus>
 					<TrainingPointsPerWeek>15</TrainingPointsPerWeek>
 					<TrainingPointsPerWeek_Upgraded>30</TrainingPointsPerWeek_Upgraded>
 					<BaseCostMultiplier>1</BaseCostMultiplier>
@@ -1945,7 +1945,7 @@
 				<StrongRune_2ndUseCostMultiplier>1</StrongRune_2ndUseCostMultiplier>
 				<FineRune_ChanceToActivateRuneForFree>67</FineRune_ChanceToActivateRuneForFree>
 				<QuicknessOfMind_InitiativeBonus>0.25</QuicknessOfMind_InitiativeBonus>
-				<TapRunes_ManaRestorePerKnowledge>0.5</TapRunes_ManaRestorePerKnowledge>
+				<TapRunes_ManaRestorePerKnowledge>0.75</TapRunes_ManaRestorePerKnowledge>
 				<RunicAttunement_EffectDurationInRounds>1</RunicAttunement_EffectDurationInRounds>
 				<RunicAttunement_MoraleBonus>2</RunicAttunement_MoraleBonus>
 				<Offensive_MaxOffenseBonus>20</Offensive_MaxOffenseBonus>
@@ -2160,7 +2160,7 @@
 				<Rash_MovementPenaltyReducePerLevel>0.02</Rash_MovementPenaltyReducePerLevel>
 				<Rash_MovePointsIncreasePerPevel>0.01</Rash_MovePointsIncreasePerPevel>
 				<CentaurMistress_StartATBBonusPerHeroLevel>0</CentaurMistress_StartATBBonusPerHeroLevel>
-				<Offender_HeroAttackDamageBonusPerLevel>0.03</Offender_HeroAttackDamageBonusPerLevel>
+				<Offender_HeroAttackDamageBonusPerLevel>0.025</Offender_HeroAttackDamageBonusPerLevel>
 				<WyvernTamer_HealthBonus>
 					<Base>5</Base>
 					<LevelDivisor>1</LevelDivisor>

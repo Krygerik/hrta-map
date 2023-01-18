@@ -20,7 +20,7 @@
 		</Item>
 		<Item>
 			<Spell>SPELL_ANIMATE_DEAD</Spell>
-			<Mastery>MASTERY_BASIC</Mastery>
+			<Mastery>MASTERY_ADVANCED</Mastery>
 		</Item>
 	</KnownSpells>
 	<SpellPoints>19</SpellPoints>

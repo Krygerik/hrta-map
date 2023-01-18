@@ -5328,7 +5328,7 @@
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_FRENZY</Item>
-							<Item>HERO_SKILL_MARCH_OF_THE_MACHINES</Item>
+							<Item>HERO_SKILL_ARTIFICIAL_GLORY</Item>
 							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
 						</dependenciesIDs>
 					</Item>
@@ -8491,7 +8491,7 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_BALLISTA</Item>
-							<Item>SKILL_CATAPULT</Item>
+							<Item>HERO_SKILL_CATAPULT</Item>
 							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
@@ -9563,17 +9563,9 @@
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_WIZARD</HeroClass>
+				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_LEADERSHIP</BasicSkillID>
-				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_WIZARD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_DIPLOMACY</Item>
-						</dependenciesIDs>
-					</Item>
-				</SkillPrerequisites>
+				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -9825,10 +9817,17 @@
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NONE</HeroClass>
+				<HeroClass>HERO_CLASS_WIZARD</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_LEADERSHIP</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_WIZARD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -9841,9 +9840,9 @@
 						<FreelancerValue>0</FreelancerValue>
 					</Sylvan>
 					<Academy>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>3000</CommanderValue>
+						<CollectorSupplierValue>100</CollectorSupplierValue>
+						<FreelancerValue>3000</FreelancerValue>
 					</Academy>
 					<Dungeon>
 						<CommanderValue>0</CommanderValue>
@@ -11100,19 +11099,13 @@
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_RECRUITMENT</Item>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ENCOURAGE</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WIZARD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MARCH_OF_THE_MACHINES</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
