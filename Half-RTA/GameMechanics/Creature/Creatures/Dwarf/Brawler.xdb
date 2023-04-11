@@ -37,7 +37,7 @@
 		<Crystal>0</Crystal>
 		<Sulfur>0</Sulfur>
 		<Gem>0</Gem>
-		<Gold>230</Gold>
+		<Gold>250</Gold>
 	</Cost>
 	<SubjectOfRandomGeneration>true</SubjectOfRandomGeneration>
 	<MonsterShared href="/MapObjects/Dwarf/Berserker.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>

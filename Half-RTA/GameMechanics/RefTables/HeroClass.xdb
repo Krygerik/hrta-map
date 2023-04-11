@@ -119,11 +119,11 @@
 					</Item>
 					<Item>
 						<SkillID>HERO_SKILL_SORCERY</SkillID>
-						<Prob>8</Prob>
+						<Prob>4</Prob>
 					</Item>
 					<Item>
 						<SkillID>HERO_SKILL_LIGHT_MAGIC</SkillID>
-						<Prob>4</Prob>
+						<Prob>8</Prob>
 					</Item>
 					<Item>
 						<SkillID>HERO_SKILL_DESTRUCTIVE_MAGIC</SkillID>

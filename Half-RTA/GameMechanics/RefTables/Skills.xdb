@@ -5490,7 +5490,7 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MENTORING</Item>
+							<Item>HERO_SKILL_PRAYER</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -10962,8 +10962,9 @@
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_WAR_MACHINES</BasicSkillID>
+				<SkillPrerequisites>	
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -11760,7 +11761,6 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MASTER_OF_WRATH</Item>
-							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

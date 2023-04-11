@@ -144,8 +144,8 @@
 			</WeeklyGrowCoefs>
 		</NeutralsNotInCampaign>
 		<HeroSkills>
-			<Scouting_VisibilityIncrease>1</Scouting_VisibilityIncrease>
-			<DisguiseAndReckon_VisibilityIncrease>1</DisguiseAndReckon_VisibilityIncrease>
+			<Scouting_VisibilityIncrease>0</Scouting_VisibilityIncrease>
+			<DisguiseAndReckon_VisibilityIncrease>0</DisguiseAndReckon_VisibilityIncrease>
 			<Intelligence_ManaPointsBonus>1.5</Intelligence_ManaPointsBonus>
 			<WarMachines_HealthBonusPerSkillTrained>100</WarMachines_HealthBonusPerSkillTrained>
 			<WarMachines_PerkSpecificHealthMultiplier>2</WarMachines_PerkSpecificHealthMultiplier>
@@ -277,7 +277,7 @@
 			<Inferno>
 				<ManaStealPerWeekPopulation>1</ManaStealPerWeekPopulation>
 				<SearingAuraDamageHits>8</SearingAuraDamageHits>
-				<AxeOfSlaughterDamageHits>1</AxeOfSlaughterDamageHits>
+				<AxeOfSlaughterDamageHits>2</AxeOfSlaughterDamageHits>
 				<SyphonManaCoef>0.5</SyphonManaCoef>
 				<Leap_JumpDistanceMin>3</Leap_JumpDistanceMin>
 				<Leap_JumpDistanceMax>8</Leap_JumpDistanceMax>
@@ -341,7 +341,7 @@
 				<AssasinPoisonDamagePerPower>1.5</AssasinPoisonDamagePerPower>
 				<AssasinPoisonCounter>3</AssasinPoisonCounter>
 				<WhipStrikeSpellPower>3</WhipStrikeSpellPower>
-				<WhipStrike_ProcFactor>2</WhipStrike_ProcFactor>
+				<WhipStrike_ProcFactor>999</WhipStrike_ProcFactor>
 				<HydraRegenerationMin>100</HydraRegenerationMin>
 				<HydraRegenerationMax>130</HydraRegenerationMax>
 				<RiderCharge_DefenceReducePerPathCell>0.15</RiderCharge_DefenceReducePerPathCell>
@@ -360,7 +360,7 @@
 				<Wound_InitiativeDecrease>0.2</Wound_InitiativeDecrease>
 				<Wound_ProcFactor>1</Wound_ProcFactor>
 				<MarkOfFire_EffectDurationInRounds>2</MarkOfFire_EffectDurationInRounds>
-				<MarkOfFire_FireDamageMultiplier>1.5</MarkOfFire_FireDamageMultiplier>
+				<MarkOfFire_FireDamageMultiplier>1.25</MarkOfFire_FireDamageMultiplier>
 				<MarkOfFire_ProcFactor>1.5</MarkOfFire_ProcFactor>
 				<AntiGiantDefenceInc>4</AntiGiantDefenceInc>
 				<AntiGiantAttackInc>4</AntiGiantAttackInc>
@@ -412,9 +412,9 @@
 			</Neutral>
 			<Stronghold>
 				<DemonRage>
-					<RPForLevel1>250</RPForLevel1>
-					<RPForLevel2>500</RPForLevel2>
-					<RPForLevel3>750</RPForLevel3>
+					<RPForLevel1>200</RPForLevel1>
+					<RPForLevel2>400</RPForLevel2>
+					<RPForLevel3>600</RPForLevel3>
 					<StartRP>0</StartRP>
 					<EnemyStackKilledRP>20</EnemyStackKilledRP>
 					<FriendlyStackKilledRP>30</FriendlyStackKilledRP>
@@ -1261,8 +1261,8 @@
 					</Bonuses>
 					<DamageAbsorbtionPerHeroSkill>
 						<Item>0</Item>
-						<Item>40</Item>
-						<Item>40</Item>
+						<Item>30</Item>
+						<Item>35</Item>
 						<Item>40</Item>
 						<Item>70</Item>
 					</DamageAbsorbtionPerHeroSkill>
@@ -1919,8 +1919,8 @@
 				<DarkEissary_DeathScreamMultiplier>1.5</DarkEissary_DeathScreamMultiplier>
 			</Necromancer>
 			<Warlock>
-				<ElementalChainBonusPerInvocationTrained>0.15</ElementalChainBonusPerInvocationTrained>
-				<ElementalChainBonusPerAltarOfChaos>0.15</ElementalChainBonusPerAltarOfChaos>
+				<ElementalChainBonusPerInvocationTrained>0.17</ElementalChainBonusPerInvocationTrained>
+				<ElementalChainBonusPerAltarOfChaos>0.2</ElementalChainBonusPerAltarOfChaos>
 				<ShakeGroundDamage>100</ShakeGroundDamage>
 				<ShakeGroundDamagePerPower>5</ShakeGroundDamagePerPower>
 				<ShakeGroundATBReduce>0.25</ShakeGroundATBReduce>
@@ -1951,8 +1951,8 @@
 				<Offensive_MaxOffenseBonus>20</Offensive_MaxOffenseBonus>
 				<Defensive_MaxDefenseBonus>20</Defensive_MaxDefenseBonus>
 				<Distract_EnemyHeroInitiativeDrop>0.2</Distract_EnemyHeroInitiativeDrop>
-				<SetAfire_DamageMultiplier>0.3</SetAfire_DamageMultiplier>
-				<SetAfire_DamageDurationInRounds>2</SetAfire_DamageDurationInRounds>
+				<SetAfire_DamageMultiplier>0.26</SetAfire_DamageMultiplier>
+				<SetAfire_DamageDurationInRounds>3</SetAfire_DamageDurationInRounds>
 				<ShrugDarkness_EnemySpellpowerMultiplier>0.5</ShrugDarkness_EnemySpellpowerMultiplier>
 				<RunicArmor_SpellpowerBonus>10</RunicArmor_SpellpowerBonus>
 				<RunicMachines_InitiativeBonus>5</RunicMachines_InitiativeBonus>
@@ -2048,7 +2048,7 @@
 				<BasicDamageBonus>0.07</BasicDamageBonus>
 				<AdvancedDamageBonus>0.14</AdvancedDamageBonus>
 				<ExpertDamageBonus>0.21</ExpertDamageBonus>
-				<Archery_DamageBonus>0.3</Archery_DamageBonus>
+				<Archery_DamageBonus>0.25</Archery_DamageBonus>
 			</SkillOffence>
 		</HeroSkills>
 		<Obstacles>
@@ -2074,7 +2074,7 @@
 			<Demonlord>
 				<Hypnotist_ManaDrainPerLevel>1</Hypnotist_ManaDrainPerLevel>
 				<Bombardier_FireballSpellpower>-1</Bombardier_FireballSpellpower>
-				<Bombardier_FireballSpellpowerLevelDivisor>7</Bombardier_FireballSpellpowerLevelDivisor>
+				<Bombardier_FireballSpellpowerLevelDivisor>5</Bombardier_FireballSpellpowerLevelDivisor>
 				<Bombardier_FireballSpellpowerPerLevel>1</Bombardier_FireballSpellpowerPerLevel>
 				<Beater_MPBonusBase>0.05</Beater_MPBonusBase>
 				<Beater_MPBonusPerLevel>0.01</Beater_MPBonusPerLevel>
@@ -2192,7 +2192,7 @@
 			</Armageddon>
 			<Runic>
 				<DragonFormSpellPercent>0.5</DragonFormSpellPercent>
-				<ReviveSpellPercent>0.3</ReviveSpellPercent>
+				<ReviveSpellPercent>0.333334</ReviveSpellPercent>
 			</Runic>
 			<HolyWordWaveSpeed>33</HolyWordWaveSpeed>
 			<UnholyWordWaveSpeed>33</UnholyWordWaveSpeed>
@@ -5725,9 +5725,9 @@
 					<Item href="ArtifactSets/Dragonish_Desc2.txt"/>
 					<Item href="ArtifactSets/Dragonish_Desc4.txt"/>
 					<Item href="ArtifactSets/Dragonish_Desc4.txt"/>
+					<Item href="ArtifactSets/Dragonish_Desc6_new.txt"/>
 					<Item href="ArtifactSets/Dragonish_Desc6.txt"/>
-					<Item href="ArtifactSets/Dragonish_Desc6.txt"/>
-					<Item href="ArtifactSets/Dragonish_Desc8.txt"/>
+					<Item href="ArtifactSets/Dragonish_Desc8_new.txt"/>
 				</CombinedDescriptionsFileRefs>
 				<CombinedHeroClassBonusesDescs/>
 				<CombinedIcons>
@@ -6118,14 +6118,14 @@
 	<ArtifactsSetsEffectsConsts>
 		<Dragonish_2_AllStats>1</Dragonish_2_AllStats>
 		<Dragonish_4_Creature_Tier>7</Dragonish_4_Creature_Tier>
-		<Dragonish_4_Creature_Attack>5</Dragonish_4_Creature_Attack>
-		<Dragonish_4_Creature_Defence>5</Dragonish_4_Creature_Defence>
-		<Dragonish_4_Creature_HitPoints>55</Dragonish_4_Creature_HitPoints>
+		<Dragonish_4_Creature_Attack>0</Dragonish_4_Creature_Attack>
+		<Dragonish_4_Creature_Defence>0</Dragonish_4_Creature_Defence>
+		<Dragonish_4_Creature_HitPoints>100</Dragonish_4_Creature_HitPoints>
 		<Dragonish_6_AllStats>3</Dragonish_6_AllStats>
-		<Dragonish_8_Creature_Tier>7</Dragonish_8_Creature_Tier>
-		<Dragonish_8_Creature_Count>1</Dragonish_8_Creature_Count>
+		<Dragonish_8_Creature_Tier>0</Dragonish_8_Creature_Tier>
+		<Dragonish_8_Creature_Count>0</Dragonish_8_Creature_Count>
 		<Dwarven_2_Creature_MagicProofPercents>0</Dwarven_2_Creature_MagicProofPercents>
-		<Dwarven_2Dwarf_SpellpowerPercents>0</Dwarven_2Dwarf_SpellpowerPercents>
+		<Dwarven_2Dwarf_SpellpowerPercents>20</Dwarven_2Dwarf_SpellpowerPercents>
 		<Dwarven_4_Creature_SpellsBuffsTurns>2</Dwarven_4_Creature_SpellsBuffsTurns>
 		<Lions_2_HeroAttack_DeMorale>3</Lions_2_HeroAttack_DeMorale>
 		<Magis_2_Casters_SpellpowerMultiplier>1</Magis_2_Casters_SpellpowerMultiplier>
@@ -6134,7 +6134,7 @@
 		<Necromancers_2Necromancer_BansheeWhail_DeMorale>1</Necromancers_2Necromancer_BansheeWhail_DeMorale>
 		<Necromancers_2Necromancer_BansheeWhail_DeLuck>1</Necromancers_2Necromancer_BansheeWhail_DeLuck>
 		<Necromancers_2Necromancer_BansheeWhail_DeInitiativeMultiplier>1</Necromancers_2Necromancer_BansheeWhail_DeInitiativeMultiplier>
-		<Necromancers_2Necromancer_BansheeWhail_ATBLessPercents>1</Necromancers_2Necromancer_BansheeWhail_ATBLessPercents>
+		<Necromancers_2Necromancer_BansheeWhail_ATBLessPercents>0</Necromancers_2Necromancer_BansheeWhail_ATBLessPercents>
 		<Necromancers_4_EnemyCreature_BadMoralePenaltyToAttackDefencePercents>20</Necromancers_4_EnemyCreature_BadMoralePenaltyToAttackDefencePercents>
 		<Necromancers_4Necromancer_NecromancyBonusPercents>20</Necromancers_4Necromancer_NecromancyBonusPercents>
 		<Necromancers_4Necromancer_NecromancyCreatureCostDisountPercents>25</Necromancers_4Necromancer_NecromancyCreatureCostDisountPercents>
@@ -6146,7 +6146,7 @@
 		<Runic_2_AllStats>1</Runic_2_AllStats>
 		<Runic_2Warlock_ElementalVisionMultiplier>1.5</Runic_2Warlock_ElementalVisionMultiplier>
 		<Demonic_2_Attack>2</Demonic_2_Attack>
-		<Demonic_2DemonLord_GatingBonusPercents>0</Demonic_2DemonLord_GatingBonusPercents>
+		<Demonic_2DemonLord_GatingBonusPercents>10</Demonic_2DemonLord_GatingBonusPercents>
 	</ArtifactsSetsEffectsConsts>
 	<SlaveMarketConsts>
 		<BasePercents>95</BasePercents>

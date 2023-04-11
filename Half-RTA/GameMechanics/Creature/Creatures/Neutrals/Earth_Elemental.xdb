@@ -3,10 +3,10 @@
 	<AttackSkill>8</AttackSkill>
 	<DefenceSkill>11</DefenceSkill>
 	<Shots>0</Shots>
-	<MinDamage>12</MinDamage>
-	<MaxDamage>16</MaxDamage>
-	<Speed>6</Speed>
-	<Initiative>7</Initiative>
+	<MinDamage>10</MinDamage>
+	<MaxDamage>14</MaxDamage>
+	<Speed>5</Speed>
+	<Initiative>8</Initiative>
 	<Flying>false</Flying>
 	<Health>75</Health>
 	<KnownSpells/>

@@ -32,7 +32,7 @@
 	<Icon128 href="/UI/H5A2/Icons/Heroes/Portrets128x128/Stronghold_Quroq.(Texture).xdb#xpointer(/Texture)"/>
 	<InternalName>Quroq</InternalName>
 	<Class>HERO_CLASS_BARBARIAN</Class>
-	<Specialization>HERO_SPEC_MIND_CLEANER</Specialization>
+	<Specialization>HERO_SPEC_NONE</Specialization>
 	<PrimarySkill>
 		<Mastery>MASTERY_BASIC</Mastery>
 		<SkillID>HERO_SKILL_DEMONIC_RAGE</SkillID>
