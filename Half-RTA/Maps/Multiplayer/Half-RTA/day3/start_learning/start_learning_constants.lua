@@ -336,8 +336,8 @@ MAP_SELL_STAT_ON_QUESTIONS = {
   [STAT_KNOWLEDGE] = PATH_TO_START_LEARNING_MESSAGES.."question_sell_knowledge_stat.txt",
 };
 
--- —тоимость перегенерации заклинаний
-COST_RE_GENERATION_STATS = 2000;
+-- —тоимость перегенерации характеристик
+COST_RE_GENERATION_STATS = 3000;
 
 -- –учное перечисление недель
 CUSTOM_WEEKS = {

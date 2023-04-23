@@ -58,10 +58,10 @@ function changeStatHero(strPlayerId)
   local mainHeroStats = mainHeroProps.stats;
   
   PLAYERS_MAIN_HERO_PROPS[playerId].stats = {
-  [STAT_ATTACK] = mainHeroStats[STAT_ATTACK] + differenceCharacteristics[STAT_ATTACK],
-  [STAT_DEFENCE] = mainHeroStats[STAT_DEFENCE] + differenceCharacteristics[STAT_DEFENCE],
-  [STAT_SPELL_POWER] = mainHeroStats[STAT_SPELL_POWER] + differenceCharacteristics[STAT_SPELL_POWER],
-  [STAT_KNOWLEDGE] = mainHeroStats[STAT_KNOWLEDGE] + differenceCharacteristics[STAT_KNOWLEDGE],
+    [STAT_ATTACK] = mainHeroStats[STAT_ATTACK] + differenceCharacteristics[STAT_ATTACK],
+    [STAT_DEFENCE] = mainHeroStats[STAT_DEFENCE] + differenceCharacteristics[STAT_DEFENCE],
+    [STAT_SPELL_POWER] = mainHeroStats[STAT_SPELL_POWER] + differenceCharacteristics[STAT_SPELL_POWER],
+    [STAT_KNOWLEDGE] = mainHeroStats[STAT_KNOWLEDGE] + differenceCharacteristics[STAT_KNOWLEDGE],
   }
   
   refreshMainHeroStats(playerId)
@@ -69,8 +69,6 @@ function changeStatHero(strPlayerId)
   SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - COST_RE_GENERATION_STATS)
   local mainHeroX, mainHeroY = GetObjectPosition(mainHeroProps.name);
   Play2DSoundForPlayers(playerId, "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", mainHeroX, mainHeroY, 0);
-  
-  
 end;
 
 -- Перегенерация статов у главного героя игрока
@@ -103,18 +101,17 @@ function reGenerationStats(strPlayerId)
 --  local levelEducation = GetHeroSkillMastery(mainHeroProps.name,SKILL_LEARNING)
 
   local tableStats = {
-  [STAT_ATTACK] = atkRemainder,
-  [STAT_DEFENCE] = defRemainder,
-  [STAT_KNOWLEDGE] = knowRemainder,
-  [STAT_SPELL_POWER] = spRemainder,
+    [STAT_ATTACK] = atkRemainder,
+    [STAT_DEFENCE] = defRemainder,
+    [STAT_KNOWLEDGE] = knowRemainder,
+    [STAT_SPELL_POWER] = spRemainder,
   }
 
-
   local resultStats = {
-  [STAT_ATTACK] = 0,
-  [STAT_DEFENCE] = 0,
-  [STAT_KNOWLEDGE] = 0,
-  [STAT_SPELL_POWER] = 0,
+    [STAT_ATTACK] = 0,
+    [STAT_DEFENCE] = 0,
+    [STAT_KNOWLEDGE] = 0,
+    [STAT_SPELL_POWER] = 0,
   }
   
   local counterWasFoundStats = 0;
@@ -135,48 +132,14 @@ function reGenerationStats(strPlayerId)
   end;
   
   local differenceStatsHero = {
-  [STAT_ATTACK] = floor(atk/100) + (resultStats[STAT_ATTACK] == 0 and 0 or 1) - mainHeroStats[STAT_ATTACK],
-  [STAT_DEFENCE] = floor(def/100) + (resultStats[STAT_DEFENCE] == 0 and 0 or 1) - mainHeroStats[STAT_DEFENCE],
-  [STAT_KNOWLEDGE] = floor(know/100) + (resultStats[STAT_KNOWLEDGE] == 0 and 0 or 1) - mainHeroStats[STAT_KNOWLEDGE],
-  [STAT_SPELL_POWER] = floor(sp/100) + (resultStats[STAT_SPELL_POWER] == 0 and 0 or 1) - mainHeroStats[STAT_SPELL_POWER],
+    [STAT_ATTACK] = floor(atk/100) + (resultStats[STAT_ATTACK] == 0 and 0 or 1) - mainHeroStats[STAT_ATTACK],
+    [STAT_DEFENCE] = floor(def/100) + (resultStats[STAT_DEFENCE] == 0 and 0 or 1) - mainHeroStats[STAT_DEFENCE],
+    [STAT_KNOWLEDGE] = floor(know/100) + (resultStats[STAT_KNOWLEDGE] == 0 and 0 or 1) - mainHeroStats[STAT_KNOWLEDGE],
+    [STAT_SPELL_POWER] = floor(sp/100) + (resultStats[STAT_SPELL_POWER] == 0 and 0 or 1) - mainHeroStats[STAT_SPELL_POWER],
   };
 
   return differenceStatsHero
-  
 end;
 
--- Перегенерация статов у главного героя игрока
-function reGenerationStats2(strPlayerId)
-  print "reGenerationStats"
-
-  local playerId = strPlayerId + 0;
-  local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
-  local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
-
-  -- Считаем количество статистик, полученных за уровни
-  local countHeroMainStats = 0;
-
-  for _, statId in ALL_MAIN_STATS_LIST do
-    countHeroMainStats = countHeroMainStats + mainHeroProps.stats[statId];
-  end;
-
-  -- Зануляем статы за уровни
-  for _, statId in ALL_MAIN_STATS_LIST do
-    mainHeroProps.stats[statId] = 0;
-  end;
-
-  -- Генерируем их заново :)
-  for indexStat = 1, countHeroMainStats do
-    local randomGenerateStatId = getRandomStatByRace(playerRaceId);
-
-    changeMainHeroMainStat(playerId, randomGenerateStatId);
-  end;
-
-  local mainHeroX, mainHeroY = GetObjectPosition(mainHeroProps.name);
-  Play2DSoundForPlayers(playerId, "/Sounds/_(Sound)/Interface/Ingame/Buy.xdb#xpointer(/Sound)", mainHeroX, mainHeroY, 0);
-
-  -- Снимаем бабки за диджейство
-  SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - COST_RE_GENERATION_STATS));
-end;
 
 setReGenerationStatTriggers();

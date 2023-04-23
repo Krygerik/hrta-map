@@ -185,6 +185,52 @@ function getRandomUniqueSpellByMagicType(playerId, spellSet, magicType, spellLev
   return randomSpellCurrentLevel;
 end;
 
+-- ѕолучение случайного заклинани€, не совпадающего со стартовым или уже имеющимс€ или nil
+function getRandomAvailableSpellByMagicType(playerId, spellSet, magicType, spellLevel)
+  print "getRandomAvailableSpellByMagicType"
+  
+  local availableSpells = {};
+  
+  for _, spellData in SPELLS[magicType] do
+    if spellData.level == spellLevel then
+      local hasSpell = nil;
+      
+      -- ѕроверка на наличие в стартовых
+      for _, bonusSpellData in PLAYERS_GENERATED_SPELLS[playerId].bonus_spells do
+        if bonusSpellData.id == spellData.id then
+          hasSpell = not nil;
+        end;
+      end;
+      
+      -- ѕроверка на наличие в списке игрока
+      for _, playerSpellData in PLAYERS_GENERATED_SPELLS[playerId].spells[1] do
+        if playerSpellData.id == spellData.id then
+          hasSpell = not nil;
+        end;
+      end;
+      
+      -- ѕроверка на совпадение с дополнительными заклинани€ми
+      for _, addSpellId in ONLY_ADDITIONAL_SPELL_ID_LIST do
+        if addSpellId == spellData.id then
+          hasSpell = not nil;
+        end;
+      end;
+      
+      if not hasSpell then
+        availableSpells[length(availableSpells)] = spellData;
+      end;
+    end;
+  end;
+  
+  print ("availableSpells", availableSpells);
+  
+  if length(availableSpells) == 0 then
+    return nil;
+  end;
+
+  return availableSpells[random(length(availableSpells))];
+end;
+
 -- ѕолучение заклинани€, как стартового бонуса
 function getStartedBonusSpell(playerId, magicType)
   print "getStartedBonusSpell"
@@ -573,8 +619,6 @@ function regenerateSpellLevel(strPlayerId, strSpellLevel, strSpellId)
       SetPlayerResource(playerId, GOLD, (playerGold - spellResetCost));
     end;
   end;
-  
-
 
   -- —крываем текущий набор заклинаний
   local spellSet = getCurrentPlayerSpellSet(playerId);
@@ -585,7 +629,6 @@ function regenerateSpellLevel(strPlayerId, strSpellLevel, strSpellId)
 
   -- ќтображаем новый набор
   showPlayerSpellList(playerId, raceId);
-  
 end;
 
 -- ѕерезапись одного заклинани€ в данных набора игрока
@@ -599,11 +642,14 @@ function changeGeneratedSpells(playerId, spellLevel, spellId)
       if spellId ~= nil and TYPE_MAGICS.DESTRUCTIVE == magicTypeId and spell.level == 5 then
         PLAYERS_GENERATED_SPELLS[playerId].spells[1][indexSpell] = {level = 5, id = spellId}
       elseif not (TYPE_MAGICS.LIGHT == magicTypeId and spell.level == 5) then
-        PLAYERS_GENERATED_SPELLS[playerId].spells[1][indexSpell] = getRandomUniqueSpellByMagicType(playerId, PLAYERS_GENERATED_SPELLS[playerId].spells[1], magicTypeId, spellLevel)
+        local newSpell = getRandomAvailableSpellByMagicType(playerId, PLAYERS_GENERATED_SPELLS[playerId].spells[1], magicTypeId, spellLevel);
+        
+        if newSpell then
+          PLAYERS_GENERATED_SPELLS[playerId].spells[1][indexSpell] = newSpell;
+        end;
       end;
     end;
   end;
-
 end;
 
 
@@ -675,7 +721,7 @@ function changeRunesForPlayer(strPlayerId, strSpellLevel)
   local spellLevel = strSpellLevel + 0;
   local playerGold = GetPlayerResource(playerId, GOLD);
   local countResetRunes = PLAYERS_GENERATED_SPELLS[playerId].countResetRunes;
-  local spellResetCost = MAPPPING_PRICE_RESET_LEVEL[spellLevel];
+  local spellResetCost = MAPPPING_PRICE_RESET_LEVEL_RUNES[spellLevel];
 
   -- ƒополнительный набор необходимо купить один раз
   if countResetRunes == 0 then

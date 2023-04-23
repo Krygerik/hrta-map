@@ -130,11 +130,11 @@ MAPPPING_PRICE_RESET_LEVEL = {
 }
 
 MAPPPING_PRICE_RESET_LEVEL_RUNES = {
-    [1] = 3000,
-    [2] = 3000,
-    [3] = 3000,
-    [4] = 4000,
-    [5] = 5000,
+    [1] = 2000,
+    [2] = 2000,
+    [3] = 2000,
+    [4] = 3000,
+    [5] = 4000,
 }
 
 MAPPPING_PRICE_RESET_LEVEL_WARCRIES = {
