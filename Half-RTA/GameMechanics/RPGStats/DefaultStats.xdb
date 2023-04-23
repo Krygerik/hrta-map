@@ -359,7 +359,7 @@
 				<Wound_SpeedDecrease>0.4</Wound_SpeedDecrease>
 				<Wound_InitiativeDecrease>0.2</Wound_InitiativeDecrease>
 				<Wound_ProcFactor>1</Wound_ProcFactor>
-				<MarkOfFire_EffectDurationInRounds>3</MarkOfFire_EffectDurationInRounds>
+				<MarkOfFire_EffectDurationInRounds>2</MarkOfFire_EffectDurationInRounds>
 				<MarkOfFire_FireDamageMultiplier>1.25</MarkOfFire_FireDamageMultiplier>
 				<MarkOfFire_ProcFactor>1.5</MarkOfFire_ProcFactor>
 				<AntiGiantDefenceInc>4</AntiGiantDefenceInc>
@@ -1951,7 +1951,7 @@
 				<Offensive_MaxOffenseBonus>20</Offensive_MaxOffenseBonus>
 				<Defensive_MaxDefenseBonus>20</Defensive_MaxDefenseBonus>
 				<Distract_EnemyHeroInitiativeDrop>0.2</Distract_EnemyHeroInitiativeDrop>
-				<SetAfire_DamageMultiplier>0.25</SetAfire_DamageMultiplier>
+				<SetAfire_DamageMultiplier>0.26</SetAfire_DamageMultiplier>
 				<SetAfire_DamageDurationInRounds>3</SetAfire_DamageDurationInRounds>
 				<ShrugDarkness_EnemySpellpowerMultiplier>0.5</ShrugDarkness_EnemySpellpowerMultiplier>
 				<RunicArmor_SpellpowerBonus>10</RunicArmor_SpellpowerBonus>
