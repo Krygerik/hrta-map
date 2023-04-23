@@ -1132,7 +1132,7 @@
 				<NameFileRef href="/Text/Game/Artifacts/Staff_of_magi/Name.txt"/>
 				<DescriptionFileRef href="/Text/Game/Artifacts/Staff_of_magi/Description.txt"/>
 				<Model/>
-				<Type>ARTF_CLASS_RELIC</Type>
+				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>PRIMARY</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Staff_of_Magi.xdb#xpointer(/Texture)"/>
 				<CostOfGold>10000</CostOfGold>
@@ -1782,7 +1782,7 @@
 				<NameFileRef href="/Text/Game/Artifacts/Book_Of_Power/Name.txt"/>
 				<DescriptionFileRef href="/Text/Game/Artifacts/Book_Of_Power/Description.txt"/>
 				<Model href="/_(Model)/Artefacts/H5A2/BookOfPower.xdb#xpointer(/Model)"/>
-				<Type>ARTF_CLASS_MAJOR</Type>
+				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>SECONDARY</Slot>
 				<Icon href="/UI/H5A2/Icons/Artifacts/Book_of_Power.(Texture).xdb#xpointer(/Texture)"/>
 				<CostOfGold>15000</CostOfGold>
@@ -2207,7 +2207,7 @@
 				<NameFileRef href="/Text/Game/Artifacts/Crown_Of_Leader/Name.txt"/>
 				<DescriptionFileRef href="/Text/Game/Artifacts/Crown_Of_Leader/Description.txt"/>
 				<Model href="/_(Model)/Artefacts/H5A2/CrownOfLeader.xdb#xpointer(/Model)"/>
-				<Type>ARTF_CLASS_RELIC</Type>
+				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>HEAD</Slot>
 				<Icon href="/UI/H5A2/Icons/Artifacts/Crown_of_Leader.(Texture).xdb#xpointer(/Texture)"/>
 				<CostOfGold>9000</CostOfGold>
