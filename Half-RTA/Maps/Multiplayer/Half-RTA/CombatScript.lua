@@ -687,9 +687,7 @@ function UnitMoveNonBlocking(unit)
 
     -- Курак специализация
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
-      
       local creaturesWhoCanGetCallOfBlood = {}
-
 
       for i, creature in GetCreatures(GetUnitSide(unit)) do
         local type = GetCreatureType(creature)
@@ -703,27 +701,36 @@ function UnitMoveNonBlocking(unit)
       local randomCreature = creaturesWhoCanGetCallOfBlood[randomCreatureNum]
       
       if randomCreature ~= nil then
-        local current_mana = GetUnitManaPoints(unit)
-        local mana_to_add = current_mana + 1000
+        local uniq_key = 'call_of_blood_creature';
       
-        SetUnitManaPoints(unit, mana_to_add)
-        while GetUnitManaPoints(unit) ~= mana_to_add do
-          sleep()
-        end
-
-        UnitCastAimedSpell(unit, SPELL_WARCRY_CALL_OF_BLOOD,randomCreature)
-        QUROQ_LAST_UNIT = randomCreature
-        SetUnitManaPoints(unit, current_mana)
+        AddCreature(GetUnitSide(unit), CREATURE_SHAMAN_WITCH, 1, -1, -1, nil, uniq_key);
         
-        while GetUnitManaPoints(unit) ~= current_mana do
+        while not exist(uniq_key) do
+            sleep()
+        end
+        
+        local x, y = pos(uniq_key);
+        
+        SetUnitManaPoints(uniq_key, 1000)
+        
+        while GetUnitManaPoints(uniq_key) ~= 1000 do
           sleep()
         end
+        
+        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
+        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
+        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
+
+        removeUnit(uniq_key)
+
+        while exist(uniq_key) do
+          sleep()
+        end
+        
+        QUROQ_LAST_UNIT = randomCreature
+        
       end;
-
     end;
-
-
-
 		
 		-- покровительство Асхи
 		if GetHeroSkillMastery(ally_hero, 80) > 0 and unit_mana_spent > 0 then
