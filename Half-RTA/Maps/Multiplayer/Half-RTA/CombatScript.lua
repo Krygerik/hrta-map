@@ -64,9 +64,6 @@ function WaitUntilTurnEnds(unit)
   time = 0
   while combatReadyPerson() == unit do
 		sleep(1)
---		print(time)        -- 1 min = 4902 5100 4700 4800 5200
---		time = time + 1
---    print(TutorialActivateHint(ui_open_atb_bar))
 	end
 end
 
@@ -261,7 +258,6 @@ function OnStart()
 		for i, wm in war_machines[side] do
 			war_machines_state[wm] = 1
 		end
---    print(real_creatures[0])
 	end
 	local disable_auto_finish = nil
 	for side, hero in {[0]=GetHero(0); GetHero(1)} do
@@ -686,6 +682,7 @@ function UnitMoveNonBlocking(unit)
 --		end
 
     -- Курак специализация
+
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
       local creaturesWhoCanGetCallOfBlood = {}
 
@@ -699,33 +696,20 @@ function UnitMoveNonBlocking(unit)
       
       local randomCreatureNum = random(length(creaturesWhoCanGetCallOfBlood))-1
       local randomCreature = creaturesWhoCanGetCallOfBlood[randomCreatureNum]
-      
+
       if randomCreature ~= nil then
         local uniq_key = 'call_of_blood_creature';
       
-        AddCreature(GetUnitSide(unit), CREATURE_SHAMAN_WITCH, 1, -1, -1, nil, uniq_key);
+        AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
             sleep()
         end
         
-        local x, y = pos(uniq_key);
+        pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
+        pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
         
-        SetUnitManaPoints(uniq_key, 1000)
-        
-        while GetUnitManaPoints(uniq_key) ~= 1000 do
-          sleep()
-        end
-        
-        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
-        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
-        UnitCastAimedSpell(uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
-
         removeUnit(uniq_key)
-
-        while exist(uniq_key) do
-          sleep()
-        end
         
         QUROQ_LAST_UNIT = randomCreature
         

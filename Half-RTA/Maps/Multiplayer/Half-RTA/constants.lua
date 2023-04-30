@@ -601,7 +601,7 @@ ALL_ARTS_LIST = {
   { id = 16, level = ARTS_LEVELS.MINOR, position = ART_POSITION.NECK,    price = 4000 }, -- ошейник льва
   { id = 55, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD,    price = 5000 }, -- шлем некроманта
   { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
-  { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.SHILD,   price = 5000 }, -- свиток маны
+  { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,   price = 5000 }, -- свиток маны
   { id = 56, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- доспех бесстрашия
   -- { id = 86, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,  price = 6500 }, -- руна пламени
   -- { id = 61, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS,  price = 8000 }, -- изумрудные туфли
