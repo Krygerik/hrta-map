@@ -153,9 +153,7 @@ function transferAllArmyToMain(playerId)
   for _, unitData in UNITS[raceId] do
     if GetObjectCreatures(townName, unitData.id) > 0 and not takedUnitFromTown then
       awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
-      
-      print(123)
-    
+
       MakeHeroInteractWithObject(mainHeroName, townName);
     
       takedUnitFromTown = not nil;
@@ -560,7 +558,21 @@ function replaceMainHero(playerId, newHeroName)
   local stashSkills = {};
 
   for indexSkill, skillId in ALL_SKILLS_TABLE do
-    stashSkills[indexSkill] = GetHeroSkillMastery(mainHeroName, skillId);
+    local masteryLvl = GetHeroSkillMastery(mainHeroName, skillId);
+    
+    print "masteryLvl1 START"
+    print (masteryLvl)
+
+    for _, raceSkillId in ALL_RACES_SKILL_LIST do
+      if skillId == raceSkillId then
+        masteryLvl = masteryLvl - 1;
+      end;
+    end;
+    
+    print "masteryLvl AFTER"
+    print (masteryLvl)
+
+    stashSkills[indexSkill] = masteryLvl;
   end;
 
   -- Умения
@@ -635,7 +647,6 @@ function replaceMainHero(playerId, newHeroName)
   while allPerkExist do
     allPerkExist = nil
     for _, perkId in mainHeroPerksTable do
-      print(perkId)
       GiveHeroSkill(newHeroName, perkId);
       if HasHeroSkill(newHeroName, perkId) == nil then
         allPerkExist = not nil
