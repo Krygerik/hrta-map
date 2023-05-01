@@ -12,6 +12,7 @@ consoleCmd('console_size 999')
 consoleCmd('game_writelog 0')
 sleep(1)
 
+doFile('/scripts/asha/lib.lua');
 doFile(GetMapDataPath()..'common.lua');
 doFile(GetMapDataPath()..'utils.lua');
 doFile(GetMapDataPath()..'constants.lua');

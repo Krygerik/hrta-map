@@ -1151,7 +1151,8 @@ function handleHeroRemoveSkill(triggerHero, skill)
 
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  
+
+  MENTOR_USAGE_COUNTER.iterate(playerId);
   mentorCashback(playerId);
 
   -- Если не выбран главный герой, не производим никаких внутренних расчетов

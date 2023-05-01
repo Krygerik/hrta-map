@@ -559,18 +559,12 @@ function replaceMainHero(playerId, newHeroName)
 
   for indexSkill, skillId in ALL_SKILLS_TABLE do
     local masteryLvl = GetHeroSkillMastery(mainHeroName, skillId);
-    
-    print "masteryLvl1 START"
-    print (masteryLvl)
 
     for _, raceSkillId in ALL_RACES_SKILL_LIST do
       if skillId == raceSkillId then
         masteryLvl = masteryLvl - 1;
       end;
     end;
-    
-    print "masteryLvl AFTER"
-    print (masteryLvl)
 
     stashSkills[indexSkill] = masteryLvl;
   end;

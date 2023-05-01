@@ -9,6 +9,9 @@ function setStartedBonus()
 
   for _, playerId in PLAYER_ID_TABLE do
     local bonus = getCalculatedStartedBonus(playerId);
+    
+    PLAYER_STARTED_BONUSES[playerId] = bonus;
+
     local firstHero = GetPlayerHeroes(playerId)[0];
     local secondHero = GetPlayerHeroes(playerId)[1];
     

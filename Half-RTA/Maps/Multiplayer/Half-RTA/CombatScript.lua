@@ -8,6 +8,8 @@
 --  Общие функции
 ---------------------------------------------------------------------------------------------------
 
+doFile('/scripts/asha/combat_lib.lua')
+
 START_ATB_MIN_VALUE = 0.00
 START_ATB_MAX_VALUE = 0.15
 QUICKNESS_OF_MIND_ATB_BONUS = 0.3
@@ -64,6 +66,9 @@ function WaitUntilTurnEnds(unit)
   time = 0
   while combatReadyPerson() == unit do
 		sleep(1)
+--		print(time)        -- 1 min = 4902 5100 4700 4800 5200
+--		time = time + 1
+--    print(TutorialActivateHint(ui_open_atb_bar))
 	end
 end
 
@@ -258,6 +263,7 @@ function OnStart()
 		for i, wm in war_machines[side] do
 			war_machines_state[wm] = 1
 		end
+--    print(real_creatures[0])
 	end
 	local disable_auto_finish = nil
 	for side, hero in {[0]=GetHero(0); GetHero(1)} do
@@ -682,7 +688,6 @@ function UnitMoveNonBlocking(unit)
 --		end
 
     -- Курак специализация
-
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
       local creaturesWhoCanGetCallOfBlood = {}
 
@@ -708,7 +713,7 @@ function UnitMoveNonBlocking(unit)
         
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
-        
+
         removeUnit(uniq_key)
         
         QUROQ_LAST_UNIT = randomCreature

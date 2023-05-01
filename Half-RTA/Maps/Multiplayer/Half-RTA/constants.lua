@@ -995,7 +995,14 @@ TOTAL_EXPERIENCE_BY_LEVEL = {
   1215939194              -- 40
 };
 
--- Данные для отправки в асху
-ASHA_REPORT = {
+-- Количество использования ментора игроками
+MENTOR_USAGE_COUNTER = {
+  players_value = {
+    [PLAYER_1] = 0,
+    [PLAYER_2] = 0,
+  },
 
+  iterate = function(playerId)
+    MENTOR_USAGE_COUNTER.players_value[playerId] = MENTOR_USAGE_COUNTER.players_value[playerId] + 1;
+  end,
 };
