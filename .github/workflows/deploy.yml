@@ -29,5 +29,5 @@ jobs:
     #  run: cp -r Exe/H5_Game.exe path/to/artifact
     - uses: actions/upload-artifact@v3
       with:
-        name: $MAP_VER
+        name: ${MAP_VER}
         path: path/to/artifact/
