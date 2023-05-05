@@ -1,0 +1,30 @@
+# Half-RTA deploy
+name: deploy
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  MAP_VER: Half-RTA_1.26f
+
+jobs:
+       
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - working-directory: ./Half-RTA
+      run: pwd
+    - name: Zip Map
+      working-directory: ./Half-RTA
+      run: zip -r $MAP_VER.h5m .
+    - run: mkdir -p path/to/artifact
+    - name: Copy Map
+      run: cp -r Half-RTA/$MAP_VER.h5m path/to/artifact
+    #- name: Copy Exe
+    #  run: cp -r Exe/H5_Game.exe path/to/artifact
+    - uses: actions/upload-artifact@v3
+      with:
+        name: $MAP_VER
+        path: path/to/artifact/
