@@ -18,13 +18,9 @@ jobs:
     - name: Read VERSION file
       working-directory: ./Half-RTA
       id: getversion
-      run: echo "version=$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
-    - name: Get version
-      working-directory: ./Half-RTA
-      id: vars
-      run: echo ::set-output name=version::$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)
+      run: echo "version=Half-RTA_$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
     - name: Test output
-      run: echo ${{ steps.vars.outputs.version }}${{ steps.getversion.outputs.version }}
+      run: echo ${{ steps.getversion.outputs.version }}
     - name: Raname Dir
       working-directory: ./Half-RTA/
       run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/${{ env.MAP_VER }}${{ steps.getversion.outputs.version }}
