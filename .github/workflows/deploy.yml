@@ -18,12 +18,16 @@ jobs:
     - name: Raname Dir
       working-directory: ./Half-RTA/
       run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/$MAP_VER
+    - name: Read VERSION file
+      working-directory: ./Half-RTA
+      id: getversion
+      run: echo "version=$(cat Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
     - name: Get version
       working-directory: ./Half-RTA
       id: vars
       run: echo ::set-output name=version::$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)
     - name: Test output
-      run: echo ${{ steps.vars.outputs.version }}
+      run: echo ${{ steps.vars.outputs.version }} ${{ steps.getversion.outputs.version }}
     - name: Zip Map
       working-directory: ./Half-RTA
       run: zip -r ${{ env.MAP_VER }}.h5m .
