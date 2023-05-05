@@ -15,9 +15,6 @@ jobs:
     - uses: actions/checkout@v3
     - working-directory: ./Half-RTA
       run: pwd
-    - name: Raname Dir
-      working-directory: ./Half-RTA/
-      run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/$MAP_VER
     - name: Read VERSION file
       working-directory: ./Half-RTA
       id: getversion
@@ -28,6 +25,9 @@ jobs:
       run: echo ::set-output name=version::$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)
     - name: Test output
       run: echo ${{ steps.vars.outputs.version }} ${{ steps.getversion.outputs.version }}
+    - name: Raname Dir
+      working-directory: ./Half-RTA/
+      run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/$MAP_VER
     - name: Zip Map
       working-directory: ./Half-RTA
       run: zip -r ${{ env.MAP_VER }}.h5m .
