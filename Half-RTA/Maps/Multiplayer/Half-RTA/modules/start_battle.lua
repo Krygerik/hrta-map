@@ -1095,6 +1095,23 @@ function runBattle()
   checkAndMoveHeroFromFrendlyField();
 
   sleep(5);
+  
+  -- ASHA
+  local customData = {
+    ["Hero1_StartBonus"] = PLAYER_STARTED_BONUSES[PLAYER_1],
+    ["Hero2_StartBonus"] = PLAYER_STARTED_BONUSES[PLAYER_2],
+    ["Hero1_Mentoring"] = MENTOR_USAGE_COUNTER.players_value[PLAYER_1],
+    ["Hero2_Mentoring"] = MENTOR_USAGE_COUNTER.players_value[PLAYER_2],
+    -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
+    -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
+    ["MapType"] = 'HRTA',
+    ["MapVersion"] = '1.26e',
+  };
+
+  composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);
+  composeCustomData(customData);
+  Trigger(COMBAT_RESULTS_TRIGGER, 'composeDataAfterBattle');
+  -- ASHA
 
   while IsHeroAlive(p1MainHeroName) and IsHeroAlive(p2MainHeroName) do
     if choisePlayerId == PLAYER_2 then
