@@ -21,7 +21,7 @@ jobs:
     - name: Get version
       working-directory: ./Half-RTA
       id: vars
-      run: echo ::set-output name=version::$(awk 'END {print $NF}' file Maps/Multiplayer/Half-RTA/messages/map_name.txt)
+      run: echo ::set-output name=version::$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)
     - name: Test output
       run: echo ${{ steps.vars.outputs.version }}
     - name: Zip Map
