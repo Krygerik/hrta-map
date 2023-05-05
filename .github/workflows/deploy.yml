@@ -16,19 +16,17 @@ jobs:
     - uses: actions/checkout@v3
     - working-directory: ./Half-RTA
       run: pwd
-      # read from file and assign to outputs object
-    - name: Set variables
-      run: |
-        VER="Half-RTA_1.26f"
+    - name: Raname Dir
+      run: mv Maps/Multiplayer/Half-RTA_1.26e Maps/Multiplayer/$MAP_VER
     - name: Zip Map
       working-directory: ./Half-RTA
-      run: zip -r @VER.h5m .
+      run: zip -r @MAP_VER.h5m .
     - run: mkdir -p path/to/artifact
     - name: Copy Map
-      run: cp -r Half-RTA/$VER.h5m path/to/artifact
+      run: cp -r Half-RTA/$MAP_VER.h5m path/to/artifact
     #- name: Copy Exe
     #  run: cp -r Exe/H5_Game.exe path/to/artifact
     - uses: actions/upload-artifact@v3
       with:
-        name: $VER
+        name: $MAP_VER
         path: path/to/artifact/
