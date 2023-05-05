@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  MAP_VER: Half-RTA_
+  MAP_VER_PREF: Half-RTA_
 
 jobs:     
   build:
@@ -18,21 +18,21 @@ jobs:
     - name: Read VERSION file
       working-directory: ./Half-RTA
       id: getversion
-      run: echo "version=Half-RTA_$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
+      run: echo "version=${{ env.MAP_VER_PREF }}$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
     - name: Test output
       run: echo ${{ steps.getversion.outputs.version }}
     - name: Raname Dir
       working-directory: ./Half-RTA/
-      run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/${{ env.MAP_VER }}${{ steps.getversion.outputs.version }}
+      run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/${{ steps.getversion.outputs.version }}
     - name: Zip Map
       working-directory: ./Half-RTA
-      run: zip -r ${{ env.MAP_VER }}${{ steps.getversion.outputs.version }}.h5m .
+      run: zip -r ${{ steps.getversion.outputs.version }}.h5m .
     - run: mkdir -p path/to/artifact
     - name: Copy Map
-      run: cp -r Half-RTA/${{ env.MAP_VER }}${{ steps.getversion.outputs.version }}.h5m path/to/artifact
+      run: cp -r Half-RTA/${{ steps.getversion.outputs.version }}.h5m path/to/artifact
     #- name: Copy Exe
     #  run: cp -r Exe/H5_Game.exe path/to/artifact
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.MAP_VER }}${{ steps.getversion.outputs.version }}
+        name: ${{ steps.getversion.outputs.version }}
         path: path/to/artifact/
