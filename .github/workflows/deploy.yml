@@ -24,7 +24,7 @@ jobs:
       id: vars
       run: echo ::set-output name=version::$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)
     - name: Test output
-      run: echo ${{ steps.vars.outputs.version }} ${{ steps.getversion.outputs.version }}
+      run: echo ${{ steps.vars.outputs.version }}${{ steps.getversion.outputs.version }}
     - name: Raname Dir
       working-directory: ./Half-RTA/
       run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/$MAP_VER
