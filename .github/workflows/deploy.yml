@@ -21,7 +21,7 @@ jobs:
       run: mv Maps/Multiplayer/Half-RTA_1.26e Maps/Multiplayer/$MAP_VER
     - name: Zip Map
       working-directory: ./Half-RTA
-      run: zip -r @MAP_VER.h5m .
+      run: zip -r $MAP_VER.h5m .
     - run: mkdir -p path/to/artifact
     - name: Copy Map
       run: cp -r Half-RTA/$MAP_VER.h5m path/to/artifact
