@@ -18,6 +18,12 @@ jobs:
     - name: Raname Dir
       working-directory: ./Half-RTA/
       run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/$MAP_VER
+    - name: Get version
+      working-directory: ./Half-RTA
+      id: vars
+      run: echo ::set-output name=version::$(awk 'END {print $NF}' file Maps/Multiplayer/Half-RTA/messages/map_name.txt)
+    - name: Test output
+      run: echo ${{ steps.vars.outputs.version }}
     - name: Zip Map
       working-directory: ./Half-RTA
       run: zip -r ${{ env.MAP_VER }}.h5m .
@@ -26,12 +32,6 @@ jobs:
       run: cp -r Half-RTA/${{ env.MAP_VER }}.h5m path/to/artifact
     #- name: Copy Exe
     #  run: cp -r Exe/H5_Game.exe path/to/artifact
-    - name: Get version
-      working-directory: ./Half-RTA/Maps/Multiplayer/Half-RTA/messages
-      id: vars
-      run: echo ::set-output name=version::$(awk 'END {print $NF}' file map_name.txt)
-    - name: Test output
-      run: echo ${{ steps.vars.outputs.version }}
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ env.MAP_VER }}
