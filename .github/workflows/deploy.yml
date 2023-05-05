@@ -17,7 +17,7 @@ jobs:
     - working-directory: ./Half-RTA
       run: pwd
     - name: Raname Dir
-    - working-directory: ./Half-RTA
+      working-directory: ./Half-RTA
       run: mv /Maps/Multiplayer/Half-RTA_1.26e /Maps/Multiplayer/$MAP_VER
     - name: Zip Map
       working-directory: ./Half-RTA
