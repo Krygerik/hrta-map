@@ -7,6 +7,7 @@ on:
 
 env:
   MAP_VER_PREF: Half-RTA_
+  MAP_VER_POSTF: _asha
 
 jobs:     
   build:
@@ -18,7 +19,7 @@ jobs:
     - name: Read VERSION file
       working-directory: ./Half-RTA
       id: getversion
-      run: echo "version=${{ env.MAP_VER_PREF }}$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)" >> $GITHUB_OUTPUT
+      run: echo "version=${{ env.MAP_VER_PREF }}$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)$MAP_VER_POSTF" >> $GITHUB_OUTPUT
     - name: Test output
       run: echo ${{ steps.getversion.outputs.version }}
     - name: Raname Dir
