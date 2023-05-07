@@ -26,6 +26,12 @@ SKILL_LIST = {
   SKILL_TRAINING,
   SKILL_GATING,
   HERO_SKILL_DEMONIC_RAGE,
+  SKILL_SORCERY,
+  SKILL_SUMMONING_MAGIC,
+  SKILL_WAR_MACHINES,
+  HERO_SKILL_SHATTER_SUMMONING_MAGIC,
+  HERO_SKILL_VOICE,
+  HERO_SKILL_SHATTER_LIGHT_MAGIC,
 }
 
 -- Проверка вхождения в таблицу
@@ -137,7 +143,7 @@ function composeDataAfterBattle(combatIndex)
 
   local winnerPlayerId = GetSavedCombatArmyPlayer(combatIndex, 1)
   local looserPlayerId = GetSavedCombatArmyPlayer(combatIndex, 0)
-  
+
   local composedData = {
     ["EqualityBattle"] = 100,
     ["ArmyRemainder"] = ArmyRemainder,

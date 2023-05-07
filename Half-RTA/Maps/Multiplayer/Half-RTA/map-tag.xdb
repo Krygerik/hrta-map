@@ -14,6 +14,6 @@
 	<thumbnailImages/>
 	<HasUnderground>true</HasUnderground>
 	<RandomMap>false</RandomMap>
-	<CustomGameMap>true</CustomGameMap>
+	<CustomGameMap>false</CustomGameMap>
 	<Version>3</Version>
 </AdvMapDescTag>

@@ -228,6 +228,7 @@ function checkAndMoveHeroFromFrendlyField()
   local choiseDictHeroName = getDictionaryHeroName(choiseHeroName);
 
   local opponentPlayerId = PLAYERS_OPPONENT[choisePlayerId];
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
   local opponentPlayerRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
     
   -- Нибросу не запрещаем находиться на его родной поляне
@@ -236,7 +237,7 @@ function checkAndMoveHeroFromFrendlyField()
   end;
 
   -- С нахождением пути можно безобразничать как угодно
-  if HasHeroSkill(choiseHeroName, PERK_PATHFINDING) then
+  if HasHeroSkill(choiseHeroName, PERK_PATHFINDING) and not HasHeroSkill(opponentHeroName, PERK_PATHFINDING) then
     return nil;
   end;
 
@@ -646,12 +647,12 @@ function checkAndRunHeroPerks(playerId)
       [CREATURE_DEVIL] = CREATURE_FRIGHTFUL_NIGHTMARE,
       [CREATURE_POLTERGEIST] = CREATURE_SKELETON_ARCHER,
       [CREATURE_DRYAD] = CREATURE_SPRITE,
-    --  [CREATURE_STONE_DEFENDER] = CREATURE_STOUT_DEFENDER,
       [CREATURE_SHADOW_MISTRESS] = CREATURE_BLACK_DRAGON,
       [CREATURE_THANE] = CREATURE_WARLORD,
       [CREATURE_THUNDER_THANE] = CREATURE_AXE_THROWER,
       [CREATURE_ANGEL] = CREATURE_ARCHANGEL,
       [CREATURE_GOBLIN_TRAPPER] = CREATURE_MASTER_GENIE,
+      [CREATURE_STORM_LORD] = CREATURE_ARCH_MAGI,
     };
 
     for unitId, unitWithLucky in MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE do
@@ -933,6 +934,13 @@ function crownOfLeader(heroName)
 
   units[1], units[2], units[3], units[4], units[5], units[6], units[7] = GetHeroCreaturesTypes(heroName);
 
+  local SPECIAL_UNIT_LIST = {
+    CREATURE_FRIGHTFUL_NIGHTMARE, -- Архдьявол с солдаткой
+    CREATURE_ARCHANGEL, -- Арх с солдаткой
+    CREATURE_GOBLIN_TRAPPER, -- Арх с Хранителя
+    CREATURE_MASTER_GENIE, -- Арх с Хранителя с солдаткой
+    CREATURE_ARCH_MAGI, -- Шторм с солдаткой
+  };
 
   local unitsNotRepeat = {};
 
@@ -953,12 +961,19 @@ function crownOfLeader(heroName)
 
   for _, unitId in unitsNotRepeat do
     if unitId > 0 then
-       for _, unitData in UNITS[raceId] do
-         if unitData.lvl == 7 and unitId == unitData.id then
-             AddHeroCreatures(heroName, unitId, CROWN_OF_LEADER_BONUS);
-
-         end;
-       end;
+      local countRepeatSpecial = 0;
+      for _, unitData in UNITS[raceId] do
+        if unitData.lvl == 7 and unitId == unitData.id then
+          countRepeatSpecial = countRepeatSpecial + 1
+          AddHeroCreatures(heroName, unitId, CROWN_OF_LEADER_BONUS);
+        end;
+      end;
+       
+      for _, specialUnitId in SPECIAL_UNIT_LIST do
+        if unitId == specialUnitId and countRepeatSpecial == 0 then
+          AddHeroCreatures(heroName, unitId, CROWN_OF_LEADER_BONUS);
+        end;
+      end;
     end;
   end;
 end;
@@ -1084,8 +1099,8 @@ function runBattle()
   
   local choisePlayerId = getSelectedBattlefieldPlayerId();
 
-  -- Прогружаем боевые скрипты
-  StartCombat(PLAYERS_MAIN_HERO_PROPS[choisePlayerId].name, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)')
+  -- Прогружаем боевые только у красного игрока скрипты
+  StartCombat(PLAYERS_MAIN_HERO_PROPS[PLAYER_1].name, nil, 1, 1, 1, '/scripts/RTA_TestExecutionThread.(Script).xdb#xpointer(/Script)')
 
   sleep(5);
 
@@ -1105,7 +1120,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.26e',
+    ["MapVersion"] = '1.26g',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);
