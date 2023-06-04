@@ -281,9 +281,11 @@ function setMentorTriggers()
 
   for _, playerId in PLAYER_ID_TABLE do
     local heroes = RESULT_HERO_LIST[playerId].heroes;
-    
+
     for _, heroName in heroes do
-      Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
+      local reservedHero = getReservedHeroName(playerId, heroName);
+
+      Trigger(HERO_REMOVE_SKILL_TRIGGER, reservedHero, 'handleHeroRemoveSkill');
     end;
   end;
 end;
@@ -587,7 +589,8 @@ function learning(strPlayerId, heroName, stage)
     SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - needGold);
     
     -- На Винраэля применяем его скидки
-    if playerMainHeroName == HEROES.ELLESHAR then
+    local dictHeroName = getDictionaryHeroName(playerMainHeroName);
+    if dictHeroName == HEROES.ELLESHAR then
       SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) + ELLESHAR_DISCOUNT);
     end;
   end;
@@ -730,36 +733,6 @@ function removeForestGuardBonusStek(heroName)
   end;
 end;
 
--- Ручная выдача бонуса за Лесного лидера
-function customGiveForestGuardBonusTread(heroName)
-  print "customGiveForestGuardBonusTread"
-
-  local countBonus = 10;
-
-  local bonusUsed = nil;
-
-  while not bonusUsed do
-    if GetDate(DAY) == 4 and HasHeroSkill(heroName, RANGER_FEAT_FOREST_GUARD_EMBLEM) then
-      if (GetHeroCreatures(heroName,  CREATURE_BLADE_SINGER) > 0) then
-        AddHeroCreatures(heroName,  CREATURE_BLADE_SINGER, countBonus);
-      elseif (GetHeroCreatures(heroName, CREATURE_BLADE_JUGGLER) > 0) then
-        AddHeroCreatures(heroName, CREATURE_BLADE_JUGGLER, countBonus);
-      end;
-      bonusUsed = not nil;
-    end;
-    
-    sleep(20);
-  end;
-end;
-
--- Навык "Лесной лидер"
-function forestGuard(heroName)
-  print "forestGuard"
-  
-  removeForestGuardBonusStek(heroName);
-  startThread(customGiveForestGuardBonusTread, heroName);
-end;
-
 -- Удаление стека, полученного с навыка "Защити нас всех"
 function removeDefendUsAllBonusStek(heroName)
   print "removeDefendUsAllBonusStek"
@@ -777,36 +750,6 @@ function removeDefendUsAllBonusStek(heroName)
       RemoveHeroCreatures(heroName, CREATURE_GOBLIN, BONUS_VALUE);
     end;
   end;
-end;
-
--- Ручная выдача бонуса за "Защити нас всех"
-function customGiveDefendUsAllBonusTread(heroName)
-  print "customGiveDefendUsAllBonusTread"
-
-  local BONUS_VALUE = 15;
-
-  local bonusUsed = nil;
-
-  while not bonusUsed do
-    if GetDate(DAY) == 4 and HasHeroSkill(heroName, HERO_SKILL_DEFEND_US_ALL) then
-      if (GetHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER) > 0) then
-        AddHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER, BONUS_VALUE);
-      elseif (GetHeroCreatures(heroName, CREATURE_GOBLIN) > 0) then
-        AddHeroCreatures(heroName, CREATURE_GOBLIN, BONUS_VALUE);
-      end;
-      bonusUsed = not nil;
-    end;
-
-    sleep(20);
-  end;
-end;
-
--- Навык "Защити нас всех"
-function defendUsAll(heroName)
-  print "defendUsAll"
-
-  removeDefendUsAllBonusStek(heroName);
-  startThread(customGiveDefendUsAllBonusTread, heroName);
 end;
 
 -- Отслеживание возможности передачи артефакта с навигации главному герою
@@ -876,7 +819,12 @@ function setNavigationTriggers(heroName)
   local hero = playerId == PLAYER_1 and Biara or Djovanni;
   local position = MAP_POSITION_FOR_NAVIGATION[playerId];
   local navigationArts = PLAYERS_ON_NAVIGATION_ARTS_TABLE[playerId];
-
+  
+   -- Открываем туман войны на остров синего
+  if playerId == PLAYER_2 then
+    OpenRegionFog(playerId, "navigation_blue")
+  end;
+  
   if IsObjectExists(PLAYERS_WALL_CELL_FOR_NAVIGATION[playerId]) then
     RemoveObject(PLAYERS_WALL_CELL_FOR_NAVIGATION[playerId]);
   end;
@@ -1094,14 +1042,14 @@ function handleHeroAddSkill(triggerHero, skillId)
     startThread(darkRitualTread, playerMainHero);
   end;
 
-  -- Лесной лидер
+  -- Лесной лидер (удаление существ)
   if skillId == RANGER_FEAT_FOREST_GUARD_EMBLEM then
-    forestGuard(playerMainHero);
+    removeForestGuardBonusStek(playerMainHero);
   end;
   
-  -- Защити нас всех
+  -- Защити нас всех (удаление существ)
   if skillId == HERO_SKILL_DEFEND_US_ALL then
-    defendUsAll(playerMainHero);
+    removeDefendUsAllBonusStek(playerMainHero);
   end;
   
   -- Логистика

@@ -590,7 +590,7 @@ ALL_ARTS_LIST = {
   { id = 87, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,     price = 6000 }, -- колода таро
   { id = 27, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BOOTS,   price = 5000 }, -- сапоги магической защиты
   -- { id = 34, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD, price = 6000 }, -- тюрбан просвещенности
-  { id = 66, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- шлем хаоса
+  { id = 66, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD,    price = 6000 }, -- шлем хаоса
   { id = 64, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- туника из плоти
   { id = 14, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 5000 }, -- нагрудник мощи
   { id = 80, level = ARTS_LEVELS.MINOR, position = ART_POSITION.WEAPON,  price = 5000 }, -- палочка новичка
