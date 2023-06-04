@@ -6,8 +6,8 @@ PATH_TO_DAY4_MESSAGES = PATH_TO_DAY4_SCRIPTS.."messages/";
 doFile(PATH_TO_DAY4_SCRIPTS.."day4_constants.lua");
 sleep(1);
 
--- —оотношение игроков на Id гарнизонов дл€ дипломатии
-MAP_GARNISON_FOR_DIPLOMACY = {
+-- —оотношение игроков на Id гарнизонов дл€ выноса армии из города
+MAP_GARNISON_FOR_TOWN_STASHE = {
   [PLAYER_1] = 'Garrison3',
   [PLAYER_2] = 'Garrison4',
 };
@@ -148,16 +148,26 @@ function transferAllArmyToMain(playerId)
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local heroes = RESULT_HERO_LIST[playerId].heroes;
   -- ≈сли есть существа в городе
-  local takedUnitFromTown = nil;
+  local hasArmyIsTown = nil;
 
   for _, unitData in UNITS[raceId] do
-    if GetObjectCreatures(townName, unitData.id) > 0 and not takedUnitFromTown then
-      awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
-
-      MakeHeroInteractWithObject(mainHeroName, townName);
-    
-      takedUnitFromTown = not nil;
+    local countUnitInTown = GetObjectCreatures(townName, unitData.id);
+  
+    if countUnitInTown > 0 then
+      if not hasArmyIsTown then
+        hasArmyIsTown = not nil;
+      end;
+      
+      AddObjectCreatures(MAP_GARNISON_FOR_TOWN_STASHE[playerId], unitData.id, countUnitInTown);
+      RemoveObjectCreatures(townName, unitData.id, countUnitInTown)
     end;
+  end;
+  
+  if hasArmyIsTown then
+    awaitMessageBoxForPlayers(playerId, PATH_TO_DAY4_MESSAGES.."find_additional_army.txt");
+    
+    SetObjectOwner(MAP_GARNISON_FOR_TOWN_STASHE[playerId], playerId);
+    MakeHeroInteractWithObject(mainHeroName, MAP_GARNISON_FOR_TOWN_STASHE[playerId]);
   end;
 
   -- ≈сли доступные существа в дополнительных геро€х
@@ -787,9 +797,9 @@ function day4_scripts()
     
     downgradeTown(playerId);
 
-    transferAllArtsToMainHero(playerId);
+    startThread(transferAllArtsToMainHero, playerId);
 
-    transferAllArmyToMain(playerId);
+    startThread(transferAllArmyToMain, playerId);
   end;
   
   for _, playerId in PLAYER_ID_TABLE do

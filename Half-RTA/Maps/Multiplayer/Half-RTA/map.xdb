@@ -45976,6 +45976,36 @@
 				</Action>
 			</ExitTrigger>
 		</Item>
+		<Item>
+			<Floor>0</Floor>
+			<Rect>
+				<x1>3</x1>
+				<y1>2</y1>
+				<x2>15</x2>
+				<y2>19</y2>
+			</Rect>
+			<Name>navigation_blue</Name>
+			<Color>
+				<x>1</x>
+				<y>1</y>
+				<z>1</z>
+			</Color>
+			<EnterAndStopTrigger>
+				<Action>
+					<FunctionName/>
+				</Action>
+			</EnterAndStopTrigger>
+			<EnterWithoutStopTrigger>
+				<Action>
+					<FunctionName/>
+				</Action>
+			</EnterWithoutStopTrigger>
+			<ExitTrigger>
+				<Action>
+					<FunctionName/>
+				</Action>
+			</ExitTrigger>
+		</Item>
 	</regions>
 	<GroundTerrainFileName href="GroundTerrain.bin"/>
 	<UndergroundTerrainFileName href="UndergroundTerrain.bin"/>

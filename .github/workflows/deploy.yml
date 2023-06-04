@@ -7,7 +7,7 @@ on:
 
 env:
   MAP_VER_PREF: Half-RTA_
-  MAP_VER_POSTF: _asha
+  MAP_VER_POSTF: ''
 
 jobs:     
   build:

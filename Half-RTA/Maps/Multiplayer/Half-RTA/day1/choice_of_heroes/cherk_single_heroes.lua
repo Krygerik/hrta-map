@@ -437,13 +437,15 @@ function setResultHeroes()
         selectedHero[pushedIndex] = heroData.name;
       end;
     end;
-    
+
     -- «аписываем список героев, которые будем показывать оппоненту
     RESULT_HERO_LIST[playerId].choised_heroes = selectedHero;
-
-    -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
-    setRandomHeroFromHeroList(playerId, heroList[1].raceId, selectedHero);
+    -- «аписываем расу игрока
+    RESULT_HERO_LIST[playerId].raceId = heroList[1].raceId;
   end;
+
+  -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
+  setRandomHeroFromHeroList();
 end;
 
 cherkSingleHeroes();

@@ -363,6 +363,8 @@ end;
 
 -- ”бираемс€ после черков героев и определ€ем конечный набор героев дл€ 2 игроков
 function finishGroupCherk()
+  print "finishGroupCherk"
+
   removeHeroMovePoints(Biara);
   removeHeroMovePoints(Djovanni);
 
@@ -383,18 +385,19 @@ function finishGroupCherk()
         for heroIndex = 1, length(group.heroes) do
           local heroData = group.heroes[heroIndex];
 
-          raceId = heroData.raceId
           selectedHeroes[heroIndex] = heroData.name;
         end;
       end;
     end;
-    
+
     -- «аписываем список героев, которые будем показывать оппоненту
     RESULT_HERO_LIST[playerId].choised_heroes = selectedHeroes;
-
-    -- ¬ыбор 2 случайных героев из переданного списка
-    setRandomHeroFromHeroList(playerId, playerData.raceId, selectedHeroes);
+        -- «аписываем расу игрока
+    RESULT_HERO_LIST[playerId].raceId = playerData.raceId;
   end;
+
+  -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
+  setRandomHeroFromHeroList();
 end;
 
 cherkGroupHeroes();

@@ -1,66 +1,88 @@
 
 -- Выбор случайных 2 героев из переданного списка и 1 рандомным
-function setRandomHeroFromHeroList(playerId, raceId, heroList)
+function setRandomHeroFromHeroList()
   print "setRandomHeroFromHeroList"
 
-  RESULT_HERO_LIST[playerId].raceId = raceId;
+  -- Генерим 2 случайных героев из выбранных наборов
+  for _, playerId in { PLAYER_1, PLAYER_2 } do
+    local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
+    local opponentResultHeroes = RESULT_HERO_LIST[PLAYERS_OPPONENT[playerId]].heroes;
+    local heroList = RESULT_HERO_LIST[playerId].choised_heroes;
 
-  local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
-  local opponentResultHeroes = RESULT_HERO_LIST[PLAYERS_OPPONENT[playerId]].heroes;
+    local filteredHeroList = {};
 
-  for resultHeroIndex = 1, 2 do
-    local randomSelectedHero;
-    local countEqualHeroNames = 0;
+    -- Убираем из списка возможных героев, выбранных героев оппонента
+    for _, posibleHeroName in heroList do
+      local isExist = nil;
 
-    -- Повторять, пока не сгенерируем индекс героя, которого не выбрали
-    repeat
-      local randomIndex = random(length(heroList)) + 1;
-      randomSelectedHero = heroList[randomIndex];
-      countEqualHeroNames = 0;
+      for _, disallowHeroname in opponentResultHeroes do
+        if posibleHeroName == disallowHeroname then
+          isExist = not nil;
+        end;
+      end
 
-      -- Проверяем наличие героя в наборе
-      for heroIndex, heroName in resultHeroes do
-        if heroName == randomSelectedHero then
-          countEqualHeroNames = countEqualHeroNames + 1;
+      if not isExist then
+        filteredHeroList[length(filteredHeroList) + 1] = posibleHeroName;
+      end;
+    end;
+
+    for resultHeroIndex = 1, 2 do
+      -- Рандомим основного героя
+
+      local randomHeroIndex = random(length(filteredHeroList)) + 1;
+
+      local randomHero = filteredHeroList[randomHeroIndex];
+
+      resultHeroes[resultHeroIndex] = randomHero;
+
+      -- Обновляем список возможных героев
+      local heroListWORandomHero = {};
+
+      for _, heroName in filteredHeroList do
+        if heroName ~= randomHero then
+          heroListWORandomHero[length(heroListWORandomHero) + 1] = heroName;
         end;
       end;
 
-      -- Проверяем наличие героя в наборе оппонента
-      for heroIndex, heroName in opponentResultHeroes do
-        if heroName == randomSelectedHero then
-          countEqualHeroNames = countEqualHeroNames + 1;
-        end;
-      end;
-    until countEqualHeroNames == 0;
-
-    resultHeroes[resultHeroIndex] = randomSelectedHero;
+      filteredHeroList = heroListWORandomHero;
+    end;
   end;
 
-  -- Заполняем список еще одним случайным героем этой расы
-  local allHeroesByRace = HEROES_BY_RACE[raceId];
-  local randomHero;
-  local countEqualHeroNames = 0;
+  -- Генерим по еще 1 случайному герою из общего списка героев
+  for _, playerId in { PLAYER_1, PLAYER_2 } do
+    local raceId = RESULT_HERO_LIST[playerId].raceId;
+    local allHeroesByRace = HEROES_BY_RACE[raceId];
 
-  -- Повторяем, пока не зарандомим не выбранного героя
-  repeat
-    local randomIndex = random(length(allHeroesByRace)) + 1;
-    randomHero = allHeroesByRace[randomIndex];
-    countEqualHeroNames = 0;
+    local resultHeroes = RESULT_HERO_LIST[playerId].heroes;
+    local opponentResultHeroes = RESULT_HERO_LIST[PLAYERS_OPPONENT[playerId]].heroes;
 
-    -- Проверяем наличие героя в наборе
-    for i, resultHero in resultHeroes do
-      if resultHero == randomHero.name then
-        countEqualHeroNames = countEqualHeroNames + 1;
+    local filteredHeroList = {};
+
+    for _, heroData in allHeroesByRace do
+      local isExist = nil;
+
+      for _, disallowHeroName in resultHeroes do
+        if heroData.name == disallowHeroName then
+          isExist = not nil;
+        end;
+      end;
+
+      for _, disallowHeroName in opponentResultHeroes do
+        if heroData.name == disallowHeroName then
+          isExist = not nil;
+        end;
+      end;
+
+      if not isExist then
+        filteredHeroList[length(filteredHeroList) + 1] = heroData.name;
       end;
     end;
 
-    -- Проверяем наличие героя в наборе оппонента
-    for i, resultHero in opponentResultHeroes do
-      if resultHero == randomHero.name then
-        countEqualHeroNames = countEqualHeroNames + 1;
-      end;
-    end;
-  until countEqualHeroNames == 0;
+    -- Рандомим героя в таверне
+    local randomHeroIndex = random(length(filteredHeroList)) + 1;
 
-  resultHeroes[3] = randomHero.name;
+    local randomHero = filteredHeroList[randomHeroIndex];
+
+    resultHeroes[length(resultHeroes) + 1] = randomHero;
+  end;
 end;

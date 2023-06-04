@@ -473,6 +473,29 @@ function perkDiplomacy(playerId)
 
 end;
 
+-- Лесной лидер
+function perkFeatForestGuardEmblem(heroName)
+  print "perkFeatForestGuardEmblem"
+  local BONUS_VALUE = 10;
+
+  if (GetHeroCreatures(heroName,  CREATURE_BLADE_SINGER) > 0) then
+    AddHeroCreatures(heroName,  CREATURE_BLADE_SINGER, BONUS_VALUE);
+  elseif (GetHeroCreatures(heroName, CREATURE_BLADE_JUGGLER) > 0) then
+    AddHeroCreatures(heroName, CREATURE_BLADE_JUGGLER, BONUS_VALUE);
+  end;
+end;
+
+-- Защити всех нас
+function perkDefendUsAll(heroName)
+  print "perkDefendUsAll"
+  local BONUS_VALUE = 30;
+
+  if (GetHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER) > 0) then
+    AddHeroCreatures(heroName,  CREATURE_GOBLIN_DEFILER, BONUS_VALUE);
+  elseif (GetHeroCreatures(heroName, CREATURE_GOBLIN) > 0) then
+    AddHeroCreatures(heroName, CREATURE_GOBLIN, BONUS_VALUE);
+  end;
+end;
 
 -- Преданность машин
 function perkFeatMarchOfTheMachines(heroName)
@@ -535,6 +558,16 @@ function checkAndRunHeroPerks(playerId)
   -- Преданность машин (выдача големов)
   if HasHeroSkill(mainHeroName, WIZARD_FEAT_ARTIFICIAL_GLORY) then
     perkFeatMarchOfTheMachines(mainHeroName);
+  end;
+  
+  -- Лесной лидер
+  if HasHeroSkill(mainHeroName, RANGER_FEAT_FOREST_GUARD_EMBLEM) then
+    perkFeatForestGuardEmblem(mainHeroName);
+  end;
+  
+  -- Защити нас всех
+  if HasHeroSkill(mainHeroName, HERO_SKILL_DEFEND_US_ALL) then
+    perkDefendUsAll(mainHeroName);
   end;
 
   -- Сумерки
@@ -940,6 +973,7 @@ function crownOfLeader(heroName)
     CREATURE_GOBLIN_TRAPPER, -- Арх с Хранителя
     CREATURE_MASTER_GENIE, -- Арх с Хранителя с солдаткой
     CREATURE_ARCH_MAGI, -- Шторм с солдаткой
+    CREATURE_WAR_UNICORN --Серафим с солдаткой
   };
 
   local unitsNotRepeat = {};
@@ -958,7 +992,7 @@ function crownOfLeader(heroName)
        end;
     end;
   end;
-
+  print(unitsNotRepeat)
   for _, unitId in unitsNotRepeat do
     if unitId > 0 then
       local countRepeatSpecial = 0;
@@ -1120,7 +1154,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.26g',
+    ["MapVersion"] = '1.26h',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);
