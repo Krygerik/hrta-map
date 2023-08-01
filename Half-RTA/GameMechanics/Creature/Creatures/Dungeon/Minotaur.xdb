@@ -3,8 +3,8 @@
 	<AttackSkill>5</AttackSkill>
 	<DefenceSkill>2</DefenceSkill>
 	<Shots>0</Shots>
-	<MinDamage>4</MinDamage>
-	<MaxDamage>7</MaxDamage>
+	<MinDamage>5</MinDamage>
+	<MaxDamage>8</MaxDamage>
 	<Speed>5</Speed>
 	<Initiative>9</Initiative>
 	<Flying>false</Flying>

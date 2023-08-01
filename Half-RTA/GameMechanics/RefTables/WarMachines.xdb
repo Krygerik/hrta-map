@@ -181,11 +181,11 @@
 						<Item>0</Item>
 					</Offense>
 					<Defense>
-						<Item>10</Item>
-						<Item>10</Item>
-						<Item>10</Item>
-						<Item>10</Item>
-						<Item>10</Item>
+						<Item>5</Item>
+						<Item>5</Item>
+						<Item>5</Item>
+						<Item>5</Item>
+						<Item>5</Item>
 					</Defense>
 					<MinDamageFactor/>
 					<MaxDamageFactor/>

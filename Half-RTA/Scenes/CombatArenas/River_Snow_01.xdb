@@ -22,7 +22,7 @@
 	<Music/>
 	<AmbientSoundSet href="/Sounds/_(Ambient)/TerrainAmbients/Snow.xdb#xpointer(/AmbientSoundSet)"/>
 	<TextFormatFileRef href=""/>
-	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/SnowArena/SnowObstaclesBig.xdb#xpointer(/ArenaObstaclesGroup)"/>
+	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/SnowArena/SnowObstacles.xdb#xpointer(/ArenaObstaclesGroup)"/>
 	<CamerasSet/>
 	<MeleeAttackPoints>
 		<Use>false</Use>

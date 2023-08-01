@@ -338,7 +338,7 @@
 				<CallStorm_DurationInRounds>3</CallStorm_DurationInRounds>
 			</Academy>
 			<Dungeon>
-				<AssasinPoisonDamagePerPower>1.5</AssasinPoisonDamagePerPower>
+				<AssasinPoisonDamagePerPower>1</AssasinPoisonDamagePerPower>
 				<AssasinPoisonCounter>3</AssasinPoisonCounter>
 				<WhipStrikeSpellPower>3</WhipStrikeSpellPower>
 				<WhipStrike_ProcFactor>999</WhipStrike_ProcFactor>
@@ -1294,7 +1294,7 @@
 				<Taunt_ProcFactor>1.25</Taunt_ProcFactor>
 			</Stronghold>
 			<ConjuredPhoenix href="ConjuredPhoenix.xdb#xpointer(/RPGCombatUniqueCreatureStats)"/>
-			<DefenceBonusOnDefend>0.4</DefenceBonusOnDefend>
+			<DefenceBonusOnDefend>0.5</DefenceBonusOnDefend>
 			<Abilities>
 				<FireShield_Damage_Multiplier>0.2</FireShield_Damage_Multiplier>
 				<MagmaShield_Damage_Multiplier>0.4</MagmaShield_Damage_Multiplier>
@@ -2033,31 +2033,31 @@
 					<Item>0.15</Item>
 				</HeroDamageLevel30>
 			</Melee>
-			<EmpoweredLightningATBDrop>0.6</EmpoweredLightningATBDrop>
-			<EmpoweredIceFreezeDuration>0.4</EmpoweredIceFreezeDuration>
+			<EmpoweredLightningATBDrop>0.66</EmpoweredLightningATBDrop>
+			<EmpoweredIceFreezeDuration>0.33</EmpoweredIceFreezeDuration>
 			<MagicMirrorLevelMultiplier>2</MagicMirrorLevelMultiplier>
 			<PrayerLevelMultiplier>0.15</PrayerLevelMultiplier>
 			<DeathScreamLevelMultiplier>0.15</DeathScreamLevelMultiplier>
 			<SkillDefence>
-				<BasicDamageReduce>0.1</BasicDamageReduce>
-				<AdvancedDamageReduce>0.2</AdvancedDamageReduce>
-				<ExpertDamageReduce>0.3</ExpertDamageReduce>
+				<BasicDamageReduce>0.05</BasicDamageReduce>
+				<AdvancedDamageReduce>0.15</AdvancedDamageReduce>
+				<ExpertDamageReduce>0.25</ExpertDamageReduce>
 				<Evasion_DamageReduce>0.25</Evasion_DamageReduce>
 			</SkillDefence>
 			<SkillOffence>
-				<BasicDamageBonus>0.07</BasicDamageBonus>
-				<AdvancedDamageBonus>0.14</AdvancedDamageBonus>
-				<ExpertDamageBonus>0.21</ExpertDamageBonus>
+				<BasicDamageBonus>0.05</BasicDamageBonus>
+				<AdvancedDamageBonus>0.15</AdvancedDamageBonus>
+				<ExpertDamageBonus>0.25</ExpertDamageBonus>
 				<Archery_DamageBonus>0.25</Archery_DamageBonus>
 			</SkillOffence>
 		</HeroSkills>
 		<Obstacles>
-			<MinSmallObstacles>1</MinSmallObstacles>
-			<MaxSmallObstacles>7</MaxSmallObstacles>
-			<MinBigObstacles>1</MinBigObstacles>
-			<MaxBigObstacles>2</MaxBigObstacles>
-			<MinMixedObstacles>1</MinMixedObstacles>
-			<MaxMixedObstacles>4</MaxMixedObstacles>
+			<MinSmallObstacles>3</MinSmallObstacles>
+			<MaxSmallObstacles>4</MaxSmallObstacles>
+			<MinBigObstacles>0</MinBigObstacles>
+			<MaxBigObstacles>0</MaxBigObstacles>
+			<MinMixedObstacles>0</MinMixedObstacles>
+			<MaxMixedObstacles>0</MaxMixedObstacles>
 			<ObstaclesMaxArea>21</ObstaclesMaxArea>
 			<FreeLines>3</FreeLines>
 		</Obstacles>
@@ -2080,11 +2080,11 @@
 				<Beater_MPBonusPerLevel>0.01</Beater_MPBonusPerLevel>
 				<Beater_LevelDivisor>4</Beater_LevelDivisor>
 				<Furious_InitiativeBonusBase>0</Furious_InitiativeBonusBase>
-				<Furious_InitiativeBonusPerLevel>0.005</Furious_InitiativeBonusPerLevel>
+				<Furious_InitiativeBonusPerLevel>0.004</Furious_InitiativeBonusPerLevel>
 			</Demonlord>
 			<Ranger>
 				<CallOfTheWasp_DamageBonusPerLevel>0.05</CallOfTheWasp_DamageBonusPerLevel>
-				<CallOfTheWasp_ATBReducePerLevel3>0.03</CallOfTheWasp_ATBReducePerLevel3>
+				<CallOfTheWasp_ATBReducePerLevel3>0.05</CallOfTheWasp_ATBReducePerLevel3>
 				<ForestGuardian_DamageBonus>0</ForestGuardian_DamageBonus>
 				<ForestGuardian_DamageBonusPerHeroLevel>0.015</ForestGuardian_DamageBonusPerHeroLevel>
 				<Waylayer_ATBShift>0</Waylayer_ATBShift>
@@ -2104,7 +2104,7 @@
 				<Radiant_MirrorProbPerLevel>0.02</Radiant_MirrorProbPerLevel>
 				<Disrupter_Damage>10</Disrupter_Damage>
 				<Disrupter_DamageLevelDivisor>1</Disrupter_DamageLevelDivisor>
-				<Disrupter_DamagePerLevel>10</Disrupter_DamagePerLevel>
+				<Disrupter_DamagePerLevel>15</Disrupter_DamagePerLevel>
 				<TimeShiftStopFactor>0.05</TimeShiftStopFactor>
 				<TimeShiftBonusATBPerLevel>0.5</TimeShiftBonusATBPerLevel>
 				<FeatherMage_InitiativeBonusBase>0</FeatherMage_InitiativeBonusBase>
@@ -2136,7 +2136,7 @@
 				<PowerBargain_CostReduce>0</PowerBargain_CostReduce>
 				<PowerBargain_CostReducePerLevel>0.02</PowerBargain_CostReducePerLevel>
 				<Prudent_InitiativeDisbonusBase>0</Prudent_InitiativeDisbonusBase>
-				<Prudent_InitiativeDisbonusPerLevel>0.005</Prudent_InitiativeDisbonusPerLevel>
+				<Prudent_InitiativeDisbonusPerLevel>0.004</Prudent_InitiativeDisbonusPerLevel>
 				<Evasive_DamageReduceBase>0</Evasive_DamageReduceBase>
 				<Evasive_DamageReducePerLevel>0.02</Evasive_DamageReducePerLevel>
 			</Warlock>
@@ -2148,7 +2148,7 @@
 				<MountainKing_ActiveRune>SPELL_RUNE_OF_STUNNING</MountainKing_ActiveRune>
 				<Researcher_ChanceToGetExtraRune>0</Researcher_ChanceToGetExtraRune>
 				<SacredHammer_ChanceToCastBase>0</SacredHammer_ChanceToCastBase>
-				<SacredHammer_ChanceToCastPerLevel>0.03</SacredHammer_ChanceToCastPerLevel>
+				<SacredHammer_ChanceToCastPerLevel>0.035</SacredHammer_ChanceToCastPerLevel>
 				<SacredHammer_SpellToCast>SPELL_BLOODLUST</SacredHammer_SpellToCast>
 				<Economist_FineRuneChanceBonusBase>0.5</Economist_FineRuneChanceBonusBase>
 				<Economist_FineRuneChanceBonusPerLevel>0</Economist_FineRuneChanceBonusPerLevel>
@@ -2162,9 +2162,9 @@
 				<CentaurMistress_StartATBBonusPerHeroLevel>0</CentaurMistress_StartATBBonusPerHeroLevel>
 				<Offender_HeroAttackDamageBonusPerLevel>0.025</Offender_HeroAttackDamageBonusPerLevel>
 				<WyvernTamer_HealthBonus>
-					<Base>5</Base>
+					<Base>4</Base>
 					<LevelDivisor>1</LevelDivisor>
-					<PerDividedLevel>5</PerDividedLevel>
+					<PerDividedLevel>4</PerDividedLevel>
 				</WyvernTamer_HealthBonus>
 				<Blooddrinker_OffenceBonusPerStack>
 					<Base>0</Base>
@@ -2191,7 +2191,7 @@
 				<WaveSpeed>33</WaveSpeed>
 			</Armageddon>
 			<Runic>
-				<DragonFormSpellPercent>0.5</DragonFormSpellPercent>
+				<DragonFormSpellPercent>0.4</DragonFormSpellPercent>
 				<ReviveSpellPercent>0.333334</ReviveSpellPercent>
 			</Runic>
 			<HolyWordWaveSpeed>33</HolyWordWaveSpeed>
@@ -2296,9 +2296,9 @@
 				</DamageMultiplier>
 			</DeepFreeze>
 			<Warcries>
-				<RPToArmyOnWarcryLevel1>20</RPToArmyOnWarcryLevel1>
-				<RPToArmyOnWarcryLevel2>30</RPToArmyOnWarcryLevel2>
-				<RPToArmyOnWarcryLevel3>40</RPToArmyOnWarcryLevel3>
+				<RPToArmyOnWarcryLevel1>40</RPToArmyOnWarcryLevel1>
+				<RPToArmyOnWarcryLevel2>50</RPToArmyOnWarcryLevel2>
+				<RPToArmyOnWarcryLevel3>60</RPToArmyOnWarcryLevel3>
 				<RallingCry_MoraleBonus>
 					<Base>1</Base>
 					<LevelDivisor>8</LevelDivisor>
@@ -2310,9 +2310,9 @@
 				<WordOfTheChief_ATBBonusPerCasterLevel>0.02</WordOfTheChief_ATBBonusPerCasterLevel>
 				<WordOfTheChief_RPBonus>30</WordOfTheChief_RPBonus>
 				<Battlecry_SpeedBonus>
-					<Base>1</Base>
-					<LevelDivisor>35</LevelDivisor>
-					<PerDividedLevel>0</PerDividedLevel>
+					<Base>0</Base>
+					<LevelDivisor>20</LevelDivisor>
+					<PerDividedLevel>1</PerDividedLevel>
 				</Battlecry_SpeedBonus>
 				<Battlecry_OffenceBonus>
 					<Base>0</Base>

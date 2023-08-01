@@ -56,6 +56,7 @@
 		<skills/>
 		<perkIDs/>
 		<spellIDs>
+		    <Item>SPELL_LAND_MINE</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

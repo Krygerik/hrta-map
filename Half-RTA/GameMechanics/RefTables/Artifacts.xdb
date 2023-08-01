@@ -110,7 +110,7 @@
 				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>PRIMARY</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Unicorn_Horn_Bow.xdb#xpointer(/Texture)"/>
-				<CostOfGold>15000</CostOfGold>
+				<CostOfGold>12000</CostOfGold>
 				<AIValue>14000</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>

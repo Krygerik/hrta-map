@@ -56,7 +56,7 @@
 		<skills/>
 		<perkIDs/>
 		<spellIDs>
-			<Item>SPELL_MAGIC_ARROW</Item>
+			<Item>SPELL_WASP_SWARM</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

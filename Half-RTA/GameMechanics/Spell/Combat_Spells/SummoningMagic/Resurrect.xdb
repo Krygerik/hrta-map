@@ -28,12 +28,12 @@
 			<PerPower>20</PerPower>
 		</Item>
 		<Item>
-			<Base>240</Base>
+			<Base>240</Base> 840 
 			<PerPower>30</PerPower>
 		</Item>
 		<Item>
-			<Base>288</Base>
-			<PerPower>36</PerPower>
+			<Base>286</Base>
+			<PerPower>34</PerPower>
 		</Item>
 	</damage>
 	<duration>
