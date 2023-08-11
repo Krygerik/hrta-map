@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Creature ObjectRecordID="14">
-	<AttackSkill>36</AttackSkill>
-	<DefenceSkill>36</DefenceSkill>
+	<AttackSkill>31</AttackSkill>
+	<DefenceSkill>31</DefenceSkill>
 	<Shots>0</Shots>
 	<MinDamage>50</MinDamage>
 	<MaxDamage>50</MaxDamage>
@@ -50,5 +50,6 @@
 	<Upgrades/>
 	<Abilities>
 		<Item>ABILITY_RESURRECT_ALLIES</Item>
+		<Item>ABILITY_REBIRTH</Item>
 	</Abilities>
 </Creature>

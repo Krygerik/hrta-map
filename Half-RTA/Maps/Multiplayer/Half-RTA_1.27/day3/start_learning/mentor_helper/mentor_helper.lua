@@ -52,7 +52,7 @@ function getReturnedSkillByMentorHelper(playerId, skillId)
     return nil;
   end;
   
-  if skillId == MENTOR_HELPER_REMOVED_SKILL[playerId] then
+  if skillId ~= MENTOR_HELPER_REMOVED_SKILL[playerId] then
     -- Возвращаем игроку деньги, если он сбросил текущий навык
     SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) + 2500)
     return nil;

@@ -195,6 +195,8 @@ end;
 function prepareForChoiceEnemy(playerId)
   print "prepareForChoiceEnemy"
 
+  while GetCurrentPlayer() ~= playerId do sleep() end;
+
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
@@ -220,7 +222,7 @@ function prepareForChoiceEnemy(playerId)
     end;
 
     if i == 1 then
-      AddHeroCreatures(mainHeroName, CREATURE_PHOENIX, 1000);
+      AddHeroCreatures(mainHeroName, CREATURE_PHOENIX, 100);
     end;
   end;
 
@@ -241,7 +243,15 @@ function prepareForChoiceEnemy(playerId)
 
     for i = 1, 14 do
       if stashEnemies[i] ~= CREATURE_PHOENIX and stashEnemies[i] ~= 0 and stashEnemies[i] ~= nil then
-        AddObjectCreatures(avengerCaravan, stashEnemies[i], 50);
+        local avengerCreature;
+
+        for _, unitData in UNITS[opponentRaceId] do
+          if unitData.id == stashEnemies[i] then
+            avengerCreature = ELF_ENEMY_GARNISONS[opponentRaceId][unitData.lvl];
+          end
+        end;
+
+        AddObjectCreatures(avengerCaravan, avengerCreature.id, avengerCreature.kol);
       end;
     end;
   end;
@@ -259,23 +269,22 @@ function prepareForChoiceEnemy(playerId)
   SetHeroesExpCoef(0);
   MakeHeroInteractWithObject(mainHeroName, avengerCaravan)
   sleep();
-
-  RemoveObject(avengerCaravan);
-
-  -- Возвращаем армию героя
-  for i = 1, 7 do
-    if i == 7 then
-      RemoveHeroCreatures(mainHeroName, CREATURE_PHOENIX, GetHeroCreatures(mainHeroName, CREATURE_PHOENIX));
-    end;
-
-    if stash[i] ~= 0 then
-      AddHeroCreatures(mainHeroName, stash[i], GetObjectCreatures(tempCaravanName, stash[i]));
-    end;
-  end;
-
-  RemoveObject(tempCaravanName);
-
   UpgradeTownBuilding(townName, TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD);
+
+  -- Возвращаем армию героя на следующий день
+  startThread(function ()
+    while GetDate(DAY) ~= 5 do sleep() end;
+
+    for i = 1, 7 do
+      if i == 7 then
+        RemoveHeroCreatures(%mainHeroName, CREATURE_PHOENIX, GetHeroCreatures(%mainHeroName, CREATURE_PHOENIX));
+      end;
+
+      if %stash[i] ~= 0 then
+        AddHeroCreatures(%mainHeroName, %stash[i], GetObjectCreatures(%tempCaravanName, %stash[i]));
+      end;
+    end;
+  end)
 end;
 
 -- Получение количества ресурсов, получаемых для изготовки миниартефактов

@@ -40,12 +40,6 @@ HAVEN_PERK_LIST = {
     RANGER_FEAT_STORM_WIND,
     WARLOCK_FEAT_ELITE_CASTERS,
   },
-
-  -- Дарующий благо
-  {
-    HERO_SKILL_ETERNAL_LIGHT,
-    KNIGHT_FEAT_GUARDIAN_ANGEL,
-  },
   -- Дарующий защиту
   {
     WIZARD_FEAT_SUPRESS_LIGHT,

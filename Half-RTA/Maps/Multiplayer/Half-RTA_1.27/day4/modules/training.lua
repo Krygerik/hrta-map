@@ -63,7 +63,7 @@ MAP_TIER_TO_UNIT_NAME = {
 MAP_TIER_TO_TRAINING_POINTS = {
   [1] = 5,
   [2] = 6,
-  [3] = 12,
+  [3] = 15,
   [5] = 30,
 };
 

@@ -5005,13 +5005,15 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_PATH_OF_WAR</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
+							<Item>HERO_SKILL_NAVIGATION</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_PATH_OF_WAR</Item>
+							<Item>HERO_SKILL_SCOUTING</Item>
+							<Item>HERO_SKILL_NAVIGATION</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -5485,13 +5487,6 @@
 				<spellBuffs/>
 				<BasicSkillID>HERO_SKILL_LIGHT_MAGIC</BasicSkillID>
 				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_KNIGHT</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_BLESSING</Item>
-							<Item>HERO_SKILL_HOLY_CHARGE</Item>
-						</dependenciesIDs>
-					</Item>
 				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
@@ -7242,23 +7237,30 @@
 			<ID>HERO_SKILL_DEATH_TREAD</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Necromancer/Logistics_DeathTread_grey.(Texture).xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Necromancer/Logistics_DeathTread.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/LightMagic_GuardianAngel_grey.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/LightMagic_GuardianAngel.xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
-					<Item href="/Text/Game/Skills/Common/Logistics/DeathTread/Name.txt"/>
+					<Item href="/Text/Game/Skills/Common/LightMagic/GuardianAngel/Name.txt"/>
 				</NameFileRef>
 				<CommonNameFileRef href=""/>
 				<DescriptionFileRef>
-					<Item href="/Text/Game/Skills/Common/Logistics/DeathTread/Description.txt"/>
+					<Item href="/Text/Game/Skills/Common/LightMagic/GuardianAngel/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NECROMANCER</HeroClass>
+				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_LIGHT_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_KNIGHT</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_ETERNAL_LIGHT</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>100</CommanderValue>
@@ -13458,8 +13460,7 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -13472,8 +13473,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

@@ -663,9 +663,16 @@ function checkAndRunHeroPerks(playerId)
   end;
   
   -- ангел-хранитель
-  if HasHeroSkill(mainHeroName, KNIGHT_FEAT_GUARDIAN_ANGEL) then
-    giveCreatureTier(mainHeroName, 1, 7);
-  end;
+--  if HasHeroSkill(mainHeroName, 99) then
+--    local ANGEL_MAP = {
+--      [CREATURE_ANGEL] = CREATURE_GOBLIN_TRAPPER,
+--      [CREATURE_SERAPH] = CREATURE_WAR_UNICORN,
+--    };
+
+--    for angelId, superAngelId in ANGEL_MAP do
+--      replaceUnitInHero(mainHeroName, angelId, superAngelId);
+--    end;
+--  end;
 
   -- солдатская удача
   if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
@@ -741,6 +748,25 @@ function checkAndRunHeroPerks(playerId)
       -- Выдача Фантома за Повелитель жизни
   if HasHeroSkill(mainHeroName, PERK_MASTER_OF_ANIMATION) then
     TeachHeroSpell(mainHeroName,SPELL_PHANTOM);
+  end;
+
+     -- Выдача случайного т3 заклинания за Тайное откровение
+  if HasHeroSkill(mainHeroName, RANGER_FEAT_INSIGHTS) then
+    local dontKnowSpellTier3 = {}
+    for skillId, skillSpellSet in SPELLS do
+        for _, spellData in skillSpellSet do
+          if spellData.level == 3 then
+            if not KnowHeroSpell(mainHeroName, spellData.id) then
+             dontKnowSpellTier3[length(dontKnowSpellTier3) + 1] = spellData.id
+            end;
+          end;
+        end;
+    end;
+    if length(dontKnowSpellTier3) > 0 then
+      local spellTeach = dontKnowSpellTier3[ random(length(dontKnowSpellTier3)) + 1 ]
+      TeachHeroSpell(mainHeroName, spellTeach);
+    end
+    
   end;
   
 end;
@@ -866,7 +892,7 @@ function specInga(heroName)
 
 end;
 
--- Отслеживание спецы Валерии
+-- Отслеживание спецы Валерия
 function specValeriaTread(heroName)
   print "specValeriaTread"
 
@@ -879,7 +905,7 @@ function specValeriaTread(heroName)
     [SPELL_FORGETFULNESS] = SPELL_MASS_FORGETFULNESS,
   };
 
-  if GetHeroSkillMastery(mainHeroName, SKILL_DARK_MAGIC) > 0 then
+  if GetHeroSkillMastery(heroName, SKILL_DARK_MAGIC) > 0 then
     for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
       if KnowHeroSpell(heroName, spellId) then
         TeachHeroSpell(heroName, massSpellId);
@@ -1201,7 +1227,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.26h',
+    ["MapVersion"] = '1.27a',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

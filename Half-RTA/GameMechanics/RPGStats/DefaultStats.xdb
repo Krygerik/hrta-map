@@ -338,7 +338,7 @@
 				<CallStorm_DurationInRounds>3</CallStorm_DurationInRounds>
 			</Academy>
 			<Dungeon>
-				<AssasinPoisonDamagePerPower>1</AssasinPoisonDamagePerPower>
+				<AssasinPoisonDamagePerPower>1.25</AssasinPoisonDamagePerPower>
 				<AssasinPoisonCounter>3</AssasinPoisonCounter>
 				<WhipStrikeSpellPower>3</WhipStrikeSpellPower>
 				<WhipStrike_ProcFactor>999</WhipStrike_ProcFactor>
@@ -2102,9 +2102,9 @@
 			<Wizard>
 				<Radiant_MirrorProb>0.6</Radiant_MirrorProb>
 				<Radiant_MirrorProbPerLevel>0.02</Radiant_MirrorProbPerLevel>
-				<Disrupter_Damage>10</Disrupter_Damage>
+				<Disrupter_Damage>12</Disrupter_Damage>
 				<Disrupter_DamageLevelDivisor>1</Disrupter_DamageLevelDivisor>
-				<Disrupter_DamagePerLevel>15</Disrupter_DamagePerLevel>
+				<Disrupter_DamagePerLevel>12</Disrupter_DamagePerLevel>
 				<TimeShiftStopFactor>0.05</TimeShiftStopFactor>
 				<TimeShiftBonusATBPerLevel>0.5</TimeShiftBonusATBPerLevel>
 				<FeatherMage_InitiativeBonusBase>0</FeatherMage_InitiativeBonusBase>
@@ -2148,7 +2148,7 @@
 				<MountainKing_ActiveRune>SPELL_RUNE_OF_STUNNING</MountainKing_ActiveRune>
 				<Researcher_ChanceToGetExtraRune>0</Researcher_ChanceToGetExtraRune>
 				<SacredHammer_ChanceToCastBase>0</SacredHammer_ChanceToCastBase>
-				<SacredHammer_ChanceToCastPerLevel>0.035</SacredHammer_ChanceToCastPerLevel>
+				<SacredHammer_ChanceToCastPerLevel>0.03</SacredHammer_ChanceToCastPerLevel>
 				<SacredHammer_SpellToCast>SPELL_BLOODLUST</SacredHammer_SpellToCast>
 				<Economist_FineRuneChanceBonusBase>0.5</Economist_FineRuneChanceBonusBase>
 				<Economist_FineRuneChanceBonusPerLevel>0</Economist_FineRuneChanceBonusPerLevel>
@@ -2178,7 +2178,7 @@
 				</GoblinKing_GoblinsWeeklyIncome>
 				<GoblinKing_TreacheryBonusPerLevel>0.01</GoblinKing_TreacheryBonusPerLevel>
 				<WarLeader_WarcryCostReducePerHeroLevel>
-					<Base>1</Base>
+					<Base>2</Base>
 					<LevelDivisor>4</LevelDivisor>
 					<PerDividedLevel>0</PerDividedLevel>
 				</WarLeader_WarcryCostReducePerHeroLevel>

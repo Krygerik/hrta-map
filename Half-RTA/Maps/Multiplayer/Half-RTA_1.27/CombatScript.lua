@@ -235,9 +235,16 @@ num_turn = {0, 0, 0}   -- all, hero_att, hero_def
 spellpower_bonus = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 14, 16, 19, 21, 24, 28, 32, 36, 41, 46, 52, 58, 66, 74, 83, 93, 104, 117, 131, 150}
 zoltan_use = 0
 
+-- Покровительство Асхи счетчик
 ASHA_COUNTER = {
   [0] = {miss = 0, triger = 0},
   [1] = {miss = 0, triger = 0},
+};
+
+-- Был ли использован Ангел-хранитель
+PLAYER_USE_GUARDIAN_ANGEL = {
+  [0] = nil,
+  [1] = nil,
 };
 
 function OnPrepare()
@@ -335,9 +342,9 @@ function OnStart()
 
       -- ловчие
       local type = GetCreatureType(unit)
---      if type == 166 or type == 93 then
---        pcall(commandDoSpecial, unit, 317, pos(unit))
---      end
+      if type == 166 or type == 93 then
+        pcall(commandDoSpecial, unit, 317, pos(unit))
+      end
       
       -- сет регалии Сар-Иссы
       if GetHeroArtSet(GetFriendlyHero(unit), 3) > 1 and GetUnitMaxManaPoints(unit) > 0 then
@@ -375,6 +382,18 @@ function WarMachineDead(wm)
 --  end
 end
 
+function getHasBeenGuardianAngel()
+  print "getHasBeenPreliminaryTeleport"
+
+  for _, hasBeen in HAS_BEEN_GUARDIAN_ANGEL do
+    if hasBeen then
+      return not nil;
+    end;
+  end;
+
+  return nil;
+end;
+
 function CreatureDead(unit)
 	creature_dead[unit] = 1
 
@@ -396,25 +415,23 @@ function CreatureDead(unit)
       combatSetPause(nil)
   	end
 	end
-	
-	
-
 
 	-- Ангел-хранитель
+  local sideAngel = GetUnitSide(unit)
+	if GetHeroSkillMastery(GetFriendlyHero(unit), 99) > 0 and (PLAYER_USE_GUARDIAN_ANGEL[sideAngel] ~= not nil) then
+    local type = GetCreatureType(unit)
 
---	if GetHeroSkillMastery(GetFriendlyHero(unit), 78) > 0 then
---	  local lastUnit = GetCreatures(GetUnitSide(unit))[0]
---	  print(lastUnit)
---    repeat sleep() until GetCreatureNumber(lastUnit) > 0
---
---    local x, y = SafePos()
---    AddCreature(GetUnitSide(unit), 14, 5, x, y, 1, 'arch-unit')
---    repeat sleep() until exist('arch-unit')
---	  pcall(commandDoSpecial, 'arch-unit', SPELL_ABILITY_RESURRECT_ALLIES, pos(lastUnit))
---    removeUnit('arch-unit')
---    repeat sleep() until combatReadyPerson()
---
---	end;
+    if type == 13 or type == 66 or type == 112 then
+      PLAYER_USE_GUARDIAN_ANGEL[sideAngel] = not nil;
+      repeat sleep() until combatReadyPerson()
+      local x, y = SafePos()
+      AddCreature(GetUnitSide(unit), 900, 20, x, y, 1, 'arch-unit')
+      repeat sleep() until exist('arch-unit')
+      pcall(commandDoSpecial, 'arch-unit', SPELL_ABILITY_RESURRECT_ALLIES, pos(unit))
+      removeUnit('arch-unit')
+
+    end;
+	end;
 
 	-- Золтан --Aberrar
   if IsNamedHero(GetFriendlyHero(unit), 'Aberrar') then

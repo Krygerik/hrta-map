@@ -40722,6 +40722,46 @@
 				</CreaturesUpgradesFilter>
 			</AdvMapHillFort>
 		</Item>
+		<Item href="#n:inline(AdvMapArtifact)" id="item_4D63A0E5-CBE7-4365-92C5-57CD2F1472EF">
+			<AdvMapArtifact>
+				<Pos>
+					<x>39</x>
+					<y>79</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>0</Floor>
+				<Name/>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Artifacts/UnicornHornBow.(AdvMapArtifactShared).xdb#xpointer(/AdvMapArtifactShared)"/>
+				<armySlots/>
+				<MessageFileRef href=""/>
+				<spellID>SPELL_NONE</spellID>
+				<RandomShiftRadius>0</RandomShiftRadius>
+				<untransferable>false</untransferable>
+			</AdvMapArtifact>
+		</Item>
+		<Item href="#n:inline(AdvMapArtifact)" id="item_F9E13D34-D91B-4872-B34B-EE833612BFCA">
+			<AdvMapArtifact>
+				<Pos>
+					<x>26</x>
+					<y>14</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>0</Floor>
+				<Name/>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Artifacts/UnicornHornBow.(AdvMapArtifactShared).xdb#xpointer(/AdvMapArtifactShared)"/>
+				<armySlots/>
+				<MessageFileRef href=""/>
+				<spellID>SPELL_NONE</spellID>
+				<RandomShiftRadius>0</RandomShiftRadius>
+				<untransferable>false</untransferable>
+			</AdvMapArtifact>
+		</Item>
 	</objects>
 	<Resources>
 		<PointLights/>
