@@ -5222,6 +5222,7 @@
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_RECRUITMENT</Item>
+							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -5328,8 +5329,7 @@
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_FRENZY</Item>
-							<Item>HERO_SKILL_ARTIFICIAL_GLORY</Item>
-							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
+							<Item>HERO_SKILL_ENCOURAGE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -5337,7 +5337,7 @@
 						<dependenciesIDs>
 							<Item>HERO_SKILL_FRENZY</Item>
 							<Item>HERO_SKILL_FAST_AND_FURIOUS</Item>
-							<Item>HERO_SKILL_DARK_RITUAL</Item>
+							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -5487,12 +5487,6 @@
 				<spellBuffs/>
 				<BasicSkillID>HERO_SKILL_LIGHT_MAGIC</BasicSkillID>
 				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_KNIGHT</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_PRAYER</Item>
-						</dependenciesIDs>
-					</Item>
 				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
@@ -7243,23 +7237,30 @@
 			<ID>HERO_SKILL_DEATH_TREAD</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Necromancer/Logistics_DeathTread_grey.(Texture).xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Necromancer/Logistics_DeathTread.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/LightMagic_GuardianAngel_grey.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/LightMagic_GuardianAngel.xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
-					<Item href="/Text/Game/Skills/Common/Logistics/DeathTread/Name.txt"/>
+					<Item href="/Text/Game/Skills/Common/LightMagic/GuardianAngel/Name.txt"/>
 				</NameFileRef>
 				<CommonNameFileRef href=""/>
 				<DescriptionFileRef>
-					<Item href="/Text/Game/Skills/Common/Logistics/DeathTread/Description.txt"/>
+					<Item href="/Text/Game/Skills/Common/LightMagic/GuardianAngel/Description.txt"/>
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NECROMANCER</HeroClass>
+				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_LIGHT_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_KNIGHT</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_ETERNAL_LIGHT</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>100</CommanderValue>
@@ -9067,43 +9068,43 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
+							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -9824,7 +9825,7 @@
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_ENCOURAGE</Item>
+							<Item>HERO_SKILL_RECRUITMENT</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -10687,48 +10688,48 @@
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_EXPERT_TRAINER</Item>
-							<Item>HERO_SKILL_HOLY_CHARGE</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_CONSUME_CORPSE</Item>
-							<Item>HERO_SKILL_DEMONIC_FIRE</Item>
+						    <Item>HERO_SKILL_DEMONIC_STRIKE</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_SNIPE_DEAD</Item>
-							<Item>HERO_SKILL_IMBUE_ARROW</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DEATH_SCREAM</Item>
-							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MAGIC_BOND</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 							<Item>HERO_SKILL_MAGIC_MIRROR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_EMPOWERED_SPELLS</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_REFRESH_RUNE</Item>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
 							<Item>HERO_SKILL_FINE_RUNE</Item>
 						</dependenciesIDs>
 					</Item>
@@ -11852,48 +11853,52 @@
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_WARLOCK</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_DESTRUCTIVE_MAGIC</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_SUMMONING_MAGIC</BasicSkillID>
 				<SkillPrerequisites>
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_HOLY_CHARGE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_DEMONIC_FIRE</Item>
+							<Item>HERO_SKILL_CONSUME_CORPSE</Item>	
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_DEATH_SCREAM</Item>
+							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_MAGIC_BOND</Item>
+							<Item>HERO_SKILL_MAGIC_MIRROR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_EMPOWERED_SPELLS</Item>
+							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_LIGHTNINGS</Item>
+							<Item>HERO_SKILL_REFRESH_RUNE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -13316,9 +13321,7 @@
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_QUAKES</Item>
 							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
-							<Item>HERO_SKILL_FINE_RUNE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -13457,7 +13460,7 @@
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_PATHFINDING</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -13469,7 +13472,7 @@
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_PATHFINDING</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -14223,13 +14226,13 @@
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
+							<Item>HERO_SKILL_CASTER_CERTIFICATE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
+							<Item>HERO_SKILL_CASTER_CERTIFICATE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

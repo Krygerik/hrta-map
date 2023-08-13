@@ -11,8 +11,8 @@
 doFile('/scripts/asha/combat_lib.lua')
 
 START_ATB_MIN_VALUE = 0.00
-START_ATB_MAX_VALUE = 0.15
-QUICKNESS_OF_MIND_ATB_BONUS = 0.3
+START_ATB_MAX_VALUE = 0.10
+QUICKNESS_OF_MIND_ATB_BONUS = 0.25
 WYNGAAL_ATB_BONUS_PER_LEVEL = 0.008
 PATH_OF_WAR_BONUS_PER_STEP = 4
 LOGISTICS_BONUS_PER_LEVEL = 0
@@ -36,11 +36,13 @@ HERO_2_MANA = 0
 HERO_1_TURN = 0
 HERO_2_TURN = 0
 
-
+GUARDIAN_ANGEL_ACTIVATE = 0
 
 
 
 HEROES_INFO = parse(GetGameVar('heroes_info'))()
+
+
 
 function shuffle(t)
 	local n = getn(t)
@@ -233,6 +235,18 @@ num_turn = {0, 0, 0}   -- all, hero_att, hero_def
 spellpower_bonus = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 14, 16, 19, 21, 24, 28, 32, 36, 41, 46, 52, 58, 66, 74, 83, 93, 104, 117, 131, 150}
 zoltan_use = 0
 
+-- Покровительство Асхи счетчик
+ASHA_COUNTER = {
+  [0] = {miss = 0, triger = 0},
+  [1] = {miss = 0, triger = 0},
+};
+
+-- Был ли использован Ангел-хранитель
+PLAYER_USE_GUARDIAN_ANGEL = {
+  [0] = nil,
+  [1] = nil,
+};
+
 function OnPrepare()
 
   combatSetPause(1)
@@ -368,6 +382,18 @@ function WarMachineDead(wm)
 --  end
 end
 
+function getHasBeenGuardianAngel()
+  print "getHasBeenPreliminaryTeleport"
+
+  for _, hasBeen in HAS_BEEN_GUARDIAN_ANGEL do
+    if hasBeen then
+      return not nil;
+    end;
+  end;
+
+  return nil;
+end;
+
 function CreatureDead(unit)
 	creature_dead[unit] = 1
 
@@ -389,6 +415,23 @@ function CreatureDead(unit)
       combatSetPause(nil)
   	end
 	end
+
+	-- Ангел-хранитель
+  local sideAngel = GetUnitSide(unit)
+	if GetHeroSkillMastery(GetFriendlyHero(unit), 99) > 0 and (PLAYER_USE_GUARDIAN_ANGEL[sideAngel] ~= not nil) then
+    local type = GetCreatureType(unit)
+
+    if type == 13 or type == 66 or type == 112 then
+      PLAYER_USE_GUARDIAN_ANGEL[sideAngel] = not nil;
+      repeat sleep() until combatReadyPerson()
+      local x, y = SafePos()
+      AddCreature(GetUnitSide(unit), 900, 20, x, y, 1, 'arch-unit')
+      repeat sleep() until exist('arch-unit')
+      pcall(commandDoSpecial, 'arch-unit', SPELL_ABILITY_RESURRECT_ALLIES, pos(unit))
+      removeUnit('arch-unit')
+
+    end;
+	end;
 
 	-- Золтан --Aberrar
   if IsNamedHero(GetFriendlyHero(unit), 'Aberrar') then
@@ -687,6 +730,8 @@ function UnitMoveNonBlocking(unit)
 --      SetUnitManaPoints(enemy_hero, cur_enemy_hero_mana)
 --		end
 
+
+
     -- Курак специализация
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
       local creaturesWhoCanGetCallOfBlood = {}
@@ -720,16 +765,31 @@ function UnitMoveNonBlocking(unit)
         
       end;
     end;
+    
 		
 		-- покровительство Асхи
 		if GetHeroSkillMastery(ally_hero, 80) > 0 and unit_mana_spent > 0 then
-		
-      local ChanceProc = random(10)
-      local heroChance = GetHeroLuck(unit) > 5 and 5 or GetHeroLuck(unit)
+
+      local chanceProc = random(2)
+      local maxLuck = GetHeroLuck(unit) > 5 and 5 or GetHeroLuck(unit)
+      local manaRecovery = ceil(unit_mana_spent *0.2 * maxLuck)
       
-      if heroChance >= ChanceProc then
-        SetUnitManaPoints(ally_hero, init_mana)
-      end
+      if ASHA_COUNTER[GetUnitSide(unit)].triger == 2 then
+        ASHA_COUNTER[GetUnitSide(unit)].triger = 0
+        ASHA_COUNTER[GetUnitSide(unit)].miss = ASHA_COUNTER[GetUnitSide(unit)].miss + 1
+      
+      elseif ASHA_COUNTER[GetUnitSide(unit)].miss == 2 then
+        ASHA_COUNTER[GetUnitSide(unit)].miss = 0
+        ASHA_COUNTER[GetUnitSide(unit)].triger = ASHA_COUNTER[GetUnitSide(unit)].triger + 1
+        SetUnitManaPoints(ally_hero, GetUnitManaPoints(unit) + manaRecovery)
+        
+      elseif chanceProc == 1 then
+        SetUnitManaPoints(ally_hero, GetUnitManaPoints(unit) + manaRecovery)
+        ASHA_COUNTER[GetUnitSide(unit)].triger =  ASHA_COUNTER[GetUnitSide(unit)].triger + 1
+      else
+        ASHA_COUNTER[GetUnitSide(unit)].miss =  ASHA_COUNTER[GetUnitSide(unit)].miss + 1
+        
+       end;
 		end
 		
 		-- восполнение маны    unit_mana_spent
@@ -744,6 +804,7 @@ function UnitMoveNonBlocking(unit)
 				init_mana = new_mana
 			end
 		end
+		
 
 
 

@@ -34161,7 +34161,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_15143DCF-1A06-4666-8B64-89547D5E4357">
 			<AdvMapStatic>
 				<Pos>
-					<x>83</x>
+					<x>82</x>
 					<y>83</y>
 					<z>0</z>
 				</Pos>
@@ -34287,8 +34287,8 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_9ABD20D8-B04D-4857-96DA-FCBD20CD4BA3">
 			<AdvMapStatic>
 				<Pos>
-					<x>77</x>
-					<y>66</y>
+					<x>76</x>
+					<y>65</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
@@ -35473,7 +35473,7 @@
 		<Item href="#n:inline(AdvMapTent)" id="item_00ADCA2A-6755-46FC-8AD7-E75CB66A8338">
 			<AdvMapTent>
 				<Pos>
-					<x>72</x>
+					<x>70</x>
 					<y>61</y>
 					<z>0</z>
 				</Pos>
@@ -38113,7 +38113,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_05BCFF18-2FC1-44CC-9D07-C008095D368B">
 			<AdvMapTreasure>
 				<Pos>
-					<x>86</x>
+					<x>85</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -38167,7 +38167,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_27E7CF83-B4D1-46A7-B94F-57A188A2F111">
 			<AdvMapTreasure>
 				<Pos>
-					<x>86</x>
+					<x>85</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -38185,7 +38185,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_58254215-B9D8-4B64-8CD6-2C562D1BC5B3">
 			<AdvMapTreasure>
 				<Pos>
-					<x>86</x>
+					<x>85</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38203,7 +38203,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_E6905755-59BF-4707-9DA4-7E2CC643365A">
 			<AdvMapTreasure>
 				<Pos>
-					<x>86</x>
+					<x>85</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38257,7 +38257,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_B465F417-77BC-4EF6-8DB7-31319431AD2D">
 			<AdvMapTreasure>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -38275,7 +38275,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_D82E65E5-C4B4-473E-8F4E-57F1AA7F5B30">
 			<AdvMapTreasure>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -38293,7 +38293,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_CDEC87AC-BDB5-4B68-AAA5-85AB5152F3AB">
 			<AdvMapTreasure>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38311,7 +38311,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_3AB8F9F3-5FE1-4B41-B97F-96ABDFF61220">
 			<AdvMapTreasure>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38329,7 +38329,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_312B339D-9050-4862-B962-3DE55EED84D0">
 			<AdvMapTreasure>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -38347,7 +38347,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_CA93F157-EC0C-4A01-9404-11FF849049AA">
 			<AdvMapTreasure>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -38365,7 +38365,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_23DE7E22-282C-40AE-90B0-39B939D0BE56">
 			<AdvMapTreasure>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38383,7 +38383,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_7632D6E7-F5D2-466F-96BB-7A49472CCA90">
 			<AdvMapTreasure>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38401,7 +38401,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_13386ECF-ECB9-46D3-9546-B3B0843EB298">
 			<AdvMapTreasure>
 				<Pos>
-					<x>90</x>
+					<x>89</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -38419,7 +38419,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_3ADADD09-6420-4A65-A639-22B570D0DFDF">
 			<AdvMapTreasure>
 				<Pos>
-					<x>90</x>
+					<x>89</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -38437,7 +38437,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_EAE7A08A-7FAA-46C9-8CBB-1D728C3AD9AA">
 			<AdvMapTreasure>
 				<Pos>
-					<x>90</x>
+					<x>89</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38455,7 +38455,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_D8AA249E-E143-437A-9B91-BC54FFE119B6">
 			<AdvMapTreasure>
 				<Pos>
-					<x>90</x>
+					<x>89</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38473,7 +38473,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_09D36785-85EF-46D7-9055-8B7FA5E0EE20">
 			<AdvMapTreasure>
 				<Pos>
-					<x>92</x>
+					<x>91</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -38491,7 +38491,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_5811CE81-EE85-4913-BD94-417B03398EFB">
 			<AdvMapTreasure>
 				<Pos>
-					<x>92</x>
+					<x>91</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -38509,7 +38509,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_67662FA9-3096-4566-9C3E-343AF0B9E727">
 			<AdvMapTreasure>
 				<Pos>
-					<x>92</x>
+					<x>91</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38527,7 +38527,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_DEFAE3B4-3F0A-4E4A-B572-AC2331EB0C5E">
 			<AdvMapTreasure>
 				<Pos>
-					<x>92</x>
+					<x>91</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38833,7 +38833,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_B6ACC50E-6D7B-4154-9810-666971144434">
 			<AdvMapStatic>
 				<Pos>
-					<x>89</x>
+					<x>88</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -38851,7 +38851,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_C999F227-6020-447A-9512-81FB4CDEDA62">
 			<AdvMapStatic>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -38869,7 +38869,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_A8F88946-9091-4FCA-9C2F-C50F51DBA793">
 			<AdvMapStatic>
 				<Pos>
-					<x>86</x>
+					<x>85</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -38887,7 +38887,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_DDDC6948-8890-4E4E-BB20-6570EBA68F22">
 			<AdvMapStatic>
 				<Pos>
-					<x>87</x>
+					<x>86</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -38905,7 +38905,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_29847C74-4504-452C-AD19-19EC32022EAC">
 			<AdvMapStatic>
 				<Pos>
-					<x>85</x>
+					<x>84</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -38923,7 +38923,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_E428B107-B1FC-4129-97EA-5E1FA10DEE71">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>74</y>
 					<z>0</z>
 				</Pos>
@@ -38941,7 +38941,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_F160473D-6F87-413F-84C7-CA916CE4BAF2">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>75</y>
 					<z>0</z>
 				</Pos>
@@ -38959,7 +38959,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_D59CD7A2-F91F-4477-928F-A9D2807C3787">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -38977,7 +38977,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_BCDD7390-990B-4D23-9C3B-84DD5459C5FB">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>77</y>
 					<z>0</z>
 				</Pos>
@@ -38995,7 +38995,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_70B94402-C382-4BA7-8873-7607470A7E8A">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -39013,7 +39013,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_E136C9FF-2ED9-4AF1-9F5C-BDF2687BCC0E">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>79</y>
 					<z>0</z>
 				</Pos>
@@ -39031,7 +39031,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_91C27ECB-E2C6-409E-A446-95E0442241AF">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -39049,7 +39049,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_279198B2-9353-4E0F-96D6-AC8EEE120E9C">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>81</y>
 					<z>0</z>
 				</Pos>
@@ -39067,7 +39067,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_CAC0FAFA-54E6-4425-8397-2DEAAE42E87A">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -39085,7 +39085,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_D8E0DD01-0563-465E-A003-93C89A5598F3">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39121,7 +39121,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_C25DA8B3-F7B0-4D81-AF60-D48D69ABB179">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>75</y>
 					<z>0</z>
 				</Pos>
@@ -39157,7 +39157,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_F881950C-E5B3-4D81-A65B-EABD84F2BF8A">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>76</y>
 					<z>0</z>
 				</Pos>
@@ -39175,7 +39175,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_E623584E-F0F5-44F4-B250-E5F7D08D86A5">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>77</y>
 					<z>0</z>
 				</Pos>
@@ -39193,7 +39193,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_C2E0A61B-B1C4-45DE-91E1-FBADBF1BCBAA">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>78</y>
 					<z>0</z>
 				</Pos>
@@ -39211,7 +39211,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_F5526A00-50BB-4A3E-BDE4-16249C8FB9CD">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>79</y>
 					<z>0</z>
 				</Pos>
@@ -39229,7 +39229,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_76834A1A-DE46-4624-91C0-879E48C01258">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>80</y>
 					<z>0</z>
 				</Pos>
@@ -39247,7 +39247,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_49AD0876-7512-46AE-B37A-6330D9CAD819">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>81</y>
 					<z>0</z>
 				</Pos>
@@ -39265,7 +39265,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_D3C33459-022C-4565-9441-40B655B45F87">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
+					<x>93</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -39283,7 +39283,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_4F875C03-B577-4BA1-A126-72E85A1C15CD">
 			<AdvMapStatic>
 				<Pos>
-					<x>91</x>
+					<x>90</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39301,7 +39301,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_749B6452-12ED-4E2F-944D-9C07106C5562">
 			<AdvMapStatic>
 				<Pos>
-					<x>90</x>
+					<x>89</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39316,29 +39316,11 @@
 				<ScalePercent>100</ScalePercent>
 			</AdvMapStatic>
 		</Item>
-		<Item href="#n:inline(AdvMapStatic)" id="item_DD60BD2A-A8A1-418D-9DF6-656DBD09B693">
-			<AdvMapStatic>
-				<Pos>
-					<x>94</x>
-					<y>73</y>
-					<z>0</z>
-				</Pos>
-				<Rot>6.28319</Rot>
-				<Floor>0</Floor>
-				<Name/>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Subterra/Brick_crash_small.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
-				<IsRemovable>false</IsRemovable>
-				<TerrainAligned>false</TerrainAligned>
-				<ScalePercent>100</ScalePercent>
-			</AdvMapStatic>
-		</Item>
 		<Item href="#n:inline(AdvMapStatic)" id="item_3B682BD4-A934-4F6C-A2D6-38C738BE35DC">
 			<AdvMapStatic>
 				<Pos>
-					<x>94</x>
-					<y>72</y>
+					<x>93</x>
+					<y>70</y>
 					<z>0</z>
 				</Pos>
 				<Rot>1.5708</Rot>
@@ -39352,28 +39334,10 @@
 				<ScalePercent>100</ScalePercent>
 			</AdvMapStatic>
 		</Item>
-		<Item href="#n:inline(AdvMapStatic)" id="item_857F336E-9D09-4255-A15A-2A8328B44464">
-			<AdvMapStatic>
-				<Pos>
-					<x>94</x>
-					<y>71</y>
-					<z>0</z>
-				</Pos>
-				<Rot>4.71239</Rot>
-				<Floor>0</Floor>
-				<Name/>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Subterra/Brick_crash_small.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
-				<IsRemovable>false</IsRemovable>
-				<TerrainAligned>false</TerrainAligned>
-				<ScalePercent>100</ScalePercent>
-			</AdvMapStatic>
-		</Item>
 		<Item href="#n:inline(AdvMapStatic)" id="item_93AD91A8-159A-4CA1-A05A-CE0AA90900B2">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>73</y>
 					<z>0</z>
 				</Pos>
@@ -39391,7 +39355,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_E7EB6BCF-EE15-4468-A802-4DF6C4D648C0">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>72</y>
 					<z>0</z>
 				</Pos>
@@ -39409,7 +39373,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_D2B53E99-8F5E-4830-ACAF-22D65067044C">
 			<AdvMapStatic>
 				<Pos>
-					<x>82</x>
+					<x>81</x>
 					<y>71</y>
 					<z>0</z>
 				</Pos>
@@ -39427,7 +39391,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_209DB61F-A975-4553-9052-30403A05BCAE">
 			<AdvMapStatic>
 				<Pos>
-					<x>93</x>
+					<x>92</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39445,7 +39409,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_1F625ADE-6F33-477C-8EE6-73BEAAFD9F36">
 			<AdvMapStatic>
 				<Pos>
-					<x>92</x>
+					<x>91</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39481,7 +39445,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_6617A0F2-3749-4FCE-8295-B81A018B37D7">
 			<AdvMapStatic>
 				<Pos>
-					<x>83</x>
+					<x>82</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39499,7 +39463,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_0674BBAC-3419-4614-AE36-D7BA9D306007">
 			<AdvMapStatic>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>70</y>
 					<z>0</z>
 				</Pos>
@@ -39931,8 +39895,8 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_8A719822-E737-4804-B283-E1AFE3690ADE">
 			<AdvMapStatic>
 				<Pos>
-					<x>75</x>
-					<y>26</y>
+					<x>74</x>
+					<y>27</y>
 					<z>0</z>
 				</Pos>
 				<Rot>4.71239</Rot>
@@ -39946,29 +39910,11 @@
 				<ScalePercent>100</ScalePercent>
 			</AdvMapStatic>
 		</Item>
-		<Item href="#n:inline(AdvMapStatic)" id="item_69EDB86A-E3D1-4F88-86C9-27ACA3DFF533">
-			<AdvMapStatic>
-				<Pos>
-					<x>75</x>
-					<y>24</y>
-					<z>0</z>
-				</Pos>
-				<Rot>1.5708</Rot>
-				<Floor>0</Floor>
-				<Name/>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Subterra/Brick_crash_small.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
-				<IsRemovable>false</IsRemovable>
-				<TerrainAligned>false</TerrainAligned>
-				<ScalePercent>100</ScalePercent>
-			</AdvMapStatic>
-		</Item>
 		<Item href="#n:inline(AdvMapStatic)" id="item_931CBB2D-6F8E-4D70-81A3-FEF51C318587">
 			<AdvMapStatic>
 				<Pos>
-					<x>75</x>
-					<y>25</y>
+					<x>74</x>
+					<y>23</y>
 					<z>0</z>
 				</Pos>
 				<Rot>3.14159</Rot>
@@ -40352,7 +40298,7 @@
 		<Item href="#n:inline(AdvMapGarrison)" id="item_7E0A94FB-0D87-4E6F-84B6-A8C66FD9C39A">
 			<AdvMapGarrison>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -40377,7 +40323,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_E00F377F-6B2B-472E-BA67-23F9FEA90B04">
 			<AdvMapStatic>
 				<Pos>
-					<x>85</x>
+					<x>84</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -40395,7 +40341,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_9690A7BF-A636-4DFC-938E-F9BF840A4D51">
 			<AdvMapStatic>
 				<Pos>
-					<x>83</x>
+					<x>82</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -40413,7 +40359,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_FD16133F-6417-4051-BFD9-787D5D199DD9">
 			<AdvMapStatic>
 				<Pos>
-					<x>93</x>
+					<x>92</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -40431,7 +40377,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_9675CCF6-8D16-49BF-9C5F-411EDF9A44E4">
 			<AdvMapStatic>
 				<Pos>
-					<x>91</x>
+					<x>90</x>
 					<y>82</y>
 					<z>0</z>
 				</Pos>
@@ -40449,7 +40395,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_C113F0A4-0126-430D-82FE-F77ECA144054">
 			<AdvMapStatic>
 				<Pos>
-					<x>88</x>
+					<x>87</x>
 					<y>83</y>
 					<z>0</z>
 				</Pos>
@@ -40467,7 +40413,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_204D4537-53C1-4CB7-A395-75832203FCB7">
 			<AdvMapStatic>
 				<Pos>
-					<x>89</x>
+					<x>88</x>
 					<y>83</y>
 					<z>0</z>
 				</Pos>
@@ -40485,7 +40431,7 @@
 		<Item href="#n:inline(AdvMapStatic)" id="item_BBFEB74A-4003-4A2D-A314-FE6278F52D4F">
 			<AdvMapStatic>
 				<Pos>
-					<x>87</x>
+					<x>86</x>
 					<y>83</y>
 					<z>0</z>
 				</Pos>
@@ -40503,7 +40449,7 @@
 		<Item href="#n:inline(AdvMapTreasure)" id="item_9C02243F-B090-40E2-BA9D-39555BED5DB6">
 			<AdvMapTreasure>
 				<Pos>
-					<x>84</x>
+					<x>83</x>
 					<y>72</y>
 					<z>0</z>
 				</Pos>
@@ -40535,6 +40481,246 @@
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapSeerHut)" id="item_404D5E94-4846-4FF5-AADB-70F088D2DDB9">
+			<AdvMapSeerHut>
+				<Pos>
+					<x>59</x>
+					<y>81</y>
+					<z>0</z>
+				</Pos>
+				<Rot>4.71239</Rot>
+				<Floor>0</Floor>
+				<Name>mentor_helper_1</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Seer_Hut.(AdvMapSeerHutShared).xdb#xpointer(/AdvMapSeerHutShared)"/>
+				<Quest>
+					<Name/>
+					<CaptionFileRef href=""/>
+					<ObscureCaptionFileRef href=""/>
+					<DescriptionFileRef href=""/>
+					<ProgressCommentsFileRef/>
+					<Kind>OBJECTIVE_KIND_MANUAL</Kind>
+					<Parameters/>
+					<Timeout>-1</Timeout>
+					<Holdout>-1</Holdout>
+					<CheckDelay>-1</CheckDelay>
+					<Dependencies/>
+					<InstantVictory>false</InstantVictory>
+					<TargetGlance>
+						<Target>
+							<Type>ADV_TARGET_NONE</Type>
+							<Name/>
+							<Coords>
+								<FloorID>0</FloorID>
+								<cell>
+									<x>0</x>
+									<y>0</y>
+								</cell>
+							</Coords>
+						</Target>
+						<Radius>10</Radius>
+						<Duration>5000</Duration>
+					</TargetGlance>
+					<Award>
+						<Type>AWARD_NONE</Type>
+						<Experience>0</Experience>
+						<Resources>
+							<Wood>0</Wood>
+							<Ore>0</Ore>
+							<Mercury>0</Mercury>
+							<Crystal>0</Crystal>
+							<Sulfur>0</Sulfur>
+							<Gem>0</Gem>
+							<Gold>0</Gold>
+						</Resources>
+						<Attribute>HERO_ATTRIB_DEFENCE</Attribute>
+						<AttributeAmount>0</AttributeAmount>
+						<ArtifactID>ARTIFACT_NONE</ArtifactID>
+						<SpellID>SPELL_NONE</SpellID>
+						<ArmySlot>
+							<Creature>CREATURE_UNKNOWN</Creature>
+							<Count>0</Count>
+						</ArmySlot>
+						<SpellPoints>0</SpellPoints>
+						<Morale>0</Morale>
+						<Luck>0</Luck>
+						<SkillWithMastery>
+							<Mastery>MASTERY_NONE</Mastery>
+							<SkillID>HERO_SKILL_NONE</SkillID>
+						</SkillWithMastery>
+					</Award>
+					<TakeContribution>false</TakeContribution>
+					<CanUncomplete>false</CanUncomplete>
+					<IsInitialyActive>true</IsInitialyActive>
+					<IsInitialyVisible>true</IsInitialyVisible>
+					<IsHidden>false</IsHidden>
+					<Ignore>false</Ignore>
+					<ShowCompleted>true</ShowCompleted>
+					<NeedComplete>true</NeedComplete>
+					<StateChangeTrigger>
+						<Action>
+							<FunctionName/>
+						</Action>
+					</StateChangeTrigger>
+					<SoundActivated/>
+					<SoundComplete/>
+					<SoundFailed/>
+					<AllowMultipleActivations>true</AllowMultipleActivations>
+					<AllowMultipleCompletions>true</AllowMultipleCompletions>
+				</Quest>
+			</AdvMapSeerHut>
+		</Item>
+		<Item href="#n:inline(AdvMapSeerHut)" id="item_5F8A74FF-0E3E-4673-933D-44E893692722">
+			<AdvMapSeerHut>
+				<Pos>
+					<x>59</x>
+					<y>15</y>
+					<z>0</z>
+				</Pos>
+				<Rot>4.91239</Rot>
+				<Floor>0</Floor>
+				<Name>mentor_helper_2</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Seer_Hut.(AdvMapSeerHutShared).xdb#xpointer(/AdvMapSeerHutShared)"/>
+				<Quest>
+					<Name/>
+					<CaptionFileRef href=""/>
+					<ObscureCaptionFileRef href=""/>
+					<DescriptionFileRef href=""/>
+					<ProgressCommentsFileRef/>
+					<Kind>OBJECTIVE_KIND_MANUAL</Kind>
+					<Parameters/>
+					<Timeout>-1</Timeout>
+					<Holdout>-1</Holdout>
+					<CheckDelay>-1</CheckDelay>
+					<Dependencies/>
+					<InstantVictory>false</InstantVictory>
+					<TargetGlance>
+						<Target>
+							<Type>ADV_TARGET_NONE</Type>
+							<Name/>
+							<Coords>
+								<FloorID>0</FloorID>
+								<cell>
+									<x>0</x>
+									<y>0</y>
+								</cell>
+							</Coords>
+						</Target>
+						<Radius>10</Radius>
+						<Duration>5000</Duration>
+					</TargetGlance>
+					<Award>
+						<Type>AWARD_NONE</Type>
+						<Experience>0</Experience>
+						<Resources>
+							<Wood>0</Wood>
+							<Ore>0</Ore>
+							<Mercury>0</Mercury>
+							<Crystal>0</Crystal>
+							<Sulfur>0</Sulfur>
+							<Gem>0</Gem>
+							<Gold>0</Gold>
+						</Resources>
+						<Attribute>HERO_ATTRIB_DEFENCE</Attribute>
+						<AttributeAmount>0</AttributeAmount>
+						<ArtifactID>ARTIFACT_NONE</ArtifactID>
+						<SpellID>SPELL_NONE</SpellID>
+						<ArmySlot>
+							<Creature>CREATURE_UNKNOWN</Creature>
+							<Count>0</Count>
+						</ArmySlot>
+						<SpellPoints>0</SpellPoints>
+						<Morale>0</Morale>
+						<Luck>0</Luck>
+						<SkillWithMastery>
+							<Mastery>MASTERY_NONE</Mastery>
+							<SkillID>HERO_SKILL_NONE</SkillID>
+						</SkillWithMastery>
+					</Award>
+					<TakeContribution>false</TakeContribution>
+					<CanUncomplete>false</CanUncomplete>
+					<IsInitialyActive>true</IsInitialyActive>
+					<IsInitialyVisible>true</IsInitialyVisible>
+					<IsHidden>false</IsHidden>
+					<Ignore>false</Ignore>
+					<ShowCompleted>true</ShowCompleted>
+					<NeedComplete>true</NeedComplete>
+					<StateChangeTrigger>
+						<Action>
+							<FunctionName/>
+						</Action>
+					</StateChangeTrigger>
+					<SoundActivated/>
+					<SoundComplete/>
+					<SoundFailed/>
+					<AllowMultipleActivations>true</AllowMultipleActivations>
+					<AllowMultipleCompletions>true</AllowMultipleCompletions>
+				</Quest>
+			</AdvMapSeerHut>
+		</Item>
+		<Item href="#n:inline(AdvMapHillFort)" id="item_36B1A3AC-759E-4305-9A52-BACF33311AF5">
+			<AdvMapHillFort>
+				<Pos>
+					<x>93</x>
+					<y>72</y>
+					<z>0</z>
+				</Pos>
+				<Rot>4.71239</Rot>
+				<Floor>0</Floor>
+				<Name/>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Hill_Fort.(AdvMapHillFortShared).xdb#xpointer(/AdvMapHillFortShared)"/>
+				<CreaturesUpgradesFilter>
+					<ForbiddenBasicUpgradeTiers/>
+					<ForbiddenAlterUpgradeTiers/>
+					<NotUpgradeable/>
+					<ForbiddenUpgrades/>
+				</CreaturesUpgradesFilter>
+			</AdvMapHillFort>
+		</Item>
+		<Item href="#n:inline(AdvMapStatic)" id="item_A94D38E8-872D-47EB-B6BB-19ABE5E7B5DA">
+			<AdvMapStatic>
+				<Pos>
+					<x>93</x>
+					<y>74</y>
+					<z>0</z>
+				</Pos>
+				<Rot>6.28319</Rot>
+				<Floor>0</Floor>
+				<Name/>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Subterra/Brick_crash_small.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
+				<IsRemovable>false</IsRemovable>
+				<TerrainAligned>false</TerrainAligned>
+				<ScalePercent>100</ScalePercent>
+			</AdvMapStatic>
+		</Item>
+		<Item href="#n:inline(AdvMapHillFort)" id="item_82613240-F8E0-4441-9CFB-A2FB75724C7A">
+			<AdvMapHillFort>
+				<Pos>
+					<x>75</x>
+					<y>25</y>
+					<z>0</z>
+				</Pos>
+				<Rot>1.5708</Rot>
+				<Floor>0</Floor>
+				<Name/>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Hill_Fort.(AdvMapHillFortShared).xdb#xpointer(/AdvMapHillFortShared)"/>
+				<CreaturesUpgradesFilter>
+					<ForbiddenBasicUpgradeTiers/>
+					<ForbiddenAlterUpgradeTiers/>
+					<NotUpgradeable/>
+					<ForbiddenUpgrades/>
+				</CreaturesUpgradesFilter>
+			</AdvMapHillFort>
 		</Item>
 	</objects>
 	<Resources>
@@ -40575,6 +40761,7 @@
 		<Item href="/MapObjects/_(AdvMapTile)/Conquest/Mud.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Orc_Terrain/Nidle_Dirt_Road.(AdvMapTile).xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Grass/Nidle_Grass_Green.xdb#xpointer(/AdvMapTile)"/>
+		<Item href="/MapObjects/_(AdvMapTile)/Grass/Road.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Orc_Terrain/White_Rock.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Lava/Dead_Land.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Sand/Rock.xdb#xpointer(/AdvMapTile)"/>
@@ -40584,6 +40771,7 @@
 		<Item href="/MapObjects/_(AdvMapTile)/Orc_Terrain/Nidle_Road.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Lava/lava_arena_brick.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Orc_Terrain/Mossy_Rock.xdb#xpointer(/AdvMapTile)"/>
+		<Item href="/MapObjects/_(AdvMapTile)/SubTerrain/Dwarf_Floor_Raised.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Sand/Sand_Rock.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Grass/StoneRoad.xdb#xpointer(/AdvMapTile)"/>
 		<Item href="/MapObjects/_(AdvMapTile)/Sand/sand-dune.xdb#xpointer(/AdvMapTile)"/>

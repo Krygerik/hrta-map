@@ -194,70 +194,97 @@ end;
 -- Подготовка к выбору заклятых врагов
 function prepareForChoiceEnemy(playerId)
   print "prepareForChoiceEnemy"
-  
+
+  while GetCurrentPlayer() ~= playerId do sleep() end;
+
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentMainHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
   local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
-  local stash = {
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-    { id = 0, kol = 0 },
-  };
-  
+
+  -- Временно перекидываем армию героя в караван
+  local stash = {};
+  local tempCaravanName = "caravan"..playerId;
+
+  CreateCaravan(tempCaravanName, PLAYER_3, UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
+  stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(mainHeroName);
+
+  for i = 1, 7 do
+    if stash[i] ~= 0 then
+      AddObjectCreatures(tempCaravanName, stash[i], GetHeroCreatures(mainHeroName, stash[i]));
+    end;
+  end;
+
+  for i = 1, 7 do
+    if stash[i] ~= 0 then
+      RemoveHeroCreatures(mainHeroName, stash[i], GetHeroCreatures(mainHeroName, stash[i]));
+    end;
+
+    if i == 1 then
+      AddHeroCreatures(mainHeroName, CREATURE_PHOENIX, 100);
+    end;
+  end;
+
+  -- Формируем из существ оппонента пробивочную армию для эльфа
+  local stashEnemies = {};
+  local tempOpponentCaravanName = "caravan"..opponentPlayerId;
+  local avengerCaravan = "avenger"..playerId;
+
+  CreateCaravan(avengerCaravan, PLAYER_3, UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
+
+  -- Со смертельным выстрелом формируем пробивку из армии оппонента
+  if HasHeroSkill(mainHeroName, PERK_SNIPE_DEAD) then
+    if IsObjectExists(tempOpponentCaravanName) then
+      stashEnemies[8], stashEnemies[9], stashEnemies[10], stashEnemies[11], stashEnemies[12], stashEnemies[13], stashEnemies[14] = GetObjectCreaturesTypes(tempOpponentCaravanName);
+    end;
+
+    stashEnemies[1], stashEnemies[2], stashEnemies[3], stashEnemies[4], stashEnemies[5], stashEnemies[6], stashEnemies[7] = GetHeroCreaturesTypes(opponentMainHeroName);
+
+    for i = 1, 14 do
+      if stashEnemies[i] ~= CREATURE_PHOENIX and stashEnemies[i] ~= 0 and stashEnemies[i] ~= nil then
+        local avengerCreature;
+
+        for _, unitData in UNITS[opponentRaceId] do
+          if unitData.id == stashEnemies[i] then
+            avengerCreature = ELF_ENEMY_GARNISONS[opponentRaceId][unitData.lvl];
+          end
+        end;
+
+        AddObjectCreatures(avengerCaravan, avengerCreature.id, avengerCreature.kol);
+      end;
+    end;
+  end;
+
+  -- Без смертельного выстрела формируем из всех возможных юнитов
+  if not HasHeroSkill(mainHeroName, PERK_SNIPE_DEAD) then
+    for _, enemyData in ELF_ENEMY_GARNISONS[opponentRaceId] do
+      AddObjectCreatures(avengerCaravan, enemyData.id, enemyData.kol);
+    end;
+  end;
+
+
+  -- Запрещаем получать опыт
+  sleep();
+  SetHeroesExpCoef(0);
+  MakeHeroInteractWithObject(mainHeroName, avengerCaravan)
+  sleep();
   UpgradeTownBuilding(townName, TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD);
-  
-  -- СОхраняем юнитов в памяти
-  stash[1].id, stash[2].id, stash[3].id, stash[4].id, stash[5].id, stash[6].id, stash[7].id = GetHeroCreaturesTypes(mainHeroName);
-  for index, stachedUnit in stash do
-    if stachedUnit.id > 0 then
-      stachedUnit.kol = GetHeroCreatures(mainHeroName, stachedUnit.id);
-      RemoveHeroCreatures(mainHeroName, stachedUnit.id, stachedUnit.kol);
-      sleep(1);
 
-      if index == 1 then
-        AddHeroCreatures(mainHeroName, CREATURE_PHOENIX, 10);
+  -- Возвращаем армию героя на следующий день
+  startThread(function ()
+    while GetDate(DAY) ~= 5 do sleep() end;
+
+    for i = 1, 7 do
+      if i == 7 then
+        RemoveHeroCreatures(%mainHeroName, CREATURE_PHOENIX, GetHeroCreatures(%mainHeroName, CREATURE_PHOENIX));
+      end;
+
+      if %stash[i] ~= 0 then
+        AddHeroCreatures(%mainHeroName, %stash[i], GetObjectCreatures(%tempCaravanName, %stash[i]));
       end;
     end;
-  end;
-  
-  local avengersEnemies = ELF_ENEMY_GARNISONS[opponentRaceId];
-  
-  StartCombat(
-    mainHeroName,
-    nil,
-    7,
-    avengersEnemies[1].id, avengersEnemies[1].kol,
-    avengersEnemies[2].id, avengersEnemies[2].kol,
-    avengersEnemies[3].id, avengersEnemies[3].kol,
-    avengersEnemies[4].id, avengersEnemies[4].kol,
-    avengersEnemies[5].id, avengersEnemies[5].kol,
-    avengersEnemies[6].id, avengersEnemies[6].kol,
-    avengersEnemies[7].id, avengersEnemies[7].kol,
-    nil,
-    'noop',
-    nil,
-    not nil
-  );
-
-  sleep(20);
-
-  -- Возвращаем юнитов обратно
-  for index, stachedUnit in stash do
-    if stachedUnit.id > 0 then
-      AddHeroCreatures(mainHeroName, stachedUnit.id, stachedUnit.kol);
-      
-      local countPhoenix = GetHeroCreatures(mainHeroName, CREATURE_PHOENIX);
-
-      if countPhoenix > 0 then
-        RemoveHeroCreatures(mainHeroName, CREATURE_PHOENIX, countPhoenix);
-      end;
-    end;
-  end;
+  end)
 end;
 
 -- Получение количества ресурсов, получаемых для изготовки миниартефактов
@@ -434,8 +461,8 @@ function giveRuneResources(playerId)
   
   -- Завершенка дает по 3 каждого ресурса
   if HasHeroSkill(mainHeroName, HERO_SKILL_FINE_RUNE) then
-    countLowRes = countLowRes + 3;
-    countHighRes = countHighRes + 3;
+    countLowRes = countLowRes + 2;
+    countHighRes = countHighRes + 2;
   end;
 
   for _, resId in { WOOD, ORE } do
@@ -761,11 +788,8 @@ function replaceCommonUnitOnSpecial(playerId)
 
   -- Джалиб
   if dictHeroName == HEROES.TAN then
-    if GetHeroCreatures(mainHeroName, CREATURE_GENIE) >= GetHeroCreatures(mainHeroName, CREATURE_DJINN_VIZIER) then
-      AddHeroCreatures(mainHeroName, CREATURE_DJINN_VIZIER, GetHeroCreatures(mainHeroName, CREATURE_GENIE));
-    else
-      AddHeroCreatures(mainHeroName, CREATURE_GENIE, GetHeroCreatures(mainHeroName, CREATURE_DJINN_VIZIER));
-    end;
+    replaceUnitInHero(mainHeroName, CREATURE_GENIE, CREATURE_RAKSHASA_RUKH);
+    replaceUnitInHero(mainHeroName, CREATURE_DJINN_VIZIER, CREATURE_TITAN);
   end;
 
   -- солдатская удача

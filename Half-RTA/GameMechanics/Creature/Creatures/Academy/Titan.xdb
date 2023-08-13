@@ -6,7 +6,7 @@
 	<MinDamage>14</MinDamage>
 	<MaxDamage>19</MaxDamage>
 	<Speed>8</Speed>
-	<Initiative>12</Initiative>
+	<Initiative>14</Initiative>
 	<Flying>true</Flying>
 	<Health>50</Health>
 	<KnownSpells/>
@@ -48,6 +48,5 @@
 		<Item>ABILITY_LUCK_GAMBLER</Item>
 		<Item>ABILITY_MAGIC_PROOF_75</Item>
 		<Item>ABILITY_IMMUNITY_TO_AIR</Item>
-		<Item>ABILITY_INCORPOREAL</Item>
 	</Abilities>
 </Creature>

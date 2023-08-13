@@ -55,7 +55,9 @@
 		<Knowledge>3</Knowledge>
 		<skills/>
 		<perkIDs/>
-		<spellIDs/>
+		<spellIDs>
+			<Item>SPELL_BLESS</Item>
+		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>
 		<AmmoCart>false</AmmoCart>

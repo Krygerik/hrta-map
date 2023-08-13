@@ -2,6 +2,7 @@
 PATH_TO_START_LEARNING_MODULE = PATH_TO_DAY3_SCRIPTS.."start_learning/";
 PATH_TO_START_LEARNING_MESSAGES = PATH_TO_START_LEARNING_MODULE.."messages/";
 
+doFile(PATH_TO_START_LEARNING_MODULE..'mentor_helper/mentor_helper.lua');
 doFile(PATH_TO_START_LEARNING_MODULE..'start_learning_constants.lua');
 sleep(1);
 
@@ -193,6 +194,12 @@ function handleTouchBuySkill(triggerHero)
 
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
   local priceBuySkill = getPriceBuySkill(playerId);
+
+  -- Если помощник активиронал, запрещаем покупать школы
+  if MENTOR_HELPER_ACTIVE[playerId] then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."need_to_disable_mentor_helper.txt");
+    return nil;
+  end;
   
   if getIsHeroHasMaximumCountSkills(triggerHero) then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."has_maximum_skills.txt");
@@ -317,6 +324,12 @@ function questionLearning(triggerHero)
   local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
   local question = QUESTION_BY_RACE[playerRaceId];
   
+  -- Если помощник активиронал, запрещаем брать уровни
+  if MENTOR_HELPER_ACTIVE[playerId] then
+    MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."need_to_disable_mentor_helper.txt");
+    return nil;
+  end;
+  
   local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
   -- Предложение начать бесплатное обучение
@@ -371,7 +384,7 @@ function questionLearning(triggerHero)
       playerId,
       {
         PATH_TO_START_LEARNING_MESSAGES..'question_buy_level.txt';
-        eq = MAP_LEVEL_BY_PRICE[playerMainHeroLvl + 1]
+        eq = getNeedGoldForLvlUp(playerMainHeroName)
       },
       'learning("'..playerId..'", "'..triggerHero..'", "'..'3'..'")',
       'noop'
@@ -584,16 +597,40 @@ function learning(strPlayerId, heroName, stage)
     
     -- TODO: Для Винраэля учитывать скидку на этапе стоимости,
     -- чтобы можно было покупать уровень, если денег хватит только со скидкой
-    local needGold = MAP_LEVEL_BY_PRICE[playerMainHeroLevel + 1];
+    local needGold = getNeedGoldForLvlUp(playerMainHeroName);
 
     SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - needGold);
     
-    -- На Винраэля применяем его скидки
-    local dictHeroName = getDictionaryHeroName(playerMainHeroName);
-    if dictHeroName == HEROES.ELLESHAR then
-      SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) + ELLESHAR_DISCOUNT);
-    end;
+
   end;
+end;
+
+-- количество золота, необходимого на повышение уровня
+function getNeedGoldForLvlUp(playerMainHeroName)
+  print "getNeedGoldForLvlUp"
+
+  local playerMainHeroLevel = GetHeroLevel(playerMainHeroName);
+  local levelPrise = MAP_LEVEL_BY_PRICE[playerMainHeroLevel + 1]
+
+
+  -- На Винраэля применяем его скидки
+  local dictHeroName = getDictionaryHeroName(playerMainHeroName);
+
+  if dictHeroName == HEROES.ELLESHAR then
+    levelPrise = levelPrise - ELLESHAR_DISCOUNT
+  end;
+
+  local playerId = GetPlayerFilter(GetObjectOwner(playerMainHeroName));
+  
+
+  local correntLearningLvl = PLAYERS_MAIN_HERO_PROPS[playerId].current_learning_level
+  
+  if LEVEL_DISCOUNT_BY_ENL[correntLearningLvl] ~= nil then
+    levelPrise = levelPrise - LEVEL_DISCOUNT_BY_ENL[correntLearningLvl]
+  end;
+  
+  return levelPrise
+
 end;
 
 -- Перемещение всех артефактов ГГ во временное хранилище
@@ -988,7 +1025,7 @@ function handleHeroAddSkill(triggerHero, skillId)
     return nil;
   end;
 
-  local removedSkillId = getRemovedUnremovableSkillId(playerId);
+  local removedSkillId = getRemovedUnremovableSkillId(playerId, skillId);
 
   -- Проверяем, не скинул ли игрок нескидываемый навык
   if removedSkillId ~= nil then
@@ -1100,6 +1137,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
+  MENTOR_HELPER_REMOVED_SKILL[playerId] = skill;
   MENTOR_USAGE_COUNTER.iterate(playerId);
   mentorCashback(playerId);
 
@@ -1322,10 +1360,16 @@ function mentorCashback(playerId)
 end;
 
 -- Получает нескидываемый навык, если он был сброшен
-function getRemovedUnremovableSkillId(playerId)
+function getRemovedUnremovableSkillId(playerId, skillId)
   print "getRemovedUnremovableSkillId"
 
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  -- Проверка на памошника ментора
+  local skillByMH = getReturnedSkillByMentorHelper(playerId, skillId);
+  if skillByMH then
+    return skillByMH;
+  end;
 
   -- Если сбросил Трофеи
   if HasHeroSkill(playerMainHero, WIZARD_FEAT_SPOILS_OF_WAR) == nil and PLAYERS_USE_SPOILS_STATUS[playerId] ~= nil then
@@ -1740,9 +1784,9 @@ function addPlayerMainHeroLearningStats(playerId)
     for _, statId in ALL_MAIN_STATS_LIST do
       learning[nextLerningLevel][statId] = 0;
     end;
-    
-    -- Генерируем 3 случайных стата для этого уровня образла
-    for indexStat = 1, 3 do
+
+    -- Генерируем 2 случайных стата для этого уровня образла
+    for indexStat = 1, 2 do
       local randomGenerateStatId = getRandomStatByRace(raceId);
 
       learning[nextLerningLevel][randomGenerateStatId] = learning[nextLerningLevel][randomGenerateStatId] + 1;

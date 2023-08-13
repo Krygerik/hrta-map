@@ -9,13 +9,13 @@ PLAYERS_TRAINING_GARRISONS = {
 tierUnitForTrainingTable = {1, 2, 3, 5};
 
 PLAYERS_TO_POSITION = {
-  [PLAYER_1] = { x = 88, y = 73 },
+  [PLAYER_1] = { x = 87, y = 72 },
   [PLAYER_2] = { x = 81, y = 25 },
 }
 
 
 SHOW_POINTS_OBJECTS = {
-  [PLAYER_1] = { name = "spell_nabor3", x = 84, y = 72 },
+  [PLAYER_1] = { name = "spell_nabor3", x = 83, y = 72 },
   [PLAYER_2] = { name = "spell_nabor4", x = 85, y = 25 },
 }
   

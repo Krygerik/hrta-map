@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Creature>
-	<AttackSkill>40</AttackSkill>
-	<DefenceSkill>30</DefenceSkill>
+	<AttackSkill>35</AttackSkill>
+	<DefenceSkill>25</DefenceSkill>
 	<Shots>0</Shots>
 	<MinDamage>45</MinDamage>
 	<MaxDamage>75</MaxDamage>
@@ -53,5 +53,7 @@
 	<Range>0</Range>
 	<BaseCreature>CREATURE_ANGEL</BaseCreature>
 	<Upgrades/>
-	<Abilities/>
+	<Abilities>
+		<Item>ABILITY_REBIRTH</Item>
+	</Abilities>
 </Creature>

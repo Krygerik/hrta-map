@@ -31,15 +31,22 @@ LEARNING_OBJECTS_NAME_AND_DESCRIPTION_MAP = {
 
 -- Соотношение уровней к цене, за которую они покупаются
 MAP_LEVEL_BY_PRICE = {
-  [19] = 8000,
-  [20] = 8500,
-  [21] = 9000,
-  [22] = 9500,
-  [23] = 10000,
-  [24] = 10500,
-  [25] = 11000,
+  [19] = 8500,
+  [20] = 9000,
+  [21] = 9500,
+  [22] = 10000,
+  [23] = 10500,
+  [24] = 11000,
+  [25] = 11500,
 };
 
+-- скидка за ур образования
+LEVEL_DISCOUNT_BY_ENL = {
+  [1] = 500,
+  [2] = 1000,
+  [3] = 1500,
+
+};
 -- Количества уровней, предоставляемых игроку для обучения бесплатно
 FREE_LEARNING_LEVEL = 18;
 
@@ -219,6 +226,7 @@ ALLOW_BUY_SKILL_LIST_BY_RACE = {
     SKILL_LOGISTICS,
     SKILL_LEARNING,
     SKILL_LEADERSHIP,
+    SKILL_OFFENCE,
     SKILL_DEFENCE,
     SKILL_LUCK,
     SKILL_LIGHT_MAGIC,
@@ -450,7 +458,7 @@ MAP_STATS_ON_MINIMUM = {
 SELL_STAT_PRICE = 2500;
 
 -- Скидка на покупку уровней для Винраэля
-ELLESHAR_DISCOUNT = 2500;
+ELLESHAR_DISCOUNT = 2000;
 
 -- Количество возвращаемого золота за покупку крестьян для Эллайны
 ELLAINA_DISCOUNT = 10;

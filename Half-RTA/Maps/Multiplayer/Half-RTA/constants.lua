@@ -385,7 +385,7 @@ INITIAL_HERO_SKILLS = {
   Duncan = { SKILL_OFFENCE, PERK_TACTICS },
   Nicolai = { SKILL_TRAINING, SKILL_TRAINING },
   Grok = { SKILL_LOGISTICS, PERK_PATHFINDING },
-  Oddrema = { SKILL_SORCERY, PERK_WISDOM },
+  Oddrema = { SKILL_SORCERY, SKILL_SUMMONING_MAGIC },
   Marder = { SKILL_DEFENCE, PERK_PROTECTION },
   Jazaz = { SKILL_OFFENCE, PERK_TACTICS },
   Efion = { SKILL_DARK_MAGIC, PERK_MASTER_OF_MIND },
@@ -432,7 +432,7 @@ INITIAL_HERO_SKILLS = {
   Eruina = { SKILL_OFFENCE, SKILL_DESTRUCTIVE_MAGIC },
   Inagost = { SKILL_DESTRUCTIVE_MAGIC, PERK_EMPOWERED_SPELLS },
   Urunir = { SKILL_LEARNING, PERK_INTELLIGENCE },
-  Almegir = { SKILL_SUMMONING_MAGIC, PERK_DARK_RITUAL },
+  Almegir = { SKILL_DARK_MAGIC, PERK_DARK_RITUAL },
   Menel = { SKILL_LEADERSHIP, PERK_ESTATES },
   Dalom = { SKILL_DARK_MAGIC, PERK_MASTER_OF_SICKNESS },
   Ferigl = { SKILL_OFFENCE, PERK_FRENZY },
@@ -447,7 +447,7 @@ INITIAL_HERO_SKILLS = {
   Ottar = { SKILL_LIGHT_MAGIC, SKILL_LIGHT_MAGIC },
   Una = { SKILL_LEARNING, PERK_SCHOLAR },
   Ingvar = { SKILL_DEFENCE, PERK_TOUGHNESS },
-  Vegeyr = { SKILL_DESTRUCTIVE_MAGIC, PERK_MASTER_OF_LIGHTNINGS },
+  Vegeyr = { SKILL_DESTRUCTIVE_MAGIC, SKILL_SORCERY },
   Skeggy = { SKILL_LUCK, PERK_LUCKY_STRIKE },
   KingTolghar = { HERO_SKILL_RUNELORE, HERO_SKILL_RUNELORE },
   Wulfstan = { SKILL_LOGISTICS, PERK_PATHFINDING },
@@ -643,7 +643,7 @@ ALL_ARTS_LIST = {
   { id = 57, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 12000 }, -- сапоги скорости
   { id = 71, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 15000 }, -- том силы (амулет некроманта)
   -- { id = 91, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 20000 }, -- кольцо машин
-  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 15000 },  -- лук единорога
+  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 12000 },  -- лук единорога
   { id = 51, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- щит гномов
   { id = 79, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том призыва
   { id = 77, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том света
@@ -684,6 +684,7 @@ HEROES = {
   MAAHIR = 'Maahir',                   -- Маахир
   BEREIN = 'Berein',                   -- Маркел
   TAN = 'Tan',                         -- Джалиб
+  NARHIZ = 'Razzak',                     -- Нархиз
   ILDAR = 'Ildar',                     -- Аларон
   JAZAZ = 'Jazaz',                     -- Ниброс
   BREM = 'Brem',                       -- Рутгер

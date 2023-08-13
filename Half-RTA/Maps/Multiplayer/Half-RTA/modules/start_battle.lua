@@ -350,7 +350,7 @@ function perkDiplomacy(playerId)
   local raceId = RESULT_HERO_LIST[playerId].raceId;
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   -- Коэффициент добавления юнитов из города
-  local DIPLOMACY_COEF = 0.301
+  local DIPLOMACY_COEF = 0.251
 
   local stash = {};
   
@@ -579,8 +579,9 @@ function checkAndRunHeroPerks(playerId)
   
   -- Тайный ритуал
   if HasHeroSkill(mainHeroName, PERK_DARK_RITUAL) then
+
     local dictHeroName = getDictionaryHeroName(mainHeroName);
-    
+
     local manaBonus = dictHeroName == HEROES.ALMEGIR and 80 or 40;
   
     ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 8);
@@ -662,16 +663,16 @@ function checkAndRunHeroPerks(playerId)
   end;
   
   -- ангел-хранитель
-  if HasHeroSkill(mainHeroName, KNIGHT_FEAT_GUARDIAN_ANGEL) then
-    local ANGEL_MAP = {
-      [CREATURE_ANGEL] = CREATURE_GOBLIN_TRAPPER,
-      [CREATURE_SERAPH] = CREATURE_WAR_UNICORN,
-    };
+--  if HasHeroSkill(mainHeroName, 99) then
+--    local ANGEL_MAP = {
+--      [CREATURE_ANGEL] = CREATURE_GOBLIN_TRAPPER,
+--      [CREATURE_SERAPH] = CREATURE_WAR_UNICORN,
+--    };
 
-    for angelId, superAngelId in ANGEL_MAP do
-      replaceUnitInHero(mainHeroName, angelId, superAngelId);
-    end;
-  end;
+--    for angelId, superAngelId in ANGEL_MAP do
+--      replaceUnitInHero(mainHeroName, angelId, superAngelId);
+--    end;
+--  end;
 
   -- солдатская удача
   if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
@@ -716,6 +717,27 @@ function checkAndRunHeroPerks(playerId)
       -- Выдача Стены огня за Тайны хаоса
   if HasHeroSkill(mainHeroName, WARLOCK_FEAT_SECRETS_OF_DESTRUCTION) then
     TeachHeroSpell(mainHeroName,SPELL_FIREWALL);
+    
+    local dontKnowDestructiveSpell = {}
+    
+    for skillId, skillSpellSet in SPELLS do
+      if skillId == TYPE_MAGICS.DESTRUCTIVE then
+        for _, spellData in skillSpellSet do
+          if spellData.level < 4 then
+            if not KnowHeroSpell(mainHeroName, spellData.id) then
+             dontKnowDestructiveSpell[length(dontKnowDestructiveSpell) + 1] = spellData.id
+
+            end;
+          end;
+        end;
+      end;
+    end;
+    
+    if length(dontKnowDestructiveSpell) > 0 then
+      local spellTeach = dontKnowDestructiveSpell[ random(length(dontKnowDestructiveSpell)) + 1 ]
+      TeachHeroSpell(mainHeroName, spellTeach);
+    end
+    
   end;
   
       -- Выдача Скорби за Повелитель проклятий
@@ -726,6 +748,25 @@ function checkAndRunHeroPerks(playerId)
       -- Выдача Фантома за Повелитель жизни
   if HasHeroSkill(mainHeroName, PERK_MASTER_OF_ANIMATION) then
     TeachHeroSpell(mainHeroName,SPELL_PHANTOM);
+  end;
+
+     -- Выдача случайного т3 заклинания за Тайное откровение
+  if HasHeroSkill(mainHeroName, RANGER_FEAT_INSIGHTS) then
+    local dontKnowSpellTier3 = {}
+    for skillId, skillSpellSet in SPELLS do
+        for _, spellData in skillSpellSet do
+          if spellData.level == 3 then
+            if not KnowHeroSpell(mainHeroName, spellData.id) then
+             dontKnowSpellTier3[length(dontKnowSpellTier3) + 1] = spellData.id
+            end;
+          end;
+        end;
+    end;
+    if length(dontKnowSpellTier3) > 0 then
+      local spellTeach = dontKnowSpellTier3[ random(length(dontKnowSpellTier3)) + 1 ]
+      TeachHeroSpell(mainHeroName, spellTeach);
+    end
+    
   end;
   
 end;
@@ -769,11 +810,11 @@ end;
 function orlandoSpec(heroName)
   print "orlandoSpec"
 
-  local ORLANDO_BONUS_BY_LEVEL = 0.1;
+  local ORLANDO_BONUS_LEVEL = 7;
   local heroLevel = GetHeroLevel(heroName);
   local devilId = getOrlandoCreature(heroName)
   if devilId ~= nil then
-    AddHeroCreatures(heroName, devilId, 1 + floor(heroLevel * ORLANDO_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, devilId, floor(heroLevel)/ORLANDO_BONUS_LEVEL);
   end;
 end;
 
@@ -781,16 +822,27 @@ end;
 function vaishanSpec(heroName)
   print "vaishanSpec"
 
-  local VAISHAN_BONUS_BY_LEVEL = 1;
+  local VAISHAN_BONUS_BY_LEVEL = 2;
   local heroLevel = GetHeroLevel(heroName);
-  local stash = {};
 
-  stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(heroName);
- --166
   if GetHeroCreatures(heroName, 92) >= GetHeroCreatures(heroName, 166) then
-    AddHeroCreatures(heroName, 92, (8 + heroLevel * VAISHAN_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, 92, (10 + heroLevel * VAISHAN_BONUS_BY_LEVEL));
   else
-    AddHeroCreatures(heroName, 166, (8 + heroLevel * VAISHAN_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, 166, (10 + heroLevel * VAISHAN_BONUS_BY_LEVEL));
+  end;
+end;
+
+-- Специализация Нархиза
+function narhizSpec(heroName)
+  print "narhizSpec"
+
+  local NARHIZ_BY_LVL_COEF = 0.34;
+  local heroLevel = GetHeroLevel(heroName);
+
+  if GetHeroCreatures(heroName, CREATURE_MAGI) >= GetHeroCreatures(heroName, CREATURE_COMBAT_MAGE) then
+    AddHeroCreatures(heroName, CREATURE_MAGI, floor(heroLevel * NARHIZ_BY_LVL_COEF));
+  else
+    AddHeroCreatures(heroName, CREATURE_COMBAT_MAGE, floor(heroLevel * NARHIZ_BY_LVL_COEF));
   end;
 end;
 
@@ -798,37 +850,49 @@ end;
 function eruinaSpec(heroName)
   print "eruinaSpec"
 
-  local ERUINA_BONUS_BY_LEVEL = 0.2;
+  local ERUINA_BONUS_BY_LEVEL = 0.1;
   local heroLevel = GetHeroLevel(heroName);
 
   if GetHeroCreatures(heroName, 81) >= GetHeroCreatures(heroName, 143) then
-    AddHeroCreatures(heroName, 81, floor(heroLevel * ERUINA_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, 81, floor(heroLevel * ERUINA_BONUS_BY_LEVEL) + 1);
   else
-    AddHeroCreatures(heroName, 143, floor(heroLevel * ERUINA_BONUS_BY_LEVEL));
+    AddHeroCreatures(heroName, 143, floor(heroLevel * ERUINA_BONUS_BY_LEVEL) + 1);
   end;
 end;
 
 -- Специализация Инги
 function specInga(heroName)
   print "specInga"
-
+  
   -- За сколько уровней ИНГА учит руну
-  local LVL_FOR_TEACH_RUNE = 7;
-
-  local playerId = GetObjectOwner(heroName);
   local ingaLevel = GetHeroLevel(heroName);
 
     -- Формируем итоговый список рун для изучения
-    local teachRuneTable = {250,249,253,256,252,251};
+    local teachRuneTableOneTwo = {250,249,252,251};
+    local teachRuneTableThree = {250,249,253,256,252,251};
+    local teachRuneTableFour = {250,249,253,256,252,251,254,258};
 
     -- Обучаем героя новым рунам
-    for _, RuneId in teachRuneTable do
+    for _, RuneId in teachRuneTableOneTwo do
       TeachHeroSpell(heroName, RuneId);
     end;
+    
+    
+--    if ingaLevel > 19 then
+--      for _, RuneId in teachRuneTableThree do
+--        TeachHeroSpell(heroName, RuneId);
+--      end;
+--    end;
+--    if ingaLevel > 29 then
+--      for _, RuneId in teachRuneTableFour do
+--        TeachHeroSpell(heroName, RuneId);
+--      end;
+--    end;
+
 
 end;
 
--- Отслеживание спецы Валерии
+-- Отслеживание спецы Валерия
 function specValeriaTread(heroName)
   print "specValeriaTread"
 
@@ -841,9 +905,11 @@ function specValeriaTread(heroName)
     [SPELL_FORGETFULNESS] = SPELL_MASS_FORGETFULNESS,
   };
 
-  for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
-    if KnowHeroSpell(heroName, spellId) then
-      TeachHeroSpell(heroName, massSpellId);
+  if GetHeroSkillMastery(heroName, SKILL_DARK_MAGIC) > 0 then
+    for spellId, massSpellId in MAP_SPELLS_ON_MASS_SPELLS do
+      if KnowHeroSpell(heroName, spellId) then
+        TeachHeroSpell(heroName, massSpellId);
+      end;
     end;
   end;
 end;
@@ -855,10 +921,12 @@ function runHeroSpecialization(playerId)
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local dictHeroName = getDictionaryHeroName(mainHeroName);
 
+  -- Инга
   if dictHeroName == HEROES.UNA then
     specInga(mainHeroName);
   end;
   
+  -- Валерия
   if dictHeroName == HEROES.RED_HEAVEN_HERO then
     specValeriaTread(mainHeroName);
   end;
@@ -876,6 +944,11 @@ function runHeroSpecialization(playerId)
   -- Вайшан
   if dictHeroName == HEROES.VAYSHAN then
     vaishanSpec(mainHeroName);
+  end;
+  
+  -- Нархиз
+  if dictHeroName == HEROES.NARHIZ then
+    narhizSpec(mainHeroName);
   end;
   
   -- Эрин
@@ -945,7 +1018,7 @@ function runHeroSpecialization(playerId)
 
   -- Марбас
   if dictHeroName == HEROES.MARDER then
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.5 * GetHeroLevel(mainHeroName)));
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(mainHeroName)));
   end;
 
   -- Куджин
@@ -1104,7 +1177,7 @@ function runScriptingArtifacts(playerId)
   local countDwarfSet = GetArtifactSetItemsCount(mainHeroName, 5, 1);
 
   if countDwarfSet > 1 then
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, 10 * countDwarfSet);
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, 10 * (countDwarfSet-1));
 
   end;
   
@@ -1154,7 +1227,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.26h',
+    ["MapVersion"] = '1.27a',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

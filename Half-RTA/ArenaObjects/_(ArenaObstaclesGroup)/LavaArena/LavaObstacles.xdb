@@ -6,7 +6,5 @@
 		<Item href="Stone2.xdb#xpointer(/ArenaObstacle)"/>
 		<Item href="Stone3.xdb#xpointer(/ArenaObstacle)"/>
 		<Item href="Stone4.xdb#xpointer(/ArenaObstacle)"/>
-		<Item href="Flow1.xdb#xpointer(/ArenaObstacle)"/>
-		<Item href="Flow2.xdb#xpointer(/ArenaObstacle)"/>
 	</links>
 </ArenaObstaclesGroup>

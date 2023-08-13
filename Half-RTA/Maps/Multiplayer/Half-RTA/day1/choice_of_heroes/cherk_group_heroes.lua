@@ -167,11 +167,11 @@ function generateRandomHeroIndexesByRace(playerId, raceId, count)
 
   -- Получаем список занятых героев из первой группы
   local existHeroNameList = {};
-  
+
   for _, heroData in RANDOM_GROUPS_HERO_ICONS[playerId].heroGroups[1].heroes do
     existHeroNameList[length(existHeroNameList) + 1] = heroData.name
   end;
-  
+
   local resultIndexList = {};
 
   for i = 1, count do
@@ -190,7 +190,7 @@ function generateRandomHeroIndexesByRace(playerId, raceId, count)
           countExistIndex = countExistIndex + 1;
         end;
       end;
-      
+
       -- Запрещаем повторную генерацию героев из первого списка
       for _, heroName in existHeroNameList do
         if heroName == allHeroes[randomHeroIndex].name then
@@ -244,6 +244,13 @@ end;
 function QuestionDeleteHeroGroup(triggerHero, triggeredIconName)
   print "QuestionDeleteHeroGroup"
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
+  local groupPlayerId, groupIndex = getGroupDataByIconName(triggeredIconName);
+  local heroName = playerId == PLAYER_1 and Biara or Djovanni;
+
+  -- Позволяем игроку вычеркивать только наборы оппонента
+  if not HOTSEAT_STATUS and playerId == groupPlayerId then
+    return ShowFlyingSign(PATH_TO_DAY1_MESSAGES.."you_cannot_delete_this_group.txt", heroName, playerId, 7.0);
+  end;
 
   QuestionBoxForPlayers(playerId, PATH_TO_DAY1_MESSAGES.."question_delete_group_hero.txt", "DeleteHeroGroupByIconName('"..triggeredIconName.."')", 'noop')
 end;
@@ -285,7 +292,7 @@ end;
 -- Скрытие иконок
 function hideGroupToUndergroundByIndex(playerId, hideIndexGroup)
   print "hideGroupToUndergroundByIndex"
-  
+
   local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
 
   for groupIndex = 1, length(playerData.heroGroups) do
@@ -293,7 +300,7 @@ function hideGroupToUndergroundByIndex(playerId, hideIndexGroup)
 
     if groupIndex == hideIndexGroup then
       group.deleted = true;
-      
+
       for heroIndex = 1, length(group.heroes) do
         local heroData = group.heroes[heroIndex];
 
@@ -310,10 +317,10 @@ function deleteResultHeroGroups()
 
   for _, playerId in PLAYER_ID_TABLE do
      local playerData = RANDOM_GROUPS_HERO_ICONS[playerId];
-     
+
      for groupIndex = 1, length(playerData.heroGroups) do
        local group = playerData.heroGroups[groupIndex];
-       
+
        if not group.deleted then
          hideGroupToUndergroundByIndex(playerId, groupIndex);
        end;
