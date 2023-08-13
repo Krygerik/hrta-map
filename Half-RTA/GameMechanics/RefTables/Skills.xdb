@@ -13466,8 +13466,7 @@
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -13479,36 +13478,31 @@
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCOUTING</Item>
-							<Item>HERO_SKILL_NAVIGATION</Item>
+							<Item>HERO_SKILL_PATH_OF_WAR</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>

@@ -52,12 +52,12 @@ function getReturnedSkillByMentorHelper(playerId, skillId)
     return nil;
   end;
   
-  if skillId ~= MENTOR_HELPER_REMOVED_SKILL[playerId] then
-    -- Возвращаем игроку деньги, если он сбросил текущий навык
-    SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) + 2500)
+  if skillId == MENTOR_HELPER_REMOVED_SKILL[playerId] then
+    MENTOR_HELPER_REMOVED_SKILL[playerId] = nil;
+    SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + 2500));
     return nil;
   end;
-  
+
   local raceId = RESULT_HERO_LIST[playerId].raceId;
 
   for _, t1 in MENTOR_HELPER_SUPPORT_PERK_LIST[raceId] do
@@ -79,7 +79,9 @@ function getReturnedSkillByMentorHelper(playerId, skillId)
       return nil;
     end;
   end;
-  
+
+  -- Костыльно отнимаем 2500, чтобы не дублировался кешбек
+  SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - 2500));
   -- Если при активированном помошнике не нашлось одного родителя со сброшенным навыком - возвращаем его
   return MENTOR_HELPER_REMOVED_SKILL[playerId];
 end;
