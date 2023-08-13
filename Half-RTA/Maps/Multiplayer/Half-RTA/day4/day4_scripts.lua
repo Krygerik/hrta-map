@@ -195,7 +195,7 @@ end;
 function prepareForChoiceEnemy(playerId)
   print "prepareForChoiceEnemy"
 
-  while GetCurrentPlayer() ~= playerId do sleep() end;
+  while HOTSEAT_STATUS and GetCurrentPlayer() ~= playerId do sleep() end;
 
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
