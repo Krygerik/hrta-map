@@ -418,6 +418,30 @@
       ]
    },
    {
+      "SkillId":"Mana_Regeneration",
+      "SectionId":5,
+      "DepthLevel":1,
+      "RequiredSkillIds":[
+         
+      ]
+   },
+   {
+      "SkillId":"Arcane_Training",
+      "SectionId":5,
+      "DepthLevel":1,
+      "RequiredSkillIds":[
+         
+      ]
+   },
+   {
+      "SkillId":"Magic_Insight",
+      "SectionId":5,
+      "DepthLevel":1,
+      "RequiredSkillIds":[
+         
+      ]
+   },
+   {
       "SkillId":"Counterspell",
       "SectionId":5,
       "DepthLevel":2,
