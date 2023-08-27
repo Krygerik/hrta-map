@@ -58,7 +58,6 @@
 			<Item>HERO_SKILL_ABSOLUTE_CHARGE</Item>
 		</perkIDs>
 		<spellIDs>
-			<Item>SPELL_SUMMON_BOAT</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

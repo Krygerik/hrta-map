@@ -3,12 +3,12 @@
 	<AttackSkill>1</AttackSkill>
 	<DefenceSkill>2</DefenceSkill>
 	<Shots>8</Shots>
-	<MinDamage>1</MinDamage>
+	<MinDamage>2</MinDamage>
 	<MaxDamage>2</MaxDamage>
 	<Speed>4</Speed>
 	<Initiative>10</Initiative>
 	<Flying>false</Flying>
-	<Health>6</Health>
+	<Health>5</Health>
 	<KnownSpells/>
 	<SpellPoints>0</SpellPoints>
 	<SpellPoints1>0</SpellPoints1>

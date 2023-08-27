@@ -1,0 +1,50 @@
+﻿[
+  {
+    "id": "humans",
+    "raceName": "Орден порядка",
+    "heroName": "Рыцарь",
+    "heroIds": ["Expediter", "Griffon_Commander", "Jouster", "SpecValeria", "Squire", "Suzerain", "White_Knight", "Vittorio", "Laszlo", "Dougal"]
+  },
+  {
+    "id": "elves",
+    "raceName": "Лесной союз",
+    "heroName": "Рейнджер",
+    "heroIds": [ "Call_of_the_Wasp", "Elven_Fury", "Elven_Volley", "Forest_Guardian", "SpecIldar", "Talented_Warrior", "Waylayer", "Gilraen", "Ylthin", "Ossir" ]
+  },
+  {
+    "id": "necr",
+    "raceName": "Некрополис",
+    "heroName": "Некромант",
+    "heroIds": ["AvatarOfDeath", "Dark_Emissary", "Empiric", "Heir_of_Undeath", "Reanimator", "Soulhunter", "SpecOrnella", "Raven", "Orson", "Lucretia"]
+  },
+  {
+    "id": "liga",
+    "raceName": "Лига теней",
+    "heroName": "Чернокнижник",
+    "heroIds": ["Dark_Acolyte", "Evasive", "Lizard_Breeder", "Matron_Salvo", "Poisoner", "Power_Bargain", "Savage", "Slaveholder", "SpecShadwyn", "Yrwanna"]
+  },
+  {
+    "id": "demons",
+    "raceName": "Инферно",
+    "heroName": "Демонолог",
+    "heroIds": ["Beater", "Bombardier", "Flagbearer_of_Darkness", "Furious", "Gate_Keeper", "Hypnotist", "Impregnable", "SpecOrlando", "Grawl", "Jezebeth"]
+  },
+  {
+    "id": "gnomy",
+    "raceName": "Северные кланы",
+    "heroName": "Рунный жрец",
+    "heroIds": ["Defender", "Economist", "Researcher", "Rider", "Sacred_Hammer", "SpecRolf", "SpecWulfstan", "Stormcaller", "Erling", "Karli"]
+  },
+  {
+    "id": "magi",
+    "heroName": "Маг",
+    "raceName": "Академия волшебства",
+    "heroIds": ["Disrupter", "Feather_Mage", "Inexhaustible", "Machinist", "Master_of_Elements", "Mentor", "Radiant", "SpecMaahir", "Weilder_of_Fire", "Havez"]
+  },
+  {
+    "id": "varvars",
+    "raceName": "Великая орда",
+    "heroName": "Варвар",
+    "heroIds": [ "Blooddrinker", "CentaurMistress", "GoblinKing", "Offender", "SpecKujin", "SpecQuroq", "SpecShak", "WarLeader", "Gorshak", "Telsek" ]
+  }
+]

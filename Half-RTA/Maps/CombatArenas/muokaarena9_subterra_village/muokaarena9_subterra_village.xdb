@@ -19,7 +19,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>1</x>
+							<y>1</y>
+							<z>0.501961</z>
+						</Color>
+						<Radius>15</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Special/RefugeeCamp.xdb#xpointer(/AdvMapDwellingShared)"/>
 				<PlayerID>PLAYER_NONE</PlayerID>
 				<CaptureTrigger>
@@ -45,7 +59,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>1</x>
+							<y>1</y>
+							<z>0.501961</z>
+						</Color>
+						<Radius>13</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Tavern.(AdvMapBuildingShared).xdb#xpointer(/AdvMapBuildingShared)"/>
 				<PlayerID>PLAYER_NONE</PlayerID>
 				<CaptureTrigger>
@@ -68,7 +96,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>1</x>
+							<y>1</y>
+							<z>0.501961</z>
+						</Color>
+						<Radius>15</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Den_Of_Thieves.(AdvMapBuildingShared).xdb#xpointer(/AdvMapBuildingShared)"/>
 				<PlayerID>PLAYER_NONE</PlayerID>
 				<CaptureTrigger>
@@ -161,7 +203,7 @@
 			<AdvMapStatic>
 				<Pos>
 					<x>36</x>
-					<y>43</y>
+					<y>44</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
@@ -222,7 +264,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>0.501961</x>
+							<y>1</y>
+							<z>1</z>
+						</Color>
+						<Radius>10</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Subterra/Mushrooms/Mushroom1x1_6.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
 				<IsRemovable>false</IsRemovable>
 				<TerrainAligned>false</TerrainAligned>
@@ -639,7 +695,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>0.501961</x>
+							<y>1</y>
+							<z>1</z>
+						</Color>
+						<Radius>4</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Subterra/Mushrooms/Mushroom1x1_7.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
 				<IsRemovable>false</IsRemovable>
 				<TerrainAligned>false</TerrainAligned>
@@ -657,7 +727,21 @@
 				<Floor>0</Floor>
 				<Name/>
 				<CombatScript/>
-				<pointLights/>
+				<pointLights>
+					<Item>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Color>
+							<x>0.501961</x>
+							<y>1</y>
+							<z>1</z>
+						</Color>
+						<Radius>10</Radius>
+					</Item>
+				</pointLights>
 				<Shared href="/MapObjects/Subterra/Columns/Column_5x5_06.(AdvMapStaticShared).xdb#xpointer(/AdvMapStaticShared)"/>
 				<IsRemovable>false</IsRemovable>
 				<TerrainAligned>false</TerrainAligned>
@@ -708,7 +792,7 @@
 	<AmbientLight/>
 	<UndergroundAmbientLight/>
 	<GroundAmbientLights>
-		<Item href="/Lights/_(AmbientLight)/Arena/dirtArena/DirtArena01 (2).xdb#xpointer(/AmbientLight)"/>
+		<Item href="/Lights/_(AmbientLight)/0_Default_AmbientLight.xdb#xpointer(/AmbientLight)"/>
 	</GroundAmbientLights>
 	<UndergroundAmbientLights>
 		<Item/>
