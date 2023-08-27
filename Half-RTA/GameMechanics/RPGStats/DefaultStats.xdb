@@ -2056,8 +2056,8 @@
 			<MaxSmallObstacles>4</MaxSmallObstacles>
 			<MinBigObstacles>0</MinBigObstacles>
 			<MaxBigObstacles>0</MaxBigObstacles>
-			<MinMixedObstacles>0</MinMixedObstacles>
-			<MaxMixedObstacles>0</MaxMixedObstacles>
+			<MinMixedObstacles>3</MinMixedObstacles>
+			<MaxMixedObstacles>4</MaxMixedObstacles>
 			<ObstaclesMaxArea>21</ObstaclesMaxArea>
 			<FreeLines>3</FreeLines>
 		</Obstacles>

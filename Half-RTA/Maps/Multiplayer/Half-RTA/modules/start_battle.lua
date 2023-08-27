@@ -246,7 +246,7 @@ function checkAndMoveHeroFromFrendlyField()
       local randomRaceId = getOtherRandomRaceId();
       local raceFieldPosition = RACE_ON_FRENDLY_FIELD_POSITION[randomRaceId];
 
-      MoveHeroRealTime(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
+      SetObjectPosition(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
       while not IsObjectInRegion(choiseHeroName, MAP_RACE_ON_NATIVE_REGIONS[randomRaceId]) do
         sleep();
       end;
@@ -259,7 +259,7 @@ function checkAndMoveHeroFromFrendlyField()
       local randomRaceId = getOtherRandomRaceId();
       local raceFieldPosition = RACE_ON_FRENDLY_FIELD_POSITION[randomRaceId];
 
-      MoveHeroRealTime(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
+      SetObjectPosition(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
       while not IsObjectInRegion(choiseHeroName, MAP_RACE_ON_NATIVE_REGIONS[randomRaceId]) do
         sleep();
       end;
@@ -271,7 +271,7 @@ function checkAndMoveHeroFromFrendlyField()
     local randomRaceId = getOtherRandomRaceId();
     local raceFieldPosition = RACE_ON_FRENDLY_FIELD_POSITION[randomRaceId];
       
-    MoveHeroRealTime(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
+    SetObjectPosition(choiseHeroName, raceFieldPosition.x, raceFieldPosition.y);
     while not IsObjectInRegion(choiseHeroName, MAP_RACE_ON_NATIVE_REGIONS[randomRaceId]) do
       sleep();
     end;
@@ -291,7 +291,7 @@ function skillMentoring(heroName)
   WarpHeroExp(heroName, GetHeroStat(heroName, STAT_EXPERIENCE) + needExp);
 end;
 
--- Ученый (Дает все заклинания 1-2 уровней, известные оппоненту)
+-- Ученый
 function perkScholar(playerId)
   print "perkScholar"
 
@@ -306,6 +306,7 @@ function perkScholar(playerId)
     TYPE_MAGICS.SUMMON,
   };
 
+  -- Дает все заклинания 1-2 уровней, известные оппоненту
   for _, customSkillId in MAGIC_SCHOOL_TABLE do
     local skillSpellSet = SPELLS[customSkillId];
 
@@ -315,6 +316,27 @@ function perkScholar(playerId)
       if spellData.level < 3 and opponentHasSpell then
         TeachHeroSpell(mainHeroName, spellData.id);
       end
+    end;
+  end;
+  
+  -- Передаем все заклинания 1-2 уровней, известные выпавшим героям
+  for _, customSkillId in MAGIC_SCHOOL_TABLE do
+    local skillSpellSet = SPELLS[customSkillId];
+
+    for _, spellData in skillSpellSet do
+      local heroes = GetPlayerHeroes(playerId);
+      
+      for heroesIndex, heroesName in heroes do
+        -- Кроме Биары и ГГ
+        if heroesIndex ~= 0
+          and heroesName ~= mainHeroName
+          and KnowHeroSpell(heroesName, spellData.id)
+          and spellData.level < 3
+          and not KnowHeroSpell(mainHeroName, spellData.id)
+        then
+          TeachHeroSpell(mainHeroName, spellData.id);
+        end;
+      end;
     end;
   end;
 end;
@@ -766,9 +788,9 @@ function checkAndRunHeroPerks(playerId)
       local spellTeach = dontKnowSpellTier3[ random(length(dontKnowSpellTier3)) + 1 ]
       TeachHeroSpell(mainHeroName, spellTeach);
     end
-    
+
   end;
-  
+
 end;
 
 -- Спеца кигана
@@ -1227,7 +1249,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27b',
+    ["MapVersion"] = '1.27d',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);
@@ -1246,8 +1268,23 @@ function runBattle()
   end;
 end;
 
+-- Проверяем ход героя (хотсит) и убираем у него мувы
+function removeMainHeroMovePoints(playerId)
+  while HOTSEAT_STATUS and GetCurrentPlayer() ~= playerId do sleep() end;
+  
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  
+  removeHeroMovePoints(mainHeroName);
+end;
+
+
+
 function startBattle()
   print "startBattle"
+
+  for _, playerId in PLAYER_ID_TABLE do
+    startThread(removeMainHeroMovePoints, playerId);
+  end;
 
   for _, playerId in PLAYER_ID_TABLE do
     refreshPlayerMana(playerId);

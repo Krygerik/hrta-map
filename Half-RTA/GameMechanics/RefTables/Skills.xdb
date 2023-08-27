@@ -14209,6 +14209,7 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
+							<Item>HERO_SKILL_CONSUME_CORPSE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -14239,6 +14240,7 @@
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
+							<Item>HERO_SKILL_REFRESH_RUNE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
