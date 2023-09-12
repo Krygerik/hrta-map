@@ -48,7 +48,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Light_Magic_10",
+      "SkillId":"Basic_Light_Magic",
+      "Comment": "(10%)",
       "SectionId":1,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -60,7 +61,7 @@
       "SectionId":1,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Light_Magic_10"
+         "Basic_Light_Magic"
       ]
    },
    {
@@ -136,7 +137,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Dark_Magic_8",
+      "SkillId":"Basic_Dark_Magic",
+      "Comment": "(8%)",
       "SectionId":2,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -148,7 +150,7 @@
       "SectionId":2,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Dark_Magic_8"
+         "Basic_Dark_Magic"
       ]
    },
    {
@@ -208,7 +210,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Destructive_Magic_8",
+      "SkillId":"Basic_Destructive_Magic",
+      "Comment": "(8%)",
       "SectionId":3,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -220,7 +223,7 @@
       "SectionId":3,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Destructive_Magic_8"
+         "Basic_Destructive_Magic"
       ]
    },
    {
@@ -296,7 +299,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Summoning_Magic_15",
+      "SkillId":"Basic_Summoning_Magic",
+      "Comment": "(15%)",
       "SectionId":4,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -308,7 +312,7 @@
       "SectionId":4,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Summoning_Magic_15"
+         "Basic_Summoning_Magic"
       ]
    },
    {
@@ -325,7 +329,7 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          "Magic_Mirror",
-		 "Mark_of_the_Wizard"
+         "Mark_of_the_Wizard"
       ]
    },
    {
@@ -358,7 +362,7 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Magic_Mirror",
-		 "Master_of_Life"
+         "Master_of_Life"
       ]
    },
    {
@@ -386,7 +390,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Sorcery_10",
+      "SkillId":"Basic_Sorcery",
+      "Comment": "(10%)",
       "SectionId":5,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -398,7 +403,7 @@
       "SectionId":5,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Sorcery_10"
+         "Basic_Sorcery"
       ]
    },
    {
@@ -474,7 +479,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Attack_2",
+      "SkillId":"Basic_Attack",
+      "Comment": "(2%)",
       "SectionId":6,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -486,7 +492,7 @@
       "SectionId":6,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Attack_2"
+         "Basic_Attack"
       ]
    },
    {
@@ -534,7 +540,7 @@
       "SectionId":6,
       "DepthLevel":2,
       "RequiredSkillIds":[
-		 "Battle_Frenzy",
+         "Battle_Frenzy",
          "Divine_Guidance"
       ]
    },
@@ -556,7 +562,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Defense_2",
+      "SkillId":"Basic_Defense",
+      "Comment": "(2%)",
       "SectionId":7,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -568,7 +575,7 @@
       "SectionId":7,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Defense_2"
+         "Basic_Defense"
       ]
    },
    {
@@ -637,7 +644,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Luck_8",
+      "SkillId":"Basic_Luck",
+      "Comment": "(8%)",
       "SectionId":8,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -649,7 +657,7 @@
       "SectionId":8,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Luck_8"
+         "Basic_Luck"
       ]
    },
    {
@@ -717,7 +725,8 @@
     ]
    },
    {
-      "SkillId":"Basic_Leadership_2",
+      "SkillId":"Basic_Leadership",
+      "Comment": "(2%)",
       "SectionId":9,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -729,7 +738,7 @@
       "SectionId":9,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Leadership_2"
+         "Basic_Leadership"
       ]
    },
    {
@@ -770,7 +779,7 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Consume_Artifact",
-		 "Recruitment"
+         "Recruitment"
       ]
    },
    {
@@ -791,7 +800,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Logistics_2",
+      "SkillId":"Basic_Logistics",
+      "Comment": "(2%)",
       "SectionId":10,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -803,7 +813,7 @@
       "SectionId":10,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Logistics_2"
+         "Basic_Logistics"
       ]
    },
    {
@@ -880,7 +890,8 @@
       ]
    },
    {
-      "SkillId":"Basic_Enlightenment_15",
+      "SkillId":"Basic_Enlightenment",
+      "Comment": "(15%)",
       "SectionId":11,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -892,7 +903,7 @@
       "SectionId":11,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_Enlightenment_15"
+         "Basic_Enlightenment"
       ]
    },
    {
@@ -968,7 +979,8 @@
       ]
    },
    {
-      "SkillId":"Basic_War_Machines_8",
+      "SkillId":"Basic_War_Machines",
+      "Comment": "(8%)",
       "SectionId":12,
       "DepthLevel":0,
       "RequiredSkillIds":[
@@ -980,7 +992,7 @@
       "SectionId":12,
       "DepthLevel":0,
       "RequiredSkillIds":[
-         "Basic_War_Machines_8"
+         "Basic_War_Machines"
       ]
    },
    {
@@ -1029,7 +1041,7 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Mark_of_the_Wizard",
-		 "Ammo_Cart"
+         "Ammo_Cart"
       ]
    }
 ]
