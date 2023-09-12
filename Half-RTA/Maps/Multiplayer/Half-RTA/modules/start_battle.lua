@@ -197,7 +197,18 @@ function getOtherRandomRaceId()
   local resultRaceIdTable = {};
 
   for _, raceId in RACES do
-    if raceId ~= RACES.NEUTRAL and raceId ~= player1RaceId and raceId ~= player2RaceId then
+    local isAllowRace = raceId ~= RACES.NEUTRAL
+       and raceId ~= player1RaceId
+       and raceId ~= player2RaceId;
+  
+    -- ”бираем фраки с общими земл€ми
+    if (player1RaceId == RACES.HAVEN or player2RaceId == RACES.HAVEN or player1RaceId == RACES.SYLVAN or player2RaceId == RACES.SYLVAN) then
+      if (raceId == RACES.SYLVAN or raceId == RACES.HAVEN) then
+        isAllowRace = 0;
+      end;
+    end;
+    
+    if isAllowRace then
       resultRaceIdTable[length(resultRaceIdTable)] = raceId;
     end;
   end;
@@ -1249,7 +1260,7 @@ function runBattle()
     -- —корее всего нужно добавить генерацию уникальных id с сайта дл€ регистрации карт
     -- ¬о избежани€ использовани€ библиотеки злоумышленниками дл€ незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27d',
+    ["MapVersion"] = '1.27f',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);
