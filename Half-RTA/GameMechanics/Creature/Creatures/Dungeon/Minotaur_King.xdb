@@ -2,7 +2,7 @@
 <Creature ObjectRecordID="1000028">
 	<AttackSkill>6</AttackSkill>
 	<DefenceSkill>5</DefenceSkill>
-	<Shots>16</Shots>
+	<Shots>10</Shots>
 	<MinDamage>8</MinDamage>
 	<MaxDamage>9</MaxDamage>
 	<Speed>5</Speed>

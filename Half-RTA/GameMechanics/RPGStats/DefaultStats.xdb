@@ -412,9 +412,9 @@
 			</Neutral>
 			<Stronghold>
 				<DemonRage>
-					<RPForLevel1>200</RPForLevel1>
-					<RPForLevel2>400</RPForLevel2>
-					<RPForLevel3>600</RPForLevel3>
+					<RPForLevel1>250</RPForLevel1>
+					<RPForLevel2>500</RPForLevel2>
+					<RPForLevel3>750</RPForLevel3>
 					<StartRP>0</StartRP>
 					<EnemyStackKilledRP>20</EnemyStackKilledRP>
 					<FriendlyStackKilledRP>30</FriendlyStackKilledRP>
@@ -632,7 +632,7 @@
 							<Bonus1>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_SPEED</Type>
-									<IntParam>2</IntParam>
+									<IntParam>1</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -648,7 +648,7 @@
 							<Bonus2>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_DAMAGE</Type>
-									<IntParam>3</IntParam>
+									<IntParam>2</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -671,7 +671,7 @@
 							<Bonus1>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_SPEED</Type>
-									<IntParam>2</IntParam>
+									<IntParam>1</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -687,7 +687,7 @@
 							<Bonus2>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_DAMAGE</Type>
-									<IntParam>3</IntParam>
+									<IntParam>2</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -1261,9 +1261,9 @@
 					</Bonuses>
 					<DamageAbsorbtionPerHeroSkill>
 						<Item>0</Item>
-						<Item>30</Item>
 						<Item>35</Item>
 						<Item>40</Item>
+						<Item>45</Item>
 						<Item>70</Item>
 					</DamageAbsorbtionPerHeroSkill>
 					<HealthToRageTransferCoef>1200</HealthToRageTransferCoef>
@@ -2046,8 +2046,8 @@
 			</SkillDefence>
 			<SkillOffence>
 				<BasicDamageBonus>0.05</BasicDamageBonus>
-				<AdvancedDamageBonus>0.15</AdvancedDamageBonus>
-				<ExpertDamageBonus>0.25</ExpertDamageBonus>
+				<AdvancedDamageBonus>0.10</AdvancedDamageBonus>
+				<ExpertDamageBonus>0.15</ExpertDamageBonus>
 				<Archery_DamageBonus>0.25</Archery_DamageBonus>
 			</SkillOffence>
 		</HeroSkills>

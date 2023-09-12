@@ -202,12 +202,18 @@ function prepareForChoiceEnemy(playerId)
   local opponentPlayerId = PLAYERS_OPPONENT[playerId];
   local opponentMainHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
   local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+  
+  -- Выдаем караваны на нейтралам
+  local NEUTRAL_PLAYERS = {
+    [PLAYER_1] = PLAYER_3,
+    [PLAYER_2] = PLAYER_4,
+  };
 
   -- Временно перекидываем армию героя в караван
   local stash = {};
   local tempCaravanName = "caravan"..playerId;
 
-  CreateCaravan(tempCaravanName, PLAYER_3, UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
+  CreateCaravan(tempCaravanName, NEUTRAL_PLAYERS[playerId], UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
   stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(mainHeroName);
 
   for i = 1, 7 do
@@ -231,7 +237,8 @@ function prepareForChoiceEnemy(playerId)
   local tempOpponentCaravanName = "caravan"..opponentPlayerId;
   local avengerCaravan = "avenger"..playerId;
 
-  CreateCaravan(avengerCaravan, PLAYER_3, UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
+  -- Для красного 1 1 коорды, для синего 2 2
+  CreateCaravan(avengerCaravan, NEUTRAL_PLAYERS[playerId], UNDERGROUND, 1, 1, UNDERGROUND, 1, 1);
 
   -- Со смертельным выстрелом формируем пробивку из армии оппонента
   if HasHeroSkill(mainHeroName, PERK_SNIPE_DEAD) then
@@ -262,7 +269,6 @@ function prepareForChoiceEnemy(playerId)
       AddObjectCreatures(avengerCaravan, enemyData.id, enemyData.kol);
     end;
   end;
-
 
   -- Запрещаем получать опыт
   sleep();

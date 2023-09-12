@@ -750,7 +750,7 @@ function UnitMoveNonBlocking(unit)
       if randomCreature ~= nil then
         local uniq_key = 'call_of_blood_creature';
       
-        AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
+        AddCreature(GetUnitSide(unit), 37, 2, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
             sleep()
