@@ -7,16 +7,31 @@ PATH_TO_SPELLS_GENERATE_MESSAGES = PATH_TO_SPELL_GENERATE_MODULE.."messages/";
 doFile(PATH_TO_SPELL_GENERATE_MODULE.."spells_generate_constants.lua");
 sleep(1);
 
+ACADEMY_AVAILABLE_MAGICK_TYPES = { TYPE_MAGICS.LIGHT, TYPE_MAGICS.DARK, TYPE_MAGICS.DESTRUCTIVE };
+
+-- Генерим случайную школу для Мага
+function getRandomAcademyMagicType()
+  local randomValue = random(3) + 1;
+
+  return ACADEMY_AVAILABLE_MAGICK_TYPES[randomValue];
+end;
+
+-- Рандомные школы мага для обоих игроков
+PLAYERS_MAGE_TYPES = {
+  [PLAYER_1] = getRandomAcademyMagicType(),
+  [PLAYER_2] = getRandomAcademyMagicType(),
+};
+
 MAPPPING_RACE_TO_MAGIC = {
   [RACES.HAVEN]            = { TYPE_MAGICS.LIGHT, TYPE_MAGICS.DARK },
   [RACES.INFERNO]          = { TYPE_MAGICS.DARK, TYPE_MAGICS.DESTRUCTIVE },
   [RACES.NECROPOLIS]       = { TYPE_MAGICS.DARK, TYPE_MAGICS.SUMMON },
   [RACES.SYLVAN]           = { TYPE_MAGICS.LIGHT, TYPE_MAGICS.DESTRUCTIVE },
-  [RACES.ACADEMY]          = { TYPE_MAGICS.SUMMON, TYPE_MAGICS.LIGHT },
+  [RACES.ACADEMY]          = { TYPE_MAGICS.SUMMON },
   [RACES.DUNGEON]          = { TYPE_MAGICS.DESTRUCTIVE, TYPE_MAGICS.SUMMON },
   [RACES.FORTRESS]         = { TYPE_MAGICS.LIGHT, TYPE_MAGICS.DESTRUCTIVE },
   [RACES.STRONGHOLD]       = { TYPE_MAGICS.WARCRIES },
-  };
+};
 
 -- Генерация случайного набора заклинаний для игрока
 function generateRandomSpellSet()
@@ -25,11 +40,17 @@ function generateRandomSpellSet()
   for _, playerId in PLAYER_ID_TABLE do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
     
+    local playerMagickList = MAPPPING_RACE_TO_MAGIC[raceId];
+
+    if raceId == RACES.ACADEMY then
+      playerMagickList[2] = PLAYERS_MAGE_TYPES[playerId];
+    end;
+    
     -- Генерация заклинаний - стартовых бонусов
-    generateStartedBonusSpells(playerId, MAPPPING_RACE_TO_MAGIC[raceId]);
+    generateStartedBonusSpells(playerId, playerMagickList);
     
     -- Генерация набора заклинаний для игрока
-    generateSpellByMagicType(playerId, raceId, MAPPPING_RACE_TO_MAGIC[raceId]);
+    generateSpellByMagicType(playerId, raceId, playerMagickList);
     
     -- Функционал перегенерации набора заклинаний
     addResetSpellsObject(playerId);
@@ -221,8 +242,6 @@ function getRandomAvailableSpellByMagicType(playerId, spellSet, magicType, spell
       end;
     end;
   end;
-  
-  print ("availableSpells", availableSpells);
   
   if length(availableSpells) == 0 then
     return nil;

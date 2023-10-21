@@ -16,7 +16,7 @@
 		</Item>
 		<Item>
 			<Spell>SPELL_FIREWALL</Spell>
-			<Mastery>MASTERY_ADVANCED</Mastery>
+			<Mastery>MASTERY_BASIC</Mastery>
 		</Item>
 	</KnownSpells>
 	<SpellPoints>25</SpellPoints>

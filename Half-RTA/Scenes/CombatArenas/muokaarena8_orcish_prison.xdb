@@ -22,7 +22,7 @@
 	<Music/>
 	<AmbientSoundSet/>
 	<TextFormatFileRef href=""/>
-	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/OrcishPrisonArena/OrcishPrisonObstacles.xdb#xpointer(/ArenaObstaclesGroup)"/>
+	<ObstaclesGroup href="/ArenaObjects/_(ArenaObstaclesGroup)/TaigaArena/Taiga.(ArenaObstaclesGroup).xdb#xpointer(/ArenaObstaclesGroup)"/>
 	<CamerasSet/>
 	<MeleeAttackPoints>
 		<Use>false</Use>

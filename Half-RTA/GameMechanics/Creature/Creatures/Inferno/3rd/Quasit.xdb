@@ -37,7 +37,7 @@
 		<Crystal>0</Crystal>
 		<Sulfur>0</Sulfur>
 		<Gem>0</Gem>
-		<Gold>80</Gold>
+		<Gold>70</Gold>
 	</Cost>
 	<SubjectOfRandomGeneration>true</SubjectOfRandomGeneration>
 	<MonsterShared href="/MapObjects/Inferno/Quasit.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>

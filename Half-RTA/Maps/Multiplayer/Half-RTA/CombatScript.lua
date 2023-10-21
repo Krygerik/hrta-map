@@ -38,7 +38,11 @@ HERO_2_TURN = 0
 
 GUARDIAN_ANGEL_ACTIVATE = 0
 
-
+-- Статус активации спецы Крага
+PLAYERS_KRAGH_STATUS = {
+  [0] = nil,
+  [1] = nil,
+};
 
 HEROES_INFO = parse(GetGameVar('heroes_info'))()
 
@@ -339,13 +343,6 @@ function OnStart()
 --    end
 
     if IsCreature(unit) then
-
-      -- ловчие
-      local type = GetCreatureType(unit)
-      if type == 166 or type == 93 then
-        pcall(commandDoSpecial, unit, 317, pos(unit))
-      end
-      
       -- сет регалии Сар-Иссы
       if GetHeroArtSet(GetFriendlyHero(unit), 3) > 1 and GetUnitMaxManaPoints(unit) > 0 then
         SetUnitManaPoints(unit, 3 * GetUnitMaxManaPoints(unit))
@@ -357,7 +354,9 @@ function OnStart()
 
 	end
 	for unit, atb in init_atb do
-		SetATB(unit, atb)
+	  if not (IsHero(unit) and IsNamedHero(unit, 'Hero1')) then
+      SetATB(unit, atb)
+    end;
 	end
 	combatSetPause(nil)
 	startThread(ReadyUnitThread)
@@ -383,7 +382,7 @@ function WarMachineDead(wm)
 end
 
 function getHasBeenGuardianAngel()
-  print "getHasBeenPreliminaryTeleport"
+  print "getHasBeenGuardianAngel"
 
   for _, hasBeen in HAS_BEEN_GUARDIAN_ANGEL do
     if hasBeen then
@@ -405,6 +404,7 @@ function CreatureDead(unit)
 
       local creatures_necro = GetCreatures(side)
       -- TODO: КАК ЗДЕСЬ МОЖЕТ ПОЛУЧИТЬСЯ length(creatures_necro)???
+      -- ПОТОМУ ЧТО
       local unit_get_move = random(length(creatures_necro) + 1) - 1
 
       if unit_get_move == (length(creatures_necro)) then
@@ -464,9 +464,9 @@ end
 function GetUnitInitialATB(unit)
 	local atb = GetRandomStartATBPosition()
 	if IsHero(unit) then
-		if IsNamedHero(unit, 'Hero1') then
-      pcall(commandDefend, unit)
-    end
+		-- if IsNamedHero(unit, 'Hero1') then
+      -- pcall(commandDefend, unit)
+    -- end
 --      atb = 0.99999
 --			auto_move[unit] = 1
 --		elseif IsNamedHero(unit, 'Grok') then
@@ -550,23 +550,62 @@ function UnitMoveNonBlocking(unit)
 	if creature_dead[unit] then
 		creature_dead[unit] = nil
 	end
+	
 
-  for side, hero in {[0]=GetHero(0); GetHero(1)} do
+  -- Первый ход любого существа
+	if num_turn[1] == 1 then
+	  -- чародейская защита
+	  for side, hero in {[0]=GetHero(0); GetHero(1)} do
+      if GetHeroSkillMastery(hero, 176) > 0 then
+        local c1 = 'temp-buff'..side
+    		local x, y = SafePos()
+    		AddCreature(side, 900, 1, x, y, 1, c1)
+    		repeat sleep() until exist(c1)
+    		displace(c1, 9, 50)
+    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
+    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
+    		removeUnit(c1)
 
-    -- чародейская защита
-    if GetHeroSkillMastery(hero, 176) > 0 and num_turn[1] == 1 then
-      local c1 = 'temp-buff'..side
-  		local x, y = SafePos()
-  		AddCreature(side, 900, 1, x, y, 1, c1)
-  		repeat sleep() until exist(c1)
-  		displace(c1, 9, 50)
-  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
-  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
-  		removeUnit(c1)
+    		repeat sleep() until not exist(c1)
+
+    		AddCreature(1-side, 900, 1, x, y, 1, c1)
+    		repeat sleep() until exist(c1)
+    		displace(c1, 9, 50)
+    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_WEAKNESS)
+    		removeUnit(c1)
+    	end
   	end
-	end
+	
+	  -- ловчие
+	  for i, creature in GetCreatures(GetUnitSide(unit)) do
+      local type = GetCreatureType(creature)
+      --проверка на виверн
+      if type == 166 or type == 93 then
+        pcall(commandDoSpecial, creature, 317, pos(creature))
+      end
+    end
+	end;
+
+
 	
 	if IsHero(unit) then
+    -- Перемещаем Крага после первого удара в конец АТБ
+   if IsNamedHero(unit, 'Hero1') then
+
+     if not PLAYERS_KRAGH_STATUS[GetUnitSide(unit)] then
+       PLAYERS_KRAGH_STATUS[GetUnitSide(unit)] = not nil;
+       
+       startThread(
+         function ()
+           while combatReadyPerson() == %unit do
+             sleep()
+           end
+           
+           setATB(%unit, 0);
+         end
+       );
+     end;
+   end;
 		
     --EnableDynamicBattleMode(nil)
 
@@ -750,7 +789,7 @@ function UnitMoveNonBlocking(unit)
       if randomCreature ~= nil then
         local uniq_key = 'call_of_blood_creature';
       
-        AddCreature(GetUnitSide(unit), 37, 2, -1, -1, nil, uniq_key);
+        AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
             sleep()

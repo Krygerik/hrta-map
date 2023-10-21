@@ -278,7 +278,7 @@
 				<ManaStealPerWeekPopulation>1</ManaStealPerWeekPopulation>
 				<SearingAuraDamageHits>8</SearingAuraDamageHits>
 				<AxeOfSlaughterDamageHits>2</AxeOfSlaughterDamageHits>
-				<SyphonManaCoef>0.5</SyphonManaCoef>
+				<SyphonManaCoef>0.75</SyphonManaCoef>
 				<Leap_JumpDistanceMin>3</Leap_JumpDistanceMin>
 				<Leap_JumpDistanceMax>8</Leap_JumpDistanceMax>
 				<Leap_AttackDamageBonusBase>0</Leap_AttackDamageBonusBase>
@@ -347,7 +347,7 @@
 				<RiderCharge_DefenceReducePerPathCell>0.15</RiderCharge_DefenceReducePerPathCell>
 				<AcidicHydraPattern href="/GameMechanics/Creature/Creatures/Dungeon/AcidBlood.xdb#xpointer(/PatternAttack)"/>
 				<AuraOfBraveryMoraleMin>3</AuraOfBraveryMoraleMin>
-				<Invisibility_DurationInRounds>3</Invisibility_DurationInRounds>
+				<Invisibility_DurationInRounds>2</Invisibility_DurationInRounds>
 				<IncinerateCoef>1.5</IncinerateCoef>
 				<RideByAttack_DamageCoef>0.75</RideByAttack_DamageCoef>
 				<RideByAttack_LastPointsToExclude>1</RideByAttack_LastPointsToExclude>
@@ -383,7 +383,7 @@
 				<FlameWave_WaveLength>5</FlameWave_WaveLength>
 				<FlameWave_ProcFactor>2</FlameWave_ProcFactor>
 				<FlameWave_WaveSpeed>15</FlameWave_WaveSpeed>
-				<Flamestrike_DamageMultipiler>1</Flamestrike_DamageMultipiler>
+				<Flamestrike_DamageMultipiler>0.8</Flamestrike_DamageMultipiler>
 				<PawStrike_ProcFactor>0.75</PawStrike_ProcFactor>
 			</Fortress>
 			<Neutral>
@@ -412,9 +412,9 @@
 			</Neutral>
 			<Stronghold>
 				<DemonRage>
-					<RPForLevel1>250</RPForLevel1>
-					<RPForLevel2>500</RPForLevel2>
-					<RPForLevel3>750</RPForLevel3>
+					<RPForLevel1>200</RPForLevel1>
+					<RPForLevel2>400</RPForLevel2>
+					<RPForLevel3>600</RPForLevel3>
 					<StartRP>0</StartRP>
 					<EnemyStackKilledRP>20</EnemyStackKilledRP>
 					<FriendlyStackKilledRP>30</FriendlyStackKilledRP>
@@ -632,7 +632,7 @@
 							<Bonus1>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_SPEED</Type>
-									<IntParam>1</IntParam>
+									<IntParam>2</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -648,7 +648,7 @@
 							<Bonus2>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_DAMAGE</Type>
-									<IntParam>2</IntParam>
+									<IntParam>3</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -671,7 +671,7 @@
 							<Bonus1>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_SPEED</Type>
-									<IntParam>1</IntParam>
+									<IntParam>2</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -687,7 +687,7 @@
 							<Bonus2>
 								<Item>
 									<Type>DEMON_RAGE_BONUS_DAMAGE</Type>
-									<IntParam>2</IntParam>
+									<IntParam>3</IntParam>
 									<FloatParam>0</FloatParam>
 									<Spells/>
 									<Abilities/>
@@ -1261,9 +1261,9 @@
 					</Bonuses>
 					<DamageAbsorbtionPerHeroSkill>
 						<Item>0</Item>
+						<Item>30</Item>
 						<Item>35</Item>
 						<Item>40</Item>
-						<Item>45</Item>
 						<Item>70</Item>
 					</DamageAbsorbtionPerHeroSkill>
 					<HealthToRageTransferCoef>1200</HealthToRageTransferCoef>
@@ -1294,7 +1294,7 @@
 				<Taunt_ProcFactor>1.25</Taunt_ProcFactor>
 			</Stronghold>
 			<ConjuredPhoenix href="ConjuredPhoenix.xdb#xpointer(/RPGCombatUniqueCreatureStats)"/>
-			<DefenceBonusOnDefend>0.5</DefenceBonusOnDefend>
+			<DefenceBonusOnDefend>0.4</DefenceBonusOnDefend>
 			<Abilities>
 				<FireShield_Damage_Multiplier>0.2</FireShield_Damage_Multiplier>
 				<MagmaShield_Damage_Multiplier>0.4</MagmaShield_Damage_Multiplier>
@@ -1955,7 +1955,7 @@
 				<SetAfire_DamageDurationInRounds>3</SetAfire_DamageDurationInRounds>
 				<ShrugDarkness_EnemySpellpowerMultiplier>0.5</ShrugDarkness_EnemySpellpowerMultiplier>
 				<RunicArmor_SpellpowerBonus>10</RunicArmor_SpellpowerBonus>
-				<RunicMachines_InitiativeBonus>5</RunicMachines_InitiativeBonus>
+				<RunicMachines_InitiativeBonus>4</RunicMachines_InitiativeBonus>
 				<Mentoring_ExpPecentToGiveToVisitor>0</Mentoring_ExpPecentToGiveToVisitor>
 				<Empathy_ATBAffectionOnMorale>0.1</Empathy_ATBAffectionOnMorale>
 				<Preparation_RetaliateToNER>true</Preparation_RetaliateToNER>
@@ -2046,8 +2046,8 @@
 			</SkillDefence>
 			<SkillOffence>
 				<BasicDamageBonus>0.05</BasicDamageBonus>
-				<AdvancedDamageBonus>0.10</AdvancedDamageBonus>
-				<ExpertDamageBonus>0.15</ExpertDamageBonus>
+				<AdvancedDamageBonus>0.15</AdvancedDamageBonus>
+				<ExpertDamageBonus>0.25</ExpertDamageBonus>
 				<Archery_DamageBonus>0.25</Archery_DamageBonus>
 			</SkillOffence>
 		</HeroSkills>
@@ -2319,13 +2319,13 @@
 					<LevelDivisor>2</LevelDivisor>
 					<PerDividedLevel>1</PerDividedLevel>
 				</Battlecry_OffenceBonus>
-				<ShoutOfMany_DamagePerCreatureInArmy>0.9</ShoutOfMany_DamagePerCreatureInArmy>
+				<ShoutOfMany_DamagePerCreatureInArmy>0.8</ShoutOfMany_DamagePerCreatureInArmy>
 				<ShoutOfMany_ShockwaveMoveTime>0.5</ShoutOfMany_ShockwaveMoveTime>
 			</Warcries>
 		</Spells>
 		<LuckAndMorale>
 			<GoodLuck_DamageMultiplier>1.5</GoodLuck_DamageMultiplier>
-			<BadLuck_DamageMultiplier>0.5</BadLuck_DamageMultiplier>
+			<BadLuck_DamageMultiplier>0.66</BadLuck_DamageMultiplier>
 			<GoodMorale_ATBValue>0.4</GoodMorale_ATBValue>
 			<BadMorale_ATBValue>0.6</BadMorale_ATBValue>
 		</LuckAndMorale>

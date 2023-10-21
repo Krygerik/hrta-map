@@ -70,10 +70,10 @@ SPELLS = {
   [TYPE_MAGICS.DARK] = {
     { level = 1, id = 11  }, -- ослабление
     { level = 1, id = 12  }, -- замедление
-    { level = 2, id = 15  }, -- немощность
     { level = 2, id = 13  }, -- разрушающий луч
+    { level = 2, id = 14  }, -- чума
+    { level = 3, id = 15  }, -- немощность
     { level = 3, id = 17  }, -- рассеяность
-    { level = 3, id = 14  }, -- чума
     { level = 3, id = 277 }, -- скорбь
     { level = 4, id = 19  }, -- ослепление
     { level = 4, id = 278 }, -- вампиризм
@@ -789,27 +789,27 @@ UNITS = {
     { kol =  6, id =112, price1 = 3200, power = 6003, lvl = 7 }
   },
   [RACES.INFERNO] = {
-    { kol =224, id = 15, price1 =   80, power =  124, lvl = 1 },
+    { kol =224, id = 15, price1 =   70, power =  124, lvl = 1 },
     { kol =188, id = 17, price1 =   90, power =  149, lvl = 2 },
     { kol = 80, id = 19, price1 =  200, power =  338, lvl = 3 },
     { kol = 45, id = 21, price1 =  400, power =  680, lvl = 4 },
     { kol = 27, id = 23, price1 =  800, power = 1415, lvl = 5 },
     { kol = 14, id = 25, price1 = 1300, power = 2360, lvl = 6 },
-    { kol =  6, id = 27, price1 = 2400, power = 5850, lvl = 7 },
-    { kol =224, id = 16, price1 =   80, power =  124, lvl = 1 },
+    { kol =  6, id = 27, price1 = 2666, power = 5850, lvl = 7 },
+    { kol =224, id = 16, price1 =   70, power =  124, lvl = 1 },
     { kol =188, id = 18, price1 =   90, power =  149, lvl = 2 },
     { kol = 80, id = 20, price1 =  200, power =  338, lvl = 3 },
     { kol = 45, id = 22, price1 =  400, power =  680, lvl = 4 },
     { kol = 27, id = 24, price1 =  800, power = 1415, lvl = 5 },
     { kol = 14, id = 26, price1 = 1300, power = 2360, lvl = 6 },
-    { kol =  6, id = 28, price1 = 2400, power = 5850, lvl = 7 },
-    { kol =224, id =131, price1 =   80, power =  124, lvl = 1 },
+    { kol =  6, id = 28, price1 = 2666, power = 5850, lvl = 7 },
+    { kol =224, id =131, price1 =   70, power =  124, lvl = 1 },
     { kol =188, id =132, price1 =   90, power =  149, lvl = 2 },
     { kol = 80, id =133, price1 =  200, power =  338, lvl = 3 },
     { kol = 45, id =134, price1 =  400, power =  680, lvl = 4 },
     { kol = 27, id =135, price1 =  800, power = 1415, lvl = 5 },
     { kol = 14, id =136, price1 = 1300, power = 2360, lvl = 6 },
-    { kol =  6, id =137, price1 = 2400, power = 5850, lvl = 7 }
+    { kol =  6, id =137, price1 = 2666, power = 5850, lvl = 7 }
   },
   [RACES.NECROPOLIS] = {
     { kol =304, id = 29, price1 =   60, power =   84, lvl = 1 },

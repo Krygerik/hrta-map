@@ -741,16 +741,31 @@ function checkAndRunHeroPerks(playerId)
       TeachHeroSpell(mainHeroName, SPELL_FORGETFULNESS);
     end;
   end;
+
   
-    -- Выдача регенерации за Вечный свет
-  if HasHeroSkill(mainHeroName, HERO_SKILL_ETERNAL_LIGHT) then
-    TeachHeroSpell(mainHeroName,SPELL_REGENERATION);
+    --выдача Скорби, Регена, Фантома, Огненной стенки за навык Мудрость при наличии основы нужной школы
+  if HasHeroSkill(mainHeroName, PERK_WISDOM) then
+
+    if GetHeroSkillMastery(mainHeroName, SKILL_DARK_MAGIC) > 0 then
+      TeachHeroSpell(mainHeroName,SPELL_SORROW);
+    end;
+
+    if GetHeroSkillMastery(mainHeroName, SKILL_LIGHT_MAGIC) > 0 then
+      TeachHeroSpell(mainHeroName,SPELL_REGENERATION);
+    end;
+
+    if GetHeroSkillMastery(mainHeroName, SKILL_SUMMONING_MAGIC) > 0 then
+      TeachHeroSpell(mainHeroName,SPELL_PHANTOM);
+    end;
+
+    if GetHeroSkillMastery(mainHeroName, SKILL_DESTRUCTIVE_MAGIC) > 0 then
+      TeachHeroSpell(mainHeroName,SPELL_FIREWALL);
+    end;
   end;
   
-      -- Выдача Стены огня за Тайны хаоса
+      -- Выдача случайного спела за тайны хаоса
   if HasHeroSkill(mainHeroName, WARLOCK_FEAT_SECRETS_OF_DESTRUCTION) then
-    TeachHeroSpell(mainHeroName,SPELL_FIREWALL);
-    
+
     local dontKnowDestructiveSpell = {}
     
     for skillId, skillSpellSet in SPELLS do
@@ -771,16 +786,6 @@ function checkAndRunHeroPerks(playerId)
       TeachHeroSpell(mainHeroName, spellTeach);
     end
     
-  end;
-  
-      -- Выдача Скорби за Повелитель проклятий
-  if HasHeroSkill(mainHeroName, PERK_MASTER_OF_CURSES) then
-    TeachHeroSpell(mainHeroName,SPELL_SORROW);
-  end;
-  
-      -- Выдача Фантома за Повелитель жизни
-  if HasHeroSkill(mainHeroName, PERK_MASTER_OF_ANIMATION) then
-    TeachHeroSpell(mainHeroName,SPELL_PHANTOM);
   end;
 
      -- Выдача случайного т3 заклинания за Тайное откровение
@@ -1260,7 +1265,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27f',
+    ["MapVersion"] = '1.27e',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

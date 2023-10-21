@@ -13703,7 +13703,6 @@
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_DIPLOMACY</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -14209,7 +14208,6 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
-							<Item>HERO_SKILL_CONSUME_CORPSE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
@@ -14227,20 +14225,19 @@
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_CASTER_CERTIFICATE</Item>
+							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_CASTER_CERTIFICATE</Item>
+							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
-							<Item>HERO_SKILL_REFRESH_RUNE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>

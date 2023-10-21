@@ -5,5 +5,8 @@
 		<Item href="Rock1.xdb#xpointer(/ArenaObstacle)"/>
 		<Item href="Rock2.xdb#xpointer(/ArenaObstacle)"/>
 		<Item href="Rock3.xdb#xpointer(/ArenaObstacle)"/>
+		<Item href="DRushs1.xdb#xpointer(/ArenaObstacle)"/>
+		<Item href="DRushs2.xdb#xpointer(/ArenaObstacle)"/>
+		<Item href="DRushs3.xdb#xpointer(/ArenaObstacle)"/>
 	</links>
 </ArenaObstaclesGroup>

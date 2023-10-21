@@ -45,8 +45,8 @@
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
-			<Base>16</Base>
-			<PerPower>16</PerPower>
+			<Base>20</Base>
+			<PerPower>20</PerPower>
 		</Item>
 	</duration>
 	<sSpellCost>
