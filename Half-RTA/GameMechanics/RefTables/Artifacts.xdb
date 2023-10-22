@@ -1762,7 +1762,7 @@
 				<Icon href="/Textures/Icons/Artifacts/Ring_of_the_Death.(Texture).xdb#xpointer(/Texture)"/>
 				<CostOfGold>4000</CostOfGold>
 				<AIValue>500</AIValue>
-				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
+				<CanBeGeneratedToSell>false</CanBeGeneratedToSell>
 				<HeroStatsModif>
 					<Attack>0</Attack>
 					<Defence>0</Defence>

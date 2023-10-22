@@ -255,11 +255,11 @@
 		<DamageDecreaseCap>0.1</DamageDecreaseCap>
 		<DynamicBattle_HeroTimeToCommand>30</DynamicBattle_HeroTimeToCommand>
 		<DynamicBattle_ChoosePresetTime>40</DynamicBattle_ChoosePresetTime>
-		<DynamicBattle_TacticsTime>180</DynamicBattle_TacticsTime>
+		<DynamicBattle_TacticsTime>150</DynamicBattle_TacticsTime>
 		<DynamicBattle_SpeedCoeffs>
-			<Item>91</Item>
-			<Item>91</Item>
-			<Item>91</Item>
+			<Item>90</Item>
+			<Item>60</Item>
+			<Item>20</Item>
 		</DynamicBattle_SpeedCoeffs>
 		<DynamicBattle_SpeedCoefAffectsTactics>false</DynamicBattle_SpeedCoefAffectsTactics>
 		<Creatures>
@@ -2160,7 +2160,7 @@
 				<Rash_MovementPenaltyReducePerLevel>0.02</Rash_MovementPenaltyReducePerLevel>
 				<Rash_MovePointsIncreasePerPevel>0.01</Rash_MovePointsIncreasePerPevel>
 				<CentaurMistress_StartATBBonusPerHeroLevel>0</CentaurMistress_StartATBBonusPerHeroLevel>
-				<Offender_HeroAttackDamageBonusPerLevel>0.025</Offender_HeroAttackDamageBonusPerLevel>
+				<Offender_HeroAttackDamageBonusPerLevel>0.015</Offender_HeroAttackDamageBonusPerLevel>
 				<WyvernTamer_HealthBonus>
 					<Base>4</Base>
 					<LevelDivisor>1</LevelDivisor>
@@ -2325,7 +2325,7 @@
 		</Spells>
 		<LuckAndMorale>
 			<GoodLuck_DamageMultiplier>1.5</GoodLuck_DamageMultiplier>
-			<BadLuck_DamageMultiplier>0.66</BadLuck_DamageMultiplier>
+			<BadLuck_DamageMultiplier>0.5</BadLuck_DamageMultiplier>
 			<GoodMorale_ATBValue>0.4</GoodMorale_ATBValue>
 			<BadMorale_ATBValue>0.6</BadMorale_ATBValue>
 		</LuckAndMorale>

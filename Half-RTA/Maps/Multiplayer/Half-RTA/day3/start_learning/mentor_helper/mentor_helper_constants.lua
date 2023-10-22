@@ -311,6 +311,11 @@ ACADEMY_PERK_LIST = {
     KNIGHT_FEAT_RETRIBUTION,
     WARLOCK_FEAT_POWER_OF_HASTE,
   },
+  -- Тайные знания
+  {
+    KNIGHT_FEAT_CASTER_CERTIFICATE,
+    HERO_SKILL_ABSOLUTE_RAGE, -- Чародейская защита
+  },
   -- Повелитель чар
   {
     KNIGHT_FEAT_ELEMENTAL_BALANCE,
@@ -363,6 +368,11 @@ DUNGEON_PERK_LIST = {
   {
     KNIGHT_FEAT_RETRIBUTION,
     WARLOCK_FEAT_POWER_OF_HASTE,
+  },
+  -- Тайные знания
+  {
+    KNIGHT_FEAT_CASTER_CERTIFICATE,
+    HERO_SKILL_ABSOLUTE_RAGE, -- Чародейская защита
   },
   -- Повелитель чар
   {

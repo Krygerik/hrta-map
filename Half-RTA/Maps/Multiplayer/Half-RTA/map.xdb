@@ -31968,26 +31968,6 @@
 				<untransferable>false</untransferable>
 			</AdvMapArtifact>
 		</Item>
-		<Item href="#n:inline(AdvMapArtifact)" id="item_C99E61C7-98E4-4AFD-882B-1DA3F30661A7">
-			<AdvMapArtifact>
-				<Pos>
-					<x>11</x>
-					<y>84</y>
-					<z>0</z>
-				</Pos>
-				<Rot>0</Rot>
-				<Floor>0</Floor>
-				<Name>a14</Name>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Artifacts/Ring_death.xdb#xpointer(/AdvMapArtifactShared)"/>
-				<armySlots/>
-				<MessageFileRef href=""/>
-				<spellID>SPELL_NONE</spellID>
-				<RandomShiftRadius>0</RandomShiftRadius>
-				<untransferable>false</untransferable>
-			</AdvMapArtifact>
-		</Item>
 		<Item href="#n:inline(AdvMapArtifact)" id="item_F7586121-C862-4815-87F7-F755F55CCA30">
 			<AdvMapArtifact>
 				<Pos>
@@ -32071,8 +32051,8 @@
 		<Item href="#n:inline(AdvMapArtifact)" id="item_DAF6F4F5-7C41-4A36-9F2E-4AE3BC0BCBE5">
 			<AdvMapArtifact>
 				<Pos>
-					<x>15</x>
-					<y>82</y>
+					<x>11</x>
+					<y>84</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
@@ -32840,26 +32820,6 @@
 				<untransferable>false</untransferable>
 			</AdvMapArtifact>
 		</Item>
-		<Item href="#n:inline(AdvMapArtifact)" id="item_360D219B-27ED-4EED-8446-6B25996D4CAC">
-			<AdvMapArtifact>
-				<Pos>
-					<x>9</x>
-					<y>7</y>
-					<z>0</z>
-				</Pos>
-				<Rot>0</Rot>
-				<Floor>0</Floor>
-				<Name>b14</Name>
-				<CombatScript/>
-				<pointLights/>
-				<Shared href="/MapObjects/Artifacts/Ring_death.xdb#xpointer(/AdvMapArtifactShared)"/>
-				<armySlots/>
-				<MessageFileRef href=""/>
-				<spellID>SPELL_NONE</spellID>
-				<RandomShiftRadius>0</RandomShiftRadius>
-				<untransferable>false</untransferable>
-			</AdvMapArtifact>
-		</Item>
 		<Item href="#n:inline(AdvMapArtifact)" id="item_D6218F72-CCC2-4A6C-BCCB-DFE20A11E917">
 			<AdvMapArtifact>
 				<Pos>
@@ -32903,8 +32863,8 @@
 		<Item href="#n:inline(AdvMapArtifact)" id="item_BFE67097-67F5-4AE9-84E7-103312F4C9DF">
 			<AdvMapArtifact>
 				<Pos>
-					<x>9</x>
-					<y>14</y>
+					<x>7</x>
+					<y>8</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>
@@ -32983,8 +32943,8 @@
 		<Item href="#n:inline(AdvMapArtifact)" id="item_8FF799C3-9374-4F71-AED3-36C5C78DB9B8">
 			<AdvMapArtifact>
 				<Pos>
-					<x>7</x>
-					<y>8</y>
+					<x>9</x>
+					<y>7</y>
 					<z>0</z>
 				</Pos>
 				<Rot>0</Rot>

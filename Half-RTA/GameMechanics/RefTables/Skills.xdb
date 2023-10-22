@@ -6607,13 +6607,12 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
-							<Item>HERO_SKILL_TACTICS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_STUNNING_BLOW</Item>
+							<Item>HERO_SKILL_POWERFULL_BLOW</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -14574,8 +14573,7 @@
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_FRENZY</Item>
-							<Item>HERO_SKILL_POWERFULL_BLOW</Item>
+							<Item>HERO_SKILL_CRITICAL_STRIKE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>

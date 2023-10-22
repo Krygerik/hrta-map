@@ -600,7 +600,7 @@ ALL_ARTS_LIST = {
   { id = 60, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 5000 }, -- пояс элементалей
   { id = 16, level = ARTS_LEVELS.MINOR, position = ART_POSITION.NECK,    price = 4000 }, -- ошейник льва
   { id = 55, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD,    price = 5000 }, -- шлем некроманта
-  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
+--  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
   { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,   price = 5000 }, -- свиток маны
   { id = 56, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- доспех бесстрашия
   -- { id = 86, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,  price = 6500 }, -- руна пламени
@@ -643,7 +643,7 @@ ALL_ARTS_LIST = {
   { id = 57, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 12000 }, -- сапоги скорости
   { id = 71, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 15000 }, -- том силы (амулет некроманта)
   -- { id = 91, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 20000 }, -- кольцо машин
-  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 12000 },  -- лук единорога
+  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 18000 },  -- лук единорога
   { id = 51, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- щит гномов
   { id = 79, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том призыва
   { id = 77, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том света

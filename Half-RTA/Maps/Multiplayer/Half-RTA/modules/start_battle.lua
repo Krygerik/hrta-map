@@ -1265,7 +1265,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27e',
+    ["MapVersion"] = '1.27g',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

@@ -796,7 +796,6 @@ function UnitMoveNonBlocking(unit)
         end
         
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
-        pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
 
         removeUnit(uniq_key)
         
