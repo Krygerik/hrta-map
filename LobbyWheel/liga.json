@@ -463,19 +463,19 @@
       ]
    },
    {
+      "SkillId":"Sorcerers_Protection",
+      "SectionId":5,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Arcane_Training"
+      ]
+   },
+   {
       "SkillId":"Arcane_Brilliance",
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Magic_Insight"
-      ]
-   },
-   {
-      "SkillId":"Sorcerers_Protection",
-      "SectionId":5,
-      "DepthLevel":3,
-      "RequiredSkillIds":[
-         "Arcane_Excellence"
       ]
    },
    {

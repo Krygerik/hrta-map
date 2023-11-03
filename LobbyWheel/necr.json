@@ -789,14 +789,6 @@
       ]
    },
    {
-      "SkillId":"Empathy",
-      "SectionId":9,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Diplomacy"
-      ]
-   },
-   {
       "SkillId":"Basic_Logistics",
       "Comment": "(8%)",
       "SectionId":10,

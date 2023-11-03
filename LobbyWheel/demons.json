@@ -477,7 +477,6 @@
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Consume_Corpse",
          "Arcane_Training"
       ]
    },
@@ -539,6 +538,14 @@
       ]
    },
    {
+      "SkillId":"Excruciating_Strikez",
+      "SectionId":6,
+      "DepthLevel":1,
+      "RequiredSkillIds":[
+         "Mark_of_the_Damned"
+      ]
+   },
+   {
       "SkillId":"Battle_Frenzy",
       "SectionId":6,
       "DepthLevel":1,
@@ -552,15 +559,6 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          
-      ]
-   },
-   {
-      "SkillId":"Excruciating_Strikez",
-      "SectionId":6,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Mark_of_the_Damned",
-         "Tactics"
       ]
    },
    {

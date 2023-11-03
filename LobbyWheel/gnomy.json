@@ -466,7 +466,6 @@
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Refresh_Rune",
          "Arcane_Training"
       ]
    },
