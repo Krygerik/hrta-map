@@ -13700,11 +13700,6 @@
 						</dependenciesIDs>
 					</Item>
 					<Item>
-						<Class>HERO_CLASS_NECROMANCER</Class>
-						<dependenciesIDs>
-						</dependenciesIDs>
-					</Item>
-					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>

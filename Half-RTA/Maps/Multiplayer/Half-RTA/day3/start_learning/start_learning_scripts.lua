@@ -1778,10 +1778,12 @@ function getIsMaxCountStat(playerId, statId)
   local count = 0;
 
   for level = 1, 3 do
-    count = count + learning[level];
+    if learning[level] ~= nil then
+      count = count + learning[level][statId];
+    end;
   end;
 
-  return count < MAXIMUM_STATS;
+  return count >= MAXIMUM_STATS;
 end;
 
 -- ��������� �������� ����� ������ ������ �����������
@@ -1868,7 +1870,7 @@ function getRandomStatByRace(raceId, allowStatList)
     for _, statId in allowStatList do
       summaryPersent = summaryPersent + raceDropStatPercent[mapStatToField[statId]];
     end;
-    
+
     local randomFromSummary = random(summaryPersent);
     local new_summary = 0;
 

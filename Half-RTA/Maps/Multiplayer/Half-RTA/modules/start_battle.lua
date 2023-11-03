@@ -204,7 +204,7 @@ function getOtherRandomRaceId()
     -- ”бираем фраки с общими земл€ми
     if (player1RaceId == RACES.HAVEN or player2RaceId == RACES.HAVEN or player1RaceId == RACES.SYLVAN or player2RaceId == RACES.SYLVAN) then
       if (raceId == RACES.SYLVAN or raceId == RACES.HAVEN) then
-        isAllowRace = 0;
+        isAllowRace = nil;
       end;
     end;
     
@@ -1265,7 +1265,7 @@ function runBattle()
     -- —корее всего нужно добавить генерацию уникальных id с сайта дл€ регистрации карт
     -- ¬о избежани€ использовани€ библиотеки злоумышленниками дл€ незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27g',
+    ["MapVersion"] = '1.27i',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

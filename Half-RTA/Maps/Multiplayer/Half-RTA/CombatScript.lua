@@ -46,8 +46,6 @@ PLAYERS_KRAGH_STATUS = {
 
 HEROES_INFO = parse(GetGameVar('heroes_info'))()
 
-
-
 function shuffle(t)
 	local n = getn(t)
 	for i = 1, n - 1 do
@@ -284,6 +282,8 @@ function OnStart()
 --    print(real_creatures[0])
 	end
 	local disable_auto_finish = nil
+	
+	
 	for side, hero in {[0]=GetHero(0); GetHero(1)} do
 		HandleHeroesOnStart(hero, side)
 --		if GetHeroSkillMastery(hero, 61) > 0 then
@@ -291,6 +291,31 @@ function OnStart()
 --			disable_auto_finish = 1
 --		end
 	end
+
+
+	-- чародейская защита
+  for side, hero in {[0]=GetHero(0); GetHero(1)} do
+    if GetHeroSkillMastery(hero, 176) > 0 then
+      local c1 = 'temp-buff'..side
+  		local x, y = SafePos()
+  		AddCreature(side, 900, 2, x, y, 1, c1)
+  		repeat sleep() until exist(c1)
+  		displace(c1, 9, 50)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
+  		removeUnit(c1)
+
+  		repeat sleep() until not exist(c1)
+
+  		AddCreature(1-side, 900, 2, x, y, 1, c1)
+  		repeat sleep() until exist(c1)
+  		displace(c1, 9, 50)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_WEAKNESS)
+  		removeUnit(c1)
+  	end
+	end
+
+
 --	if disable_auto_finish then
 --		startThread(CombatFinishManualControl)
 --	end
@@ -298,8 +323,6 @@ function OnStart()
 	for i, unit in GetAllUnits() do
 		local atb = GetUnitInitialATB(unit)
 		init_atb[unit] = atb
-
-
 
     -- Файдаэн
 --    if IsCreature(unit) then
@@ -343,21 +366,25 @@ function OnStart()
 --    end
 
     if IsCreature(unit) then
+      local type = GetCreatureType(unit)
+
+      -- Инвиз ловчих
+      if type == 166 or type == 93 then
+        pcall(commandDoSpecial, unit, 317, pos(unit))
+      end
+    
       -- сет регалии Сар-Иссы
       if GetHeroArtSet(GetFriendlyHero(unit), 3) > 1 and GetUnitMaxManaPoints(unit) > 0 then
         SetUnitManaPoints(unit, 3 * GetUnitMaxManaPoints(unit))
 	  	end
-
     end
-    
-    
-
 	end
 	for unit, atb in init_atb do
 	  if not (IsHero(unit) and IsNamedHero(unit, 'Hero1')) then
       SetATB(unit, atb)
     end;
 	end
+	
 	combatSetPause(nil)
 	startThread(ReadyUnitThread)
 	startThread(CombatFinishManualControl)
@@ -554,56 +581,24 @@ function UnitMoveNonBlocking(unit)
 
   -- Первый ход любого существа
 	if num_turn[1] == 1 then
-	  -- чародейская защита
-	  for side, hero in {[0]=GetHero(0); GetHero(1)} do
-      if GetHeroSkillMastery(hero, 176) > 0 then
-        local c1 = 'temp-buff'..side
-    		local x, y = SafePos()
-    		AddCreature(side, 900, 1, x, y, 1, c1)
-    		repeat sleep() until exist(c1)
-    		displace(c1, 9, 50)
-    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
-    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
-    		removeUnit(c1)
-
-    		repeat sleep() until not exist(c1)
-
-    		AddCreature(1-side, 900, 1, x, y, 1, c1)
-    		repeat sleep() until exist(c1)
-    		displace(c1, 9, 50)
-    		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_WEAKNESS)
-    		removeUnit(c1)
-    	end
-  	end
-	
-	  -- ловчие
-	  for i, creature in GetCreatures(GetUnitSide(unit)) do
-      local type = GetCreatureType(creature)
-      --проверка на виверн
-      if type == 166 or type == 93 then
-        pcall(commandDoSpecial, creature, 317, pos(creature))
-      end
-    end
+   -- ЧЗ + Ловчие
 	end;
-
-
 	
+	print "unit"
+	print (unit)
+	print "num_turn[1]"
+	print (num_turn[1])
+
 	if IsHero(unit) then
     -- Перемещаем Крага после первого удара в конец АТБ
    if IsNamedHero(unit, 'Hero1') then
-
-     if not PLAYERS_KRAGH_STATUS[GetUnitSide(unit)] then
-       PLAYERS_KRAGH_STATUS[GetUnitSide(unit)] = not nil;
+     -- Если у опа ЧЗ
+     local turnNumForSkip = GetHeroSkillMastery(enemy_hero, 176) > 0 and 2 or 1;
+     
+     if num_turn[1] == turnNumForSkip then
+       WaitUntilTurnEnds(unit);
        
-       startThread(
-         function ()
-           while combatReadyPerson() == %unit do
-             sleep()
-           end
-           
-           setATB(%unit, 0);
-         end
-       );
+       setATB(unit, 0);
      end;
    end;
 		
