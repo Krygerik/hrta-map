@@ -10982,6 +10982,24 @@
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
 		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FG">
+			<AdvMapTreasure>
+				<Pos>
+					<x>67</x>
+					<y>81</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_1</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
 		<Item href="#n:inline(AdvMapTreasure)" id="item_FAE548EC-30CD-490B-AC83-D046F39388AF">
 			<AdvMapTreasure>
 				<Pos>
@@ -12615,6 +12633,24 @@
 				<CombatScript/>
 				<pointLights/>
 				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (2) (2) (2) (13).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FD">
+			<AdvMapTreasure>
+				<Pos>
+					<x>67</x>
+					<y>65</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_2</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -14258,6 +14294,24 @@
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
 		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FQ">
+			<AdvMapTreasure>
+				<Pos>
+					<x>67</x>
+					<y>49</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_4</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
 		<Item href="#n:inline(AdvMapTreasure)" id="item_92F3140B-14F2-4723-8013-26B89F01D868">
 			<AdvMapTreasure>
 				<Pos>
@@ -15896,6 +15950,24 @@
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
 		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FA">
+			<AdvMapTreasure>
+				<Pos>
+					<x>67</x>
+					<y>33</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_3</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
 		<Item href="#n:inline(AdvMapTreasure)" id="item_4014A0E7-3FFC-4E1D-A45F-8D85EA4C14B6">
 			<AdvMapTreasure>
 				<Pos>
@@ -17367,6 +17439,24 @@
 				<CombatScript/>
 				<pointLights/>
 				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (2) (2) (2) (13).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FW">
+			<AdvMapTreasure>
+				<Pos>
+					<x>50</x>
+					<y>67</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_5</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -20504,6 +20594,24 @@
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
 		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FP">
+			<AdvMapTreasure>
+				<Pos>
+					<x>50</x>
+					<y>51</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_6</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
 		<Item href="#n:inline(AdvMapTreasure)" id="item_13B50292-C465-4C1F-A09A-6E4942A5F6F4">
 			<AdvMapTreasure>
 				<Pos>
@@ -20576,6 +20684,24 @@
 				<MessageFileRef href=""/>
 			</AdvMapTreasure>
 		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FE">
+			<AdvMapTreasure>
+				<Pos>
+					<x>50</x>
+					<y>35</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_7</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
 		<Item href="#n:inline(AdvMapTreasure)" id="item_5E1051AC-BB8A-459B-8C6E-568CA0510BDD">
 			<AdvMapTreasure>
 				<Pos>
@@ -20589,6 +20715,24 @@
 				<CombatScript/>
 				<pointLights/>
 				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (2) (2) (2) (13).xdb#xpointer(/AdvMapTreasureShared)"/>
+				<IsCustom>false</IsCustom>
+				<Amount>0</Amount>
+				<MessageFileRef href=""/>
+			</AdvMapTreasure>
+		</Item>
+		<Item href="#n:inline(AdvMapTreasure)" id="item_EACAA1BE-604E-4944-97EB-13ED8F7BB5FU">
+			<AdvMapTreasure>
+				<Pos>
+					<x>50</x>
+					<y>19</y>
+					<z>0</z>
+				</Pos>
+				<Rot>0</Rot>
+				<Floor>1</Floor>
+				<Name>hero_14_1_8</Name>
+				<CombatScript/>
+				<pointLights/>
+				<Shared href="/MapObjects/Gold.(AdvMapTreasureShared) (alaric).xdb#xpointer(/AdvMapTreasureShared)"/>
 				<IsCustom>false</IsCustom>
 				<Amount>0</Amount>
 				<MessageFileRef href=""/>
@@ -48161,6 +48305,64 @@
 						<BannedRaces/>
 					</AdvMapHero>
 				</Item>
+				<Item href="#n:inline(AdvMapHero)" id="item_D5DCF485-81CF-40FE-B28E-26E243BE6636">
+					<AdvMapHero>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Rot>0</Rot>
+						<Floor>0</Floor>
+						<Name/>
+						<CombatScript/>
+						<pointLights/>
+						<Shared href="/MapObjects/Haven/Alaric.(AdvMapHeroShared).xdb#xpointer(/AdvMapHeroShared)"/>
+						<PlayerID>PLAYER_1</PlayerID>
+						<Experience>1</Experience>
+						<armySlots>
+							<Item>
+								<Creature>CREATURE_AIR_ELEMENTAL</Creature>
+								<Count>1</Count>
+							</Item>
+						</armySlots>
+						<artifactIDs/>
+						<isUntransferable/>
+						<Editable>
+							<NameFileRef href=""/>
+							<BiographyFileRef href=""/>
+							<Offence>0</Offence>
+							<Defence>0</Defence>
+							<Spellpower>0</Spellpower>
+							<Knowledge>0</Knowledge>
+							<skills/>
+							<perkIDs/>
+							<spellIDs/>
+							<Ballista>false</Ballista>
+							<FirstAidTent>false</FirstAidTent>
+							<AmmoCart>false</AmmoCart>
+							<FavoriteEnemies/>
+							<TalismanLevel>0</TalismanLevel>
+						</Editable>
+						<OverrideMask>0</OverrideMask>
+						<PrimarySkillMastery>MASTERY_NONE</PrimarySkillMastery>
+						<LossTrigger>
+							<Action>
+								<FunctionName/>
+							</Action>
+						</LossTrigger>
+						<AllowQuickCombat>true</AllowQuickCombat>
+						<Textures>
+							<Icon128x128/>
+							<Icon64x64/>
+							<RoundedFace/>
+							<LeftFace/>
+							<RightFace/>
+						</Textures>
+						<PresetPrice>0</PresetPrice>
+						<BannedRaces/>
+					</AdvMapHero>
+				</Item>
 				<Item href="#n:inline(AdvMapHero)" id="item_3B3CF3E5-A75F-4231-9423-E7CDC8EC3ACD">
 					<AdvMapHero>
 						<Pos>
@@ -59510,6 +59712,64 @@
 						<BannedRaces/>
 					</AdvMapHero>
 				</Item>
+				<Item href="#n:inline(AdvMapHero)" id="item_D5DCF485-81CF-40FE-B28E-26E243BE6637">
+					<AdvMapHero>
+						<Pos>
+							<x>0</x>
+							<y>0</y>
+							<z>0</z>
+						</Pos>
+						<Rot>0</Rot>
+						<Floor>0</Floor>
+						<Name/>
+						<CombatScript/>
+						<pointLights/>
+						<Shared href="/MapObjects/Haven/Alaric.(AdvMapHeroShared) (2).xdb#xpointer(/AdvMapHeroShared)"/>
+						<PlayerID>PLAYER_2</PlayerID>
+						<Experience>1</Experience>
+						<armySlots>
+							<Item>
+								<Creature>CREATURE_AIR_ELEMENTAL</Creature>
+								<Count>1</Count>
+							</Item>
+						</armySlots>
+						<artifactIDs/>
+						<isUntransferable/>
+						<Editable>
+							<NameFileRef href=""/>
+							<BiographyFileRef href=""/>
+							<Offence>0</Offence>
+							<Defence>0</Defence>
+							<Spellpower>0</Spellpower>
+							<Knowledge>0</Knowledge>
+							<skills/>
+							<perkIDs/>
+							<spellIDs/>
+							<Ballista>false</Ballista>
+							<FirstAidTent>false</FirstAidTent>
+							<AmmoCart>false</AmmoCart>
+							<FavoriteEnemies/>
+							<TalismanLevel>0</TalismanLevel>
+						</Editable>
+						<OverrideMask>0</OverrideMask>
+						<PrimarySkillMastery>MASTERY_NONE</PrimarySkillMastery>
+						<LossTrigger>
+							<Action>
+								<FunctionName/>
+							</Action>
+						</LossTrigger>
+						<AllowQuickCombat>true</AllowQuickCombat>
+						<Textures>
+							<Icon128x128/>
+							<Icon64x64/>
+							<RoundedFace/>
+							<LeftFace/>
+							<RightFace/>
+						</Textures>
+						<PresetPrice>0</PresetPrice>
+						<BannedRaces/>
+					</AdvMapHero>
+				</Item>
 				<Item href="#n:inline(AdvMapHero)" id="item_F70454BB-E512-43A0-8E76-CAE031B4629E">
 					<AdvMapHero>
 						<Pos>
@@ -70131,6 +70391,8 @@
 		<Item href="/MapObjects/Haven/Sarge.(AdvMapHeroShared) (2).xdb#xpointer(/AdvMapHeroShared)"/>
 		<Item href="/MapObjects/Haven/Ving.(AdvMapHeroShared).xdb#xpointer(/AdvMapHeroShared)"/>
 		<Item href="/MapObjects/Haven/Ving.(AdvMapHeroShared) (2).xdb#xpointer(/AdvMapHeroShared)"/>
+		<Item href="/MapObjects/Haven/Alaric.(AdvMapHeroShared).xdb#xpointer(/AdvMapHeroShared)"/>
+		<Item href="/MapObjects/Haven/Alaric.(AdvMapHeroShared) (2).xdb#xpointer(/AdvMapHeroShared)"/>
 		<Item href="/MapObjects/Inferno/Agrael.(AdvMapHeroShared).xdb#xpointer(/AdvMapHeroShared)"/>
 		<Item href="/MapObjects/Inferno/Agrael.(AdvMapHeroShared) (2).xdb#xpointer(/AdvMapHeroShared)"/>
 		<Item href="/MapObjects/Inferno/Calid.(AdvMapHeroShared).xdb#xpointer(/AdvMapHeroShared)"/>

@@ -30,14 +30,13 @@
 			<average>
 				<OldArena/>
 				<newArenas>
-					<Item href="/Scenes/CombatArenas/Grass_Big_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Grass_Big_02.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Grass_Small_02.xdb#xpointer(/AdventureFlybyScene)"/>
-					<Item href="/Scenes/CombatArenas/Grass_Small_03.xdb#xpointer(/AdventureFlybyScene)"/>						
-					<Item href="/Scenes/CombatArenas/Beach_Grass_Big_01.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/Grass_Small_03.xdb#xpointer(/AdventureFlybyScene)"/>	
 					<Item href="/Scenes/CombatArenas/Beach_Grass_Small_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Beach_Grass_Small_02.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/persona_grass_farm.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/muokaarena15_grass_fallenbridge.xdb#xpointer(/AdventureFlybyScene)"/>
 				</newArenas>
 				<waterArenas>
 				</waterArenas>
@@ -54,9 +53,10 @@
 				<OldArena/>
 				<newArenas>							
 					<Item href="/Scenes/CombatArenas/Sand_Big_02.xdb#xpointer(/AdventureFlybyScene)"/>
-					<Item href="/Scenes/CombatArenas/Beach_Sand_Big_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Beach_Sand_Small_01.xdb#xpointer(/AdventureFlybyScene)"/>
-					<Item href="/Scenes/CombatArenas/muokaarena4_sand_career.xdb#xpointer(/AdventureFlybyScene)"/>			
+					<Item href="/Scenes/CombatArenas/muokaarena4_sand_career.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/persona_sand_island.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/muokaarena12_sand_village.xdb#xpointer(/AdventureFlybyScene)"/>			
 				</newArenas>
 				<waterArenas>					
 				</waterArenas>
@@ -75,6 +75,8 @@
 					<Item href="/Scenes/CombatArenas/River_Snow_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Beach_Snow_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/muokaarena2_snow_river.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/muokaarena14_snow_christmastree.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/persona_snow_whatliesinthesnow.xdb#xpointer(/AdventureFlybyScene)"/>
 				</newArenas>
 				<waterArenas>					
 				</waterArenas>
@@ -94,6 +96,7 @@
 					<Item href="/Scenes/CombatArenas/Lava_Small_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/River_Lava_Small_01.xdb#xpointer(/AdventureFlybyScene)"/>
 					<Item href="/Scenes/CombatArenas/Beach_Lava_Small_01.xdb#xpointer(/AdventureFlybyScene)"/>
+					<Item href="/Scenes/CombatArenas/muokaarena13_inferno_gate.xdb#xpointer(/AdventureFlybyScene)"/>
 				</newArenas>
 				<waterArenas>
 				</waterArenas>

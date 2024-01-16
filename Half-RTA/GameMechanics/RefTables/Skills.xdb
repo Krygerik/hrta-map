@@ -6028,48 +6028,6 @@
 				<spellBuffs/>
 				<BasicSkillID>HERO_SKILL_SUMMONING_MAGIC</BasicSkillID>
 				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_KNIGHT</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_DEMON_LORD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RANGER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_NECROMANCER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WIZARD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WARLOCK</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RUNEMAGE</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
-						</dependenciesIDs>
-					</Item>
 				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
@@ -6607,12 +6565,14 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
+							<Item>HERO_SKILL_FRENZY</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_POWERFULL_BLOW</Item>
+							<Item>HERO_SKILL_FRENZY</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -6731,8 +6691,8 @@
 			<ID>HERO_SKILL_EXPLODING_CORPSES</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses_grey.xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Demon_Lord/Demonic_ExplodingCorpses.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Necromancer/SummoningMagic_HauntMine_grey2.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Necromancer/SummoningMagic_HauntMine2.(Texture).xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
@@ -6744,10 +6704,17 @@
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NONE</HeroClass>
+				<HeroClass>HERO_CLASS_NECROMANCER</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_SUMMONING_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_NECROMANCER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_ANIMATION</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -6770,9 +6737,9 @@
 						<FreelancerValue>0</FreelancerValue>
 					</Dungeon>
 					<Necropolis>
-						<CommanderValue>0</CommanderValue>
-						<CollectorSupplierValue>0</CollectorSupplierValue>
-						<FreelancerValue>0</FreelancerValue>
+						<CommanderValue>3000</CommanderValue>
+						<CollectorSupplierValue>4000</CollectorSupplierValue>
+						<FreelancerValue>4000</FreelancerValue>
 					</Necropolis>
 					<Inferno>
 						<CommanderValue>0</CommanderValue>
@@ -7327,25 +7294,7 @@
 				<BasicSkillID>HERO_SKILL_WAR_MACHINES</BasicSkillID>
 				<SkillPrerequisites>
 					<Item>
-						<Class>HERO_CLASS_DEMON_LORD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_FIRST_AID</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_FIRST_AID</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WARLOCK</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_FIRST_AID</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_BARBARIAN</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_FIRST_AID</Item>
 						</dependenciesIDs>
@@ -8545,8 +8494,8 @@
 			<ID>HERO_SKILL_CUNNING_OF_THE_WOODS</ID>
 			<obj>
 				<Texture>
-					<Item href="/Textures/HeroScreen/Feats/Ranger/Learning_CunningTheWoods_grey.(Texture).xdb#xpointer(/Texture)"/>
-					<Item href="/Textures/HeroScreen/Feats/Ranger/Learning_CunningTheWood.(Texture).xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/SummoningMagic_ElementalBalance_grey.xdb#xpointer(/Texture)"/>
+					<Item href="/Textures/HeroScreen/Feats/Knight/SummoningMagic_ElementalBalance.xdb#xpointer(/Texture)"/>
 				</Texture>
 				<CommonTexture/>
 				<NameFileRef>
@@ -8560,8 +8509,51 @@
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_SUMMONING_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_KNIGHT</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_DEMON_LORD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RANGER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_NECROMANCER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WIZARD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WARLOCK</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RUNEMAGE</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_MASTER_OF_CREATURES</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -8705,6 +8697,7 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_LUCKY_STRIKE</Item>
+							<Item>HERO_SKILL_MULTISHOT</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -9636,7 +9629,6 @@
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_CATAPULT</Item>
-							<Item>HERO_SKILL_MAGIC_BOND</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -11761,6 +11753,7 @@
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MASTER_OF_WRATH</Item>
+							<Item>HERO_SKILL_IMBUE_ARROW</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

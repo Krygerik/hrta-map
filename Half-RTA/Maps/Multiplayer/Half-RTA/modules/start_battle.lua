@@ -446,7 +446,7 @@ function perkDiplomacy(playerId)
   stash[1], stash[2], stash[3], stash[4], stash[5], stash[6], stash[7] = GetHeroCreaturesTypes(mainHeroName);
   
   local dictHeroName = getDictionaryHeroName(mainHeroName);
-  if dictHeroName == HEROES.ROLF then
+  if dictHeroName == 'oldRolf' then
     for currentLvl = 5, 7 do
       local giveCreature = nil;
       
@@ -543,6 +543,48 @@ function perkFeatMarchOfTheMachines(heroName)
   end;
 end;
 
+
+-- Власть над машинами
+function perkFeatRemoveControl(heroName)
+  print "perkFeatRemoveControl"
+
+  local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+  local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
+  local raceId = RESULT_HERO_LIST[playerId].raceId;
+
+  local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+
+  local warMachinesTable = {};
+  
+  --проверка на наличия боевых машин
+  for machineId = 1, 4 do
+    if HasHeroWarMachine(opponentHeroName, machineId) and machineId ~= 2 then
+      warMachinesTable[length(warMachinesTable) + 1] = machineId;
+    end;
+    
+    --выдача балисты
+    if length(warMachinesTable) == 0 then
+      GiveHeroWarMachine(opponentHeroName, 1);
+    end;
+    
+  end;
+
+end;
+
+-- Обитаемые шахты
+function perkMineDeath(heroName)
+  print "perkMineDeath"
+  local BONUS_VALUE = 5;
+  local ghostNum = GetHeroCreatures(heroName,  CREATURE_GHOST) + GetHeroCreatures(heroName, CREATURE_POLTERGEIST)
+
+    ChangeHeroStat(heroName, STAT_KNOWLEDGE, 50);
+    ChangeHeroStat(heroName, STAT_MANA_POINTS, (ghostNum/BONUS_VALUE));
+    ChangeHeroStat(heroName, STAT_KNOWLEDGE, -50);
+
+end;
+
 -- Вечное рабство
 function perkNoRestForTheWicked(heroName)
   print "perkNoRestForTheWicked"
@@ -562,7 +604,10 @@ function checkAndRunHeroPerks(playerId)
   print "checkAndRunHeroPerks"
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-
+  local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+  local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+  
+  
   -- Менторство
   if HasHeroSkill(mainHeroName, HERO_SKILL_MENTORING) then
     skillMentoring(mainHeroName);
@@ -591,6 +636,11 @@ function checkAndRunHeroPerks(playerId)
   -- Преданность машин (выдача големов)
   if HasHeroSkill(mainHeroName, WIZARD_FEAT_ARTIFICIAL_GLORY) then
     perkFeatMarchOfTheMachines(mainHeroName);
+  end;
+  
+  -- Власть над машинами
+  if HasHeroSkill(mainHeroName, WIZARD_FEAT_REMOTE_CONTROL) then
+    perkFeatRemoveControl(mainHeroName);
   end;
   
   -- Лесной лидер
@@ -634,8 +684,6 @@ function checkAndRunHeroPerks(playerId)
 
   -- мародерство
   if HasHeroSkill(mainHeroName, HERO_SKILL_SNATCH) then
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
-    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
     GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_SPEED, -1);
   end;
@@ -644,6 +692,11 @@ function checkAndRunHeroPerks(playerId)
   if HasHeroSkill(mainHeroName, KNIGHT_FEAT_ROAD_HOME) then
     GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_SPEED, 1);
   end;
+  
+  -- смертельная неудача
+  if HasHeroSkill(mainHeroName, NECROMANCER_FEAT_DEAD_LUCK) then
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -1);
+  end;
 
   -- сила против магии
   if HasHeroSkill(mainHeroName, HERO_SKILL_MIGHT_OVER_MAGIC) then
@@ -651,12 +704,10 @@ function checkAndRunHeroPerks(playerId)
       ChangeHeroStat(mainHeroName, STAT_SPELL_POWER, 1);
     end;
   end;
-
-  -- лесное коварство
-  if HasHeroSkill(mainHeroName, RANGER_FEAT_CUNNING_OF_THE_WOODS) then
-    local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
-
-    UpgradeTownBuilding(townName, TOWN_BUILDING_PRESERVE_AVENGERS_BROTHERHOOD);
+  
+    -- Обитаемые шахты
+  if HasHeroSkill(mainHeroName, DEMON_FEAT_EXPLODING_CORPSES) then
+    perkMineDeath(mainHeroName);
   end;
 
   -- чувство стихий
@@ -670,22 +721,24 @@ function checkAndRunHeroPerks(playerId)
   local raceId = RESULT_HERO_LIST[playerId].raceId;
   local leadershipLevel = GetHeroSkillMastery(mainHeroName, SKILL_LEADERSHIP);
 
+
   -- некролидерство
-  if raceId == RACES.NECROPOLIS and leadershipLevel > 0 then
-    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
-    local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
-    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
-
-    local opponentLeadershipLevel = GetHeroSkillMastery(opponentHeroName, SKILL_LEADERSHIP);
-
-    if opponentLeadershipLevel > 0 and leadershipLevel >= opponentLeadershipLevel then
-      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - opponentLeadershipLevel);
-    end;
-
-    if opponentLeadershipLevel > 0 and leadershipLevel < opponentLeadershipLevel then
-      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - leadershipLevel);
-    end;
-  end;
+--  if raceId == RACES.NECROPOLIS and leadershipLevel > 0 then
+--    local opponentPlayerId = PLAYERS_OPPONENT[playerId];
+--    local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
+--    local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
+--
+--    local opponentLeadershipLevel = GetHeroSkillMastery(opponentHeroName, SKILL_LEADERSHIP);
+--
+--    if opponentLeadershipLevel > 0 and leadershipLevel >= opponentLeadershipLevel then
+--      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - opponentLeadershipLevel);
+--    end;
+--
+--    if opponentLeadershipLevel > 0 and leadershipLevel < opponentLeadershipLevel then
+--      GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, 0 - leadershipLevel);
+--    end;
+--  end;
+  
 
   -- управление машинами
   if GetHeroSkillMastery(mainHeroName, SKILL_WAR_MACHINES) > 0 then
@@ -708,25 +761,25 @@ function checkAndRunHeroPerks(playerId)
 --  end;
 
   -- солдатская удача
-  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
-    local MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE = {
-      [CREATURE_SUCCUBUS_SEDUCER] = CREATURE_IMP,
-      [CREATURE_DEVIL] = CREATURE_FRIGHTFUL_NIGHTMARE,
-      [CREATURE_POLTERGEIST] = CREATURE_SKELETON_ARCHER,
-      [CREATURE_DRYAD] = CREATURE_SPRITE,
-      [CREATURE_SHADOW_MISTRESS] = CREATURE_BLACK_DRAGON,
-      [CREATURE_THANE] = CREATURE_WARLORD,
-      [CREATURE_THUNDER_THANE] = CREATURE_AXE_THROWER,
-      [CREATURE_ANGEL] = CREATURE_ARCHANGEL,
-      [CREATURE_GOBLIN_TRAPPER] = CREATURE_MASTER_GENIE,
-      [CREATURE_STORM_LORD] = CREATURE_ARCH_MAGI,
-    };
-
-    for unitId, unitWithLucky in MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE do
-      replaceUnitInHero(mainHeroName, unitId, unitWithLucky);
-    end;
-  end;
-
+--  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
+--    local MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE = {
+--      [CREATURE_SUCCUBUS_SEDUCER] = CREATURE_IMP,
+--      [CREATURE_DEVIL] = CREATURE_FRIGHTFUL_NIGHTMARE,
+--      [CREATURE_POLTERGEIST] = CREATURE_SKELETON_ARCHER,
+--      [CREATURE_DRYAD] = CREATURE_SPRITE,
+--      [CREATURE_SHADOW_MISTRESS] = CREATURE_BLACK_DRAGON,
+--      [CREATURE_THANE] = CREATURE_WARLORD,
+--      [CREATURE_THUNDER_THANE] = CREATURE_AXE_THROWER,
+--      [CREATURE_ANGEL] = CREATURE_ARCHANGEL,
+--      [CREATURE_GOBLIN_TRAPPER] = CREATURE_MASTER_GENIE,
+--      [CREATURE_STORM_LORD] = CREATURE_ARCH_MAGI,
+--    };
+--
+--    for unitId, unitWithLucky in MAP_UNIT_ON_UNIT_WITH_LUCKY_STRIKE do
+--      replaceUnitInHero(mainHeroName, unitId, unitWithLucky);
+--    end;
+--  end;
+  
   -- Заклинания за "Бесшумный преследователь"
   if HasHeroSkill(mainHeroName, RANGER_FEAT_DISGUISE_AND_RECKON) then
     if raceId == RACES.STRONGHOLD then
@@ -870,8 +923,8 @@ function vaishanSpec(heroName)
   end;
 end;
 
--- Специализация Нархиза
-function narhizSpec(heroName)
+-- Старая Специализация Нархиза (удалена)
+function narhizSpecOld(heroName)
   print "narhizSpec"
 
   local NARHIZ_BY_LVL_COEF = 0.34;
@@ -984,11 +1037,6 @@ function runHeroSpecialization(playerId)
     vaishanSpec(mainHeroName);
   end;
   
-  -- Нархиз
-  if dictHeroName == HEROES.NARHIZ then
-    narhizSpec(mainHeroName);
-  end;
-  
   -- Эрин
   if dictHeroName == HEROES.ERUINA then
     eruinaSpec(mainHeroName);
@@ -1023,6 +1071,18 @@ function runHeroSpecialization(playerId)
       replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
     end;
   end;
+  
+  -- Дункан
+  if dictHeroName == HEROES.DUNCAN then
+    local MAP_REPLACE_UNIT = {
+      [3] = 4,
+      [107] = 4,
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
 
 
   -- Соргал
@@ -1048,6 +1108,18 @@ function runHeroSpecialization(playerId)
       replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
     end;
   end;
+  
+    -- Аларик
+  if dictHeroName == HEROES.ALARIC then
+    local MAP_REPLACE_UNIT = {
+      [9] = CREATURE_OBSIDIAN_GARGOYLE,
+      [110] = CREATURE_ARCH_MAGI,
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+  end;
 
   -- Грок
   if dictHeroName == HEROES.GROK then
@@ -1056,7 +1128,7 @@ function runHeroSpecialization(playerId)
 
   -- Марбас
   if dictHeroName == HEROES.MARDER then
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.4 * GetHeroLevel(mainHeroName)));
+    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_HITPOINTS, round(0.35 * GetHeroLevel(mainHeroName)));
   end;
 
   -- Куджин
@@ -1208,7 +1280,7 @@ function runScriptingArtifacts(playerId)
   if HasArtefact(mainHeroName, 70, 1) then
     local artCount = GetHeroArtifactsCount(mainHeroName, 70, 1);
 
-    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -artCount);
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -(artCount*3));
   end;
 
   -- Сет гномов
@@ -1265,7 +1337,7 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.27i',
+    ["MapVersion"] = '1.28b',
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

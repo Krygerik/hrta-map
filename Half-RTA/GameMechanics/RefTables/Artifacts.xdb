@@ -835,7 +835,7 @@
 				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>SHOULDERS</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Cloak_of_Mourning.xdb#xpointer(/Texture)"/>
-				<CostOfGold>18000</CostOfGold>
+				<CostOfGold>16000</CostOfGold>
 				<AIValue>1300</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -1590,7 +1590,7 @@
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
 					<Attack>0</Attack>
-					<Defence>0</Defence>
+					<Defence>1</Defence>
 					<Knowledge>0</Knowledge>
 					<SpellPower>0</SpellPower>
 					<Morale>0</Morale>

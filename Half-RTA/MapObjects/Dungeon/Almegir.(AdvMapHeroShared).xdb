@@ -58,7 +58,7 @@
 			<Item>HERO_SKILL_ELEMENTAL_VISION</Item>
 		</perkIDs>
 		<spellIDs>
-			<Item>SPELL_CURSE</Item>
+			<Item>SPELL_WEAKNESS</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

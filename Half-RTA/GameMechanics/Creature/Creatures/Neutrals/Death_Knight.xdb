@@ -46,6 +46,5 @@
 	<Abilities>
 		<Item>ABILITY_UNDEAD</Item>
 		<Item>ABILITY_CURSING_ATTACK</Item>
-		<Item>ABILITY_DEADLY_STRIKE</Item>
 	</Abilities>
 </Creature>

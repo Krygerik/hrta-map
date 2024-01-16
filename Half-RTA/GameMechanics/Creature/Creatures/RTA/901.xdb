@@ -30,6 +30,10 @@
 			<Spell>SPELL_BLADE_BARRIER</Spell>
 			<Mastery>MASTERY_EXPERT</Mastery>
 		</Item>
+		<Item>
+			<Spell>SPELL_BLADE_BARRIER</Spell>
+			<Mastery>SPELL_SUMMON_ELEMENTALS</Mastery>
+		</Item>
 	</KnownSpells>
 	<SpellPoints>999</SpellPoints>
 	<SpellPoints1>999</SpellPoints1>

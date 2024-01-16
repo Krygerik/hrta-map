@@ -258,7 +258,9 @@ function prepareForChoiceEnemy(playerId)
           end
         end;
 
-        AddObjectCreatures(avengerCaravan, avengerCreature.id, avengerCreature.kol);
+        if avengerCreature ~= nil then
+          AddObjectCreatures(avengerCaravan, avengerCreature.id, avengerCreature.kol);
+        end;
       end;
     end;
   end;
@@ -797,11 +799,11 @@ function replaceCommonUnitOnSpecial(playerId)
     replaceUnitInHero(mainHeroName, CREATURE_GENIE, CREATURE_RAKSHASA_RUKH);
     replaceUnitInHero(mainHeroName, CREATURE_DJINN_VIZIER, CREATURE_TITAN);
   end;
-
-  -- солдатская удача
-  if HasHeroSkill(mainHeroName, PERK_LUCKY_STRIKE) then
-    replaceUnitInHero(mainHeroName, CREATURE_GREMLIN, CREATURE_OBSIDIAN_GARGOYLE);
-    replaceUnitInHero(mainHeroName, CREATURE_STORM_LORD, CREATURE_ARCH_MAGI);
+  
+  -- Нархиз
+  if dictHeroName == HEROES.NARHIZ then
+    replaceUnitInHero(mainHeroName, CREATURE_MAGI, 907);
+    replaceUnitInHero(mainHeroName, CREATURE_COMBAT_MAGE, 908);
   end;
 
   -- фикс бага с грифонами (Когда приземляется за поле боя)

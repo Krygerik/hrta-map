@@ -458,10 +458,10 @@ MAP_STATS_ON_MINIMUM = {
 SELL_STAT_PRICE = 2500;
 
 -- Скидка на покупку уровней для Винраэля
-ELLESHAR_DISCOUNT = 2000;
+ELLESHAR_DISCOUNT = 2200;
 
 -- Количество возвращаемого золота за покупку крестьян для Эллайны
-ELLAINA_DISCOUNT = 10;
+ELLAINA_DISCOUNT = 12;
 
 -- Соотношение уровня владения рунами на разрешенные уровни рун
 MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS = {

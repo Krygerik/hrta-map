@@ -71,7 +71,7 @@
 	<RaceTraitIcon/>
 	<RaceTraitDescFileRef href=""/>
 	<ScenarioHero>false</ScenarioHero>
-	<AdventureMusic/>
+	<AdventureMusic href="/Sounds/_(Music)/AdvMap-Heroes/a1-Freyda.xdb#xpointer(/Music)"/>
 	<HideInEditor>false</HideInEditor>
 	<PresetMinimalAttributes>
 		<Offence>2</Offence>

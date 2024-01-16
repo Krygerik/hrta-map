@@ -137,7 +137,7 @@ HEROES_BY_RACE = {
 	  { name = "Orrin",           txt = "haven/heroDugal.txt",    dsc = "/Text/Game/Heroes/Specializations/Haven/Archer_Commander/Description.txt",   [PLAYER_1] = {{ red_icon = "hero_1_1_1", blue_icon = "hero_1_1_2" },   { red_icon = "hero_1_1_5", blue_icon = "hero_1_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_1_1_3", blue_icon = "hero_1_1_4" },   { red_icon = "hero_1_1_7", blue_icon = "hero_1_1_8" }} },
 	  { name = "Sarge",           txt = "haven/heroAksel.txt",    dsc = "/Text/Game/Heroes/Specializations/Haven/Jouster/Description.txt",            [PLAYER_1] = {{ red_icon = "hero_2_1_1", blue_icon = "hero_2_1_2" },   { red_icon = "hero_2_1_5", blue_icon = "hero_2_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_2_1_3", blue_icon = "hero_2_1_4" },   { red_icon = "hero_2_1_7", blue_icon = "hero_2_1_8" }} },
 	  { name = "Mardigo",         txt = "haven/heroLaslo.txt",    dsc = "/Text/Game/Heroes/Specializations/Haven/Infantry_Commander/Description.txt", [PLAYER_1] = {{ red_icon = "hero_3_1_1", blue_icon = "hero_3_1_2" },   { red_icon = "hero_3_1_5", blue_icon = "hero_3_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_3_1_3", blue_icon = "hero_3_1_4" },   { red_icon = "hero_3_1_7", blue_icon = "hero_3_1_8" }} },
-	  { name = "Brem",            txt = "haven/heroRutger.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/Wanderer/Description.txt",           [PLAYER_1] = {{ red_icon = "hero_4_1_1", blue_icon = "hero_4_1_2" },   { red_icon = "hero_4_1_5", blue_icon = "hero_4_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_4_1_3", blue_icon = "hero_4_1_4" },   { red_icon = "hero_4_1_7", blue_icon = "hero_4_1_8" }} },
+--	  { name = "Brem",            txt = "haven/heroRutger.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/Wanderer/Description.txt",           [PLAYER_1] = {{ red_icon = "hero_4_1_1", blue_icon = "hero_4_1_2" },   { red_icon = "hero_4_1_5", blue_icon = "hero_4_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_4_1_3", blue_icon = "hero_4_1_4" },   { red_icon = "hero_4_1_7", blue_icon = "hero_4_1_8" }} },
 	  { name = "Maeve",           txt = "haven/heroMiv.txt",      dsc = "/Text/Game/Heroes/Specializations/Haven/Expediter/Description.txt",          [PLAYER_1] = {{ red_icon = "hero_5_1_1", blue_icon = "hero_5_1_2" },   { red_icon = "hero_5_1_5", blue_icon = "hero_5_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_5_1_3", blue_icon = "hero_5_1_4" },   { red_icon = "hero_5_1_7", blue_icon = "hero_5_1_8" }} },
 	  { name = "Ving",            txt = "haven/heroAiris.txt",    dsc = "/Text/Game/Heroes/Specializations/Haven/Griffon_Commander/Description.txt",  [PLAYER_1] = {{ red_icon = "hero_6_1_1", blue_icon = "hero_6_1_2" },   { red_icon = "hero_6_1_5", blue_icon = "hero_6_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_6_1_3", blue_icon = "hero_6_1_4" },   { red_icon = "hero_6_1_7", blue_icon = "hero_6_1_8" }} },
 	  { name = "Nathaniel",       txt = "haven/heroEllaina.txt",  dsc = "/Text/Game/Heroes/Specializations/Haven/Squire/Description.txt",             [PLAYER_1] = {{ red_icon = "hero_7_1_1", blue_icon = "hero_7_1_2" },   { red_icon = "hero_7_1_5", blue_icon = "hero_7_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_7_1_3", blue_icon = "hero_7_1_4" },   { red_icon = "hero_7_1_7", blue_icon = "hero_7_1_8" }} },
@@ -145,8 +145,11 @@ HEROES_BY_RACE = {
 	  { name = "Godric",          txt = "haven/heroGodric.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/White_Knight/Description.txt",       [PLAYER_1] = {{ red_icon = "hero_9_1_1", blue_icon = "hero_9_1_2" },   { red_icon = "hero_9_1_5", blue_icon = "hero_9_1_6" }},            [PLAYER_2] = {{ red_icon = "hero_9_1_3", blue_icon = "hero_9_1_4" },   { red_icon = "hero_9_1_7", blue_icon = "hero_9_1_8" }} },
     { name = "RedHeavenHero03", txt = "haven/heroValeria.txt",  dsc = "/Text/Game/Heroes/Specializations/Haven/SpecValeria/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_13_1_1", blue_icon = "hero_13_1_2" }, { red_icon = "hero_13_1_5", blue_icon = "hero_13_1_6" }},          [PLAYER_2] = {{ red_icon = "hero_13_1_3", blue_icon = "hero_13_1_4" }, { red_icon = "hero_13_1_7", blue_icon = "hero_13_1_8" }} },
 --	  { name = "Isabell_A1",      txt = "haven/heroIsabel.txt",   p1 = "hero_11_1_1", p2 = "hero_11_1_2", p3 = "hero_11_1_3", p4 = "hero_11_1_4", dsc = "/Text/Game/Heroes/Specializations/Haven/Archer_Commander/Description.txt"},
---	  { name = "Duncan",          txt = "haven/heroDuncan.txt",   p1 = "hero_12_1_1", p2 = "hero_12_1_2", p3 = "hero_12_1_3", p4 = "hero_12_1_4", dsc = "/Text/Game/Heroes/Specializations/Haven/Archer_Commander/Description.txt"},
+    { name = "Alaric",          txt = "haven/heroAlarik.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/SpecAlarik/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_11_1_1", blue_icon = "hero_11_1_2" }, { red_icon = "hero_11_1_5", blue_icon = "hero_11_1_6" }},          [PLAYER_2] = {{ red_icon = "hero_11_1_3", blue_icon = "hero_11_1_4" }, { red_icon = "hero_11_1_7", blue_icon = "hero_11_1_8" }} },
+--    { name = "Duncan",          txt = "haven/heroDuncan.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/SpecValeria/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_12_1_1", blue_icon = "hero_12_1_2" }, { red_icon = "hero_12_1_5", blue_icon = "hero_12_1_6" }},          [PLAYER_2] = {{ red_icon = "hero_12_1_3", blue_icon = "hero_12_1_4" }, { red_icon = "hero_12_1_7", blue_icon = "hero_12_1_8" }} },
 --    { name = "Nicolai",         txt = "haven/heroNicolai.txt",  p1 = "hero_10_1_1", p2 = "hero_10_1_2", p3 = "hero_10_1_3", p4 = "hero_10_1_4", dsc = "/Text/Game/Heroes/Specializations/Haven/Archer_Commander/Description.txt"}
+--    { name = "Alaric",          txt = "haven/heroAlarik.txt",   dsc = "/Text/Game/Heroes/Specializations/Haven/SpecAlarik/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_14_1_1", blue_icon = "hero_14_1_2" }, { red_icon = "hero_14_1_5", blue_icon = "hero_14_1_6" }},          [PLAYER_2] = {{ red_icon = "hero_14_1_3", blue_icon = "hero_14_1_4" }, { red_icon = "hero_14_1_7", blue_icon = "hero_14_1_8" }} },
+
   },
   [RACES.INFERNO] = {
 	  { name = "Grok",        txt = "inferno/heroGrok.txt",       dsc = "/Text/Game/Heroes/Specializations/Inferno/Beater/Description.txt",                [PLAYER_1] = {{ red_icon = "hero_1_2_1", blue_icon = "hero_1_2_2" },   { red_icon = "hero_1_2_5", blue_icon = "hero_1_2_6" }},            [PLAYER_2] = {{ red_icon = "hero_1_2_3", blue_icon = "hero_1_2_4" },   { red_icon = "hero_1_2_7", blue_icon = "hero_1_2_8" }} },
@@ -159,7 +162,7 @@ HEROES_BY_RACE = {
 	  { name = "Nymus",       txt = "inferno/heroNimus.txt",      dsc = "/Text/Game/Heroes/Specializations/Inferno/Gate_Keeper/Description.txt",           [PLAYER_1] = {{ red_icon = "hero_8_2_1", blue_icon = "hero_8_2_2" },   { red_icon = "hero_8_2_5", blue_icon = "hero_8_2_6" }},            [PLAYER_2] = {{ red_icon = "hero_8_2_3", blue_icon = "hero_8_2_4" },   { red_icon = "hero_8_2_7", blue_icon = "hero_8_2_8" }} },
 	  { name = "Orlando",     txt = "inferno/heroOrlando.txt",    dsc = "/Text/Game/Heroes/Specializations/Inferno/SpecOrlando/Description.txt",           [PLAYER_1] = {{ red_icon = "hero_9_2_1", blue_icon = "hero_9_2_2" },   { red_icon = "hero_9_2_5", blue_icon = "hero_9_2_6" }},            [PLAYER_2] = {{ red_icon = "hero_9_2_3", blue_icon = "hero_9_2_4" },   { red_icon = "hero_9_2_7", blue_icon = "hero_9_2_8" }} },
 	  { name = "Agrael",      txt = "inferno/heroAgrail.txt",     dsc = "/Text/Game/Heroes/Specializations/Inferno/SpecAgrael/Description.txt",            [PLAYER_1] = {{ red_icon = "hero_10_2_1", blue_icon = "hero_10_2_2" }, { red_icon = "hero_10_2_5", blue_icon = "hero_10_2_6" }},          [PLAYER_2] = {{ red_icon = "hero_10_2_3", blue_icon = "hero_10_2_4" }, { red_icon = "hero_10_2_7", blue_icon = "hero_10_2_8" }} },
---	  { name = "Kha-Beleth",  txt = "inferno/heroVlastelin.txt",  dsc = "/Text/Game/Heroes/Specializations/Inferno/Beater/Description.txt",                [PLAYER_1] = { red_icon = "hero_11_2_1", blue_icon = "hero_11_2_2" }, [PLAYER_2] = { red_icon = "hero_11_2_3", blue_icon = "hero_11_2_4" } }
+--	  { name = "Kha-Beleth",  txt = "inferno/heroVlastelin.txt",  dsc = "/Text/Game/Heroes/Specializations/Inferno/Beater/Description.txt",                [PLAYER_1] = {{ red_icon = "hero_11_2_1", blue_icon = "hero_11_2_2" },  { red_icon = "hero_11_2_5", blue_icon = "hero_11_2_6" }},          [PLAYER_2] = {{ red_icon = "hero_11_2_3", blue_icon = "hero_11_2_4" },  { red_icon = "hero_11_2_7", blue_icon = "hero_11_2_8" }} },
   },
   [RACES.NECROPOLIS] = {
 	  { name = "Nemor",       txt = "necropolis/heroDeidra.txt",     dsc = "/Text/Game/Heroes/Specializations/Necropolis/Dark_Emissary/Description.txt",     [PLAYER_1] = {{ red_icon = "hero_1_3_1", blue_icon = "hero_1_3_2" },   { red_icon = "hero_1_3_5", blue_icon = "hero_1_3_6" }},   [PLAYER_2] = {{ red_icon = "hero_1_3_3", blue_icon = "hero_1_3_4" },   { red_icon = "hero_1_3_7", blue_icon = "hero_1_3_8" }} },
@@ -185,8 +188,8 @@ HEROES_BY_RACE = {
 	  { name = "Elleshar",    txt = "sylvan/heroVinrael.txt",    dsc = "/Text/Game/Heroes/Specializations/Preserve/Talented_Warrior/Description.txt", [PLAYER_1] = {{ red_icon = "hero_7_4_1", blue_icon = "hero_7_4_2" },   { red_icon = "hero_7_4_5", blue_icon = "hero_7_4_6" }}, [PLAYER_2] = {{ red_icon = "hero_7_4_3", blue_icon = "hero_7_4_4" },   { red_icon = "hero_7_4_7", blue_icon = "hero_7_4_8" }}  },
 	  { name = "Linaas",      txt = "sylvan/heroVingael.txt",    dsc = "/Text/Game/Heroes/Specializations/Preserve/Waylayer/Description.txt",         [PLAYER_1] = {{ red_icon = "hero_8_4_1", blue_icon = "hero_8_4_2" },   { red_icon = "hero_8_4_5", blue_icon = "hero_8_4_6" }}, [PLAYER_2] = {{ red_icon = "hero_8_4_3", blue_icon = "hero_8_4_4" },   { red_icon = "hero_8_4_7", blue_icon = "hero_8_4_8" }}  },
 	  { name = "Heam",        txt = "sylvan/heroFaidaen.txt",    dsc = "/Text/Game/Heroes/Specializations/Preserve/Elven_Volley/Description.txt",     [PLAYER_1] = {{ red_icon = "hero_9_4_1", blue_icon = "hero_9_4_2" },   { red_icon = "hero_9_4_5", blue_icon = "hero_9_4_6" }}, [PLAYER_2] = {{ red_icon = "hero_9_4_3", blue_icon = "hero_9_4_4" },   { red_icon = "hero_9_4_7", blue_icon = "hero_9_4_8" }}  },
-	  { name = "Ildar",       txt = "sylvan/heroAlaron.txt",     dsc = "/Text/Game/Heroes/Specializations/Preserve/SpecIldar/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_10_4_1", blue_icon = "hero_10_4_2" }, { red_icon = "hero_10_4_5", blue_icon = "hero_10_4_6" }}, [PLAYER_2] = {{ red_icon = "hero_10_4_3", blue_icon = "hero_10_4_4" }, { red_icon = "hero_10_4_7", blue_icon = "hero_10_4_8" }}  },
---	  { name = "GhostFSLord", txt = "sylvan/heroPrizrak.txt",    dsc = "/Text/Game/Heroes/Specializations/Preserve/Forest_Guardian/Description.txt",  [PLAYER_1] = { red_icon = "hero_11_4_1", blue_icon = "hero_11_4_2" }, [PLAYER_2] = { red_icon = "hero_11_4_3", blue_icon = "hero_11_4_4" }  }
+	  { name = "Ildar",       txt = "sylvan/heroAlaron.txt",     dsc = "/Text/Game/Heroes/Specializations/Preserve/SpecIldar/Description.txt",        [PLAYER_1] = {{ red_icon = "hero_10_4_1", blue_icon = "hero_10_4_2" }, { red_icon = "hero_10_4_5", blue_icon = "hero_10_4_6" }}, [PLAYER_2] = {{ red_icon = "hero_10_4_3", blue_icon = "hero_10_4_4" }, { red_icon = "hero_10_4_7", blue_icon = "hero_10_4_8" }} },
+--	  { name = "GhostFSLord", txt = "sylvan/heroPrizrak.txt",    dsc = "/Text/Game/Heroes/Specializations/Preserve/Forest_Guardian/Description.txt",  [PLAYER_1] = {{ red_icon = "hero_11_4_1", blue_icon = "hero_11_4_2" }, { red_icon = "hero_11_4_5", blue_icon = "hero_11_4_6" }},  [PLAYER_2] = {{ red_icon = "hero_11_4_3", blue_icon = "hero_11_4_4" } , { red_icon = "hero_11_4_7", blue_icon = "hero_11_4_8" }} },
   },
   [RACES.ACADEMY] = {
 	  { name = "Faiz",        txt = "academy/heroFaiz.txt",       dsc = "/Text/Game/Heroes/Specializations/Academy/Disrupter/Description.txt",          [PLAYER_1] = {{ red_icon = "hero_1_5_1", blue_icon = "hero_1_5_2" },   { red_icon = "hero_1_5_5", blue_icon = "hero_1_5_6" }}, [PLAYER_2] = {{ red_icon = "hero_1_5_3", blue_icon = "hero_1_5_4" }, { red_icon = "hero_1_5_7", blue_icon = "hero_1_5_8" }} },
@@ -199,7 +202,7 @@ HEROES_BY_RACE = {
 	  { name = "Isher",       txt = "academy/heroRazzak.txt",     dsc = "/Text/Game/Heroes/Specializations/Academy/Machinist/Description.txt",          [PLAYER_1] = {{ red_icon = "hero_8_5_1", blue_icon = "hero_8_5_2" },   { red_icon = "hero_8_5_5", blue_icon = "hero_8_5_6" }}, [PLAYER_2] = {{ red_icon = "hero_8_5_3", blue_icon = "hero_8_5_4" }, { red_icon = "hero_8_5_7", blue_icon = "hero_8_5_8" }} },
 	  { name = "Zehir",       txt = "academy/heroZehir.txt",      dsc = "/Text/Game/Heroes/Specializations/Academy/Master_of_Elements/Description.txt", [PLAYER_1] = {{ red_icon = "hero_9_5_1", blue_icon = "hero_9_5_2" },   { red_icon = "hero_9_5_5", blue_icon = "hero_9_5_6" }}, [PLAYER_2] = {{ red_icon = "hero_9_5_3", blue_icon = "hero_9_5_4" }, { red_icon = "hero_9_5_7", blue_icon = "hero_9_5_8" }} },
 	  { name = "Maahir",      txt = "academy/heroMaahir.txt",     dsc = "/Text/Game/Heroes/Specializations/Academy/SpecMaahir/Description.txt",         [PLAYER_1] = {{ red_icon = "hero_10_5_1", blue_icon = "hero_10_5_2" }, { red_icon = "hero_10_5_5", blue_icon = "hero_10_5_6" }}, [PLAYER_2] = {{ red_icon = "hero_10_5_3", blue_icon = "hero_10_5_4" }, { red_icon = "hero_10_5_7", blue_icon = "hero_10_5_8" }} },
---	  { name = "Cyrus",       txt = "academy/heroSairus.txt",     dsc = "/Text/Game/Heroes/Specializations/Academy/SpecCyrus/Description.txt",          [PLAYER_1] = { red_icon = "hero_11_5_1", blue_icon = "hero_11_5_2" }, [PLAYER_2] = { red_icon = "hero_11_5_3", blue_icon = "hero_11_5_4" } }
+	  { name = "Cyrus",       txt = "academy/heroSairus.txt",     dsc = "/Text/Game/Heroes/Specializations/Academy/SpecCyrus/Description.txt",          [PLAYER_1] = {{ red_icon = "hero_11_5_1", blue_icon = "hero_11_5_2" },  { red_icon = "hero_11_5_5", blue_icon = "hero_11_5_6" }}, [PLAYER_2] = {{ red_icon = "hero_11_5_3", blue_icon = "hero_11_5_4" }, { red_icon = "hero_11_5_7", blue_icon = "hero_11_5_8" }} },
   },
   [RACES.DUNGEON] = {
 	  { name = "Eruina",      txt = "dungeon/heroErin.txt",       dsc = "/Text/Game/Heroes/Specializations/Dungeon/Matron_Salvo/Description.txt",           [PLAYER_1] = {{ red_icon = "hero_1_6_1", blue_icon = "hero_1_6_2" }, { red_icon = "hero_1_6_5", blue_icon = "hero_1_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_1_6_3", blue_icon = "hero_1_6_4" }, { red_icon = "hero_1_6_7", blue_icon = "hero_1_6_8" }} },
@@ -210,7 +213,7 @@ HEROES_BY_RACE = {
 	  { name = "Dalom",       txt = "dungeon/heroLetos.txt",      dsc = "/Text/Game/Heroes/Specializations/Dungeon/Poisoner/Description.txt",               [PLAYER_1] = {{ red_icon = "hero_6_6_1", blue_icon = "hero_6_6_2" }, { red_icon = "hero_6_6_5", blue_icon = "hero_6_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_6_6_3", blue_icon = "hero_6_6_4" }, { red_icon = "hero_6_6_7", blue_icon = "hero_6_6_8" }} },
 	  { name = "Ferigl",      txt = "dungeon/heroSorgal.txt",     dsc = "/Text/Game/Heroes/Specializations/Dungeon/Lizard_Breeder/Description.txt",         [PLAYER_1] = {{ red_icon = "hero_7_6_1", blue_icon = "hero_7_6_2" }, { red_icon = "hero_7_6_5", blue_icon = "hero_7_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_7_6_3", blue_icon = "hero_7_6_4" }, { red_icon = "hero_7_6_7", blue_icon = "hero_7_6_8" }} },
 	  { name = "Ohtarig",     txt = "dungeon/heroVaishan.txt",    dsc = "/Text/Game/Heroes/Specializations/Dungeon/Savage/Description.txt",                 [PLAYER_1] = {{ red_icon = "hero_8_6_1", blue_icon = "hero_8_6_2" }, { red_icon = "hero_8_6_5", blue_icon = "hero_8_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_8_6_3", blue_icon = "hero_8_6_4" }, { red_icon = "hero_8_6_7", blue_icon = "hero_8_6_8" }} },
---	  { name = "Raelag_A1",   txt = "dungeon/heroRailag.txt",     dsc = "/Text/Game/Heroes/Specializations/Dungeon/MasterOfInitiative/Description.txt",     [PLAYER_1] = { red_icon = "hero_9_6_1", blue_icon = "hero_9_6_2" }, [PLAYER_2] = { red_icon = "hero_9_6_3", blue_icon = "hero_9_6_4" } },
+--	  { name = "Raelag_A1",   txt = "dungeon/heroRailag.txt",     dsc = "/Text/Game/Heroes/Specializations/Dungeon/MasterOfInitiative/Description.txt",     [PLAYER_1] = {{ red_icon = "hero_9_6_1", blue_icon = "hero_9_6_2" }, { red_icon = "hero_9_6_5", blue_icon = "hero_9_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_9_6_3", blue_icon = "hero_9_6_4" }, { red_icon = "hero_9_6_7", blue_icon = "hero_9_6_8" }} },
 	  { name = "Kelodin",     txt = "dungeon/heroShadia.txt",     dsc = "/Text/Game/Heroes/Specializations/Dungeon/Evasive/Description.txt",                [PLAYER_1] = {{ red_icon = "hero_10_6_1", blue_icon = "hero_10_6_2" }, { red_icon = "hero_10_6_5", blue_icon = "hero_10_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_10_6_3", blue_icon = "hero_10_6_4" }, { red_icon = "hero_10_6_7", blue_icon = "hero_10_6_8" }} },
 	  { name = "Shadwyn",     txt = "dungeon/heroIlaiya.txt",     dsc = "/Text/Game/Heroes/Specializations/Dungeon/SpecShadwyn/Description.txt",            [PLAYER_1] = {{ red_icon = "hero_11_6_1", blue_icon = "hero_11_6_2" }, { red_icon = "hero_11_6_5", blue_icon = "hero_11_6_6" }}, [PLAYER_2] = {{ red_icon = "hero_11_6_3", blue_icon = "hero_11_6_4" }, { red_icon = "hero_11_6_7", blue_icon = "hero_11_6_8" }} },
 --	  { name = "Thralsai",    txt = "dungeon/heroTralsai.txt",    dsc = "/Text/Game/Heroes/Specializations/Dungeon/SpecThralsai/Description.txt",           [PLAYER_1] = { red_icon = "hero_12_6_1", blue_icon = "hero_12_6_2" }, [PLAYER_2] = { red_icon = "hero_12_6_3", blue_icon = "hero_12_6_4" } }
@@ -381,18 +384,19 @@ INITIAL_HERO_SKILLS = {
   Christian = { SKILL_WAR_MACHINES, PERK_BALLISTA },
   Godric = { SKILL_LIGHT_MAGIC, PERK_PRAYER },
   RedHeavenHero03 = { SKILL_SORCERY, SKILL_DARK_MAGIC },
+  Alaric = {SKILL_LIGHT_MAGIC, SKILL_DARK_MAGIC },
   Isabell_A1 = { SKILL_LIGHT_MAGIC, SKILL_LIGHT_MAGIC },
   Duncan = { SKILL_OFFENCE, PERK_TACTICS },
   Nicolai = { SKILL_TRAINING, SKILL_TRAINING },
   Grok = { SKILL_LOGISTICS, PERK_PATHFINDING },
-  Oddrema = { SKILL_SORCERY, SKILL_SUMMONING_MAGIC },
+  Oddrema = { SKILL_OFFENCE, SKILL_DARK_MAGIC },
   Marder = { SKILL_DEFENCE, PERK_PROTECTION },
   Jazaz = { SKILL_OFFENCE, PERK_TACTICS },
   Efion = { SKILL_DARK_MAGIC, PERK_MASTER_OF_MIND },
   Deleb = { SKILL_WAR_MACHINES, PERK_BALLISTA },
   Calid = { SKILL_DESTRUCTIVE_MAGIC, PERK_DEMONIC_FIRE },
   Nymus = { SKILL_LUCK, PERK_RESISTANCE },
-  Orlando = { SKILL_LEADERSHIP, PERK_DEMONIC_STRIKE },
+  Orlando = { SKILL_OFFENCE, PERK_DEMONIC_STRIKE },
   Agrael = { SKILL_OFFENCE, PERK_FRENZY },
   ["Kha-Beleth"] = { SKILL_DARK_MAGIC, PERK_DEMONIC_FIRE },
   Nemor = { SKILL_DARK_MAGIC, PERK_DEATH_SCREAM },
@@ -428,7 +432,7 @@ INITIAL_HERO_SKILLS = {
   Isher = { SKILL_DEFENCE, PERK_TOUGHNESS },
   Zehir = { SKILL_SUMMONING_MAGIC, PERK_MASTER_OF_CREATURES },
   Maahir = { SKILL_ARTIFICIER, SKILL_ARTIFICIER },
-  Cyrus = { SKILL_LIGHT_MAGIC, SKILL_LIGHT_MAGIC },
+  Cyrus = { SKILL_SORCERY, SKILL_SORCERY },
   Eruina = { SKILL_OFFENCE, SKILL_DESTRUCTIVE_MAGIC },
   Inagost = { SKILL_DESTRUCTIVE_MAGIC, PERK_EMPOWERED_SPELLS },
   Urunir = { SKILL_LEARNING, PERK_INTELLIGENCE },
@@ -451,11 +455,12 @@ INITIAL_HERO_SKILLS = {
   Skeggy = { SKILL_LUCK, PERK_LUCKY_STRIKE },
   KingTolghar = { HERO_SKILL_RUNELORE, HERO_SKILL_RUNELORE },
   Wulfstan = { SKILL_LOGISTICS, PERK_PATHFINDING },
-  Rolf = { SKILL_LEADERSHIP, PERK_DIPLOMACY },
+--  Rolf = { SKILL_LEADERSHIP, PERK_DIPLOMACY },
+  Rolf = { SKILL_SUMMONING_MAGIC, PERK_MASTER_OF_CREATURES },
   Hero2 = { SKILL_WAR_MACHINES, PERK_FIRST_AID },
   Hero3 = { SKILL_OFFENCE, PERK_FRENZY },
   Hero6 = { SKILL_DEFENCE, PERK_TOUGHNESS },
-  Hero8 = { SKILL_WAR_MACHINES, HERO_SKILL_MIGHT_OVER_MAGIC },
+  Hero8 = { SKILL_OFFENCE, SKILL_DEFENCE },
   Hero7 = { SKILL_OFFENCE, PERK_ARCHERY },
   Hero1 = { SKILL_OFFENCE, HERO_SKILL_POWERFULL_BLOW },
   Hero9 = { SKILL_LEADERSHIP, PERK_RECRUITMENT },
@@ -477,6 +482,7 @@ MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME = {
     { dictName = "Christian", reservedNames = { "Christian", "Christian2" } },
     { dictName = "Godric", reservedNames = { "Godric", "Godric2" } },
     { dictName = "RedHeavenHero03", reservedNames = { "RedHeavenHero03", "RedHeavenHero032" } },
+    { dictName = "Alaric", reservedNames = { "Alaric", "Alaric2" } },
     { dictName = "Isabell_A1", reservedNames = { "Isabell_A1", "Isabell_A12" } },
     { dictName = "Duncan", reservedNames = { "Duncan", "Duncan2" } },
     { dictName = "Nicolai", reservedNames = { "Nicolai", "Nicolai2" } },
@@ -600,12 +606,12 @@ ALL_ARTS_LIST = {
   { id = 60, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 5000 }, -- пояс элементалей
   { id = 16, level = ARTS_LEVELS.MINOR, position = ART_POSITION.NECK,    price = 4000 }, -- ошейник льва
   { id = 55, level = ARTS_LEVELS.MINOR, position = ART_POSITION.HEAD,    price = 5000 }, -- шлем некроманта
---  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
   { id = 10, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,   price = 5000 }, -- свиток маны
   { id = 56, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BODY,    price = 6000 }, -- доспех бесстрашия
   -- { id = 86, level = ARTS_LEVELS.MINOR, position = ART_POSITION.BAG,  price = 6500 }, -- руна пламени
   -- { id = 61, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS,  price = 8000 }, -- изумрудные туфли
   -- { id = 32, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,   price = 8000 }, -- накидка феникса
+--  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
   { id = 65, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо предостережения
   -- { id = 93, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,   price = 8000 }, -- кольцо изгнания
   { id = 74, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 7500 }, -- дубина орка
@@ -658,7 +664,7 @@ ALL_ARTS_LIST = {
   { id = 44, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 15000 }, -- халат сар-иссы
   { id = 48, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 12000 }, -- кираса гномов
   { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 20000 }, -- доспех забытого
-  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 18000 }, -- плащ смерти
+  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 16000 }, -- плащ смерти
   { id = 47, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,      price = 15000 }, -- кольцо сар-иссы
 
   { id = 5,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 12000 },  -- трезубец титанов
@@ -676,15 +682,18 @@ HEROES = {
   ELLESHAR = 'Elleshar',               -- Винраэль
   NATHANIEL = 'Nathaniel',             -- Эллайна
   UNA = 'Una',                         -- Инга
+  DUNCAN ='Duncan',                    -- Дункан
   NIKOLAS = 'Nikolas',                 -- Николас
   VEGEYR = 'Vegeyr',                   -- Свея
   RED_HEAVEN_HERO = 'RedHeavenHero03', -- Валерия
+  ALARIC = 'Alaric',                   -- Аларик
   ROLF = 'Rolf',                       -- Ролф
   ALMEGIR = 'Almegir',                 -- Ирбет
   MAAHIR = 'Maahir',                   -- Маахир
+  CYRUS = 'Cyrus',                     -- Сайрус
   BEREIN = 'Berein',                   -- Маркел
   TAN = 'Tan',                         -- Джалиб
-  NARHIZ = 'Razzak',                     -- Нархиз
+  NARHIZ = 'Razzak',                   -- Нархиз
   ILDAR = 'Ildar',                     -- Аларон
   JAZAZ = 'Jazaz',                     -- Ниброс
   BREM = 'Brem',                       -- Рутгер
@@ -785,7 +794,7 @@ UNITS = {
     { kol =100, id =108, price1 =  160, power =  287, lvl = 3 },
     { kol = 45, id =109, price1 =  400, power =  716, lvl = 4 },
     { kol = 24, id =110, price1 =  600, power = 1487, lvl = 5 },
-    { kol = 14, id =111, price1 = 1200, power = 2520, lvl = 6 },
+    { kol = 13, id =111, price1 = 1200, power = 2520, lvl = 6 },
     { kol =  6, id =112, price1 = 3200, power = 6003, lvl = 7 }
   },
   [RACES.INFERNO] = {
@@ -808,7 +817,7 @@ UNITS = {
     { kol = 80, id =133, price1 =  200, power =  338, lvl = 3 },
     { kol = 45, id =134, price1 =  400, power =  680, lvl = 4 },
     { kol = 27, id =135, price1 =  800, power = 1415, lvl = 5 },
-    { kol = 14, id =136, price1 = 1300, power = 2360, lvl = 6 },
+    { kol = 13, id =136, price1 = 1300, power = 2360, lvl = 6 },
     { kol =  6, id =137, price1 = 2666, power = 5850, lvl = 7 }
   },
   [RACES.NECROPOLIS] = {
@@ -831,7 +840,7 @@ UNITS = {
     { kol = 90, id =154, price1 =  180, power =  327, lvl = 3 },
     { kol = 45, id =155, price1 =  450, power =  739, lvl = 4 },
     { kol = 24, id =156, price1 =  750, power = 1539, lvl = 5 },
-    { kol = 14, id =157, price1 = 1200, power = 2449, lvl = 6 },
+    { kol = 13, id =157, price1 = 1200, power = 2449, lvl = 6 },
     { kol =  8, id =158, price1 = 2200, power = 3872, lvl = 7 }
   },
   [RACES.SYLVAN] = {
@@ -854,7 +863,7 @@ UNITS = {
     { kol = 70, id =147, price1 =  280, power =  433, lvl = 3 },
     { kol = 36, id =148, price1 =  420, power =  846, lvl = 4 },
     { kol = 24, id =149, price1 =  750, power = 1441, lvl = 5 },
-    { kol = 16, id =150, price1 = 1050, power = 1993, lvl = 6 },
+    { kol = 15, id =150, price1 = 1050, power = 1993, lvl = 6 },
     { kol =  6, id =151, price1 = 3200, power = 5905, lvl = 7 }
   },
   [RACES.ACADEMY] = {
@@ -877,7 +886,7 @@ UNITS = {
     { kol = 90, id =161, price1 =  150, power =  355, lvl = 3 },
     { kol = 45, id =162, price1 =  420, power =  642, lvl = 4 },
     { kol = 30, id =163, price1 =  500, power = 1096, lvl = 5 },
-    { kol = 14, id =164, price1 = 1500, power = 2535, lvl = 6 },
+    { kol = 13, id =164, price1 = 1500, power = 2535, lvl = 6 },
     { kol =  6, id =165, price1 = 3300, power = 6095, lvl = 7 }
   },
   [RACES.DUNGEON] = {
@@ -900,7 +909,7 @@ UNITS = {
     { kol = 66, id =140, price1 =  200, power =  474, lvl = 3 },
     { kol = 36, id =141, price1 =  420, power =  812, lvl = 4 },
     { kol = 24, id =142, price1 =  750, power = 1324, lvl = 5 },
-    { kol = 14, id =143, price1 = 1000, power = 2537, lvl = 6 },
+    { kol = 13, id =143, price1 = 1000, power = 2537, lvl = 6 },
     { kol =  6, id =144, price1 = 3600, power = 6389, lvl = 7 }
   },
   [RACES.FORTRESS] = {
@@ -923,7 +932,7 @@ UNITS = {
     { kol = 70, id =168, price1 =  240, power =  419, lvl = 3 },
     { kol = 66, id =169, price1 =  250, power =  434, lvl = 4 },
     { kol = 27, id =170, price1 =  650, power = 1308, lvl = 5 },
-    { kol = 14, id =171, price1 = 1400, power = 2437, lvl = 6 },
+    { kol = 13, id =171, price1 = 1400, power = 2437, lvl = 6 },
     { kol =  6, id =172, price1 = 3200, power = 6070, lvl = 7 }
   },
   [RACES.STRONGHOLD] = {
@@ -946,7 +955,7 @@ UNITS = {
     { kol =110, id =175, price1 =  140, power =  254, lvl = 3 },
     { kol = 45, id =176, price1 =  400, power =  680, lvl = 4 },
     { kol = 40, id =177, price1 =  550, power =  895, lvl = 5 },
-    { kol = 14, id =178, price1 = 1000, power = 2571, lvl = 6 },
+    { kol = 13, id =178, price1 = 1000, power = 2571, lvl = 6 },
     { kol =  6, id =179, price1 = 3000, power = 5937, lvl = 7 }
   }
 };

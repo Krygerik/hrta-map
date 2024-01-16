@@ -15,14 +15,6 @@
 	<TrainedCost>5</TrainedCost>
 	<damage>
 		<Item>
-			<Base>3</Base>
-			<PerPower>0</PerPower>
-		</Item>
-		<Item>
-			<Base>3</Base>
-			<PerPower>0</PerPower>
-		</Item>
-		<Item>
 			<Base>4</Base>
 			<PerPower>0</PerPower>
 		</Item>
@@ -30,8 +22,16 @@
 			<Base>5</Base>
 			<PerPower>0</PerPower>
 		</Item>
-        <Item>
+		<Item>
 			<Base>6</Base>
+			<PerPower>0</PerPower>
+		</Item>
+		<Item>
+			<Base>7</Base>
+			<PerPower>0</PerPower>
+		</Item>
+        <Item>
+			<Base>8</Base>
 			<PerPower>0</PerPower>
 		</Item>
 	</damage>

@@ -85,6 +85,7 @@ function addHeroesToPlayers()
       -- берем зарезервированных героев для игроков
       local reservedHeroName = getReservedHeroName(playerId, heroName);
 
+      print(reservedHeroName)
       DeployReserveHero(reservedHeroName, coords.x, coords.y, GROUND);
     end;
   end;
