@@ -109,6 +109,7 @@
       "SectionId":1,
       "DepthLevel":2,
       "RequiredSkillIds":[
+         "Imbue_Arrow",
          "Master_of_Wrath"
       ]
    },
@@ -381,7 +382,7 @@
       ]
    },
    {
-      "SkillId":"Elemental_Balance",
+      "SkillId":"Elemental_Fury",
       "SectionId":4,
       "DepthLevel":2,
       "RequiredSkillIds":[
@@ -697,6 +698,7 @@
       "SectionId":8,
       "DepthLevel":2,
       "RequiredSkillIds":[
+         "Rain_of_Arrows",
          "Soldier's_Luck"
       ]
    },

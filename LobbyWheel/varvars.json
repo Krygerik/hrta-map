@@ -409,20 +409,21 @@
       ]
    },
    {
-      "SkillId":"Excruciating_Strikez",
-      "SectionId":6,
-      "DepthLevel":1,
-      "RequiredSkillIds":[
-         "Powerfull_Blow"
-      ]
-   },
-   {
       "SkillId":"Retribution",
       "SectionId":6,
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Battle_Frenzy",
          "Battle_Elation"
+      ]
+   },
+   {
+      "SkillId":"Excruciating_Strikez",
+      "SectionId":6,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Powerfull_Blow",
+         "Battle_Frenzy"
       ]
    },
    {
@@ -437,7 +438,7 @@
    {
       "SkillId":"Stunning_Blow",
       "SectionId":6,
-      "DepthLevel":2,
+      "DepthLevel":3,
       "RequiredSkillIds":[
          "Excruciating_Strikez"
       ]
@@ -889,14 +890,6 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          
-      ]
-   },
-   {
-      "SkillId":"Plague_Tent",
-      "SectionId":12,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "First_Aid"
       ]
    },
    {

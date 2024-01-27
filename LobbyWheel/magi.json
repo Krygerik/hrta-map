@@ -1040,7 +1040,6 @@
       "SectionId":12,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Mark_of_the_Wizard",
          "Ammo_Cart"
       ]
    }
