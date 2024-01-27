@@ -1,1069 +1,1069 @@
-[\r
-  {\r
-    "Id": "Disrupter",\r
-    "Name": "Фаиз",\r
-    "Description": "Разрушитель: Мастерски обращается с заклинанием «Разрушающий луч», которое не только уменьшает защиту жертвы, но и наносит урон в размере 15 единиц за уровень.",\r
-    "Comment": null,\r
-    "Image": "Faiz.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Dark_Magic",\r
-      "Master_of_Pain"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Feather_Mage",\r
-    "Name": "Ора",\r
-    "Description": "Говорящий с ветром: Очередь хода героя в бою наступает быстрее - «инициатива» героя повышается на +0,05% за каждый уровень.",\r
-    "Comment": null,\r
-    "Image": "Jhora.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Arcane_Training"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Inexhaustible",\r
-    "Name": "Нура",\r
-    "Description": "Мистик: Герой в свой ход во время битвы восстанавливает 1 единицу маны за каждые 3 уровня, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Nur.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Mark_of_the_Wizard"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Machinist",\r
-    "Name": "Раззак",\r
-    "Description": "Творец големов: Стальные и обсидиановые големы в армии героя получают +1 ед. к защите и нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Razzak.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Master_of_Elements",\r
-    "Name": "Зехир",\r
-    "Description": "Хозяин элементалей: Всякий раз, когда умирает дружественный отряд, группа элементалей вступает в бой на стороне героя. «Колдовство» для заклинаний «Призыв элементалей» и «Призыв феникса» возрастает на ( Уровень_Героя / 5 ).",\r
-    "Comment": null,\r
-    "Image": "Zehir.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Summoning_Magic",\r
-      "Master_of_Conjuration"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Mentor",\r
-    "Name": "Нархиз",\r
-    "Description": "Наставник: Архимаги и боевые маги в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя. Также в армию героя присоединяются Архимаги или боевые маги в количестве 1 за каждые 3 уровня героя. Приоритет на архимагов при равном количестве.",\r
-    "Comment": null,\r
-    "Image": "Narxes.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Intelligence"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Radiant",\r
-    "Name": "Джалиб",\r
-    "Description": "Воздушный: Султаны джиннов становятся колдунами, взамен способности \"Случайное заклинание\" получают книгу заклинаний с заклинаниями 1-3 уровня магии Тьмы и Света (кроме заклинаний \"Регенерация\" и \"Скорбь\"). Инициатива джинов в армии героя увеличена на 2. ",\r
-	"Comment": null,\r
-    "Image": "Galib.png",\r
-    "DefaultSkillIds": [\r
-      "Magic_Mirror",\r
-      "Basic_Luck"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecCyrus",\r
-    "Name": "Сайрус",\r
-    "Description": "Любимец Богов: Все существа в армии героя постоянно находятся под действием заклинания «Божественная сила».",\r
-	"Comment": null,\r
-    "Image": "Cyrus.png",\r
-    "DefaultSkillIds": [\r
-      "Magic_Mirror",\r
-      "Basic_Luck"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecMaahir",\r
-    "Name": "Маахир",\r
-    "Description": "Зажиточный: Получает дополнительные +15 мер каждого ресурса для изготовления мини-артефактов.",\r
-    "Comment": null,\r
-    "Image": "Maahir.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Artificer",\r
-      "Expert_Artificer"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Weilder_of_Fire",\r
-    "Name": "Назир",\r
-    "Description": "Властелин пламени: Эффективная колдовская сила героя увеличивается, когда он творит заклинание «Огненный шар». При расчете эффекта «Колдовство» увеличивается на ( Уровень_Героя / 3 ) с округлением вверх.",\r
-    "Comment": null,\r
-    "Image": "Nathir.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Destructive_Magic",\r
-      "Master_of_Fire"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Havez",\r
-    "Name": "Хафиз",\r
-    "Description": "Хозяин гремлинов: Обычные и старшие гремлины и гремлины-вредители в армии героя получают +1 единицу к Защите и Нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Havez.png",\r
-    "DefaultSkillIds": [\r
-      "Consume_Artifact",\r
-      "Basic_War_Machines"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Dark_Acolyte",\r
-    "Name": "Ирбет",\r
-    "Description": "Темный мистик: Способность «Темный ритуал» усиливается, количество маны, полученной с ритуала, увеличивается вдвое",\r
-    "Comment": null,\r
-    "Image": "Yrbeth.png",\r
-    "DefaultSkillIds": [\r
-      "Dark_Ritual",\r
-      "Basic_Dark_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Evasive",\r
-    "Name": "Шадия",\r
-    "Description": "Танцующий в сумерках: Стрельба наносит меньше урона войскам героя на 2% за уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Shadya.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Evasion"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Lizard_Breeder",\r
-    "Name": "Соргалл",\r
-    "Description": "Заводчик ящеров: Темные всадники и проворные наездники получают +1 к «Нападению» и «Защите» за каждые два уровня героя.",\r
-    "Comment": null,\r
-    "Image": "Sorgal.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Battle_Frenzy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "MasterOfInitiative",\r
-    "Name": "Раилаг",\r
-    "Description": "Повелитель инициативы: «Инициатива» существ в армии героя увеличивается, а вражеских существ уменьшается на 0,3% × Уровень_Героя.",\r
-    "Comment": null,\r
-    "Image": "Raelag.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Battle_Frenzy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Matron_Salvo",\r
-    "Name": "Эрин",\r
-    "Description": "Шабаш ведьм: Владычицы тени делают выстрел по цели своего героя при использовании им одиночных заклинаний, наносящих урон. Герой получает Владычиц тени или Хозяек ночи в количестве 1 + 1 за каждые 10 уровней. Предпочтение отдается существам, которых больше в армии героя.",\r
-    "Comment": null,\r
-    "Image": "Eruina.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Destructive_Magic",\r
-      "Basic_Attack"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Poisoner",\r
-    "Name": "Летос",\r
-    "Description": "Отравитель: Каждый отряд противника может вступить в бой уже будучи отравленным с вероятностью 2% х Уровень_Героя.",\r
-    "Comment": null,\r
-    "Image": "Lethos.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Dark_Magic",\r
-      "Master_of_Pain"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Power_Bargain",\r
-    "Name": "Синитар",\r
-    "Description": "Катализатор: Количество потребляемой маны на усиленные заклинания уменьшается на 2% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Sinitar.png",\r
-    "DefaultSkillIds": [\r
-      "Empowered_spells",\r
-      "Basic_Destructive_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Savage",\r
-    "Name": "Вайшан",\r
-    "Description": "Протектор: Герой получает 10 + 2 ассасина или ловчего за каждый уровень. Предпочтение отдается существам, которых больше в армии героя.",\r
-    "Comment": null,\r
-    "Image": "Vayshan.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Luck",\r
-      "Soldier's_Luck"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Slaveholder",\r
-    "Name": "Кифра",\r
-    "Description": "Рабовладелец: Все минотавры-стражи и минотавры-надсмотрщики в армии героя получают +1 ед. к защите и нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Kythra.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Leadership",\r
-      "Estates"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecShadwyn",\r
-    "Name": "Илайя",\r
-    "Description": "Направляющая стихию: Расовый навык героя усиливается на один уровень, вплоть до абсолютной неодолимой магии (урон элементальных цепочек равен 67%, магическая защита преодолевается на 50%).",\r
-    "Comment": null,\r
-    "Image": "Ylaya.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Irresistible_Magic",\r
-      "Elemental_Vision"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecThralsai",\r
-    "Name": "Тралсай",\r
-    "Description": "Властелин гидр: Пещерные и темные гидры получают +5 к инициативе",\r
-    "Comment": null,\r
-    "Image": "Thralsai.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Irresistible_Magic",\r
-      "Elemental_Vision"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Yrwanna",\r
-    "Name": "Иранна",\r
-    "Description": "Кровавая госпожа: Бестии, фурии и мегеры в армии героя получают +1 к Защите и Нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Yrwanna.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Intelligence"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Border_Guard",\r
-    "Name": "Ратолг",\r
-    "Description": "Хозяин берсерков: Берсерки и Воины Арката получают +2 к инициативе и скорости.",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-	  "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Courtier",\r
-    "Name": "Ролгат",\r
-    "Description": "Золотой язык: Герой получает на выбор 1 великий артефакт, 1 реликвию или ~12000 золота",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-	  "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Defender",\r
-    "Name": "Ингвар",\r
-    "Description": "Черная рука: Воители и стражи гор в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя.",\r
-    "Comment": null,\r
-    "Image": "Ingvar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Economist",\r
-    "Name": "Бранд",\r
-    "Description": "Художник Рун: Для использования рун герой получает по 1 ресурсу всех типов за каждые 6 уровней.",\r
-    "Comment": null,\r
-    "Image": "Brand.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Runelore",\r
-      "Fine_Rune"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Mountain_King",\r
-    "Name": "Толгар",\r
-    "Description": "Король Каменных Залов: Все существа в армии героя постоянно испытывают на себе действие руны громового раската (восстанавливается на начале хода отряда)",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Researcher",\r
-    "Name": "Инга",\r
-    "Description": "Повелитель Рун: Герой изучает все руны 1-2 тира. ",\r
-    "Comment": null,\r
-    "Image": "Inga.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Scholar"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Rider",\r
-    "Name": "Ибба",\r
-    "Description": "Всадник: Наездники на медведях, хозяева медведей и северные наездники в армии героя получают +1 к «Нападению» и «Защите» за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Ebba.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Tactics"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Sacred_Hammer",\r
-    "Name": "Хельмар",\r
-    "Description": "Священный молот: Каждый раз, когда герой накладывает заклинание магии Света на дружественный отряд, существует вероятность того, что на отряд также будет наложено заклинание «Карающий удар» (3.5% за уровень).",\r
-    "Comment": null,\r
-    "Image": "Helmar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Light_Magic",\r
-      "Advanced_Light_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecRolf",\r
-    "Name": "Рольф",\r
-    "Description": "Золотой язык: Действие навыка «Дипломатия» распространяется на существ 5-7 тира (даже если они не являются колдунами). На каждый уровень существ навык срабатывает не более одного раза. Округление работает всегда вниз.",\r
-    "Comment": null,\r
-    "Image": "Rolf.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Leadership",\r
-      "Diplomacy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecWulfstan",\r
-    "Name": "Вульфстен",\r
-    "Description": "Воинственный: Берсерки и воины Арката в армии героя получают +3 к «Скорости» и «Инициативе».",\r
-    "Comment": null,\r
-    "Image": "Wulfstan.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Logistics",\r
-      "Pathfinding"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Stormcaller",\r
-    "Name": "Свея",\r
-    "Description": "Призывающий бурю: Герой получает заклинания «Молния» и «Цепь молний», которые неотразимы для врагов (однако невосприимчивость и непробиваемость магией по-прежнему будут действовать). Герой учит усиленный вариант заклинаний Воздуха, имеющихся у героя.",\r
-    "Comment": null,\r
-    "Image": "Svea.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Destructive_Magic",\r
-      "Basic_Sorcery"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Erling",\r
-    "Name": "Эрлинг",\r
-    "Description": "Хранитель пламени: Жрецы рун, жрецы Арката и жрецы пламени в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Erling.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Advanced_Sorcery"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Karli",\r
-    "Name": "Карли",\r
-    "Description": "Острый клинок: Метатели копья, мастера копья и гарпунёры в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Karli.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Luck",\r
-      "Soldier's_Luck"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "ChosenByGods",\r
-    "Name": "Фрида",\r
-    "Description": "Любимец богов: Сила отдельных заклинаний искусной магии Света, творимых героем, увеличивается до +35%.\r\nУсиливаются следующие заклинания:\r\nУклонение - до +80% снижение урона;\r\nУскорение - до +40% инициативы;\r\nКаменная кожа - до +15 «Защиты»;\r\nСнятие чар - до +120% вероятности;\r\nКарающий удар - до +15 «Нападения»;\r\nРегенерация - до (100 + 7 * sp)% единиц жизни;\r\nВоскрешение - до (300 + 40 * sp) единиц жизни.",\r
-    "Comment": null,\r
-    "Image": "Freyda.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Training",\r
-      "Expert_Training"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Expediter",\r
-    "Name": "Мив",\r
-    "Description": "Эффект от заклинания «Ускорение» с каждым уровнем героя увеличивается на 0.8%.",\r
-    "Comment": null,\r
-    "Image": "Maeve.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Light_Magic",\r
-      "Master_of_Wrath"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Griffon_Commander",\r
-    "Name": "Айрис",\r
-    "Description": "Все королевские и боевые грифоны в армии героя получают +1 ед. к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Irina.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Luck",\r
-      "Magic_Resistance"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Jouster",\r
-    "Name": "Аксель",\r
-    "Description": "Капитан рыцарей: Увеличивается урон, наносимый способностью Рыцарский разбег, у паладинов и рыцарей Изабель в армии героя на 2% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Klaus.png",\r
-    "DefaultSkillIds": [\r
-      "Retaliation_Strike",\r
-      "Basic_Attack"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecValeria",\r
-    "Name": "Валерия",\r
-    "Description": "Избранная Тьмой: Герой может изучать массовые версии заклинаний магии Тьмы, если имеет базу школы магии Тьмы.",\r
-    "Comment": null,\r
-    "Image": "Valeria.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Basic_Dark_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Squire",\r
-    "Name": "Эллайна",\r
-    "Description": "Любимец народа: Ополченцы и лендлорды в армии героя получают +1 к защите и нападению за каждые два уровня героя, начиная с первого. К тому же при их найме часть золота возвращается обратно (10 за каждого).",\r
-    "Comment": null,\r
-    "Image": "Ellaine.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Leadership",\r
-      "Recruitment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Suzerain",\r
-    "Name": "Рутгер",\r
-    "Description": "Талион: Герой получает 150 очков тренировки.",\r
-    "Comment": null,\r
-    "Image": "Rutger.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Training",\r
-      "Expert_Training"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Wanderer",\r
-    "Name": "Дункан",\r
-    "Description": "Талион: Герой получает 150 очков тренировки.",\r
-    "Comment": null,\r
-    "Image": "Duncan.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Training",\r
-      "Expert_Training"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "White_Knight",\r
-    "Name": "Годрик",\r
-    "Description": "Идеальный рыцарь: Эффект «Молитвы» действует в полтора раза сильнее. Мана, используемая для сотворения заклинаний магии Света, снижается на 1 ед.",\r
-    "Comment": null,\r
-    "Image": "Godric.png",\r
-    "DefaultSkillIds": [\r
-      "Benediction",\r
-      "Basic_Light_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Vittorio",\r
-    "Name": "Витторио",\r
-    "Description": "Осадный инженер: Баллиста получает +1 к «Нападению» за каждый уровень героя. Шанс катапульты поразить стены увеличивается на 2% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Vittorio.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_War_Machines",\r
-      "Ballista"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Laszlo",\r
-    "Name": "Ласло",\r
-    "Description": "Командир латников: Все латники, мечники и ревнители веры в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Laszlo.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Dougal",\r
-    "Name": "Дугал",\r
-    "Description": "Командир лучников: Все лучники и арбалетчики в армии героя получают +1 единиц к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Dougal.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-	  "Archery"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Beater",\r
-    "Name": "Грок",\r
-    "Description": "Скороход: Скорость всех существ в армии героя увеличивается на 1. ",\r
-    "Comment": null,\r
-    "Image": "Grok.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Logistics",\r
-      "Pathfinding"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Bombardier",\r
-    "Name": "Дэлеб",\r
-    "Description": "Железная дева: Каждый снаряд баллисты героя несет заклинание «Огненный шар» с уроном по формуле 20 х ((Уровень_Героя-1) / 5). ",\r
-    "Comment": null,\r
-    "Image": "Deleb.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_War_Machines",\r
-      "Ballista"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Flagbearer_of_Darkness",\r
-    "Name": "Ниброс",\r
-    "Description": "Избранник Хаоса: Ниброс ВСЕГДА выбирает поле для сражения, ему доступен выбор его родной земли(+1/+1 к нападению и защите) и каменных залов. \r\nВражеский герой не может использовать умение \"Тактика\".\r\nУдача всех войск героя увеличивается на 1 единицу.",\r
-    "Comment": null,\r
-    "Image": "Nebiros.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Tactics"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Furious",\r
-    "Name": "Аграил",\r
-    "Description": "Аура активности: «Инициатива» всех существ в армии героя увеличивается на 0.4% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Agrael.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Battle_Frenzy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Gate_Keeper",\r
-    "Name": "Нимус",\r
-    "Description": "Привратник: Число существ, призываемых через «Открытие врат» увеличивается на 0.8% с каждым новым уровнем героя.",\r
-    "Comment": null,\r
-    "Image": "Nymus.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Luck",\r
-      "Magic_Resistance"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Hypnotist",\r
-    "Name": "Аластор",\r
-    "Description": "Похититель разума: Заклинание «Рассеянность» получает дополнительный эффект, уменьшая запас маны жертвы на одну единицу за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Alastor.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Dark_Magic",\r
-      "Master_Of_Mind"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Impregnable",\r
-    "Name": "Марбас",\r
-    "Description": "Разрушитель заклинаний: Все существа в армии героя увеличивают единицы жизни на 0,4% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Marbas.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Protection"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecAgrael",\r
-    "Name": "Ролтаг",\r
-    "Description": "Аура активности: «Инициатива» всех существ в армии героя увеличивается на 0.4% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecOrlando",\r
-    "Name": "Орландо",\r
-    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",\r
-    "Comment": null,\r
-    "Image": "Orlando.png",\r
-    "DefaultSkillIds": [\r
-      "Excruciating_Strikez",\r
-	  "Basic_Leadership"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecVlastelin",\r
-    "Name": "Властелин",\r
-    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",\r
-    "Comment": null,\r
-    "Image": "Sovereign.png",\r
-    "DefaultSkillIds": [\r
-      "Excruciating_Strikez",\r
-	  "Basic_Leadership"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Grawl",\r
-    "Name": "Грол",\r
-    "Description": "Хозяин гончих: Все адские гончие, церберы и огненные гончие в армии героя получают +1 к их Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Grawl.png",\r
-    "DefaultSkillIds": [\r
-      "Hellfire",\r
-	  "Basic_Destructive_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Jezebeth",\r
-    "Name": "Джезебет",\r
-    "Description": "Искушение: Все суккубы, демонессы и искусительницы в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Jezebeth.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Basic_Summoning_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "AvatarOfDeath",\r
-    "Name": "Арантир",\r
-    "Description": "Аватара смерти: Герой может призывать на поле боя таинственное существо, которое сражается на его стороне. Если это существо гибнет, герой теряет всю свою ману.\r\nХарактеристики существа:\r\n«Нападение» и «защита» 50\r\n«Урон» (5 х Lvl + 7 х Sp) – (7 х Lvl + 10 х Sp)\r\n«Единицы жизни» 500 + 10 х Sp + 20 х Kn + 20 х Lv\r\n«Скорость» 6\r\n«Инициатива» 14\r\n«Умения»:\r\nНежить (1 lvl), Наложение проклятия (8), Смертельный взгляд (13), Удар скорби (16), Осушение (21), Смертельный удар (27)\r\n",\r
-    "Comment": null,\r
-    "Image": "Arantir.png",\r
-    "DefaultSkillIds": [\r
-      "Mark_of_the_Necromancer",\r
-      "Basic_Summoning_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Dark_Emissary",\r
-    "Name": "Дейдра",\r
-    "Description": "Баньши: Усилено умение «Крик баньши» - оно снижает «Боевой дух» и «Удачу» армии противника на -3, «Инициатива» снижается на -10% как и при обычном Крике Баньши.",\r
-    "Comment": null,\r
-    "Image": "Deirdre.png",\r
-    "DefaultSkillIds": [\r
-      "Banshee_Howl",\r
-      "Basic_Dark_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Empiric",\r
-    "Name": "Каспар",\r
-    "Description": "Бальзамировщик: Палатка первой помощи исцеляет на 10 единиц жизни больше за каждый уровень героя. Урон от способности \"Чумная палатка\" также увеличивается.",\r
-    "Comment": null,\r
-    "Image": "Kaspar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_War_Machines",\r
-      "First_Aid"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Heir_of_Undeath",\r
-    "Name": "Маркел",\r
-    "Description": "Верховный некромант: Количество существ, получаемых с навыка «Некромантия», возрастает на 2% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Markal.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Necromancy",\r
-      "Expert_Necromancy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Mind_Cleaner",\r
-    "Name": "Золтан",\r
-    "Description": "Черная сила: Когда в армии некроманта остается один отряд (первый раз за битву), герой увеличивает свое колдовство на величину знания и немедленно получает ход.\r\n",\r
-    "Comment": null,\r
-    "Image": "Zoltan.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Intelligence"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Reanimator",\r
-    "Name": "Влад",\r
-    "Description": "Воскреситель: Усиливается действие заклинания «Поднятие мертвых». «Колдовство» для этого заклинания увеличивается на 1 за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Vladimir.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Summoning_Magic",\r
-      "Master_of_Life"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Soulhunter",\r
-    "Name": "Наадир",\r
-    "Description": "Ловец душ: Всякий раз, когда гибнет вражеский отряд, он на время боя заменяется группой дружественных привидений в размере 2 существа за каждый уровень героя, но не выше численности погибшего отряда.",\r
-    "Comment": null,\r
-    "Image": "Naadir.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Summoning_Magic",\r
-      "Basic_Dark_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecNikolas",\r
-    "Name": "Николас",\r
-    "Description": "Особый: Герой может купить в свою армию мумий в количестве 40 существ по стоимости 300 золота за каждую.",\r
-    "Comment": null,\r
-    "Image": "Nicolai.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecOrnella",\r
-    "Name": "Орнелла",\r
-    "Description": "Ужасающая: «Инициатива» отрядов противника в бою уменьшается на 0.4% за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Ornella.png",\r
-    "DefaultSkillIds": [\r
-      "Eternal_Servitude",\r
-      "Basic_Leadership"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Raven",\r
-    "Name": "Равэнна",\r
-    "Description": "Пожиратель душ: Заклинание «Ослабление» не только уменьшает урон, наносимый отрядом врага, но и снижает его «Защиту» на 1 единицу за каждые три уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Raven.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Dark_Magic",\r
-      "Master_Of_Curses"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Orson",\r
-    "Name": "Орсон",\r
-    "Description": "Повелитель зомби: Все обычные, чумные и гниющие зомби в армии героя получают +1 единицу к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Orson.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Lucretia",\r
-    "Name": "Лукреция",\r
-    "Description": "Принцесса вампиров: Все обычные, высшие вампиры и князья вампиров в армии героя получают +1 единиц к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Lucretia.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Sorcery",\r
-      "Arcane_Training"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Call_of_the_Wasp",\r
-    "Name": "Дираэль",\r
-    "Description": "Королева роя: Эффективность заклинания «Призыв осиного роя» растет с уровнем героя. Урон увеличивается на +5% за уровень героя, отброс по АТB-шкале увеличивается на +5% за каждые 3 уровня героя.",\r
-    "Comment": null,\r
-    "Image": "Dirael.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Summoning_Magic",\r
-      "Master_of_Conjuration"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Elven_Fury",\r
-    "Name": "Таланар",\r
-    "Description": "Эльфийская ярость: Оба грейда танцующих, стрелков и друидов получают способности «Ярость», «Боевая ярость» и «Лесная ярость» (+1 к максимальному урону).",\r
-    "Comment": null,\r
-    "Image": "Talanar.png",\r
-    "DefaultSkillIds": [\r
-        "Basic_Leadership",\r
-        "Recruitment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Elven_Volley",\r
-    "Name": "Файдаэн",\r
-    "Description": "Безжалостные стрелы: Все стрелки в армии героя получают +1 инициативы, и в начале битвы автоматически делают выстрел по отряду самого низкого уровня во вражеской армии. Если отрядов одного уровня несколько, то выбирается тот, который расположен последним в окне армии. Урон составляет ( 20% + 2% х Уровень_Героя ) от обычного урона существ. ",\r
-    "Comment": null,\r
-    "Image": "Findan.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Archery"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Forest_Guardian",\r
-    "Name": "Анвэн",\r
-    "Description": "Меч Силанны: Все существа Лесного Союза под командованием героя наносят заклятому врагу на 1.5% больше урона за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Anwen.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Avenger",\r
-      "Expert_Avenger"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecIldar",\r
-    "Name": "Аларон",\r
-    "Description": "Эльфийский свет: Сила отдельных заклинаний искусной магии Света, творимых героем, увеличивается на +15%.\r\nУсиливаются следующие заклинания:\r\nУклонение - до +75% снижение урона;\r\nУскорение - до +28% инициативы;\r\nКаменная кожа - до +14 «Защиты»;\r\nСнятие чар - до +115% вероятности;\r\nКарающий удар - до +14 «Нападения»;\r\nРегенерация - до 83% + 6%*sp единиц жизни;\r\nВоскрешение - до (345 + 23 * sp) единиц жизни.",\r
-    "Comment": null,\r
-    "Image": "Alaron.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Light_Magic",\r
-      "Advanced_Light_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecTieru",\r
-    "Name": "Тиеру",\r
-    "Description": "Избранный: Количество единиц маны у верховных и старших друидов увеличивается до 20. Верховные друиды изучают заклинание «Небесный щит» на развитом уровне магии, старшие друиды изучают заклинания «Призыв улья» и «Призыв элементалей» на развитом уровне магии.",\r
-    "Comment": null,\r
-    "Image": "Tieru.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Light_Magic",\r
-      "Advanced_Light_Magic"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Talented_Warrior",\r
-    "Name": "Винраэль",\r
-    "Description": "Боевая закалка: Покупка уровня стоит на 2000 золота дешевле.",\r
-    "Comment": null,\r
-    "Image": "Vinrael.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Intelligence"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Waylayer",\r
-    "Name": "Вингаэль",\r
-    "Description": "Стремительный боец: В начале боя существа из армии героя получают 0.8%-ный прирост к стартовой позиции на АТБ-шкале за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Wyngaal.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Tactics"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Gilraen",\r
-    "Name": "Гильраэн",\r
-    "Description": "Мастер клинка: Все танцующие с клинками, танцующие со смертью и танцующие с ветром в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Gilraen.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Ylthin",\r
-    "Name": "Ильфина",\r
-    "Description": "Дитя единорога: Все обычные единороги и их улучшения в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Ylthin.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Light_Magic",\r
-      "Master_of_Blessings"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Ossir",\r
-    "Name": "Оссир",\r
-    "Description": "Искусный охотник: Все эльфийские стрелки, мастера лука и лесные стрелки в армии героя получают +1 единиц к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Ossir.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Luck",\r
-      "Magic_Resistance"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Blooddrinker",\r
-    "Name": "Гаруна",\r
-    "Description": "Пьющая кровь: Каждый убитый отряд противника (включая призванные войска) повышает «Нападение» всех существ в армии героя на +1 за каждые 7 уровней героя, полученные после первого уровня: «Нападение» = (Уровень_героя - 1)/7, округление вниз.",\r
-    "Comment": null,\r
-    "Image": "Garuna.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-      "Battle_Frenzy"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "CentaurMistress",\r
-    "Name": "Хаггеш",\r
-    "Description": "Вожак кентавров: Все кентавры, кочевые кентавры и боевые кентавры в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Haggash.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Attack",\r
-	  "Archery"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "DemonHunter",\r
-    "Name": "Горалт",\r
-    "Description": "Охотник на демонов: Если в бою участвуют демонические существа, существа в армии героя быстрее набирают Гнев крови. Бонус ярости +1 за каждые 2 уровня героя.",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "GoblinKing",\r
-    "Name": "Киган",\r
-    "Description": "Король гоблинов: Герой получает перед боем +6 трапперов/колдунов гоблинов за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Kilghan.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Leadership",\r
-      "Recruitment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Offender",\r
-    "Name": "Краг",\r
-    "Description": "Нарушитель: В самом начале боя этот герой может провести одну особую атаку ближнего боя. Кроме того, все его атаки наносят на +1.5% больше урона за каждый уровень героя.",\r
-    "Comment": null,\r
-    "Image": "Kragh.png",\r
-    "DefaultSkillIds": [\r
-      "Powerfull_Blow",\r
-	  "Basic_Attack"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Rash",\r
-    "Name": "Гарлот",\r
-    "Description": "Ищейка: Скорость всех существ под командованием героя увеличивается на 1.",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecArgat",\r
-    "Name": "Аргат",\r
-    "Description": "Исцелитель: Палатка первой помощи исцеляет на 5 x Уровень_Героя единиц здоровья больше. Соответствующим образом увеличится урон от способности «Чумная палатка».",\r
-    "Comment": null,\r
-    "Image": "Urghat.png",\r
-    "DefaultSkillIds": [\r
-      "Powerfull_Blow",\r
-	  "Basic_Attack"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecKujin",\r
-    "Name": "Куджин",\r
-    "Description": "Безжалостная: Все существа в армии героя получают в начале боя больше на +75 очков ярости.",\r
-    "Comment": null,\r
-    "Image": "Kujin.png",\r
-    "DefaultSkillIds": [\r
-      "Memory_Of_Our_Blood",\r
-	  "Basic_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecQuroq",\r
-    "Name": "Курак",\r
-    "Description": "Кровавый рев: После каждого применения клича случайное существо получает 105 очков крови. Эффект не срабатывает два раза подряд на один и тот же отряд.",\r
-    "Comment": null,\r
-    "Image": "Quroq.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Shout",\r
-      "Shout_of_Rage"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "SpecShak",\r
-    "Name": "Шак'Карукат",\r
-    "Description": "Укротитель виверн: Темные виверны и паокаи в армии героя получают +4 единиц жизни за каждый уровень героя",\r
-    "Comment": null,\r
-    "Image": "ShakKarukat.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Defense",\r
-      "Vitality"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "WarLeader",\r
-    "Name": "Готай",\r
-    "Description": "Военачальник: Все боевые кличи дают на +1 единицу ярости больше за каждый уровень героя и тратят на 2 ману меньше.",\r
-    "Comment": null,\r
-    "Image": "Gotai.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Blood_Rage",\r
-	  "Basic_Shout"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "WyvernTamer",\r
-    "Name": "Таргол",\r
-    "Description": "Властелин дьяволов: Темные виверны и паокаи в армии героя получают +4 ед. к жизни за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Tolghar.png",\r
-    "DefaultSkillIds": [\r
-      "Basic_Enlightenment",\r
-      "Advanced_Enlightenment"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Gorshak",\r
-    "Name": "Гошак",\r
-    "Description": "Клинок хана: Все убийцы, палачи и вожаки в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Gorshak.png",\r
-    "DefaultSkillIds": [\r
-      "Advanced_Blood_Rage",\r
-      "Powerfull_Blow"\r
-    ]\r
-  },\r
-  {\r
-    "Id": "Telsek",\r
-    "Name": "Тилсек",\r
-    "Description": "Кулак хана: Все орочьи бойцы, воины и вармонгеры в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",\r
-    "Comment": null,\r
-    "Image": "Telsek.png",\r
-    "DefaultSkillIds": [\r
-      "Might_Over_Magic",\r
-      "Basic_War_Machines"\r
-    ]\r
-  }\r
+[
+  {
+    "Id": "Disrupter",
+    "Name": "Фаиз",
+    "Description": "Разрушитель: Мастерски обращается с заклинанием «Разрушающий луч», которое не только уменьшает защиту жертвы, но и наносит урон в размере 15 единиц за уровень.",
+    "Comment": null,
+    "Image": "Faiz.png",
+    "DefaultSkillIds": [
+      "Basic_Dark_Magic",
+      "Master_of_Pain"
+    ]
+  },
+  {
+    "Id": "Feather_Mage",
+    "Name": "Ора",
+    "Description": "Говорящий с ветром: Очередь хода героя в бою наступает быстрее - «инициатива» героя повышается на +0,05% за каждый уровень.",
+    "Comment": null,
+    "Image": "Jhora.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Arcane_Training"
+    ]
+  },
+  {
+    "Id": "Inexhaustible",
+    "Name": "Нура",
+    "Description": "Мистик: Герой в свой ход во время битвы восстанавливает 1 единицу маны за каждые 3 уровня, начиная с первого.",
+    "Comment": null,
+    "Image": "Nur.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Mark_of_the_Wizard"
+    ]
+  },
+  {
+    "Id": "Machinist",
+    "Name": "Раззак",
+    "Description": "Творец големов: Стальные и обсидиановые големы в армии героя получают +1 ед. к защите и нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Razzak.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "Master_of_Elements",
+    "Name": "Зехир",
+    "Description": "Хозяин элементалей: Всякий раз, когда умирает дружественный отряд, группа элементалей вступает в бой на стороне героя. «Колдовство» для заклинаний «Призыв элементалей» и «Призыв феникса» возрастает на ( Уровень_Героя / 5 ).",
+    "Comment": null,
+    "Image": "Zehir.png",
+    "DefaultSkillIds": [
+      "Basic_Summoning_Magic",
+      "Master_of_Conjuration"
+    ]
+  },
+  {
+    "Id": "Mentor",
+    "Name": "Нархиз",
+    "Description": "Наставник: Архимаги и боевые маги в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя. Также в армию героя присоединяются Архимаги или боевые маги в количестве 1 за каждые 3 уровня героя. Приоритет на архимагов при равном количестве.",
+    "Comment": null,
+    "Image": "Narxes.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Intelligence"
+    ]
+  },
+  {
+    "Id": "Radiant",
+    "Name": "Джалиб",
+    "Description": "Воздушный: Султаны джиннов становятся колдунами, взамен способности \"Случайное заклинание\" получают книгу заклинаний с заклинаниями 1-3 уровня магии Тьмы и Света (кроме заклинаний \"Регенерация\" и \"Скорбь\"). Инициатива джинов в армии героя увеличена на 2. ",
+	"Comment": null,
+    "Image": "Galib.png",
+    "DefaultSkillIds": [
+      "Magic_Mirror",
+      "Basic_Luck"
+    ]
+  },
+  {
+    "Id": "SpecCyrus",
+    "Name": "Сайрус",
+    "Description": "Любимец Богов: Все существа в армии героя постоянно находятся под действием заклинания «Божественная сила».",
+	"Comment": null,
+    "Image": "Cyrus.png",
+    "DefaultSkillIds": [
+      "Magic_Mirror",
+      "Basic_Luck"
+    ]
+  },
+  {
+    "Id": "SpecMaahir",
+    "Name": "Маахир",
+    "Description": "Зажиточный: Получает дополнительные +15 мер каждого ресурса для изготовления мини-артефактов.",
+    "Comment": null,
+    "Image": "Maahir.png",
+    "DefaultSkillIds": [
+      "Advanced_Artificer",
+      "Expert_Artificer"
+    ]
+  },
+  {
+    "Id": "Weilder_of_Fire",
+    "Name": "Назир",
+    "Description": "Властелин пламени: Эффективная колдовская сила героя увеличивается, когда он творит заклинание «Огненный шар». При расчете эффекта «Колдовство» увеличивается на ( Уровень_Героя / 3 ) с округлением вверх.",
+    "Comment": null,
+    "Image": "Nathir.png",
+    "DefaultSkillIds": [
+      "Basic_Destructive_Magic",
+      "Master_of_Fire"
+    ]
+  },
+  {
+    "Id": "Havez",
+    "Name": "Хафиз",
+    "Description": "Хозяин гремлинов: Обычные и старшие гремлины и гремлины-вредители в армии героя получают +1 единицу к Защите и Нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Havez.png",
+    "DefaultSkillIds": [
+      "Consume_Artifact",
+      "Basic_War_Machines"
+    ]
+  },
+  {
+    "Id": "Dark_Acolyte",
+    "Name": "Ирбет",
+    "Description": "Темный мистик: Способность «Темный ритуал» усиливается, количество маны, полученной с ритуала, увеличивается вдвое",
+    "Comment": null,
+    "Image": "Yrbeth.png",
+    "DefaultSkillIds": [
+      "Dark_Ritual",
+      "Basic_Dark_Magic"
+    ]
+  },
+  {
+    "Id": "Evasive",
+    "Name": "Шадия",
+    "Description": "Танцующий в сумерках: Стрельба наносит меньше урона войскам героя на 2% за уровень героя.",
+    "Comment": null,
+    "Image": "Shadya.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Evasion"
+    ]
+  },
+  {
+    "Id": "Lizard_Breeder",
+    "Name": "Соргалл",
+    "Description": "Заводчик ящеров: Темные всадники и проворные наездники получают +1 к «Нападению» и «Защите» за каждые два уровня героя.",
+    "Comment": null,
+    "Image": "Sorgal.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Battle_Frenzy"
+    ]
+  },
+  {
+    "Id": "MasterOfInitiative",
+    "Name": "Раилаг",
+    "Description": "Повелитель инициативы: «Инициатива» существ в армии героя увеличивается, а вражеских существ уменьшается на 0,3% × Уровень_Героя.",
+    "Comment": null,
+    "Image": "Raelag.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Battle_Frenzy"
+    ]
+  },
+  {
+    "Id": "Matron_Salvo",
+    "Name": "Эрин",
+    "Description": "Шабаш ведьм: Владычицы тени делают выстрел по цели своего героя при использовании им одиночных заклинаний, наносящих урон. Герой получает Владычиц тени или Хозяек ночи в количестве 1 + 1 за каждые 10 уровней. Предпочтение отдается существам, которых больше в армии героя.",
+    "Comment": null,
+    "Image": "Eruina.png",
+    "DefaultSkillIds": [
+      "Basic_Destructive_Magic",
+      "Basic_Attack"
+    ]
+  },
+  {
+    "Id": "Poisoner",
+    "Name": "Летос",
+    "Description": "Отравитель: Каждый отряд противника может вступить в бой уже будучи отравленным с вероятностью 2% х Уровень_Героя.",
+    "Comment": null,
+    "Image": "Lethos.png",
+    "DefaultSkillIds": [
+      "Basic_Dark_Magic",
+      "Master_of_Pain"
+    ]
+  },
+  {
+    "Id": "Power_Bargain",
+    "Name": "Синитар",
+    "Description": "Катализатор: Количество потребляемой маны на усиленные заклинания уменьшается на 2% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Sinitar.png",
+    "DefaultSkillIds": [
+      "Empowered_spells",
+      "Basic_Destructive_Magic"
+    ]
+  },
+  {
+    "Id": "Savage",
+    "Name": "Вайшан",
+    "Description": "Протектор: Герой получает 10 + 2 ассасина или ловчего за каждый уровень. Предпочтение отдается существам, которых больше в армии героя.",
+    "Comment": null,
+    "Image": "Vayshan.png",
+    "DefaultSkillIds": [
+      "Basic_Luck",
+      "Soldier's_Luck"
+    ]
+  },
+  {
+    "Id": "Slaveholder",
+    "Name": "Кифра",
+    "Description": "Рабовладелец: Все минотавры-стражи и минотавры-надсмотрщики в армии героя получают +1 ед. к защите и нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Kythra.png",
+    "DefaultSkillIds": [
+      "Basic_Leadership",
+      "Estates"
+    ]
+  },
+  {
+    "Id": "SpecShadwyn",
+    "Name": "Илайя",
+    "Description": "Направляющая стихию: Расовый навык героя усиливается на один уровень, вплоть до абсолютной неодолимой магии (урон элементальных цепочек равен 67%, магическая защита преодолевается на 50%).",
+    "Comment": null,
+    "Image": "Ylaya.png",
+    "DefaultSkillIds": [
+      "Advanced_Irresistible_Magic",
+      "Elemental_Vision"
+    ]
+  },
+  {
+    "Id": "SpecThralsai",
+    "Name": "Тралсай",
+    "Description": "Властелин гидр: Пещерные и темные гидры получают +5 к инициативе",
+    "Comment": null,
+    "Image": "Thralsai.png",
+    "DefaultSkillIds": [
+      "Advanced_Irresistible_Magic",
+      "Elemental_Vision"
+    ]
+  },
+  {
+    "Id": "Yrwanna",
+    "Name": "Иранна",
+    "Description": "Кровавая госпожа: Бестии, фурии и мегеры в армии героя получают +1 к Защите и Нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Yrwanna.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Intelligence"
+    ]
+  },
+  {
+    "Id": "Border_Guard",
+    "Name": "Ратолг",
+    "Description": "Хозяин берсерков: Берсерки и Воины Арката получают +2 к инициативе и скорости.",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+	  "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "Courtier",
+    "Name": "Ролгат",
+    "Description": "Золотой язык: Герой получает на выбор 1 великий артефакт, 1 реликвию или ~12000 золота",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+	  "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "Defender",
+    "Name": "Ингвар",
+    "Description": "Черная рука: Воители и стражи гор в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя.",
+    "Comment": null,
+    "Image": "Ingvar.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "Economist",
+    "Name": "Бранд",
+    "Description": "Художник Рун: Для использования рун герой получает по 1 ресурсу всех типов за каждые 6 уровней.",
+    "Comment": null,
+    "Image": "Brand.png",
+    "DefaultSkillIds": [
+      "Advanced_Runelore",
+      "Fine_Rune"
+    ]
+  },
+  {
+    "Id": "Mountain_King",
+    "Name": "Толгар",
+    "Description": "Король Каменных Залов: Все существа в армии героя постоянно испытывают на себе действие руны громового раската (восстанавливается на начале хода отряда)",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "Researcher",
+    "Name": "Инга",
+    "Description": "Повелитель Рун: Герой изучает все руны 1-2 тира. ",
+    "Comment": null,
+    "Image": "Inga.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Scholar"
+    ]
+  },
+  {
+    "Id": "Rider",
+    "Name": "Ибба",
+    "Description": "Всадник: Наездники на медведях, хозяева медведей и северные наездники в армии героя получают +1 к «Нападению» и «Защите» за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Ebba.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Tactics"
+    ]
+  },
+  {
+    "Id": "Sacred_Hammer",
+    "Name": "Хельмар",
+    "Description": "Священный молот: Каждый раз, когда герой накладывает заклинание магии Света на дружественный отряд, существует вероятность того, что на отряд также будет наложено заклинание «Карающий удар» (3.5% за уровень).",
+    "Comment": null,
+    "Image": "Helmar.png",
+    "DefaultSkillIds": [
+      "Basic_Light_Magic",
+      "Advanced_Light_Magic"
+    ]
+  },
+  {
+    "Id": "SpecRolf",
+    "Name": "Рольф",
+    "Description": "Золотой язык: Действие навыка «Дипломатия» распространяется на существ 5-7 тира (даже если они не являются колдунами). На каждый уровень существ навык срабатывает не более одного раза. Округление работает всегда вниз.",
+    "Comment": null,
+    "Image": "Rolf.png",
+    "DefaultSkillIds": [
+      "Basic_Leadership",
+      "Diplomacy"
+    ]
+  },
+  {
+    "Id": "SpecWulfstan",
+    "Name": "Вульфстен",
+    "Description": "Воинственный: Берсерки и воины Арката в армии героя получают +3 к «Скорости» и «Инициативе».",
+    "Comment": null,
+    "Image": "Wulfstan.png",
+    "DefaultSkillIds": [
+      "Basic_Logistics",
+      "Pathfinding"
+    ]
+  },
+  {
+    "Id": "Stormcaller",
+    "Name": "Свея",
+    "Description": "Призывающий бурю: Герой получает заклинания «Молния» и «Цепь молний», которые неотразимы для врагов (однако невосприимчивость и непробиваемость магией по-прежнему будут действовать). Герой учит усиленный вариант заклинаний Воздуха, имеющихся у героя.",
+    "Comment": null,
+    "Image": "Svea.png",
+    "DefaultSkillIds": [
+      "Basic_Destructive_Magic",
+      "Basic_Sorcery"
+    ]
+  },
+  {
+    "Id": "Erling",
+    "Name": "Эрлинг",
+    "Description": "Хранитель пламени: Жрецы рун, жрецы Арката и жрецы пламени в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Erling.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Advanced_Sorcery"
+    ]
+  },
+  {
+    "Id": "Karli",
+    "Name": "Карли",
+    "Description": "Острый клинок: Метатели копья, мастера копья и гарпунёры в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Karli.png",
+    "DefaultSkillIds": [
+      "Basic_Luck",
+      "Soldier's_Luck"
+    ]
+  },
+  {
+    "Id": "ChosenByGods",
+    "Name": "Фрида",
+    "Description": "Любимец богов: Сила отдельных заклинаний искусной магии Света, творимых героем, увеличивается до +35%.\r\nУсиливаются следующие заклинания:\r\nУклонение - до +80% снижение урона;\r\nУскорение - до +40% инициативы;\r\nКаменная кожа - до +15 «Защиты»;\r\nСнятие чар - до +120% вероятности;\r\nКарающий удар - до +15 «Нападения»;\r\nРегенерация - до (100 + 7 * sp)% единиц жизни;\r\nВоскрешение - до (300 + 40 * sp) единиц жизни.",
+    "Comment": null,
+    "Image": "Freyda.png",
+    "DefaultSkillIds": [
+      "Advanced_Training",
+      "Expert_Training"
+    ]
+  },
+  {
+    "Id": "Expediter",
+    "Name": "Мив",
+    "Description": "Эффект от заклинания «Ускорение» с каждым уровнем героя увеличивается на 0.8%.",
+    "Comment": null,
+    "Image": "Maeve.png",
+    "DefaultSkillIds": [
+      "Basic_Light_Magic",
+      "Master_of_Wrath"
+    ]
+  },
+  {
+    "Id": "Griffon_Commander",
+    "Name": "Айрис",
+    "Description": "Все королевские и боевые грифоны в армии героя получают +1 ед. к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Irina.png",
+    "DefaultSkillIds": [
+      "Basic_Luck",
+      "Magic_Resistance"
+    ]
+  },
+  {
+    "Id": "Jouster",
+    "Name": "Аксель",
+    "Description": "Капитан рыцарей: Увеличивается урон, наносимый способностью Рыцарский разбег, у паладинов и рыцарей Изабель в армии героя на 2% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Klaus.png",
+    "DefaultSkillIds": [
+      "Retaliation_Strike",
+      "Basic_Attack"
+    ]
+  },
+  {
+    "Id": "SpecValeria",
+    "Name": "Валерия",
+    "Description": "Избранная Тьмой: Герой может изучать массовые версии заклинаний магии Тьмы, если имеет базу школы магии Тьмы.",
+    "Comment": null,
+    "Image": "Valeria.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Basic_Dark_Magic"
+    ]
+  },
+  {
+    "Id": "Squire",
+    "Name": "Эллайна",
+    "Description": "Любимец народа: Ополченцы и лендлорды в армии героя получают +1 к защите и нападению за каждые два уровня героя, начиная с первого. К тому же при их найме часть золота возвращается обратно (10 за каждого).",
+    "Comment": null,
+    "Image": "Ellaine.png",
+    "DefaultSkillIds": [
+      "Basic_Leadership",
+      "Recruitment"
+    ]
+  },
+  {
+    "Id": "Suzerain",
+    "Name": "Рутгер",
+    "Description": "Талион: Герой получает 150 очков тренировки.",
+    "Comment": null,
+    "Image": "Rutger.png",
+    "DefaultSkillIds": [
+      "Advanced_Training",
+      "Expert_Training"
+    ]
+  },
+  {
+    "Id": "Wanderer",
+    "Name": "Дункан",
+    "Description": "Талион: Герой получает 150 очков тренировки.",
+    "Comment": null,
+    "Image": "Duncan.png",
+    "DefaultSkillIds": [
+      "Advanced_Training",
+      "Expert_Training"
+    ]
+  },
+  {
+    "Id": "White_Knight",
+    "Name": "Годрик",
+    "Description": "Идеальный рыцарь: Эффект «Молитвы» действует в полтора раза сильнее. Мана, используемая для сотворения заклинаний магии Света, снижается на 1 ед.",
+    "Comment": null,
+    "Image": "Godric.png",
+    "DefaultSkillIds": [
+      "Benediction",
+      "Basic_Light_Magic"
+    ]
+  },
+  {
+    "Id": "Vittorio",
+    "Name": "Витторио",
+    "Description": "Осадный инженер: Баллиста получает +1 к «Нападению» за каждый уровень героя. Шанс катапульты поразить стены увеличивается на 2% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Vittorio.png",
+    "DefaultSkillIds": [
+      "Basic_War_Machines",
+      "Ballista"
+    ]
+  },
+  {
+    "Id": "Laszlo",
+    "Name": "Ласло",
+    "Description": "Командир латников: Все латники, мечники и ревнители веры в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Laszlo.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "Dougal",
+    "Name": "Дугал",
+    "Description": "Командир лучников: Все лучники и арбалетчики в армии героя получают +1 единиц к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Dougal.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+	  "Archery"
+    ]
+  },
+  {
+    "Id": "Beater",
+    "Name": "Грок",
+    "Description": "Скороход: Скорость всех существ в армии героя увеличивается на 1. ",
+    "Comment": null,
+    "Image": "Grok.png",
+    "DefaultSkillIds": [
+      "Basic_Logistics",
+      "Pathfinding"
+    ]
+  },
+  {
+    "Id": "Bombardier",
+    "Name": "Дэлеб",
+    "Description": "Железная дева: Каждый снаряд баллисты героя несет заклинание «Огненный шар» с уроном по формуле 20 х ((Уровень_Героя-1) / 5). ",
+    "Comment": null,
+    "Image": "Deleb.png",
+    "DefaultSkillIds": [
+      "Basic_War_Machines",
+      "Ballista"
+    ]
+  },
+  {
+    "Id": "Flagbearer_of_Darkness",
+    "Name": "Ниброс",
+    "Description": "Избранник Хаоса: Ниброс ВСЕГДА выбирает поле для сражения, ему доступен выбор его родной земли(+1/+1 к нападению и защите) и каменных залов. \r\nВражеский герой не может использовать умение \"Тактика\".\r\nУдача всех войск героя увеличивается на 1 единицу.",
+    "Comment": null,
+    "Image": "Nebiros.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Tactics"
+    ]
+  },
+  {
+    "Id": "Furious",
+    "Name": "Аграил",
+    "Description": "Аура активности: «Инициатива» всех существ в армии героя увеличивается на 0.4% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Agrael.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Battle_Frenzy"
+    ]
+  },
+  {
+    "Id": "Gate_Keeper",
+    "Name": "Нимус",
+    "Description": "Привратник: Число существ, призываемых через «Открытие врат» увеличивается на 0.8% с каждым новым уровнем героя.",
+    "Comment": null,
+    "Image": "Nymus.png",
+    "DefaultSkillIds": [
+      "Basic_Luck",
+      "Magic_Resistance"
+    ]
+  },
+  {
+    "Id": "Hypnotist",
+    "Name": "Аластор",
+    "Description": "Похититель разума: Заклинание «Рассеянность» получает дополнительный эффект, уменьшая запас маны жертвы на одну единицу за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Alastor.png",
+    "DefaultSkillIds": [
+      "Basic_Dark_Magic",
+      "Master_Of_Mind"
+    ]
+  },
+  {
+    "Id": "Impregnable",
+    "Name": "Марбас",
+    "Description": "Разрушитель заклинаний: Все существа в армии героя увеличивают единицы жизни на 0,4% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Marbas.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Protection"
+    ]
+  },
+  {
+    "Id": "SpecAgrael",
+    "Name": "Ролтаг",
+    "Description": "Аура активности: «Инициатива» всех существ в армии героя увеличивается на 0.4% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "SpecOrlando",
+    "Name": "Орландо",
+    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",
+    "Comment": null,
+    "Image": "Orlando.png",
+    "DefaultSkillIds": [
+      "Excruciating_Strikez",
+	  "Basic_Leadership"
+    ]
+  },
+  {
+    "Id": "SpecVlastelin",
+    "Name": "Властелин",
+    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",
+    "Comment": null,
+    "Image": "Sovereign.png",
+    "DefaultSkillIds": [
+      "Excruciating_Strikez",
+	  "Basic_Leadership"
+    ]
+  },
+  {
+    "Id": "Grawl",
+    "Name": "Грол",
+    "Description": "Хозяин гончих: Все адские гончие, церберы и огненные гончие в армии героя получают +1 к их Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Grawl.png",
+    "DefaultSkillIds": [
+      "Hellfire",
+	  "Basic_Destructive_Magic"
+    ]
+  },
+  {
+    "Id": "Jezebeth",
+    "Name": "Джезебет",
+    "Description": "Искушение: Все суккубы, демонессы и искусительницы в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Jezebeth.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Basic_Summoning_Magic"
+    ]
+  },
+  {
+    "Id": "AvatarOfDeath",
+    "Name": "Арантир",
+    "Description": "Аватара смерти: Герой может призывать на поле боя таинственное существо, которое сражается на его стороне. Если это существо гибнет, герой теряет всю свою ману.\r\nХарактеристики существа:\r\n«Нападение» и «защита» 50\r\n«Урон» (5 х Lvl + 7 х Sp) – (7 х Lvl + 10 х Sp)\r\n«Единицы жизни» 500 + 10 х Sp + 20 х Kn + 20 х Lv\r\n«Скорость» 6\r\n«Инициатива» 14\r\n«Умения»:\r\nНежить (1 lvl), Наложение проклятия (8), Смертельный взгляд (13), Удар скорби (16), Осушение (21), Смертельный удар (27)\r\n",
+    "Comment": null,
+    "Image": "Arantir.png",
+    "DefaultSkillIds": [
+      "Mark_of_the_Necromancer",
+      "Basic_Summoning_Magic"
+    ]
+  },
+  {
+    "Id": "Dark_Emissary",
+    "Name": "Дейдра",
+    "Description": "Баньши: Усилено умение «Крик баньши» - оно снижает «Боевой дух» и «Удачу» армии противника на -3, «Инициатива» снижается на -10% как и при обычном Крике Баньши.",
+    "Comment": null,
+    "Image": "Deirdre.png",
+    "DefaultSkillIds": [
+      "Banshee_Howl",
+      "Basic_Dark_Magic"
+    ]
+  },
+  {
+    "Id": "Empiric",
+    "Name": "Каспар",
+    "Description": "Бальзамировщик: Палатка первой помощи исцеляет на 10 единиц жизни больше за каждый уровень героя. Урон от способности \"Чумная палатка\" также увеличивается.",
+    "Comment": null,
+    "Image": "Kaspar.png",
+    "DefaultSkillIds": [
+      "Basic_War_Machines",
+      "First_Aid"
+    ]
+  },
+  {
+    "Id": "Heir_of_Undeath",
+    "Name": "Маркел",
+    "Description": "Верховный некромант: Количество существ, получаемых с навыка «Некромантия», возрастает на 2% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Markal.png",
+    "DefaultSkillIds": [
+      "Advanced_Necromancy",
+      "Expert_Necromancy"
+    ]
+  },
+  {
+    "Id": "Mind_Cleaner",
+    "Name": "Золтан",
+    "Description": "Черная сила: Когда в армии некроманта остается один отряд (первый раз за битву), герой увеличивает свое колдовство на величину знания и немедленно получает ход.\r\n",
+    "Comment": null,
+    "Image": "Zoltan.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Intelligence"
+    ]
+  },
+  {
+    "Id": "Reanimator",
+    "Name": "Влад",
+    "Description": "Воскреситель: Усиливается действие заклинания «Поднятие мертвых». «Колдовство» для этого заклинания увеличивается на 1 за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Vladimir.png",
+    "DefaultSkillIds": [
+      "Basic_Summoning_Magic",
+      "Master_of_Life"
+    ]
+  },
+  {
+    "Id": "Soulhunter",
+    "Name": "Наадир",
+    "Description": "Ловец душ: Всякий раз, когда гибнет вражеский отряд, он на время боя заменяется группой дружественных привидений в размере 2 существа за каждый уровень героя, но не выше численности погибшего отряда.",
+    "Comment": null,
+    "Image": "Naadir.png",
+    "DefaultSkillIds": [
+      "Basic_Summoning_Magic",
+      "Basic_Dark_Magic"
+    ]
+  },
+  {
+    "Id": "SpecNikolas",
+    "Name": "Николас",
+    "Description": "Особый: Герой может купить в свою армию мумий в количестве 40 существ по стоимости 300 золота за каждую.",
+    "Comment": null,
+    "Image": "Nicolai.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "SpecOrnella",
+    "Name": "Орнелла",
+    "Description": "Ужасающая: «Инициатива» отрядов противника в бою уменьшается на 0.4% за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Ornella.png",
+    "DefaultSkillIds": [
+      "Eternal_Servitude",
+      "Basic_Leadership"
+    ]
+  },
+  {
+    "Id": "Raven",
+    "Name": "Равэнна",
+    "Description": "Пожиратель душ: Заклинание «Ослабление» не только уменьшает урон, наносимый отрядом врага, но и снижает его «Защиту» на 1 единицу за каждые три уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Raven.png",
+    "DefaultSkillIds": [
+      "Basic_Dark_Magic",
+      "Master_Of_Curses"
+    ]
+  },
+  {
+    "Id": "Orson",
+    "Name": "Орсон",
+    "Description": "Повелитель зомби: Все обычные, чумные и гниющие зомби в армии героя получают +1 единицу к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Orson.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "Lucretia",
+    "Name": "Лукреция",
+    "Description": "Принцесса вампиров: Все обычные, высшие вампиры и князья вампиров в армии героя получают +1 единиц к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Lucretia.png",
+    "DefaultSkillIds": [
+      "Basic_Sorcery",
+      "Arcane_Training"
+    ]
+  },
+  {
+    "Id": "Call_of_the_Wasp",
+    "Name": "Дираэль",
+    "Description": "Королева роя: Эффективность заклинания «Призыв осиного роя» растет с уровнем героя. Урон увеличивается на +5% за уровень героя, отброс по АТB-шкале увеличивается на +5% за каждые 3 уровня героя.",
+    "Comment": null,
+    "Image": "Dirael.png",
+    "DefaultSkillIds": [
+      "Basic_Summoning_Magic",
+      "Master_of_Conjuration"
+    ]
+  },
+  {
+    "Id": "Elven_Fury",
+    "Name": "Таланар",
+    "Description": "Эльфийская ярость: Оба грейда танцующих, стрелков и друидов получают способности «Ярость», «Боевая ярость» и «Лесная ярость» (+1 к максимальному урону).",
+    "Comment": null,
+    "Image": "Talanar.png",
+    "DefaultSkillIds": [
+        "Basic_Leadership",
+        "Recruitment"
+    ]
+  },
+  {
+    "Id": "Elven_Volley",
+    "Name": "Файдаэн",
+    "Description": "Безжалостные стрелы: Все стрелки в армии героя получают +1 инициативы, и в начале битвы автоматически делают выстрел по отряду самого низкого уровня во вражеской армии. Если отрядов одного уровня несколько, то выбирается тот, который расположен последним в окне армии. Урон составляет ( 20% + 2% х Уровень_Героя ) от обычного урона существ. ",
+    "Comment": null,
+    "Image": "Findan.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Archery"
+    ]
+  },
+  {
+    "Id": "Forest_Guardian",
+    "Name": "Анвэн",
+    "Description": "Меч Силанны: Все существа Лесного Союза под командованием героя наносят заклятому врагу на 1.5% больше урона за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Anwen.png",
+    "DefaultSkillIds": [
+      "Advanced_Avenger",
+      "Expert_Avenger"
+    ]
+  },
+  {
+    "Id": "SpecIldar",
+    "Name": "Аларон",
+    "Description": "Эльфийский свет: Сила отдельных заклинаний искусной магии Света, творимых героем, увеличивается на +15%.\r\nУсиливаются следующие заклинания:\r\nУклонение - до +75% снижение урона;\r\nУскорение - до +28% инициативы;\r\nКаменная кожа - до +14 «Защиты»;\r\nСнятие чар - до +115% вероятности;\r\nКарающий удар - до +14 «Нападения»;\r\nРегенерация - до 83% + 6%*sp единиц жизни;\r\nВоскрешение - до (345 + 23 * sp) единиц жизни.",
+    "Comment": null,
+    "Image": "Alaron.png",
+    "DefaultSkillIds": [
+      "Basic_Light_Magic",
+      "Advanced_Light_Magic"
+    ]
+  },
+  {
+    "Id": "SpecTieru",
+    "Name": "Тиеру",
+    "Description": "Избранный: Количество единиц маны у верховных и старших друидов увеличивается до 20. Верховные друиды изучают заклинание «Небесный щит» на развитом уровне магии, старшие друиды изучают заклинания «Призыв улья» и «Призыв элементалей» на развитом уровне магии.",
+    "Comment": null,
+    "Image": "Tieru.png",
+    "DefaultSkillIds": [
+      "Basic_Light_Magic",
+      "Advanced_Light_Magic"
+    ]
+  },
+  {
+    "Id": "Talented_Warrior",
+    "Name": "Винраэль",
+    "Description": "Боевая закалка: Покупка уровня стоит на 2000 золота дешевле.",
+    "Comment": null,
+    "Image": "Vinrael.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Intelligence"
+    ]
+  },
+  {
+    "Id": "Waylayer",
+    "Name": "Вингаэль",
+    "Description": "Стремительный боец: В начале боя существа из армии героя получают 0.8%-ный прирост к стартовой позиции на АТБ-шкале за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Wyngaal.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Tactics"
+    ]
+  },
+  {
+    "Id": "Gilraen",
+    "Name": "Гильраэн",
+    "Description": "Мастер клинка: Все танцующие с клинками, танцующие со смертью и танцующие с ветром в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Gilraen.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "Ylthin",
+    "Name": "Ильфина",
+    "Description": "Дитя единорога: Все обычные единороги и их улучшения в армии героя получают +1 ед. к Защите и Нападению за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Ylthin.png",
+    "DefaultSkillIds": [
+      "Basic_Light_Magic",
+      "Master_of_Blessings"
+    ]
+  },
+  {
+    "Id": "Ossir",
+    "Name": "Оссир",
+    "Description": "Искусный охотник: Все эльфийские стрелки, мастера лука и лесные стрелки в армии героя получают +1 единиц к «Защите» и «Нападению» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Ossir.png",
+    "DefaultSkillIds": [
+      "Basic_Luck",
+      "Magic_Resistance"
+    ]
+  },
+  {
+    "Id": "Blooddrinker",
+    "Name": "Гаруна",
+    "Description": "Пьющая кровь: Каждый убитый отряд противника (включая призванные войска) повышает «Нападение» всех существ в армии героя на +1 за каждые 7 уровней героя, полученные после первого уровня: «Нападение» = (Уровень_героя - 1)/7, округление вниз.",
+    "Comment": null,
+    "Image": "Garuna.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+      "Battle_Frenzy"
+    ]
+  },
+  {
+    "Id": "CentaurMistress",
+    "Name": "Хаггеш",
+    "Description": "Вожак кентавров: Все кентавры, кочевые кентавры и боевые кентавры в армии героя получают +1 к «Нападению» и «Защите» за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Haggash.png",
+    "DefaultSkillIds": [
+      "Basic_Attack",
+	  "Archery"
+    ]
+  },
+  {
+    "Id": "DemonHunter",
+    "Name": "Горалт",
+    "Description": "Охотник на демонов: Если в бою участвуют демонические существа, существа в армии героя быстрее набирают Гнев крови. Бонус ярости +1 за каждые 2 уровня героя.",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "GoblinKing",
+    "Name": "Киган",
+    "Description": "Король гоблинов: Герой получает перед боем +6 трапперов/колдунов гоблинов за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Kilghan.png",
+    "DefaultSkillIds": [
+      "Basic_Leadership",
+      "Recruitment"
+    ]
+  },
+  {
+    "Id": "Offender",
+    "Name": "Краг",
+    "Description": "Нарушитель: В самом начале боя этот герой может провести одну особую атаку ближнего боя. Кроме того, все его атаки наносят на +1.5% больше урона за каждый уровень героя.",
+    "Comment": null,
+    "Image": "Kragh.png",
+    "DefaultSkillIds": [
+      "Powerfull_Blow",
+	  "Basic_Attack"
+    ]
+  },
+  {
+    "Id": "Rash",
+    "Name": "Гарлот",
+    "Description": "Ищейка: Скорость всех существ под командованием героя увеличивается на 1.",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "SpecArgat",
+    "Name": "Аргат",
+    "Description": "Исцелитель: Палатка первой помощи исцеляет на 5 x Уровень_Героя единиц здоровья больше. Соответствующим образом увеличится урон от способности «Чумная палатка».",
+    "Comment": null,
+    "Image": "Urghat.png",
+    "DefaultSkillIds": [
+      "Powerfull_Blow",
+	  "Basic_Attack"
+    ]
+  },
+  {
+    "Id": "SpecKujin",
+    "Name": "Куджин",
+    "Description": "Безжалостная: Все существа в армии героя получают в начале боя больше на +75 очков ярости.",
+    "Comment": null,
+    "Image": "Kujin.png",
+    "DefaultSkillIds": [
+      "Memory_Of_Our_Blood",
+	  "Basic_Enlightenment"
+    ]
+  },
+  {
+    "Id": "SpecQuroq",
+    "Name": "Курак",
+    "Description": "Кровавый рев: После каждого применения клича случайное существо получает 105 очков крови. Эффект не срабатывает два раза подряд на один и тот же отряд.",
+    "Comment": null,
+    "Image": "Quroq.png",
+    "DefaultSkillIds": [
+      "Basic_Shout",
+      "Shout_of_Rage"
+    ]
+  },
+  {
+    "Id": "SpecShak",
+    "Name": "Шак'Карукат",
+    "Description": "Укротитель виверн: Темные виверны и паокаи в армии героя получают +4 единиц жизни за каждый уровень героя",
+    "Comment": null,
+    "Image": "ShakKarukat.png",
+    "DefaultSkillIds": [
+      "Basic_Defense",
+      "Vitality"
+    ]
+  },
+  {
+    "Id": "WarLeader",
+    "Name": "Готай",
+    "Description": "Военачальник: Все боевые кличи дают на +1 единицу ярости больше за каждый уровень героя и тратят на 2 ману меньше.",
+    "Comment": null,
+    "Image": "Gotai.png",
+    "DefaultSkillIds": [
+      "Advanced_Blood_Rage",
+	  "Basic_Shout"
+    ]
+  },
+  {
+    "Id": "WyvernTamer",
+    "Name": "Таргол",
+    "Description": "Властелин дьяволов: Темные виверны и паокаи в армии героя получают +4 ед. к жизни за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Tolghar.png",
+    "DefaultSkillIds": [
+      "Basic_Enlightenment",
+      "Advanced_Enlightenment"
+    ]
+  },
+  {
+    "Id": "Gorshak",
+    "Name": "Гошак",
+    "Description": "Клинок хана: Все убийцы, палачи и вожаки в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Gorshak.png",
+    "DefaultSkillIds": [
+      "Advanced_Blood_Rage",
+      "Powerfull_Blow"
+    ]
+  },
+  {
+    "Id": "Telsek",
+    "Name": "Тилсек",
+    "Description": "Кулак хана: Все орочьи бойцы, воины и вармонгеры в армии героя получают +1 к Нападению и Защите за каждые два уровня героя, начиная с первого.",
+    "Comment": null,
+    "Image": "Telsek.png",
+    "DefaultSkillIds": [
+      "Might_Over_Magic",
+      "Basic_War_Machines"
+    ]
+  }
 ]
