@@ -1329,6 +1329,12 @@ function runBattle()
   sleep(5);
   
   -- ASHA
+  local MapVersion = '1.28d';
+  
+  if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
+    MapVersion = MapVersion..'_no_mentor'
+  end;
+  
   local customData = {
     ["Hero1_StartBonus"] = PLAYER_STARTED_BONUSES[PLAYER_1],
     ["Hero2_StartBonus"] = PLAYER_STARTED_BONUSES[PLAYER_2],
@@ -1337,7 +1343,8 @@ function runBattle()
     -- Скорее всего нужно добавить генерацию уникальных id с сайта для регистрации карт
     -- Во избежания использования библиотеки злоумышленниками для незарегистрированных карт
     ["MapType"] = 'HRTA',
-    ["MapVersion"] = '1.28b',
+    ["MapVersion"] = MapVersion,
+
   };
 
   composeHeroesDataBeforeFight(p1MainHeroName, p2MainHeroName);

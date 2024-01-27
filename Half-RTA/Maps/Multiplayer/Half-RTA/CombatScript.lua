@@ -552,7 +552,7 @@ function mineDeathATB()
         end
       end
     end
-    sleep(100)
+    sleep(1)
     combatSetPause(nil)
 
   until N ~= 0

@@ -123,7 +123,7 @@ function deleteAllDelimeters()
   RemoveObject     ('blue20');
 end;
 
---  всех перегородок
+-- Перемещение всех перегородок
 function moveDelimetersToRandomChoise()
   print "moveDelimetersToRandomChoise"
   
@@ -151,6 +151,7 @@ function moveDelimetersToRandomChoise()
   SetObjectPosition('blue15', 40, 23)
   SetObjectPosition('blue16', 40, 21)
 end;
+
 
 -- соотношение расы с отображаемыми при черке существами
 MAPPING_RACE_TO_CREATURES = {

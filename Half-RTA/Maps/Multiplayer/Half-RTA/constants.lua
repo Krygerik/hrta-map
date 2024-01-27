@@ -19,6 +19,12 @@ GAME_MODE = {
 -- Выбран ли режим хотсит
 HOTSEAT_STATUS = nil;
 
+
+--Кастомные режимы игры
+CUSTOM_GAME_MODE_NO_MENTOR = nil;
+CUSTOM_GAME_MODE_ONLY_CHERK_SINGLE_HEROES = nil;
+CUSTOM_GAME_MODE_ONLY_MIRROR = nil;
+
 -- Кастомное перечисление рас, за неимением такого по умолчанию
 RACES = {
   -- Орден Порядка

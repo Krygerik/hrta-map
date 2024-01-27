@@ -47,16 +47,12 @@ end;
 
 -- ѕолучение зарезервированному названи€ геро€ по его словарному
 function getReservedHeroName(playerId, dictHeroName)
-  print "getReservedHeroName"
   for indexHero = 1, length(MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME) do
     local heroReservedNamesTable = MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME[indexHero];
     if heroReservedNamesTable.dictName == dictHeroName then
-      print("heroReservedNamesTable.reservedNames[playerId];")
-      print(heroReservedNamesTable.reservedNames[playerId])
       return heroReservedNamesTable.reservedNames[playerId];
     end;
   end;
-      print("VISLI")
 end;
 
 -- ”ниверсальный перенос артефактов между геро€ми
