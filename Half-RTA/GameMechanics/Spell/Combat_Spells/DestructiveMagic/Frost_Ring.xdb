@@ -15,7 +15,11 @@
 	<TrainedCost>9</TrainedCost>
 	<damage>
 		<Item>
-			<Base>96</Base>
+			<Base>72</Base>
+			<PerPower>12</PerPower>
+		</Item>
+		<Item>
+			<Base>72</Base>
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
@@ -23,11 +27,7 @@
 			<PerPower>12</PerPower>
 		</Item>
 		<Item>
-			<Base>132</Base>
-			<PerPower>12</PerPower>
-		</Item>
-		<Item>
-			<Base>168</Base>
+			<Base>120</Base>
 			<PerPower>12</PerPower>
 		</Item>
 	</damage>

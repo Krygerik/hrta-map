@@ -37,7 +37,7 @@ function getDictionaryHeroName(heroName)
     
     for indexName = 1, length(heroReservedNamesTable.reservedNames) do
       local heroReverveName = heroReservedNamesTable.reservedNames[indexName];
-      
+
       if heroReverveName == heroName then
         return heroReservedNamesTable.dictName;
       end;
@@ -49,7 +49,6 @@ end;
 function getReservedHeroName(playerId, dictHeroName)
   for indexHero = 1, length(MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME) do
     local heroReservedNamesTable = MAPPING_HERO_NAME_TO_PLAYERS_HERO_NAME[indexHero];
-    
     if heroReservedNamesTable.dictName == dictHeroName then
       return heroReservedNamesTable.reservedNames[playerId];
     end;

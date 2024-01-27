@@ -3,7 +3,7 @@ PATH_TO_BUY_HERO_MODULE = PATH_TO_DAY3_SCRIPTS.."buy_hero/";
 PATH_TO_BUY_HERO_MESSAGES = PATH_TO_BUY_HERO_MODULE.."messages/";
 
 -- Стоимость покупки героя
-BUY_HERO_COST = 5000;
+BUY_HERO_COST = 3000;
 
 -- Соотношение ИД объектов для покупки доп героев к игрокам
 MAP_BUY_HERO_OBJECT_ON_PLAYER = {

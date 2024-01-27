@@ -14,16 +14,16 @@
 	<TrainedCost>18</TrainedCost>
 	<damage>
 		<Item>
-			<Base>17</Base>
-			<PerPower>17</PerPower>
-		</Item>
-		<Item>
-			<Base>17</Base>
-			<PerPower>17</PerPower>
+			<Base>20</Base>
+			<PerPower>20</PerPower>
 		</Item>
 		<Item>
 			<Base>20</Base>
 			<PerPower>20</PerPower>
+		</Item>
+		<Item>
+			<Base>30</Base>
+			<PerPower>30</PerPower>
 		</Item>
 		<Item>
 			<Base>40</Base>

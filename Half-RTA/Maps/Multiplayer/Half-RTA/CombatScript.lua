@@ -38,11 +38,13 @@ HERO_2_TURN = 0
 
 GUARDIAN_ANGEL_ACTIVATE = 0
 
-
+-- Статус активации спецы Крага
+PLAYERS_KRAGH_STATUS = {
+  [0] = nil,
+  [1] = nil,
+};
 
 HEROES_INFO = parse(GetGameVar('heroes_info'))()
-
-
 
 function shuffle(t)
 	local n = getn(t)
@@ -235,6 +237,10 @@ num_turn = {0, 0, 0}   -- all, hero_att, hero_def
 spellpower_bonus = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 14, 16, 19, 21, 24, 28, 32, 36, 41, 46, 52, 58, 66, 74, 83, 93, 104, 117, 131, 150}
 zoltan_use = 0
 
+-- Статус активации спецы Сайруса
+cyrus_round_status = 0
+cyrus_use = 0
+
 -- Покровительство Асхи счетчик
 ASHA_COUNTER = {
   [0] = {miss = 0, triger = 0},
@@ -280,6 +286,8 @@ function OnStart()
 --    print(real_creatures[0])
 	end
 	local disable_auto_finish = nil
+	
+	
 	for side, hero in {[0]=GetHero(0); GetHero(1)} do
 		HandleHeroesOnStart(hero, side)
 --		if GetHeroSkillMastery(hero, 61) > 0 then
@@ -287,6 +295,39 @@ function OnStart()
 --			disable_auto_finish = 1
 --		end
 	end
+
+
+	-- чародейская защита
+  for side, hero in {[0]=GetHero(0); GetHero(1)} do
+  
+    if ( IsNamedHero(hero, 'Rolf') or IsNamedHero(hero, 'Rolf2') ) then
+      RolfSpec(side, hero)
+    end
+  
+  
+  
+  
+    if GetHeroSkillMastery(hero, 176) > 0 then
+      local c1 = 'temp-buff'..side
+  		local x, y = SafePos()
+  		AddCreature(side, 900, 2, x, y, 1, c1)
+  		repeat sleep() until exist(c1)
+  		displace(c1, 9, 50)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
+  		removeUnit(c1)
+
+  		repeat sleep() until not exist(c1)
+
+  		AddCreature(1-side, 900, 2, x, y, 1, c1)
+  		repeat sleep() until exist(c1)
+  		displace(c1, 9, 50)
+  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_WEAKNESS)
+  		removeUnit(c1)
+  	end
+	end
+
+
 --	if disable_auto_finish then
 --		startThread(CombatFinishManualControl)
 --	end
@@ -294,8 +335,6 @@ function OnStart()
 	for i, unit in GetAllUnits() do
 		local atb = GetUnitInitialATB(unit)
 		init_atb[unit] = atb
-
-
 
     -- Файдаэн
 --    if IsCreature(unit) then
@@ -339,29 +378,32 @@ function OnStart()
 --    end
 
     if IsCreature(unit) then
-
-      -- ловчие
       local type = GetCreatureType(unit)
+
+      -- Инвиз ловчих
       if type == 166 or type == 93 then
         pcall(commandDoSpecial, unit, 317, pos(unit))
       end
-      
+    
       -- сет регалии Сар-Иссы
       if GetHeroArtSet(GetFriendlyHero(unit), 3) > 1 and GetUnitMaxManaPoints(unit) > 0 then
         SetUnitManaPoints(unit, 3 * GetUnitMaxManaPoints(unit))
 	  	end
-
     end
-    
-    
-
 	end
 	for unit, atb in init_atb do
-		SetATB(unit, atb)
+	  if not (IsHero(unit) and IsNamedHero(unit, 'Hero1')) then
+      SetATB(unit, atb)
+    end;
 	end
+	
 	combatSetPause(nil)
 	startThread(ReadyUnitThread)
 	startThread(CombatFinishManualControl)
+  startThread(SummonATB)
+  startThread(mineDeathATB)
+
+
 end
 
 function WarMachineDead(wm)
@@ -383,7 +425,7 @@ function WarMachineDead(wm)
 end
 
 function getHasBeenGuardianAngel()
-  print "getHasBeenPreliminaryTeleport"
+  print "getHasBeenGuardianAngel"
 
   for _, hasBeen in HAS_BEEN_GUARDIAN_ANGEL do
     if hasBeen then
@@ -397,7 +439,7 @@ end;
 function CreatureDead(unit)
 	creature_dead[unit] = 1
 
-  -- сопереживание некроманта
+  -- сопереживание некроманта (удалено)
   local type = GetCreatureType(unit)
   for side, hero in {[0]=GetHero(0); GetHero(1)} do
     if GetHeroSkillMastery(hero, 170) > 0 and GetHeroSkillMastery(hero, 15) > 0 and type < 900 and (GetUnitSide(unit) ~= GetUnitSide(hero))  then
@@ -405,6 +447,7 @@ function CreatureDead(unit)
 
       local creatures_necro = GetCreatures(side)
       -- TODO: КАК ЗДЕСЬ МОЖЕТ ПОЛУЧИТЬСЯ length(creatures_necro)???
+      -- ПОТОМУ ЧТО
       local unit_get_move = random(length(creatures_necro) + 1) - 1
 
       if unit_get_move == (length(creatures_necro)) then
@@ -460,13 +503,128 @@ function CreatureDead(unit)
 
 end
 
+--Обитаемые шахты
+function mineDeathATB()
+  print "mineDeathATB"
+
+  local N = 0
+  repeat
+    local allUnits_1 = GetAllUnits()
+
+    repeat sleep() until length(allUnits_1) ~= lengthAllUnits()
+    --если изменилось кол-во юнитов - создаем новый массив с новым списком юнитов
+    local allUnits_2 = GetAllUnits()
+    local allUnits_3 = {}
+
+    for i = 1, length(allUnits_2) do
+      local status = nil
+      for j = 1, length(allUnits_1) do
+        if allUnits_2[i] == allUnits_1[j] then
+          status = not nil
+        end
+      end
+
+      if status == nil then
+        allUnits_3[length(allUnits_3)+1] = allUnits_2[i]
+      end
+    end
+    for _, unit in allUnits_3 do
+      if IsCreature(unit) then
+        local unitId = (GetCreatureType(unit))
+        if GetHeroSkillMastery(GetFriendlyHero(unit), 93) > 0 then
+          print("Есть навык")
+          
+          for key, value in init_real_creatures_numbers do
+            if unit == key then
+              local side = GetUnitSide(unit)
+
+              combatSetPause(1)
+              SetATB(unit, 0.7)
+              local c1 = 'temp-buff'..side
+              local x, y = SafePos()
+              AddCreature(side, 900, 1, x, y, 1, c1)
+              repeat sleep() until exist(c1)
+              displace(c1, 9, 50)
+              removeUnit(c1)
+              print("SummonATB")
+            end
+          end
+        end
+      end
+    end
+    sleep(1)
+    combatSetPause(nil)
+
+  until N ~= 0
+end
+
+--Элемы в 0.7 по АТБ Стихийное равновесие
+function SummonATB()
+  print "SummonATB"
+  
+  local N = 0
+  repeat
+    --sleep(1000)
+    local allUnits_1 = GetAllUnits()
+
+    repeat sleep() until length(allUnits_1) ~= lengthAllUnits()
+    --если изменилось кол-во юнитов - создаем новый массив с новым списком юнитов
+    local allUnits_2 = GetAllUnits()
+    local allUnits_3 = {}
+
+    for i = 1, length(allUnits_2) do
+      local status = nil
+      for j = 1, length(allUnits_1) do
+        if allUnits_2[i] == allUnits_1[j] then
+          status = not nil
+        end
+      end
+      
+      if status == nil then
+        allUnits_3[length(allUnits_3)+1] = allUnits_2[i]
+      end
+    end
+
+    for _, unit in allUnits_3 do
+      if IsCreature(unit) then
+        local unitId = (GetCreatureType(unit))
+
+        if unitId == 88 or unitId == 87 or unitId == 86 or unitId == 85 then
+          print("Elem")
+          if GetHeroSkillMastery(GetFriendlyHero(unit), 114) > 0 then
+            local side = GetUnitSide(unit)
+            combatSetPause(1)
+            SetATB(unit, 0.7)
+            local c1 = 'temp-buff'..side
+            local x, y = SafePos()
+            AddCreature(side, 900, 1, x, y, 1, c1)
+            repeat sleep() until exist(c1)
+            displace(c1, 9, 50)
+            removeUnit(c1)
+            print("SummonATB_2")
+          end
+        end
+      end
+    end
+    sleep(1)
+    combatSetPause(nil)
+
+  until N ~= 0
+end
+
+--? зачем-то нужна, но непонятно зачем дубль
+function lengthAllUnits()
+  local lengthAll = length(GetAllUnits())
+  return lengthAll
+end
+
 
 function GetUnitInitialATB(unit)
 	local atb = GetRandomStartATBPosition()
 	if IsHero(unit) then
-		if IsNamedHero(unit, 'Hero1') then
-      pcall(commandDefend, unit)
-    end
+		-- if IsNamedHero(unit, 'Hero1') then
+      -- pcall(commandDefend, unit)
+    -- end
 --      atb = 0.99999
 --			auto_move[unit] = 1
 --		elseif IsNamedHero(unit, 'Grok') then
@@ -550,23 +708,27 @@ function UnitMoveNonBlocking(unit)
 	if creature_dead[unit] then
 		creature_dead[unit] = nil
 	end
-
-  for side, hero in {[0]=GetHero(0); GetHero(1)} do
-
-    -- чародейская защита
-    if GetHeroSkillMastery(hero, 176) > 0 and num_turn[1] == 1 then
-      local c1 = 'temp-buff'..side
-  		local x, y = SafePos()
-  		AddCreature(side, 900, 1, x, y, 1, c1)
-  		repeat sleep() until exist(c1)
-  		displace(c1, 9, 50)
-  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_STONESKIN)
-  		pcall(UnitCastGlobalSpell, c1, SPELL_MASS_DEFLECT_ARROWS)
-  		removeUnit(c1)
-  	end
-	end
 	
+
+  -- Первый ход любого существа
+	if num_turn[1] == 1 then
+   -- ЧЗ + Ловчие
+	end;
+	
+
+
 	if IsHero(unit) then
+    -- Перемещаем Крага после первого удара в конец АТБ
+   if IsNamedHero(unit, 'Hero1') then
+     -- Если у опа ЧЗ
+     local turnNumForSkip = GetHeroSkillMastery(enemy_hero, 176) > 0 and 2 or 1;
+     
+     if num_turn[1] == turnNumForSkip then
+       WaitUntilTurnEnds(unit);
+       
+       setATB(unit, 0);
+     end;
+   end;
 		
     --EnableDynamicBattleMode(nil)
 
@@ -681,7 +843,37 @@ function UnitMoveNonBlocking(unit)
 	elseif IsCreature(unit) then
 	
 
-    local type = GetCreatureType(unit)
+  local type = GetCreatureType(unit)
+
+
+  -- Спеца Аларика
+  if type == CREATURE_OBSIDIAN_GARGOYLE or type == CREATURE_ARCH_MAGI then
+    local currentMana = GetUnitManaPoints(unit)
+    local manaRestory = 1 + (GetCreatureNumber(unit)/10)
+    
+    print((GetCreatureNumber(unit)/10))
+    print(ceil(GetCreatureNumber(unit)/10))
+    print(manaRestory)
+    local newMana = currentMana + manaRestory
+    local maxMana = 0
+
+    if type == CREATURE_OBSIDIAN_GARGOYLE then
+      maxMana = 12
+    elseif type == CREATURE_ARCH_MAGI then
+      maxMana = 16
+    end
+
+    if newMana > maxMana then
+      newMana = maxMana
+    end
+
+   SetUnitManaPoints(unit, newMana)
+
+  end
+
+
+
+
     
     -- путь войны
 --		if GetHeroSkillMastery(ally_hero, 177) > 0 then     --177
@@ -730,6 +922,10 @@ function UnitMoveNonBlocking(unit)
 --      SetUnitManaPoints(enemy_hero, cur_enemy_hero_mana)
 --		end
 
+    if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Cyrus') or IsNamedHero(ally_hero, 'Cyrus2') ) then
+      CyrusSpec(unit)
+      
+    end
 
 
     -- Курак специализация
@@ -750,13 +946,12 @@ function UnitMoveNonBlocking(unit)
       if randomCreature ~= nil then
         local uniq_key = 'call_of_blood_creature';
       
-        AddCreature(GetUnitSide(unit), 37, 2, -1, -1, nil, uniq_key);
+        AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
             sleep()
         end
         
-        pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
 
         removeUnit(uniq_key)
@@ -791,6 +986,10 @@ function UnitMoveNonBlocking(unit)
         
        end;
 		end
+		
+    if (IsNamedHero(ally_hero, 'Cyrus') or IsNamedHero(ally_hero, 'Cyrus2') ) then
+
+    end;
 		
 		-- восполнение маны    unit_mana_spent
 		if GetHeroSkillMastery(unit, 40) > 0 or GetHeroSkillMastery(unit, 213) > 0 then
@@ -844,7 +1043,7 @@ function UnitMoveNonBlocking(unit)
     -- тележка с боеприпасами
     if GetHeroSkillMastery(ally_hero, 24) > 0  then
       if index(GetWarMachines(we), NumberSideToText(we)..'-warmachine-WAR_MACHINE_AMMO_CART') then
-        local num = AMMO_CART_REPAIR / 5
+        local num = AMMO_CART_REPAIR / 8
 	  		local x, y = SafePos(we)
 	  		AddCreature(we, 902, num, x, y, 1, 'temp-catapult')
         repeat sleep() until exist('temp-catapult')
@@ -875,6 +1074,71 @@ function UnitMoveNonBlocking(unit)
 	
 	last_turn_player = GetUnitSide(unit)
 	
+end
+
+
+--Cпецы героев --
+
+function RaelagA1Spec(side, mainHeroName)
+  print "RaelagA1Spec"
+
+  local summoningLevel = GetHeroSkillMastery(mainHeroName, 12);
+  
+  local c1 = 'temp-buff'..side
+  local x, y = SafePos()
+  
+  AddCreature(side, 901, 3 * summoningLevel, x, y, 1, c1)
+  repeat sleep() until exist(c1)
+ 	displace(c1, 9, 50)
+  pcall(UnitCastGlobalSpell, c1, SPELL_CELESTIAL_SHIELD)
+  removeUnit(c1)                                         UnitCastAimedSpell()
+
+  repeat sleep() until not exist(c1)
+
+end;
+
+-- Спеца Рольфа
+function RolfSpec(side, mainHeroName)
+  print "RolfSpec"
+  
+  local summoningLevel = GetHeroSkillMastery(mainHeroName, 12);
+  
+  -- Количество эллемов: 7 (20) 27 (36), 60(48), 130(60)/ 66(50), 18 (30)
+  numberSummon = {7, 27, 60, 130}
+
+  local c1 = 'temp-buff'..side
+  local x, y = SafePos()
+  AddCreature(side, 901, numberSummon[summoningLevel+1], x, y, 1, c1)
+  repeat sleep() until exist(c1)
+ 	displace(c1, 9, 50)
+  pcall(UnitCastGlobalSpell, c1, SPELL_SUMMON_ELEMENTALS)
+  removeUnit(c1)
+
+  repeat sleep() until not exist(c1)
+
+end;
+
+--спеца Сайруса
+function CyrusSpec(mainHeroName)
+  print "CyrusSpec"
+  
+  local cyrus_side = GetUnitSide(mainHeroName)
+  
+  cyrus_round_status = cyrus_round_status + 1
+  
+  if cyrus_round_status == 3 and cyrus_use == 0 then
+    local x, y = SafePos()
+    AddCreature(cyrus_side, 901, 4, x, y, 1, 'spellpower-unit')
+    repeat sleep() until exist('spellpower-unit')
+    displace('spellpower-unit', 9, 50)
+    pcall(commandDoSpecial, 'spellpower-unit', 333, pos(GetHero(cyrus_side)))
+    removeUnit('spellpower-unit')
+--    repeat sleep() until combatReadyPerson()
+--    local next_creature = combatReadyPerson()
+    print("cyrus_use = 1")
+    cyrus_use = 1
+
+  end
 end
 
 function ReadyUnitThread()

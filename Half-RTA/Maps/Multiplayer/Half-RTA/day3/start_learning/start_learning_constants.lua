@@ -31,20 +31,20 @@ LEARNING_OBJECTS_NAME_AND_DESCRIPTION_MAP = {
 
 -- Соотношение уровней к цене, за которую они покупаются
 MAP_LEVEL_BY_PRICE = {
-  [19] = 8500,
-  [20] = 9000,
-  [21] = 9500,
-  [22] = 10000,
-  [23] = 10500,
-  [24] = 11000,
-  [25] = 11500,
+  [19] = 7500,
+  [20] = 8000,
+  [21] = 8500,
+  [22] = 9000,
+  [23] = 10000,
+  [24] = 10500,
+  [25] = 11000,
 };
 
 -- скидка за ур образования
 LEVEL_DISCOUNT_BY_ENL = {
-  [1] = 500,
-  [2] = 1000,
-  [3] = 1500,
+  [1] = 0,
+  [2] = 0,
+  [3] = 0,
 
 };
 -- Количества уровней, предоставляемых игроку для обучения бесплатно
@@ -345,7 +345,7 @@ MAP_SELL_STAT_ON_QUESTIONS = {
 };
 
 -- Стоимость перегенерации характеристик
-COST_RE_GENERATION_STATS = 3000;
+COST_RE_GENERATION_STATS = 4000;
 
 -- Ручное перечисление недель
 CUSTOM_WEEKS = {
@@ -458,10 +458,10 @@ MAP_STATS_ON_MINIMUM = {
 SELL_STAT_PRICE = 2500;
 
 -- Скидка на покупку уровней для Винраэля
-ELLESHAR_DISCOUNT = 2000;
+ELLESHAR_DISCOUNT = 2200;
 
 -- Количество возвращаемого золота за покупку крестьян для Эллайны
-ELLAINA_DISCOUNT = 10;
+ELLAINA_DISCOUNT = 12;
 
 -- Соотношение уровня владения рунами на разрешенные уровни рун
 MAP_RUNELORE_TO_ALLOW_RUNE_LEVELS = {
@@ -506,7 +506,7 @@ PLAYERS_GET_DEFEND_US_ALL_STATUS = {
 };
 
 -- Количество бонуса, получаемого с логистики
-LOGISTIC_BONUS = 5000;
+LOGISTIC_BONUS = 4000;
 
 -- Значение задолженности с навыка логистики
 PLAYERS_LOGISTICS_DEBT = {
@@ -524,7 +524,7 @@ PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED = {
 --
 
 -- Количество бонуса, получаемого с Казна
-ESTATES_BONUS = 8000;
+ESTATES_BONUS = 6000;
 
 -- Значение задолженности с навыка Казна
 PLAYERS_ESTATES_DEBT = {

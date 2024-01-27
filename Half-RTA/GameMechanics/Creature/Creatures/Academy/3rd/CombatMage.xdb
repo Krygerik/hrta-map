@@ -12,7 +12,7 @@
 	<KnownSpells>
 		<Item>
 			<Spell>SPELL_MAGIC_FIST</Spell>
-			<Mastery>MASTERY_BASIC</Mastery>
+			<Mastery>MASTERY_ADVANCED</Mastery>
 		</Item>
 		<Item>
 			<Spell>SPELL_DISPEL</Spell>

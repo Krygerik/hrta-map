@@ -14,6 +14,9 @@ function simple_choice_of_races()
   
   -- Предоставляем мумию для случайного выбора рас
   doFile(PATH_TO_DAY1_MODULE.."choice_of_races/mummy/mummy.lua");
+
+  -- Предоставляем голема для выбора гейм-мода
+  doFile(PATH_TO_DAY1_MODULE.."choice_of_races/game_mode/golem.lua");
   
   -- Все расы
   showAllRaces();
@@ -137,7 +140,12 @@ function finishSimpleChoiseOfRaces()
   deleteAllDelimeters();
   deleteAllRacesUnit();
 
-  doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
+  if CUSTOM_GAME_MODE_ONLY_CHERK_SINGLE_HEROES == 1 then
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_single_heroes.lua");
+  else
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
+  
+  end;
 end;
 
 

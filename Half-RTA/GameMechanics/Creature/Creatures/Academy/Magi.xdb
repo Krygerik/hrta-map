@@ -16,11 +16,11 @@
 		</Item>
 		<Item>
 			<Spell>SPELL_FIREBALL</Spell>
-			<Mastery>MASTERY_BASIC</Mastery>
+			<Mastery>MASTERY_NONE</Mastery>
 		</Item>
 		<Item>
 			<Spell>SPELL_BLOODLUST</Spell>
-			<Mastery>MASTERY_ADVANCED</Mastery>
+			<Mastery>MASTERY_BASIC</Mastery>
 		</Item>
 		<Item>
 			<Spell>SPELL_DISPEL</Spell>

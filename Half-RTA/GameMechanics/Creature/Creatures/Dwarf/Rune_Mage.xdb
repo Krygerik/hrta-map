@@ -16,10 +16,10 @@
 		</Item>
 		<Item>
 			<Spell>SPELL_FIREWALL</Spell>
-			<Mastery>MASTERY_ADVANCED</Mastery>
+			<Mastery>MASTERY_BASIC</Mastery>
 		</Item>
 	</KnownSpells>
-	<SpellPoints>25</SpellPoints>
+	<SpellPoints>14</SpellPoints>
 	<SpellPoints1>0</SpellPoints1>
 	<SpellPoints2>0</SpellPoints2>
 	<Exp>100</Exp>

@@ -12,7 +12,7 @@
 	<KnownSpells>
 		<Item>
 			<Spell>SPELL_FIREBALL</Spell>
-			<Mastery>MASTERY_ADVANCED</Mastery>
+			<Mastery>MASTERY_BASIC</Mastery>
 		</Item>
 		<Item>
 			<Spell>SPELL_METEOR_SHOWER</Spell>

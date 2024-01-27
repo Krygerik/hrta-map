@@ -3,7 +3,7 @@
     "id": "humans",
     "raceName": "Орден порядка",
     "heroName": "Рыцарь",
-    "heroIds": ["Expediter", "Griffon_Commander", "Jouster", "SpecValeria", "Squire", "Suzerain", "White_Knight", "Vittorio", "Laszlo", "Dougal"]
+    "heroIds": ["Expediter", "Griffon_Commander", "Jouster", "SpecValeria", "Squire", "White_Knight", "Vittorio", "Laszlo", "Dougal", "SpecAlarik"]
   },
   {
     "id": "elves",
@@ -39,7 +39,7 @@
     "id": "magi",
     "heroName": "Маг",
     "raceName": "Академия волшебства",
-    "heroIds": ["Disrupter", "Feather_Mage", "Inexhaustible", "Machinist", "Master_of_Elements", "Mentor", "Radiant", "SpecMaahir", "Weilder_of_Fire", "Havez"]
+    "heroIds": ["Disrupter", "Feather_Mage", "Inexhaustible", "Machinist", "Master_of_Elements", "Mentor", "Radiant", "SpecCyrus", "SpecMaahir", "Weilder_of_Fire", "Havez"]
   },
   {
     "id": "varvars",

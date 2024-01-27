@@ -390,7 +390,7 @@
       ]
    },
    {
-      "SkillId":"Elemental_Balance",
+      "SkillId":"Elemental_Fury",
       "SectionId":4,
       "DepthLevel":2,
       "RequiredSkillIds":[
@@ -463,19 +463,19 @@
       ]
    },
    {
+      "SkillId":"Sorcerers_Protection",
+      "SectionId":5,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Arcane_Training"
+      ]
+   },
+   {
       "SkillId":"Arcane_Brilliance",
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Magic_Insight"
-      ]
-   },
-   {
-      "SkillId":"Sorcerers_Protection",
-      "SectionId":5,
-      "DepthLevel":3,
-      "RequiredSkillIds":[
-         "Arcane_Excellence"
       ]
    },
    {
@@ -1035,14 +1035,6 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          
-      ]
-   },
-   {
-      "SkillId":"Plague_Tent",
-      "SectionId":12,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "First_Aid"
       ]
    },
    {

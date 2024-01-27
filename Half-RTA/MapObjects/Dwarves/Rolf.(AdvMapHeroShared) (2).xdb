@@ -55,7 +55,10 @@
 		<Knowledge>2</Knowledge>
 		<skills/>
 		<perkIDs/>
-		<spellIDs/>
+		<spellIDs>
+		    <Item>SPELL_SUMMON_ELEMENTALS</Item>
+			<Item>SPELL_ARCANE_CRYSTAL</Item>
+		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>
 		<AmmoCart>false</AmmoCart>

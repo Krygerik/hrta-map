@@ -8,11 +8,18 @@ function showMummy()
   Trigger(OBJECT_TOUCH_TRIGGER, 'mumiya', 'questionRandomRace');
 end;
 
--- Вопрос выбора случайной расы
+-- Вопрос выбора случайных фракций
 function questionRandomRace()
   print "questionRandomRace"
 
-  QuestionBoxForPlayers(GetPlayerFilter(PLAYER_1), PATH_TO_DAY1_MESSAGES.."question_random_race.txt", 'prepareForRandomChoise', 'noop');
+  QuestionBoxForPlayers(GetPlayerFilter(PLAYER_1), PATH_TO_DAY1_MESSAGES.."question_random_race.txt", 'prepareForRandomChoise', 'questionRandomMirror');
+end;
+
+-- Вопрос выбора случайной зеркалки
+function questionRandomMirror()
+  print "questionRandomMirror"
+
+  QuestionBoxForPlayers(GetPlayerFilter(PLAYER_1), PATH_TO_DAY1_MESSAGES.."question_random_mirror.txt", 'prepareForRandomMirror', 'noop');
 end;
 
 -- Подготовка к рандомному черку фракции
@@ -23,6 +30,9 @@ function prepareForRandomChoise()
   moveDelimetersToRandomChoise();
   deleteAllRacesUnit();
   setRandomRace();
+  
+  RemoveObject('golem');
+  SetObjectPosition('red10', 35, 83, GROUND);
 
   SetObjectPosition(Biara, 35, 87);
   SetObjectPosition(Djovanni, 42, 22);
@@ -30,6 +40,15 @@ function prepareForRandomChoise()
   initPlayerControl();
   showGeneratedRaces();
 end;
+
+-- Подготовка к зеркальному черку
+function prepareForRandomMirror()
+  print "prepareForRandomMirror"
+  
+  CUSTOM_GAME_MODE_ONLY_MIRROR = 1;
+  prepareForRandomChoise()
+end;
+
 
 -- Установка рандомных рас для обоих игроков
 function setRandomRace()
@@ -44,6 +63,10 @@ function setRandomRace()
   until randomSecondPlayerRaceId ~= SELECTED_RACE_ID_TABLE[PLAYER_1];
   
   SELECTED_RACE_ID_TABLE[PLAYER_2] = randomSecondPlayerRaceId;
+  
+  if CUSTOM_GAME_MODE_ONLY_MIRROR == 1 then
+    SELECTED_RACE_ID_TABLE[PLAYER_2] = SELECTED_RACE_ID_TABLE[PLAYER_1];
+  end;
 end;
 
 --Генерация возможности перегенерации и соглашения
@@ -202,7 +225,7 @@ print "playerReroll"
   
 end;
 
---Убираем ненужные объекты после черка
+--Убираем ненужные объекты после черка и выбираем нужный черк
 function finishRandomChoise()
     deleteAllDelimeters();
     SetObjectPosition('spell_nabor1', 1, 1, UNDERGROUND)
@@ -210,7 +233,19 @@ function finishRandomChoise()
     SetObjectPosition('spell_nabor3', 1, 1, UNDERGROUND)
     SetObjectPosition('spell_nabor4', 1, 1, UNDERGROUND)
     deleteAllRacesUnit();
+    
+    checkCustomGamemode()
+end;
+
+--Проверка игрового мода и смена черка героев
+function checkCustomGamemode()
+print"checkCustomGamemode"
+
+  if CUSTOM_GAME_MODE_ONLY_CHERK_SINGLE_HEROES == 1 then
+    doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_single_heroes.lua");
+  else
     doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
+  end;
 end;
 
 showMummy()

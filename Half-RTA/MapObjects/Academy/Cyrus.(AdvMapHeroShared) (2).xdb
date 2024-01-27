@@ -30,7 +30,7 @@
 	<Icon128/>
 	<InternalName>Cyrus2</InternalName>
 	<Class>HERO_CLASS_WIZARD</Class>
-	<Specialization>HERO_SPEC_CHOSEN_BY_GODS</Specialization>
+	<Specialization>HERO_SPEC_NONE</Specialization>
 	<PrimarySkill>
 		<Mastery>MASTERY_BASIC</Mastery>
 		<SkillID>HERO_SKILL_ARTIFICIER</SkillID>
@@ -55,7 +55,9 @@
 		<Knowledge>3</Knowledge>
 		<skills/>
 		<perkIDs/>
-		<spellIDs/>
+		<spellIDs>
+			<Item>SPELL_MAGIC_FIST</Item>
+		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>
 		<AmmoCart>false</AmmoCart>

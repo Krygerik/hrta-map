@@ -132,6 +132,11 @@ INFERNO_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Боевое безумие
+  {
+    DEMON_FEAT_CRITICAL_STRIKE,
+    WARLOCK_FEAT_POWER_OF_HASTE,
+  },
 };
 
 NECROPOLIS_PERK_LIST = {
@@ -165,6 +170,11 @@ NECROPOLIS_PERK_LIST = {
     RANGER_FEAT_FOG_VEIL,
     WIZARD_FEAT_UNSUMMON,
   },
+  --Повелитель жизни
+  {
+    WIZARD_FEAT_UNSUMMON,
+    DEMON_FEAT_EXPLODING_CORPSES, --шахты
+    },
   -- Повелитель чар
   {
     KNIGHT_FEAT_ELEMENTAL_BALANCE,
@@ -311,6 +321,11 @@ ACADEMY_PERK_LIST = {
     KNIGHT_FEAT_RETRIBUTION,
     WARLOCK_FEAT_POWER_OF_HASTE,
   },
+  -- Тайные знания
+  {
+    KNIGHT_FEAT_CASTER_CERTIFICATE,
+    HERO_SKILL_ABSOLUTE_RAGE, -- Чародейская защита
+  },
   -- Повелитель чар
   {
     KNIGHT_FEAT_ELEMENTAL_BALANCE,
@@ -363,6 +378,11 @@ DUNGEON_PERK_LIST = {
   {
     KNIGHT_FEAT_RETRIBUTION,
     WARLOCK_FEAT_POWER_OF_HASTE,
+  },
+  -- Тайные знания
+  {
+    KNIGHT_FEAT_CASTER_CERTIFICATE,
+    HERO_SKILL_ABSOLUTE_RAGE, -- Чародейская защита
   },
   -- Повелитель чар
   {
@@ -504,7 +524,8 @@ STRONGHOLD_PERK_LIST = {
   -- Боевое безумие
   {
     KNIGHT_FEAT_RETRIBUTION,
-    HERO_SKILL_STUNNING_BLOW,
+    DEMON_FEAT_CRITICAL_STRIKE,
+    
   },
   -- Гнев праведный
   {
@@ -523,7 +544,7 @@ STRONGHOLD_PERK_LIST = {
   },
 };
 
--- На примере ренжера 1.27
+-- На примере ренжера 1.28
 MENTOR_HELPER_SUPPORT_PERK_LIST = {
   [RACES.HAVEN] = HAVEN_PERK_LIST,
   [RACES.INFERNO] = INFERNO_PERK_LIST,

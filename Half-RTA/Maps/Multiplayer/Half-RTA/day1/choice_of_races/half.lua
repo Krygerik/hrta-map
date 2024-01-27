@@ -555,11 +555,11 @@ function startChoosingHeroes(resultPairIndex)
     end;
   end;
 
-  if random(2) == 0 then
+--  if random(2) == 0 then
     doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_single_heroes.lua");
-  else
-    doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
-  end;
+--  else
+--    doFile(PATH_TO_DAY1_MODULE.."choice_of_heroes/cherk_group_heroes.lua");
+--  end;
 end;
 
 -- ”даление объектов карты, раздел€ющих пары

@@ -1,5 +1,6 @@
 PATH_TO_DAY3_SCRIPTS = GetMapDataPath().."day3/";
 
+PATH_TO_DAY3_MESSAGES = PATH_TO_DAY3_SCRIPTS.."messages/";
 doFile(PATH_TO_DAY3_SCRIPTS.."day3_constants.lua");
 doFile(PATH_TO_DAY3_SCRIPTS.."day3_common.lua");
 sleep(1);
@@ -14,6 +15,7 @@ function day3()
   setHeroesInitialProperties();
   setEnemyHeroPosters();
   changePlayersArea();
+  checkCustomGameMode();
   doFile(PATH_TO_DAY3_SCRIPTS.."spells_generate/spells_generate_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."start_bonus/start_bonus_scripts.lua");
   doFile(PATH_TO_DAY3_SCRIPTS.."town_building/town_building_scripts.lua");
@@ -85,6 +87,7 @@ function addHeroesToPlayers()
       -- берем зарезервированных героев для игроков
       local reservedHeroName = getReservedHeroName(playerId, heroName);
 
+      print(reservedHeroName)
       DeployReserveHero(reservedHeroName, coords.x, coords.y, GROUND);
     end;
   end;
@@ -150,6 +153,60 @@ function changePlayersArea()
   SetRegionBlocked ('block3', 1);
   SetRegionBlocked ('block4', 1);
 end;
+
+--Проверка кастомных режимов игры
+function checkCustomGameMode()
+  print "checkNoMentorStatus"
+  if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
+    closeMentorObject()
+  end;
+end;
+
+
+-- Маппинг ИД расы на ее наименование
+MAP_CREATURE_TO_NAME = {
+  PATH_TO_DAY3_MESSAGES.."message_mage1_1.txt",
+  PATH_TO_DAY3_MESSAGES.."message_mage1_2.txt",
+  PATH_TO_DAY3_MESSAGES.."message_mage1_3.txt",
+  PATH_TO_DAY3_MESSAGES.."message_mage1_4.txt",
+  PATH_TO_DAY3_MESSAGES.."message_mage1_5.txt",
+  PATH_TO_DAY3_MESSAGES.."message_mage1_6.txt"
+}
+
+
+--закрытие объектов - ментор, ментор-хелпер и обелиск(покупка баз)
+function closeMentorObject()
+  print "closeMentorObject"
+  
+  SetObjectPosition('mage1', 54, 87);
+  SetObjectPosition('mage2', 60, 87);
+  SetObjectPosition('mage3', 51, 9);
+  SetObjectPosition('mage4', 57, 9);
+
+  SetObjectPosition('gremlin1', 58, 80);
+  SetObjectPosition('gremlin2', 58, 14);
+  
+  for _, creature in {"mage1", 'mage2', 'gremlin1', 'mage3', 'mage4', 'gremlin2'} do
+      SetObjectEnabled(creature, nil)
+      SetDisabledObjectMode(creature, DISABLED_INTERACT)
+      Trigger(OBJECT_TOUCH_TRIGGER, creature,  'messageCreatureNoMentor');
+    end;
+
+end;
+
+
+-- Сообщение у существ закрывающих Ментора
+function messageCreatureNoMentor(heroName)
+  print "messageCreatureNoMentor"
+  
+    local playerId = GetPlayerFilter(GetObjectOwner(heroName));
+
+    local message = MAP_CREATURE_TO_NAME[random(length(MAP_CREATURE_TO_NAME))]
+
+    ShowFlyingSign(message, heroName, playerId, 5);
+
+end;
+
 
 -- Отображение иконок выбранного списка героев у оппонента
 function setEnemyHeroPosters()

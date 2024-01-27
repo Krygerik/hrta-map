@@ -390,11 +390,19 @@
       ]
    },
    {
-      "SkillId":"Elemental_Balance",
+      "SkillId":"Elemental_Fury",
       "SectionId":4,
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Master_of_Conjuration"
+      ]
+   },
+   {
+      "SkillId":"Haunted_Mines",
+      "SectionId":4,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Master_of_Life"
       ]
    },
    {
@@ -786,14 +794,6 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          
-      ]
-   },
-   {
-      "SkillId":"Empathy",
-      "SectionId":9,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Diplomacy"
       ]
    },
    {

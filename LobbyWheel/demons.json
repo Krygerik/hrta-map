@@ -400,7 +400,7 @@
       ]
    },
    {
-      "SkillId":"Elemental_Balance",
+      "SkillId":"Elemental_Fury",
       "SectionId":4,
       "DepthLevel":2,
       "RequiredSkillIds":[
@@ -477,7 +477,6 @@
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Consume_Corpse",
          "Arcane_Training"
       ]
    },
@@ -555,19 +554,19 @@
       ]
    },
    {
+      "SkillId":"Power_of_Speed",
+      "SectionId":6,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Battle_Frenzy"
+      ]
+   },
+   {
       "SkillId":"Excruciating_Strikez",
       "SectionId":6,
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Mark_of_the_Damned",
-         "Tactics"
-      ]
-   },
-   {
-      "SkillId":"Power_of_Speed",
-      "SectionId":6,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
          "Battle_Frenzy"
       ]
    },
@@ -1068,14 +1067,6 @@
       "DepthLevel":1,
       "RequiredSkillIds":[
          
-      ]
-   },
-   {
-      "SkillId":"Plague_Tent",
-      "SectionId":12,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "First_Aid"
       ]
    },
    {

@@ -118,7 +118,7 @@ function getCountUnitByLevel(playerId, raceId, unitLevel)
   if unitLevel < 6 and unitLevel > 1 then
     local plusOrMinusOne = getRandomPlusOrMinusOne();
 
-    count = plusOrMinusOne * random(count * 0.1) + count;
+    count = plusOrMinusOne * random(count * 0.05) + count;
   end;
 
   if unitLevel == 1 then
@@ -138,7 +138,7 @@ function getPriceUnitByLevel(raceId, unitLevel, countUnits)
   local defaultUnitCount = UNITS[raceId][unitLevel].kol;
 
   if unitLevel == 1 then
-    return oneUnitPrice * defaultUnitCount * 0.1;
+    return oneUnitPrice * defaultUnitCount * 0.05;
   end;
   
   return countUnits * oneUnitPrice - defaultUnitCount * oneUnitPrice;

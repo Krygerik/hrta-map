@@ -12,10 +12,10 @@
 	<MagicSchool>MAGIC_SCHOOL_SUMMONING</MagicSchool>
 	<RequiredHeroLevel>0</RequiredHeroLevel>
 	<IsAimed>true</IsAimed>
-	<TrainedCost>10</TrainedCost>
+	<TrainedCost>8</TrainedCost>
 	<damage>
 		<Item>
-			<Base>5</Base>
+			<Base>3</Base>
 			<PerPower>0</PerPower>
 		</Item>
 		<Item>
@@ -23,7 +23,7 @@
 			<PerPower>0</PerPower>
 		</Item>
 		<Item>
-			<Base>6</Base>
+			<Base>7</Base>
 			<PerPower>0</PerPower>
 		</Item>
 		<Item>

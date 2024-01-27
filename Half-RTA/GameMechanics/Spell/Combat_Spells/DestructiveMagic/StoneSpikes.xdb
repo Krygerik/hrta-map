@@ -23,11 +23,11 @@
 			<PerPower>8</PerPower>
 		</Item>
 		<Item>
-			<Base>40</Base>
+			<Base>48</Base>
 			<PerPower>8</PerPower>
 		</Item>
 		<Item>
-			<Base>48</Base>
+			<Base>64</Base>
 			<PerPower>8</PerPower>
 		</Item>
 	</damage>

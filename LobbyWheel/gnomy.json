@@ -389,7 +389,7 @@
       ]
    },
    {
-      "SkillId":"Elemental_Balance",
+      "SkillId":"Elemental_Fury",
       "SectionId":4,
       "DepthLevel":2,
       "RequiredSkillIds":[
@@ -466,7 +466,6 @@
       "SectionId":5,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Refresh_Rune",
          "Arcane_Training"
       ]
    },

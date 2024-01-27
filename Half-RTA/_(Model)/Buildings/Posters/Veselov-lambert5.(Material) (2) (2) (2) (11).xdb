@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Material>
-	<Texture href="/Textures/Icons/Heroes/Heaven/Heaven_Isabel_128x128.(Texture).xdb#xpointer(/Texture)"/>
+	<Texture href="/UI/H5A2/Icons/Heroes/Portrets128x128/Haven_Alaric.(Texture).xdb#xpointer(/Texture)"/>
 	<Bump/>
 	<SpecFactor>0</SpecFactor>
 	<SpecColor>

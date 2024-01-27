@@ -3631,11 +3631,11 @@
 		</Item>
 		<Item>
 			<ID>CREATURE_907</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/907.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_908</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/908.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_909</ID>
