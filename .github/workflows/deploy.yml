@@ -22,9 +22,9 @@ jobs:
       run: echo "version=${{ env.MAP_VER_PREF }}$(awk 'END {print $NF}' Maps/Multiplayer/Half-RTA/messages/map_name.txt)$MAP_VER_POSTF" >> $GITHUB_OUTPUT
     - name: Test output
       run: echo ${{ steps.getversion.outputs.version }}
-    - name: Raname Dir
-      working-directory: ./Half-RTA/
-      run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/${{ steps.getversion.outputs.version }}
+    #- name: Raname Dir
+    #  working-directory: ./Half-RTA/
+    #  run: mv Maps/Multiplayer/Half-RTA Maps/Multiplayer/${{ steps.getversion.outputs.version }}
     - name: Zip Map
       working-directory: ./Half-RTA
       run: zip -r ${{ steps.getversion.outputs.version }}.h5m .
