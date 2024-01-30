@@ -1121,24 +1121,34 @@ end;
 --спеца Сайруса
 function CyrusSpec(mainHeroName)
   print "CyrusSpec"
-  
-  local cyrus_side = GetUnitSide(mainHeroName)
-  
-  cyrus_round_status = cyrus_round_status + 1
-  
-  if cyrus_round_status == 3 and cyrus_use == 0 then
-    local x, y = SafePos()
-    AddCreature(cyrus_side, 901, 4, x, y, 1, 'spellpower-unit')
-    repeat sleep() until exist('spellpower-unit')
-    displace('spellpower-unit', 9, 50)
-    pcall(commandDoSpecial, 'spellpower-unit', 333, pos(GetHero(cyrus_side)))
-    removeUnit('spellpower-unit')
---    repeat sleep() until combatReadyPerson()
---    local next_creature = combatReadyPerson()
-    print("cyrus_use = 1")
-    cyrus_use = 1
 
-  end
+  local cyrus_side = GetUnitSide(mainHeroName)
+
+  cyrus_round_status = cyrus_round_status + 1
+
+  print(cyrus_round_status)
+  print(cyrus_round_status>1)
+  if cyrus_round_status < 11 then
+    local x, y = SafePos()
+    
+     if cyrus_round_status > 1 then
+       removeUnit('spellpower-unit'..cyrus_round_status)
+       print('1232')
+       repeat sleep() until not exist('spellpower-unit'..cyrus_round_status)
+     end;
+
+      AddCreature(cyrus_side, (909+cyrus_round_status-1), cyrus_round_status, x, y, 1, 'spellpower-unit'..cyrus_round_status)
+
+      print(cyrus_round_status)
+    
+    
+      repeat sleep() until exist('spellpower-unit'..cyrus_round_status)
+--    displace('spellpower-unit', 9, 50)
+      pcall(commandDoSpecial, 'spellpower-unit'..cyrus_round_status, 333, pos(GetHero(cyrus_side)))
+--    removeUnit('spellpower-unit')
+
+
+  end;
 end
 
 function ReadyUnitThread()

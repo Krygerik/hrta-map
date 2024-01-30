@@ -82,7 +82,13 @@ function addHeroesToPlayers()
     local playerData = RESULT_HERO_LIST[playerId];
 
     for indexHero, heroName in playerData.heroes do
+    
+      if RESULT_HERO_LIST[PLAYER_1].raceId == RESULT_HERO_LIST[PLAYER_2].raceId and indexHero == 3 then
+        return nil
+      end;
+      
       local coords = INITIAL_HERO_COORDINATES[playerId][indexHero];
+
       
       -- берем зарезервированных героев для игроков
       local reservedHeroName = getReservedHeroName(playerId, heroName);

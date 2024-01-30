@@ -27,6 +27,10 @@ MAP_BUY_HERO_REGION_ON_PLAYER = {
 function buy_hero_scripts()
   print "buy_hero_scripts"
   
+  if RESULT_HERO_LIST[PLAYER_1].raceId == RESULT_HERO_LIST[PLAYER_2].raceId then
+    return nil
+  end;
+  
   for _, playerId in PLAYER_ID_TABLE do
     SetObjectEnabled(MAP_BUY_HERO_OBJECT_ON_PLAYER[playerId], nil);
     SetRegionBlocked (MAP_BUY_HERO_REGION_ON_PLAYER[playerId], not nil);
