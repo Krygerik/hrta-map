@@ -137,6 +137,8 @@ function finishSimpleChoiseOfRaces()
   print "finishSimpleChoiseOfRaces"
   
   RemoveObject('mumiya');
+  RemoveObject('golem');
+  SetObjectPosition('red10', 35, 83, GROUND);
   deleteAllDelimeters();
   deleteAllRacesUnit();
 

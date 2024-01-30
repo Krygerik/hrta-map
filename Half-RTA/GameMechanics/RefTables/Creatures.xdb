@@ -3639,43 +3639,43 @@
 		</Item>
 		<Item>
 			<ID>CREATURE_909</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus1.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_910</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus2.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_911</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus3.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_912</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus4.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_913</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus5.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_914</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus6.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_915</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus7.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_916</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus8.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_917</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus9.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_918</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/Cyrus10.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_919</ID>

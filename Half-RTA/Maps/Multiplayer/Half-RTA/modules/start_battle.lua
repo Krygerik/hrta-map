@@ -1329,7 +1329,7 @@ function runBattle()
   sleep(5);
   
   -- ASHA
-  local MapVersion = '1.28d';
+  local MapVersion = '1.28e';
   
   if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
     MapVersion = MapVersion..'_no_mentor'

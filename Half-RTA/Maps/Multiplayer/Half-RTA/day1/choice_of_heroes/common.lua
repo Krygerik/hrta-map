@@ -1,6 +1,6 @@
 -- √енерим по еще 1 случайному герою из общего списка героев
 function getRandomHeroFromAll()
-  print "setRandomHeroFromHeroList"
+  print "getRandomHeroFromAll"
   
   for _, playerId in { PLAYER_1, PLAYER_2 } do
     local raceId = RESULT_HERO_LIST[playerId].raceId;
@@ -67,8 +67,13 @@ function setRandomHeroFromHeroList()
       end;
     end;
 
-    for resultHeroIndex = 1, 3 do
+    local resultHeroMaxIndex = (RESULT_HERO_LIST[PLAYER_1].raceId == RESULT_HERO_LIST[PLAYER_2].raceId) and 2 or 3
+    
+    for resultHeroIndex = 1, resultHeroMaxIndex do
       -- –андомим основного геро€
+      
+
+      
 
       local randomHeroIndex = random(length(filteredHeroList)) + 1;
 

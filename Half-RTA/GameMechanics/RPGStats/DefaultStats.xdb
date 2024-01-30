@@ -2189,7 +2189,7 @@
 				<WaveSpeed>33</WaveSpeed>
 			</Armageddon>
 			<Runic>
-				<DragonFormSpellPercent>0.4</DragonFormSpellPercent>
+				<DragonFormSpellPercent>0.25</DragonFormSpellPercent>
 				<ReviveSpellPercent>0.333334</ReviveSpellPercent>
 			</Runic>
 			<HolyWordWaveSpeed>33</HolyWordWaveSpeed>

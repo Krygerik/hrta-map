@@ -186,7 +186,7 @@ function getRelatedPlayerAndHeroNameByHeroIconName(heroIconName)
 end;
 
 -- Признак, что идет первым: выбор или удаление: 0 - сначала добавляем, 1 - сначала удаляем
-RANDOM_CHOOSE_FIRST_FLAG = random(2);
+RANDOM_CHOOSE_FIRST_FLAG = 1;--random(2);
 
 -- Перечисление типов хода при черке героев: 0 - Вычеркиваем, 1 - Добавляем
 TURN_ACTIONS = {
