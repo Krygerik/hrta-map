@@ -8,6 +8,8 @@
 --  Общие функции
 ---------------------------------------------------------------------------------------------------
 
+consoleCmd('console_size 999')
+
 doFile('/scripts/asha/combat_lib.lua')
 
 START_ATB_MIN_VALUE = 0.00
@@ -546,7 +548,7 @@ function mineDeathATB()
               repeat sleep() until exist(c1)
               displace(c1, 9, 50)
               removeUnit(c1)
-              print("SummonATB")
+              print("mineDeathATB")
             end
           end
         end
@@ -558,6 +560,60 @@ function mineDeathATB()
   until N ~= 0
 end
 
+
+-- Проверка, если был призван новый элементаль
+function CheckIfNewElemAdd(allUnits_1)
+--  print "CheckIfNewElemAdd"
+  
+  local allUnitsInRealMoment = GetAllUnits();
+
+  local newInits = {};
+  local newElemUnits = {}
+
+  for i = 1, length(allUnitsInRealMoment) do
+    local status = nil
+    for j = 1, length(allUnits_1) do
+      if allUnitsInRealMoment[i] == allUnits_1[j] then
+        status = not nil
+      end
+    end
+      
+    if status == nil then
+      newInits[length(newInits)+1] = allUnitsInRealMoment[i]
+    end
+  end
+  
+  for _, unit in newInits do
+    if IsCreature(unit) then
+      local unitId = (GetCreatureType(unit))
+
+      if unitId == 88 or unitId == 87 or unitId == 86 or unitId == 85 then
+        newElemUnits[length(newElemUnits)+1] = unit
+      end;
+      
+    end;
+  end;
+  
+
+  return newElemUnits
+end
+
+
+--Обновление АТБ
+function refreshATB(side)
+  print "refreshATB"
+  
+  combatSetPause(1)
+  local c1 = 'temp-buff'..side
+
+  AddCreature(side, 900, 1, -1, -1, 1, c1)
+  repeat sleep() until exist(c1)
+  removeUnit(c1)
+  repeat sleep() until not exist(c1)
+  combatSetPause(nil)
+end
+
+
 --Элемы в 0.7 по АТБ Стихийное равновесие
 function SummonATB()
   print "SummonATB"
@@ -566,48 +622,26 @@ function SummonATB()
   repeat
     --sleep(1000)
     local allUnits_1 = GetAllUnits()
+    
+    local newElem
 
-    repeat sleep() until length(allUnits_1) ~= lengthAllUnits()
+    repeat
+      sleep()
+      newElem = CheckIfNewElemAdd(allUnits_1)
+    until length(newElem) > 0
+
     --если изменилось кол-во юнитов - создаем новый массив с новым списком юнитов
-    local allUnits_2 = GetAllUnits()
-    local allUnits_3 = {}
 
-    for i = 1, length(allUnits_2) do
-      local status = nil
-      for j = 1, length(allUnits_1) do
-        if allUnits_2[i] == allUnits_1[j] then
-          status = not nil
-        end
+    for _, unit in newElem do
+      if GetHeroSkillMastery(GetFriendlyHero(unit), 114) > 0 then
+        local side = GetUnitSide(unit)
+        SetATB(unit, 0.7)
+        refreshATB(side)
+        print("SummonATB_end_function")
       end
-      
-      if status == nil then
-        allUnits_3[length(allUnits_3)+1] = allUnits_2[i]
-      end
+
     end
 
-    for _, unit in allUnits_3 do
-      if IsCreature(unit) then
-        local unitId = (GetCreatureType(unit))
-
-        if unitId == 88 or unitId == 87 or unitId == 86 or unitId == 85 then
-          print("Elem")
-          if GetHeroSkillMastery(GetFriendlyHero(unit), 114) > 0 then
-            local side = GetUnitSide(unit)
-            combatSetPause(1)
-            SetATB(unit, 0.7)
-            local c1 = 'temp-buff'..side
-            local x, y = SafePos()
-            AddCreature(side, 900, 1, x, y, 1, c1)
-            repeat sleep() until exist(c1)
-            displace(c1, 9, 50)
-            removeUnit(c1)
-            print("SummonATB_2")
-          end
-        end
-      end
-    end
-    sleep(1)
-    combatSetPause(nil)
 
   until N ~= 0
 end
