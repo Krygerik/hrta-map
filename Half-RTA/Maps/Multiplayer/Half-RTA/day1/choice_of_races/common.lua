@@ -84,10 +84,10 @@ end;
 function deleteAllDelimeters()
   print "deleteAllDelimeters"
 
-  RemoveObject     ('red1');
-  RemoveObject     ('red2');
-  RemoveObject     ('red3');
-  RemoveObject     ('red4');
+  SetObjectPosition('red1', 1, 1);
+  SetObjectPosition('red2', 1, 1);
+  SetObjectPosition('red3', 1, 1);
+  SetObjectPosition('red4', 1, 1);
   RemoveObject     ('red5');
   RemoveObject     ('red6');
   RemoveObject     ('red7');
@@ -103,10 +103,10 @@ function deleteAllDelimeters()
   RemoveObject     ('red19');
   RemoveObject     ('red20');
 
-  RemoveObject     ('blue1');
-  RemoveObject     ('blue2');
-  RemoveObject     ('blue3');
-  RemoveObject     ('blue4');
+  SetObjectPosition('blue1', 1, 1);
+  SetObjectPosition('blue2', 1, 1);
+  SetObjectPosition('blue3', 1, 1);
+  SetObjectPosition('blue4', 1, 1);
   RemoveObject     ('blue5');
   RemoveObject     ('blue6');
   RemoveObject     ('blue7');

@@ -32,7 +32,7 @@
 		</Item>
 		<Item>
 			<Base>20</Base>
-			<PerPower>4</PerPower>
+			<PerPower>10</PerPower>
 		</Item>
 	</damage>
 	<duration>

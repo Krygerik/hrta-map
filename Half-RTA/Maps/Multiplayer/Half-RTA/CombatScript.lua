@@ -541,7 +541,7 @@ function mineDeathATB()
               local side = GetUnitSide(unit)
 
               combatSetPause(1)
-              SetATB(unit, 0.7)
+              SetATB(unit, 0.8)
               local c1 = 'temp-buff'..side
               local x, y = SafePos()
               AddCreature(side, 900, 1, x, y, 1, c1)
@@ -1077,7 +1077,7 @@ function UnitMoveNonBlocking(unit)
     -- тележка с боеприпасами
     if GetHeroSkillMastery(ally_hero, 24) > 0  then
       if index(GetWarMachines(we), NumberSideToText(we)..'-warmachine-WAR_MACHINE_AMMO_CART') then
-        local num = AMMO_CART_REPAIR / 8
+        local num = AMMO_CART_REPAIR / 5
 	  		local x, y = SafePos(we)
 	  		AddCreature(we, 902, num, x, y, 1, 'temp-catapult')
         repeat sleep() until exist('temp-catapult')

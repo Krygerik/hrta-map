@@ -3,7 +3,7 @@ HAVEN_PERK_LIST = {
   -- Вилка от разведки
   {
     HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
     HERO_SKILL_SNATCH,
   },
   -- Удача в пути
@@ -60,14 +60,20 @@ HAVEN_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
+  
 };
 
 INFERNO_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
    -- Нахождение пути
   {
     WARLOCK_FEAT_TELEPORT_ASSAULT,
@@ -137,14 +143,21 @@ INFERNO_PERK_LIST = {
     DEMON_FEAT_CRITICAL_STRIKE,
     WARLOCK_FEAT_POWER_OF_HASTE,
   },
+  
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
+  
 };
 
 NECROPOLIS_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
   -- Удача в пути
   {
     KNIGHT_FEAT_GRAIL_VISION,
@@ -161,10 +174,10 @@ NECROPOLIS_PERK_LIST = {
     HERO_SKILL_ABSOLUTE_RAGE, -- Чародейская защита
   },
   -- Тайные знания
-  {
-    KNIGHT_FEAT_CASTER_CERTIFICATE,
-    NECROMANCER_FEAT_SPELLPROOF_BONES,
-  },
+--  {
+--    KNIGHT_FEAT_CASTER_CERTIFICATE,
+--    NECROMANCER_FEAT_SPELLPROOF_BONES,
+--  },
   -- Хозяин земли
   {
     RANGER_FEAT_FOG_VEIL,
@@ -215,13 +228,19 @@ NECROPOLIS_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
+  
 };
 
 RANGER_PERK_LIST = {
   -- Вилка от разведки
   {
     HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
     HERO_SKILL_SNATCH,
   },
   -- Сбор войск
@@ -288,14 +307,19 @@ RANGER_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
 };
 
 ACADEMY_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
    -- Нахождение пути
   {
     WARLOCK_FEAT_TELEPORT_ASSAULT,
@@ -351,14 +375,19 @@ ACADEMY_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+    -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
 };
 
 DUNGEON_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
    -- Нахождение пути
   {
     WARLOCK_FEAT_TELEPORT_ASSAULT,
@@ -424,14 +453,19 @@ DUNGEON_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
 };
 
 FORTRESS_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
    -- Нахождение пути
   {
     WARLOCK_FEAT_TELEPORT_ASSAULT,
@@ -498,14 +532,19 @@ FORTRESS_PERK_LIST = {
     WIZARD_FEAT_ACADEMY_AWARD,
     KNIGHT_FEAT_STUDENT_AWARD,
   },
+  -- Огненная ярость
+  {
+    KNIGHT_FEAT_ANCIENT_SMITHY,
+    HERO_SKILL_SET_AFIRE,
+  },
 };
 
 STRONGHOLD_PERK_LIST = {
   -- Вилка от разведки
-  {
-    HERO_SKILL_QUICKNESS_OF_MIND,
-    RANGER_FEAT_DISGUISE_AND_RECKON,
-  },
+--  {
+--    HERO_SKILL_QUICKNESS_OF_MIND,
+--    RANGER_FEAT_DISGUISE_AND_RECKON,
+--  },
   -- Сбор войск
   {
      HERO_SKILL_BATTLE_ELATION,
@@ -544,7 +583,7 @@ STRONGHOLD_PERK_LIST = {
   },
 };
 
--- На примере ренжера 1.28
+-- На примере ренжера 1.29 ментор-хелпер
 MENTOR_HELPER_SUPPORT_PERK_LIST = {
   [RACES.HAVEN] = HAVEN_PERK_LIST,
   [RACES.INFERNO] = INFERNO_PERK_LIST,

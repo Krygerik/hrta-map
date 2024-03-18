@@ -6,9 +6,9 @@
 	<MinDamage>45</MinDamage>
 	<MaxDamage>57</MaxDamage>
 	<Speed>5</Speed>
-	<Initiative>9</Initiative>
+	<Initiative>10</Initiative>
 	<Flying>false</Flying>
-	<Health>270</Health>
+	<Health>225</Health>
 	<KnownSpells>
 		<Item>
 			<Spell>SPELL_ABILITY_SWALLOW_GOBLIN</Spell>

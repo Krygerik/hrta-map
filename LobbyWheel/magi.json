@@ -299,6 +299,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Consume_Artifact",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(15%)",
       "SectionId":4,
@@ -800,6 +809,14 @@
       ]
    },
    {
+      "SkillId":"March_of_the_Golems",
+      "SectionId":9,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Artificial_Glory"
+      ]
+   },
+   {
       "SkillId":"Basic_Logistics",
       "Comment": "(2%)",
       "SectionId":10,
@@ -853,15 +870,6 @@
       "SectionId":10,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Scouting"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Consume_Artifact",
          "Scouting"
       ]
    },

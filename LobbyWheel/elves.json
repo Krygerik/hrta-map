@@ -300,6 +300,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Imbue_Arrow",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(2%)",
       "SectionId":4,
@@ -861,15 +870,6 @@
       "SectionId":10,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Scouting"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Deadeye_Shot",
          "Scouting"
       ]
    },

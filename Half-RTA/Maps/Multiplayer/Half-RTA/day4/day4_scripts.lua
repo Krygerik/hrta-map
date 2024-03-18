@@ -664,6 +664,9 @@ function replaceMainHero(playerId, newHeroName)
   local x, y = GetObjectPosition(mainHeroName);
   local heroExp = GetHeroStat(mainHeroName, STAT_EXPERIENCE);
 
+  print(mainHeroName)
+  print(newHeroName)
+
   RemoveObject(mainHeroName);
   DeployReserveHero(newHeroName, x, y, GROUND);
   
@@ -772,6 +775,35 @@ function replaceHeroOnSpecial(playerId)
       GiveHeroSkill(mainHeroName, SKILL_INVOCATION);
     end;
   end;
+  
+
+  -- Орландо
+  if dictHeroName == HEROES.ORLANDO then
+    local invocationLevel = GetHeroSkillMastery(mainHeroName, SKILL_GATING);
+    print("-----------------REPLACED---------------------")
+
+    print(invocationLevel)
+    if invocationLevel == 3 then
+      local PLAYERS_SUPER_EXPERT_HERO = {
+        [PLAYER_1] = "Orlando3",
+        [PLAYER_2] = "Orlando4",
+      };
+
+      print("replaceMainHero1")
+      
+      print(PLAYERS_SUPER_EXPERT_HERO[playerId])
+
+      replaceMainHero(playerId, PLAYERS_SUPER_EXPERT_HERO[playerId]);
+    end;
+
+    if invocationLevel < 3 and invocationLevel > 0 then
+      print("AAAAAA")
+--      Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
+--      GiveHeroSkill(mainHeroName, SKILL_GATING);
+    end;
+  end;
+  
+  
 end;
 
 -- Замена определенного существа в герое на другое

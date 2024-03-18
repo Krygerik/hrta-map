@@ -572,8 +572,8 @@ function removePairDelimeters()
   RemoveObject('blue12');
   RemoveObject('blue15');
   RemoveObject('blue18');
-  RemoveObject('red1');
-  RemoveObject('red2');
+  SetObjectPosition('red1', 1, 1);
+  SetObjectPosition('red2', 1, 1);
   RemoveObject('red3');
   RemoveObject('red4');
   RemoveObject('red5');
@@ -585,8 +585,8 @@ function changeChooseArea()
   print "changeChooseArea"
 
   -- Удаление перегородок между расами
-  RemoveObject('blue1');
-  RemoveObject('blue2');
+  SetObjectPosition('blue1', 1, 1);
+  SetObjectPosition('blue2', 1, 1);
   RemoveObject('blue4');
   RemoveObject('blue5');
   RemoveObject('blue7');

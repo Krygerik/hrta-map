@@ -41,7 +41,7 @@
 		<Crystal>0</Crystal>
 		<Sulfur>0</Sulfur>
 		<Gem>0</Gem>
-		<Gold>85</Gold>
+		<Gold>75</Gold>
 	</Cost>
 	<SubjectOfRandomGeneration>true</SubjectOfRandomGeneration>
 	<MonsterShared href="/MapObjects/Preserve/Sprite.(AdvMapMonsterShared).xdb#xpointer(/AdvMapMonsterShared)"/>

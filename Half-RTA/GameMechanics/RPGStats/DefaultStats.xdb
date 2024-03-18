@@ -246,7 +246,7 @@
 		</AstrologerCallWeekCost>
 		<SacrificialAltar_ArtifactCostOfGoldToExpCoef>0.5</SacrificialAltar_ArtifactCostOfGoldToExpCoef>
 		<SacrificialAltar_CreatureHitsToExpCoef>3</SacrificialAltar_CreatureHitsToExpCoef>
-		<Marketplace_ArtifactSellCostOfGoldCoef>0.75</Marketplace_ArtifactSellCostOfGoldCoef>
+		<Marketplace_ArtifactSellCostOfGoldCoef>0.5</Marketplace_ArtifactSellCostOfGoldCoef>
 	</adventure>
 	<combat>
 		<DamageIncrease>0.05</DamageIncrease>
@@ -316,8 +316,8 @@
 				<DefenceBonusOnTakeRoots>0.5</DefenceBonusOnTakeRoots>
 				<PiercingArrowCoef>0.67</PiercingArrowCoef>
 				<PiercingArrow_ProcFactor>1.5</PiercingArrow_ProcFactor>
-				<TreeanUnionCasterHits>10</TreeanUnionCasterHits>
-				<TreeanUnionTargetHits>50</TreeanUnionTargetHits>
+				<TreeanUnionCasterHits>12</TreeanUnionCasterHits>
+				<TreeanUnionTargetHits>75</TreeanUnionTargetHits>
 				<TreeanUnionTargetBaseCreature>CREATURE_TREANT</TreeanUnionTargetBaseCreature>
 				<RageOfTheForestInitiativeInc>5</RageOfTheForestInitiativeInc>
 				<PowerFeedOnlyRanger>false</PowerFeedOnlyRanger>
@@ -325,7 +325,7 @@
 				<AgilityDefenceBoostPerCell>2</AgilityDefenceBoostPerCell>
 			</Sylvan>
 			<Academy>
-				<GremlinRepairPowerPreCreature>8</GremlinRepairPowerPreCreature>
+				<GremlinRepairPowerPreCreature>5</GremlinRepairPowerPreCreature>
 				<Dash_InitiativeFactor>2</Dash_InitiativeFactor>
 				<Dash_Duration>3</Dash_Duration>
 				<VulnerabilityDamageCoef>1.5</VulnerabilityDamageCoef>
@@ -1307,10 +1307,10 @@
 				<HoldGround_DefendBonusMultiplier>2</HoldGround_DefendBonusMultiplier>
 				<HoldGround_TakeRootsBonusMultiplier>2</HoldGround_TakeRootsBonusMultiplier>
 				<Training>
-					<BasicDamageBonus>0.3</BasicDamageBonus>
-					<AdvancedDamageBonus>0.6</AdvancedDamageBonus>
-					<ExpertDamageBonus>0.9</ExpertDamageBonus>
-					<ExtraExpertDamageBonus>0.9</ExtraExpertDamageBonus>
+					<BasicDamageBonus>0.15</BasicDamageBonus>
+					<AdvancedDamageBonus>0.3</AdvancedDamageBonus>
+					<ExpertDamageBonus>0.45</ExpertDamageBonus>
+					<ExtraExpertDamageBonus>0.6</ExtraExpertDamageBonus>
 					<TrainingPointsPerWeek>15</TrainingPointsPerWeek>
 					<TrainingPointsPerWeek_Upgraded>30</TrainingPointsPerWeek_Upgraded>
 					<BaseCostMultiplier>1</BaseCostMultiplier>
@@ -1334,7 +1334,7 @@
 						<Item>0.5</Item>
 						<Item>0.5</Item>
 						<Item>0.5</Item>
-						<Item>0.7</Item>
+						<Item>0.5</Item>
 					</PortionOfSummonedByGatingLevel>
 					<CallerStartATB>0.5</CallerStartATB>
 					<GatedStartATB>0</GatedStartATB>
@@ -1925,7 +1925,7 @@
 			</Warlock>
 			<Wizard>
 				<Unsummon_DamagePerHeroLevel>15</Unsummon_DamagePerHeroLevel>
-				<Unsummon_DamagePerSkillMastery>100</Unsummon_DamagePerSkillMastery>
+				<Unsummon_DamagePerSkillMastery>50</Unsummon_DamagePerSkillMastery>
 				<MeltArtifact_HealPerArtifactEffectPerHeroLevel>6</MeltArtifact_HealPerArtifactEffectPerHeroLevel>
 				<MeltArtifact_ATBUsage>0.25</MeltArtifact_ATBUsage>
 			</Wizard>
@@ -1943,7 +1943,7 @@
 				<StrongRune_2ndUseCostMultiplier>1</StrongRune_2ndUseCostMultiplier>
 				<FineRune_ChanceToActivateRuneForFree>67</FineRune_ChanceToActivateRuneForFree>
 				<QuicknessOfMind_InitiativeBonus>0.25</QuicknessOfMind_InitiativeBonus>
-				<TapRunes_ManaRestorePerKnowledge>0.75</TapRunes_ManaRestorePerKnowledge>
+				<TapRunes_ManaRestorePerKnowledge>0.6</TapRunes_ManaRestorePerKnowledge>
 				<RunicAttunement_EffectDurationInRounds>1</RunicAttunement_EffectDurationInRounds>
 				<RunicAttunement_MoraleBonus>2</RunicAttunement_MoraleBonus>
 				<Offensive_MaxOffenseBonus>16</Offensive_MaxOffenseBonus>
@@ -1968,7 +1968,7 @@
 				<GoblinSupport_GoblinsIncomePerDay>0</GoblinSupport_GoblinsIncomePerDay>
 				<Bodybuilding_HPBonusPercent>0</Bodybuilding_HPBonusPercent>
 				<VoiceTraining_WarcryCostDiscount>0.25</VoiceTraining_WarcryCostDiscount>
-				<DeathToNonexistent_DamageToSummonsMult>2</DeathToNonexistent_DamageToSummonsMult>
+				<DeathToNonexistent_DamageToSummonsMult>3</DeathToNonexistent_DamageToSummonsMult>
 				<MightyVoice_HeroLevelBonus>10</MightyVoice_HeroLevelBonus>
 				<VoiceOfRage_RageMultCallOfBlood>1.5</VoiceOfRage_RageMultCallOfBlood>
 				<VoiceOfRage_RageMultOther>2</VoiceOfRage_RageMultOther>
@@ -6142,7 +6142,7 @@
 		<Ogres_2_Creature_HitPoints>2</Ogres_2_Creature_HitPoints>
 		<Ogres_2Barbarian_HeroAttack_ATBLessPercents>30</Ogres_2Barbarian_HeroAttack_ATBLessPercents>
 		<Runic_2_AllStats>1</Runic_2_AllStats>
-		<Runic_2Warlock_ElementalVisionMultiplier>1.5</Runic_2Warlock_ElementalVisionMultiplier>
+		<Runic_2Warlock_ElementalVisionMultiplier>1.25</Runic_2Warlock_ElementalVisionMultiplier>
 		<Demonic_2_Attack>2</Demonic_2_Attack>
 		<Demonic_2DemonLord_GatingBonusPercents>10</Demonic_2DemonLord_GatingBonusPercents>
 	</ArtifactsSetsEffectsConsts>

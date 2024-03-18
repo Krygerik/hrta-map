@@ -299,6 +299,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Greater_Rune",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(4%)",
       "SectionId":4,
@@ -883,15 +892,6 @@
       "SectionId":10,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Scouting"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Greater_Rune",
          "Scouting"
       ]
    },
