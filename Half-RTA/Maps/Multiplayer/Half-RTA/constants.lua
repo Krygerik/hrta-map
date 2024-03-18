@@ -395,14 +395,14 @@ INITIAL_HERO_SKILLS = {
   Duncan = { SKILL_OFFENCE, PERK_TACTICS },
   Nicolai = { SKILL_TRAINING, SKILL_TRAINING },
   Grok = { SKILL_LOGISTICS, PERK_PATHFINDING },
-  Oddrema = { SKILL_OFFENCE, SKILL_DARK_MAGIC },
+  Oddrema = { SKILL_SORCERY, PERK_WISDOM },
   Marder = { SKILL_DEFENCE, PERK_PROTECTION },
   Jazaz = { SKILL_OFFENCE, PERK_TACTICS },
   Efion = { SKILL_DARK_MAGIC, PERK_MASTER_OF_MIND },
   Deleb = { SKILL_WAR_MACHINES, PERK_BALLISTA },
   Calid = { SKILL_DESTRUCTIVE_MAGIC, PERK_DEMONIC_FIRE },
   Nymus = { SKILL_LUCK, PERK_RESISTANCE },
-  Orlando = { SKILL_OFFENCE, PERK_DEMONIC_STRIKE },
+  Orlando = { SKILL_LEADERSHIP, PERK_DEMONIC_STRIKE },
   Agrael = { SKILL_OFFENCE, PERK_FRENZY },
   ["Kha-Beleth"] = { SKILL_DARK_MAGIC, PERK_DEMONIC_FIRE },
   Nemor = { SKILL_DARK_MAGIC, PERK_DEATH_SCREAM },
@@ -435,7 +435,7 @@ INITIAL_HERO_SKILLS = {
   Sufi = { SKILL_SORCERY, PERK_ARCANE_TRAINING },
   Razzak = { SKILL_LEARNING, PERK_INTELLIGENCE },
   Tan = { SKILL_LUCK, PERK_MAGIC_MIRROR },
-  Isher = { SKILL_DEFENCE, PERK_TOUGHNESS },
+  Isher = { SKILL_LEADERSHIP, PERK_RECRUITMENT },
   Zehir = { SKILL_SUMMONING_MAGIC, PERK_MASTER_OF_CREATURES },
   Maahir = { SKILL_ARTIFICIER, SKILL_ARTIFICIER },
   Cyrus = { SKILL_SORCERY, SKILL_SORCERY },
@@ -446,7 +446,7 @@ INITIAL_HERO_SKILLS = {
   Menel = { SKILL_LEADERSHIP, PERK_ESTATES },
   Dalom = { SKILL_DARK_MAGIC, PERK_MASTER_OF_SICKNESS },
   Ferigl = { SKILL_OFFENCE, PERK_FRENZY },
-  Ohtarig = { SKILL_LUCK, PERK_LUCKY_STRIKE },
+  Ohtarig = { SKILL_LUCK, SKILL_LUCK },
   Raelag_A1 = { SKILL_LOGISTICS, SKILL_INVOCATION },
   Kelodin = { SKILL_DEFENCE, PERK_EVASION },
   Shadwyn = { SKILL_INVOCATION, NECROMANCER_FEAT_ABSOLUTE_FEAR },
@@ -618,15 +618,15 @@ ALL_ARTS_LIST = {
   -- { id = 61, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BOOTS,  price = 8000 }, -- изумрудные туфли
   -- { id = 32, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,   price = 8000 }, -- накидка феникса
 --  { id = 70, level = ARTS_LEVELS.MINOR, position = ART_POSITION.RING,    price = 4000 }, -- кольцо грешников
-  { id = 65, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо предостережения
+  { id = 65, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 9000 }, -- кольцо предостережения
   -- { id = 93, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,   price = 8000 }, -- кольцо изгнания
-  { id = 74, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 7500 }, -- дубина орка
+  { id = 74, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 8500 }, -- дубина орка
   { id = 85, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 9500 }, -- гномий молот
   { id = 81, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 9000 }, -- рунный топор
   { id = 2,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.WEAPON,    price = 10000 },  -- секира горного короля
 
   { id = 58, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 7500 }, -- лунный клинок
-  { id = 75, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 9000 }, -- щит орка
+  { id = 75, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 9500 }, -- щит орка
   { id = 9,  level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 9000 }, -- ледяной щит
 
   { id = 37, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.SHILD,     price = 10000 }, -- щит дракона
@@ -638,7 +638,7 @@ ALL_ARTS_LIST = {
   { id = 31, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 8000 }, -- накидка льва
   { id = 95, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 7500 }, -- колчан единорога
   { id = 39, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 9000 }, -- мантия дракона
-  { id = 23, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 10000 }, -- кольцо сломленного духа
+  { id = 23, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 10500 }, -- кольцо сломленного духа
   { id = 63, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 },  --кольцо неудачи
   { id = 21, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо жизненной силы
   { id = 19, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK,      price = 9000 }, -- ожерелье победы
@@ -655,21 +655,21 @@ ALL_ARTS_LIST = {
   { id = 57, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 12000 }, -- сапоги скорости
   { id = 71, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 15000 }, -- том силы (амулет некроманта)
   -- { id = 91, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,   price = 20000 }, -- кольцо машин
-  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 18000 },  -- лук единорога
+--  { id = 4,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 18000 },  -- лук единорога
   { id = 51, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- щит гномов
   { id = 79, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том призыва
   { id = 77, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том света
   { id = 78, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 13000 }, -- том тьмы
   { id = 76, level = ARTS_LEVELS.RELIC, position = ART_POSITION.SHILD,     price = 12000 }, -- том хаоса
-  { id = 83, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BAG,       price = 16000 }, -- череп маркела
-  { id = 68, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 12500 }, -- сандали святого
+  { id = 83, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BAG,       price = 17000 }, -- череп маркела
+  { id = 68, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 13000 }, -- сандали святого
   { id = 49, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BOOTS,     price = 13000 }, -- поножи гномов
   { id = 11, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 14000 }, -- корона льва
   { id = 46, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 12000 }, -- корона сар-иссы
   { id = 50, level = ARTS_LEVELS.RELIC, position = ART_POSITION.HEAD,      price = 11000 }, -- шлем гномов
   { id = 44, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 15000 }, -- халат сар-иссы
   { id = 48, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 12000 }, -- кираса гномов
-  { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 20000 }, -- доспех забытого
+  { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 21000 }, -- доспех забытого
   { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 16000 }, -- плащ смерти
   { id = 47, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,      price = 15000 }, -- кольцо сар-иссы
 
@@ -800,7 +800,7 @@ UNITS = {
     { kol =100, id =108, price1 =  160, power =  287, lvl = 3 },
     { kol = 45, id =109, price1 =  400, power =  716, lvl = 4 },
     { kol = 24, id =110, price1 =  600, power = 1487, lvl = 5 },
-    { kol = 13, id =111, price1 = 1200, power = 2520, lvl = 6 },
+    { kol = 14, id =111, price1 = 1200, power = 2520, lvl = 6 },
     { kol =  6, id =112, price1 = 3200, power = 6003, lvl = 7 }
   },
   [RACES.INFERNO] = {
@@ -823,7 +823,7 @@ UNITS = {
     { kol = 80, id =133, price1 =  200, power =  338, lvl = 3 },
     { kol = 45, id =134, price1 =  400, power =  680, lvl = 4 },
     { kol = 27, id =135, price1 =  800, power = 1415, lvl = 5 },
-    { kol = 13, id =136, price1 = 1300, power = 2360, lvl = 6 },
+    { kol = 14, id =136, price1 = 1300, power = 2360, lvl = 6 },
     { kol =  6, id =137, price1 = 2666, power = 5850, lvl = 7 }
   },
   [RACES.NECROPOLIS] = {
@@ -846,53 +846,53 @@ UNITS = {
     { kol = 90, id =154, price1 =  180, power =  327, lvl = 3 },
     { kol = 45, id =155, price1 =  450, power =  739, lvl = 4 },
     { kol = 24, id =156, price1 =  750, power = 1539, lvl = 5 },
-    { kol = 13, id =157, price1 = 1200, power = 2449, lvl = 6 },
+    { kol = 14, id =157, price1 = 1200, power = 2449, lvl = 6 },
     { kol =  8, id =158, price1 = 2200, power = 3872, lvl = 7 }
   },
   [RACES.SYLVAN] = {
-    { kol =156, id = 43, price1 =   85, power =  169, lvl = 1 },
+    { kol =156, id = 43, price1 =   75, power =  169, lvl = 1 },
     { kol =108, id = 45, price1 =  150, power =  308, lvl = 2 },
     { kol = 70, id = 47, price1 =  280, power =  433, lvl = 3 },
     { kol = 36, id = 49, price1 =  420, power =  846, lvl = 4 },
     { kol = 24, id = 51, price1 =  750, power = 1441, lvl = 5 },
-    { kol = 16, id = 53, price1 = 1050, power = 1993, lvl = 6 },
+    { kol = 16, id = 53, price1 = 1150, power = 1993, lvl = 6 },
     { kol =  6, id = 55, price1 = 3200, power = 5905, lvl = 7 },
-    { kol =156, id = 44, price1 =   85, power =  169, lvl = 1 },
+    { kol =156, id = 44, price1 =   75, power =  169, lvl = 1 },
     { kol =108, id = 46, price1 =  150, power =  308, lvl = 2 },
     { kol = 70, id = 48, price1 =  280, power =  433, lvl = 3 },
     { kol = 36, id = 50, price1 =  420, power =  846, lvl = 4 },
     { kol = 24, id = 52, price1 =  750, power = 1441, lvl = 5 },
-    { kol = 16, id = 54, price1 = 1050, power = 1993, lvl = 6 },
+    { kol = 16, id = 54, price1 = 1150, power = 1993, lvl = 6 },
     { kol =  6, id = 56, price1 = 3200, power = 5905, lvl = 7 },
-    { kol =156, id =145, price1 =   85, power =  169, lvl = 1 },
+    { kol =156, id =145, price1 =   75, power =  169, lvl = 1 },
     { kol =108, id =146, price1 =  150, power =  308, lvl = 2 },
     { kol = 70, id =147, price1 =  280, power =  433, lvl = 3 },
     { kol = 36, id =148, price1 =  420, power =  846, lvl = 4 },
     { kol = 24, id =149, price1 =  750, power = 1441, lvl = 5 },
-    { kol = 15, id =150, price1 = 1050, power = 1993, lvl = 6 },
+    { kol = 16, id =150, price1 = 1150, power = 1993, lvl = 6 },
     { kol =  6, id =151, price1 = 3200, power = 5905, lvl = 7 }
   },
   [RACES.ACADEMY] = {
-    { kol =280, id = 57, price1 =   50, power =  105, lvl = 1 },
+    { kol =280, id = 57, price1 =   55, power =  105, lvl = 1 },
     { kol =168, id = 59, price1 =  100, power =  172, lvl = 2 },
     { kol = 90, id = 61, price1 =  150, power =  355, lvl = 3 },
-    { kol = 45, id = 63, price1 =  420, power =  642, lvl = 4 },
+    { kol = 45, id = 63, price1 =  390, power =  642, lvl = 4 },
     { kol = 30, id = 65, price1 =  500, power = 1096, lvl = 5 },
     { kol = 14, id = 67, price1 = 1500, power = 2535, lvl = 6 },
     { kol =  6, id = 69, price1 = 3300, power = 6095, lvl = 7 },
-    { kol =280, id = 58, price1 =   50, power =  105, lvl = 1 },
+    { kol =280, id = 58, price1 =   55, power =  105, lvl = 1 },
     { kol =168, id = 60, price1 =  100, power =  172, lvl = 2 },
     { kol = 90, id = 62, price1 =  150, power =  355, lvl = 3 },
-    { kol = 45, id = 64, price1 =  420, power =  642, lvl = 4 },
+    { kol = 45, id = 64, price1 =  390, power =  642, lvl = 4 },
     { kol = 30, id = 66, price1 =  500, power = 1096, lvl = 5 },
     { kol = 14, id = 68, price1 = 1500, power = 2535, lvl = 5 },
     { kol =  6, id = 70, price1 = 3300, power = 6095, lvl = 5 },
-    { kol =280, id =159, price1 =   50, power =  105, lvl = 1 },
+    { kol =280, id =159, price1 =   55, power =  105, lvl = 1 },
     { kol =168, id =160, price1 =  100, power =  172, lvl = 2 },
     { kol = 90, id =161, price1 =  150, power =  355, lvl = 3 },
-    { kol = 45, id =162, price1 =  420, power =  642, lvl = 4 },
+    { kol = 45, id =162, price1 =  390, power =  642, lvl = 4 },
     { kol = 30, id =163, price1 =  500, power = 1096, lvl = 5 },
-    { kol = 13, id =164, price1 = 1500, power = 2535, lvl = 6 },
+    { kol = 14, id =164, price1 = 1500, power = 2535, lvl = 6 },
     { kol =  6, id =165, price1 = 3300, power = 6095, lvl = 7 }
   },
   [RACES.DUNGEON] = {
@@ -901,21 +901,21 @@ UNITS = {
     { kol = 66, id = 75, price1 =  200, power =  474, lvl = 3 },
     { kol = 36, id = 77, price1 =  420, power =  812, lvl = 4 },
     { kol = 24, id = 79, price1 =  750, power = 1324, lvl = 5 },
-    { kol = 14, id = 81, price1 = 1000, power = 2537, lvl = 6 },
+    { kol = 14, id = 81, price1 = 1100, power = 2537, lvl = 6 },
     { kol =  6, id = 83, price1 = 3600, power = 6389, lvl = 7 },
     { kol = 98, id = 92, price1 =  130, power =  290, lvl = 1 },
     { kol = 78, id = 74, price1 =  190, power =  477, lvl = 2 },
     { kol = 66, id = 76, price1 =  200, power =  474, lvl = 3 },
     { kol = 36, id = 78, price1 =  420, power =  812, lvl = 4 },
     { kol = 24, id = 80, price1 =  750, power = 1324, lvl = 5 },
-    { kol = 14, id = 82, price1 = 1000, power = 2537, lvl = 6 },
+    { kol = 14, id = 82, price1 = 1100, power = 2537, lvl = 6 },
     { kol =  6, id = 84, price1 = 3600, power = 6389, lvl = 7 },
     { kol = 98, id =166, price1 =  130, power =  290, lvl = 1 },
     { kol = 78, id =139, price1 =  190, power =  477, lvl = 2 },
     { kol = 66, id =140, price1 =  200, power =  474, lvl = 3 },
     { kol = 36, id =141, price1 =  420, power =  812, lvl = 4 },
     { kol = 24, id =142, price1 =  750, power = 1324, lvl = 5 },
-    { kol = 13, id =143, price1 = 1000, power = 2537, lvl = 6 },
+    { kol = 14, id =143, price1 = 1100, power = 2537, lvl = 6 },
     { kol =  6, id =144, price1 = 3600, power = 6389, lvl = 7 }
   },
   [RACES.FORTRESS] = {
@@ -938,7 +938,7 @@ UNITS = {
     { kol = 70, id =168, price1 =  240, power =  419, lvl = 3 },
     { kol = 66, id =169, price1 =  250, power =  434, lvl = 4 },
     { kol = 27, id =170, price1 =  650, power = 1308, lvl = 5 },
-    { kol = 13, id =171, price1 = 1400, power = 2437, lvl = 6 },
+    { kol = 14, id =171, price1 = 1400, power = 2437, lvl = 6 },
     { kol =  6, id =172, price1 = 3200, power = 6070, lvl = 7 }
   },
   [RACES.STRONGHOLD] = {
@@ -961,7 +961,7 @@ UNITS = {
     { kol =110, id =175, price1 =  140, power =  254, lvl = 3 },
     { kol = 45, id =176, price1 =  400, power =  680, lvl = 4 },
     { kol = 40, id =177, price1 =  550, power =  895, lvl = 5 },
-    { kol = 13, id =178, price1 = 1000, power = 2571, lvl = 6 },
+    { kol = 14, id =178, price1 = 1000, power = 2571, lvl = 6 },
     { kol =  6, id =179, price1 = 3000, power = 5937, lvl = 7 }
   }
 };

@@ -111,9 +111,9 @@ function getCountUnitByLevel(playerId, raceId, unitLevel)
 
   local count = UNITS[raceId][unitLevel].kol;
 
-  if unitLevel == 6 then
-    count = random(3) + count - 1;
-  end;
+--  if unitLevel == 6 then
+--    count = random(3) + count - 1;
+--  end;
 
   if unitLevel < 6 and unitLevel > 1 then
     local plusOrMinusOne = getRandomPlusOrMinusOne();
@@ -153,7 +153,7 @@ function adjustmentArmyCount(playerId, raceId)
   local unitLevel = 7;
 
   -- Если сгенерировалась слишком много войск,
-  -- уменьшаем их количество до стоимости менее 10% от первого тира
+  -- уменьшаем их количество до стоимости менее 5% от первого тира
   if priceAllButFirst > tenPercentFullPriceFirstLvlUnit then
     while unitLevel > 1 do
       local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];
@@ -181,7 +181,7 @@ function adjustmentArmyCount(playerId, raceId)
   end;
 
   -- Если сгенерировалась слишком мало войск,
-  -- увеличиваем их количество до стоимости менее 10% от первого тира
+  -- увеличиваем их количество до стоимости менее 5% от первого тира
   if priceAllButFirst < (-tenPercentFullPriceFirstLvlUnit) then
     while unitLevel > 1 do
       local unit = RESULT_ARMY_INTO_TOWN[playerId][unitLevel];

@@ -317,6 +317,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Mark_of_the_Damned",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(2%)",
       "SectionId":4,
@@ -821,7 +830,7 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Diplomacy",
-         "Astrology"
+         "Corrupted_Soil"
       ]
    },
    {
@@ -894,15 +903,6 @@
       "SectionId":10,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Scouting"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Mark_of_the_Damned",
          "Scouting"
       ]
    },

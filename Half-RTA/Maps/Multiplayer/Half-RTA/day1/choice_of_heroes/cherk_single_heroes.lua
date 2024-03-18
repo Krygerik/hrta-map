@@ -29,6 +29,36 @@ randomHeroList = {
 -- „ерк по одному герою
 function cherkSingleHeroes()
   print "cherkSingleHeroes"
+  
+--  SetObjectEnabled('red1', nil); SetDisabledObjectMode('red17', DISABLED_BLOCKED);
+--  SetObjectEnabled('red2', nil); SetDisabledObjectMode('red18', DISABLED_BLOCKED);
+--  SetObjectEnabled('blue1', nil); SetDisabledObjectMode('blue17', DISABLED_BLOCKED);
+--  SetObjectEnabled('blue2', nil); SetDisabledObjectMode('blue18', DISABLED_BLOCKED);
+  
+--  SetObjectPosition('red1', 31, 86);
+--  SetObjectPosition('red2', 39, 86);
+--  SetObjectPosition('blue1', 31, 88);
+--  SetObjectPosition('blue2', 39, 88);
+
+    SetObjectPosition('blue10', 1, 1);
+
+    SetObjectPosition('red1', 42, 26);
+    SetObjectPosition('blue1', 42, 18);
+    
+    SetObjectPosition('blue2', 35, 91);
+  
+--  SetObjectPosition('red19', 44, 24);
+--  SetObjectPosition('red20', 44, 24);
+--  SetObjectPosition('blue19', 44, 24);
+--  SetObjectPosition('blue20', 44, 24);
+  
+
+  
+--  SetObjectEnabled('red19', nil); SetDisabledObjectMode('red19', DISABLED_BLOCKED);
+--  SetObjectEnabled('red20', nil); SetDisabledObjectMode('red20', DISABLED_BLOCKED);
+--  SetObjectEnabled('blue19', nil); SetDisabledObjectMode('blue19', DISABLED_BLOCKED);
+--  SetObjectEnabled('blue20', nil); SetDisabledObjectMode('blue20', DISABLED_BLOCKED);
+  
   SetObjectPosition(Biara, 35, 87);
   SetObjectPosition(Djovanni, 42, 22);
 
@@ -70,7 +100,7 @@ end;
 -- ”даление триггеров с регионов, где находились расы
 function removeRaceRegionTriggers()
   print "removeRaceRegionTriggers"
-  
+
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race1', 'noop');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race2', 'noop');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl1_race3', 'noop');
@@ -87,6 +117,16 @@ function removeRaceRegionTriggers()
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race6', 'noop');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race7', 'noop');
   Trigger( REGION_ENTER_WITHOUT_STOP_TRIGGER, 'pl2_race8', 'noop');
+end;
+
+--убираем перегородки
+function deleteFlagsCrystal()
+
+    SetObjectPosition('blue10', 42, 26);
+    SetObjectPosition('red1', 1, 1);
+    SetObjectPosition('blue1', 1, 1);
+    SetObjectPosition('blue2', 1, 1);
+
 end;
 
 -- ћен€ем им€ и описание дл€ всех героев переданных рас
@@ -446,6 +486,12 @@ function setResultHeroes()
 
   -- «аполн€ем итоговый список 2 случайными выбранными геро€ми и 1 рандомным
   setRandomHeroFromHeroList();
+  
+  deleteFlagsCrystal()
+  
 end;
+
+
+
 
 cherkSingleHeroes();

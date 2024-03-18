@@ -307,6 +307,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Eternal_Servitude",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(10%)",
       "SectionId":4,
@@ -455,6 +464,14 @@
       ]
    },
    {
+      "SkillId":"Boneward",
+      "SectionId":5,
+      "DepthLevel":1,
+      "RequiredSkillIds":[
+         "Eternal_Servitude"
+      ]
+   },
+   {
       "SkillId":"Counterspell",
       "SectionId":5,
       "DepthLevel":2,
@@ -468,14 +485,6 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Mana_Regeneration"
-      ]
-   },
-   {
-      "SkillId":"Boneward",
-      "SectionId":5,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Arcane_Training"
       ]
    },
    {
@@ -626,14 +635,6 @@
       ]
    },
    {
-      "SkillId":"Chilling_Bones",
-      "SectionId":7,
-      "DepthLevel":1,
-      "RequiredSkillIds":[
-         "Master_Of_Ice"
-      ]
-   },
-   {
       "SkillId":"Power_Of_Endurance",
       "SectionId":7,
       "DepthLevel":2,
@@ -664,6 +665,15 @@
       "DepthLevel":2,
       "RequiredSkillIds":[
          "Evasion"
+      ]
+   },
+   {
+      "SkillId":"Chilling_Bones",
+      "SectionId":7,
+      "DepthLevel":2,
+      "RequiredSkillIds":[
+         "Evasion",
+		 "Master_Of_Ice"
       ]
    },
    {
@@ -850,15 +860,6 @@
       "SectionId":10,
       "DepthLevel":2,
       "RequiredSkillIds":[
-         "Scouting"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Mark_of_the_Necromancer",
          "Scouting"
       ]
    },

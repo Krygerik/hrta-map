@@ -112,7 +112,7 @@
 				<Icon href="/Textures/HeroScreen/Artifacts/Unicorn_Horn_Bow.xdb#xpointer(/Texture)"/>
 				<CostOfGold>18000</CostOfGold>
 				<AIValue>14000</AIValue>
-				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
+				<CanBeGeneratedToSell>false</CanBeGeneratedToSell>
 				<HeroStatsModif>
 					<Attack>0</Attack>
 					<Defence>0</Defence>
@@ -335,7 +335,7 @@
 				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>CHEST</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Plate_Mail_of_Stability.xdb#xpointer(/Texture)"/>
-				<CostOfGold>20000</CostOfGold>
+				<CostOfGold>21000</CostOfGold>
 				<AIValue>3500</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -585,7 +585,7 @@
 				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>FINGER</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Nightmarish_Ring_3.xdb#xpointer(/Texture)"/>
-				<CostOfGold>10000</CostOfGold>
+				<CostOfGold>10500</CostOfGold>
 				<AIValue>900</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -1635,7 +1635,7 @@
 				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>FINGER</Slot>
 				<Icon href="/Textures/HeroScreen/Artifacts/Wispering_Ring.xdb#xpointer(/Texture)"/>
-				<CostOfGold>8000</CostOfGold>
+				<CostOfGold>9000</CostOfGold>
 				<AIValue>600</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -1710,7 +1710,7 @@
 				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>FEET</Slot>
 				<Icon href="/Textures/Icons/Artifacts/Sandais_of_the_Saint.(Texture).xdb#xpointer(/Texture)"/>
-				<CostOfGold>12500</CostOfGold>
+				<CostOfGold>13000</CostOfGold>
 				<AIValue>1800</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -1860,7 +1860,7 @@
 				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>PRIMARY</Slot>
 				<Icon href="/UI/H5A1/Icons/Artefacts/128x128/Ogre_Club.(Texture).xdb#xpointer(/Texture)"/>
-				<CostOfGold>7500</CostOfGold>
+				<CostOfGold>8500</CostOfGold>
 				<AIValue>1200</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -1885,7 +1885,7 @@
 				<Type>ARTF_CLASS_MAJOR</Type>
 				<Slot>SECONDARY</Slot>
 				<Icon href="/UI/H5A1/Icons/Artefacts/128x128/Ogre_Shield.(Texture).xdb#xpointer(/Texture)"/>
-				<CostOfGold>9000</CostOfGold>
+				<CostOfGold>9500</CostOfGold>
 				<AIValue>1200</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>
@@ -2085,7 +2085,7 @@
 				<Type>ARTF_CLASS_RELIC</Type>
 				<Slot>MISCSLOT1</Slot>
 				<Icon href="/UI/H5A1/Icons/Artefacts/128x128/Skull_of_Markal_(Berein).(Texture).xdb#xpointer(/Texture)"/>
-				<CostOfGold>16000</CostOfGold>
+				<CostOfGold>17000</CostOfGold>
 				<AIValue>2500</AIValue>
 				<CanBeGeneratedToSell>true</CanBeGeneratedToSell>
 				<HeroStatsModif>

@@ -307,6 +307,15 @@
       ]
    },
    {
+      "SkillId":"Fiery_Wrath",
+      "SectionId":3,
+      "DepthLevel":3,
+      "RequiredSkillIds":[
+         "Elemental_Vision",
+		 "Secrets_Of_Destruction"
+      ]
+   },
+   {
       "SkillId":"Basic_Summoning_Magic",
       "Comment": "(10%)",
       "SectionId":4,
@@ -864,15 +873,6 @@
       "RequiredSkillIds":[
          "Scouting",
          "Arcane_Intuition"
-      ]
-   },
-   {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Elemental_Vision",
-         "Scouting"
       ]
    },
    {

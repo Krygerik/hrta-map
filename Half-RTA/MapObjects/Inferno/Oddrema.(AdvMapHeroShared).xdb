@@ -58,7 +58,7 @@
 			<Item>HERO_SKILL_DEMONIC_RETALIATION</Item>
 		</perkIDs>
 		<spellIDs>
-			<Item>SPELL_SLOW</Item>
+			<Item>SPELL_PHANTOM</Item>
 		</spellIDs>
 		<Ballista>false</Ballista>
 		<FirstAidTent>false</FirstAidTent>

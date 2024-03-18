@@ -5883,12 +5883,62 @@
 				</DescriptionFileRef>
 				<CommonDescriptionFileRef href=""/>
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
-				<HeroClass>HERO_CLASS_NONE</HeroClass>
+				<HeroClass>HERO_CLASS_RANGER</HeroClass>
 				<spellBuffs>
 					<Item>SPELL_SKILL_ANCIENT_SMITHY</Item>
 				</spellBuffs>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
-				<SkillPrerequisites/>
+				<BasicSkillID>HERO_SKILL_DESTRUCTIVE_MAGIC</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_KNIGHT</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_EXPERT_TRAINER</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RANGER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_IMBUE_ARROW</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WIZARD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_DEMON_LORD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_NECROMANCER</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_WARLOCK</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
+						</dependenciesIDs>
+					</Item>
+					<Item>
+						<Class>HERO_CLASS_RUNEMAGE</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
+							<Item>HERO_SKILL_STRONG_RUNE</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -7736,6 +7786,7 @@
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_MASTER_OF_ICE</Item>
+							<Item>HERO_SKILL_EVASION</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -7808,7 +7859,7 @@
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_ARCANE_TRAINING</Item>
+							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -8313,62 +8364,6 @@
 				<spellBuffs/>
 				<BasicSkillID>HERO_SKILL_LOGISTICS</BasicSkillID>
 				<SkillPrerequisites>
-					<Item>
-						<Class>HERO_CLASS_KNIGHT</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_PRAYER</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_DEMON_LORD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RANGER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_SNIPE_DEAD</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_NECROMANCER</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_SPIRIT_LINK</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WIZARD</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_WARLOCK</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_RUNEMAGE</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_STRONG_RUNE</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
-					<Item>
-						<Class>HERO_CLASS_BARBARIAN</Class>
-						<dependenciesIDs>
-							<Item>HERO_SKILL_MIGHT_OVER_MAGIC</Item>
-							<Item>HERO_SKILL_SCOUTING</Item>
-						</dependenciesIDs>
-					</Item>
 				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
@@ -9558,7 +9553,15 @@
 				<SkillType>SKILLTYPE_SPECIAL_PERK</SkillType>
 				<HeroClass>HERO_CLASS_NONE</HeroClass>
 				<spellBuffs/>
-				<BasicSkillID>HERO_SKILL_NONE</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_LEADERSHIP</BasicSkillID>
+				<SkillPrerequisites>
+					<Item>
+						<Class>HERO_CLASS_WIZARD</Class>
+						<dependenciesIDs>
+							<Item>HERO_SKILL_ARTIFICIAL_GLORY</Item>
+						</dependenciesIDs>
+					</Item>
+				</SkillPrerequisites>
 				<AIRacesValues>
 					<Haven>
 						<CommanderValue>0</CommanderValue>
@@ -13683,7 +13686,7 @@
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
 							<Item>HERO_SKILL_DIPLOMACY</Item>
-							<Item>HERO_SKILL_HAUNT_MINE</Item>
+							<Item>HERO_SKILL_SOIL_BURN</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

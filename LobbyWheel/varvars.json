@@ -746,15 +746,6 @@
       ]
    },
    {
-      "SkillId":"Silent_Stalker",
-      "SectionId":10,
-      "DepthLevel":2,
-      "RequiredSkillIds":[
-         "Might_Over_Magic",
-         "Scouting"
-      ]
-   },
-   {
       "SkillId":"Warpath",
       "SectionId":10,
       "DepthLevel":2,

@@ -41,7 +41,7 @@
 				<WarMachine ObjectRecordID="29">
 					<Shots>100</Shots>
 					<Initiative>10</Initiative>
-					<Health>500</Health>
+					<Health>350</Health>
 					<Range>0</Range>
 					<spellIDs/>
 					<MagicElement>
@@ -76,14 +76,14 @@
 						<Item>15</Item>
 					</Defense>
 					<MinDamageFactor>
-						<Item>5</Item>
+						<Item>4</Item>
 						<Item>5</Item>
 						<Item>5</Item>
 						<Item>5</Item>
 						<Item>5</Item>
 					</MinDamageFactor>
 					<MaxDamageFactor>
-						<Item>5</Item>
+						<Item>4</Item>
 						<Item>5</Item>
 						<Item>5</Item>
 						<Item>5</Item>

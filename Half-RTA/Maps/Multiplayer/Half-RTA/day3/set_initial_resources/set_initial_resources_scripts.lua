@@ -21,7 +21,7 @@ function setInitialResources()
       -- Для золота учитываем стартовый бонус
       if resourceId == GOLD then
         if bonus == STARTED_BONUSES.GOLD then
-          local randomStartGold = 5000;
+          local randomStartGold = 4000;
 
           resValue = resValue + randomStartGold;
 

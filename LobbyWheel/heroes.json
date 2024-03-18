@@ -39,8 +39,8 @@
     "Comment": null,
     "Image": "Razzak.png",
     "DefaultSkillIds": [
-      "Basic_Defense",
-      "Vitality"
+      "Basic_Leadership",
+      "Recruitment"
     ]
   },
   {
@@ -205,7 +205,7 @@
     "Image": "Vayshan.png",
     "DefaultSkillIds": [
       "Basic_Luck",
-      "Soldier's_Luck"
+      "Advanced_Luck"
     ]
   },
   {
@@ -629,18 +629,18 @@
   {
     "Id": "SpecOrlando",
     "Name": "Орландо",
-    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",
+    "Description": "При наличии Искусного открытия врат дьяволы получают возможность открывать врата.",
     "Comment": null,
     "Image": "Orlando.png",
     "DefaultSkillIds": [
       "Mark_of_the_Damned",
-      "Basic_Attack"
+      "Basic_Leadership"
     ]
   },
   {
     "Id": "SpecVlastelin",
     "Name": "Властелин",
-    "Description": "Властелин дьяволов: К герою игрока присоединяются Архидьяволы и Архидемоны в уже имеющиеся отряды за каждые 7 уровней героя. При наличии нескольких типов существ герой получит тех, каких больше. Если у героя нет никаких, то он ничего не получит.",
+    "Description": "При наличии Искусного открытия врат дьяволы получают возможность открывать врата.",
     "Comment": null,
     "Image": "Sovereign.png",
     "DefaultSkillIds": [
@@ -666,8 +666,8 @@
     "Comment": null,
     "Image": "Jezebeth.png",
     "DefaultSkillIds": [
-      "Basic_Attack",
-      "Basic_Dark_Magic"
+      "Basic_Sorcery",
+      "Magic_Insight"
     ]
   },
   {

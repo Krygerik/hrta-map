@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Creature ObjectRecordID="1000047">
 	<AttackSkill>25</AttackSkill>
-	<DefenceSkill>25</DefenceSkill>
+	<DefenceSkill>20</DefenceSkill>
 	<Shots>0</Shots>
 	<MinDamage>23</MinDamage>
 	<MaxDamage>30</MaxDamage>
 	<Speed>6</Speed>
-	<Initiative>9</Initiative>
+	<Initiative>8</Initiative>
 	<Flying>false</Flying>
-	<Health>140</Health>
+	<Health>160</Health>
 	<KnownSpells>
 		<Item>
 			<Spell>SPELL_ABILITY_DASH</Spell>

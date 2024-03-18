@@ -588,7 +588,7 @@ end;
 -- Вечное рабство
 function perkNoRestForTheWicked(heroName)
   print "perkNoRestForTheWicked"
-  local BONUS_VALUE = 80;
+  local BONUS_VALUE = 90;
 
   if GetHeroCreatures(heroName, CREATURE_SKELETON) >= GetHeroCreatures(heroName, CREATURE_SKELETON_WARRIOR) then
      AddHeroCreatures(heroName,  CREATURE_SKELETON, BONUS_VALUE);
@@ -692,14 +692,10 @@ function checkAndRunHeroPerks(playerId)
   if HasHeroSkill(mainHeroName, KNIGHT_FEAT_ROAD_HOME) then
     GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_SPEED, 1);
   end;
-  
-  -- смертельная неудача
-  if HasHeroSkill(mainHeroName, NECROMANCER_FEAT_DEAD_LUCK) then
-    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -1);
-  end;
 
   -- сила против магии
   if HasHeroSkill(mainHeroName, HERO_SKILL_MIGHT_OVER_MAGIC) then
+    ChangeHeroStat(mainHeroName, STAT_SPELL_POWER, 2);
     if frac(GetHeroStat(mainHeroName, STAT_SPELL_POWER) / 2) == 0.5 then
       ChangeHeroStat(mainHeroName, STAT_SPELL_POWER, 1);
     end;
@@ -877,7 +873,7 @@ function kiganSpec(heroName)
   end;
 end;
 
---Для определения Дьяволов с Солдатки у Орландо
+--Для определения Дьяволов с Солдатки у Орландо (удалено)
 function getOrlandoCreature(heroName)
   local creatureDevilsList = {CREATURE_DEVIL, CREATURE_ARCH_DEMON, CREATURE_FRIGHTFUL_NIGHTMARE};
   local maxCountDevilId = nil;
@@ -897,9 +893,25 @@ function getOrlandoCreature(heroName)
   return maxCountDevilId
 end;
 
--- Спеца Орландо
+-- Спеца Орландо (выдача усиленных дэвилов, с доп хп)
 function orlandoSpec(heroName)
   print "orlandoSpec"
+  print"dddddddddddddddddddddddddddddddddddddddddddddddddddddd "
+
+    local MAP_REPLACE_UNIT = {
+      [27] = 220,
+      [137] = 221,
+    };
+
+    for unitId, replaceUnitId in MAP_REPLACE_UNIT do
+      replaceUnitInHero(mainHeroName, unitId, replaceUnitId);
+    end;
+
+end;
+
+-- Спеца Орландо (удалена)
+function orlandoSpecOld(heroName)
+  print "orlandoSpecOld"
 
   local ORLANDO_BONUS_LEVEL = 7;
   local heroLevel = GetHeroLevel(heroName);
@@ -1011,7 +1023,7 @@ function runHeroSpecialization(playerId)
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local dictHeroName = getDictionaryHeroName(mainHeroName);
-
+--здесь проблема с переопределением героя после замены
   -- Инга
   if dictHeroName == HEROES.UNA then
     specInga(mainHeroName);
@@ -1027,10 +1039,12 @@ function runHeroSpecialization(playerId)
     kiganSpec(mainHeroName);
   end;
 
+  print(dictHeroName)
+  print(mainHeroName)
   -- Орландо
-  if dictHeroName == HEROES.ORLANDO then
-    orlandoSpec(mainHeroName);
-  end;
+--  if dictHeroName == HEROES.ORLANDO then
+--    orlandoSpec(mainHeroName);
+--  end;
   
   -- Вайшан
   if dictHeroName == HEROES.VAYSHAN then
@@ -1329,7 +1343,7 @@ function runBattle()
   sleep(5);
   
   -- ASHA
-  local MapVersion = '1.28f';
+  local MapVersion = '1.29a';
   
   if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
     MapVersion = MapVersion..'_no_mentor'

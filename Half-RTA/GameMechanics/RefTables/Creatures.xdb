@@ -883,11 +883,11 @@
 		</Item>
 		<Item>
 			<ID>CREATURE_220</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/220.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_221</ID>
-			<Obj href="/GameMechanics/Creature/Creatures/Empty.xdb#xpointer(/Creature)"/>
+			<Obj href="/GameMechanics/Creature/Creatures/RTA/221.xdb#xpointer(/Creature)"/>
 		</Item>
 		<Item>
 			<ID>CREATURE_222</ID>
