@@ -396,6 +396,9 @@ function perkDiplomacy(playerId)
 
     [CREATURE_COMBAT_MAGE] = CREATURE_MAGI,
 
+    --специализация Нархиза
+    [907] = 908,
+
     [CREATURE_SHADOW_MISTRESS] = CREATURE_MATRON,
 
     [CREATURE_RUNE_MAGE] = CREATURE_FLAME_KEEPER,
@@ -420,6 +423,10 @@ function perkDiplomacy(playerId)
 
     [CREATURE_COMBAT_MAGE] = 4,
     [CREATURE_MAGI] = 4,
+    
+    [907] = 4,
+    [908] = 4,
+
 
     [CREATURE_SHADOW_MISTRESS] = 6,
     [CREATURE_MATRON] = 6,
@@ -1343,7 +1350,7 @@ function runBattle()
   sleep(5);
   
   -- ASHA
-  local MapVersion = '1.29a';
+  local MapVersion = '1.29b';
   
   if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
     MapVersion = MapVersion..'_no_mentor'

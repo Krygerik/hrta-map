@@ -236,9 +236,8 @@ function prepareForHavenTraining(playerId)
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   SetObjectPosition(mainHeroName, PLAYERS_TO_POSITION[playerId].x, PLAYERS_TO_POSITION[playerId].y);
 
-  local tiltAngle = playerId == PLAYER_1 and 0 or 3.14;
   local rotate = playerId == PLAYER_1 and 0 or 3.14;
-  MoveCameraForPlayers(playerId, PLAYERS_TO_POSITION[playerId].x, PLAYERS_TO_POSITION[playerId].y, GROUND, 50, tiltAngle, rotate, 0, 0, 1);
+  MoveCameraForPlayers(playerId, PLAYERS_TO_POSITION[playerId].x, PLAYERS_TO_POSITION[playerId].y, GROUND, 50, 3.14, rotate, 0, 0, 1);
 
   calculatePlayerTrainingPoints(playerId);
 
