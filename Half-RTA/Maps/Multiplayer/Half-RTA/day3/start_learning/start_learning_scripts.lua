@@ -6,7 +6,7 @@ doFile(PATH_TO_START_LEARNING_MODULE..'mentor_helper/mentor_helper.lua');
 doFile(PATH_TO_START_LEARNING_MODULE..'start_learning_constants.lua');
 sleep(1);
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Скрипты для обработки прокачки героя
 function start_learning_script()
   print "start_learning_script"
   
@@ -17,7 +17,7 @@ function start_learning_script()
   doFile(PATH_TO_START_LEARNING_MODULE..'reGenerationStats/reGeneration_stats_script.lua');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров на покупку дополнительных статов
 function setBuyStatsTriggers()
   print "setBuyStatsTriggers"
 
@@ -32,7 +32,7 @@ function setBuyStatsTriggers()
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Обработчик взаимодействия героя с объектом для покупки стата
 function handleTouchBuyStatObject(strPlayerId, strStatId)
   print "handleTouchBuyStatObject"
 
@@ -62,11 +62,11 @@ function handleTouchBuyStatObject(strPlayerId, strStatId)
   QuestionBoxForPlayers(playerId, MAP_BUY_STAT_ON_QUESTIONS[statId], 'buyStat("'..playerId..'", "'..statId..'")', 'noop');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обновление игровых статистик главного героя на основе скриптовых
 function refreshMainHeroStats(playerId)
   print "refreshMainHeroStats"
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Снимаем с героя все шмотки
   moveAllMainHeroArtsToStorage(playerId);
   
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
@@ -78,7 +78,7 @@ function refreshMainHeroStats(playerId)
       + playerMainHero.buy_stats[statId]
       - GetHeroStat(playerMainHero.name, statId);
 
-    -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    -- Если есть образло, считываем статы за все уровни образла
     if playerMainHero.current_learning_level > 0 then
       for learningLevel = 1, playerMainHero.current_learning_level do
         changeStatValue = changeStatValue + playerMainHero.learning[learningLevel][statId]
@@ -88,11 +88,11 @@ function refreshMainHeroStats(playerId)
     ChangeHeroStat(playerMainHero.name, statId, changeStatValue);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Отдаем шмотки обратно
   getAllMainHeroArtsFromStorage(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Увеличение значение переданного стата у главного героя игрока
 function changeMainHeroMainStat(playerId, statId, count)
   print "changeMainHeroMainStat"
 
@@ -102,27 +102,27 @@ function changeMainHeroMainStat(playerId, statId, count)
 
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Меняем скриптовое состояние главных статистик героя
   playerMainHero.stats[statId] = playerMainHero.stats[statId] + count;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Обновляем статы ГГ
   refreshMainHeroStats(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Изменение у ГГ статов, полученных за навыки
 function changeMainHeroStatsForSkills(playerId, statId, count)
   print "changeMainHeroStatsForSkills"
 
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId];
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Меняем скриптовое состояние главных статистик героя
   playerMainHero.stats_for_skills[statId] = playerMainHero.stats_for_skills[statId] + count;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Обновляем статы ГГ
   refreshMainHeroStats(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Покупка стата игроком
 function buyStat(strPlayerId, strStatId)
   print "buyStat"
 
@@ -136,13 +136,13 @@ function buyStat(strPlayerId, strStatId)
 
   SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - 2500));
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Обновляем статы ГГ
   refreshMainHeroStats(playerId);
 
   ShowFlyingSign(MAP_STAT_ON_ADDING_MESSAGE[statId], playerMainHeroProps.name, playerId, 5.0);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+-- Установка триггеров на покупку базы
 function setBuySkillTriggers()
   print "setBuySkillTriggers"
   
@@ -158,22 +158,22 @@ function setBuySkillTriggers()
 end;
 
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Получение текущей стоимости покупки навыка
 function getPriceBuySkill(playerId)
   print "getPriceBuySkill"
 
   local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
-  -- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- на старте прокачки
   if playerMainHeroName == nil then
     return 14000;
   end;
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- если герой уже прокачан
     return 12000;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Возвращает статус, что герой уже имеет максимум навыков
 function getIsHeroHasMaximumCountSkills(heroName)
   print "getIsHeroHasMaximumCountSkills"
   
@@ -189,7 +189,7 @@ function getIsHeroHasMaximumCountSkills(heroName)
   return countSkills == MAXIMUM_COUNT_HAS_HERO_SKILL;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+-- Обработчик взаимодействия с алтарем для покупки базы
 function handleTouchBuySkill(triggerHero)
   print "handleTouchBuySkill"
 
@@ -220,26 +220,26 @@ function handleTouchBuySkill(triggerHero)
   questionBuySkill(triggerHero, priceBuySkill, 1);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Вопрос на покупку навыка
 function questionBuySkill(heroName, priceStr, skillIndexStr)
   print "questionBuySkill"
   
   local playerId = GetPlayerFilter(GetObjectOwner(heroName));
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Приведение приходящей строки к числу
   local price = priceStr + 0;
   local skillIndex = skillIndexStr + 0;
   
   local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если предложили уже все варианты
   if skillIndex > length(ALLOW_BUY_SKILL_LIST_BY_RACE[playerRaceId]) then
     return nil;
   end;
   
   local offerSkillId = ALLOW_BUY_SKILL_LIST_BY_RACE[playerRaceId][skillIndex];
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если герой уже имеет данную базу - предлагаем следующую
   if GetHeroSkillMastery(heroName, offerSkillId) > 0 then
     questionBuySkill(heroName, price, skillIndex + 1);
 
@@ -254,7 +254,7 @@ function questionBuySkill(heroName, priceStr, skillIndexStr)
   );
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Добавляем герою купленный навык
 function addHeroOfferSkill(heroName, skillIdStr, priceStr)
   print "addHeroOfferSkill"
 
@@ -283,7 +283,7 @@ function addHeroOfferSkill(heroName, skillIdStr, priceStr)
   SetPlayerResource(playerId, GOLD, (GetPlayerResource (playerId, GOLD) - price));
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров для обучения героя
 function setMentorTriggers()
   print "setMentorTriggers"
 
@@ -298,7 +298,7 @@ function setMentorTriggers()
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров для обучения героя
 function setLearningTriggers()
   print "setLearningTriggers"
   
@@ -317,7 +317,7 @@ function setLearningTriggers()
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Вопрос пользователю о начале прокачки
 function questionLearning(triggerHero)
   print "questionLearning"
 
@@ -325,7 +325,7 @@ function questionLearning(triggerHero)
   local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
   local question = QUESTION_BY_RACE[playerRaceId];
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Предложение начать бесплатное обучение
   if MENTOR_HELPER_ACTIVE[playerId] then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."need_to_disable_mentor_helper.txt");
     return nil;
@@ -333,7 +333,7 @@ function questionLearning(triggerHero)
   
   local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Предложение продолжить бесплатное обучение
   if (
     playerMainHeroName == nil
     or (playerMainHeroName ~= nil and GetHeroLevel(playerMainHeroName) < HALF_FREE_LEARNING_LEVEL)
@@ -350,7 +350,7 @@ function questionLearning(triggerHero)
 
   local playerMainHeroLvl = GetHeroLevel(playerMainHeroName);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если достигнут максимум в прокачке
   if playerMainHeroLvl >= HALF_FREE_LEARNING_LEVEL and playerMainHeroLvl < FREE_LEARNING_LEVEL then
     QuestionBoxForPlayers(
       playerId,
@@ -362,7 +362,7 @@ function questionLearning(triggerHero)
     return nil;
   end;
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если достигнут максимум в прокачке
   if PLAYERS_ALLOW_BUYING_LEVEL[playerId] == 0 then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES..'hero_already_has_the_maximum_level.txt');
 
@@ -372,14 +372,14 @@ function questionLearning(triggerHero)
   local needGold = MAP_LEVEL_BY_PRICE[playerMainHeroLvl + 1];
   local currentPlayerGold = GetPlayerResource(playerId, GOLD);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если недостаточно денег для покупки уровня
   if needGold > currentPlayerGold then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES..'not_enough_money.txt');
 
     return nil;
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Предложение купить дополнительные уровни
   if playerMainHeroLvl >= FREE_LEARNING_LEVEL then
     QuestionBoxForPlayers(
       playerId,
@@ -396,14 +396,14 @@ function questionLearning(triggerHero)
 end;
 
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Получение количество существ 1 уровня из замка переданного игрока
 function getFirstUnitCountInTown(playerId)
   print "getFirstUnitCountInTown"
   
   return GetObjectDwellingCreatures(MAP_PLAYER_TO_TOWNNAME[playerId], 1);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Отслеживание спецы Эллайны
 function specEllainaTread(heroName)
   print "specEllainaTread"
 
@@ -427,7 +427,7 @@ function specEllainaTread(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Выдача игроку дополнительного замка с дополнительными существами
 function givePlayerSecondTown(playerId)
   print "givePlayerSecondTown"
 
@@ -442,7 +442,7 @@ function givePlayerSecondTown(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Передача юнитов из двелла - главному герою игрока
 function transferUnitsFromDwellToHero(playerId, creatureId, countCreature)
   print "transferUnitsFromDwellToHero"
   
@@ -450,7 +450,7 @@ function transferUnitsFromDwellToHero(playerId, creatureId, countCreature)
   local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
   local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
+  -- Если игрок заказал доставку на дом
   if IsHeroInTown(mainHeroName, townName, 0, 1) then
     AddObjectCreatures(townName, creatureId, countCreature);
   else
@@ -460,7 +460,7 @@ function transferUnitsFromDwellToHero(playerId, creatureId, countCreature)
   RemoveObjectCreatures(dwellId, creatureId, countCreature);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Отслеживание спецы Николаса
 function specNikolasTread(heroName)
   print "specNikolasTread"
 
@@ -472,7 +472,7 @@ function specNikolasTread(heroName)
   givePlayerSecondTown(playerId);
   SetObjectDwellingCreatures(dwellId, CREATURE_DEATH_KNIGHT, countAllowBlackKnight);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если купили всадников - передаем их мейну игрока
   local countBuyBlackKnight = 0;
 
   while countBuyBlackKnight < countAllowBlackKnight and GetDate(DAY) == 3 do
@@ -488,7 +488,7 @@ function specNikolasTread(heroName)
 end;
 
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+-- Отслеживание спецы Свеи
 function specVegeyrTread(heroName)
   print "specVegeyrTread"
 
@@ -510,13 +510,13 @@ function specVegeyrTread(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Проверка героя на наличие скриптовых специализаций и их запуск
 function checkAndRunHeroSpec(heroName)
   print "checkAndRunHeroSpec"
   
   local dictHeroName = getDictionaryHeroName(heroName);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Если скриптовая спеца - запускаем ее
   if dictHeroName == HEROES.NATHANIEL then
     startThread(specEllainaTread, heroName);
   end;
@@ -533,7 +533,7 @@ function checkAndRunHeroSpec(heroName)
     startThread(darkRitualTread, heroName);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Навигация
   if HasHeroSkill(heroName, PERK_NAVIGATION) then
     setNavigationTriggers(heroName);
   end;
@@ -546,7 +546,7 @@ function checkAndRunHeroSpec(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Высчитывает компенсацию за стартовые навыки логистики
 function startLogisticCompensation(heroName)
   print "startLogisticCompensation"
   
@@ -557,13 +557,13 @@ function startLogisticCompensation(heroName)
   SetPlayerResource(playerId, GOLD, newValue);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Повышение уровней переданного героя
 function learning(strPlayerId, heroName, stage)
   print "learning"
 
   local playerId = strPlayerId + 0;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Начало бесплатной прокачки
   if stage == '1' then
     local heroLevel = GetHeroLevel(heroName);
   
@@ -572,7 +572,7 @@ function learning(strPlayerId, heroName, stage)
       setControlStatsTriggerOnHero(playerId);
     end;
 
-    -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    -- Если опп заюзал разведку - отчитываемся о начале прокачки
     local enemyPlayerId = PLAYERS_OPPONENT[playerId];
 
     if PLAYER_SCOUTING_WAITING_STATUS[enemyPlayerId] ~= nil then
@@ -585,12 +585,12 @@ function learning(strPlayerId, heroName, stage)
 
     startLogisticCompensation(heroName);
 
-    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    -- Навигация
     if HasHeroSkill(heroName, PERK_NAVIGATION) then
       setNavigationTriggers(heroName);
     end;
     
-    -- пїЅпїЅпїЅпїЅпїЅ
+    -- Казна
     if HasHeroSkill(heroName, PERK_ESTATES) then
       local newValue = GetPlayerResource(playerId, GOLD) + ESTATES_BONUS;
 
@@ -602,7 +602,7 @@ function learning(strPlayerId, heroName, stage)
     ChangeHeroStat(heroName, STAT_EXPERIENCE, needExperience);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Продолжение бесплатной прокачки
   if stage == '2' then
     local SECOND_HALF_LEARNING_LEVEL = 9;
     
@@ -614,7 +614,7 @@ function learning(strPlayerId, heroName, stage)
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Покупка дополнительных уровней
   if stage == '3' then
     local playerMainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
     local playerMainHeroLevel = GetHeroLevel(playerMainHeroName);
@@ -624,8 +624,8 @@ function learning(strPlayerId, heroName, stage)
     
     ChangeHeroStat(playerMainHeroName, STAT_EXPERIENCE, needExperience);
     
-    -- TODO: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
-    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    -- TODO: Для Винраэля учитывать скидку на этапе стоимости,
+    -- чтобы можно было покупать уровень, если денег хватит только со скидкой
     local needGold = getNeedGoldForLvlUp(playerMainHeroName);
 
     SetPlayerResource(playerId, GOLD, GetPlayerResource(playerId, GOLD) - needGold);
@@ -662,7 +662,7 @@ function getNeedGoldForLvlUp(playerMainHeroName)
 
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Перемещение всех артефактов ГГ во временное хранилище
 function moveAllMainHeroArtsToStorage(playerId)
   print "moveAllMainHeroArtsToStorage"
 
@@ -676,13 +676,13 @@ function moveAllMainHeroArtsToStorage(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Получение всех артефактов ГГ из временное хранилище
 function getAllMainHeroArtsFromStorage(playerId)
   print "getAllMainHeroArtsFromStorage"
 
   local mainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Отдаем шмотки обратно
   for _, removedArtId in mainHeroProps.removedHeroArtIdList do
     GiveArtifact(mainHeroProps.name, removedArtId);
   end;
@@ -690,24 +690,24 @@ function getAllMainHeroArtsFromStorage(playerId)
   mainHeroProps.removedHeroArtIdList = {};
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров на контроль статистик героев
 function setControlStatsTriggerOnHero(playerId)
   print "setControlStatsTriggerOnHero"
 
   local heroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Снимаем с героя все шмотки
   moveAllMainHeroArtsToStorage(playerId);
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Переводим стартовые статы героев в стартовые скриптовые
   for _, statId in ALL_MAIN_STATS_LIST do
     PLAYERS_MAIN_HERO_PROPS[playerId].start_stats[statId] = GetHeroStat(heroName, statId);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Отдаем шмотки обратно
   getAllMainHeroArtsFromStorage(playerId);
 
-  -- пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+  -- Если у героя есть образло, выдаем ему положенные статы за него
   if HasHeroSkill(heroName, SKILL_LEARNING) then
     local learningLevel = GetHeroSkillMastery(heroName, SKILL_LEARNING);
 
@@ -716,7 +716,7 @@ function setControlStatsTriggerOnHero(playerId)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если у героя есть стартовые навыки, добавляющиеся в книгу заклинаний
   for skillId, ability in MAP_SKILL_ON_CUSTOM_ABILITY do
     if HasHeroSkill(heroName, skillId) then
       ControlHeroCustomAbility(heroName, ability, CUSTOM_ABILITY_ENABLED);
@@ -729,7 +729,7 @@ function setControlStatsTriggerOnHero(playerId)
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Отслеживание активации Темного ритуала
 function darkRitualTread(heroName)
   print "darkRitualTread"
 
@@ -745,7 +745,7 @@ function darkRitualTread(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Безопасное изменение статистик главного героя у игрока
 function safetyRemoveStat(playerId, statId, diff)
   print "safetyRemoveStat"
 
@@ -753,19 +753,19 @@ function safetyRemoveStat(playerId, statId, diff)
 
   local currentValue = mainHeroProps.start_stats[statId] + mainHeroProps.stats[statId];
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Если стат превысит нижний лимит
   if currentValue - diff < MAP_STATS_ON_MINIMUM[statId] then
     return nil;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Если хватает статов с уровней - берем их
   if mainHeroProps.stats[statId] >= diff then
     mainHeroProps.stats[statId] = mainHeroProps.stats[statId] - diff;
 
     return not nil;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если не хватает - берем еще и стартовые
   local diffForStartStats = diff - mainHeroProps.stats[statId];
   local diffForStats = diff - diffForStartStats;
 
@@ -780,7 +780,7 @@ function safetyRemoveStat(playerId, statId, diff)
   return not nil;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"
+-- Удаление стека, полученного с навыка "Лесной лидер"
 function removeForestGuardBonusStek(heroName)
   print "removeForestGuardBonusStek"
   
@@ -799,7 +799,7 @@ function removeForestGuardBonusStek(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"
+-- Удаление стека, полученного с навыка "Защити нас всех"
 function removeDefendUsAllBonusStek(heroName)
   print "removeDefendUsAllBonusStek"
 
@@ -818,7 +818,7 @@ function removeDefendUsAllBonusStek(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Отслеживание возможности передачи артефакта с навигации главному герою
 function navigationTread(playerId)
   print "navigationTread"
 
@@ -838,7 +838,7 @@ function navigationTread(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик взятия артефакта игроком
 function handleTouchNavigationArt(triggerHero)
   print "handleTouchNavigationArt"
   
@@ -870,14 +870,14 @@ function handleTouchNavigationArt(triggerHero)
   SetObjectPosition(triggerHero, position.x, position.y);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅ.пїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ :D)
+-- Обработчик использования лодки синим игроком (т.к. до артефактов навигации ему далеко :D)
 function handleTouchBoat(heroName)
   print "handleTouchBoat"
 
   MoveHeroRealTime(heroName, 9, 19);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+-- Навык "Навигация"
 function setNavigationTriggers(heroName)
   print "setNavigationTriggers"
 
@@ -905,7 +905,7 @@ function setNavigationTriggers(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Вестник смерти, выдаем мумий за навык
 function heraldOfDeath(heroName)
   print "heraldOfDeath"
   
@@ -916,7 +916,7 @@ function heraldOfDeath(heroName)
   givePlayerSecondTown(playerId);
   SetObjectDwellingCreatures(dwellId, CREATURE_MUMMY, countAllowMummy);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если купили рыцарей - передаем их мейну игрока
   local countBuyMummy = 0;
 
   while countBuyMummy < countAllowMummy and GetDate(DAY) == 3 do
@@ -934,7 +934,7 @@ function heraldOfDeath(heroName)
 end;
 
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Получение поличества взятых школ магии
 function getCountMagicSchool(heroName)
   print "getCountMagicSchool"
 
@@ -956,7 +956,7 @@ function getCountMagicSchool(heroName)
   return count;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+-- Отслеживание изменений статистик с навыка "Тайное преимущество"
 function trackingChangeStatsForCasterCertificate(heroName)
   print "trackingChangeStatsForCasterCertificate"
 
@@ -964,7 +964,7 @@ function trackingChangeStatsForCasterCertificate(heroName)
   local KOEF = 2;
 
   while GetDate(DAY) < 5 do
-    -- пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    -- Если у игрока имеется навык
     if HasHeroSkill(heroName, KNIGHT_FEAT_CASTER_CERTIFICATE) then
       local currentCount = getCountMagicSchool(heroName);
       local currentCountForSkill = KOEF * currentCount;
@@ -981,7 +981,7 @@ function trackingChangeStatsForCasterCertificate(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Тайное преимущество
 function casterCertificate(heroName)
   print "casterCertificate"
 
@@ -994,7 +994,7 @@ function casterCertificate(heroName)
   startThread(trackingChangeStatsForCasterCertificate, heroName);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+-- Отслеживание изменений статистик с навыка "Хранитель тайного"
 function trackingChangeStatsForMasterOfSecret(heroName)
   print "trackingChangeStatsForMasterOfSecret"
 
@@ -1002,7 +1002,7 @@ function trackingChangeStatsForMasterOfSecret(heroName)
   local KOEF = 2;
 
   while GetDate(DAY) < 5 do
-    -- пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    -- Если у игрока имеется навык
     if HasHeroSkill(heroName, DEMON_FEAT_MASTER_OF_SECRETS) then
       local currentCount = getCountMagicSchool(heroName);
       local currentCountForSkill = KOEF * currentCount;
@@ -1019,7 +1019,7 @@ function trackingChangeStatsForMasterOfSecret(heroName)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Хранитель тайного
 function masterOfSecret(heroName)
   print "masterOfSecret"
 
@@ -1030,11 +1030,11 @@ function masterOfSecret(heroName)
   startThread(trackingChangeStatsForMasterOfSecret, heroName);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Получение данных по статистикам, которые изменяет данный навык
 function getSkillWithStatsDataById(skillId)
   print "getSkillWithStatsDataById"
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Заброшенные шахты и СА мага были переделаны под астрологию
   if skillId == WIZARD_FEAT_ABSOLUTE_WIZARDY or skillId == NECROMANCER_FEAT_HAUNT_MINE then
     return MAP_WEEK_ON_ASTROLOGY_STATS[GetCurrentMoonWeek()];
   end;
@@ -1042,14 +1042,14 @@ function getSkillWithStatsDataById(skillId)
   return MAP_SKILLS_TO_CHANGING_STATS[skillId];
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик получения героем нового навыка
 function handleHeroAddSkill(triggerHero, skillId)
   print "handleHeroAddSkill"
 
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если не выбран главный герой, не производим никаких внутренних расчетов
   if playerMainHero == nil then
     return nil;
   end;
@@ -1062,11 +1062,11 @@ function handleHeroAddSkill(triggerHero, skillId)
   local removedSkillId = getRemovedUnremovableSkillId(playerId, skillId);
 
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Проверяем, не скинул ли игрок нескидываемый навык
   if removedSkillId ~= nil then
-removeHeroSkill(playerMainHero, skillId);
-    
-      GiveHeroSkill(playerMainHero, removedSkillId);
+    removeHeroSkill(playerMainHero, skillId);
+
+    GiveHeroSkill(playerMainHero, removedSkillId);
 
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) +  2500));
 
@@ -1074,10 +1074,10 @@ removeHeroSkill(playerMainHero, skillId);
 
     return nil;
   end;
-  
+
   local skillWithStats = getSkillWithStatsDataById(skillId);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Если навык, дающий статы
   if skillWithStats ~= nil then
     for _, statId in { STAT_ATTACK, STAT_DEFENCE, STAT_SPELL_POWER, STAT_KNOWLEDGE } do
       if skillWithStats[statId] ~= nil then
@@ -1086,55 +1086,55 @@ removeHeroSkill(playerMainHero, skillId);
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- если взяли образование
   if skillId == SKILL_LEARNING or skillId == HERO_SKILL_BARBARIAN_LEARNING then
     addPlayerMainHeroLearningStats(playerId);
   end;
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если трофеи
   if skillId == WIZARD_FEAT_SPOILS_OF_WAR then
     setSpoilsTrigger(playerId);
   end;
 
   local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skillId];
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если навык добавляется в книгу заклинаний
   if customAbility ~= nil then
     ControlHeroCustomAbility(playerMainHero, customAbility, CUSTOM_ABILITY_ENABLED);
     Trigger(CUSTOM_ABILITY_TRIGGER, "handleUseCustomAbility");
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Выпускник
   if skillId == KNIGHT_FEAT_STUDENT_AWARD then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + STUDENT_AWARD_GOLD));
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Огненная ярость
   if skillId == KNIGHT_FEAT_ANCIENT_SMITHY then
     ChangeHeroStat(playerMainHero, STAT_ATTACK, 2);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Смертельная неудача
   if skillId == NECROMANCER_FEAT_DEAD_LUCK then
     ChangeHeroStat(playerMainHero, STAT_DEFENCE, 1);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Темный ритуал
   if skillId == PERK_DARK_RITUAL then
     startThread(darkRitualTread, playerMainHero);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Лесной лидер
   if skillId == RANGER_FEAT_FOREST_GUARD_EMBLEM then
     removeForestGuardBonusStek(playerMainHero);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  -- Защити нас всех
   if skillId == HERO_SKILL_DEFEND_US_ALL then
     removeDefendUsAllBonusStek(playerMainHero);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Логистика
   if skillId == SKILL_LOGISTICS then
     if PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] > 0 then
       PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] - 1;
@@ -1143,7 +1143,7 @@ removeHeroSkill(playerMainHero, skillId);
     end;
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅ
+  -- Казна
   if skillId == PERK_ESTATES then
     if PLAYERS_COUNT_ESTATES_LEVEL_RETURNED[playerId] > 0 then
       PLAYERS_COUNT_ESTATES_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_ESTATES_LEVEL_RETURNED[playerId] - 1;
@@ -1152,30 +1152,30 @@ removeHeroSkill(playerMainHero, skillId);
     end;
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Навигация
   if skillId == PERK_NAVIGATION then
     setNavigationTriggers(playerMainHero);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Вестник смерти
   if skillId == NECROMANCER_FEAT_HERALD_OF_DEATH then
     if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
       startThread(heraldOfDeath, playerMainHero);
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Тайное преимущество
   if skillId == KNIGHT_FEAT_CASTER_CERTIFICATE then
     casterCertificate(playerMainHero);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Хранитель тайного
   if skillId == DEMON_FEAT_MASTER_OF_SECRETS then
     masterOfSecret(playerMainHero);
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик потери героем навыка
 function handleHeroRemoveSkill(triggerHero, skill)
   print "handleHeroRemoveSkill"
 
@@ -1184,16 +1184,16 @@ function handleHeroRemoveSkill(triggerHero, skill)
 
   MENTOR_HELPER_REMOVED_SKILL[playerId] = skill;
   MENTOR_USAGE_COUNTER.iterate(playerId);
-    mentorCashback(playerId);
+  mentorCashback(playerId);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если не выбран главный герой, не производим никаких внутренних расчетов
   if mainHeroName == nil then
     return nil;
   end;
   
   local removedSkillId = getRemovedUnremovableSkillId(playerId, skillId);
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Проверяем, не скинул ли игрок нескидываемый навык
   if removedSkillId ~= nil then
     PLAYERS_GOLD_STORE[playerId] = GetPlayerResource(playerId, GOLD)
     SetPlayerResource(playerId, GOLD, 0);
@@ -1202,7 +1202,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
 
   local skillWithStats = getSkillWithStatsDataById(skill);
   
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Если навык, дающий статы
   if skillWithStats ~= nil then
     for _, statId in { STAT_ATTACK, STAT_DEFENCE, STAT_SPELL_POWER, STAT_KNOWLEDGE } do
       if skillWithStats[statId] ~= nil then
@@ -1211,19 +1211,19 @@ function handleHeroRemoveSkill(triggerHero, skill)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- если образование
   if skill == SKILL_LEARNING or skill == HERO_SKILL_BARBARIAN_LEARNING then
     removePlayerMainHeroLearningStats(playerId);
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если трофеи
   if skill == WIZARD_FEAT_SPOILS_OF_WAR then
     Trigger(OBJECT_TOUCH_TRIGGER, MAP_MERCHANT_ON_PLAYER[playerId], 'noop');
   end;
 
   local customAbility = MAP_SKILL_ON_CUSTOM_ABILITY[skill];
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ CUSTOM_ABILITY_2
+  -- Если это навык, привязанный к CUSTOM_ABILITY_2
   if (
     customAbility ~= nil
     and (
@@ -1235,22 +1235,22 @@ function handleHeroRemoveSkill(triggerHero, skill)
     ControlHeroCustomAbility(triggerHero, customAbility, CUSTOM_ABILITY_DISABLED);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Выпускник
   if skill == KNIGHT_FEAT_STUDENT_AWARD then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) - STUDENT_AWARD_GOLD));
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Огненная ярость
   if skill == KNIGHT_FEAT_ANCIENT_SMITHY then
     ChangeHeroStat(mainHeroName, STAT_ATTACK, -2);
   end;
   
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Смертельная неудача
   if skill == NECROMANCER_FEAT_DEAD_LUCK then
     ChangeHeroStat(mainHeroName, STAT_DEFENCE, -1);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Логистика
   if skill == SKILL_LOGISTICS then
     local resultGold = GetPlayerResource (playerId, GOLD) - LOGISTIC_BONUS;
 
@@ -1263,7 +1263,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
     end;
   end;
 
-    -- пїЅпїЅпїЅпїЅпїЅ
+    -- Казна
   if skill == PERK_ESTATES then
     local resultGold = GetPlayerResource (playerId, GOLD) - ESTATES_BONUS;
 
@@ -1276,7 +1276,7 @@ function handleHeroRemoveSkill(triggerHero, skill)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Вестник смерти
   if skill == NECROMANCER_FEAT_HERALD_OF_DEATH then
     if PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] == nil then
       local dwellId = MAP_PLAYERS_ON_DWELL_NAME[playerId];
@@ -1285,18 +1285,18 @@ function handleHeroRemoveSkill(triggerHero, skill)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Тайное преимущество
   if skill == KNIGHT_FEAT_CASTER_CERTIFICATE then
     changeMainHeroStatsForSkills(playerId, STAT_KNOWLEDGE, -PLAYERS_COUNT_STATS_FROM_CASTER_CERTIFICATE[playerId]);
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Хранитель тайного
   if skill == DEMON_FEAT_MASTER_OF_SECRETS then
     changeMainHeroStatsForSkills(playerId, STAT_SPELL_POWER, -PLAYERS_COUNT_STATS_FROM_MASTER_OF_SECRET[playerId]);
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров для активации Трофеев
 function setSpoilsTrigger(playerId)
   print "setSpoilsTrigger"
 
@@ -1304,7 +1304,7 @@ function setSpoilsTrigger(playerId)
   startThread(spoilsOfWarThread, playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 4 пїЅпїЅпїЅ
+-- Установка слежки за трофеями, если их не используют до 4 дня
 function spoilsOfWarThread(strPlayerId)
   print "spoilsOfWarThread"
 
@@ -1321,7 +1321,7 @@ function spoilsOfWarThread(strPlayerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик касания героя с лавкой
 function handleTouchArtifactMerchant(triggerHero)
   print "handleTouchArtifactMerchant"
 
@@ -1334,20 +1334,20 @@ function handleTouchArtifactMerchant(triggerHero)
   QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_spoils.txt", 'spoilsOfWar', 'noop');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Активация трофеев
 function spoilsOfWar(strPlayerId)
   print "spoilsOfWar"
 
   local playerId = strPlayerId + 0;
   local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Формируем список слотов, которые заняты у героя текущими артами
+  -- Список занятых слотов
   local havingItemPositionList = {};
 
   for _, art in ALL_ARTS_LIST do
     if HasArtefact(playerMainHeroProps.name, art.id) then
-      local slotIsNotAdded = not nil; -- пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ true пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ :)
+      local slotIsNotAdded = not nil; -- Ору с этого, почему то адекватный true тут не существует :)
 
       for _, position in havingItemPositionList do
         if position == art.position then
@@ -1361,8 +1361,8 @@ function spoilsOfWar(strPlayerId)
     end;
   end;
 
-  -- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- На основе списка занятых слотов формируем список артефактов мажорных артов в доступные слоты
+  -- Список возможных для выдачи артефактов
   local allowedItemIdList = {};
 
   for _, art in ALL_ARTS_LIST do
@@ -1381,25 +1381,25 @@ function spoilsOfWar(strPlayerId)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+  -- Теперь рандомим из этой кучи выдаваемый арт
   local randomIndexArt = random(length(allowedItemIdList));
 
   GiveArtefact(playerMainHeroProps.name, allowedItemIdList[randomIndexArt]);
 
-  -- пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- И запрещаем игроку больше использовать трофеи
   PLAYERS_USE_SPOILS_STATUS[playerId] = not nil;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Возврат ментором средств при сброске навыков
 function mentorCashback(playerId)
   print "mentorCashback"
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local currentCountFirstLeveDiscount = PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS[playerId];
 
-  -- пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 500 пїЅпїЅпїЅпїЅпїЅ
+  -- Если у игрока не вкачан ни один герой, даем ему 2 сброски по 500 монет
   if mainHeroName == nil then
-    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 500
+    -- сброски по умолчанию равны 500
     if currentCountFirstLeveDiscount > 0 then
 
       PLAYERS_FIRST_LEVEL_DISCOUNT_ON_REMOVE_SKILLS[playerId] = currentCountFirstLeveDiscount - 1;
@@ -1407,7 +1407,7 @@ function mentorCashback(playerId)
       return nil;
     end;
 
-    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    -- После окончания дешевых сбросок, устанавливаем обычную цену
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) -  2000));
 
     return nil;
@@ -1415,7 +1415,7 @@ function mentorCashback(playerId)
 
   local mainHeroLevel = GetHeroLevel(mainHeroName);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2500
+  -- Если герой наполовину прокачан - отнимаем столько, чтобы суммарно получалось 2500
   if mainHeroLevel > HALF_FREE_LEARNING_LEVEL and mainHeroLevel < FREE_LEARNING_LEVEL then
     SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) -  1000));
 
@@ -1423,7 +1423,7 @@ function mentorCashback(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Получает нескидываемый навык, если он был сброшен
 function getRemovedUnremovableSkillId(playerId, skillId)
   print "getRemovedUnremovableSkillId"
 
@@ -1440,22 +1440,22 @@ function getRemovedUnremovableSkillId(playerId, skillId)
     return WIZARD_FEAT_SPOILS_OF_WAR;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если сбросил Разведку
   if HasHeroSkill(playerMainHero, PERK_SCOUTING) == nil and PLAYER_USE_SCOUTING_STATUS[playerId] ~= nil then
     return PERK_SCOUTING;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если сбросил Бесшумного преследователя
   if HasHeroSkill(playerMainHero, RANGER_FEAT_DISGUISE_AND_RECKON) == nil and PLAYER_USE_DISGUISE_STATUS[playerId] ~= nil then
     return RANGER_FEAT_DISGUISE_AND_RECKON;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
+  -- Если сбросил Удачу в пути
   if HasHeroSkill(playerMainHero, PERK_FORTUNATE_ADVENTURER) == nil and PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] ~= nil then
     return PERK_FORTUNATE_ADVENTURER;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅ
+  -- Казна
   if PLAYERS_ESTATES_DEBT[playerId] > 0 then
     PLAYERS_ESTATES_DEBT[playerId] = PLAYERS_ESTATES_DEBT[playerId] - ESTATES_BONUS;
     PLAYERS_COUNT_ESTATES_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_ESTATES_LEVEL_RETURNED[playerId] + 1;
@@ -1463,7 +1463,7 @@ function getRemovedUnremovableSkillId(playerId, skillId)
     return PERK_ESTATES;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Военачальник
   if (GetTownRace(MAP_PLAYER_TO_TOWNNAME[playerId]) == RACES.HAVEN) then
     if (
       HasHeroSkill(playerMainHero, PERK_EXPERT_TRAINER) == nil
@@ -1473,7 +1473,7 @@ function getRemovedUnremovableSkillId(playerId, skillId)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Логистика
   if PLAYERS_LOGISTICS_DEBT[playerId] > 0 then
     PLAYERS_LOGISTICS_DEBT[playerId] = PLAYERS_LOGISTICS_DEBT[playerId] - LOGISTIC_BONUS;
     PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] = PLAYERS_COUNT_LOGISTICS_LEVEL_RETURNED[playerId] + 1;
@@ -1481,12 +1481,12 @@ function getRemovedUnremovableSkillId(playerId, skillId)
     return SKILL_LOGISTICS;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Навигация
   if HasHeroSkill(playerMainHero, PERK_NAVIGATION) == nil and PLAYERS_USE_NAVIGATION_STATUS[playerId] ~= nil then
     return PERK_NAVIGATION;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Вестник смерти
   if HasHeroSkill(playerMainHero, NECROMANCER_FEAT_HERALD_OF_DEATH) == nil and PLAYERS_USE_HERALD_OF_DEATH_STATUS[playerId] ~= nil then
     return NECROMANCER_FEAT_HERALD_OF_DEATH;
   end;
@@ -1494,8 +1494,8 @@ function getRemovedUnremovableSkillId(playerId, skillId)
   return nil;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
--- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Удаление навыка у героя
+-- Не предоставлено разработчиками, поэтому херачим свой метод с блекджеком и изабелькой
 function removeHeroSkill(heroName, removeSkillId)
   print "removeHeroSkill"
 
@@ -1505,10 +1505,10 @@ function removeHeroSkill(heroName, removeSkillId)
   local playerId = GetPlayerFilter(GetObjectOwner(heroName));
   local playerRaceId = RESULT_HERO_LIST[playerId].raceId;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ { skillId, skillLevel }[]
+  -- Список текущих навыков героя { skillId, skillLevel }[]
   local heroSkillIdList = {};
 
-  -- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Мне очень влом делать список всех возможных скилов, поэтому я просто протыкаю все числа до максимально знакомого мне айдишника
   for checkSkillId = 1, 215 do
     if HasHeroSkill(heroName, checkSkillId) then
       heroSkillIdList[length(heroSkillIdList)] = {
@@ -1518,17 +1518,17 @@ function removeHeroSkill(heroName, removeSkillId)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Количество опыта, имеющееся у героя
   local hasHeroExpirience = TOTAL_EXPERIENCE_BY_LEVEL[GetHeroLevel(heroName)];
 
   TakeAwayHeroExp(heroName, hasHeroExpirience);
   WarpHeroExp(heroName, hasHeroExpirience);
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Сбрасываем 2 раз, потому что из-за стартовых навыков их количество на 2 больше чем уровень
   TakeAwayHeroExp(heroName, hasHeroExpirience);
   WarpHeroExp(heroName, hasHeroExpirience);
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Возвращаем все навыки и школы кроме того, который удаляем
   for _, savedSkill in heroSkillIdList do
     local maxSkillLevel = savedSkill.skillLevel;
 
@@ -1539,7 +1539,7 @@ function removeHeroSkill(heroName, removeSkillId)
     if maxSkillLevel > 0 then
       local countReturnLevel = maxSkillLevel;
 
-      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+      -- Фракционный навык не снимается до нуля, поэтому убираем один уровень навыка
       if MAP_RACE_ON_RACE_SKILL[playerRaceId] == savedSkill.skillId then
         countReturnLevel = countReturnLevel - 1;
       end;
@@ -1550,7 +1550,7 @@ function removeHeroSkill(heroName, removeSkillId)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Возвращаем обратно кастомные триггеры и статы
   Trigger(HERO_ADD_SKILL_TRIGGER, heroName, 'handleHeroAddSkill');
   Trigger(HERO_REMOVE_SKILL_TRIGGER, heroName, 'handleHeroRemoveSkill');
 
@@ -1559,7 +1559,7 @@ function removeHeroSkill(heroName, removeSkillId)
   refreshMainHeroStats(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Продажа стата игроком
 function sellStat(strPlayerId, strStatId)
   print "sellStat"
 
@@ -1573,13 +1573,13 @@ function sellStat(strPlayerId, strStatId)
 
   SetPlayerResource(playerId, GOLD, (GetPlayerResource(playerId, GOLD) + SELL_STAT_PRICE));
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+  -- Обновляем статы ГГ
   refreshMainHeroStats(playerId);
 
   ShowFlyingSign({PATH_TO_START_LEARNING_MESSAGES.."n_goldback.txt"; eq = SELL_STAT_PRICE}, playerMainHeroProps.name, playerId, 2.0);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+-- Обработчик взаимодействия героя с объектом для продажи стата стата
 function handleTouchSellStatObject(strPlayerId, strStatId)
   print "handleTouchSellStatObject"
 
@@ -1588,14 +1588,14 @@ function handleTouchSellStatObject(strPlayerId, strStatId)
 
   local playerMainHeroProps = PLAYERS_MAIN_HERO_PROPS[playerId];
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если игрок хочет превысить лимит по продаже статов
   if PLAYER_COUNT_ALLOW_SELL_STATS[playerId] == 0 then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."sell_maximum_stats.txt");
 
     return nil;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если значение параметра опустилось до своего минимума
   if playerMainHeroProps.stats[statId] <= MAP_STATS_ON_MINIMUM[statId] then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."sell_maximum_stat.txt");
 
@@ -1605,7 +1605,7 @@ function handleTouchSellStatObject(strPlayerId, strStatId)
   QuestionBoxForPlayers(playerId, MAP_BUY_STAT_ON_QUESTIONS[statId], 'sellStat("'..playerId..'", "'..statId..'")', 'noop');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+-- Установка триггеров на продажу статов
 function setSellStatsTriggers(playerId)
   print "setSellStatsTriggers"
 
@@ -1616,13 +1616,13 @@ function setSellStatsTriggers(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик использования кастомной способности
 function handleUseCustomAbility(triggerHero, ability)
   print "handleUseCustomAbility"
 
   local playerId = GetPlayerFilter(GetObjectOwner(triggerHero));
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- если использовали абилку разведки или бесшумного
   if ability == CUSTOM_ABILITY_2 then
     if HasHeroSkill(triggerHero, PERK_SCOUTING) and PLAYER_USE_SCOUTING_STATUS[playerId] == nil then
       handleUseScouting(playerId)
@@ -1633,20 +1633,20 @@ function handleUseCustomAbility(triggerHero, ability)
     end;
   end;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ"
+  -- если использовали "Удача в пути"
   if ability == CUSTOM_ABILITY_4 then
     handleUseFortunareAdventure(playerId);
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+-- Обработка использования способности "Бесшумный преследователь"
 function handleUseDisguise(playerId)
   print "handleUseDisguise"
 
   QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_disguise.txt", 'disguise("'..playerId..'")', 'noop');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+-- Применение "Бесшумный преследователь"
 function disguise(strPlayerId)
   print "disguise"
 
@@ -1663,11 +1663,11 @@ function disguise(strPlayerId)
   PLAYER_USE_DISGUISE_STATUS[playerId] = not nil;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработка использования способности разведка
 function handleUseScouting(playerId)
   print "handleUseScouting"
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если разведка уже использована
   if PLAYER_SCOUTING_WAITING_STATUS[playerId] ~= nil then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."has_waiting_learning_opponent.txt" );
 
@@ -1677,12 +1677,12 @@ function handleUseScouting(playerId)
   QuestionBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."question_use_scouting.txt", 'scouting("'..playerId..'")', 'noop');
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Перемещаем камеру игрока на героев оппонента
 function moveCameraOnEnemyHero(playerId)
   print "moveCameraOnEnemyHero"
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-  -- пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  -- Ваще влом это делать универсально)
+  -- Думаю, что все здесь понятно итак
   if playerId == PLAYER_1 then
     MoveCameraForPlayers(playerId, 31, 88, 0, 20, 0, 0, 0, 0, 1);
   else
@@ -1690,7 +1690,7 @@ function moveCameraOnEnemyHero(playerId)
   end;
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Показываем набор героев, который выпал оппоненту
 function showResultHeroList(enemyPlayerId, dictMainHeroName)
   print "showResultHeroList"
 
@@ -1713,7 +1713,7 @@ function showResultHeroList(enemyPlayerId, dictMainHeroName)
   moveCameraOnEnemyHero(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Активация разведки
 function scouting(strPlayerId)
   print "scouting"
 
@@ -1725,7 +1725,7 @@ function scouting(strPlayerId)
 
   PLAYER_USE_SCOUTING_STATUS[playerId] = not nil;
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если оппонент еще не начал прокачку
   if enemyMainHero == nil then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_has_not_main_hero.txt" );
 
@@ -1737,7 +1737,7 @@ function scouting(strPlayerId)
 
   local dictMainHeroName = getDictionaryHeroName(enemyMainHero);
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если герой из таверны
   if dictMainHeroName == enemyHeroes[3] then
     MessageBoxForPlayers(playerId, PATH_TO_START_LEARNING_MESSAGES.."opponent_buy_hero.txt");
 
@@ -1746,16 +1746,16 @@ function scouting(strPlayerId)
     return nil;
   end;
 
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  -- Показываем ГГ врага
   showResultHeroList(enemyPlayerId, dictMainHeroName);
 end;
 
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ" пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Обработчик использования "Удача в пути" в книге заклинаний
 function handleUseFortunareAdventure(playerId)
   print "handleUseFortunareAdventure"
 
-  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Если игрок еще не использовал этот навык - предупреждаем его о последствиях
   if PLAYERS_USE_FORTUNARE_ADVENTURE_STATUS[playerId] == nil then
     QuestionBoxForPlayers(
       playerId,
@@ -1770,13 +1770,13 @@ function handleUseFortunareAdventure(playerId)
   fortunareAdventure(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
+-- Активация удача в пути
 function fortunareAdventure(strPlayerId)
   print "fortunareAdventure"
 
   local playerId = strPlayerId + 0;
   local playerMainHero = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Соотношение дополнительных лавок к игрокам
   local MAP_ADDITIONAL_MERCHANT_ON_PLAYERS = {
     [PLAYER_1] = 'FortunateAdventure1',
     [PLAYER_2] = 'FortunateAdventure2',
@@ -1788,7 +1788,7 @@ function fortunareAdventure(strPlayerId)
 
   MakeHeroInteractWithObject(playerMainHero, MAP_ADDITIONAL_MERCHANT_ON_PLAYERS[playerId]);
 
-  -- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  -- Без костылей подсчитать скидку можно только через колбек
   MessageBoxForPlayers(
     playerId,
     PATH_TO_START_LEARNING_MESSAGES.."fortunare_adventure_have_discount.txt",
@@ -1796,7 +1796,7 @@ function fortunareAdventure(strPlayerId)
   );
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
+-- Применение скидок для артефактов с Удачи в пути
 function applyFortunareAdventureDiscount(strPlayerId)
   print "applyFortunareAdventureDiscount"
 
@@ -1818,7 +1818,7 @@ function applyFortunareAdventureDiscount(strPlayerId)
   getAllMainHeroArtsFromStorage(playerId);
 end;
 
--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- Генерация главному герою игрока статов образования
 function removePlayerMainHeroLearningStats(playerId)
   print "removePlayerMainHeroLearningStats"
 

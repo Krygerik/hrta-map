@@ -228,8 +228,8 @@ war_machines_state = {}
 creature_dead = {}
 
 lord_of_undead = {}
-first_heroes = {Kragh = 1, Grok = 1}
-auto_move = {}
+--first_heroes = {Kragh = 1, Grok = 1}
+--auto_move = {}
 current_turn = {}
 asha_turn = {[0] = 0; 0}
 ritual_mana = {[0] = 0; 0}
@@ -254,6 +254,99 @@ PLAYER_USE_GUARDIAN_ANGEL = {
   [0] = nil,
   [1] = nil,
 };
+
+------------------------------
+-- START NEW COMBAT HANDLER --
+------------------------------
+
+-- Данные боя для новых обработчиков
+COMBAT_DATA = {
+  prev = {
+    activeUnit = nil,
+    heroMana = {
+      [0] = 0,
+      [1] = 0,
+    },
+  },
+};
+
+-- Попытка фикса бага с перепризывом элементалей и метка некроманта
+function fixMarkOfNecromancyWithResummonElem(prevActiveUnit)
+  print "fixMarkOfNecromancyWithResummonElem"
+  
+  local playerSide = GetUnitSide(prevActiveUnit);
+  local currentHeroMana = GetUnitManaPoints(GetHero(playerSide));
+  print("COMBAT_DATA.prev.heroMana")
+  print(COMBAT_DATA.prev.heroMana)
+  print("currentHeroMana")
+  print(currentHeroMana)
+  print("COMBAT_DATA.prev_prev.heroMana")
+  print(COMBAT_DATA.prev_prev.heroMana)
+
+  local heroManaDiff = COMBAT_DATA.prev_prev.heroMana[playerSide] - COMBAT_DATA.prev.heroMana[playerSide];
+
+  print(prevActiveUnit)
+  print("prevActiveUnit")
+  if GetHeroSkillMastery(prevActiveUnit, 61) > 0 then
+    print("GetHeroSkillMastery(prevActiveUnit, 61) > 0 then")
+    local addedMana = CheckIfSideResummonElem(real_creatures[playerSide], heroManaDiff, playerSide);
+    print("addedMana")
+    print(addedMana)
+    if addedMana > 0 then
+      SetUnitManaPoints(prevActiveUnit, COMBAT_DATA.prev_prev.heroMana[playerSide])
+    end
+  end;
+end;
+
+-- Действия после хода предыдущего существа
+function HandleAfterMove(currentTurnUnit)
+  print "HandleAfterMove"
+  
+  local prevActiveUnit = COMBAT_DATA.prev.activeUnit;
+
+  if prevActiveUnit == nil then
+    return nil
+  end;
+  
+--  if IsHero(prevActiveUnit) then
+--    fixMarkOfNecromancyWithResummonElem(prevActiveUnit);
+--  end;
+end;
+
+-- Действия до хода существа
+function HandleBeforeMove(currentTurnUnit)
+  print "HandleBeforeMove"
+
+end;
+
+-- Действия до хода существа
+function PopulateCombatData(currentTurnUnit)
+  print "PopulateCombatData"
+
+
+  COMBAT_DATA.prev_prev = COMBAT_DATA.prev
+  COMBAT_DATA.prev = {
+      activeUnit = currentTurnUnit,
+      heroMana = {
+        [0] = GetUnitManaPoints(GetHero(0)),
+        [1] = GetUnitManaPoints(GetHero(1)),
+      },
+    };
+  
+end;
+
+-- Новый обработчик действий юнитов в бою
+function NewUnitMoveHandler(currentTurnUnit)
+  print "NewUnitMoveHandler"
+  
+  HandleAfterMove(currentTurnUnit);
+  HandleBeforeMove(currentTurnUnit);
+  PopulateCombatData(currentTurnUnit);
+end;
+
+----------------------------
+-- END NEW COMBAT HANDLER --
+----------------------------
 
 function OnPrepare()
 
@@ -899,7 +992,6 @@ function UnitMoveNonBlocking(unit)
 
 	      
 	elseif IsWarMachine(unit) then
-	
 
 	
 	end
@@ -941,9 +1033,7 @@ function UnitMoveNonBlocking(unit)
 --  end
 
   if IsWarMachine(unit) then
-	
 
-		
 	elseif IsCreature(unit) then
 	
 
@@ -955,9 +1045,9 @@ function UnitMoveNonBlocking(unit)
     local currentMana = GetUnitManaPoints(unit)
     local manaRestory = 1 + (GetCreatureNumber(unit)/10)
     
-    print((GetCreatureNumber(unit)/10))
-    print(ceil(GetCreatureNumber(unit)/10))
-    print(manaRestory)
+--    print((GetCreatureNumber(unit)/10))
+--    print(ceil(GetCreatureNumber(unit)/10))
+--    print(manaRestory)
     local newMana = currentMana + manaRestory
     local maxMana = 0
 
@@ -976,23 +1066,12 @@ function UnitMoveNonBlocking(unit)
   end
 
 	elseif IsHero(unit) then
-
---    EnableDynamicBattleMode(3)
-    
--- Попытка фикса бага с перепризывом элементалей
---    if GetHeroSkillMastery(unit, 61) > 0 then
-
---      local addedMana = CheckIfSideResummonElem(real_creatures[GetUnitSide(unit)], init_mana, GetUnitSide(unit));
---      if addedMana > 0 then
---        SetUnitManaPoints(unit, init_mana)
---      end
---    end;
-
+	
+-- Сайрус
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Cyrus') or IsNamedHero(ally_hero, 'Cyrus2') ) then
       CyrusSpec(unit)
       
     end
-
 
     -- Курак специализация
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
@@ -1015,7 +1094,7 @@ function UnitMoveNonBlocking(unit)
         AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
-            sleep()
+          sleep()
         end
         
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
@@ -1109,6 +1188,7 @@ end
 
 --Cпецы героев --
 
+--Раилаг, не реализован
 function RaelagA1Spec(side, mainHeroName)
   print "RaelagA1Spec"
 
@@ -1187,6 +1267,7 @@ function ReadyUnitThread()
 	while 1 do
 		repeat sleep() until combatReadyPerson()
 		local unit = combatReadyPerson()
+		startThread(NewUnitMoveHandler, unit)
 		startThread(UnitMoveNonBlocking, unit)
 		repeat sleep() until combatReadyPerson() ~= unit
 	end
