@@ -144,13 +144,6 @@ print "questionApproval"
   QuestionBoxForPlayers(playerId, PATH_TO_DAY1_MODULE.."choice_of_races/mummy/check_question.txt", 'playerApproval('..playerId..')', 'noop');
 end;
 
-
-
-PLAYERS_MOMENT_REROLL = {
-  [PLAYER_1] = nil,
-  [PLAYER_2] = nil,
-}
-
 PLAYERS_REROLL_COUNT = {
   [PLAYER_1] = 1,
   [PLAYER_2] = 1,
@@ -184,34 +177,26 @@ print "playerApproval"
   local hero = playerId == PLAYER_1 and Biara or Djovanni;
   local opponentPlayerId = playerId == PLAYER_1 and PLAYER_2 or PLAYER_1;
 
-  print(hero);
-
-
   if PLAYERS_ACTION_IN_THIS_TURN[playerId] ~= nil then
     ShowFlyingSign(PATH_TO_DAY1_MODULE.."choice_of_races/mummy/action_denied.txt", hero, playerId, 5.0);
     return nil
   end;
 
-  print(1)
-
   PLAYERS_ACTION_IN_THIS_TURN[playerId] = 1;
 
-  print( PLAYERS_ACTION_IN_THIS_TURN[playerId])
-
-  print(PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId])
-
-  if PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == nil then
+  if PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == nil and PLAYERS_REROLL_COUNT[opponentPlayerId] > 0 then
     return nil;
   end;
 
-  print(2)
+  if (PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == nil and PLAYERS_REROLL_COUNT[opponentPlayerId] == 0) then
+    finishRandomChoise();
+    return nil;
+  end;
 
   if (PLAYERS_ACTION_IN_THIS_TURN[playerId] == 1 and PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == 1) then
     finishRandomChoise();
     return nil;
   end;
-
-  print(3)
 
   --перегенерация если 2 игрок перереген
   if ((PLAYERS_ACTION_IN_THIS_TURN[playerId] == 1) and (PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == 2)) then
@@ -219,33 +204,26 @@ print "playerApproval"
     PLAYERS_ACTION_IN_THIS_TURN[PLAYER_1] = nil
     PLAYERS_ACTION_IN_THIS_TURN[PLAYER_2] = nil
   end;
-
 end;
 
 
 -- Вопрос для реролла
 function questionReroll(trigerhero)
-print "questionReroll"
+  print "questionReroll"
 
   local playerId = GetPlayerFilter(GetObjectOwner(trigerhero))
-  PLAYERS_MOMENT_REROLL[playerId] = PLAYERS_REROLL_COUNT[playerId == PLAYER_1 and PLAYER_2 or PLAYER_1]
-  print('PLAYERS_MOMENT_REROLL', PLAYERS_MOMENT_REROLL[playerId])
-  print('PLAYERS_REROLL_COUNT', PLAYERS_REROLL_COUNT[playerId == PLAYER_1 and PLAYER_2 or PLAYER_1])
   QuestionBoxForPlayers(playerId, PATH_TO_DAY1_MODULE.."choice_of_races/mummy/check_reroll.txt", 'playerReroll('..playerId..')', 'noop');
 end;
 
-
-
 -- После реролла
 function playerReroll(strPlayerId)
-print "playerReroll"
+  print "playerReroll"
 
   local playerId = strPlayerId + 0;
 
   local hero = playerId == PLAYER_1 and Biara or Djovanni;
   local opponentPlayerId = playerId == PLAYER_1 and PLAYER_2 or PLAYER_1;
-
-
+  
   if PLAYERS_ACTION_IN_THIS_TURN[playerId] ~= nil then
     ShowFlyingSign(PATH_TO_DAY1_MODULE.."choice_of_races/mummy/action_denied.txt", hero, playerId, 5.0);
     return nil
@@ -255,7 +233,6 @@ print "playerReroll"
     ShowFlyingSign(PATH_TO_DAY1_MODULE.."choice_of_races/mummy/rerrol_denied.txt", hero, playerId, 5.0);
     return nil
   end;
-
 
   PLAYERS_ACTION_IN_THIS_TURN[playerId] = 2;
   PLAYERS_REROLL_COUNT[playerId] = PLAYERS_REROLL_COUNT[playerId] - 1;
@@ -268,10 +245,10 @@ print "playerReroll"
     return nil;
   end;
 
-  if PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == nil then
+  if PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == nil and PLAYERS_REROLL_COUNT[opponentPlayerId] > 0 then
     return nil;
   end;
-
+  
   if PLAYERS_ACTION_IN_THIS_TURN[opponentPlayerId] == 2 then
     newObjectsForRegeneratins()
     finishRandomChoise()

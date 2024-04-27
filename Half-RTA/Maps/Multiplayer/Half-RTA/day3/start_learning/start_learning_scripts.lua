@@ -1053,9 +1053,15 @@ function handleHeroAddSkill(triggerHero, skillId)
   if playerMainHero == nil then
     return nil;
   end;
+  
+  if PLAYERS_GOLD_STORE[playerId] ~= nil then
+    SetPlayerResource(playerId, GOLD, PLAYERS_GOLD_STORE[playerId]);
+    PLAYERS_GOLD_STORE[playerId] = nil
+  end;
 
   local removedSkillId = getRemovedUnremovableSkillId(playerId, skillId);
 
+  
   -- Проверяем, не скинул ли игрок нескидываемый навык
   if removedSkillId ~= nil then
     removeHeroSkill(playerMainHero, skillId);
@@ -1183,6 +1189,15 @@ function handleHeroRemoveSkill(triggerHero, skill)
   -- Если не выбран главный герой, не производим никаких внутренних расчетов
   if mainHeroName == nil then
     return nil;
+  end;
+  
+  local removedSkillId = getRemovedUnremovableSkillId(playerId, skillId);
+
+  -- Проверяем, не скинул ли игрок нескидываемый навык
+  if removedSkillId ~= nil then
+    PLAYERS_GOLD_STORE[playerId] = GetPlayerResource(playerId, GOLD)
+    SetPlayerResource(playerId, GOLD, 0);
+    return nil
   end;
 
   local skillWithStats = getSkillWithStatsDataById(skill);

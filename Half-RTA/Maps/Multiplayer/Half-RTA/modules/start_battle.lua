@@ -396,6 +396,9 @@ function perkDiplomacy(playerId)
 
     [CREATURE_COMBAT_MAGE] = CREATURE_MAGI,
 
+    --специализация Нархиза
+    [907] = 908,
+
     [CREATURE_SHADOW_MISTRESS] = CREATURE_MATRON,
 
     [CREATURE_RUNE_MAGE] = CREATURE_FLAME_KEEPER,
@@ -420,6 +423,10 @@ function perkDiplomacy(playerId)
 
     [CREATURE_COMBAT_MAGE] = 4,
     [CREATURE_MAGI] = 4,
+    
+    [907] = 4,
+    [908] = 4,
+
 
     [CREATURE_SHADOW_MISTRESS] = 6,
     [CREATURE_MATRON] = 6,
@@ -556,19 +563,18 @@ function perkFeatRemoveControl(heroName)
   local opponentRaceId = RESULT_HERO_LIST[opponentPlayerId].raceId;
   local opponentHeroName = PLAYERS_MAIN_HERO_PROPS[opponentPlayerId].name;
 
-  local warMachinesTable = {};
+  local hasMachines = nil;
   
   --проверка на наличия боевых машин
   for machineId = 1, 4 do
     if HasHeroWarMachine(opponentHeroName, machineId) and machineId ~= 2 then
-      warMachinesTable[length(warMachinesTable) + 1] = machineId;
+      hasMachines = not nil;
     end;
-    
-    --выдача балисты
-    if length(warMachinesTable) == 0 then
-      GiveHeroWarMachine(opponentHeroName, 1);
-    end;
-    
+  end;
+  
+  --выдача балисты
+  if not hasMachines then
+    GiveHeroWarMachine(opponentHeroName, 1);
   end;
 
 end;
@@ -590,7 +596,7 @@ function perkNoRestForTheWicked(heroName)
   print "perkNoRestForTheWicked"
   local BONUS_VALUE = 90;
 
-  if GetHeroCreatures(heroName, CREATURE_SKELETON) >= GetHeroCreatures(heroName, CREATURE_SKELETON_WARRIOR) then
+  if GetHeroCreatures(heroName, CREATURE_SKELETON) > GetHeroCreatures(heroName, CREATURE_SKELETON_WARRIOR) then
      AddHeroCreatures(heroName,  CREATURE_SKELETON, BONUS_VALUE);
   else
     AddHeroCreatures(heroName, CREATURE_SKELETON_WARRIOR, BONUS_VALUE);
@@ -896,7 +902,7 @@ end;
 -- Спеца Орландо (выдача усиленных дэвилов, с доп хп)
 function orlandoSpec(heroName)
   print "orlandoSpec"
-  print"dddddddddddddddddddddddddddddddddddddddddddddddddddddd "
+
 
     local MAP_REPLACE_UNIT = {
       [27] = 220,
@@ -956,7 +962,7 @@ function eruinaSpec(heroName)
   local ERUINA_BONUS_BY_LEVEL = 0.1;
   local heroLevel = GetHeroLevel(heroName);
 
-  if GetHeroCreatures(heroName, 81) >= GetHeroCreatures(heroName, 143) then
+  if GetHeroCreatures(heroName, 81) > GetHeroCreatures(heroName, 143) then
     AddHeroCreatures(heroName, 81, floor(heroLevel * ERUINA_BONUS_BY_LEVEL) + 1);
   else
     AddHeroCreatures(heroName, 143, floor(heroLevel * ERUINA_BONUS_BY_LEVEL) + 1);
@@ -1039,8 +1045,6 @@ function runHeroSpecialization(playerId)
     kiganSpec(mainHeroName);
   end;
 
-  print(dictHeroName)
-  print(mainHeroName)
   -- Орландо
 --  if dictHeroName == HEROES.ORLANDO then
 --    orlandoSpec(mainHeroName);
@@ -1343,7 +1347,7 @@ function runBattle()
   sleep(5);
   
   -- ASHA
-  local MapVersion = '1.29a';
+  local MapVersion = '1.29b';
   
   if CUSTOM_GAME_MODE_NO_MENTOR == 1 then
     MapVersion = MapVersion..'_no_mentor'

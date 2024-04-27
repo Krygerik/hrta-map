@@ -228,8 +228,8 @@ war_machines_state = {}
 creature_dead = {}
 
 lord_of_undead = {}
-first_heroes = {Kragh = 1, Grok = 1}
-auto_move = {}
+--first_heroes = {Kragh = 1, Grok = 1}
+--auto_move = {}
 current_turn = {}
 asha_turn = {[0] = 0; 0}
 ritual_mana = {[0] = 0; 0}
@@ -254,6 +254,99 @@ PLAYER_USE_GUARDIAN_ANGEL = {
   [0] = nil,
   [1] = nil,
 };
+
+------------------------------
+-- START NEW COMBAT HANDLER --
+------------------------------
+
+-- Данные боя для новых обработчиков
+COMBAT_DATA = {
+  prev = {
+    activeUnit = nil,
+    heroMana = {
+      [0] = 0,
+      [1] = 0,
+    },
+  },
+};
+
+-- Попытка фикса бага с перепризывом элементалей и метка некроманта
+function fixMarkOfNecromancyWithResummonElem(prevActiveUnit)
+  print "fixMarkOfNecromancyWithResummonElem"
+  
+  local playerSide = GetUnitSide(prevActiveUnit);
+  local currentHeroMana = GetUnitManaPoints(GetHero(playerSide));
+  print("COMBAT_DATA.prev.heroMana")
+  print(COMBAT_DATA.prev.heroMana)
+  print("currentHeroMana")
+  print(currentHeroMana)
+  print("COMBAT_DATA.prev_prev.heroMana")
+  print(COMBAT_DATA.prev_prev.heroMana)
+
+  local heroManaDiff = COMBAT_DATA.prev_prev.heroMana[playerSide] - COMBAT_DATA.prev.heroMana[playerSide];
+
+  print(prevActiveUnit)
+  print("prevActiveUnit")
+  if GetHeroSkillMastery(prevActiveUnit, 61) > 0 then
+    print("GetHeroSkillMastery(prevActiveUnit, 61) > 0 then")
+    local addedMana = CheckIfSideResummonElem(real_creatures[playerSide], heroManaDiff, playerSide);
+    print("addedMana")
+    print(addedMana)
+    if addedMana > 0 then
+      SetUnitManaPoints(prevActiveUnit, COMBAT_DATA.prev_prev.heroMana[playerSide])
+    end
+  end;
+end;
+
+-- Действия после хода предыдущего существа
+function HandleAfterMove(currentTurnUnit)
+  print "HandleAfterMove"
+  
+  local prevActiveUnit = COMBAT_DATA.prev.activeUnit;
+
+  if prevActiveUnit == nil then
+    return nil
+  end;
+  
+--  if IsHero(prevActiveUnit) then
+--    fixMarkOfNecromancyWithResummonElem(prevActiveUnit);
+--  end;
+end;
+
+-- Действия до хода существа
+function HandleBeforeMove(currentTurnUnit)
+  print "HandleBeforeMove"
+
+end;
+
+-- Действия до хода существа
+function PopulateCombatData(currentTurnUnit)
+  print "PopulateCombatData"
+
+
+  COMBAT_DATA.prev_prev = COMBAT_DATA.prev
+  COMBAT_DATA.prev = {
+      activeUnit = currentTurnUnit,
+      heroMana = {
+        [0] = GetUnitManaPoints(GetHero(0)),
+        [1] = GetUnitManaPoints(GetHero(1)),
+      },
+    };
+  
+end;
+
+-- Новый обработчик действий юнитов в бою
+function NewUnitMoveHandler(currentTurnUnit)
+  print "NewUnitMoveHandler"
+  
+  HandleAfterMove(currentTurnUnit);
+  HandleBeforeMove(currentTurnUnit);
+  PopulateCombatData(currentTurnUnit);
+end;
+
+----------------------------
+-- END NEW COMBAT HANDLER --
+----------------------------
 
 function OnPrepare()
 
@@ -406,6 +499,7 @@ function OnStart()
   startThread(mineDeathATB)
 
 
+
 end
 
 function WarMachineDead(wm)
@@ -508,6 +602,12 @@ end
 --Обитаемые шахты
 function mineDeathATB()
   print "mineDeathATB"
+  
+  -- условие запуска треда
+  if (GetHeroSkillMastery(GetHero(0), 93) or 0) <= 0 and (GetHeroSkillMastery(GetHero(1), 93) or 0) <= 0 then
+      return nil;
+  end;
+
 
   local N = 0
   repeat
@@ -599,6 +699,45 @@ function CheckIfNewElemAdd(allUnits_1)
 end
 
 
+-- Проверка, если был удален элементаль
+function CheckIfElemDelete(allUnits_1)
+  print("CheckIfElemDelete")
+  
+  local allUnitsInRealMoment = GetAllUnits();
+
+  local deleteUnits = {};
+  local deletedElemUnits = {}
+
+  for i = 1, length(allUnits_1) do
+    local status = nil
+    for j = 1, length(allUnitsInRealMoment) do
+      if allUnits_1[i] == allUnitsInRealMoment[j] then
+        status = not nil
+      end
+    end
+
+    if status == nil then
+      deleteUnits[length(deleteUnits)+1] = allUnits_1[i]
+    end
+  end
+
+  for _, unit in deleteUnits do
+    if IsCreature(unit) then
+      local unitId = (GetCreatureType(unit))
+
+      if unitId == 88 or unitId == 87 or unitId == 86 or unitId == 85 then
+        deletedElemUnits[length(deletedElemUnits)+1] = unit
+      end;
+
+    end;
+  end;
+
+
+  return deletedElemUnits
+
+end;
+
+
 --Обновление АТБ
 function refreshATB(side)
   print "refreshATB"
@@ -614,13 +753,39 @@ function refreshATB(side)
 end
 
 
+-- Игрок перепризывает элементалей
+function CheckIfSideResummonElem(allUnitsLastTurn, prevHeroMana, side)
+  print "CheckIfSideResummonElem"
+  
+  local newElemList = CheckIfNewElemAdd(allUnitsLastTurn);
+  local deletedElemList = CheckIfElemDelete(allUnitsLastTurn);
+
+  local addedMana = GetUnitManaPoints(GetHero(side)) - prevHeroMana;
+
+  if length(newElemList) == length(deletedElemList) then
+    return addedMana;
+  
+  end;
+  
+  return 0
+
+
+end;
+
+
+
 --Элемы в 0.7 по АТБ Стихийное равновесие
 function SummonATB()
   print "SummonATB"
+
+-- условие запуска треда
+  if (GetHeroSkillMastery(GetHero(0), 114) or 0) <= 0 and (GetHeroSkillMastery(GetHero(1), 114) or 0) <= 0 then
+    return nil;
+  end;
   
   local N = 0
   repeat
-    --sleep(1000)
+    sleep()
     local allUnits_1 = GetAllUnits()
     
     local newElem
@@ -629,9 +794,7 @@ function SummonATB()
       sleep()
       newElem = CheckIfNewElemAdd(allUnits_1)
     until length(newElem) > 0
-
     --если изменилось кол-во юнитов - создаем новый массив с новым списком юнитов
-
     for _, unit in newElem do
       if GetHeroSkillMastery(GetFriendlyHero(unit), 114) > 0 then
         local side = GetUnitSide(unit)
@@ -829,7 +992,6 @@ function UnitMoveNonBlocking(unit)
 
 	      
 	elseif IsWarMachine(unit) then
-	
 
 	
 	end
@@ -871,9 +1033,7 @@ function UnitMoveNonBlocking(unit)
 --  end
 
   if IsWarMachine(unit) then
-	
 
-		
 	elseif IsCreature(unit) then
 	
 
@@ -885,9 +1045,9 @@ function UnitMoveNonBlocking(unit)
     local currentMana = GetUnitManaPoints(unit)
     local manaRestory = 1 + (GetCreatureNumber(unit)/10)
     
-    print((GetCreatureNumber(unit)/10))
-    print(ceil(GetCreatureNumber(unit)/10))
-    print(manaRestory)
+--    print((GetCreatureNumber(unit)/10))
+--    print(ceil(GetCreatureNumber(unit)/10))
+--    print(manaRestory)
     local newMana = currentMana + manaRestory
     local maxMana = 0
 
@@ -905,62 +1065,13 @@ function UnitMoveNonBlocking(unit)
 
   end
 
-
-
-
-    
-    -- путь войны
---		if GetHeroSkillMastery(ally_hero, 177) > 0 then     --177
---      path_of_war_x2, path_of_war_y2 = pos(unit)
---      path_of_war_dist = ceil( sqrt((path_of_war_x2 - path_of_war_x1) * (path_of_war_x2 - path_of_war_x1) + (path_of_war_y2 - path_of_war_y1) * (path_of_war_y2 - path_of_war_y1)))
---      print('dist=', path_of_war_dist)
---      if path_of_war_dist > 0 then
---        local x, y = SafePos()
---        AddCreature(we, 903, PATH_OF_WAR_BONUS_PER_STEP * path_of_war_dist, x, y, 1, 'drive-unit')
---        repeat sleep() until exist('drive-unit')
---        displace('drive-unit', 9, 50)
---        pcall(commandDoSpecial, 'drive-unit', 325, pos(unit))
---        removeUnit('drive-unit')
---        combatSetPause(1)
---        sleep(200)
---        combatSetPause(nil)
---      end
---    end
-    
-
-		-- фикс бага с полетом грифонов на себя
---		if type == CREATURE_GRIFFIN or type == CREATURE_ROYAL_GRIFFIN then
---			combatSetPause(1)
---			sleep(100)
---			if not creature_dead[unit] and not contains(GetCreatures(we), unit) then
---				displace(unit, 0, 0)
---			end
---			combatSetPause(nil)
---		end
-
-
-
 	elseif IsHero(unit) then
-
---    EnableDynamicBattleMode(3)
-    
-    -- темный ритуал
---		if GetHeroSkillMastery(enemy_hero, 71) > 0 and unit_mana_spent > 0 then
---			local sum = ritual_mana[enemy] + unit_mana_spent
---			ritual_mana[enemy] = mod(sum, RITUAL_ENEMY_MANA_SPENT)
---      if IsNamedHero(enemy_hero, 'Almegir') then
---        cur_enemy_hero_mana = cur_enemy_hero_mana + floor(GetHeroLevel(unit) * ALMEGIR_RITUAL_PER_LEVEL * sum / RITUAL_ENEMY_MANA_SPENT)
---      else
---        cur_enemy_hero_mana = cur_enemy_hero_mana + floor(sum / RITUAL_ENEMY_MANA_SPENT)
---      end
---      SetUnitManaPoints(enemy_hero, cur_enemy_hero_mana)
---		end
-
+	
+-- Сайрус
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Cyrus') or IsNamedHero(ally_hero, 'Cyrus2') ) then
       CyrusSpec(unit)
       
     end
-
 
     -- Курак специализация
     if init_mana ~=  GetUnitManaPoints(unit) and ( IsNamedHero(ally_hero, 'Quroq') or IsNamedHero(ally_hero, 'Quroq2') ) then
@@ -983,7 +1094,7 @@ function UnitMoveNonBlocking(unit)
         AddCreature(GetUnitSide(unit), 900, 1, -1, -1, nil, uniq_key);
         
         while not exist(uniq_key) do
-            sleep()
+          sleep()
         end
         
         pcall(UnitCastAimedSpell, uniq_key, SPELL_WARCRY_CALL_OF_BLOOD, randomCreature)
@@ -1038,42 +1149,6 @@ function UnitMoveNonBlocking(unit)
 			end
 		end
 		
-
-
-
-	-- Демон
---    if IsNamedHero(unit, 'KVing') then
---      if num_turn[2] < 1 then
---        local x, y = SafePos()
---        AddCreature(enemy, 900, 1000, x, y, 1, 'killer-unit')
---        x, y = SafePos()
---        AddCreature(we, 901, spellpower_bonus[num_turn[2] + 1], x, y, 1, 'temp-spellpower')
---        repeat sleep() until exist('killer-unit') and exist('temp-spellpower')
---        displace('killer-unit', 7, 50)
---        displace('temp-spellpower', 8, 50)
---        pcall(commandDoSpecial, 'temp-spellpower', 333, pos(unit))
---        num_turn[2] = num_turn[2] + 1
---      else
---        local x, y = SafePos()
---        if IsAttacker(unit) then
---          displace('temp-spellpower', 0, 10)
---        else
---          displace('temp-spellpower', 13, 10)
---        end
---        sleep()
---        combatSetPause(1)
---        pcall(commandShot, 'killer-unit', 'temp-spellpower')
---        while exist('temp-spellpower') do sleep() end
---        num_turn[2] = num_turn[2] + 1
---        AddCreature(we, 901, spellpower_bonus[num_turn[2]], x, y, 1, 'temp-spellpower')
---        repeat sleep() until exist('temp-spellpower')
---        displace('temp-spellpower', 8, 50)
---        pcall(commandDoSpecial, 'temp-spellpower', 333, pos(unit))
---			  sleep(250)
---			  combatSetPause(nil)
---      end
---    end
-    
     -- тележка с боеприпасами
     if GetHeroSkillMastery(ally_hero, 24) > 0  then
       if index(GetWarMachines(we), NumberSideToText(we)..'-warmachine-WAR_MACHINE_AMMO_CART') then
@@ -1090,7 +1165,7 @@ function UnitMoveNonBlocking(unit)
       end
     end
     
---    print(GetUnitSide(unit))
+
     if GetUnitSide(unit) == 0 then
       HERO_1_MANA = GetUnitManaPoints(unit)
       HERO_1_TURN = HERO_1_TURN + 1
@@ -1113,6 +1188,7 @@ end
 
 --Cпецы героев --
 
+--Раилаг, не реализован
 function RaelagA1Spec(side, mainHeroName)
   print "RaelagA1Spec"
 
@@ -1191,6 +1267,7 @@ function ReadyUnitThread()
 	while 1 do
 		repeat sleep() until combatReadyPerson()
 		local unit = combatReadyPerson()
+		startThread(NewUnitMoveHandler, unit)
 		startThread(UnitMoveNonBlocking, unit)
 		repeat sleep() until combatReadyPerson() ~= unit
 	end

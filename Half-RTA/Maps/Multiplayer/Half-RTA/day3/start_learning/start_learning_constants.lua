@@ -603,3 +603,9 @@ PLAYERS_ALLOW_BUYING_LEVEL = {
   [PLAYER_1] = 6,
   [PLAYER_2] = 6,
 };
+
+-- Количество сохраненного золота игроков при сброске навыков, которые нельзя сбрасывать
+PLAYERS_GOLD_STORE = {
+  [PLAYER_1] = nil,
+  [PLAYER_2] = nil,
+};

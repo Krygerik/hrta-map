@@ -50,8 +50,8 @@ MAP_NECRO_GRADE_UNIT_ON_UNIT = {
 
 -- Место для телепортации героя из города
 PLAYERS_TELEPORT_NEAR_TOWN_POSITION = {
-  [PLAYER_1] = { x = 46, y = 79 },
-  [PLAYER_2] = { x = 43, y = 14 },
+  [PLAYER_1] = { x = 46, y = 82 },
+  [PLAYER_2] = { x = 43, y = 11 },
 };
 
 
