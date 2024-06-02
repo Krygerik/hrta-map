@@ -2,7 +2,7 @@
 <Creature>
 	<AttackSkill>6</AttackSkill>
 	<DefenceSkill>5</DefenceSkill>
-	<Shots>10</Shots>
+	<Shots>9</Shots>
 	<MinDamage>8</MinDamage>
 	<MaxDamage>9</MaxDamage>
 	<Speed>5</Speed>

@@ -774,7 +774,7 @@ end;
 
 
 
---Элемы в 0.7 по АТБ Стихийное равновесие
+--Элемы в 0.5 по АТБ Стихийное равновесие(Буйство стихий)
 function SummonATB()
   print "SummonATB"
 
@@ -798,7 +798,7 @@ function SummonATB()
     for _, unit in newElem do
       if GetHeroSkillMastery(GetFriendlyHero(unit), 114) > 0 then
         local side = GetUnitSide(unit)
-        SetATB(unit, 0.7)
+        SetATB(unit, 0.5)
         refreshATB(side)
         print("SummonATB_end_function")
       end
@@ -1112,7 +1112,7 @@ function UnitMoveNonBlocking(unit)
 
       local chanceProc = random(2)
       local maxLuck = GetHeroLuck(unit) > 5 and 5 or GetHeroLuck(unit)
-      local manaRecovery = ceil(unit_mana_spent *0.2 * maxLuck)
+      local manaRecovery = ceil(unit_mana_spent *0.15 * maxLuck)
       
       if ASHA_COUNTER[GetUnitSide(unit)].triger == 2 then
         ASHA_COUNTER[GetUnitSide(unit)].triger = 0

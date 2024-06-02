@@ -1116,11 +1116,6 @@ function handleHeroAddSkill(triggerHero, skillId)
     ChangeHeroStat(playerMainHero, STAT_ATTACK, 2);
   end;
   
-  -- Смертельная неудача
-  if skillId == NECROMANCER_FEAT_DEAD_LUCK then
-    ChangeHeroStat(playerMainHero, STAT_DEFENCE, 1);
-  end;
-  
   -- Темный ритуал
   if skillId == PERK_DARK_RITUAL then
     startThread(darkRitualTread, playerMainHero);
@@ -1246,11 +1241,6 @@ function handleHeroRemoveSkill(triggerHero, skill)
   -- Огненная ярость
   if skill == KNIGHT_FEAT_ANCIENT_SMITHY then
     ChangeHeroStat(mainHeroName, STAT_ATTACK, -2);
-  end;
-  
-  -- Смертельная неудача
-  if skill == NECROMANCER_FEAT_DEAD_LUCK then
-    ChangeHeroStat(mainHeroName, STAT_DEFENCE, -1);
   end;
 
   -- Логистика

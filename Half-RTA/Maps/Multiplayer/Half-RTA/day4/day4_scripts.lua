@@ -343,9 +343,9 @@ function getNecromancyCoef(heroName)
 
   -- Бонус к некромантии для Маркела
   if dictHeroName == HEROES.BEREIN then
-    local MARKEL_KOEF = 0.02;
+    local MARKEL_KOEF = 0.017;
     if HasHeroSkill(heroName,HERO_SKILL_MENTORING) then
-      extraLvl = 8;
+      extraLvl = 6;
     end;
 
     coef = coef + MARKEL_KOEF * (GetHeroLevel(heroName) + extraLvl);

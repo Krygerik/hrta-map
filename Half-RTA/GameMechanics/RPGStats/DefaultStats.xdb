@@ -246,7 +246,7 @@
 		</AstrologerCallWeekCost>
 		<SacrificialAltar_ArtifactCostOfGoldToExpCoef>0.5</SacrificialAltar_ArtifactCostOfGoldToExpCoef>
 		<SacrificialAltar_CreatureHitsToExpCoef>3</SacrificialAltar_CreatureHitsToExpCoef>
-		<Marketplace_ArtifactSellCostOfGoldCoef>0.5</Marketplace_ArtifactSellCostOfGoldCoef>
+		<Marketplace_ArtifactSellCostOfGoldCoef>0.6</Marketplace_ArtifactSellCostOfGoldCoef>
 	</adventure>
 	<combat>
 		<DamageIncrease>0.05</DamageIncrease>
@@ -276,7 +276,7 @@
 			</Haven>
 			<Inferno>
 				<ManaStealPerWeekPopulation>1</ManaStealPerWeekPopulation>
-				<SearingAuraDamageHits>8</SearingAuraDamageHits>
+				<SearingAuraDamageHits>9</SearingAuraDamageHits>
 				<AxeOfSlaughterDamageHits>2</AxeOfSlaughterDamageHits>
 				<SyphonManaCoef>0.75</SyphonManaCoef>
 				<Leap_JumpDistanceMin>3</Leap_JumpDistanceMin>
@@ -447,8 +447,8 @@
 					<RPCoefPowerOfBlood>1.5</RPCoefPowerOfBlood>
 					<AbsoluteRageRP>500</AbsoluteRageRP>
 					<UltimateBloodRage_RageForLevelDecrease>0.25</UltimateBloodRage_RageForLevelDecrease>
-					<MemoryOfOurBlood_MinRP>50</MemoryOfOurBlood_MinRP>
-					<MemoryOfOurBlood_MaxRP>100</MemoryOfOurBlood_MaxRP>
+					<MemoryOfOurBlood_MinRP>75</MemoryOfOurBlood_MinRP>
+					<MemoryOfOurBlood_MaxRP>75</MemoryOfOurBlood_MaxRP>
 					<MemoryOfOurBlood_RPStep>10</MemoryOfOurBlood_RPStep>
 					<BattleElation_RPOnGoodMorale>50</BattleElation_RPOnGoodMorale>
 					<PileOfOurFoes_StartRPBonus>75</PileOfOurFoes_StartRPBonus>
@@ -1292,7 +1292,7 @@
 				<Taunt_ProcFactor>1.25</Taunt_ProcFactor>
 			</Stronghold>
 			<ConjuredPhoenix href="ConjuredPhoenix.xdb#xpointer(/RPGCombatUniqueCreatureStats)"/>
-			<DefenceBonusOnDefend>0.4</DefenceBonusOnDefend>
+			<DefenceBonusOnDefend>0.33</DefenceBonusOnDefend>
 			<Abilities>
 				<FireShield_Damage_Multiplier>0.2</FireShield_Damage_Multiplier>
 				<MagmaShield_Damage_Multiplier>0.4</MagmaShield_Damage_Multiplier>
@@ -1967,11 +1967,11 @@
 				<DefendUsAll_CreatureCountMultiplier>2</DefendUsAll_CreatureCountMultiplier>
 				<GoblinSupport_GoblinsIncomePerDay>0</GoblinSupport_GoblinsIncomePerDay>
 				<Bodybuilding_HPBonusPercent>0</Bodybuilding_HPBonusPercent>
-				<VoiceTraining_WarcryCostDiscount>0.25</VoiceTraining_WarcryCostDiscount>
+				<VoiceTraining_WarcryCostDiscount>0.20</VoiceTraining_WarcryCostDiscount>
 				<DeathToNonexistent_DamageToSummonsMult>3</DeathToNonexistent_DamageToSummonsMult>
 				<MightyVoice_HeroLevelBonus>10</MightyVoice_HeroLevelBonus>
 				<VoiceOfRage_RageMultCallOfBlood>1.5</VoiceOfRage_RageMultCallOfBlood>
-				<VoiceOfRage_RageMultOther>2</VoiceOfRage_RageMultOther>
+				<VoiceOfRage_RageMultOther>1.75</VoiceOfRage_RageMultOther>
 				<BasicShatterMagic>
 					<SpellTrainedDecrease>
 						<Item>1</Item>
@@ -2037,9 +2037,9 @@
 			<PrayerLevelMultiplier>0.15</PrayerLevelMultiplier>
 			<DeathScreamLevelMultiplier>0.15</DeathScreamLevelMultiplier>
 			<SkillDefence>
-				<BasicDamageReduce>0.05</BasicDamageReduce>
-				<AdvancedDamageReduce>0.15</AdvancedDamageReduce>
-				<ExpertDamageReduce>0.25</ExpertDamageReduce>
+				<BasicDamageReduce>0.1</BasicDamageReduce>
+				<AdvancedDamageReduce>0.2</AdvancedDamageReduce>
+				<ExpertDamageReduce>0.3</ExpertDamageReduce>
 				<Evasion_DamageReduce>0.25</Evasion_DamageReduce>
 			</SkillDefence>
 			<SkillOffence>
@@ -2136,7 +2136,7 @@
 				<Prudent_InitiativeDisbonusBase>0</Prudent_InitiativeDisbonusBase>
 				<Prudent_InitiativeDisbonusPerLevel>0.004</Prudent_InitiativeDisbonusPerLevel>
 				<Evasive_DamageReduceBase>0</Evasive_DamageReduceBase>
-				<Evasive_DamageReducePerLevel>0.02</Evasive_DamageReducePerLevel>
+				<Evasive_DamageReducePerLevel>0.015</Evasive_DamageReducePerLevel>
 			</Warlock>
 			<Runemage>
 				<BorderGuard_DistanceFromCityInDays>1</BorderGuard_DistanceFromCityInDays>
@@ -2189,8 +2189,8 @@
 				<WaveSpeed>33</WaveSpeed>
 			</Armageddon>
 			<Runic>
-				<DragonFormSpellPercent>0.25</DragonFormSpellPercent>
-				<ReviveSpellPercent>0.333334</ReviveSpellPercent>
+				<DragonFormSpellPercent>0.5</DragonFormSpellPercent>
+				<ReviveSpellPercent>0.3</ReviveSpellPercent>
 			</Runic>
 			<HolyWordWaveSpeed>33</HolyWordWaveSpeed>
 			<UnholyWordWaveSpeed>33</UnholyWordWaveSpeed>

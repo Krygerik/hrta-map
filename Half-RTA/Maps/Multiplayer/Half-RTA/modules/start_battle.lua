@@ -294,7 +294,7 @@ end;
 function skillMentoring(heroName)
   print "skillMentoring"
 
-  local MENTORINT_ADDITIONAL_LEVEL = 8;
+  local MENTORINT_ADDITIONAL_LEVEL = 6;
 
   local heroLevel = GetHeroLevel(heroName);
   local needExp = TOTAL_EXPERIENCE_BY_LEVEL[heroLevel + MENTORINT_ADDITIONAL_LEVEL] - TOTAL_EXPERIENCE_BY_LEVEL[heroLevel];
@@ -541,7 +541,7 @@ end;
 function perkFeatMarchOfTheMachines(heroName)
   print "perkFeatMarchOfTheMachines"
   local heroLevel = GetHeroLevel(heroName);
-  local BONUS_VALUE = 10 + 10 * (floor(heroLevel/10));
+  local BONUS_VALUE = heroLevel;
 
   if (GetHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM) > 0) then
     AddHeroCreatures(heroName,  CREATURE_OBSIDIAN_GOLEM, BONUS_VALUE);
@@ -550,6 +550,20 @@ function perkFeatMarchOfTheMachines(heroName)
   end;
 end;
 
+--Темный ритуал
+function perkDarkRitual(heroName)
+  print "perkFeatMarchOfTheMachines"
+  
+  local heroLevel = GetHeroLevel(heroName);
+  local BONUS_VALUE = 2 * heroLevel;
+  
+  local dictHeroName = getDictionaryHeroName(heroName);
+  local manaBonus = dictHeroName == HEROES.ALMEGIR and 2*BONUS_VALUE or BONUS_VALUE;
+
+  ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 10);
+  ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, manaBonus);
+  ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -10);
+end;
 
 -- Власть над машинами
 function perkFeatRemoveControl(heroName)
@@ -668,14 +682,7 @@ function checkAndRunHeroPerks(playerId)
   
   -- Тайный ритуал
   if HasHeroSkill(mainHeroName, PERK_DARK_RITUAL) then
-
-    local dictHeroName = getDictionaryHeroName(mainHeroName);
-
-    local manaBonus = dictHeroName == HEROES.ALMEGIR and 80 or 40;
-  
-    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, 8);
-    ChangeHeroStat(mainHeroName, STAT_MANA_POINTS, manaBonus);
-    ChangeHeroStat(mainHeroName, STAT_KNOWLEDGE, -8);
+    perkDarkRitual(mainHeroName);
   end;
 
   -- сопротивление
@@ -1283,8 +1290,8 @@ function runScriptingArtifacts(playerId)
 
   -- сет объятия смерти
   if HasArtefact(mainHeroName, 7, 1) and HasArtefact(mainHeroName, 33, 1) then
-    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_SPEED, -1);
-    GiveHeroBattleBonus(mainHeroName, HERO_BATTLE_BONUS_SPEED, -1);
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_LUCK, -1);
+    GiveHeroBattleBonus(opponentHeroName, HERO_BATTLE_BONUS_MORALE, -1);
   end;
 
   -- свиток маны

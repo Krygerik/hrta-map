@@ -43,11 +43,11 @@
 			<PerPower>0</PerPower>
 		</Item>
 		<Item>
-			<Base>4</Base>
+			<Base>3</Base>
 			<PerPower>0</PerPower>
 		</Item>
 		<Item>
-			<Base>5</Base>
+			<Base>3</Base>
 			<PerPower>0</PerPower>
 		</Item>
 	</duration>

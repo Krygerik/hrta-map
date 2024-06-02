@@ -5887,55 +5887,48 @@
 				<spellBuffs>
 					<Item>SPELL_SKILL_ANCIENT_SMITHY</Item>
 				</spellBuffs>
-				<BasicSkillID>HERO_SKILL_DESTRUCTIVE_MAGIC</BasicSkillID>
+				<BasicSkillID>HERO_SKILL_OFFENCE</BasicSkillID>
 				<SkillPrerequisites>
 					<Item>
 						<Class>HERO_CLASS_KNIGHT</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_EXPERT_TRAINER</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RANGER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_IMBUE_ARROW</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WIZARD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_MELT_ARTIFACT</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_DEMON_LORD</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_DEMONIC_STRIKE</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_NO_REST_FOR_THE_WICKED</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_WARLOCK</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_ABSOLUTE_FEAR</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>
 						<Class>HERO_CLASS_RUNEMAGE</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SECRETS_OF_DESTRUCTION</Item>
-							<Item>HERO_SKILL_STRONG_RUNE</Item>
+							<Item>HERO_SKILL_MASTER_OF_FIRE</Item>
 						</dependenciesIDs>
 					</Item>
 				</SkillPrerequisites>
@@ -13588,7 +13581,7 @@
 					<Item>
 						<Class>HERO_CLASS_NECROMANCER</Class>
 						<dependenciesIDs>
-							<Item>HERO_SKILL_SCHOLAR</Item>
+							<Item>HERO_SKILL_MASTER_OF_SECRETS</Item>
 						</dependenciesIDs>
 					</Item>
 					<Item>

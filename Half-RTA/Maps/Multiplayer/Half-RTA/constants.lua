@@ -123,9 +123,10 @@ SPELLS = {
     { level = 3, id = 253 }, -- руна стихийной невосприимчивости
     { level = 3, id = 256 }, -- руна неос€заемости
     { level = 4, id = 254 }, -- руна громового раската
-    { level = 4, id = 258 }, -- руна драконьего обличь€
+    { level = 4, id = 257 }, -- руна воскрешени€
+    { level = 5, id = 258 }, -- руна драконьего обличь€
     { level = 5, id = 255 }, -- руна боевой €рости
-    { level = 5, id = 257 }, -- руна воскрешени€
+
   },
   [TYPE_MAGICS.WARCRIES] = {
     { level = 1, id = 290}, -- объедин€ющий клич
@@ -639,7 +640,7 @@ ALL_ARTS_LIST = {
   { id = 95, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 7500 }, -- колчан единорога
   { id = 39, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.BACK,      price = 9000 }, -- манти€ дракона
   { id = 23, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 10500 }, -- кольцо сломленного духа
-  { id = 63, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 },  --кольцо неудачи
+  { id = 63, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 },  --кольцо неудачи (прокл€тое кольцо)
   { id = 21, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.RING,      price = 8000 }, -- кольцо жизненной силы
   { id = 19, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK,      price = 9000 }, -- ожерелье победы
   { id = 40, level = ARTS_LEVELS.MAJOR, position = ART_POSITION.NECK,      price = 10000 }, -- ожерелье дракона
@@ -670,7 +671,7 @@ ALL_ARTS_LIST = {
   { id = 44, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 15000 }, -- халат сар-иссы
   { id = 48, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 12000 }, -- кираса гномов
   { id = 13, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BODY,      price = 21000 }, -- доспех забытого
-  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 16000 }, -- плащ смерти
+  { id = 33, level = ARTS_LEVELS.RELIC, position = ART_POSITION.BACK,      price = 16500 }, -- плащ смерти
   { id = 47, level = ARTS_LEVELS.RELIC, position = ART_POSITION.RING,      price = 15000 }, -- кольцо сар-иссы
 
   { id = 5,  level = ARTS_LEVELS.RELIC, position = ART_POSITION.WEAPON,    price = 12000 },  -- трезубец титанов
