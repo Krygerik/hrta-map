@@ -43,6 +43,7 @@ function day1()
   end;
   
   setAuthorMapsDescription();
+  objectsWothInformation();
 end;
 
 -- Память о создателях
@@ -53,6 +54,16 @@ function setAuthorMapsDescription()
   OverrideObjectTooltipNameAndDescription('mostovik_map', PATH_TO_DAY1_MESSAGES.."mostovik_name.txt", PATH_TO_DAY1_MESSAGES.."mostovik_desc.txt");
   OverrideObjectTooltipNameAndDescription('vsev_map', PATH_TO_DAY1_MESSAGES.."vsev_name.txt", PATH_TO_DAY1_MESSAGES.."vsev_desc.txt");
   OverrideObjectTooltipNameAndDescription('tari_map', PATH_TO_DAY1_MESSAGES.."tari_name.txt", PATH_TO_DAY1_MESSAGES.."tari_desc.txt");
+end;
+
+-- Информация о победителях турниров
+function objectsWothInformation()
+  print "objectsWothInformation"
+  
+  OverrideObjectTooltipNameAndDescription('Znamya1', PATH_TO_DAY1_MESSAGES.."winners.txt", PATH_TO_DAY1_MESSAGES.."winners_desc.txt");
+  OverrideObjectTooltipNameAndDescription('Znamya2', PATH_TO_DAY1_MESSAGES.."winners.txt", PATH_TO_DAY1_MESSAGES.."winners_desc.txt");
+  OverrideObjectTooltipNameAndDescription('Znamya3', PATH_TO_DAY1_MESSAGES.."winners.txt", PATH_TO_DAY1_MESSAGES.."winners_desc.txt");
+
 end;
 
 -- Точка входа в модуль

@@ -566,13 +566,14 @@ function teleportMainHeroToNearTown(playerId)
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local position = PLAYERS_TELEPORT_NEAR_TOWN_POSITION[playerId];
-
+  local townName = MAP_PLAYER_TO_TOWNNAME[playerId];
+  
+  DisableAutoEnterTown(townName, true)
   SetObjectPosition(mainHeroName, position.x, position.y);
-
   local rotate = playerId == PLAYER_2 and 3.14 or 0;
 
   MoveCameraForPlayers(playerId, position.x, position.y, GROUND, 50, 1.57, rotate, 0, 0, 1);
-  
+--  DisableAutoEnterTown(townName,enable)
   addHeroMovePoints(mainHeroName);
 end;
 
@@ -779,31 +780,23 @@ function replaceHeroOnSpecial(playerId)
 
   -- Орландо
   if dictHeroName == HEROES.ORLANDO then
-    local invocationLevel = GetHeroSkillMastery(mainHeroName, SKILL_GATING);
-    print("-----------------REPLACED---------------------")
+    local raceSkillLevel = GetHeroSkillMastery(mainHeroName, SKILL_GATING);
 
-    print(invocationLevel)
-    if invocationLevel == 3 then
+    if raceSkillLevel == 3 then
       local PLAYERS_SUPER_EXPERT_HERO = {
         [PLAYER_1] = "Orlando3",
         [PLAYER_2] = "Orlando4",
       };
 
-      print("replaceMainHero1")
-      
-      print(PLAYERS_SUPER_EXPERT_HERO[playerId])
-
       replaceMainHero(playerId, PLAYERS_SUPER_EXPERT_HERO[playerId]);
     end;
 
-    if invocationLevel < 3 and invocationLevel > 0 then
-      print("AAAAAA")
+-- выдача гейтинга, если нет в наличии экспертного (убрано)
+--    if raceSkillLevel < 3 and raceSkillLevel > 0 then
 --      Trigger(HERO_ADD_SKILL_TRIGGER, mainHeroName, 'noop');
 --      GiveHeroSkill(mainHeroName, SKILL_GATING);
-    end;
+--    end;
   end;
-  
-  
 end;
 
 -- Замена определенного существа в герое на другое
@@ -861,9 +854,9 @@ function day4_scripts()
     
     downgradeTown(playerId);
 
-    startThread(transferAllArtsToMainHero, playerId);
+    transferAllArtsToMainHero(playerId);
 
-    startThread(transferAllArmyToMain, playerId);
+    transferAllArmyToMain(playerId);
   end;
   
   for _, playerId in PLAYER_ID_TABLE do
@@ -879,7 +872,7 @@ function day4_scripts()
     
     runRaceAbility(playerId);
   end;
-  
+
   if needPostponeBattle() then
     -- Объявляем промежуточный день для фракционных плюшек
     additionalDayBeforeSelectBattlefield();

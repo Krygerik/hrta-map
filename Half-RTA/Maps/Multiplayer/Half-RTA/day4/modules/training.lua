@@ -18,8 +18,8 @@ SHOW_POINTS_OBJECTS = {
   [PLAYER_1] = { name = "spell_nabor3", x = 83, y = 72 },
   [PLAYER_2] = { name = "spell_nabor4", x = 85, y = 25 },
 }
-  
-  
+
+
 PLAYERS_TRAINING_UNITS = {
   [PLAYER_1] = {
     [1] = 'training_peasant_1_',
@@ -40,7 +40,7 @@ MAP_OPTION_COUNT_UNIT = {
   3,
   5,
   10,
-  25,
+  25, -- вместо 25 используетс€ тренинг на все очки. Ќо чтобы не переписывать сильно логику, оставил.
 };
 
 -- —оотношение уровн€ существа к уровню получаемого
@@ -90,7 +90,7 @@ function calculatePlayerTrainingPoints(playerId)
   if dictHeroName == HEROES.BREM then
     summaryPoints = summaryPoints + POINTS_FOR_RUTGER;
   end;
-  
+
   if HasHeroSkill(mainHeroName, PERK_EXPERT_TRAINER) then
     summaryPoints = summaryPoints + POINTS_PER_EXPERT_TRAINING;
   end;
@@ -105,7 +105,7 @@ function garrisonWatcherTread(playerId)
   print "garrisonWatcherTread"
 
   local garrisonName = PLAYERS_TRAINING_GARRISONS[playerId];
-  
+
   SetObjectOwner(garrisonName, playerId);
 
   while GetDate(DAY) < 5 do
@@ -135,10 +135,17 @@ function handleSelectTrainingOption(strPlayerId, strTier, strCountUnits)
   local tierLvl = strTier + 0;
 
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
-
-  local needPoints = countUnits * MAP_TIER_TO_TRAINING_POINTS[tierLvl];
   local currentPoints = PLAYERS_TRAINING_POINTS[playerId];
 
+  -- ≈сли выбрана опци€ 25, то рассчитать максимальное количество возможных тренировок
+  if countUnits == 25 then
+    local trainingPointsPerUnit = MAP_TIER_TO_TRAINING_POINTS[tierLvl];
+    countUnits = floor(currentPoints / trainingPointsPerUnit);
+  end
+
+  local needPoints = countUnits * MAP_TIER_TO_TRAINING_POINTS[tierLvl];
+
+  -- ≈сли очков недостаточно даже после пересчета, уведомить и выйти
   if needPoints > currentPoints then
     ShowFlyingSign(
       {GetMapDataPath()..'day4/modules/not_enough_point.txt'; eq1=needPoints, eq2=currentPoints},
@@ -146,7 +153,6 @@ function handleSelectTrainingOption(strPlayerId, strTier, strCountUnits)
       playerId,
       7
     );
-
     return nil;
   end
 
@@ -174,7 +180,7 @@ function handleSelectTrainingOption(strPlayerId, strTier, strCountUnits)
       return nil;
     end;
   end;
-  
+
   ShowFlyingSign(
     GetMapDataPath()..'day4/modules/not_enough_unit.txt',
     mainHeroName,
@@ -201,7 +207,7 @@ function handleTouchShowPoints(strPlayerId)
   local playerId = strPlayerId + 0;
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
   local currentPoints = PLAYERS_TRAINING_POINTS[playerId];
-  
+
   ShowFlyingSign(
     {GetMapDataPath()..'day4/modules/n_left_points.txt'; eq=currentPoints},
     mainHeroName,
@@ -213,14 +219,14 @@ end;
 --»нициализаци€ объекта дл€ показа очков
 function initShowPointsObjects(playerId)
   print "initShowPointsObjects"
-  
+
   local unit = SHOW_POINTS_OBJECTS[playerId];
   local mainHeroName = PLAYERS_MAIN_HERO_PROPS[playerId].name;
 
   SetObjectPosition(unit.name, unit.x, unit.y, GROUND)
 
   SetObjectEnabled(unit.name, nil);
-  
+
   OverrideObjectTooltipNameAndDescription(
     unit.name,
     GetMapDataPath()..'day4/modules/show_points_name.txt',
